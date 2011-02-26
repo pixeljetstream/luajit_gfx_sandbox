@@ -1,0 +1,94 @@
+Third party code/libraries:
+ * 1. Lua
+ * 1.1. LuaJIT 2
+ * 1.2. LuaFileSystem
+ * 1.3. LuaSockets
+ * 2. GLFW
+ * 3. GLEW
+ * 4. Cg
+
+1. Lua License
+=============================================================================
+Copyright: © 1994-2011 Lua.org, PUC-Rio.
+Homepage: http://www.lua.org
+License:  http://www.lua.org/copyright.html
+
+Permission is hereby granted, free of charge, to any person obtaining a copy 
+of this software and associated documentation files (the "Software"), to deal 
+in the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
+of the Software, and to permit persons to whom the Software is furnished to do 
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in 
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL 
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+SOFTWARE. 
+=============================================================================
+
+1.1 LuaJIT
+=============================================================================
+Copyright: © 2005-2011 Mike Pall
+Homepage: http://www.luajit.org
+License:  http://www.opensource.org/licenses/mit-license.php
+=============================================================================
+
+1.2 LuaFileSystem
+=============================================================================
+LuaFileSystem was designed by Roberto Ierusalimschy, André Carregal and Tomás 
+Guisasola as part of the Kepler Project, which holds its copyright.
+Homepage: http://www.keplerproject.org/luafilesystem/index.html
+License:  http://www.keplerproject.org/luafilesystem/license.html
+=============================================================================
+
+1.2 LuaSockets
+=============================================================================
+Copyright: © 2004-2006 Diego Nehab. All rights reserved.
+Homepage: http://www.cs.princeton.edu/~diego/professional/luasocket/
+License:  http://www.lua.org/copyright.html (same as LUA)
+=============================================================================
+
+2. GLFW 
+=============================================================================
+Copyright: © 2002-2009 Camilla Berglund
+Homepage: http://www.glfw.org/
+License:  http://www.glfw.org/documentation.html#license
+
+Used for cross platform window creation and input callback handling.
+=============================================================================
+
+3. GLEW 
+=============================================================================
+Copyright: http://glew.sourceforge.net/credits.html
+Homepage:  http://glew.sourceforge.net/
+License:   http://glew.sourceforge.net/credits.html
+
+OpenGL extension wrapper
+=============================================================================
+
+4. Nvidia Cg 
+=============================================================================
+Copyright: © 2002-2011 NVIDIA Corporation
+Homepage: http://developer.nvidia.com/object/cg_toolkit.html
+
+Cross Platform Advanced Shading Language
+
+No Warranties. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE 
+IS PROVIDED "AS IS" AND NVIDIA AND ITS SUPPLIERS DISCLAIM ALL WARRANTIES, EITHER 
+EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF 
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+No Liability for Consequential Damages. TO THE MAXIMUM EXTENT PERMITTED BY 
+APPLICABLE LAW, IN NO EVENT SHALL NVIDIA OR ITS SUPPLIERS BE LIABLE FOR ANY 
+SPECIAL, INCIDENTAL, INDIRECT, OR CONSEQUENTIAL DAMAGES WHATSOEVER (INCLUDING, 
+WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, 
+LOSS OF BUSINESS INFORMATION, OR ANY OTHER PECUNIARY LOSS) ARISING OUT OF THE 
+USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF NVIDIA HAS BEEN ADVISED OF 
+THE POSSIBILITY OF SUCH DAMAGES.
+=============================================================================
