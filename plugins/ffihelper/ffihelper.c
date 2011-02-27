@@ -9,7 +9,7 @@ static int touserdata(lua_State *L)
 {
   int stacksize = lua_gettop(L);
   int size;
-  void* orig;
+  const void* orig;
   void* udata;
 
   if (stacksize < 3){
@@ -18,7 +18,7 @@ static int touserdata(lua_State *L)
     return 1;
   }
 
-  orig = lua_touserdata(L,-3);
+  orig = lua_topointer(L,-3);
   size = (int)luaL_checknumber(L,-2);
 
   if (!orig || !size || !lua_istable(L,-1)){
