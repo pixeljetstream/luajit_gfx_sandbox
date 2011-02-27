@@ -7,6 +7,9 @@ contact: info@luxinia.de
 
 luxinia 2 is the successor of luxinia 1.x
 
+CURRENTLY HEAVILY WORK IN PROGRESS, ONLY PARTS OF
+BACKEND ARE TESTED (luxcore/luxmath) DONT USE YET
+
 The major change is that it uses luajit2.x's capability
 to call native C functions and the engine itself is 
 implemented in Lua. The backend is mostly written
