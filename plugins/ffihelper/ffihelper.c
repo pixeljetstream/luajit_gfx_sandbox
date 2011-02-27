@@ -10,26 +10,35 @@ static int touserdata(lua_State *L)
   int stacksize = lua_gettop(L);
   int size;
   const void* orig;
-  void* udata;
+  double num;
 
   if (stacksize < 3){
-    lua_pushstring(L,"1 lightuser data, 1 number, 1 table required");
+    lua_pushstring(L,"1 number, 1 number, 1 table required");
     lua_error(L);
     return 1;
   }
 
-  orig = lua_topointer(L,-3);
+  num = lua_tonumber(L,-3);
   size = (int)luaL_checknumber(L,-2);
+  orig = (const void*)(uintptr_t)num;
 
-  if (!orig || !size || !lua_istable(L,-1)){
-    lua_pushstring(L,"1 lightuser data, 1 number, 1 table required");
+  if (!orig || !lua_istable(L,-1)){
+    lua_pushstring(L,"1 number, 1 number, 1 table required");
     lua_error(L);
     return 1;
   }
   // stack: light, number, table
-
-  udata = lua_newuserdata(L,size);
-  memcpy(udata,orig,size);
+  
+  if (!size){
+    // store pointer value
+    const void** udata = lua_newuserdata(L,sizeof(void*));
+    udata[0] = orig;
+  }
+  else{
+    // deepcopy
+    void* udata = lua_newuserdata(L,size);
+    memcpy(udata,orig,size);
+  }
   // stack: light, number, table, udata
 
   lua_pushvalue(L,-2);
