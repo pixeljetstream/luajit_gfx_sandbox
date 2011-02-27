@@ -20,7 +20,7 @@ extern "C"{
   #include "rendertarget.h"
 
   //////////////////////////////////////////////////////////////////////////
-  enum lxGFXCapability_e{
+  enum lxgCapability_e{
     LUXGFX_CAP_POINTSPRITE = 1<<0,
     LUXGFX_CAP_STENCILWRAP = 1<<1,
     LUXGFX_CAP_BLENDSEP = 1<<2,
@@ -58,34 +58,31 @@ extern "C"{
 
   //////////////////////////////////////////////////////////////////////////
 
-  typedef enum lxGFXGPUVendor_e{
-    LUXGFX_VENDOR_UNKNOWN,
-    LUXGFX_VENDOR_NVIDIA,
-    LUXGFX_VENDOR_ATI,
-    LUXGFX_VENDOR_INTEL,
-    LUXGFX_VENDOR_FORCE_DWORD = 0x7FFFFFFF
-  }lxGFXGPUVendor_t;
+  typedef enum lxgGPUVendor_e{
+    LUXGFX_GPUVENDOR_UNKNOWN,
+    LUXGFX_GPUVENDOR_NVIDIA,
+    LUXGFX_GPUVENDOR_ATI,
+    LUXGFX_GPUVENDOR_INTEL,
+  }lxgGPUVendor_t;
 
-  typedef enum lxGFXGPUDomain_e{
+  typedef enum lxgGPUDomain_e{
     LUXGFX_GPUDOMAIN_VERTEX,
     LUXGFX_GPUDOMAIN_FRAGMENT,
     LUXGFX_GPUDOMAIN_GEOMETRY,
     LUXGFX_GPUDOMAIN_TESS_EVAL,
     LUXGFX_GPUDOMAIN_TESS_CTRL,
     LUXGFX_GPUDOMAINS,
-    LUXGFX_GPUDOMAIN_FORCE_DWORD = 0x7FFFFFFF
-  }lxGFXGPUDomain_t;
+  }lxgGPUDomain_t;
 
-  typedef enum lxGFXGPUMode_e{
+  typedef enum lxgGPUMode_e{
     LUXGFX_GPUMODE_FIXED,
     LUXGFX_GPUMODE_ASM,
     LUXGFX_GPUMODE_HL,
-    LUXGFX_GPUMODE_FORCE_DWORD = 0x7FFFFFFF
-  }lxGFXGPUMode_t;
+  }lxgGPUMode_t;
 
 
   //////////////////////////////////////////////////////////////////////////
-  typedef struct lxGFXCapabilites_s{
+  typedef struct lxgCapabilites_s{
     int     texsize;
     int     texsize3d;
     int     texlayers;
@@ -98,205 +95,213 @@ extern "C"{
     int     drawbuffers;
     int     viewports;
     int     fbosamples;
-  }lxGFXCapabilites_t;
+  }lxgCapabilites_t;
 
-  typedef struct lxGFXContext_s{
-    flags32               capbits;
-    lxGFXVertexState_t    vertex;
-    lxGFXTexturePTR       textures[LUXGFX_MAX_TEXTURE_IMAGES];
-    lxGFXSamplerPTR       samplers[LUXGFX_MAX_TEXTURE_IMAGES];
-    lxGFXRenderTargetPTR  rendertargets[LUXGFX_RENDERTARGETS];
-    lxGFXTextureImagePTR  images[LUXGFX_MAX_RWTEXTURE_IMAGES];
-    lxGFXBufferPTR        uniform[LUXGFX_MAX_UNIFORM_BUFFERS];
+  typedef struct lxgContext_s{
+    flags32             capbits;
+    lxgVertexState_t    vertex;
+    lxgTexturePTR       textures[LUXGFX_MAX_TEXTURE_IMAGES];
+    lxgSamplerPTR       samplers[LUXGFX_MAX_TEXTURE_IMAGES];
+    lxgRenderTargetPTR  rendertargets[LUXGFX_RENDERTARGETS];
+    lxgTextureImagePTR  images[LUXGFX_MAX_RWTEXTURE_IMAGES];
+    lxgBufferPTR        uniform[LUXGFX_MAX_UNIFORM_BUFFERS];
 
-    flags32               rflag;
-    uint16                stencilmaskpos;
-    uint16                stencilmaskneg;
+    flags32             rflag;
+    uint16              stencilmaskpos;
+    uint16              stencilmaskneg;
 
-    lxGFXAlpha_t          alpha;
-    lxGFXBlend_t          blend;
+    lxgAlpha_t          alpha;
+    lxgBlend_t          blend;
 
-    lxGFXDepth_t          depth;
-    lxGFXStencil_t        stencil;
-    lxGFXLogic_t          logic;
+    lxgDepth_t          depth;
+    lxgStencil_t        stencil;
+    lxgLogic_t          logic;
 
-    lxGFXLine_t           line;
+    lxgLine_t           line;
 
-    lxGFXRasterizer_t     rasterizer;
-    lxGFXViewPort_t       viewport;
-    lxGFXFrameBounds_t    framebounds;
-    lxGFXFrameBounds_t    window;
+    lxgRasterizer_t     rasterizer;
+    lxgViewPort_t       viewport;
+    lxgFrameBounds_t    framebounds;
+    lxgFrameBounds_t    window;
 
-    lxGFXBlendMrt_t       blendMRT;
-    lxGFXViewPortMrt_t    viewportMRT;
+    lxgBlendMrt_t       blendMRT;
+    lxgViewPortMrt_t    viewportMRT;
     
-    lxGFXCapabilites_t    capabilites;
-  }lxGFXContext_t;
+    lxgCapabilites_t    capabilites;
+  }lxgContext_t;
 
   //////////////////////////////////////////////////////////////////////////
-  LUX_API const char* lxGFXContext_init(lxGFXContextPTR ctx);
-  LUX_API void  lxGFXContext_syncStates(lxGFXContextPTR ctx);
-  LUX_API booln lxGFXContext_checkStates(lxGFXContextPTR ctx);
-  LUX_API void  lxGFXContext_resetTextures(lxGFXContextPTR ctx);
-  LUX_API void  lxGFXContext_resetVertexStreams(lxGFXContextPTR ctx);
+  LUX_API const char* lxgContext_init(lxgContextPTR ctx);
+  LUX_API void  lxgContext_syncStates(lxgContextPTR ctx);
+  LUX_API booln lxgContext_checkStates(lxgContextPTR ctx);
+  LUX_API void  lxgContext_resetTextures(lxgContextPTR ctx);
+  LUX_API void  lxgContext_resetVertexStreams(lxgContextPTR ctx);
 
-  LUX_API void  lxGFXTexture_apply(lxGFXContextPTR ctx, uint imageunit, lxGFXTexturePTR tex);
-  LUX_API void  lxGFXSampler_apply(lxGFXContextPTR ctx, uint imageunit, lxGFXSamplerPTR self);
-  LUX_API void  lxGFXTextures_apply(lxGFXContextPTR ctx, uint start, uint num, lxGFXTexturePTR *texs);
-  LUX_API void  lxGFXSamplers_apply(lxGFXContextPTR ctx, uint start, uint num, lxGFXSamplerPTR *samps);
-  LUX_API void  lxGFXTextureImage_apply(lxGFXContextPTR ctx, uint imageunit, lxGFXTextureImagePTR tex);
-  LUX_API void  lxGFXRenderTarget_apply(lxGFXContextPTR ctx, lxGFXRenderTargetType_t type, lxGFXRenderTargetPTR rt);
-  LUX_API void  lxGFXRenderTarget_applyDraw(lxGFXContextPTR ctx, lxGFXRenderTargetPTR rt, booln setViewport);
+  LUX_API void  lxgTexture_apply(lxgContextPTR ctx, uint imageunit, lxgTexturePTR tex);
+  LUX_API void  lxgSampler_apply(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR self);
+  LUX_API void  lxgTextures_apply(lxgContextPTR ctx, uint start, uint num, lxgTexturePTR *texs);
+  LUX_API void  lxgSamplers_apply(lxgContextPTR ctx, uint start, uint num, lxgSamplerPTR *samps);
+  LUX_API void  lxgTextureImage_apply(lxgContextPTR ctx, uint imageunit, lxgTextureImagePTR tex);
+  LUX_API void  lxgRenderTarget_apply(lxgContextPTR ctx, lxgRenderTargetType_t type, lxgRenderTargetPTR rt);
+  LUX_API void  lxgRenderTarget_applyDraw(lxgContextPTR ctx, lxgRenderTargetPTR rt, booln setViewport);
 
   // perform check if same state, prior to setting
-  LUX_API void lxGFXAlpha_checked(lxGFXContextPTR ctx, const lxGFXAlphaPTR );
-  LUX_API void lxGFXBlend_checked(lxGFXContextPTR ctx, const lxGFXBlendPTR );
-  LUX_API void lxGFXDepth_checked(lxGFXContextPTR ctx, const lxGFXDepthPTR );
-  LUX_API void lxGFXLogic_checked(lxGFXContextPTR ctx, const lxGFXLogicPTR );
-  LUX_API void lxGFXLine_checked(lxGFXContextPTR ctx, const lxGFXLinePTR );
-  LUX_API void lxGFXStencil_checked(lxGFXContextPTR ctx, const lxGFXStencilPTR );
-  LUX_API void lxGFXTexture_checked(lxGFXContextPTR ctx, uint imageunit, lxGFXTexturePTR tex);
-  LUX_API void lxGFXSampler_checked(lxGFXContextPTR ctx, uint imageunit, lxGFXSamplerPTR samp);
-  LUX_API void lxGFXTextures_checked(lxGFXContextPTR ctx, uint start, uint num, lxGFXTexturePTR *texs);
-  LUX_API void lxGFXSamplers_checked(lxGFXContextPTR ctx, uint start, uint num, lxGFXSamplerPTR *samps);
-  LUX_API void lxGFXRenderFlag_checked(lxGFXContextPTR ctx, flags32 needed);
-  LUX_API void lxGFXVertexDeclaration_checked(lxGFXContextPTR ctx, const lxGFXVertexDeclPTR decl);
-  LUX_API void lxGFXVertexAttrib_checked(lxGFXContextPTR ctx, flags32 needed);
-  LUX_API void lxGFXRenderTarget_checked(lxGFXContextPTR ctx, lxGFXRenderTargetType_t type, lxGFXRenderTargetPTR rt);
-  LUX_API void lxGFXTextureImage_checked(lxGFXContextPTR ctx, uint imageunit, lxGFXTextureImagePTR img);
+  LUX_API void lxgAlpha_checked(lxgContextPTR ctx, const lxgAlphaPTR );
+  LUX_API void lxgBlend_checked(lxgContextPTR ctx, const lxgBlendPTR );
+  LUX_API void lxgDepth_checked(lxgContextPTR ctx, const lxgDepthPTR );
+  LUX_API void lxgLogic_checked(lxgContextPTR ctx, const lxgLogicPTR );
+  LUX_API void lxgLine_checked(lxgContextPTR ctx, const lxgLinePTR );
+  LUX_API void lxgStencil_checked(lxgContextPTR ctx, const lxgStencilPTR );
+  LUX_API void lxgTexture_checked(lxgContextPTR ctx, uint imageunit, lxgTexturePTR tex);
+  LUX_API void lxgSampler_checked(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR samp);
+  LUX_API void lxgTextures_checked(lxgContextPTR ctx, uint start, uint num, lxgTexturePTR *texs);
+  LUX_API void lxgSamplers_checked(lxgContextPTR ctx, uint start, uint num, lxgSamplerPTR *samps);
+  LUX_API void lxgRenderFlag_checked(lxgContextPTR ctx, flags32 needed);
+  LUX_API void lxgVertexDeclaration_checked(lxgContextPTR ctx, const lxgVertexDeclPTR decl);
+  LUX_API void lxgVertexAttrib_checked(lxgContextPTR ctx, flags32 needed);
+  LUX_API void lxgVertexAttrib_checkedFIXED(lxgContextPTR ctx ,flags32 needed);
+  LUX_API void lxgRenderTarget_checked(lxgContextPTR ctx, lxgRenderTargetType_t type, lxgRenderTargetPTR rt);
+  LUX_API void lxgTextureImage_checked(lxgContextPTR ctx, uint imageunit, lxgTextureImagePTR img);
 
-  LUX_API void  lxGFXViewPortScissor_checked(lxGFXContextPTR ctx, const lxRectangleiPTR rect);
-  LUX_API booln lxGFXBuffer_checkedSetUniform(lxGFXContextPTR ctx, uint idx, lxGFXBufferPTR buffer);
+  LUX_API void  lxgViewPortScissor_checked(lxgContextPTR ctx, const lxRectangleiPTR rect);
+  LUX_API booln lxgBuffer_checkedSetUniform(lxgContextPTR ctx, uint idx, lxgBufferPTR buffer);
 
   //////////////////////////////////////////////////////////////////////////
 
-  LUX_INLINE void lxGFXAlpha_checked(lxGFXContextPTR ctx, const lxGFXAlphaPTR obj)
+  LUX_INLINE void lxgAlpha_checked(lxgContextPTR ctx, const lxgAlphaPTR obj)
   {
-    if (memcmp(&ctx->alpha,obj,sizeof(lxGFXAlpha_t)))
+    if (memcmp(&ctx->alpha,obj,sizeof(lxgAlpha_t)))
     {
-      lxGFXAlpha_apply(ctx, obj);
+      lxgAlpha_apply(ctx, obj);
     }
   }
-  LUX_INLINE void lxGFXBlend_checked(lxGFXContextPTR ctx, const lxGFXBlendPTR obj)
+  LUX_INLINE void lxgBlend_checked(lxgContextPTR ctx, const lxgBlendPTR obj)
   {
-    if (memcmp(&ctx->blend,obj,sizeof(lxGFXBlend_t)))
+    if (memcmp(&ctx->blend,obj,sizeof(lxgBlend_t)))
     {
-      lxGFXBlend_apply(ctx,obj);
+      lxgBlend_apply(ctx,obj);
     }
   }
-  LUX_INLINE void lxGFXDepth_checked(lxGFXContextPTR ctx, const lxGFXDepthPTR obj)
+  LUX_INLINE void lxgDepth_checked(lxgContextPTR ctx, const lxgDepthPTR obj)
   {
-    if (memcmp(&ctx->depth,obj,sizeof(lxGFXDepth_t)))
+    if (memcmp(&ctx->depth,obj,sizeof(lxgDepth_t)))
     {
-      lxGFXDepth_apply(ctx,obj);
+      lxgDepth_apply(ctx,obj);
     }
   }
-  LUX_INLINE void lxGFXLogic_checked(lxGFXContextPTR ctx, const lxGFXLogicPTR obj)
+  LUX_INLINE void lxgLogic_checked(lxgContextPTR ctx, const lxgLogicPTR obj)
   {
-    if (memcmp(&ctx->logic,obj,sizeof(lxGFXLogic_t)))
+    if (memcmp(&ctx->logic,obj,sizeof(lxgLogic_t)))
     {
-      lxGFXLogic_apply(ctx,obj);
+      lxgLogic_apply(ctx,obj);
     }
   }
-  LUX_INLINE void lxGFXLine_checked(lxGFXContextPTR ctx, const lxGFXLinePTR obj)
+  LUX_INLINE void lxgLine_checked(lxgContextPTR ctx, const lxgLinePTR obj)
   {
-    if (memcmp(&ctx->line,obj,sizeof(lxGFXLine_t)))
+    if (memcmp(&ctx->line,obj,sizeof(lxgLine_t)))
     {
-      lxGFXLine_apply(ctx,obj);
+      lxgLine_apply(ctx,obj);
     }
   }
-  LUX_INLINE void lxGFXStencil_checked(lxGFXContextPTR ctx, const lxGFXStencilPTR obj)
+  LUX_INLINE void lxgStencil_checked(lxgContextPTR ctx, const lxgStencilPTR obj)
   {
-    if (memcmp(&ctx->stencil,obj,sizeof(lxGFXStencil_t)))
+    if (memcmp(&ctx->stencil,obj,sizeof(lxgStencil_t)))
     {
-      lxGFXStencil_apply(ctx,obj);
+      lxgStencil_apply(ctx,obj);
     }
   }
 
-  LUX_INLINE void lxGFXTexture_checked(lxGFXContextPTR ctx, uint imageunit, lxGFXTexturePTR tex)
+  LUX_INLINE void lxgTexture_checked(lxgContextPTR ctx, uint imageunit, lxgTexturePTR tex)
   {
     if (ctx->textures[imageunit] != tex){
-      lxGFXTexture_apply(ctx,imageunit,tex);
+      lxgTexture_apply(ctx,imageunit,tex);
     }
     else{
       glActiveTexture(GL_TEXTURE0_ARB + imageunit);
     }
   }
-  LUX_INLINE void lxGFXSampler_checked(lxGFXContextPTR ctx, uint imageunit, lxGFXSamplerPTR sampler)
+  LUX_INLINE void lxgSampler_checked(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler)
   {
     if (ctx->samplers[imageunit] != sampler){
-      lxGFXSampler_apply(ctx,imageunit,sampler);
+      lxgSampler_apply(ctx,imageunit,sampler);
     }
   }
-  LUX_INLINE void lxGFXTextureImage_checked(lxGFXContextPTR ctx, uint imageunit, lxGFXTextureImagePTR img)
+  LUX_INLINE void lxgTextureImage_checked(lxgContextPTR ctx, uint imageunit, lxgTextureImagePTR img)
   {
     if (ctx->images[imageunit] != img){
-      lxGFXTextureImage_apply(ctx,imageunit,img);
+      lxgTextureImage_apply(ctx,imageunit,img);
     }
   }
-  LUX_INLINE booln lxGFXBuffer_checkedSetUniform(lxGFXContextPTR ctx, uint idx, lxGFXBufferPTR buffer)
+  LUX_INLINE booln lxgBuffer_checkedSetUniform(lxgContextPTR ctx, uint idx, lxgBufferPTR buffer)
   {
     booln res = ctx->uniform[idx] != buffer;
     ctx->uniform[idx] = buffer;
     return res;
   }
-  LUX_INLINE void lxGFXTextures_checked(lxGFXContextPTR ctx, uint start, uint num, lxGFXTexturePTR *texs)
+  LUX_INLINE void lxgTextures_checked(lxgContextPTR ctx, uint start, uint num, lxgTexturePTR *texs)
   {
     LUX_ASSUME(num >= 1 && num <= LUXGFX_MAX_TEXTURE_IMAGES);
-    if (memcmp(ctx->textures,texs,sizeof(lxGFXTexturePTR )*num)){
-      lxGFXTextures_apply(ctx,start,num,texs);
+    if (memcmp(ctx->textures,texs,sizeof(lxgTexturePTR )*num)){
+      lxgTextures_apply(ctx,start,num,texs);
     }
   }
-  LUX_INLINE void lxGFXSamplers_checked(lxGFXContextPTR ctx, uint start, uint num, lxGFXSamplerPTR *samps)
+  LUX_INLINE void lxgSamplers_checked(lxgContextPTR ctx, uint start, uint num, lxgSamplerPTR *samps)
   {
     LUX_ASSUME(num >= 1 && num <= LUXGFX_MAX_TEXTURE_IMAGES);
-    if (memcmp(ctx->textures,samps,sizeof(lxGFXSamplerPTR)*num)){
-      lxGFXSamplers_apply(ctx,start,num,samps);
+    if (memcmp(ctx->textures,samps,sizeof(lxgSamplerPTR)*num)){
+      lxgSamplers_apply(ctx,start,num,samps);
     }
   }
-  LUX_INLINE void lxGFXRenderFlag_checked(lxGFXContextPTR ctx, flags32 needed){
+  LUX_INLINE void lxgRenderFlag_checked(lxgContextPTR ctx, flags32 needed){
     flags32 changed = (needed ^ ctx->rflag);
     if (changed){
-      lxGFXRenderFlag_apply(ctx,needed,changed);
+      lxgRenderFlag_apply(ctx,needed,changed);
     }
   }
 
-  LUX_INLINE void lxGFXViewPortScissor_checked(lxGFXContextPTR ctx, const lxRectangleiPTR rect){
+  LUX_INLINE void lxgViewPortScissor_checked(lxgContextPTR ctx, const lxRectangleiPTR rect){
     if (rect){
       glScissor(rect->x,rect->y,rect->width,rect->height);
       memcpy(&ctx->viewport.scissorRect,rect,sizeof(lxRectanglei_t));
     }
     if ((rect != NULL) != ctx->viewport.scissor){
-      lxGFXViewPortScissor_applyState(ctx, (rect != NULL));
+      lxgViewPortScissor_applyState(ctx, (rect != NULL));
     }
   }
 
-  LUX_INLINE void lxGFXVertexDeclaration_checked(lxGFXContextPTR ctx, const lxGFXVertexDeclPTR decl)
+  LUX_INLINE void lxgVertexDeclaration_checked(lxgContextPTR ctx, const lxgVertexDeclPTR decl)
   {
     if (ctx->vertex.decl != decl){
-      lxGFXVertexDecl_apply(ctx,decl);
+      lxgVertexDecl_apply(ctx,decl);
     }
   }
 
-  LUX_INLINE void lxGFXVertexAttrib_checked(lxGFXContextPTR ctx ,flags32 needed){
+  LUX_INLINE void lxgVertexAttrib_checked(lxgContextPTR ctx ,flags32 needed){
     flags32 changed = (needed ^ ctx->vertex.active);
     if (changed){
-      lxGFXVertexAttribs_apply(ctx,needed,changed);
+      lxgVertexAttribs_apply(ctx,needed,changed);
     }
   }
 
-  LUX_INLINE void lxGFXRenderTarget_checked(lxGFXContextPTR ctx, lxGFXRenderTargetType_t type, lxGFXRenderTargetPTR rt)
-  {
-    if (ctx->rendertargets[type] == rt) return;
-    lxGFXRenderTarget_apply(ctx,type,rt);
+  LUX_INLINE void lxgVertexAttrib_checkedFIXED(lxgContextPTR ctx ,flags32 needed){
+    flags32 changed = (needed ^ ctx->vertex.active);
+    if (changed){
+      lxgVertexAttribs_applyFIXED(ctx,needed,changed);
+    }
   }
 
-  LUX_INLINE void lxGFXContext_resetTextures(lxGFXContextPTR ctx)
+  LUX_INLINE void lxgRenderTarget_checked(lxgContextPTR ctx, lxgRenderTargetType_t type, lxgRenderTargetPTR rt)
+  {
+    if (ctx->rendertargets[type] == rt) return;
+    lxgRenderTarget_apply(ctx,type,rt);
+  }
+
+  LUX_INLINE void lxgContext_resetTextures(lxgContextPTR ctx)
   {
     memset(ctx->textures,0,sizeof(void*)*LUXGFX_MAX_TEXTURE_IMAGES);
   }
 
-  LUX_INLINE void lxGFXContext_resetVertexStreams(lxGFXContextPTR ctx)
+  LUX_INLINE void lxgContext_resetVertexStreams(lxgContextPTR ctx)
   {
     ctx->vertex.streamvalid = 0;
     ctx->vertex.streamchange = 0;

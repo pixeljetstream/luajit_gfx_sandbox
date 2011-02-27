@@ -6,11 +6,11 @@
 #include <luxgfx/context.h>
 
 //////////////////////////////////////////////////////////////////////////
-// lxGFXContext
-LUX_API const char* lxGFXContext_init(lxGFXContextPTR ctx)
+// lxgContext
+LUX_API const char* lxgContext_init(lxgContextPTR ctx)
 {
   glewInit();
-  memset(ctx,0,sizeof(lxGFXContext_t));
+  memset(ctx,0,sizeof(lxgContext_t));
 
   if (!GLEW_VERSION_2_0){
     return "ARB_STENCIL_SEPARATE";
@@ -167,99 +167,99 @@ LUX_API const char* lxGFXContext_init(lxGFXContextPTR ctx)
     ctx->capabilites.pointsize = LUX_MAX(val1,val2);
   }
 
-  lxGFXContext_syncStates(ctx);
+  lxgContext_syncStates(ctx);
 
   return NULL;
 }
 
 
 
-LUX_API void lxGFXContext_syncStates(lxGFXContextPTR ctx)
+LUX_API void lxgContext_syncStates(lxgContextPTR ctx)
 {
-  ctx->rflag = lxGFXRenderFlag_sync(ctx);
+  ctx->rflag = lxgRenderFlag_sync(ctx);
 
-  lxGFXDepth_sync(ctx, &ctx->depth);
-  lxGFXAlpha_sync(ctx, &ctx->alpha);
-  lxGFXBlend_sync(ctx, &ctx->blend);
-  lxGFXStencil_sync(ctx, &ctx->stencil);
-  lxGFXViewPort_sync(ctx, &ctx->viewport);
-  lxGFXRasterizer_sync(ctx, &ctx->rasterizer);
+  lxgDepth_sync(ctx, &ctx->depth);
+  lxgAlpha_sync(ctx, &ctx->alpha);
+  lxgBlend_sync(ctx, &ctx->blend);
+  lxgStencil_sync(ctx, &ctx->stencil);
+  lxgViewPort_sync(ctx, &ctx->viewport);
+  lxgRasterizer_sync(ctx, &ctx->rasterizer);
 }
 
 
-LUX_API const char* lxGFXContext_test(lxGFXContextPTR ctx)
+LUX_API const char* lxgContext_test(lxgContextPTR ctx)
 {
   {
-    lxGFXDepthPTR state = &ctx->depth;
-    lxGFXDepth_t test;
-    lxGFXDepth_sync(ctx, &test);
+    lxgDepthPTR state = &ctx->depth;
+    lxgDepth_t test;
+    lxgDepth_sync(ctx, &test);
 
-    if (memcmp(state,&test,sizeof(lxGFXDepth_t))){
+    if (memcmp(state,&test,sizeof(lxgDepth_t))){
       return ("VIDDepth_t");
     }
   }
 
   {
-    lxGFXAlphaPTR state = &ctx->alpha;
-    lxGFXAlpha_t test;
-    lxGFXAlpha_sync(ctx, &test);
+    lxgAlphaPTR state = &ctx->alpha;
+    lxgAlpha_t test;
+    lxgAlpha_sync(ctx, &test);
 
-    if (memcmp(state,&test,sizeof(lxGFXAlpha_t))){
+    if (memcmp(state,&test,sizeof(lxgAlpha_t))){
       return ("VIDAlpha_t");
     }
   }
 
   {
-    lxGFXBlendPTR state = &ctx->blend;
-    lxGFXBlend_t test;
-    lxGFXBlend_sync(ctx, &test);
+    lxgBlendPTR state = &ctx->blend;
+    lxgBlend_t test;
+    lxgBlend_sync(ctx, &test);
 
-    if (memcmp(state,&test,sizeof(lxGFXBlend_t))){
+    if (memcmp(state,&test,sizeof(lxgBlend_t))){
       return ("VIDBlend_t");
     }
   }
 
   {
-    lxGFXStencilPTR state = &ctx->stencil;
-    lxGFXStencil_t test;
-    lxGFXStencil_sync(ctx, &test);
+    lxgStencilPTR state = &ctx->stencil;
+    lxgStencil_t test;
+    lxgStencil_sync(ctx, &test);
 
-    if (memcmp(state,&test,sizeof(lxGFXStencil_t))){
+    if (memcmp(state,&test,sizeof(lxgStencil_t))){
       return ("VIDStencil_t");
     }
   }
 
   {
-    lxGFXLinePTR state = &ctx->line;
-    lxGFXLine_t test;
-    lxGFXLine_sync(ctx, &test);
+    lxgLinePTR state = &ctx->line;
+    lxgLine_t test;
+    lxgLine_sync(ctx, &test);
 
-    if (memcmp(state,&test,sizeof(lxGFXLine_t))){
+    if (memcmp(state,&test,sizeof(lxgLine_t))){
       return ("VIDLine_t");
     }
   }
 
   {
-    lxGFXViewPortPTR state = &ctx->viewport;
-    lxGFXViewPort_t test;
-    lxGFXViewPort_sync(ctx, &test);
+    lxgViewPortPTR state = &ctx->viewport;
+    lxgViewPort_t test;
+    lxgViewPort_sync(ctx, &test);
 
-    if (memcmp(state,&test,sizeof(lxGFXViewPort_t))){
+    if (memcmp(state,&test,sizeof(lxgViewPort_t))){
       return ("VIDViewPort_t");
     }
   }
 
   {
-    lxGFXRasterizerPTR state = &ctx->rasterizer;
-    lxGFXRasterizer_t test;
-    lxGFXRasterizer_sync(ctx, &test);
+    lxgRasterizerPTR state = &ctx->rasterizer;
+    lxgRasterizer_t test;
+    lxgRasterizer_sync(ctx, &test);
 
-    if (memcmp(state,&test,sizeof(lxGFXRasterizer_t))){
+    if (memcmp(state,&test,sizeof(lxgRasterizer_t))){
       return ("VIDRasterizer_t");
     }
   }
 
-  return lxGFXRenderFlag_test(ctx);
+  return lxgRenderFlag_test(ctx);
 }
 
 

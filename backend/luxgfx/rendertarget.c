@@ -11,31 +11,31 @@
 #include "state_inl.h"
 
 
-LUX_API void lxGFXRenderTarget_init(lxGFXContextPTR ctx, lxGFXRenderTargetPTR rt)
+LUX_API void lxgRenderTarget_init(lxgContextPTR ctx, lxgRenderTargetPTR rt)
 {
-  memset(rt,0,sizeof(lxGFXRenderTarget_t));
+  memset(rt,0,sizeof(lxgRenderTarget_t));
 
   rt->ctx = ctx;
 
   glGenFramebuffers(1,&rt->vgl.id);
 }
 
-LUX_API void lxGFXRenderTarget_deinit(lxGFXContextPTR ctx, lxGFXRenderTargetPTR rt)
+LUX_API void lxgRenderTarget_deinit(lxgContextPTR ctx, lxgRenderTargetPTR rt)
 {
   glDeleteFramebuffers(1,&rt->vgl.id);
 }
 
-LUX_API void lxGFXRenderTarget_resetAssigns(lxGFXContextPTR ctx, lxGFXRenderTargetPTR rt)
+LUX_API void lxgRenderTarget_resetAssigns(lxgContextPTR ctx, lxgRenderTargetPTR rt)
 {
 
 }
 
 
 
-static void lxGFXRenderTarget_applyAssign(GLenum target, GLenum what,lxGFXRenderAssignPTR assign)
+static void lxgRenderTarget_applyAssign(GLenum target, GLenum what,lxgRenderAssignPTR assign)
 {
   if (assign->tex){
-    lxGFXTexturePTR tex = assign->tex;
+    lxgTexturePTR tex = assign->tex;
     switch (tex->type){
     case LUXGFX_TEXTURE_1D:
       glFramebufferTexture1DEXT(target,what,GL_TEXTURE_1D,tex->vgl.id,assign->mip);
@@ -70,12 +70,12 @@ static void lxGFXRenderTarget_applyAssign(GLenum target, GLenum what,lxGFXRender
   }
 }
 
-void lxGFXRenderTarget_applyNamedAssign(lxGFXRenderTargetPTR rt, GLenum what,lxGFXRenderAssignPTR assign)
+void lxgRenderTarget_applyNamedAssign(lxgRenderTargetPTR rt, GLenum what,lxgRenderAssignPTR assign)
 {
   GLuint target = rt->vgl.id;
 
   if (assign->tex){
-    lxGFXTexturePTR tex = assign->tex;
+    lxgTexturePTR tex = assign->tex;
     switch (tex->type){
     case LUXGFX_TEXTURE_1D:
       glNamedFramebufferTexture1DEXT(target,what,GL_TEXTURE_1D,tex->vgl.id,assign->mip);
@@ -136,7 +136,7 @@ static const GLenum l_FBOAssigns[LUXGFX_RENDERASSIGNS]= {
   GL_COLOR_ATTACHMENT15_EXT,
 };
 
-LUX_API void lxGFXRenderTarget_applyAssigns(lxGFXContextPTR ctx, lxGFXRenderTargetPTR rt, lxGFXRenderTargetType_t mode)
+LUX_API void lxgRenderTarget_applyAssigns(lxgContextPTR ctx, lxgRenderTargetPTR rt, lxgRenderTargetType_t mode)
 {
   GLenum target = l_FBOmode[mode];
   uint i;
@@ -148,22 +148,22 @@ LUX_API void lxGFXRenderTarget_applyAssigns(lxGFXContextPTR ctx, lxGFXRenderTarg
 
   for (i = 0; i < rt->maxidx; i++){
     if (rt->dirty & (1<<i)){
-      lxGFXRenderTarget_applyAssign(target,l_FBOAssigns[i],&rt->assigns[i]);
+      lxgRenderTarget_applyAssign(target,l_FBOAssigns[i],&rt->assigns[i]);
     }
   }
   rt->maxidx = 0;
 }
 
-LUX_API void  lxGFXRenderTarget_applyDraw(lxGFXContextPTR ctx, lxGFXRenderTargetPTR rt, booln setViewport)
+LUX_API void  lxgRenderTarget_applyDraw(lxgContextPTR ctx, lxgRenderTargetPTR rt, booln setViewport)
 {
-  lxGFXRenderTarget_apply(ctx,LUXGFX_RENDERTARGET_DRAW,rt);
+  lxgRenderTarget_apply(ctx,LUXGFX_RENDERTARGET_DRAW,rt);
   if (setViewport){
     lxRectanglei_t rect = {0,0,ctx->framebounds.width,ctx->framebounds.height};
-    lxGFXViewPortRect_apply(ctx, &rect);
+    lxgViewPortRect_apply(ctx, &rect);
   }
 }
 
-LUX_API void  lxGFXRenderTarget_apply(lxGFXContextPTR ctx, lxGFXRenderTargetType_t mode, lxGFXRenderTargetPTR rt)
+LUX_API void  lxgRenderTarget_apply(lxgContextPTR ctx, lxgRenderTargetType_t mode, lxgRenderTargetPTR rt)
 {
   GLenum target = l_FBOmode[mode];
   glBindFramebuffer(target,rt ? rt->vgl.id : 0);
@@ -174,25 +174,25 @@ LUX_API void  lxGFXRenderTarget_apply(lxGFXContextPTR ctx, lxGFXRenderTargetType
   }
 }
 
-LUX_API void lxGFXRenderTarget_blit(lxGFXContextPTR ctx, lxGFXRenderTargetPTR to, lxGFXRenderTargetPTR from, lxGFXRenderTargetBlitPTR update, flags32 mask, booln linearFilter)
+LUX_API void lxgRenderTarget_blit(lxgContextPTR ctx, lxgRenderTargetPTR to, lxgRenderTargetPTR from, lxgRenderTargetBlitPTR update, flags32 mask, booln linearFilter)
 {
-  lxGFXRenderTarget_checked(ctx,LUXGFX_RENDERTARGET_DRAW,to);
-  lxGFXRenderTarget_checked(ctx,LUXGFX_RENDERTARGET_READ,from);
+  lxgRenderTarget_checked(ctx,LUXGFX_RENDERTARGET_DRAW,to);
+  lxgRenderTarget_checked(ctx,LUXGFX_RENDERTARGET_READ,from);
   glBlitFramebuffer(
     update->fromStart.x,  update->fromStart.y,  update->fromEnd.x,  update->fromEnd.y,
     update->toStart.x,    update->toStart.y,    update->toEnd.x,    update->toEnd.y, mask, linearFilter ? GL_LINEAR : GL_NEAREST);
 }
 
-LUX_API void lxGFXRenderTarget_setAssign(lxGFXRenderTargetPTR rt, uint idx,lxGFXRenderAssignPTR assign)
+LUX_API void lxgRenderTarget_setAssign(lxgRenderTargetPTR rt, uint idx,lxgRenderAssignPTR assign)
 {
   LUX_DEBUGASSERT(idx < LUXGFX_RENDERASSIGNS);
-  if (memcmp(&rt->assigns[idx],assign,sizeof(lxGFXRenderAssign_t)) == 0) return;
+  if (memcmp(&rt->assigns[idx],assign,sizeof(lxgRenderAssign_t)) == 0) return;
   rt->assigns[idx] = *assign;
   rt->dirty |= (1<<idx);
   rt->maxidx = LUX_MAX(rt->maxidx,idx);
 }
 
-LUX_API booln lxGFXRenderTarget_checkSize(lxGFXRenderTargetPTR rt)
+LUX_API booln lxgRenderTarget_checkSize(lxgRenderTargetPTR rt)
 {
   uint i;
   int width = 0;
@@ -204,9 +204,9 @@ LUX_API booln lxGFXRenderTarget_checkSize(lxGFXRenderTargetPTR rt)
   rt->equalsized = LUX_TRUE;
 
   for (i = 0; i < LUXGFX_RENDERASSIGNS; i++){
-    lxGFXRenderAssign_t*assign = &rt->assigns[i];
+    lxgRenderAssign_t*assign = &rt->assigns[i];
     if (assign->tex){
-      lxVec3i_t vec = *lxGFXTexture_getMipSize(assign->tex,assign->mip);
+      lxVec3i_t vec = *lxgTexture_getMipSize(assign->tex,assign->mip);
       width  = vec.x;
       height = vec.y;
     }
@@ -231,10 +231,10 @@ LUX_API booln lxGFXRenderTarget_checkSize(lxGFXRenderTargetPTR rt)
 
 
 //////////////////////////////////////////////////////////////////////////
-// lxGFXViewPort
+// lxgViewPort
 
 
-LUX_API void lxGFXViewPort_sync(lxGFXContextPTR ctx, lxGFXViewPortPTR view)
+LUX_API void lxgViewPort_sync(lxgContextPTR ctx, lxgViewPortPTR view)
 {
   glGetIntegerv(GL_VIEWPORT,&view->viewRect.x);
   glGetDoublev(GL_DEPTH_RANGE,&view->depth.near);
@@ -242,7 +242,7 @@ LUX_API void lxGFXViewPort_sync(lxGFXContextPTR ctx, lxGFXViewPortPTR view)
   glGetIntegerv(GL_SCISSOR_BOX,&view->scissorRect.x);
 }
 
-LUX_API booln lxGFXViewPortRect_apply(lxGFXContextPTR ctx, const lxRectangleiPTR viewRect)
+LUX_API booln lxgViewPortRect_apply(lxgContextPTR ctx, const lxRectangleiPTR viewRect)
 {
   glViewport(LUX_ARRAY4UNPACK(&viewRect->x));
   ctx->viewport.viewRect = *viewRect;
@@ -263,7 +263,7 @@ LUX_API booln lxGFXViewPortRect_apply(lxGFXContextPTR ctx, const lxRectangleiPTR
   
 }
 
-LUX_API booln lxGFXViewPortScissor_applyState(lxGFXContextPTR ctx, booln state)
+LUX_API booln lxgViewPortScissor_applyState(lxgContextPTR ctx, booln state)
 {
   booln retstate = state;
   if(state){
@@ -287,9 +287,9 @@ LUX_API booln lxGFXViewPortScissor_applyState(lxGFXContextPTR ctx, booln state)
   return retstate;
 }
 
-LUX_API booln lxGFXViewPort_apply(lxGFXContextPTR ctx, const lxGFXViewPortPTR view)
+LUX_API booln lxgViewPort_apply(lxgContextPTR ctx, const lxgViewPortPTR view)
 {
-  booln res = lxGFXViewPortRect_apply(ctx,&view->viewRect);
+  booln res = lxgViewPortRect_apply(ctx,&view->viewRect);
   ctx->viewport = *view;
   glDepthRange(view->depth.near,view->depth.far);
   
@@ -304,7 +304,7 @@ LUX_API booln lxGFXViewPort_apply(lxGFXContextPTR ctx, const lxGFXViewPortPTR vi
   return res || ctx->viewport.scissor;
 }
 
-LUX_API void   lxGFXViewPortMrt_apply(lxGFXContextPTR ctx, const lxGFXViewPortMrtPTR objmrt)
+LUX_API void   lxgViewPortMrt_apply(lxgContextPTR ctx, const lxgViewPortMrtPTR objmrt)
 {
   uint i;
   uint numused = objmrt->numused;
@@ -322,10 +322,10 @@ LUX_API void   lxGFXViewPortMrt_apply(lxGFXContextPTR ctx, const lxGFXViewPortMr
   }
 }
 
-LUX_API void  lxGFXViewPortMrt_sync(lxGFXContextPTR ctx, lxGFXViewPortMrtPTR objmrt)
+LUX_API void  lxgViewPortMrt_sync(lxgContextPTR ctx, lxgViewPortMrtPTR objmrt)
 {
   int i;
-  memset(objmrt,0,sizeof(lxGFXViewPortMrt_t));
+  memset(objmrt,0,sizeof(lxgViewPortMrt_t));
 
   if (! (ctx->capbits & LUXGFX_CAP_SM4)) return;
 

@@ -16,27 +16,25 @@ extern "C"{
 
   #define LUXGFX_TEXTURE_MAXMIPMAPS 16
 
-  typedef enum lxGFXSamplerFilter_e{
+  typedef enum lxgSamplerFilter_e{
     LUXGFX_SAMPLERFILTER_NEAREST,
     LUXGFX_SAMPLERFILTER_LINEAR,
     LUXGFX_SAMPLERFILTER_MIPMAP_NEAREST,
     LUXGFX_SAMPLERFILTER_MIPMAP_LINEAR,
 
     LUXGFX_SAMPLERFILTERS,
-    LUXGFX_SAMPLERFILTER_FORCE_DWORD = 0x7FFFFFFF,
-  }lxGFXSamplerFilter_t;
+  }lxgSamplerFilter_t;
 
-  typedef enum lxGFXSamplerAddress_e{
+  typedef enum lxgSamplerAddress_e{
     LUXGFX_SAMPLERADDRESS_REPEAT,
     LUXGFX_SAMPLERADDRESS_MIRROR,
     LUXGFX_SAMPLERADDRESS_CLAMP,
     LUXGFX_SAMPLERADDRESS_BORDER,
 
     LUXGFX_SAMPLERADDRESSES,
-    LUXGFX_SAMPLERADDRESSES_FORCE_DWORD = 0x7FFFFFFF,
-  }lxGFXSamplerAddress_t;
+  }lxgSamplerAddress_t;
 
-  enum lxGFXSamplerAttrib_e{
+  enum lxgSamplerAttrib_e{
     LUXGFX_SAMPLERATTRIB_FILTER = 1<<0,
     LUXGFX_SAMPLERATTRIB_CMP = 1<<1,
     LUXGFX_SAMPLERATTRIB_ADDRESS = 1<<2,
@@ -46,43 +44,29 @@ extern "C"{
     LUXGFX_SAMPLERATTRIB_ALL = (1<<6)-1,
   };
 
-  typedef struct lxGFXSamplerLod_s{
+  typedef struct lxgSamplerLod_s{
     float         bias;
     float         min;
     float         max;
-  }lxGFXSamplerLod_t;
+  }lxgSamplerLod_t;
 
-  typedef struct lxGFXSampler_s{
+  typedef struct lxgSampler_s{
     lxGLSampler_t         vgl;
     uint32                incarnation;
-    lxGFXSamplerFilter_t  filter;
-    lxGLCompareMode_t     cmpfunc;
-    lxGLAddressMode_t     address[3];
-    uint                  aniso;
-    lxGFXSamplerLod_t     lod;
+    lxgCompareMode_t      cmpfunc : 8;
+    lxgSamplerFilter_t    filter : 3;
+    lxgSamplerAddress_t   addru : 3;
+    lxgSamplerAddress_t   addrv : 3;
+    lxgSamplerAddress_t   addrw : 3;
+    uint                  aniso : 4;
+    lxgSamplerLod_t       lod;
 
     float                 border[4];
-  }lxGFXSampler_t;
+  }lxgSampler_t;
 
   //////////////////////////////////////////////////////////////////////////
 
-  typedef enum lxGFXTextureType_e{
-    LUXGFX_TEXTURE_1D,
-    LUXGFX_TEXTURE_2D,
-    LUXGFX_TEXTURE_RECT,
-    LUXGFX_TEXTURE_3D,
-    LUXGFX_TEXTURE_CUBE,
-    LUXGFX_TEXTURE_2DMS,
-    LUXGFX_TEXTURE_1DARRAY,
-    LUXGFX_TEXTURE_2DARRAY,
-    LUXGFX_TEXTURE_CUBEARRAY,
-    LUXGFX_TEXTURE_2DMSARRAY,
-    LUXGFX_TEXTURE_BUFFER,
-
-    LUXGFX_TEXTURE_FORCE_DWORD = 0x7FFFFFFF,
-  }lxGFXTextureType_t;
-
-  typedef enum lxGFXTextureFlags_e{
+  typedef enum lxgTextureFlags_e{
     LUXGFX_TEXTUREFLAG_AUTOMIPMAP = 1<<0,
     LUXGFX_TEXTUREFLAG_MANMIPMAP  = 1<<1,
     LUXGFX_TEXTUREFLAG_COMPRESS   = 1<<2,
@@ -91,11 +75,9 @@ extern "C"{
 
     LUXGFX_TEXTUREFLAG_HASLOD     = 1<<30,
     LUXGFX_TEXTUREFLAG_HASCOMPARE = 1<<31,
+  }lxgTextureFlags_t;
 
-    LUXGFX_TEXTUREFLAG_FORCE_DWORD = 0x7FFFFFFF,
-  }lxGFXTextureFlags_t;
-
-  typedef enum lxGFXTextureChannel_e{
+  typedef enum lxgTextureChannel_e{
     LUXGFX_TEXTURECHANNEL_RGB,
     LUXGFX_TEXTURECHANNEL_RGBA,
   
@@ -116,10 +98,9 @@ extern "C"{
 #endif
 
     LUXGFX_TEXTURECHANNEL_CUSTOM,
-    LUXGFX_TEXTURECHANNEL_FORCE_DWORD = 0x7FFFFFFF,
-  }lxGFXTextureChannel_t;
+  }lxgTextureChannel_t;
 
-  typedef enum lxGFXTextureDataType_e{
+  typedef enum lxgTextureDataType_e{
     LUXGFX_TEXTUREDATA_BASE,
 
     LUXGFX_TEXTUREDATA_UNORM8,
@@ -136,7 +117,6 @@ extern "C"{
     LUXGFX_TEXTUREDATA_UINT16,
     LUXGFX_TEXTUREDATA_SINT32,
     LUXGFX_TEXTUREDATA_UINT32,
-
 
     LUXGFX_TEXTUREDATAS,
 
@@ -162,25 +142,23 @@ extern "C"{
     LUXGFX_TEXTUREDATA_COMPRESSED_FLOAT_BPTC,
     LUXGFX_TEXTUREDATA_COMPRESSED_SIGNED_FLOAT_BPTC,
     LUXGFX_TEXTUREDATA_CUSTOM,
+  }lxgTextureDataType_t;
 
-    LUXGFX_TEXTUREDATA_FORCE_DWORD = 0x7FFFFFFF,
-  }lxGFXTextureDataType_t;
-
-  typedef struct lxGFXTexture_s{
+  typedef struct lxgTexture_s{
     lxGLTexture_t     vgl;
-    lxGFXSamplerPTR   lastSampler;
+    lxgSamplerPTR     lastSampler;
     uint32            lastSamplerIncarnation;
-    lxGFXContextPTR   ctx;
+    lxgContextPTR     ctx;
 
-    lxGFXTextureType_t    type;
-    lxGFXTextureChannel_t formattype;
-    lxGFXTextureDataType_t  datatype;
-    flags32         flags;
+    lxgTextureChannel_t   formattype;
+    lxgTextureDataType_t  datatype;
+    flags32               flags;
 
     int           width;
     int           height;
     int           depth;
     int           arraysize;
+    int           samples;
 
     flags32       mipsdefined;
     uint          miplevels;
@@ -189,111 +167,113 @@ extern "C"{
     size_t        nativesizes[LUXGFX_TEXTURE_MAXMIPMAPS];
 
     uint          components;
+    uint          componentsize;
 
-    lxGFXSampler_t      sampler;
+    lxgSampler_t        sampler;
     lxGLTextureData_t   vgldata;
-  }lxGFXTexture_t;
+  }lxgTexture_t;
 
-  typedef struct lxGFXRenderBuffer_s{
+  typedef struct lxgRenderBuffer_s{
     lxGLRenderBuffer_t    vgl;
-    lxGFXContextPTR       ctx;
+    lxgContextPTR         ctx;
 
-    lxGFXTextureChannel_t formattype;
+    lxgTextureChannel_t formattype;
     int           width;
     int           height;
     uint          samples;
-  }lxGFXRenderBuffer_t;
+  }lxgRenderBuffer_t;
   
 
     // for cubemap: z == side 
     // for cubemap array: layer = z/6, side = z%6)
-  typedef struct lxGFXTextureUpdate_s{
+  typedef struct lxgTextureUpdate_s{
     lxVec3i_t   from;
     lxVec3i_t   to;
     lxVec3i_t   size;
-  }lxGFXTextureUpdate_t;
+  }lxgTextureUpdate_t;
 
   //////////////////////////////////////////////////////////////////////////
 
-  typedef enum lxGFXTextureAccessType_e{
-    LUXGFX_TEXACCESS_READ,
-    LUXGFX_TEXACCESS_WRITE,
-    LUXGFX_TEXACCESS_READWRITE,
-  }lxGFXTextureAccessType_t;
-
-  typedef struct lxGFXTextureImage_s{
-    lxGFXTexturePTR           tex;
+  typedef struct lxgTextureImage_s{
+    lxgTexturePTR             tex;
     int                       level;
     booln                     layered;
     int                       layer;
-    lxGLAccess_t              access;
-    lxGLAccessFormat_t        format;
-  }lxGFXTextureImage_t;
+    lxGLTextureImage_t        vgl;
+  }lxgTextureImage_t;
 
   //////////////////////////////////////////////////////////////////////////
   
 
   // Type checks
-  LUX_API booln lxGFXTextureChannel_valid(lxGFXContextPTR ctx, lxGFXTextureChannel_t channel);
-  LUX_API booln lxGFXTextureType_valid(lxGFXContextPTR ctx, lxGFXTextureType_t type);
+  LUX_API booln lxgTextureChannel_valid(lxgContextPTR ctx, lxgTextureChannel_t channel);
+  LUX_API booln lxgTextureTarget_valid(lxgContextPTR ctx, lxGLTextureTarget_t type);
   
-  // lxGFXTexture
+  // lxgTexture
 
    // for multisampled textures depth = samples
-  LUX_API booln lxGFXTexture_init(lxGFXContextPTR ctx, lxGFXTexturePTR tex, 
-    lxGFXTextureType_t type, lxGFXTextureChannel_t format, lxGFXTextureDataType_t data,
+  LUX_API booln lxgTexture_init(lxgContextPTR ctx, lxgTexturePTR tex, 
+    lxGLTextureTarget_t type, lxgTextureChannel_t format, lxgTextureDataType_t data,
     int width, int height, int depth, int arraysize, flags32 flags);
 
-  LUX_API booln lxGFXTexture_resize(lxGFXContextPTR ctx, lxGFXTexturePTR tex, int width, int height);
+  LUX_API booln lxgTexture_resize(lxgContextPTR ctx, lxgTexturePTR tex, 
+    int width, int height, int depth, int arraysize);
 
-  LUX_API void  lxGFXTexture_deinit(lxGFXContextPTR ctx, lxGFXTexturePTR tex);
+  LUX_API void  lxgTexture_deinit(lxgContextPTR ctx, lxgTexturePTR tex);
   
-  LUX_API booln lxGFXTexture_readFrame(lxGFXContextPTR ctx, lxGFXTexturePTR tex, 
-    const lxGFXTextureUpdatePTR update, uint miplevel);
+  LUX_API booln lxgTexture_readFrame(lxgContextPTR ctx, lxgTexturePTR tex, 
+    const lxgTextureUpdatePTR update, uint miplevel);
 
     // if scalartype is set to invalid, we assume "native" data (matching
     // internal)
-  LUX_API booln lxGFXTexture_readData(lxGFXContextPTR ctx, lxGFXTexturePTR tex, 
-    const lxGFXTextureUpdatePTR update, uint miplevel,
+  LUX_API booln lxgTexture_readData(lxgContextPTR ctx, lxgTexturePTR tex, 
+    const lxgTextureUpdatePTR update, uint miplevel,
     enum lxScalarType_e scalar, const void* buffer, uint buffersize);
 
-  LUX_API booln lxGFXTexture_readBuffer(lxGFXContextPTR ctx, lxGFXTexturePTR tex, 
-    const lxGFXTextureUpdatePTR update, uint miplevel,
-    enum lxScalarType_e scalar, const lxGFXBufferPTR buffer, uint bufferoffset);
+  LUX_API booln lxgTexture_readBuffer(lxgContextPTR ctx, lxgTexturePTR tex, 
+    const lxgTextureUpdatePTR update, uint miplevel,
+    enum lxScalarType_e scalar, const lxgBufferPTR buffer, uint bufferoffset);
 
-  LUX_API booln lxGFXTexture_writeData(lxGFXContextPTR ctx, lxGFXTexturePTR tex, uint side, booln ascompressed, booln onlydepth, uint mip, enum lxScalarType_e d, void* buffer, uint buffersize);
-  LUX_API booln lxGFXTexture_writeBuffer(lxGFXContextPTR ctx, lxGFXTexturePTR tex, uint side, booln ascompressed, booln onlydepth, uint mip, enum lxScalarType_e d, lxGFXBufferPTR buffer, uint bufferoffset);
+  LUX_API booln lxgTexture_writeData(lxgContextPTR ctx, lxgTexturePTR tex, uint side, booln ascompressed, booln onlydepth, uint mip, enum lxScalarType_e d, void* buffer, uint buffersize);
+  LUX_API booln lxgTexture_writeBuffer(lxgContextPTR ctx, lxgTexturePTR tex, uint side, booln ascompressed, booln onlydepth, uint mip, enum lxScalarType_e d, lxgBufferPTR buffer, uint bufferoffset);
 
-  LUX_API void  lxGFXTexture_getSampler(const lxGFXTexturePTR tex, lxGFXSamplerPTR sampler);
-  LUX_API const lxVec3iPTR  lxGFXTexture_getMipSize(const lxGFXTexturePTR tex, uint mipLevel);
+  LUX_API void  lxgTexture_getSampler(const lxgTexturePTR tex, lxgSamplerPTR sampler);
+  LUX_API const lxVec3iPTR  lxgTexture_getMipSize(const lxgTexturePTR tex, uint mipLevel);
   
-  LUX_API void  lxGFXTextureUnit_setCompare(lxGFXContextPTR ctx, uint imageunit, enum lxGFXCompareMode_e cmp);
-  LUX_API void  lxGFXTextureUnit_setSampler(lxGFXContextPTR ctx, uint imageunit, lxGFXSamplerPTR sampler, flags32 what);
-  LUX_API void  lxGFXTextureUnit_checkedSampler(lxGFXContextPTR ctx, uint imageunit, lxGFXSamplerPTR sampler, flags32 what);
+  LUX_API void  lxgTextureUnit_setCompare(lxgContextPTR ctx, uint imageunit, enum lxgCompareMode_e cmp);
+  LUX_API void  lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
+  LUX_API void  lxgTextureUnit_checkedSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
 
   //////////////////////////////////////////////////////////////////////////
-  // lxGFXSampler_t
-  LUX_API void lxGFXSampler_init(lxGFXSamplerPTR self);
-  LUX_API void lxGFXSampler_setAddress(lxGFXSamplerPTR self, uint n, lxGFXSamplerAddress_t address);
-  LUX_API void lxGFXSampler_setCompare(lxGFXSamplerPTR self, enum lxGFXCompareMode_e cmp);
-  LUX_API void lxGFXSampler_changed(lxGFXSamplerPTR self);
+  // lxgSampler_t
+
+  LUX_API void lxgSampler_init(lxgSamplerPTR self);
+  LUX_API void lxgSampler_setAddress(lxgSamplerPTR self, uint n, lxgSamplerAddress_t address);
+  LUX_API void lxgSampler_setCompare(lxgSamplerPTR self, enum lxgCompareMode_e cmp);
+  LUX_API void lxgSampler_changed(lxgSamplerPTR self);
   
     // require SM4
-  LUX_API void lxGFXSampler_initObj(lxGFXContextPTR ctx, lxGFXSamplerPTR self);
-  LUX_API void lxGFXSampler_deinitObj(lxGFXContextPTR ctx, lxGFXSamplerPTR self);
-  LUX_API void lxGFXSampler_updateObj(lxGFXContextPTR ctx, lxGFXSamplerPTR self);
+  LUX_API void lxgSampler_initHW(lxgContextPTR ctx, lxgSamplerPTR self);
+  LUX_API void lxgSampler_deinitHW(lxgContextPTR ctx, lxgSamplerPTR self);
+  LUX_API void lxgSampler_updateHW(lxgContextPTR ctx, lxgSamplerPTR self);
   
   //////////////////////////////////////////////////////////////////////////
-  // lxGFXRenderBuffer
+  // lxgRenderBuffer
 
-  LUX_API booln lxGFXRenderBuffer_init(lxGFXContextPTR ctx, lxGFXRenderBufferPTR rb, lxGFXTextureChannel_t format,
+  LUX_API booln lxgRenderBuffer_init(lxgContextPTR ctx, lxgRenderBufferPTR rb, lxgTextureChannel_t format,
     int width, int height, int samples);
 
-  LUX_API booln lxGFXRenderBuffer_change(lxGFXContextPTR ctx, lxGFXRenderBufferPTR rb,
-    lxGFXTextureChannel_t format,
+  LUX_API booln lxgRenderBuffer_change(lxgContextPTR ctx, lxgRenderBufferPTR rb,
+    lxgTextureChannel_t format,
     int width, int height, int samples);
 
-  LUX_API void  lxGFXRenderBuffer_deinit(lxGFXContextPTR ctx, lxGFXRenderBufferPTR rb);
+  LUX_API void  lxgRenderBuffer_deinit(lxgContextPTR ctx, lxgRenderBufferPTR rb);
+
+  //////////////////////////////////////////////////////////////////////////
+  // lxgTextureImage
+
+  LUX_API booln lxgTextureImage_init(lxgTextureImagePTR img, lxgTexturePTR tex, lxgAccessMode_t acces, 
+    uint level, booln layered, int layer);
 
 
 #ifdef __cplusplus

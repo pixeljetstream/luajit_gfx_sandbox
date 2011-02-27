@@ -13,67 +13,67 @@
 extern "C"{
 #endif
 
-  typedef enum lxGFXShaderType_e{
+  typedef enum lxgShaderType_e{
     LUXGFX_SHADER_VERTEX,
     LUXGFX_SHADER_FRAGMENT,
     LUXGFX_SHADER_GEOMETRY,
     LUXGFX_SHADER_TESSCTRL,
     LUXGFX_SHADER_TESSEVAL,
     LUXGFX_SHADERS,
-  }lxGFXShaderType_t;
+  }lxgShaderType_t;
 
-  typedef void (*lxGFXParmeterUpdate_fn)(lxGFXContextPTR ctx, lxGFXProgramParameterPTR param, void* data);
+  typedef void (*lxgParmeterUpdate_fn)(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data);
 
-  typedef struct lxGFXProgramParameter_s{
+  typedef struct lxgProgramParameter_s{
     lxGLParameter_t         vgl;
-    lxGFXParmeterUpdate_fn  func;
+    lxgParmeterUpdate_fn  func;
     ushort                  count;
     ushort                  transpose;
     uint                    size;
     const char*             name;
-  }lxGFXProgramParameter_t;
+  }lxgProgramParameter_t;
 
-  typedef struct lxGFXProgramData_s{
+  typedef struct lxgProgramData_s{
     uint                        numParams;
-    lxGFXProgramParameterPTR    parameters;
+    lxgProgramParameterPTR    parameters;
     uint                        numSampler;
-    lxGFXProgramParameterPTR    samplers;
+    lxgProgramParameterPTR    samplers;
     uint                        numBuffers;
-    lxGFXProgramParameterPTR    buffer;
-  }lxGFXProgramData_t;
+    lxgProgramParameterPTR    buffer;
+  }lxgProgramData_t;
 
-  typedef struct lxGFXDomainProgram_s{
+  typedef struct lxgDomainProgram_s{
     lxGLShader_t          vgl;
-    lxGFXProgramDataPTR   data;
-    lxGFXContextPTR       ctx;
-  }lxGFXDomainProgram_t;
+    lxgProgramDataPTR   data;
+    lxgContextPTR       ctx;
+  }lxgDomainProgram_t;
 
-  typedef struct lxGFXProgram_s{
+  typedef struct lxgProgram_s{
     lxGLProgram_t         vgl;
     flags32               usedProgs;
-    lxGFXDomainProgramPTR  programs[LUXGFX_SHADERS];
-    lxGFXProgramDataPTR   data;
-    lxGFXContextPTR       ctx;
-  }lxGFXProgram_t;
+    lxgDomainProgramPTR  programs[LUXGFX_SHADERS];
+    lxgProgramDataPTR   data;
+    lxgContextPTR       ctx;
+  }lxgProgram_t;
 
 
-  LUX_API void lxGFXProgramParameter_initFunc(lxGFXProgramParameterPTR param);
+  LUX_API void lxgProgramParameter_initFunc(lxgProgramParameterPTR param);
 
-  LUX_API void lxGFXDomainProgram_init(lxGFXContextPTR ctx, lxGFXDomainProgramPTR stage, lxGFXShaderType_t type);
-  LUX_API void lxGFXDomainProgram_deinit(lxGFXContextPTR ctx, lxGFXDomainProgramPTR stage);
-  LUX_API booln lxGFXDomainProgram_compile(lxGFXContextPTR ctx, lxGFXDomainProgramPTR stage, const char *src, int len);
-  LUX_API const char* lxGFXDomainProgram_error(lxGFXContextPTR ctx, lxGFXDomainProgramPTR stage, char *buffer, int len);
+  LUX_API void lxgDomainProgram_init(lxgContextPTR ctx, lxgDomainProgramPTR stage, lxgShaderType_t type);
+  LUX_API void lxgDomainProgram_deinit(lxgContextPTR ctx, lxgDomainProgramPTR stage);
+  LUX_API booln lxgDomainProgram_compile(lxgContextPTR ctx, lxgDomainProgramPTR stage, const char *src, int len);
+  LUX_API const char* lxgDomainProgram_error(lxgContextPTR ctx, lxgDomainProgramPTR stage, char *buffer, int len);
 
-  LUX_API void  lxGFXProgram_init(lxGFXContextPTR ctx, lxGFXProgramPTR prog);
-  LUX_API void  lxGFXProgram_deinit(lxGFXContextPTR ctx, lxGFXProgramPTR prog);
-  LUX_API void  lxGFXProgram_setStage(lxGFXContextPTR ctx, lxGFXProgramPTR prog, lxGFXShaderType_t type, lxGFXDomainProgramPTR stage);
-  LUX_API booln lxGFXProgram_link(lxGFXContextPTR ctx, lxGFXProgramPTR prog);
-  LUX_API const char* lxGFXProgram_log( lxGFXContextPTR ctx, lxGFXProgramPTR prog, char* buffer, int len);
+  LUX_API void  lxgProgram_init(lxgContextPTR ctx, lxgProgramPTR prog);
+  LUX_API void  lxgProgram_deinit(lxgContextPTR ctx, lxgProgramPTR prog);
+  LUX_API void  lxgProgram_setStage(lxgContextPTR ctx, lxgProgramPTR prog, lxgShaderType_t type, lxgDomainProgramPTR stage);
+  LUX_API booln lxgProgram_link(lxgContextPTR ctx, lxgProgramPTR prog);
+  LUX_API const char* lxgProgram_log( lxgContextPTR ctx, lxgProgramPTR prog, char* buffer, int len);
 
-  LUX_API void lxGFXProgram_updateParameters(lxGFXContextPTR ctx, lxGFXProgramPTR prog, uint num, lxGFXProgramParameterPTR *params, void **data);
-  LUX_API void lxGFXProgram_updateSamplers(lxGFXContextPTR ctx, lxGFXProgramPTR prog, uint num, lxGFXProgramParameterPTR *params, lxGFXTexturePTR *data);
-  LUX_API void lxGFXProgram_updateBuffers(lxGFXContextPTR ctx, lxGFXProgramPTR prog, uint num, lxGFXProgramParameterPTR *params, lxGFXBufferPTR *data);
-  LUX_API void lxGFXProgram_updateImages( lxGFXContextPTR ctx, lxGFXProgramPTR prog, uint num, lxGFXProgramParameterPTR *params, lxGFXTextureImagePTR *data );
+  LUX_API void lxgProgram_updateParameters(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, void **data);
+  LUX_API void lxgProgram_updateSamplers(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgTexturePTR *data);
+  LUX_API void lxgProgram_updateBuffers(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data);
+  LUX_API void lxgProgram_updateImages( lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgTextureImagePTR *data );
 
 #ifdef __cplusplus
 }

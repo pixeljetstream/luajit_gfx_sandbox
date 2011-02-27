@@ -16,7 +16,7 @@ extern "C"{
   //////////////////////////////////////////////////////////////////////////
   // VertexAttrib
 
-  typedef enum lxGFXVertexAttrib_e{
+  typedef enum lxgVertexAttrib_e{
     LUXGFX_VERTEX_ATTRIB_POS,
     LUXGFX_VERTEX_ATTRIB_ATTR1,   // Cg:  blendweights
     LUXGFX_VERTEX_ATTRIB_NORMAL,
@@ -34,17 +34,16 @@ extern "C"{
     LUXGFX_VERTEX_ATTRIB_ATTR14,    // Cg: tangent
     LUXGFX_VERTEX_ATTRIB_ATTR15,    // Cg: binormal
     LUXGFX_VERTEX_ATTRIBS,
-    LUXGFX_VERTEX_ATTRIB_FORCE_DWORD = 0x7FFFFFFF,
-  }lxGFXVertexAttrib_t;
+  }lxgVertexAttrib_t;
 
   #define LUXGFX_MAX_VERTEX_STREAMS 8
 
   //////////////////////////////////////////////////////////////////////////
-  // lxGFXVertexElement_t
+  // lxgVertexElement_t
   //
   // assumes maximum vertex size of 256 bytes, and stride as multiple of 2
 
-  typedef struct lxGFXVertexElement_s{
+  typedef struct lxgVertexElement_s{
     unsigned  normalize :  1;
     unsigned  integer :  1;
     unsigned  cnt  :     2;
@@ -52,56 +51,57 @@ extern "C"{
     unsigned  scalartype : 8;
     unsigned  stridehalf : 8;
     unsigned  offset :  8;
-  }lxGFXVertexElement_t;
+  }lxgVertexElement_t;
 
 
-  LUX_INLINE lxGFXVertexElement_t 
-    lxGFXVertexElement_set(uint cnt, enum lxScalarType_e type, booln normalize, booln integer, uint stride,uint offset, uint stream)
+  LUX_INLINE lxgVertexElement_t 
+    lxgVertexElement_set(uint cnt, enum lxScalarType_e type, booln normalize, booln integer, uint stride,uint offset, uint stream)
   {
-    lxGFXVertexElement_t  elem = {normalize,integer,cnt-1,stream,type,stride/2,offset};
+    lxgVertexElement_t  elem = {normalize,integer,cnt-1,stream,type,stride/2,offset};
     return elem;
   }
 
   //////////////////////////////////////////////////////////////////////////
-  // lxGFXVertexPointer
+  // lxgVertexPointer
 
-  typedef struct lxGFXVertexDecl_s{
-    flags32                 available;
-    uint                    streams;
-    lxGFXVertexElement_t    table[LUXGFX_VERTEX_ATTRIBS];
-  }lxGFXVertexDecl_t;
+  typedef struct lxgVertexDecl_s{
+    flags32               available;
+    uint                  streams;
+    lxgVertexElement_t    table[LUXGFX_VERTEX_ATTRIBS];
+  }lxgVertexDecl_t;
 
   //////////////////////////////////////////////////////////////////////////
-  // lxGFXVertexPointer
+  // lxgVertexPointer
 
-  typedef struct lxGFXStreamHost_s{
-    lxGFXBufferPTR        buffer;
+  typedef struct lxgStreamHost_s{
+    lxgBufferPTR        buffer;
     void*                 ptr;
-  }lxGFXStreamHost_t;
+  }lxgStreamHost_t;
   
-  typedef struct lxGFXVertexPointer_s{
-    lxGFXVertexElement_t  element[LUXGFX_VERTEX_ATTRIBS];
-    lxGFXStreamHost_t     streams[LUXGFX_MAX_VERTEX_STREAMS];
-  }lxGFXVertexPointer_t;
+  typedef struct lxgVertexPointer_s{
+    lxgVertexElement_t  element[LUXGFX_VERTEX_ATTRIBS];
+    lxgStreamHost_t     streams[LUXGFX_MAX_VERTEX_STREAMS];
+  }lxgVertexPointer_t;
 
-  typedef struct lxGFXVertexState_s{
-    lxGFXVertexDeclPTR  decl;
+  typedef struct lxgVertexState_s{
+    lxgVertexDeclPTR  decl;
     flags32             active;
     flags32             declvalid;
     flags32             streamvalid;
     flags32             declchange;
     flags32             streamchange;
 
-    lxGFXVertexPointer_t  setup;
-  }lxGFXVertexState_t;
+    lxgVertexPointer_t  setup;
+  }lxgVertexState_t;
 
-  LUX_API void lxGFXVertexAttribs_apply(lxGFXContextPTR ctx, flags32 attribs, flags32 changed);
-  LUX_API void lxGFXVertexAttribs_setArray(lxGFXContextPTR ctx, uint numattribs, lxGFXVertexAttrib_t* attribs, booln state);
+  LUX_API void lxgVertexAttribs_apply(lxgContextPTR ctx, flags32 attribs, flags32 changed);
+  LUX_API void lxgVertexAttribs_applyFIXED(lxgContextPTR ctx, flags32 attribs, flags32 changed);
 
-  LUX_API void lxGFXVertexDecl_apply(lxGFXContextPTR ctx, lxGFXVertexDeclPTR decl);
-  LUX_API void lxGFXVertexSetup_setStreams(lxGFXContextPTR ctx, const lxGFXVertexDeclPTR decl, const lxGFXStreamHostPTR hosts);
-  LUX_API void lxGFXVertexSetup_setStream(lxGFXContextPTR ctx, uint idx, lxGFXStreamHostPTR host);
-  LUX_API void lxGFXVertexSetup_apply(lxGFXContextPTR ctx);
+  LUX_API void lxgVertexDecl_apply(lxgContextPTR ctx, lxgVertexDeclPTR decl);
+  LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, const lxgVertexDeclPTR decl, const lxgStreamHostPTR hosts);
+  LUX_API void lxgVertexSetup_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host);
+  LUX_API void lxgVertexSetup_apply(lxgContextPTR ctx);
+  LUX_API void lxgVertexSetup_applyFIXED(lxgContextPTR ctx);
 
 #ifdef __cplusplus
 }
