@@ -73,8 +73,8 @@
 				Name="VCLinkerTool"
 				UseLibraryDependencyInputs="false"
 				AdditionalDependencies="luxgfx.lib luxcore.lib luxplatform.lib luxmath.lib glew32.lib opengl32.lib glu32.lib"
-				OutputFile="..\..\..\runtime\lib\win32_debug\luxbackend.dll"
-				AdditionalLibraryDirectories="..\..\..\depend\lib\win32_debug\msvc9;..\..\..\depend\lib\win32_debug"
+				OutputFile="..\..\..\runtime\clibs_Windows_x86\luxbackend_d.dll"
+				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug"
 				GenerateMapFile="true"
 				MapExports="true"
 				OptimizeReferences="0"
@@ -136,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib luxplatform.lib glew32.lib  opengl32.lib glu32.lib"
+				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib luxplatform.lib glew32.lib opengl32.lib glu32.lib"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\win64_debug\msvc9;..\..\..\depend\lib\win64_debug"
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
@@ -221,9 +221,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib  luxplatform.lib  glew32.lib  opengl32.lib glu32.lib"
-				OutputFile="..\..\..\runtime\lib\win32\luxbackend.dll"
-				AdditionalLibraryDirectories="..\..\..\depend\lib\win32\msvc9;..\..\..\depend\lib\win32"
+				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib luxplatform.lib glew32.lib opengl32.lib glu32.lib"
+				OutputFile="..\..\..\runtime\clibs_Windows_x86\luxbackend.dll"
+				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 			/>
 			<Tool
 				Name="VCALinkTool"

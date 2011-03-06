@@ -81,7 +81,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\depend\lib\win32\msvc9\luxmath.lib"
+				OutputFile="..\..\..\depend\lib\Windows_x86\msvc9\luxmath.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -240,7 +240,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\depend\lib\win32_debug\msvc9\luxmath.lib"
+				OutputFile="..\..\..\depend\lib\Windows_x86_debug\msvc9\luxmath.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"

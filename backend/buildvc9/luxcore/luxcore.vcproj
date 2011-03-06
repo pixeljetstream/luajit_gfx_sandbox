@@ -72,8 +72,8 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="luxmath.lib "
-				OutputFile="..\..\..\depend\lib\win32_debug\msvc9\luxcore.lib"
-				AdditionalLibraryDirectories="&quot;..\..\..\depend\lib\win32_debug\msvc9&quot;;"
+				OutputFile="..\..\..\depend\lib\Windows_x86_debug\msvc9\luxcore.lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\depend\lib\Windows_x86_debug\msvc9&quot;;"
 				SuppressStartupBanner="true"
 				IgnoreAllDefaultLibraries="true"
 			/>
@@ -218,8 +218,8 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="luxmath.lib "
-				OutputFile="..\..\..\depend\lib\win32\msvc9\luxcore.lib"
-				AdditionalLibraryDirectories="&quot;..\..\..\depend\lib\win32\msvc9&quot;;"
+				OutputFile="..\..\..\depend\lib\Windows_x86\msvc9\luxcore.lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\depend\lib\Windows_x86\msvc9&quot;;"
 				SuppressStartupBanner="true"
 			/>
 			<Tool

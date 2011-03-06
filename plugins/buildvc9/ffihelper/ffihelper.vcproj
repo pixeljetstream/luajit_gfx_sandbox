@@ -61,7 +61,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="lua5.1.lib"
-				OutputFile="..\..\..\runtime\lib\win32_debug\ffihelper.dll"
+				OutputFile="..\..\..\runtime\clibs_Windows_x86\ffihelper.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\win32_debug\msvc9;..\..\..\depend\lib\win32_debug"
 				GenerateDebugInformation="true"
@@ -133,7 +133,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="lua5.1.lib"
-				OutputFile="..\..\..\runtime\lib\win32\ffihelper.dll"
+				OutputFile="..\..\..\runtime\clibs_Windows_x86\ffihelper.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\win32\msvc9;..\..\..\depend\lib\win32"
 				GenerateDebugInformation="true"

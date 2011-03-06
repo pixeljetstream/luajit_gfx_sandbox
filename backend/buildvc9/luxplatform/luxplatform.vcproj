@@ -71,8 +71,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\depend\lib\win32_debug\msvc9\luxplatform.lib"
-				AdditionalLibraryDirectories="&quot;..\..\..\depend\lib\win32_debug\msvc9&quot;;"
+				OutputFile="..\..\..\depend\lib\Windows_x86_debug\msvc9\luxplatform.lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\depend\lib\Windows_x86_debug\msvc9&quot;;"
 				SuppressStartupBanner="true"
 				IgnoreAllDefaultLibraries="true"
 			/>
@@ -220,8 +220,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="..\..\..\depend\lib\win32\msvc9\luxplatform.lib"
-				AdditionalLibraryDirectories="&quot;..\..\..\depend\lib\win32\msvc9&quot;;"
+				OutputFile="..\..\..\depend\lib\Windows_x86\msvc9\luxplatform.lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\depend\lib\Windows_x86\msvc9&quot;;"
 				SuppressStartupBanner="true"
 			/>
 			<Tool

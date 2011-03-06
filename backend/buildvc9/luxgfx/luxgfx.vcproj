@@ -72,8 +72,8 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="glew32.lib"
-				OutputFile="..\..\..\depend\lib\win32_debug\msvc9\luxgfx.lib"
-				AdditionalLibraryDirectories="..\..\..\depend\lib\win32_debug\msvc9;..\..\..\depend\lib\win32_debug"
+				OutputFile="..\..\..\depend\lib\Windows_x86_debug\msvc9\luxgfx.lib"
+				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug"
 				SuppressStartupBanner="true"
 				IgnoreAllDefaultLibraries="true"
 			/>
@@ -222,8 +222,8 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="glew32.lib"
-				OutputFile="..\..\..\depend\lib\win32\msvc9\luxgfx.lib"
-				AdditionalLibraryDirectories="..\..\..\depend\lib\win32\msvc9;..\..\..\depend\lib\win32"
+				OutputFile="..\..\..\depend\lib\Windows_x86\msvc9\luxgfx.lib"
+				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 				SuppressStartupBanner="true"
 			/>
 			<Tool
