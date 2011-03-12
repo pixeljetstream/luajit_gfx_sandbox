@@ -1,6 +1,6 @@
-local settings = select(1,...) or {port = "55555"}
 
-do
+local function init(settings,lprint)
+	settings = settings or {port = "55555"}
 	local zmq = require "zmq"
 	local ctx = zmq.init(1)
 	local s = ctx:socket(zmq.REP)
@@ -8,12 +8,11 @@ do
 	
 	print("server:",addr)
 	if (not s:bind(addr)) then 
-			print("server: failed")
+		print("server: failed")
 		return 
 	end
 
-	LXG = LXG or {}
-	LXG.serverpoll = function()
+	local function poll()
 		local t,zmerr = s:recv(zmq.NOBLOCK)
 		if (zmerr == "timeout") then return end
 		s:send("OK")
@@ -28,8 +27,11 @@ do
 			end
 		end
 	end
+	
+	return poll
 end
 
+return init
 
 
 

@@ -1,6 +1,5 @@
-local settings = select(1,...) or {port = "55555"}
-
-do
+local function init(settings)
+	local settings = settings or {port = "55555"}
 	local zmq = require "zmq"
 	local ctx = zmq.init(1)
 	local s = ctx:socket(zmq.REQ)
@@ -8,15 +7,18 @@ do
 	
 	print("client:",addr)
 	if (not s:connect(addr)) then 
-			print("client: failed")
+		print("client: failed")
 		return 
 	end
 
-	LXG = LXG or {}
-	LXG.clientsend = function(msg)
+	local function send(msg)
 		s:send(msg)
 		if (s:recv() ~= "OK") then
 			print("error: could not send",msg)
 		end
 	end
+	
+	return send
 end
+
+return init

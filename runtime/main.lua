@@ -42,7 +42,7 @@ do
 	end
 	
 	local function relativeFilepath(file)
-		local name,level = luafilepath(3)
+		local name,level = luafilepath(lvl,3)
 		return (file and name) and name.."/"..file or file or name
 	end
 	
@@ -67,9 +67,14 @@ do
 		if not fn then
 			print("Error: "..err)
 		else
-			xpcall(function() return fn(unpack(args)) end,function(err)
-				print(debug.traceback(err))
-			end)
+			local res = {xpcall( 
+					function() return fn(unpack(args)) end ,
+					function(err) print(debug.traceback(err))  end)
+				}
+			
+			if res[1] == true then
+				return select(2,unpack(res))
+			end
 		end
 	end
 	
@@ -79,7 +84,7 @@ do
 	local l = relativeFilepath "lua"
 	local s = jit.os == "Windows" and ".dll" or ".so"
 	local cstr = string.format(";%s/?%s;%s/?51%s;%s/?/?%s;%s/?/?51%s;",p,s,p,s,p,s,p,s)
-	local lstr = string.format(";%s/?.lua;%s/?/?.lua;%s/?/init.lua;",p,p,p)
+	local lstr = string.format(";%s/?.lua;%s/?/?.lua;%s/?/init.lua;",l,l,l)
 	package.path  = package.path..lstr
 	package.cpath = package.cpath..cstr
 	
@@ -110,6 +115,9 @@ local args = {...}
 local argcnt = #args
 local i = 1
 local svSetting
+local svPoll
+local exec
+
 while (i <= argcnt) do
 	local v = args[i]
 	if (v == "-sp" or v == "--serverport") then
@@ -119,18 +127,24 @@ while (i <= argcnt) do
 		svSetting = svSetting or {}
 		svSetting.port = port
 	elseif (v == "-s" or v == "--server") then
-		dofile("comserver/server.lua",svSetting)
-	else
-		dofile(v)
+		local svInit = dofile("comserver/server.lua")
+		svPoll = svInit(svSetting)
+	elseif (v == "-e") then
+		i = i + 1
+		local file = args[i]
+		assert(file,"no execution file defined")
+		exec = file
 	end
 	i = i + 1
 end
 
-if (LXG.serverpoll) then
-	local serverpoll = LXG.serverpoll
+if (exec) then
+	dofile(exec,unpack(args))
+end
+if (svPoll) then
 	local sleep = LXG.sleep
 	while(true) do
-		serverpoll()
+		svPoll()
 		sleep(10)
 	end
 end
