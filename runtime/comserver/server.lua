@@ -1,6 +1,6 @@
 
 local function init(settings,lprint)
-	settings = settings or {port = "55555"}
+	local settings = settings or {port = "55555"}
 	local zmq = require "zmq"
 	local ctx = zmq.init(1)
 	local s = ctx:socket(zmq.REP)
@@ -13,6 +13,7 @@ local function init(settings,lprint)
 	end
 
 	local function poll()
+		io.flush()
 		local t,zmerr = s:recv(zmq.NOBLOCK)
 		if (zmerr == "timeout") then return end
 		s:send("OK")
@@ -27,7 +28,7 @@ local function init(settings,lprint)
 			end
 		end
 	end
-	
+
 	return poll
 end
 

@@ -1,3 +1,5 @@
+if LXG then return end
+
 do
 	LXG = LXG or {}
 
@@ -108,7 +110,7 @@ do
 	end
 	
 	LXG.sleep = sleep
-	
+	LXG.svPoll = function() end
 end
 
 local args = {...}
@@ -129,6 +131,7 @@ while (i <= argcnt) do
 	elseif (v == "-s" or v == "--server") then
 		local svInit = dofile("comserver/server.lua")
 		svPoll = svInit(svSetting)
+		LXG.svPoll = svPoll
 	elseif (v == "-e") then
 		i = i + 1
 		local file = args[i]
