@@ -36,27 +36,27 @@ static void lxgRenderTarget_applyAssign(GLenum target, GLenum what,lxgRenderAssi
 {
   if (assign->tex){
     lxgTexturePTR tex = assign->tex;
-    switch (tex->type){
-    case LUXGFX_TEXTURE_1D:
+	switch (tex->vgl.target){
+    case LUXGL_TEXTURE_1D:
       glFramebufferTexture1DEXT(target,what,GL_TEXTURE_1D,tex->vgl.id,assign->mip);
       return;
-    case LUXGFX_TEXTURE_2D:
-    case LUXGFX_TEXTURE_RECT:
+    case LUXGL_TEXTURE_2D:
+    case LUXGL_TEXTURE_RECT:
       glFramebufferTexture2DEXT(target,what,tex->vgl.target,tex->vgl.id,assign->mip);
       return;
-    case LUXGFX_TEXTURE_3D:
+    case LUXGL_TEXTURE_3D:
       glFramebufferTexture3DEXT(target,what,GL_TEXTURE_3D,tex->vgl.id,assign->mip,assign->layer);
       return;
-    case LUXGFX_TEXTURE_CUBE:
+    case LUXGL_TEXTURE_CUBE:
       glFramebufferTextureFaceEXT(target, what, tex->vgl.id,assign->mip, GL_TEXTURE_CUBE_MAP_POSITIVE_X + assign->layer);
       return;
-    case LUXGFX_TEXTURE_2DMS:
+    case LUXGL_TEXTURE_2DMS:
       glFramebufferTexture2DEXT(target, what, tex->vgl.target,tex->vgl.id,assign->mip);
       return;
-    case LUXGFX_TEXTURE_1DARRAY:
-    case LUXGFX_TEXTURE_2DARRAY:
-    case LUXGFX_TEXTURE_CUBEARRAY:
-    case LUXGFX_TEXTURE_2DMSARRAY:
+    case LUXGL_TEXTURE_1DARRAY:
+    case LUXGL_TEXTURE_2DARRAY:
+    case LUXGL_TEXTURE_CUBEARRAY:
+    case LUXGL_TEXTURE_2DMSARRAY:
       glFramebufferTextureLayerEXT(target, what, tex->vgl.id,assign->mip,assign->layer);
       return;
     }
@@ -76,27 +76,27 @@ void lxgRenderTarget_applyNamedAssign(lxgRenderTargetPTR rt, GLenum what,lxgRend
 
   if (assign->tex){
     lxgTexturePTR tex = assign->tex;
-    switch (tex->type){
-    case LUXGFX_TEXTURE_1D:
+    switch (tex->vgl.target){
+    case LUXGL_TEXTURE_1D:
       glNamedFramebufferTexture1DEXT(target,what,GL_TEXTURE_1D,tex->vgl.id,assign->mip);
       return;
-    case LUXGFX_TEXTURE_2D:
-    case LUXGFX_TEXTURE_RECT:
+    case LUXGL_TEXTURE_2D:
+    case LUXGL_TEXTURE_RECT:
       glNamedFramebufferTexture2DEXT(target,what,tex->vgl.target,tex->vgl.id,assign->mip);
       return;
-    case LUXGFX_TEXTURE_3D:
+    case LUXGL_TEXTURE_3D:
       glNamedFramebufferTexture3DEXT(target,what,GL_TEXTURE_3D,tex->vgl.id,assign->mip,assign->layer);
       return;
-    case LUXGFX_TEXTURE_CUBE:
+    case LUXGL_TEXTURE_CUBE:
       glNamedFramebufferTextureFaceEXT(target, what, tex->vgl.id,assign->mip, GL_TEXTURE_CUBE_MAP_POSITIVE_X + assign->layer);
       return;
-    case LUXGFX_TEXTURE_2DMS:
+    case LUXGL_TEXTURE_2DMS:
       glNamedFramebufferTexture2DEXT(target, what, tex->vgl.target,tex->vgl.id,assign->mip);
       return;
-    case LUXGFX_TEXTURE_1DARRAY:
-    case LUXGFX_TEXTURE_2DARRAY:
-    case LUXGFX_TEXTURE_CUBEARRAY:
-    case LUXGFX_TEXTURE_2DMSARRAY:
+    case LUXGL_TEXTURE_1DARRAY:
+    case LUXGL_TEXTURE_2DARRAY:
+    case LUXGL_TEXTURE_CUBEARRAY:
+    case LUXGL_TEXTURE_2DMSARRAY:
       glNamedFramebufferTextureLayerEXT(target, what, tex->vgl.id,assign->mip,assign->layer);
       return;
     }

@@ -160,6 +160,10 @@ LUX_API size_t lxMemoryGeneric_offsetAligned(lxMemoryGenericPTR gen, void *ptr)
 }
 
 
+//////////////////////////////////////////////////////////////////////////
+
+#if defined(MEMORY_STATS)
+
 LUX_API void lxMemoryGeneric_freeStats(lxMemoryGenericPTR gen, void *ptr, size_t size,const char *source, int line)
 {
   MemInfo_t *info;
@@ -194,9 +198,6 @@ LUX_API size_t  lxMemoryGeneric_offsetAlignedStats(lxMemoryGenericPTR gen, void 
   return *ptr3;
 }
 
-//////////////////////////////////////////////////////////////////////////
-
-#if defined(MEMORY_STATS)
 LUX_API void* lxMemoryGeneric_reallocStats(lxMemoryGenericPTR gen, void *ptr, size_t size,size_t oldsize,const char *source, int line)
 {
   ptrdiff_t sz = size;
