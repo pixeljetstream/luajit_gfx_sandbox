@@ -15,6 +15,7 @@ typedef struct lxgVertexDecl_s* lxgVertexDeclPTR;
 typedef struct lxgVertexPointer_s* lxgVertexPointerPTR;
 typedef struct lxgVertexElement_s* lxgVertexElementPTR;
 typedef struct lxgVertexState_s* lxgVertexStatePTR;
+typedef struct lxgFeedbackState_s* lxgFeedbackStatePTR;
 
 typedef struct lxgTextureImage_s* lxgTextureImagePTR;
 typedef struct lxgSampler_s* lxgSamplerPTR;

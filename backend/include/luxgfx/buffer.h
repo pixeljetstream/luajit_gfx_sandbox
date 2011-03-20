@@ -48,8 +48,8 @@ extern "C"{
   LUX_API uint lxgBuffer_alloc(lxgBufferPTR buffer, uint needed, uint padsize);
 
   LUX_API void lxgBuffer_apply(lxgContextPTR ctx, lxGLBufferTarget_t type, const lxgBufferPTR buffer);
-  LUX_API void  lxgBuffer_applyIndexed(lxgContextPTR ctx, lxGLBufferTarget_t type, uint idx, const lxgBufferPTR buffer);
-  LUX_API void  lxgBuffer_applyRanged(lxgContextPTR ctx,  lxGLBufferTarget_t type, uint idx, const lxgBufferPTR buffer, size_t offset, size_t size);
+  LUX_API void lxgBuffer_applyIndexed(lxgContextPTR ctx, lxGLBufferTarget_t type, uint idx, const lxgBufferPTR buffer);
+  LUX_API void lxgBuffer_applyRanged(lxgContextPTR ctx,  lxGLBufferTarget_t type, uint idx, const lxgBufferPTR buffer, size_t offset, size_t size);
 
   // implicitly call lxgBuffer_setGL with type used on init
   LUX_API booln lxgBuffer_map(lxgContextPTR ctx, lxgBufferPTR buffer, void**ptr, lxgAccessMode_t type);

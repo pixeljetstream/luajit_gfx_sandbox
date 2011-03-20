@@ -105,6 +105,7 @@ extern "C"{
     lxgRenderTargetPTR  rendertargets[LUXGFX_RENDERTARGETS];
     lxgTextureImagePTR  images[LUXGFX_MAX_RWTEXTURE_IMAGES];
     lxgBufferPTR        uniform[LUXGFX_MAX_UNIFORM_BUFFERS];
+    lxgFeedbackState_t  feedback;
 
     flags32             rflag;
     uint16              stencilmaskpos;

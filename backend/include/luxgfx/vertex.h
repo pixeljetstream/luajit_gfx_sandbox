@@ -75,7 +75,7 @@ extern "C"{
 
   typedef struct lxgStreamHost_s{
     lxgBufferPTR        buffer;
-    void*                 ptr;
+    void*               ptr;
   }lxgStreamHost_t;
   
   typedef struct lxgVertexPointer_s{
@@ -84,7 +84,7 @@ extern "C"{
   }lxgVertexPointer_t;
 
   typedef struct lxgVertexState_s{
-    lxgVertexDeclPTR  decl;
+    lxgVertexDeclPTR    decl;
     flags32             active;
     flags32             declvalid;
     flags32             streamvalid;
@@ -94,14 +94,36 @@ extern "C"{
     lxgVertexPointer_t  setup;
   }lxgVertexState_t;
 
+  typedef struct lxgFeedbackState_s{
+    lxGLPrimitiveType_t capture;
+    int                 active;
+    flags32             usedvalid;
+    flags32             streamvalid;
+    flags32             streamchange;
+    
+    lxgStreamHost_t     streams[LUXGFX_MAX_VERTEX_STREAMS];
+  }lxgFeedbackState_t;
+
   LUX_API void lxgVertexAttribs_apply(lxgContextPTR ctx, flags32 attribs, flags32 changed);
   LUX_API void lxgVertexAttribs_applyFIXED(lxgContextPTR ctx, flags32 attribs, flags32 changed);
+  LUX_API void lxgVertexAttrib_setFloat(lxgContextPTR ctx, lxgVertexAttrib_t attrib, const float* vec4);
+  LUX_API void lxgVertexAttrib_setInteger(lxgContextPTR ctx, lxgVertexAttrib_t attrib, const int* vec4);
+  LUX_API void lxgVertexAttrib_setFloatFIXED(lxgContextPTR ctx, lxgVertexAttrib_t attrib, const float* vec4);
 
   LUX_API void lxgVertexDecl_apply(lxgContextPTR ctx, lxgVertexDeclPTR decl);
   LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, const lxgVertexDeclPTR decl, const lxgStreamHostPTR hosts);
   LUX_API void lxgVertexSetup_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host);
   LUX_API void lxgVertexSetup_apply(lxgContextPTR ctx);
   LUX_API void lxgVertexSetup_applyFIXED(lxgContextPTR ctx);
+
+  LUX_API void lxgFeedback_enable(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams);
+  LUX_API void lxgFeedback_disable(lxgContextPTR ctx);
+  LUX_API void lxgFeedback_pause(lxgContextPTR ctx);
+  LUX_API void lxgFeedback_resume(lxgContextPTR ctx);
+
+  LUX_API void lxgFeedback_applyStreams(lxgContextPTR ctx);
+  LUX_API void lxgFeedback_setStreams(lxgContextPTR ctx, const lxgStreamHostPTR hosts, int numStreams);
+  LUX_API void lxgFeedback_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host );
 
 #ifdef __cplusplus
 }

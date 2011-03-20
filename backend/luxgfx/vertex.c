@@ -348,6 +348,16 @@ LUX_API void lxgVertexDecl_apply(lxgContextPTR ctx, lxgVertexDeclPTR decl)
   }
 }
 
+LUX_INLINE booln lxgStreamHost_valid(const lxgStreamHostPTR host)
+{
+  return (host && (host->buffer || host->ptr));
+}
+
+LUX_INLINE booln lxgStreamHost_unequal(const lxgStreamHostPTR a, const lxgStreamHostPTR b)
+{
+  return !!memcmp(a,b,sizeof(lxgStreamHost_t));
+}
+
 LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, const lxgVertexDeclPTR decl, const lxgStreamHostPTR streams)
 {
   lxgVertexStatePTR vtx = &ctx->vertex;
@@ -357,8 +367,9 @@ LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, const lxgVertexDeclPTR
   LUX_DEBUGASSERT(vtx->decl == decl);
 
   for (i = 0; i < decl->streams; i++){
-    changed |= ((vtx->setup.streams[i].buffer == streams[i].buffer &&
-                 vtx->setup.streams[i].ptr == streams[i].ptr)<<i);
+    LUX_DEBUGASSERT(lxgStreamHost_valid(&streams[i]));
+
+    changed |= (lxgStreamHost_unequal(&vtx->setup.streams[i],&streams[i])) << i;
     vtx->setup.streams[i] = streams[i];
   }
   vtx->streamchange |= changed;
@@ -371,15 +382,151 @@ LUX_API void lxgVertexSetup_setStream(lxgContextPTR ctx, uint idx, lxgStreamHost
   lxgVertexStatePTR vtx = &ctx->vertex;
   booln changed = 0;
   
-  if (!host || (!host->buffer && !host->ptr)){
-    vtx->streamvalid &= ~(1<<idx);
+  if (!lxgStreamHost_valid(host)){
+    vtx->streamvalid &= ~(1 << idx);
     return;
   }
 
-  vtx->streamchange |= (host->buffer == vtx->setup.streams[idx].buffer &&
-                        host->ptr == vtx->setup.streams[idx].ptr)<<idx;
-  vtx->streamvalid |= (1<<idx);
+  vtx->streamchange |= lxgStreamHost_unequal(&vtx->setup.streams[idx],host) << idx;
+  vtx->streamvalid |= (1 << idx);
   vtx->setup.streams[idx] = *host;
 }
 
+LUX_API void lxgVertexAttrib_setFloat(lxgContextPTR ctx, lxgVertexAttrib_t type, const float* vec4)
+{
+  glVertexAttrib4fv(type, vec4);
+}
+
+LUX_API void lxgVertexAttrib_setInteger(lxgContextPTR ctx, lxgVertexAttrib_t type, const int* vec4)
+{
+  glVertexAttribI4iv(type, vec4);
+}
+
+LUX_API void lxgVertexAttrib_setFloatFIXED(lxgContextPTR ctx, lxgVertexAttrib_t type, const float* vec4)
+{
+  switch (type){
+  case LUXGFX_VERTEX_ATTRIB_POS:
+    glVertex4fv(vec4);
+    return;
+  
+  case LUXGFX_VERTEX_ATTRIB_ATTR1:
+    glVertexAttrib4fv(1,vec4);
+    return;
+  
+  case LUXGFX_VERTEX_ATTRIB_NORMAL:
+    glNormal3fv(vec4);
+    return;
+
+  case LUXGFX_VERTEX_ATTRIB_COLOR:
+    glColor4fv(vec4);
+    return;
+
+  case LUXGFX_VERTEX_ATTRIB_ATTR4:
+  case LUXGFX_VERTEX_ATTRIB_ATTR5: 
+  case LUXGFX_VERTEX_ATTRIB_ATTR6:
+  case LUXGFX_VERTEX_ATTRIB_ATTR7:
+    glVertexAttrib4fv(type,vec4);
+    return;
+
+  case LUXGFX_VERTEX_ATTRIB_TEXCOORD0:
+  case LUXGFX_VERTEX_ATTRIB_TEXCOORD1:
+  case LUXGFX_VERTEX_ATTRIB_TEXCOORD2:
+  case LUXGFX_VERTEX_ATTRIB_TEXCOORD3:
+    glActiveTexture(GL_TEXTURE0 + type - LUXGFX_VERTEX_ATTRIB_TEXCOORD0);
+    glTexCoord4fv(vec4);
+    return;
+
+  case LUXGFX_VERTEX_ATTRIB_ATTR12:
+  case LUXGFX_VERTEX_ATTRIB_ATTR13:
+  case LUXGFX_VERTEX_ATTRIB_ATTR14:
+  case LUXGFX_VERTEX_ATTRIB_ATTR15:
+    glVertexAttrib4fv(type,vec4);
+    return;
+  }
+}
+
+LUX_API void lxgFeedback_setStreams(lxgContextPTR ctx, const lxgStreamHostPTR streams, int numStreams)
+{
+  lxgFeedbackStatePTR xfb = &ctx->feedback;
+  flags32 changed = 0;
+  flags32 valid = 0;
+  int i;
+
+  for (i = 0; i < numStreams; i++){
+    LUX_DEBUGASSERT(lxgStreamHost_valid(&streams[i]));
+
+    changed |= (lxgStreamHost_unequal(&xfb->streams[i],&streams[i])) << i;
+    xfb->streams[i] = streams[i];
+    valid |= 1 << i;
+  }
+  xfb->streamchange |= changed;
+  xfb->streamvalid  |= valid;
+}
+
+
+LUX_API void lxgFeedback_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
+{
+  lxgFeedbackStatePTR xfb = &ctx->feedback;
+  
+  if (!lxgStreamHost_valid(host)){
+    xfb->streamvalid &= ~(1 << idx);
+    return;
+  }
+
+  xfb->streamchange |= lxgStreamHost_unequal(&xfb->streams[idx],host) << idx;
+  xfb->streamvalid  |= (1 << idx);
+  xfb->streams[idx] = *host;
+}
+
+LUX_API LUX_INLINE void lxgFeedback_applyStreams(lxgContextPTR ctx)
+{
+  lxgFeedbackStatePTR xfb = &ctx->feedback;
+  flags32 streamchanged = xfb->streamchange;
+
+  LUX_DEBUGASSERT((xfb->usedvalid & xfb->streamvalid) == xfb->usedvalid);
+  if (streamchanged){
+    int i;
+    for (i = 0; i < xfb->active; i++){
+      const lxgStreamHostPTR    host = &xfb->streams[i];
+      if (streamchanged & (1<<i)){
+        lxgBuffer_applyIndexed(ctx,LUXGL_BUFFER_FEEDBACK,i,host->buffer);
+      }
+    }
+  }
+
+  xfb->streamchange = 0;
+}
+
+LUX_API void lxgFeedback_enable(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams)
+{
+  lxgFeedbackStatePTR xfb = &ctx->feedback;
+
+  LUX_DEBUGASSERT(!xfb->active);
+
+  xfb->capture = type;
+  xfb->active = numStreams;
+  xfb->usedvalid = (1<<numStreams) - 1;
+
+  lxgFeedback_applyStreams(ctx);
+
+  glBeginTransformFeedback(type);
+}
+
+LUX_API void lxgFeedback_disable(lxgContextPTR ctx)
+{
+  lxgFeedbackStatePTR xfb = &ctx->feedback;
+
+  LUX_DEBUGASSERT(xfb->active); 
+
+  glEndTransformFeedback();
+}
+
+LUX_API void lxgFeedback_pause(lxgContextPTR ctx)
+{
+  glPauseTransformFeedback();
+}
+LUX_API void lxgFeedback_resume(lxgContextPTR ctx)
+{
+  glResumeTransformFeedback();
+}
 

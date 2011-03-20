@@ -69,6 +69,7 @@ extern "C"{
   LUX_API void  lxgProgram_setStage(lxgContextPTR ctx, lxgProgramPTR prog, lxgShaderType_t type, lxgDomainProgramPTR stage);
   LUX_API booln lxgProgram_link(lxgContextPTR ctx, lxgProgramPTR prog);
   LUX_API const char* lxgProgram_log( lxgContextPTR ctx, lxgProgramPTR prog, char* buffer, int len);
+  LUX_API void  lxgProgram_feedback(lxgContextPTR ctx, lxgProgramPTR prog);
 
   LUX_API void lxgProgram_updateParameters(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, void **data);
   LUX_API void lxgProgram_updateSamplers(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgTexturePTR *data);
