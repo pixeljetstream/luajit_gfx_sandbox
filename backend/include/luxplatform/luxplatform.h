@@ -93,14 +93,15 @@
 #if defined(__GNUC__) && __GNUC__ >= 3 && __GNUC_MINOR__ >= 4
   #define LUX_COMPILER_GCC
   #define LUX_NOOP(...)
-  #define LUX_INLINE      inline
-  #define LUX_STACKALLOC    alloca
-  #define LUX_STACKALLOC16  ((void *)((((size_t)alloca( (x)+15 )) + 15) & ~15))
-  #define LUX_ALIGN16_V(x)  x __attribute__((aligned (16)))
-  #define LUX_ALIGN16_S   __attribute__((aligned (16)))
-  #define LUX_FASTCALL    __attribute__((fastcall))
-  #define LUX_RESTRICT    __restrict__
-  #define LUX_ASSUME      LUX_NOOP
+  #define LUX_INLINE          inline
+  #define LUX_STACKALLOC      alloca
+  #define LUX_STACKALLOC16    ((void *)((((size_t)alloca( (x)+15 )) + 15) & ~15))
+  #define LUX_ALIGN_V(x,a)    x __attribute__((aligned (a)))
+  #define LUX_ALIGN_BEGIN(a)  
+  #define LUX_ALIGN_END(a)    __attribute__((aligned (a)))
+  #define LUX_FASTCALL        __attribute__((fastcall))
+  #define LUX_RESTRICT        __restrict__
+  #define LUX_ASSUME          LUX_NOOP
 
 #elif defined(__MSC__) || defined(_MSC_VER)
   #pragma warning(disable:4142) // redefinition of same type
@@ -115,15 +116,16 @@
   #endif   // VC8+
 
   #define LUX_COMPILER_MSC
-  #define LUX_NOOP        __noop
-  #define LUX_INLINE      __forceinline
-  #define LUX_STACKALLOC    _alloca
-  #define LUX_STACKALLOC16  ((void *)((((size_t)_alloca( (x)+15 )) + 15) & ~15))
-  #define LUX_ALIGN16_V(x)  __declspec(align(16)) x
-  #define LUX_ALIGN16_S   __declspec(align(16))
-  #define LUX_FASTCALL    __fastcall
-  #define LUX_RESTRICT    __restrict
-  #define LUX_ASSUME      __assume
+  #define LUX_NOOP            __noop
+  #define LUX_INLINE          __forceinline
+  #define LUX_STACKALLOC      _alloca
+  #define LUX_STACKALLOC16    ((void *)((((size_t)_alloca( (x)+15 )) + 15) & ~15))
+  #define LUX_ALIGN_V(x,a)    __declspec(align(a)) x
+  #define LUX_ALIGN_BEGIN(a)  __declspec(align(a))
+  #define LUX_ALIGN_END(a)  
+  #define LUX_FASTCALL        __fastcall
+  #define LUX_RESTRICT       __restrict
+  #define LUX_ASSUME         __assume
 
 #else
   #error "compiler unkown"
@@ -136,12 +138,14 @@
   // we have support for xmmintrin
   #define LUX_SIMD_SSE
   #include <xmmintrin.h>
-  #define LUX_ALIGNSIMD_V(x)  LUX_ALIGN16_V( x )
-  #define LUX_ALIGNSIMD_S   LUX_ALIGN16_S
+  #define LUX_ALIGNSIMD_V(x)    LUX_ALIGN_V( x, 16 )
+  #define LUX_ALIGNSIMD_BEGIN   LUX_ALIGN_BEGIN( 16 )
+  #define LUX_ALIGNSIMD_END     LUX_ALIGN_END( 16 )
 #endif
 #else
-  #define LUX_ALIGNSIMD_V(x)  x 
-  #define LUX_ALIGNSIMD_S   
+  #define LUX_ALIGNSIMD_V(x)  x
+  #define LUX_ALIGNSIMD_BEGIN
+  #define LUX_ALIGNSIMD_END
 #endif
 
 #ifndef LUX_COMPILERINTRINSICS

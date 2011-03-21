@@ -29,12 +29,6 @@ extern "C"{
   typedef float lxMatrix34[12];
   typedef float lxQuat[4];
 
-
-  typedef LUX_ALIGNSIMD_S lxMatrix44 lxMatrix44SIMD;
-  typedef LUX_ALIGNSIMD_S lxVector4 lxVector4SIMD;
-  typedef LUX_ALIGNSIMD_S lxVector4 lxVector3SIMD;
-
-
   #define lxVector2PTR    float* LUX_RESTRICT
   #define lxVector3PTR    float* LUX_RESTRICT
   #define lxVector4PTR    float* LUX_RESTRICT
@@ -42,6 +36,7 @@ extern "C"{
   #define lxMatrix44PTR   float* LUX_RESTRICT
   #define lxMatrix34PTR   float* LUX_RESTRICT
   #define lxQuatPTR       float* LUX_RESTRICT
+
 #if 0
   typedef float*  LUX_RESTRICT lxVector2PTR;
   typedef float*  LUX_RESTRICT lxVector3PTR;
@@ -50,6 +45,14 @@ extern "C"{
   typedef float*  LUX_RESTRICT lxMatrix44PTR;
   typedef float*  LUX_RESTRICT lxMatrix34PTR;
   typedef float*  LUX_RESTRICT lxQuatPTR;
+
+  typedef const float*  LUX_RESTRICT lxVector2PTRconst;
+  typedef const float*  LUX_RESTRICT lxVector3PTRconst;
+  typedef const float*  LUX_RESTRICT lxVector4PTRconst;
+  typedef const float*  LUX_RESTRICT lxPlanePTRconst;
+  typedef const float*  LUX_RESTRICT lxMatrix44PTRconst;
+  typedef const float*  LUX_RESTRICT lxMatrix34PTRconst;
+  typedef const float*  LUX_RESTRICT lxQuatPTRconst;
 #endif
 
   //////////////////////////////////////////////////////////////////////////
