@@ -44,7 +44,7 @@ do
 	end
 	
 	local function relativeFilepath(file)
-		local name,level = luafilepath(lvl,3)
+		local name,level = luafilepath(3)
 		return (file and name) and name.."/"..file or file or name
 	end
 	

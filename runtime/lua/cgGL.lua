@@ -2,6 +2,10 @@ local ffi = require "ffi"
 
 ffi.cdef [[
 typedef unsigned int GLuint;
+typedef unsigned int GLenum;
+typedef void GLvoid;
+typedef int GLsizei;
+typedef int GLint;
 
 typedef enum
 {
