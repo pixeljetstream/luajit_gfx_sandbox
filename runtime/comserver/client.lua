@@ -3,7 +3,7 @@ local function init(settings)
 	local settings = settings or {port = "55555"}
 	local zmq = require "zmq"
 	local ctx = zmq.init(1)
-	local s = ctx:socket(zmq.REQ)
+	local s = ctx:socket(zmq.PUB)
 	local addr = "tcp://127.0.0.1:"..settings.port
 	
 	print("client:",addr)
@@ -13,10 +13,7 @@ local function init(settings)
 	end
 
 	local function send(msg)
-		s:send(msg)
-		if (s:recv() ~= "OK") then
-			print("error: could not send",msg)
-		end
+		s:send("LX2"..msg,zmq.NOBLOCK)
 	end
 	
 	return send

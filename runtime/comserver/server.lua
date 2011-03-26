@@ -1,9 +1,9 @@
 
-local function init(settings,lprint)
+local function init(settings)
 	local settings = settings or {port = "55555"}
 	local zmq = require "zmq"
 	local ctx = zmq.init(1)
-	local s = ctx:socket(zmq.REP)
+	local s = ctx:socket(zmq.SUB)
 	local addr = "tcp://127.0.0.1:"..settings.port
 	
 	print("server:",addr)
@@ -11,14 +11,15 @@ local function init(settings,lprint)
 		print("server: failed")
 		return 
 	end
+	
+	s:setopt(zmq.SUBSCRIBE,"LX2")
 
 	local function poll()
 		io.flush()
 		local t,zmerr = s:recv(zmq.NOBLOCK)
 		if (zmerr == "timeout") then return end
-		s:send("OK")
 		if (t) then
-			local fn,err = loadstring(t)
+			local fn,err = loadstring(string.sub(t,4,-1))
 			if not fn then
 				print("Error: "..err)
 			else
