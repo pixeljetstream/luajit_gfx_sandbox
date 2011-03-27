@@ -11,11 +11,12 @@ local function main()
    glfw.glfwSwapInterval(1);
    while glfw.glfwIsWindow(window) and glfw.glfwGetKey(window, glfw.GLFW_KEY_ESCAPE) ~= glfw.GLFW_PRESS 
    do
-      local double t = glfw.glfwGetTime()
-      
-      glfw.glfwSwapBuffers()
-      glfw.glfwPollEvents()
-      LXG.svPoll()
+    local t = glfw.glfwGetTime()
+    if( THINK ) then THINK(t) end
+    
+    glfw.glfwSwapBuffers()
+    glfw.glfwPollEvents()
+    LXG.svPoll()
    end
    glfw.glfwTerminate()
    os.exit(0)
