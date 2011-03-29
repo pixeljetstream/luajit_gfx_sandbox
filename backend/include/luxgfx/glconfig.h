@@ -63,9 +63,9 @@ extern "C"{
     LUXGL_BUFFER_CPYREAD = GL_COPY_READ_BUFFER,
     LUXGL_BUFFER_DRAWINDIRECT = GL_DRAW_INDIRECT_BUFFER,
     LUXGL_BUFFER_NVVIDEO = 0x9020, //FIXME GL_VIDEO_BUFFER_NV;
-    LUXGL_BUFFER_NVPARAM_FRAGMENT = GL_FRAGMENT_PROGRAM_PARAMETER_BUFFER_NV,
     LUXGL_BUFFER_NVPARAM_VERTEX = GL_VERTEX_PROGRAM_PARAMETER_BUFFER_NV,
     LUXGL_BUFFER_NVPARAM_GEOMETRY = GL_GEOMETRY_PROGRAM_PARAMETER_BUFFER_NV,
+    LUXGL_BUFFER_NVPARAM_FRAGMENT = GL_FRAGMENT_PROGRAM_PARAMETER_BUFFER_NV,
     LUXGL_BUFFER_NVPARAM_TESSCTRL = GL_TESS_CONTROL_PROGRAM_PARAMETER_BUFFER_NV,
     LUXGL_BUFFER_NVPARAM_TESSEVAL = GL_TESS_EVALUATION_PROGRAM_PARAMETER_BUFFER_NV,
     LUXGL_BUFFER_INVALID = 0,
@@ -221,14 +221,20 @@ extern "C"{
 
   typedef struct lxGLParameter_s{
     lxGLParameterType_t   type;
-    GLuint                id;
+    union{
+      GLuint              id;
+      GLenum              target;
+    };
     GLuint                location;
   }lxGLParameter_t;
 
-  typedef struct lxGLShader_s{
-    lxGLShaderType_t      type;
+  typedef struct lxGLDomainProgram_s{
+    union{
+      lxGLShaderType_t    type;
+      lxGLProgramType_t   target;
+    };
     GLuint                id;
-  }lxGLShader_t;
+  }lxGLDomainProgram_t;
 
   typedef struct lxGLProgram_s{
     GLuint                id;

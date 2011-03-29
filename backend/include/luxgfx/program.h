@@ -13,68 +13,81 @@
 extern "C"{
 #endif
 
-  typedef enum lxgShaderType_e{
-    LUXGFX_SHADER_VERTEX,
-    LUXGFX_SHADER_FRAGMENT,
-    LUXGFX_SHADER_GEOMETRY,
-    LUXGFX_SHADER_TESSCTRL,
-    LUXGFX_SHADER_TESSEVAL,
+  typedef enum lxgProgramType_e{
+    LUXGFX_PROGRAM_GLSL,
+    LUXGFX_PROGRAM_ARBNV,
+  }lxgProgramType_t;
+
+  typedef enum lxgShaderDomain_e{
+    LUXGFX_DOMAIN_VERTEX,
+    LUXGFX_DOMAIN_FRAGMENT,
+    LUXGFX_DOMAIN_GEOMETRY,
+    LUXGFX_DOMAIN_TESSCTRL,
+    LUXGFX_DOMAIN_TESSEVAL,
     LUXGFX_SHADERS,
-  }lxgShaderType_t;
+  }lxgProgramDomain_t;
 
   typedef void (*lxgParmeterUpdate_fn)(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data);
 
   typedef struct lxgProgramParameter_s{
     lxGLParameter_t         vgl;
-    lxgParmeterUpdate_fn  func;
+    lxgParmeterUpdate_fn    func;
     ushort                  count;
-    ushort                  transpose;
+    bool16                  transpose;
     uint                    size;
     const char*             name;
   }lxgProgramParameter_t;
 
   typedef struct lxgProgramData_s{
-    uint                        numParams;
+    uint                      numParams;
     lxgProgramParameterPTR    parameters;
-    uint                        numSampler;
+    uint                      numSampler;
     lxgProgramParameterPTR    samplers;
-    uint                        numBuffers;
+    uint                      numBuffers;
     lxgProgramParameterPTR    buffer;
+    uint                      numImages;
+    lxgProgramParameterPTR    images;
   }lxgProgramData_t;
 
   typedef struct lxgDomainProgram_s{
-    lxGLShader_t          vgl;
-    lxgProgramDataPTR   data;
-    lxgContextPTR       ctx;
+    lxGLDomainProgram_t   vgl;
+    lxgProgramDataPTR     data;
+    lxgContextPTR         ctx;
   }lxgDomainProgram_t;
 
   typedef struct lxgProgram_s{
     lxGLProgram_t         vgl;
+    lxgProgramType_t      type;
     flags32               usedProgs;
-    lxgDomainProgramPTR  programs[LUXGFX_SHADERS];
-    lxgProgramDataPTR   data;
-    lxgContextPTR       ctx;
+    lxgDomainProgramPTR   programs[LUXGFX_SHADERS];
+    lxgProgramDataPTR     data;
+    lxgContextPTR         ctx;
   }lxgProgram_t;
 
-
+  // GLSL
   LUX_API void lxgProgramParameter_initFunc(lxgProgramParameterPTR param);
 
-  LUX_API void lxgDomainProgram_init(lxgContextPTR ctx, lxgDomainProgramPTR stage, lxgShaderType_t type);
+  LUX_API void lxgDomainProgram_init(lxgContextPTR ctx, lxgDomainProgramPTR stage, lxgProgramDomain_t type);
   LUX_API void lxgDomainProgram_deinit(lxgContextPTR ctx, lxgDomainProgramPTR stage);
   LUX_API booln lxgDomainProgram_compile(lxgContextPTR ctx, lxgDomainProgramPTR stage, const char *src, int len);
   LUX_API const char* lxgDomainProgram_error(lxgContextPTR ctx, lxgDomainProgramPTR stage, char *buffer, int len);
 
   LUX_API void  lxgProgram_init(lxgContextPTR ctx, lxgProgramPTR prog);
   LUX_API void  lxgProgram_deinit(lxgContextPTR ctx, lxgProgramPTR prog);
-  LUX_API void  lxgProgram_setStage(lxgContextPTR ctx, lxgProgramPTR prog, lxgShaderType_t type, lxgDomainProgramPTR stage);
+  LUX_API void  lxgProgram_setDomain(lxgContextPTR ctx, lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage);
   LUX_API booln lxgProgram_link(lxgContextPTR ctx, lxgProgramPTR prog);
   LUX_API const char* lxgProgram_log( lxgContextPTR ctx, lxgProgramPTR prog, char* buffer, int len);
-  LUX_API void  lxgProgram_feedback(lxgContextPTR ctx, lxgProgramPTR prog);
 
+  // COMMON
   LUX_API void lxgProgram_updateParameters(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, void **data);
   LUX_API void lxgProgram_updateSamplers(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgTexturePTR *data);
   LUX_API void lxgProgram_updateBuffers(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data);
   LUX_API void lxgProgram_updateImages( lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgTextureImagePTR *data );
+
+  // NV/ARB PROGRAM
+  LUX_API void lxgProgramParameter_initDomainNV(lxgProgramParameterPTR param, lxgProgramDomain_t domain);
+  LUX_API void lxgProgramParameter_initFuncNV(lxgProgramParameterPTR param);
+
 
 #ifdef __cplusplus
 }
