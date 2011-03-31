@@ -41,6 +41,7 @@ local function processHeader(name,idir,odir)
   local inheader = io.open(idir.."/include/GL/"..name,"rb")
   local outheader = io.open(odir.."/include/GL/"..name,"wb")
   
+  local exts = {}
   local types = {}
   local funcs = {}
   local vars = {}
@@ -91,15 +92,15 @@ local function processHeader(name,idir,odir)
       if (pfn and lkfunctypes[pfn]) then
         lkfuncused[pfn] = true
         lkfuncnames[pfn] = fn
-        local fndef = lkfunctypes[pfn]:sub(9,-1)
-        local fndef = fndef:gsub(pfn,fn)
-        table.insert(funcs, fndef)
+        local fndef = lkfunctypes[pfn].str:sub(9,-1)
+        fndef = fndef:gsub(pfn,fn)
+        table.insert(funcs, {str=fndef, name = fn})
       end
       
     elseif (l:match("GLEW_VAR_EXPORT GLboolean")) then
       -- log variables
       local var = l:match("GLEW_VAR_EXPORT GLboolean ([_%w]+);")
-      table.insert(vars,"GLboolean "..var..";")
+      table.insert(vars,{str="GLboolean "..var..";", name=var})
 
     elseif (record and l:match("#ifndef")) then
       -- ignore these when logging enums
@@ -108,7 +109,9 @@ local function processHeader(name,idir,odir)
       
       local enum = l:match("#ifndef ([_%w]+)")
       lkenumignore[enum or " "] = true
-      
+      if (enum) then
+        table.insert(exts,enum)
+      end
     elseif (record and l:match("#define")) then
       -- log enums
       --  #define GL_PHONG_WIN 0x80EA
@@ -116,7 +119,7 @@ local function processHeader(name,idir,odir)
       local enum,value = l:match("#define ([_%w]+) ([_%w]+)")
       if (enum and value and not lkenumignore[enum]) then
         lkenumvalue[enum] = value
-        table.insert(enums,enum.." = "..value..",")
+        table.insert(enums,{str=enum.." = "..value..",", name=enum})
       end
       
     elseif (record and l:match("^typedef .+%([%w]+%s*%*"))then
@@ -124,7 +127,7 @@ local function processHeader(name,idir,odir)
       --  typedef void (GLAPIENTRY * PFNGLACCUMPROC) (GLenum op, GLfloat value);
       local api,pfn = l:match("^typedef [^%(]+ %(([%w]+)%s*%*%s*([_%w]+)%)")
       local fn  = l:match("(.+;)"):gsub(api,"")
-      lkfunctypes[pfn] = fn
+      lkfunctypes[pfn] = {str=fn, name=pfn}
       
     elseif (record and l:match("typedef ")) then
       -- due to different platform types, let's use the last definition
@@ -132,7 +135,7 @@ local function processHeader(name,idir,odir)
       local key = l:match("([_%w]+);")
       if (not lktypes[key]) then
         lktypes[key] = true
-        table.insert(types,def)
+        table.insert(types,{str=def, name=key})
       end
     end
     
@@ -147,7 +150,7 @@ local function processHeader(name,idir,odir)
   
   local lkenumexported = {}
   for i,v in ipairs(enums) do
-    local enum,value = v:match("([_%w]+) = ([_%w]+)")
+    local enum,value = v.str:match("([_%w]+) = ([_%w]+)")
     if (not lkenumexported[enum]) then
       lkenumexported[enum] = true
       local nval = lkenumvalue[value]
@@ -157,14 +160,22 @@ local function processHeader(name,idir,odir)
         nval = lkenumvalue[nval]
       end
       if (lval) then
-        enums[i] = enum.." = "..lval..","
+        enums[i] = {str = enum.." = "..lval..",", name = enum }
       end
     else
-      enums[i] = "//"..v
+      enums[i] = {str ="//"..v.str, name = enum }
     end
   end
   
-  return {funcs=funcs, vars=vars, types=types, enums=enums, eol=eol, lkfuncnames=lkfuncnames}
+  return {
+    funcs = funcs, 
+    vars = vars, 
+    types = types, 
+    enums = enums, 
+    eol = eol, 
+    lkfuncnames = lkfuncnames, 
+    exts = exts
+    }
 end
 
 local function processSource(name,idir,odir,gl)
@@ -203,31 +214,67 @@ local function copyFile(name,idir,odir)
   end
 end
 
-local function generateBinding(name,odir,gl)
+local function generateBinding(name,odir,gl,filter)
   local ofile = io.open(odir..name, "wb")
   local eol = gl.eol
   
   ofile:write("local ffi = require 'ffi'"..eol)
   ofile:write("ffi.cdef [["..eol)
   
+  
+  local filtered = function(id) return true end
+  if (filter) then
+    local except = {
+      GLint64EXT = true,
+      GLuint64EXT = true
+    }
+    local vendors = {}
+    for i,ext in ipairs(gl.exts) do
+      local vendor = ext:match("^%w+%_(%w+)%_")
+      vendors[vendor or " "] = false
+    end
+    vendors.VERSION = nil
+    
+    for cap in filter:gmatch("([%w]+)%s*,?") do
+      vendors[cap] = true
+    end
+    
+    filtered = function (id,var)
+      if (not id or except[id]) then return true end
+      if (var) then
+        local extname = id:match("%_%_GLEW%_(%w+)%_")
+        if (extname and extname ~= "VERSION") then
+          return vendors[extname]
+        end
+      end
+      
+      local suffix = id:match("[A-Z]+%s*$")
+      return (not suffix) or vendors[suffix]~= nil and vendors[suffix]
+    end
+  end
+  
   for i,v in ipairs(gl.types) do
-    ofile:write(v..eol)
+    local out = filtered(v.name)
+    ofile:write(out and v.str..eol or "")
   end
   ofile:write(eol)
   
   ofile:write("enum {"..eol)
   for i,v in ipairs(gl.enums) do
-    ofile:write("  "..v..eol)
+    local out = filtered(v.name)
+    ofile:write(out and v.str..eol or "")
   end
   ofile:write("};"..eol..eol)
   
   for i,v in ipairs(gl.funcs) do
-    ofile:write("extern "..v..eol)
+    local out = filtered(v.name)
+    ofile:write(out and "extern "..v.str..eol or "")
   end
   ofile:write(eol)
   
   for i,v in ipairs(gl.vars) do
-    ofile:write("extern "..v..eol)
+    local out = filtered(v.name,true)
+    ofile:write(out and "extern "..v.str..eol or "")
   end
   ofile:write("]]"..eol..eol)
   
@@ -236,22 +283,23 @@ local function generateBinding(name,odir,gl)
   ofile:write("return glew"..eol)
 end
 
-local function makebinding(name,idir,odir)
+local function makebinding(name,idir,odir,filter)
   local gl = processHeader("glew.h", idir, odir)
   copyFile("include/GL/wglew.h", idir, odir)
   copyFile("include/GL/glxew.h", idir, odir)
 
   processSource("glew.c", idir, odir, gl)
 
+  table.insert(gl.funcs,{str="GLenum glewInit ();", name = "glewInit"})
+  table.insert(gl.funcs,{str="GLboolean glewIsSupported (const char* name);", name = "glewIsSupported"})
 
-  table.insert(gl.funcs,"GLenum glewInit ();")
-  table.insert(gl.funcs,"GLboolean glewIsSupported (const char* name);")
-
-  generateBinding(name,odir,gl)
+  generateBinding(name..".lua",odir,gl,filter)
+  generateBinding(name.."_filtered.lua",odir,gl,filter)
 end
 
 
 makebinding(
-  "glewgl.lua",
+  "glewgl",
   RELPATH ("glewinput/"),
-  RELPATH (""))
+  RELPATH (""),
+  "NV")
