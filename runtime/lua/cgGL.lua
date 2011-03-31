@@ -1,6 +1,7 @@
 local ffi = require "ffi"
 
 ffi.cdef [[
+// cggl cgGL | Cg OpenGL runtime
 typedef unsigned int GLuint;
 typedef unsigned int GLenum;
 typedef void GLvoid;

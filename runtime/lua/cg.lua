@@ -1,5 +1,6 @@
 local ffi = require( "ffi" )
 ffi.cdef[[
+// cg | Cg runtime
 typedef int CGbool;
 typedef struct _CGcontext *CGcontext;
 typedef struct _CGprogram *CGprogram;

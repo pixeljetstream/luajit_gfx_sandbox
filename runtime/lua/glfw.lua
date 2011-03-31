@@ -3,6 +3,7 @@
 
 local ffi = require( "ffi" )
 ffi.cdef[[
+// glfw | GLFW window manager
 enum {
     GLFW_VERSION_MAJOR         =  3,
     GLFW_VERSION_MINOR         =  0,
