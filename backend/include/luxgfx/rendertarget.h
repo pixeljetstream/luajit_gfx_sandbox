@@ -61,23 +61,23 @@ extern "C"{
   }lxgRenderAssignType_t;
 
   typedef struct lxgRenderTarget_s{
-    lxGLFrameBuffer_t vgl;
-    lxgContextPTR   ctx;
+    lxGLFrameBuffer_t   vgl;
+    lxgContextPTR       ctx;
 
-    uint          maxidx;
-    flags32       dirty;
+    uint                maxidx;
+    flags32             dirty;
         
-    lxgRenderAssign_t assigns[LUXGFX_RENDERASSIGNS];
+    lxgRenderAssign_t   assigns[LUXGFX_RENDERASSIGNS];
 
     booln               equalsized;
-    lxgFrameBounds_t  bounds;
+    lxgFrameBounds_t    bounds;
   }lxgRenderTarget_t;
 
   typedef struct lxgRenderTargetBlit_s{
-    lxVec2i_t   fromStart;
-    lxVec2i_t   fromEnd;
-    lxVec2i_t   toStart;
-    lxVec2i_t   toEnd;
+    lxVec2i_t           fromStart;
+    lxVec2i_t           fromEnd;
+    lxVec2i_t           toStart;
+    lxVec2i_t           toEnd;
   }lxgRenderTargetBlit_t;
   typedef struct lxgRenderTargetBlit_s* lxgRenderTargetBlitPTR;
 

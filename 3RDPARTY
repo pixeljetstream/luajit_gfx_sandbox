@@ -6,6 +6,7 @@ Third party code/libraries:
  * 2. GLFW
  * 3. GLEW
  * 4. Cg
+ * 5. DevIL
 
 1. Lua License
 =============================================================================
@@ -70,6 +71,9 @@ Homepage:  http://glew.sourceforge.net/
 License:   http://glew.sourceforge.net/credits.html
 
 OpenGL extension wrapper
+
+A modified version from university of Utah is used so that there
+is no dependency on opengl32.lib.
 =============================================================================
 
 4. Nvidia Cg 
@@ -92,3 +96,12 @@ LOSS OF BUSINESS INFORMATION, OR ANY OTHER PECUNIARY LOSS) ARISING OUT OF THE
 USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF NVIDIA HAS BEEN ADVISED OF 
 THE POSSIBILITY OF SUCH DAMAGES.
 =============================================================================
+
+5. DevIL 
+=============================================================================
+Copyright: © 2000-2009 by Denton Woods
+Homepage: http://openil.sourceforge.net/
+
+Cross Platform Image Library
+=============================================================================
+
