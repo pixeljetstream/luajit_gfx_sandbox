@@ -66,6 +66,7 @@
 				AdditionalLibraryDirectories="..\..\..\depend\lib\win32_debug\msvc9;..\..\..\depend\lib\win32_debug"
 				GenerateDebugInformation="true"
 				SubSystem="2"
+				ImportLibrary="..\..\..\depend\lib\Windows_x86_debug\msvc9\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -136,10 +137,11 @@
 				OutputFile="..\..\..\runtime\bin_Windows_x86\glewgl.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\win32\msvc9;..\..\..\depend\lib\win32"
-				GenerateDebugInformation="true"
+				GenerateDebugInformation="false"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
+				ImportLibrary="..\..\..\depend\lib\Windows_x86\msvc9\$(TargetName).lib"
 				TargetMachine="1"
 			/>
 			<Tool

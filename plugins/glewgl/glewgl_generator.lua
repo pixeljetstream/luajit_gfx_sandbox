@@ -1,6 +1,11 @@
 -- copy original files
 -- and strip __glew names
 
+local RELPATH = RELPATH
+if not (RELPATH) then
+  RELPATH = function(str) return str end
+end
+
 -- http://lua-users.org/wiki/EnhancedFileLines
 local function FileLines(f)
   local CHUNK_SIZE = 1024
@@ -303,3 +308,7 @@ makebinding(
   RELPATH ("glewinput/"),
   RELPATH (""),
   "NV")
+
+copyFile("include/GL/glew.h",  RELPATH (""), RELPATH ("../../depend/"))
+copyFile("include/GL/wglew.h", RELPATH (""), RELPATH ("../../depend/"))
+copyFile("include/GL/glxew.h", RELPATH (""), RELPATH ("../../depend/"))
