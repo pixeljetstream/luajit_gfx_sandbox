@@ -7,10 +7,17 @@ function d2ffi.new(class)
     structs = {},
     enums = {},
     consts = {},
+    
     lkenum = {},
     lkconst = {},
+    lktype = {},
+    lkfunc  = {},
+    lkstruct = {},
   }
   
+  table.insert(self.types,{name="uint",alias="unsigned int uint"})
+  table.insert(self.types,{name="byte",alias="char byte"})
+  table.insert(self.types,{name="ubyte",alias="unsigned char ubyte"})
   
   setmetatable(self,{
     __index = class,})
@@ -20,37 +27,42 @@ end
 function d2ffi:parse(txt)
   local txt = StripCommentsC(txt)
   
-  local mod = txt:match("module%s+([_%.%w]+)%s+;") or ""
+  local mod = txt:match("module%s+([_%.%w]+)%s*;") or ""
+  print("mod",mod)
   txt = txt:match("extern%s*%(%s*C%s*%)%s*(%b{})")
   
   if (not txt) then return end
   txt = txt:sub(2,-2) 
   
-  local lkc = self.lkconst[mod] or {}
-  local lke = self.lkenum[mod] or {}
-  self.lkconst[mod] = lkc
-  self.lkenum[mod]  = lke
+  local function getOrNew(tab)
+    local t = tab[mod] or {}
+    tab[mod] = t
+    return t
+  end
+  
+  
+  local lkc = getOrNew(self.lkconst)
+  local lke = getOrNew(self.lkenum)
+  local lkf = getOrNew(self.lkfunc)
+  local lkt = getOrNew(self.lktype)
+  local lks = getOrNew(self.lkstruct)
+
   
   -- for functions and variables, get rid of "inner" definitions
   local outer = txt:gsub("(%b{})","{}")
   local lkvalue = {}
   
-  -- consts
-  for typ,name,value in outer:gmatch("const%s+([_%*%w]-)%s*([_%w]+)%s*=%s*(.-)%s*;") do
-    print("const",name,value)
-    local const = {name=name,value=value,typ=(typ or "uint"),mod=mod}
-    table.insert(self.consts, const)
-    lkc[name] = const
-    lkvalue[name] = value
-  end
-  
-  -- funcs
-  for ret,args,name in outer:gmatch("[_%*%w]+%s+function%s*(%b())%s*([_%w]+)%s*;") do
-    if (reg and name and args) then
-      args = args:gsub("[\r\n]"," ")
-      print("fn",reg,name,args)
-      table.insert(self.funcs, {ret=ret,args=args,name=name,mod=mod})
+  -- enums
+  for name,def in txt:gmatch("enum%s+([_%w]+).-(%b{})") do
+    local data = {}
+    local lastvalue = -1
+    for var,value in def:gmatch("([_%w]+)%s*=?%s*(.-)[\r\n,}]") do
+      print("enum",name,var,value)
+      table.insert(data,{name=var,value=value})
     end
+    local enum = {name=name,mod=mod,data=data}
+    lke[name] = enum
+    table.insert(self.enums,enum)
   end
   
   -- types
@@ -63,40 +75,73 @@ function d2ffi:parse(txt)
     end
     alias=alias:sub(1,-2)
     print("alias",name,alias)
-    table.insert(self.types,{name=name, alias=alias})
+    alias = {name=name, alias=alias}
+    lkt[name] = alias
+    table.insert(self.types,alias)
+  end
+  
+  -- consts
+  for typ,name,value in outer:gmatch("const%s+([_%*%w]-)%s*([_%w]+)%s*=%s*(.-)%s*;") do
+    typ = (typ ~= "" and typ or "uint")
+    print("const",typ,name,value)
+    local const = {name=name,value=value,typ=typ,mod=mod}
+    table.insert(self.consts, const)
+    lkc[name] = const
+    lkvalue[name] = value
+  end
+  
+  -- funcs
+  for ret,args,name in outer:gmatch("([_%*%w]+)%s+function%s*(%b())%s*([_%w]+)%s*;") do
+    if (ret and name and args) then
+      args = args:gsub("[\r\n]"," ")
+      args = args:gsub("=.-[,)]",function(cap) if (cap:match(",")) then return "," else return ")" end end)
+      args = args:gsub("%s+"," ")
+      print("fn",ret,name,args)
+      local func = {ret=ret,args=args,name=name,mod=mod}
+      lkf[name] = func
+      table.insert(self.funcs, func)
+    end
   end
   
   -- remove align statement
   txt = txt:gsub("align%s*%b()%s*:","")
   
   -- structs
-  for struct,def in txt:gmatch("struct%s+([_%w]+)%s*(%b{})") do
+  for name,def in txt:gmatch("struct%s+([_%w]+)%s*(%b{})") do
     local data = {}
-    for typ,name in def:gmatch("([_%*%w]+)%s+(.-)%s*;") do
-      name = name:gsub("%[%s*([_%w]+)%s*%]",
+    for typ,var in def:gmatch("([_%*%w]+)%s+(.-)%s*;") do
+      var =var:gsub("%[%s*([_%w]+)%s*%]",
         function(a) 
           local t = lkvalue[a]
           return t and "["..t.."]"
         end)
-      print("struct",strname,typ,name)
-      table.insert(data,{name=name,typ=typ})
+      print("struct",name,typ,var)
+      typ = typ:gsub(name.."%s*%*","struct "..name.."*")
+      table.insert(data,{name=var,typ=typ})
     end
-    table.insert(self.structs,{name=struct,mod=mod,data=data})
+    local struct = {name=name,mod=mod,data=data}
+    lks[name] = struct
+    table.insert(self.structs,struct)
   end
-  
-  -- enums
-  for enum,def in txt:gmatch("enum%s+([_%w]+).-(%b{})") do
-    local data = {}
-    for name,value in def:gmatch("([_%w]+)([^\r\n]+)[,}]") do
-      print("enum",enum,name,value)
-      table.insert(data,{name=name,value=value})
-    end
-    data = {name=enum,mod=mod,data=data}
-    lke[enum] = data
-    table.insert(self.enums,data)
-  end
-  
 end
+
+function d2ffi:prefixEnums()
+  for i,v in ipairs(self.enums) do
+    if (not v.prefixed) then
+      for n,k in ipairs(v.data) do
+        k.name = v.name.."_"..k.name
+      end
+    end
+  end
+end
+
+function d2ffi:prefixData(tab,prefix)
+  tab.prefixed = true
+  for i,v in ipairs(tab.data) do
+    v.name = prefix..v.name
+  end
+end
+
 
 function d2ffi:output()
   local str = ""
@@ -104,28 +149,42 @@ function d2ffi:output()
     str = str..s.."\n"
   end
   
-  for i,v in ipairs(self.types) do
-    write("typedef "..v.alias..";")
-  end
-
   for i,v in ipairs(self.enums) do
-    write("enum "..v.name.." {")
-    for n,k in ipairs(v.data) do
-      write("  "..k.name..k.value..",")
+    if (not v.skip) then
+      write("typedef enum "..v.name.." {")
+      for n,k in ipairs(v.data) do
+          write("  "..k.name..(k.value and (" = "..k.value) or "")..",")
+      end
+      write("} "..v.name..";")
     end
-    write("};")
+  end
+  
+  for i,v in ipairs(self.types) do
+    if (not v.skip) then
+      write("typedef "..v.alias..";")
+    end
+  end
+  
+  for i,v in ipairs(self.consts) do
+    if (not v.skip) then
+      write("static const "..v.typ.." "..v.name.." = "..v.value..";")
+    end
   end
   
   for i,v in ipairs(self.structs) do
-    write("struct "..v.name.." {")
-    for n,k in ipairs(v.data) do
-      write("  "..k.typ.." "..k.name..";")
+    if (not v.skip) then
+      write("typedef struct "..v.name.." {")
+      for n,k in ipairs(v.data) do
+        write("  "..k.typ.." "..k.name..";")
+      end
+      write("} "..v.name..";")
     end
-    write("};")
   end
   
   for i,v in ipairs(self.funcs) do
-    write(v.ret.." "..v.name..v.args..";")
+    if (not v.skip) then
+      write(v.ret.." "..v.name..v.args..";")
+    end
   end
   
   return str
