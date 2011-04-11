@@ -6509,7 +6509,4 @@ extern GLboolean __GLEW_WIN_specular_fog;
 extern GLboolean __GLEW_WIN_swap_hint;
 ]]
 
-local glew = ffi.load('glewgl')
-glew.glewInit()
-
-return glew
+return ffi.load('glewgl')

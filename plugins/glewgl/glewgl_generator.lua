@@ -3,10 +3,16 @@
 dofile("../_common/misc.lua")
 
 
-local function processHeader(name,idir,odir)
+local function processHeader(name,idir,odir,onlybinding)
   print("processing...",name)
   local inheader = io.open(idir.."/include/GL/"..name,"rb")
   local outheader = io.open(odir.."/include/GL/"..name,"wb")
+  if (onlybinding) then
+    outheader:close()
+    outheader = {
+      write = function() end,
+    }
+  end
   
   local exts = {}
   local types = {}
@@ -216,7 +222,7 @@ local function generateBinding(name,odir,gl,filter)
       end
       
       local suffix = id:match("[A-Z]+%s*$")
-      return (not suffix) or vendors[suffix]~= nil and vendors[suffix]
+      return (not suffix) or (vendors[suffix]== nil and true or vendors[suffix])
     end
   end
   
@@ -244,33 +250,33 @@ local function generateBinding(name,odir,gl,filter)
     ofile:write(out and "extern "..v.str..eol or "")
   end
   ofile:write("]]"..eol..eol)
-  
-  ofile:write("local glew = ffi.load('glewgl')"..eol)
-  ofile:write("glew.glewInit()"..eol..eol)
-  ofile:write("return glew"..eol)
+  ofile:write("return ffi.load('glewgl')"..eol)
 end
 
-local function makebinding(name,idir,odir,filter)
-  local gl = processHeader("glew.h", idir, odir)
-  copyFile("include/GL/wglew.h", idir, odir)
-  copyFile("include/GL/glxew.h", idir, odir)
+local function makebinding(name,idir,odir,filter,onlybinding)
+  local gl = processHeader("glew.h", idir, odir,onlybinding)
+  if (not onlybinding) then
+    copyFile("include/GL/wglew.h", idir, odir)
+    copyFile("include/GL/glxew.h", idir, odir)
 
-  processSource("glew.c", idir, odir, gl)
+    processSource("glew.c", idir, odir, gl)
+  end
 
   table.insert(gl.funcs,{str="GLenum glewInit ();", name = "glewInit"})
   table.insert(gl.funcs,{str="GLboolean glewIsSupported (const char* name);", name = "glewIsSupported"})
 
   generateBinding(name..".lua",odir,gl,filter)
-  generateBinding(name.."_filtered.lua",odir,gl,filter)
 end
-
 
 makebinding(
   "glewgl",
   RELPATH ("glewinput/"),
   RELPATH (""),
-  "NV")
-
-copyFile("include/GL/glew.h",  RELPATH (""), RELPATH ("../../depend/"))
-copyFile("include/GL/wglew.h", RELPATH (""), RELPATH ("../../depend/"))
-copyFile("include/GL/glxew.h", RELPATH (""), RELPATH ("../../depend/"))
+  FILTER,
+  ONLYBINDING)
+  
+if (not ONLYBINDING) then
+  copyFile("include/GL/glew.h",  RELPATH (""), RELPATH ("../../depend/"))
+  copyFile("include/GL/wglew.h", RELPATH (""), RELPATH ("../../depend/"))
+  copyFile("include/GL/glxew.h", RELPATH (""), RELPATH ("../../depend/"))
+end
