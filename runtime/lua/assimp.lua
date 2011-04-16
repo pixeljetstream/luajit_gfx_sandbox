@@ -396,14 +396,6 @@ typedef struct aiScene {
   uint mNumCameras;
   aiCamera** mCameras;
 } aiScene;
-void aiLogStreamCallback( char* message, char* user );
-size_t aiFileWriteProc( aiFile*, char*, size_t, size_t );
-size_t aiFileReadProc( aiFile*, char*, size_t, size_t );
-size_t aiFileTellProc( aiFile* );
-void aiFileFlushProc( aiFile* );
-aiReturn aiFileSeek( aiFile*, size_t, aiOrigin );
-aiFile* aiFileOpenProc( aiFileIO*, char*, char* );
-void aiFileCloseProc( aiFileIO*, aiFile* );
 aiScene* aiImportFile( char* pFile, uint pFile );
 aiScene* aiImportFileEx( char* pFile, uint pFlags, aiFileIO* pFS );
 aiScene* aiImportFileFromMemory( char* pBuffer, uint pLength, uint pFlags, char* pHint );

@@ -66,7 +66,7 @@ function d2ffi:parse(txt)
   end
   
   -- types
-  for alias in outer:gmatch("alias (.-;)") do
+  outer = outer:gsub("alias (.-;)", function(alias)
     -- check for simple type or functionptr
     local name=alias:match("([_%w]+)%s*;")
     local alias,cnt=alias:gsub("function","(*"..name..")")
@@ -78,20 +78,24 @@ function d2ffi:parse(txt)
     alias = {name=name, alias=alias}
     lkt[name] = alias
     table.insert(self.types,alias)
-  end
+    return ""
+  end)
   
   -- consts
-  for typ,name,value in outer:gmatch("const%s+([_%*%w]-)%s*([_%w]+)%s*=%s*(.-)%s*;") do
+  outer = outer:gsub("const%s+([_%*%w]-)%s*([_%w]+)%s*=%s*(.-)%s*;",
+  function(typ,name,value)
     typ = (typ ~= "" and typ or "uint")
     print("const",typ,name,value)
     local const = {name=name,value=value,typ=typ,mod=mod}
     table.insert(self.consts, const)
     lkc[name] = const
     lkvalue[name] = value
-  end
+    return ""
+  end)
   
   -- funcs
-  for ret,args,name in outer:gmatch("([_%*%w]+)%s+function%s*(%b())%s*([_%w]+)%s*;") do
+  outer = outer:gsub("([_%*%w]+)%s+function%s*(%b())%s*([_%w]+)%s*;",
+  function(ret,args,name)
     if (ret and name and args) then
       args = args:gsub("[\r\n]"," ")
       args = args:gsub("=.-[,)]",function(cap) if (cap:match(",")) then return "," else return ")" end end)
@@ -100,8 +104,9 @@ function d2ffi:parse(txt)
       local func = {ret=ret,args=args,name=name,mod=mod}
       lkf[name] = func
       table.insert(self.funcs, func)
+      return ""
     end
-  end
+  end)
   
   -- remove align statement
   txt = txt:gsub("align%s*%b()%s*:","")
