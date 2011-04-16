@@ -137,177 +137,177 @@ extern "C"{
   LUX_API void  lxgContext_resetTextures(lxgContextPTR ctx);
   LUX_API void  lxgContext_resetVertexStreams(lxgContextPTR ctx);
 
-  LUX_API void  lxgTexture_apply(lxgContextPTR ctx, uint imageunit, lxgTexturePTR tex);
-  LUX_API void  lxgSampler_apply(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR self);
-  LUX_API void  lxgTextures_apply(lxgContextPTR ctx, uint start, uint num, lxgTexturePTR *texs);
-  LUX_API void  lxgSamplers_apply(lxgContextPTR ctx, uint start, uint num, lxgSamplerPTR *samps);
-  LUX_API void  lxgTextureImage_apply(lxgContextPTR ctx, uint imageunit, lxgTextureImagePTR tex);
-  LUX_API void  lxgRenderTarget_apply(lxgContextPTR ctx, lxgRenderTargetType_t type, lxgRenderTargetPTR rt);
-  LUX_API void  lxgRenderTarget_applyDraw(lxgContextPTR ctx, lxgRenderTargetPTR rt, booln setViewport);
-  LUX_API void  lxgProgram_apply(lxgContextPTR ctx, lxgProgramPTR prog);
+  LUX_API void  lxgTexture_apply(lxgTexturePTR obj, lxgContextPTR ctx, uint imageunit);
+  LUX_API void  lxgSampler_apply(lxgSamplerPTR obj, lxgContextPTR ctx, uint imageunit);
+  LUX_API void  lxgTextures_apply(lxgTexturePTR *texs, lxgContextPTR ctx, uint start, uint num);
+  LUX_API void  lxgSamplers_apply(lxgSamplerPTR *samps, lxgContextPTR ctx, uint start, uint num);
+  LUX_API void  lxgTextureImage_apply(lxgTextureImagePTR obj, lxgContextPTR ctx, uint imageunit);
+  LUX_API void  lxgRenderTarget_apply(lxgRenderTargetPTR obj, lxgContextPTR ctx, lxgRenderTargetType_t type);
+  LUX_API void  lxgRenderTarget_applyDraw(lxgRenderTargetPTR obj, lxgContextPTR ctx, booln setViewport);
+  LUX_API void  lxgProgram_apply(lxgProgramPTR obj, lxgContextPTR ctx );
 
   // perform check if same state, prior to setting
-  LUX_API void lxgAlpha_checked(lxgContextPTR ctx, const lxgAlphaPTR );
-  LUX_API void lxgBlend_checked(lxgContextPTR ctx, const lxgBlendPTR );
-  LUX_API void lxgDepth_checked(lxgContextPTR ctx, const lxgDepthPTR );
-  LUX_API void lxgLogic_checked(lxgContextPTR ctx, const lxgLogicPTR );
-  LUX_API void lxgLine_checked(lxgContextPTR ctx, const lxgLinePTR );
-  LUX_API void lxgStencil_checked(lxgContextPTR ctx, const lxgStencilPTR );
-  LUX_API void lxgTexture_checked(lxgContextPTR ctx, uint imageunit, lxgTexturePTR tex);
-  LUX_API void lxgSampler_checked(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR samp);
-  LUX_API void lxgTextures_checked(lxgContextPTR ctx, uint start, uint num, lxgTexturePTR *texs);
-  LUX_API void lxgSamplers_checked(lxgContextPTR ctx, uint start, uint num, lxgSamplerPTR *samps);
-  LUX_API void lxgRenderFlag_checked(lxgContextPTR ctx, flags32 needed);
-  LUX_API void lxgVertexDecl_checked(lxgContextPTR ctx, const lxgVertexDeclPTR decl);
-  LUX_API void lxgVertexAttrib_checked(lxgContextPTR ctx, flags32 needed);
-  LUX_API void lxgVertexAttrib_checkedFIXED(lxgContextPTR ctx ,flags32 needed);
-  LUX_API void lxgRenderTarget_checked(lxgContextPTR ctx, lxgRenderTargetType_t type, lxgRenderTargetPTR rt);
-  LUX_API void lxgTextureImage_checked(lxgContextPTR ctx, uint imageunit, lxgTextureImagePTR img);
-  LUX_API void lxgProgram_checked(lxgContextPTR ctx, lxgProgramPTR prog);
+  LUX_API void lxgAlpha_checked(lxgAlphaPTR obj, lxgContextPTR ctx);
+  LUX_API void lxgBlend_checked(lxgBlendPTR obj, lxgContextPTR ctx);
+  LUX_API void lxgDepth_checked(lxgDepthPTR obj, lxgContextPTR ctx);
+  LUX_API void lxgLogic_checked(lxgLogicPTR obj, lxgContextPTR ctx);
+  LUX_API void lxgLine_checked(lxgLinePTR obj, lxgContextPTR ctx);
+  LUX_API void lxgStencil_checked(lxgStencilPTR obj, lxgContextPTR ctx);
+  LUX_API void lxgTexture_checked(lxgTexturePTR tex,lxgContextPTR ctx, uint imageunit );
+  LUX_API void lxgSampler_checked(lxgSamplerPTR samp,lxgContextPTR ctx, uint imageunit );
+  LUX_API void lxgTextures_checked(lxgTexturePTR *texs,lxgContextPTR ctx, uint start, uint num );
+  LUX_API void lxgSamplers_checked(lxgSamplerPTR *samps,lxgContextPTR ctx, uint start, uint num );
+  LUX_API void lxgRenderFlag_checked(flags32 needed,lxgContextPTR ctx );
+  LUX_API void lxgVertexDecl_checked(lxgVertexDeclPTR decl,lxgContextPTR ctx );
+  LUX_API void lxgVertexAttrib_checked(flags32 needed,lxgContextPTR ctx);
+  LUX_API void lxgVertexAttrib_checkedFIXED(flags32 needed,lxgContextPTR ctx);
+  LUX_API void lxgRenderTarget_checked(lxgRenderTargetPTR rt,lxgContextPTR ctx, lxgRenderTargetType_t type);
+  LUX_API void lxgTextureImage_checked(lxgTextureImagePTR img, lxgContextPTR ctx, uint imageunit);
+  LUX_API void lxgProgram_checked(lxgProgramPTR prog, lxgContextPTR ctx);
   LUX_API void lxgVertexSetup_checked(lxgContextPTR ctx);
   LUX_API void lxgVertexSetup_checkedNV(lxgContextPTR ctx);
   LUX_API void lxgVertexSetup_checkedFIXED(lxgContextPTR ctx);
   LUX_API void lxgVertexSetup_checkedFIXEDNV(lxgContextPTR ctx);
 
-  LUX_API void  lxgViewPortScissor_checked(lxgContextPTR ctx, const lxRectangleiPTR rect);
-  LUX_API booln lxgBuffer_checkedSetUniform(lxgContextPTR ctx, uint idx, lxgBufferPTR buffer);
+  LUX_API void  lxgViewPortScissor_checked(lxRectangleiPTR rect, lxgContextPTR ctx);
+  LUX_API booln lxgBuffer_queryUniform(lxgBufferPTR buffer, lxgContextPTR ctx, uint idx );
 
   //////////////////////////////////////////////////////////////////////////
 
-  LUX_INLINE void lxgAlpha_checked(lxgContextPTR ctx, const lxgAlphaPTR obj)
+  LUX_INLINE void lxgAlpha_checked(lxgAlphaPTR obj, lxgContextPTR ctx)
   {
     if (memcmp(&ctx->alpha,obj,sizeof(lxgAlpha_t)))
     {
-      lxgAlpha_apply(ctx, obj);
+      lxgAlpha_apply(obj,ctx);
     }
   }
-  LUX_INLINE void lxgBlend_checked(lxgContextPTR ctx, const lxgBlendPTR obj)
+  LUX_INLINE void lxgBlend_checked(lxgBlendPTR obj, lxgContextPTR ctx)
   {
     if (memcmp(&ctx->blend,obj,sizeof(lxgBlend_t)))
     {
-      lxgBlend_apply(ctx,obj);
+      lxgBlend_apply(obj,ctx);
     }
   }
-  LUX_INLINE void lxgDepth_checked(lxgContextPTR ctx, const lxgDepthPTR obj)
+  LUX_INLINE void lxgDepth_checked(lxgDepthPTR obj, lxgContextPTR ctx)
   {
     if (memcmp(&ctx->depth,obj,sizeof(lxgDepth_t)))
     {
-      lxgDepth_apply(ctx,obj);
+      lxgDepth_apply(obj,ctx);
     }
   }
-  LUX_INLINE void lxgLogic_checked(lxgContextPTR ctx, const lxgLogicPTR obj)
+  LUX_INLINE void lxgLogic_checked(lxgLogicPTR obj, lxgContextPTR ctx)
   {
     if (memcmp(&ctx->logic,obj,sizeof(lxgLogic_t)))
     {
-      lxgLogic_apply(ctx,obj);
+      lxgLogic_apply(obj,ctx);
     }
   }
-  LUX_INLINE void lxgLine_checked(lxgContextPTR ctx, const lxgLinePTR obj)
+  LUX_INLINE void lxgLine_checked(lxgLinePTR obj, lxgContextPTR ctx)
   {
     if (memcmp(&ctx->line,obj,sizeof(lxgLine_t)))
     {
-      lxgLine_apply(ctx,obj);
+      lxgLine_apply(obj,ctx);
     }
   }
-  LUX_INLINE void lxgStencil_checked(lxgContextPTR ctx, const lxgStencilPTR obj)
+  LUX_INLINE void lxgStencil_checked(lxgStencilPTR obj, lxgContextPTR ctx)
   {
     if (memcmp(&ctx->stencil,obj,sizeof(lxgStencil_t)))
     {
-      lxgStencil_apply(ctx,obj);
+      lxgStencil_apply(obj,ctx);
     }
   }
 
-  LUX_INLINE void lxgTexture_checked(lxgContextPTR ctx, uint imageunit, lxgTexturePTR tex)
+  LUX_INLINE void lxgTexture_checked(lxgTexturePTR tex, lxgContextPTR ctx, uint imageunit )
   {
     if (ctx->textures[imageunit] != tex){
-      lxgTexture_apply(ctx,imageunit,tex);
+      lxgTexture_apply(tex,ctx,imageunit);
     }
     else{
       glActiveTexture(GL_TEXTURE0_ARB + imageunit);
     }
   }
-  LUX_INLINE void lxgSampler_checked(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler)
+  LUX_INLINE void lxgSampler_checked(lxgSamplerPTR sampler, lxgContextPTR ctx, uint imageunit )
   {
     if (ctx->samplers[imageunit] != sampler){
-      lxgSampler_apply(ctx,imageunit,sampler);
+      lxgSampler_apply(sampler,ctx,imageunit);
     }
   }
-  LUX_INLINE void lxgTextureImage_checked(lxgContextPTR ctx, uint imageunit, lxgTextureImagePTR img)
+  LUX_INLINE void lxgTextureImage_checked(lxgTextureImagePTR img, lxgContextPTR ctx, uint imageunit) 
   {
     if (ctx->images[imageunit] != img){
-      lxgTextureImage_apply(ctx,imageunit,img);
+      lxgTextureImage_apply(img,ctx,imageunit);
     }
   }
 
-  LUX_INLINE void lxgProgram_checked(lxgContextPTR ctx, lxgProgramPTR prog)
+  LUX_INLINE void lxgProgram_checked(lxgProgramPTR prog, lxgContextPTR ctx )
   {
     if (ctx->program != prog){
-      lxgProgram_apply(ctx,prog);
+      lxgProgram_apply(prog,ctx);
     }
   }
 
-  LUX_INLINE booln lxgBuffer_checkedSetUniform(lxgContextPTR ctx, uint idx, lxgBufferPTR buffer)
+  LUX_INLINE booln lxgBuffer_queryUniform(lxgBufferPTR buffer, lxgContextPTR ctx, uint idx )
   {
     booln res = ctx->uniform[idx] != buffer;
     ctx->uniform[idx] = buffer;
     return res;
   }
-  LUX_INLINE void lxgTextures_checked(lxgContextPTR ctx, uint start, uint num, lxgTexturePTR *texs)
+  LUX_INLINE void lxgTextures_checked(lxgTexturePTR *texs, lxgContextPTR ctx, uint start, uint num )
   {
     LUX_ASSUME(num >= 1 && num <= LUXGFX_MAX_TEXTURE_IMAGES);
     if (memcmp(ctx->textures,texs,sizeof(lxgTexturePTR )*num)){
-      lxgTextures_apply(ctx,start,num,texs);
+      lxgTextures_apply(texs,ctx,start,num);
     }
   }
-  LUX_INLINE void lxgSamplers_checked(lxgContextPTR ctx, uint start, uint num, lxgSamplerPTR *samps)
+  LUX_INLINE void lxgSamplers_checked(lxgSamplerPTR *samps, lxgContextPTR ctx, uint start, uint num )
   {
     LUX_ASSUME(num >= 1 && num <= LUXGFX_MAX_TEXTURE_IMAGES);
     if (memcmp(ctx->textures,samps,sizeof(lxgSamplerPTR)*num)){
-      lxgSamplers_apply(ctx,start,num,samps);
+      lxgSamplers_apply(samps,ctx,start,num);
     }
   }
-  LUX_INLINE void lxgRenderFlag_checked(lxgContextPTR ctx, flags32 needed){
+  LUX_INLINE void lxgRenderFlag_checked(flags32 needed, lxgContextPTR ctx){
     flags32 changed = (needed ^ ctx->rflag);
     if (changed){
-      lxgRenderFlag_apply(ctx,needed,changed);
+      lxgRenderFlag_apply(needed,ctx,changed);
     }
   }
 
-  LUX_INLINE void lxgViewPortScissor_checked(lxgContextPTR ctx, const lxRectangleiPTR rect){
+  LUX_INLINE void lxgViewPortScissor_checked(lxRectangleiPTR rect, lxgContextPTR ctx){
     if (rect){
       glScissor(rect->x,rect->y,rect->width,rect->height);
       memcpy(&ctx->viewport.scissorRect,rect,sizeof(lxRectanglei_t));
     }
     if ((rect != NULL) != ctx->viewport.scissor){
-      lxgViewPortScissor_applyState(ctx, (rect != NULL));
+      lxgViewPortScissor_applyState((rect != NULL), ctx);
     }
   }
 
-  LUX_INLINE void lxgVertexDecl_checked(lxgContextPTR ctx, const lxgVertexDeclPTR decl)
+  LUX_INLINE void lxgVertexDecl_checked(lxgVertexDeclPTR decl,lxgContextPTR ctx)
   {
     if (ctx->vertex.decl != decl){
       lxgVertexDecl_apply(decl,ctx);
     }
   }
 
-  LUX_INLINE void lxgVertexAttrib_checked(lxgContextPTR ctx ,flags32 needed){
+  LUX_INLINE void lxgVertexAttrib_checked(flags32 needed, lxgContextPTR ctx){
     flags32 changed = (needed ^ ctx->vertex.active);
     if (changed){
-      lxgVertexAttribs_apply(ctx,needed,changed);
+      lxgVertexAttribs_apply(needed,ctx,changed);
     }
   }
 
-  LUX_INLINE void lxgVertexAttrib_checkedFIXED(lxgContextPTR ctx ,flags32 needed){
+  LUX_INLINE void lxgVertexAttrib_checkedFIXED(flags32 needed, lxgContextPTR ctx){
     flags32 changed = (needed ^ ctx->vertex.active);
     if (changed){
-      lxgVertexAttribs_applyFIXED(ctx,needed,changed);
+      lxgVertexAttribs_applyFIXED(needed,ctx,changed);
     }
   }
 
-  LUX_INLINE void lxgRenderTarget_checked(lxgContextPTR ctx, lxgRenderTargetType_t type, lxgRenderTargetPTR rt)
+  LUX_INLINE void lxgRenderTarget_checked(lxgRenderTargetPTR rt, lxgContextPTR ctx, lxgRenderTargetType_t type )
   {
     if (ctx->rendertargets[type] == rt) return;
-    lxgRenderTarget_apply(ctx,type,rt);
+    lxgRenderTarget_apply(rt,ctx,type);
   }
 
   LUX_INLINE void lxgContext_resetTextures(lxgContextPTR ctx)

@@ -24,7 +24,7 @@ static lxGLBufferTarget_t l_vglbuffers[] = {
 };
 
 static lxGLBufferTarget_t l_default = LUXGL_BUFFER_VERTEX;
-static LUX_INLINE void lxgBuffer_applyDefault(lxgContextPTR ctx, lxgBufferPTR buffer)
+static LUX_INLINE void lxgBuffer_bindDefault(lxgBufferPTR buffer)
 {
   glBindBuffer(buffer->gltarget,buffer->glid);
 }
@@ -32,11 +32,11 @@ static LUX_INLINE void lxgBuffer_applyDefault(lxgContextPTR ctx, lxgBufferPTR bu
 //////////////////////////////////////////////////////////////////////////
 // lxgBuffer
 
-LUX_API void lxgBuffer_deinit(lxgContextPTR ctx, lxgBufferPTR buffer)
+LUX_API void lxgBuffer_deinit(lxgBufferPTR buffer, lxgContextPTR ctx)
 {
 
   if (buffer->mapped){
-    lxgBuffer_applyDefault(ctx,buffer);
+    lxgBuffer_bindDefault(buffer);
     glUnmapBuffer(buffer->gltarget);
   }
 
@@ -47,7 +47,7 @@ LUX_API void lxgBuffer_deinit(lxgContextPTR ctx, lxgBufferPTR buffer)
 }
 
 
-LUX_API void lxgBuffer_reset(lxgContextPTR ctx, lxgBufferPTR buffer, void *data)
+LUX_API void lxgBuffer_reset(lxgBufferPTR buffer, void *data)
 {
   static const GLenum hinttoGL[] = {
     GL_STATIC_DRAW,
@@ -63,13 +63,13 @@ LUX_API void lxgBuffer_reset(lxgContextPTR ctx, lxgBufferPTR buffer, void *data)
   int index = (buffer->update * 3) + buffer->mode;
   LUX_DEBUGASSERT(index >= 0 && index < 9);
 
-  lxgBuffer_applyDefault(ctx,buffer);
+  lxgBuffer_bindDefault(buffer);
   glBufferData(buffer->gltarget,buffer->size,data,hinttoGL[index]);
 
   buffer->used = data ? buffer->size : 0;
 }
 
-LUX_API void lxgBuffer_init(lxgContextPTR ctx, lxgBufferPTR buffer, lxgBufferMode_t mode, lxgBufferUpdate_t update, uint size, void* data )
+LUX_API void lxgBuffer_init(lxgBufferPTR buffer, lxgContextPTR ctx, lxgBufferMode_t mode, lxgBufferUpdate_t update, uint size, void* data )
 {
 //  LUX_ASSERT(buffer->glID == 0);
 
@@ -82,12 +82,12 @@ LUX_API void lxgBuffer_init(lxgContextPTR ctx, lxgBufferPTR buffer, lxgBufferMod
   buffer->used = 0;
 
   glGenBuffers(1,&buffer->glid);
-  lxgBuffer_reset(ctx,buffer,data);
+  lxgBuffer_reset(buffer,data);
 }
 
-LUX_API GLuint64 lxgBuffer_addressNV(lxgContextPTR ctx, lxgBufferPTR buffer)
+LUX_API GLuint64 lxgBuffer_addressNV(lxgBufferPTR buffer)
 {
-  lxgBuffer_applyDefault(ctx,buffer);
+  lxgBuffer_bindDefault(buffer);
   glGetBufferParameterui64vNV(buffer->gltarget,GL_BUFFER_GPU_ADDRESS_NV,&buffer->address);
   return buffer->address;
 }
@@ -109,7 +109,7 @@ LUX_API uint lxgBuffer_alloc(lxgBufferPTR buffer, uint size, uint padsize)
   return oldused;
 }
 
-LUX_API booln lxgBuffer_map(lxgContextPTR ctx, lxgBufferPTR buffer, void** ptr, lxgAccessMode_t type)
+LUX_API booln lxgBuffer_map(lxgBufferPTR buffer, void** ptr, lxgAccessMode_t type)
 {
   static const GLenum typetoGL[LUXGFX_ACCESSS] = {
     GL_READ_ONLY,
@@ -121,9 +121,9 @@ LUX_API booln lxgBuffer_map(lxgContextPTR ctx, lxgBufferPTR buffer, void** ptr, 
 
   if(buffer->mapped) return LUX_FALSE;
 
-  lxgBuffer_applyDefault(ctx,buffer);
+  lxgBuffer_bindDefault(buffer);
 
-  if (type >= LUXGFX_ACCESS_WRITEDISCARD && ctx->capbits){
+  if (type >= LUXGFX_ACCESS_WRITEDISCARD && buffer->ctx->capbits){
     buffer->mapped = glMapBufferRange(buffer->gltarget,0,buffer->size,GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
   }
   else{
@@ -139,7 +139,7 @@ LUX_API booln lxgBuffer_map(lxgContextPTR ctx, lxgBufferPTR buffer, void** ptr, 
   return LUX_TRUE;
 }
 
-LUX_API booln lxgBuffer_copy(lxgContextPTR ctx, lxgBufferPTR dst, uint dstoffset, lxgBufferPTR src, uint srcoffset, uint size)
+LUX_API booln lxgBuffer_copy(lxgBufferPTR dst, uint dstoffset, lxgBufferPTR src, uint srcoffset, uint size)
 {
   if (LUXGFX_VALIDITY && !(
     (!dst->mapped && !src->mapped) &&
@@ -150,73 +150,73 @@ LUX_API booln lxgBuffer_copy(lxgContextPTR ctx, lxgBufferPTR dst, uint dstoffset
     ))
     return LUX_FALSE;
 
-  if (ctx->capbits & LUXGFX_CAP_BUFCOPY){
-    lxgBuffer_apply(ctx,LUXGL_BUFFER_CPYWRITE,dst);
-    lxgBuffer_apply(ctx,LUXGL_BUFFER_CPYREAD,src);
+  if (dst->ctx->capbits & LUXGFX_CAP_BUFCOPY){
+    lxgBuffer_bind(dst,LUXGL_BUFFER_CPYWRITE);
+    lxgBuffer_bind(src,LUXGL_BUFFER_CPYREAD);
 
     glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER,
       srcoffset, dstoffset,
       size);
   }
-  else if ((ctx->capbits & LUXGFX_CAP_BUFMAPRANGE) || src != dst){
+  else if ((dst->ctx->capbits & LUXGFX_CAP_BUFMAPRANGE) || src != dst){
     // temporarily map both
     void* psrc;
     void* pdst;
-    lxgBuffer_mapRange(ctx,src,&psrc,srcoffset,size,LUXGFX_ACCESS_READ,LUX_FALSE,LUX_FALSE);
-    lxgBuffer_mapRange(ctx,dst,&pdst,dstoffset,size,LUXGFX_ACCESS_WRITEDISCARD,LUX_FALSE,LUX_FALSE);
+    lxgBuffer_mapRange(src,&psrc,srcoffset,size,LUXGFX_ACCESS_READ,LUX_FALSE,LUX_FALSE);
+    lxgBuffer_mapRange(dst,&pdst,dstoffset,size,LUXGFX_ACCESS_WRITEDISCARD,LUX_FALSE,LUX_FALSE);
 
     memcpy(pdst,psrc,size);
 
     // unmap
-    lxgBuffer_unmap(ctx,src);
-    lxgBuffer_unmap(ctx,dst);
+    lxgBuffer_unmap(src);
+    lxgBuffer_unmap(dst);
   }
   else{
     // temporarily map
     byte* p;
-    booln succ = lxgBuffer_map(ctx,src,(void**)&p,LUXGFX_ACCESS_READWRITE);
+    booln succ = lxgBuffer_map(src,(void**)&p,LUXGFX_ACCESS_READWRITE);
     byte* psrc = p+srcoffset;
     byte* pdst = p+dstoffset;
 
     memcpy(pdst,psrc,size);
 
     // unmap
-    lxgBuffer_unmap(ctx,src);
+    lxgBuffer_unmap(src);
   }
 
   return LUX_TRUE;
 }
 
-LUX_API booln lxgBuffer_submit(lxgContextPTR ctx, lxgBufferPTR buffer, uint offset, uint size, void *data)
+LUX_API booln lxgBuffer_submit(lxgBufferPTR buffer, uint offset, uint size, void *data)
 {
   if (LUXGFX_VALIDITY &&(buffer->mapped || offset+size > buffer->size))
     return LUX_FALSE;
 
-  lxgBuffer_applyDefault(ctx,buffer);
+  lxgBuffer_bindDefault(buffer);
   glBufferSubDataARB(buffer->gltarget,offset,size,data);
   
   return LUX_TRUE;
 }
 
-LUX_API booln lxgBuffer_retrieve(lxgContextPTR ctx, lxgBufferPTR buffer, uint offset, uint size, void *data)
+LUX_API booln lxgBuffer_retrieve(lxgBufferPTR buffer, uint offset, uint size, void *data)
 {
   if (LUXGFX_VALIDITY && (buffer->mapped || offset+size > buffer->size))
     return LUX_FALSE;
 
-  lxgBuffer_applyDefault(ctx,buffer);
+  lxgBuffer_bindDefault(buffer);
   glGetBufferSubDataARB(buffer->gltarget,offset,size,data);
 
   return LUX_TRUE;
 }
 
-LUX_API booln lxgBuffer_mapRange(lxgContextPTR ctx, lxgBufferPTR buffer, void**ptr, lxgAccessMode_t type, uint from, uint length,  booln manualflush, booln unsynch)
+LUX_API booln lxgBuffer_mapRange(lxgBufferPTR buffer, void**ptr, lxgAccessMode_t type, uint from, uint length,  booln manualflush, booln unsynch)
 {
   if (LUXGFX_VALIDITY && (buffer->mapped || from+length > buffer->size))
     return LUX_FALSE;
 
-  lxgBuffer_applyDefault(ctx,buffer);
+  lxgBuffer_bindDefault(buffer);
 
-  if ((ctx->capbits & LUXGFX_CAP_BUFMAPRANGE))
+  if ((buffer->ctx->capbits & LUXGFX_CAP_BUFMAPRANGE))
   {
     static const GLbitfield bitfieldsGL[LUXGFX_ACCESSS] = {
       GL_MAP_READ_BIT,
@@ -253,20 +253,20 @@ LUX_API booln lxgBuffer_mapRange(lxgContextPTR ctx, lxgBufferPTR buffer, void**p
   return LUX_TRUE;
 }
 
-LUX_API booln lxgBuffer_flushRange(lxgContextPTR ctx, lxgBufferPTR buffer, uint from, uint length)
+LUX_API booln lxgBuffer_flushRange(lxgBufferPTR buffer, uint from, uint length)
 {
   if (!buffer->mapped) return LUX_FALSE;
 
-  lxgBuffer_applyDefault(ctx,buffer);
+  lxgBuffer_bindDefault(buffer);
   glFlushMappedBufferRange(buffer->gltarget,from,length);
 
   return LUX_TRUE;
 }
-LUX_API booln lxgBuffer_unmap(lxgContextPTR ctx, lxgBufferPTR buffer)
+LUX_API booln lxgBuffer_unmap(lxgBufferPTR buffer)
 {
   if(!buffer->mapped) return LUX_FALSE;
 
-  lxgBuffer_applyDefault(ctx,buffer);
+  lxgBuffer_bindDefault(buffer);
   glUnmapBuffer(buffer->gltarget);
 
   buffer->maplength = buffer->mapstart = 0;

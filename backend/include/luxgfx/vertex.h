@@ -102,11 +102,11 @@ extern "C"{
     uint cnt, enum lxScalarType_e type, booln normalize, 
     booln integer, uint stride,uint offset, uint stream);
 
-  LUX_API void lxgVertexAttribs_apply(lxgContextPTR ctx, flags32 attribs, flags32 changed);
-  LUX_API void lxgVertexAttribs_applyFIXED(lxgContextPTR ctx, flags32 attribs, flags32 changed);
-  LUX_API void lxgVertexAttrib_setFloat(lxgContextPTR ctx, lxgVertexAttrib_t attrib, const float* vec4);
-  LUX_API void lxgVertexAttrib_setInteger(lxgContextPTR ctx, lxgVertexAttrib_t attrib, const int* vec4);
-  LUX_API void lxgVertexAttrib_setFloatFIXED(lxgContextPTR ctx, lxgVertexAttrib_t attrib, const float* vec4);
+  LUX_API void lxgVertexAttribs_apply(flags32 attribs, lxgContextPTR ctx, flags32 changed);
+  LUX_API void lxgVertexAttribs_applyFIXED(flags32 attribs, lxgContextPTR ctx, flags32 changed);
+  LUX_API void lxgVertexAttrib_setFloat(lxgVertexAttrib_t attrib, const float* vec4);
+  LUX_API void lxgVertexAttrib_setInteger(lxgVertexAttrib_t attrib, const int* vec4);
+  LUX_API void lxgVertexAttrib_setFloatFIXED(lxgVertexAttrib_t attrib, const float* vec4);
 
   LUX_API void lxgVertexDecl_apply( lxgVertexDeclPTR decl, lxgContextPTR ctx );
   LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, lxgVertexDeclPTR decl, lxgStreamHostPTR hosts);

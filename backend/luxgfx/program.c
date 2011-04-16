@@ -77,8 +77,8 @@ static void lxgUpdateMat4x3(lxgContextPTR ctx, lxgProgramParameterPTR param, voi
   glUniformMatrix4x3fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
 static void lxgUpdateBuffer(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
-  if (lxgBuffer_checkedSetUniform(ctx,param->gllocation,data)){
-    lxgBuffer_applyIndexed(ctx,LUXGL_BUFFER_UNIFORM,param->gllocation,data);
+  if (lxgBuffer_queryUniform(data,ctx,param->gllocation)){
+    lxgBuffer_bindIndexed(data,LUXGL_BUFFER_UNIFORM,param->gllocation);
   }
 }
 
@@ -318,17 +318,17 @@ static void lxgUpdateMat4x3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, v
   }
 }
 static void lxgUpdateBufferNV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
-  if (lxgBuffer_checkedSetUniform(ctx,param->gllocation,data)){
-    lxgBuffer_applyIndexed(ctx,param->gltarget,param->gllocation,data);
+  if (lxgBuffer_queryUniform(data,ctx,param->gllocation)){
+    lxgBuffer_bindIndexed(data,param->gltarget,param->gllocation);
   }
 }
 
 
 static void lxgUpdateSampler(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
-  lxgTexture_checked(ctx,param->gllocation,data);
+  lxgTexture_checked(data,ctx,param->gllocation);
 }
 static void lxgUpdateImage(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
-  lxgTextureImage_checked(ctx,param->gllocation,data);
+  lxgTextureImage_checked(data,ctx,param->gllocation);
 }
 
 LUX_API void lxgProgramParameter_initDomainNV(lxgProgramParameterPTR param, lxgProgramDomain_t domain)
@@ -657,7 +657,7 @@ LUX_API void lxgProgram_updateSamplers( lxgContextPTR ctx, lxgProgramPTR prog, u
   uint i;
   for (i = 0; i < num; ++i){
     LUX_DEBUGASSERT(params[i]->func == lxgUpdateSampler);
-    lxgTexture_checked(ctx,params[i]->gllocation,data[i]);
+    lxgTexture_checked(data[i],ctx,params[i]->gllocation);
   }
 }
 
@@ -666,7 +666,7 @@ LUX_API void lxgProgram_updateImages( lxgContextPTR ctx, lxgProgramPTR prog, uin
   uint i;
   for (i = 0; i < num; ++i){
     LUX_DEBUGASSERT(params[i]->func == lxgUpdateImage);
-    lxgTextureImage_checked(ctx,params[i]->gllocation,data[i]);
+    lxgTextureImage_checked(data[i],ctx,params[i]->gllocation);
   }
 }
 
@@ -675,8 +675,8 @@ LUX_API void lxgProgram_updateBuffers( lxgContextPTR ctx, lxgProgramPTR prog, ui
   uint i;
   for (i = 0; i < num; ++i){
     LUX_DEBUGASSERT(params[i]->func == lxgUpdateBuffer);
-    if (lxgBuffer_checkedSetUniform(ctx,params[i]->gllocation,data[i])){
-      lxgBuffer_applyIndexed(ctx,LUXGL_BUFFER_UNIFORM,params[i]->gllocation,data[i]);
+    if (lxgBuffer_queryUniform(data[i],ctx,params[i]->gllocation)){
+      lxgBuffer_bindIndexed(data[i],LUXGL_BUFFER_UNIFORM,params[i]->gllocation);
     }
   }
 }
@@ -684,7 +684,7 @@ LUX_API void lxgProgram_updateBuffers( lxgContextPTR ctx, lxgProgramPTR prog, ui
 
 //////////////////////////////////////////////////////////////////////////
 
-LUX_API void lxgProgram_init( lxgContextPTR ctx, lxgProgramPTR prog )
+LUX_API void lxgProgram_init( lxgProgramPTR prog, lxgContextPTR ctx)
 {
   memset(prog,0,sizeof(lxgProgram_t));
   prog->ctx = ctx;
@@ -692,12 +692,12 @@ LUX_API void lxgProgram_init( lxgContextPTR ctx, lxgProgramPTR prog )
   prog->type = LUXGFX_PROGRAM_GLSL;
 }
 
-LUX_API void lxgProgram_deinit( lxgContextPTR ctx, lxgProgramPTR prog )
+LUX_API void lxgProgram_deinit( lxgProgramPTR prog, lxgContextPTR ctx )
 {
   glDeleteProgram(prog->glid);
 }
 
-LUX_API void lxgProgram_setDomain( lxgContextPTR ctx, lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage )
+LUX_API void lxgProgram_setDomain( lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage )
 {
   LUX_DEBUGASSERT(stage->progtype == prog->type);
   prog->programs[type] = stage;
@@ -705,7 +705,7 @@ LUX_API void lxgProgram_setDomain( lxgContextPTR ctx, lxgProgramPTR prog, lxgPro
   glAttachShader(prog->glid,stage->glid);
 }
 
-LUX_API booln lxgProgram_link( lxgContextPTR ctx, lxgProgramPTR prog )
+LUX_API booln lxgProgram_link( lxgProgramPTR prog )
 {
   GLint status;
   GLuint id = prog->glid;
@@ -721,7 +721,7 @@ LUX_API booln lxgProgram_link( lxgContextPTR ctx, lxgProgramPTR prog )
   return LUX_TRUE;
 }
 
-LUX_API const char* lxgProgram_log( lxgContextPTR ctx, lxgProgramPTR prog, char* buffer, int len)
+LUX_API const char* lxgProgram_log( lxgProgramPTR prog, char* buffer, int len)
 {
   GLsizei used;
   glGetProgramInfoLog(prog->glid, len, &used, buffer);
@@ -787,7 +787,7 @@ static LUX_INLINE lxgProgram_stateARBNV(flags32 flags, flags32 changed, lxgDomai
   }
 }
 
-LUX_API void  lxgProgram_apply(lxgContextPTR ctx, lxgProgramPTR prog)
+LUX_API void  lxgProgram_apply( lxgProgramPTR prog, lxgContextPTR ctx)
 {
   lxgProgramType_t type = prog ? prog->type : LUXGFX_PROGRAM_NONE;
   lxgProgramPTR    oldprog = ctx->program;
@@ -813,19 +813,19 @@ LUX_API void  lxgProgram_apply(lxgContextPTR ctx, lxgProgramPTR prog)
 
 //////////////////////////////////////////////////////////////////////////
 
-LUX_API void lxgProgram_initNV( lxgContextPTR ctx, lxgProgramPTR prog )
+LUX_API void lxgProgram_initNV( lxgProgramPTR prog, lxgContextPTR ctx )
 {
   memset(prog,0,sizeof(lxgProgram_t));
   prog->ctx = ctx;
   prog->type = LUXGFX_PROGRAM_ARBNV;
 }
 
-LUX_API void lxgProgram_deinitNV( lxgContextPTR ctx, lxgProgramPTR prog )
+LUX_API void lxgProgram_deinitNV( lxgProgramPTR prog, lxgContextPTR ctx )
 {
 
 }
 
-LUX_API void lxgProgram_setDomainNV( lxgContextPTR ctx, lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage )
+LUX_API void lxgProgram_setDomainNV( lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage )
 {
   LUX_DEBUGASSERT(stage->progtype == prog->type);
   prog->programs[type] = stage;
@@ -849,7 +849,7 @@ static LUX_INLINE lxGLShaderType_t getDomainType(lxgProgramDomain_t type)
 
 
 
-LUX_API void lxgDomainProgram_init( lxgContextPTR ctx, lxgDomainProgramPTR stage, lxgProgramDomain_t type)
+LUX_API void lxgDomainProgram_init( lxgDomainProgramPTR stage, lxgContextPTR ctx, lxgProgramDomain_t type)
 {
   GLenum gltype = getDomainType(type);
   memset(stage,0,sizeof(lxgDomainProgram_t));
@@ -860,12 +860,12 @@ LUX_API void lxgDomainProgram_init( lxgContextPTR ctx, lxgDomainProgramPTR stage
   stage->progtype = LUXGFX_PROGRAM_GLSL;
 }
 
-LUX_API void lxgDomainProgram_deinit( lxgContextPTR ctx, lxgDomainProgramPTR stage )
+LUX_API void lxgDomainProgram_deinit( lxgDomainProgramPTR stage, lxgContextPTR ctx )
 {
   glDeleteShader(stage->glid);
 }
 
-LUX_API booln lxgDomainProgram_compile( lxgContextPTR ctx, lxgDomainProgramPTR stage, const char *src, int len )
+LUX_API booln lxgDomainProgram_compile( lxgDomainProgramPTR stage, const char *src, int len )
 {
   GLuint id = stage->glid;
   GLint status;
@@ -875,7 +875,7 @@ LUX_API booln lxgDomainProgram_compile( lxgContextPTR ctx, lxgDomainProgramPTR s
   return status;
 }
 
-LUX_API const char* lxgDomainProgram_error( lxgContextPTR ctx, lxgDomainProgramPTR stage, char *buffer, int len  )
+LUX_API const char* lxgDomainProgram_error( lxgDomainProgramPTR stage, char *buffer, int len  )
 {
   GLsizei used;
   glGetShaderInfoLog(stage->glid, len, &used, buffer);
@@ -897,7 +897,7 @@ static LUX_INLINE lxGLProgramType_t getDomainTargetNV(lxgProgramDomain_t type)
   return types[type];
 }
 
-LUX_API void lxgDomainProgram_initNV( lxgContextPTR ctx, lxgDomainProgramPTR stage, lxgProgramDomain_t type)
+LUX_API void lxgDomainProgram_initNV( lxgDomainProgramPTR stage, lxgContextPTR ctx, lxgProgramDomain_t type)
 {
   memset(stage,0,sizeof(lxgDomainProgram_t));
 
@@ -907,12 +907,12 @@ LUX_API void lxgDomainProgram_initNV( lxgContextPTR ctx, lxgDomainProgramPTR sta
   stage->progtype = LUXGFX_PROGRAM_ARBNV;
 }
 
-LUX_API void lxgDomainProgram_deinitNV( lxgContextPTR ctx, lxgDomainProgramPTR stage)
+LUX_API void lxgDomainProgram_deinitNV( lxgDomainProgramPTR stage, lxgContextPTR ctx)
 {
   glDeleteProgramsARB(1,&stage->glid);
 }
 
-LUX_API booln lxgDomainProgram_compileNV(lxgContextPTR ctx, lxgDomainProgramPTR stage, const char *src, int len)
+LUX_API booln lxgDomainProgram_compileNV(lxgDomainProgramPTR stage, const char *src, int len)
 {
   GLint pos;
   glBindProgramARB(stage->gltarget,stage->glid);
@@ -920,7 +920,7 @@ LUX_API booln lxgDomainProgram_compileNV(lxgContextPTR ctx, lxgDomainProgramPTR 
   glGetIntegerv(GL_PROGRAM_ERROR_POSITION_ARB,&pos);
   return (pos == -1);
 }
-LUX_API const char* lxgDomainProgram_errorNV(lxgContextPTR ctx, lxgDomainProgramPTR stage, char *buffer, int len)
+LUX_API const char* lxgDomainProgram_errorNV(lxgDomainProgramPTR stage, char *buffer, int len)
 {
   const char* str = glGetString(GL_PROGRAM_ERROR_STRING_ARB);
   GLint pos;

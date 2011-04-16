@@ -199,38 +199,38 @@ extern "C"{
 
 
   LUX_API void  lxgDepth_init(lxgDepthPTR obj);
-  LUX_API void  lxgDepth_apply(lxgContextPTR ctx, const lxgDepthPTR obj);
-  LUX_API void  lxgDepth_sync(lxgContextPTR ctx, lxgDepthPTR obj);
+  LUX_API void  lxgDepth_apply(lxgDepthPTR obj, lxgContextPTR ctx);
+  LUX_API void  lxgDepth_sync(lxgDepthPTR obj, lxgContextPTR ctx);
 
   LUX_API void  lxgLogic_init(lxgLogicPTR obj);
-  LUX_API void  lxgLogic_apply(lxgContextPTR ctx, const lxgLogicPTR obj);
-  LUX_API void  lxgLogic_sync(lxgContextPTR ctx, lxgLogicPTR obj);
+  LUX_API void  lxgLogic_apply(lxgLogicPTR obj, lxgContextPTR ctx);
+  LUX_API void  lxgLogic_sync(lxgLogicPTR obj, lxgContextPTR ctx);
 
   LUX_API void  lxgStencil_init(lxgStencilPTR obj);
-  LUX_API void  lxgStencil_apply(lxgContextPTR ctx, const lxgStencilPTR obj);
-  LUX_API void  lxgStencil_sync(lxgContextPTR ctx, lxgStencilPTR obj);
+  LUX_API void  lxgStencil_apply(lxgStencilPTR obj, lxgContextPTR ctx);
+  LUX_API void  lxgStencil_sync(lxgStencilPTR obj, lxgContextPTR ctx);
 
   LUX_API void  lxgBlend_init(lxgBlendPTR obj);
-  LUX_API void  lxgBlend_apply(lxgContextPTR ctx, const lxgBlendPTR obj);
-  LUX_API void  lxgBlend_sync(lxgContextPTR ctx, lxgBlendPTR obj);
+  LUX_API void  lxgBlend_apply(lxgBlendPTR obj, lxgContextPTR ctx);
+  LUX_API void  lxgBlend_sync(lxgBlendPTR obj, lxgContextPTR ctx);
 
-  LUX_API void  lxgBlendMrt_apply(lxgContextPTR ctx, lxgBlendMrtPTR obj);
-  LUX_API void  lxgBlendMrt_sync(lxgContextPTR ctx, lxgBlendMrtPTR obj);
+  LUX_API void  lxgBlendMrt_apply(lxgBlendMrtPTR obj, lxgContextPTR ctx);
+  LUX_API void  lxgBlendMrt_sync(lxgBlendMrtPTR obj, lxgContextPTR ctx);
 
   LUX_API void  lxgAlpha_init(lxgAlphaPTR obj);
-  LUX_API void  lxgAlpha_apply(lxgContextPTR ctx, const lxgAlphaPTR obj);
-  LUX_API void  lxgAlpha_sync(lxgContextPTR ctx, lxgAlphaPTR obj);
+  LUX_API void  lxgAlpha_apply(lxgAlphaPTR obj, lxgContextPTR ctx);
+  LUX_API void  lxgAlpha_sync(lxgAlphaPTR obj, lxgContextPTR ctx);
 
   LUX_API void  lxgLine_init(lxgLinePTR   obj);
-  LUX_API void  lxgLine_apply(lxgContextPTR ctx, const lxgLinePTR obj);
-  LUX_API void  lxgLine_sync(lxgContextPTR ctx, lxgLinePTR obj);
+  LUX_API void  lxgLine_apply(lxgLinePTR obj, lxgContextPTR ctx);
+  LUX_API void  lxgLine_sync(lxgLinePTR obj, lxgContextPTR ctx);
 
   LUX_API flags32 lxgRenderFlag_init();
   LUX_API flags32 lxgRenderFlag_sync(lxgContextPTR ctx);
-  LUX_API void    lxgRenderFlag_apply(lxgContextPTR ctx, flags32 flags, flags32 changed);
+  LUX_API void    lxgRenderFlag_apply(flags32 flags, lxgContextPTR ctx, flags32 changed);
   LUX_API const char* lxgRenderFlag_test(lxgContextPTR ctx);
 
-  LUX_API void lxgRasterizer_sync(lxgContextPTR ctx, lxgRasterizerPTR raster);
+  LUX_API void lxgRasterizer_sync(lxgRasterizerPTR raster, lxgContextPTR ctx);
 
 #ifdef __cplusplus
 }

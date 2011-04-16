@@ -178,12 +178,12 @@ LUX_API void lxgContext_syncStates(lxgContextPTR ctx)
 {
   ctx->rflag = lxgRenderFlag_sync(ctx);
 
-  lxgDepth_sync(ctx, &ctx->depth);
-  lxgAlpha_sync(ctx, &ctx->alpha);
-  lxgBlend_sync(ctx, &ctx->blend);
-  lxgStencil_sync(ctx, &ctx->stencil);
-  lxgViewPort_sync(ctx, &ctx->viewport);
-  lxgRasterizer_sync(ctx, &ctx->rasterizer);
+  lxgDepth_sync(&ctx->depth, ctx );
+  lxgAlpha_sync(&ctx->alpha, ctx );
+  lxgBlend_sync(&ctx->blend, ctx );
+  lxgStencil_sync(&ctx->stencil, ctx );
+  lxgViewPort_sync(&ctx->viewport, ctx );
+  lxgRasterizer_sync(&ctx->rasterizer, ctx );
 }
 
 
@@ -192,7 +192,7 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
   {
     lxgDepthPTR state = &ctx->depth;
     lxgDepth_t test;
-    lxgDepth_sync(ctx, &test);
+    lxgDepth_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgDepth_t))){
       return ("VIDDepth_t");
@@ -202,7 +202,7 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
   {
     lxgAlphaPTR state = &ctx->alpha;
     lxgAlpha_t test;
-    lxgAlpha_sync(ctx, &test);
+    lxgAlpha_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgAlpha_t))){
       return ("VIDAlpha_t");
@@ -212,7 +212,7 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
   {
     lxgBlendPTR state = &ctx->blend;
     lxgBlend_t test;
-    lxgBlend_sync(ctx, &test);
+    lxgBlend_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgBlend_t))){
       return ("VIDBlend_t");
@@ -222,7 +222,7 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
   {
     lxgStencilPTR state = &ctx->stencil;
     lxgStencil_t test;
-    lxgStencil_sync(ctx, &test);
+    lxgStencil_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgStencil_t))){
       return ("VIDStencil_t");
@@ -232,7 +232,7 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
   {
     lxgLinePTR state = &ctx->line;
     lxgLine_t test;
-    lxgLine_sync(ctx, &test);
+    lxgLine_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgLine_t))){
       return ("VIDLine_t");
@@ -242,7 +242,7 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
   {
     lxgViewPortPTR state = &ctx->viewport;
     lxgViewPort_t test;
-    lxgViewPort_sync(ctx, &test);
+    lxgViewPort_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgViewPort_t))){
       return ("VIDViewPort_t");
@@ -252,7 +252,7 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
   {
     lxgRasterizerPTR state = &ctx->rasterizer;
     lxgRasterizer_t test;
-    lxgRasterizer_sync(ctx, &test);
+    lxgRasterizer_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgRasterizer_t))){
       return ("VIDRasterizer_t");

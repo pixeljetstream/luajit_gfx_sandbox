@@ -251,7 +251,7 @@ LUX_API const char* lxgRenderFlag_test(lxgContextPTR ctx)
   return NULL;
 }
 
-LUX_API void lxgRenderFlag_apply(lxgContextPTR ctx, flags32 flags, flags32 changed){
+LUX_API void lxgRenderFlag_apply(flags32 flags, lxgContextPTR ctx, flags32 changed){
   static lxVector4 white = {1,1,1,1};
   static lxVector4 black = {0,0,0,0};
 
@@ -309,7 +309,7 @@ LUX_API void lxgRenderFlag_apply(lxgContextPTR ctx, flags32 flags, flags32 chang
 //////////////////////////////////////////////////////////////////////////
 // lxgLine
 
-LUX_API void  lxgLine_apply(lxgContextPTR ctx, const lxgLinePTR obj)
+LUX_API void  lxgLine_apply(lxgLinePTR obj, lxgContextPTR ctx)
 {
 
   glLineWidth(obj->linewidth);
@@ -327,7 +327,7 @@ LUX_API void  lxgLine_apply(lxgContextPTR ctx, const lxgLinePTR obj)
   ctx->line = *obj;
 }
 
-LUX_API void  lxgLine_sync(lxgContextPTR ctx, lxgLinePTR obj)
+LUX_API void  lxgLine_sync(lxgLinePTR obj, lxgContextPTR ctx)
 {
   GLint val;
   glGetIntegerv(GL_LINE_STIPPLE_PATTERN,&val);
@@ -345,14 +345,14 @@ LUX_API void  lxgLogic_init(lxgLogicPTR obj)
 
 }
 
-LUX_API void  lxgLogic_apply(lxgContextPTR ctx, const lxgLogicPTR obj)
+LUX_API void  lxgLogic_apply(lxgLogicPTR obj, lxgContextPTR ctx)
 {
   glLogicOp(lxGLLogicOp_get(obj->op));
 
   ctx->logic = *obj;
 }
 
-LUX_API void  lxgLogic_sync(lxgContextPTR ctx, lxgLogicPTR obj)
+LUX_API void  lxgLogic_sync(lxgLogicPTR obj, lxgContextPTR ctx)
 {
   GLint func;
   glGetIntegerv(GL_LOGIC_OP_MODE,&func);
@@ -363,7 +363,7 @@ LUX_API void  lxgLogic_sync(lxgContextPTR ctx, lxgLogicPTR obj)
 //////////////////////////////////////////////////////////////////////////
 // lxgDepth
 
-LUX_API void  lxgDepth_sync(lxgContextPTR ctx, lxgDepthPTR state)
+LUX_API void  lxgDepth_sync(lxgDepthPTR state, lxgContextPTR ctx)
 {
   GLint func;
   glGetIntegerv(GL_DEPTH_FUNC,&func);
@@ -373,7 +373,7 @@ LUX_API void  lxgDepth_sync(lxgContextPTR ctx, lxgDepthPTR state)
 }
 
 
-LUX_API void  lxgDepth_apply(lxgContextPTR ctx, const lxgDepthPTR state)
+LUX_API void  lxgDepth_apply(lxgDepthPTR state, lxgContextPTR ctx)
 {
   glDepthFunc(lxGLCompareMode_get(state->func));
 
@@ -384,7 +384,7 @@ LUX_API void  lxgDepth_apply(lxgContextPTR ctx, const lxgDepthPTR state)
 // lxgAlpha
 
 
-LUX_API void  lxgAlpha_sync(lxgContextPTR ctx, lxgAlphaPTR state)
+LUX_API void  lxgAlpha_sync(lxgAlphaPTR state, lxgContextPTR ctx)
 {
   GLenum func;
 
@@ -395,7 +395,7 @@ LUX_API void  lxgAlpha_sync(lxgContextPTR ctx, lxgAlphaPTR state)
 }
 
 
-LUX_API void  lxgAlpha_apply(lxgContextPTR ctx, const lxgAlphaPTR state)
+LUX_API void  lxgAlpha_apply(lxgAlphaPTR state, lxgContextPTR ctx)
 {
   glAlphaFunc(lxGLCompareMode_get(state->func),state->refval);
 
@@ -429,7 +429,7 @@ static GLenum l_BlendEqu[] =
 };
 
 //#define BLEND_LAST
-LUX_API void  lxgBlend_apply(lxgContextPTR ctx, const lxgBlendPTR obj)
+LUX_API void  lxgBlend_apply(lxgBlendPTR obj, lxgContextPTR ctx)
 {
 #ifdef BLEND_LAST
   enum32 lastequ = (ctx->blend.colormode.equ<<4) | ctx->blend.alphamode.equ;
@@ -464,7 +464,7 @@ LUX_API void  lxgBlend_apply(lxgContextPTR ctx, const lxgBlendPTR obj)
   ctx->blend = *obj;
 }
 
-LUX_API void  lxgBlend_sync(lxgContextPTR ctx, lxgBlendPTR blend)
+LUX_API void  lxgBlend_sync(lxgBlendPTR blend, lxgContextPTR ctx)
 {
   GLenum rgbsrc;
   GLenum rgbdst;
@@ -498,7 +498,7 @@ LUX_API void  lxgBlend_sync(lxgContextPTR ctx, lxgBlendPTR blend)
 
 }
 
-LUX_API void  lxgBlendMrt_apply(lxgContextPTR ctx, lxgBlendMrtPTR objmrt)
+LUX_API void  lxgBlendMrt_apply(lxgBlendMrtPTR objmrt, lxgContextPTR ctx)
 {
   int i;
 
@@ -536,7 +536,7 @@ LUX_API void  lxgBlendMrt_apply(lxgContextPTR ctx, lxgBlendMrtPTR objmrt)
   }
 }
 
-LUX_API void  lxgBlendMrt_sync(lxgContextPTR ctx, lxgBlendMrtPTR obj)
+LUX_API void  lxgBlendMrt_sync(lxgBlendMrtPTR obj, lxgContextPTR ctx)
 {
   int i;
   lxgBlendPTR last = NULL;
@@ -592,7 +592,7 @@ LUX_API void  lxgBlendMrt_sync(lxgContextPTR ctx, lxgBlendMrtPTR obj)
 // lxgStencil
 
 
-LUX_API void lxgStencil_sync(lxgContextPTR ctx, lxgStencilPTR stencil)
+LUX_API void lxgStencil_sync(lxgStencilPTR stencil, lxgContextPTR ctx)
 {
   GLenum val;
   glGetIntegerv(GL_STENCIL_FAIL,(GLint*)&val);
@@ -629,7 +629,7 @@ LUX_INLINE static GLenum lxGLStencilMode_get(lxgStencilMode_t mode)
   };
   return modes[mode];
 }
-LUX_API void lxgStencil_apply(lxgContextPTR ctx, const lxgStencilPTR vidstencil)
+LUX_API void lxgStencil_apply(lxgStencilPTR vidstencil, lxgContextPTR ctx)
 {
   if (memcmp(&vidstencil->ops[0],&vidstencil->ops[1],sizeof(lxgStencilOp_t))){
     glStencilFuncSeparate(GL_FRONT, lxGLCompareMode_get((lxgCompareMode_t)vidstencil->ops[0].func),
@@ -658,7 +658,7 @@ LUX_API void lxgStencil_apply(lxgContextPTR ctx, const lxgStencilPTR vidstencil)
 // lxgRasterizer
 
 
-LUX_API void lxgRasterizer_sync(lxgContextPTR ctx, lxgRasterizerPTR raster)
+LUX_API void lxgRasterizer_sync(lxgRasterizerPTR raster, lxgContextPTR ctx)
 {
   GLint val;
   glGetIntegerv(GL_FRONT_FACE,&val);

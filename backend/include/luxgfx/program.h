@@ -78,35 +78,35 @@ extern "C"{
   // GLSL
   LUX_API void lxgProgramParameter_initFunc(lxgProgramParameterPTR param);
 
-  LUX_API void lxgDomainProgram_init(lxgContextPTR ctx, lxgDomainProgramPTR stage, lxgProgramDomain_t type);
-  LUX_API void lxgDomainProgram_deinit(lxgContextPTR ctx, lxgDomainProgramPTR stage);
-  LUX_API booln lxgDomainProgram_compile(lxgContextPTR ctx, lxgDomainProgramPTR stage, const char *src, int len);
-  LUX_API const char* lxgDomainProgram_error(lxgContextPTR ctx, lxgDomainProgramPTR stage, char *buffer, int len);
+  LUX_API void lxgDomainProgram_init(lxgDomainProgramPTR stage, lxgContextPTR ctx, lxgProgramDomain_t type);
+  LUX_API void lxgDomainProgram_deinit(lxgDomainProgramPTR stage, lxgContextPTR ctx);
+  LUX_API booln lxgDomainProgram_compile(lxgDomainProgramPTR stage, const char *src, int len);
+  LUX_API const char* lxgDomainProgram_error(lxgDomainProgramPTR stage, char *buffer, int len);
 
-  LUX_API void  lxgProgram_init(lxgContextPTR ctx, lxgProgramPTR prog);
-  LUX_API void  lxgProgram_deinit(lxgContextPTR ctx, lxgProgramPTR prog);
-  LUX_API void  lxgProgram_setDomain(lxgContextPTR ctx, lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage);
-  LUX_API booln lxgProgram_link(lxgContextPTR ctx, lxgProgramPTR prog);
-  LUX_API const char* lxgProgram_log( lxgContextPTR ctx, lxgProgramPTR prog, char* buffer, int len);
+  LUX_API void  lxgProgram_init(lxgProgramPTR prog, lxgContextPTR ctx);
+  LUX_API void  lxgProgram_deinit(lxgProgramPTR prog, lxgContextPTR ctx);
+  LUX_API void  lxgProgram_setDomain(lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage);
+  LUX_API booln lxgProgram_link(lxgProgramPTR prog);
+  LUX_API const char* lxgProgram_log(lxgProgramPTR prog, char* buffer, int len);
 
   // COMMON
-  LUX_API void lxgProgram_updateParameters(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, void **data);
-  LUX_API void lxgProgram_updateSamplers(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgTexturePTR *data);
-  LUX_API void lxgProgram_updateBuffers(lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data);
-  LUX_API void lxgProgram_updateImages( lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgTextureImagePTR *data );
+  LUX_API void lxgProgram_applyParameters(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, void **data);
+  LUX_API void lxgProgram_applySamplers( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgTexturePTR *data);
+  LUX_API void lxgProgram_applyBuffers(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data);
+  LUX_API void lxgProgram_applyImages( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgTextureImagePTR *data );
 
   // NV/ARB PROGRAM
   LUX_API void lxgProgramParameter_initDomainNV(lxgProgramParameterPTR param, lxgProgramDomain_t domain);
   LUX_API void lxgProgramParameter_initFuncNV(lxgProgramParameterPTR param);
 
-  LUX_API void lxgDomainProgram_initNV(lxgContextPTR ctx, lxgDomainProgramPTR stage, lxgProgramDomain_t type);
-  LUX_API void lxgDomainProgram_deinitNV(lxgContextPTR ctx, lxgDomainProgramPTR stage);
-  LUX_API booln lxgDomainProgram_compileNV(lxgContextPTR ctx, lxgDomainProgramPTR stage, const char *src, int len);
-  LUX_API const char* lxgDomainProgram_errorNV(lxgContextPTR ctx, lxgDomainProgramPTR stage, char *buffer, int len);
+  LUX_API void lxgDomainProgram_initNV(lxgDomainProgramPTR stage, lxgContextPTR ctx, lxgProgramDomain_t type);
+  LUX_API void lxgDomainProgram_deinitNV(lxgDomainProgramPTR stage, lxgContextPTR ctx);
+  LUX_API booln lxgDomainProgram_compileNV(lxgDomainProgramPTR stage, const char *src, int len);
+  LUX_API const char* lxgDomainProgram_errorNV(lxgDomainProgramPTR stage, char *buffer, int len);
 
-  LUX_API void  lxgProgram_initNV(lxgContextPTR ctx, lxgProgramPTR prog);
-  LUX_API void  lxgProgram_deinitNV(lxgContextPTR ctx, lxgProgramPTR prog);
-  LUX_API void  lxgProgram_setDomainNV(lxgContextPTR ctx, lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage);
+  LUX_API void  lxgProgram_initNV(lxgProgramPTR prog, lxgContextPTR ctx);
+  LUX_API void  lxgProgram_deinitNV(lxgProgramPTR prog, lxgContextPTR ctx);
+  LUX_API void  lxgProgram_setDomainNV(lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage);
 
 #ifdef __cplusplus
 }
