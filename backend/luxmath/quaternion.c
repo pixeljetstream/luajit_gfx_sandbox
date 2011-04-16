@@ -37,7 +37,7 @@ LUX_API void lxQuatSlerp(lxQuat q,const float t, const lxQuat q1, const lxQuat q
     lxQuatCopy(q,q2);
   }
   // calculate coefficients
-  if ((1.0f- cosom) > FLOAT_EPSILON)
+  if ((1.0f- cosom) > LUX_FLOAT_EPSILON)
   {
     // standard case (slerp)
     omega = (float)acos(cosom);
@@ -75,7 +75,7 @@ LUX_API void lxQuatSlerpLongest(lxQuat q,const float t, const lxQuat q1, const l
   }
 
   // calculate coefficients
-  if ((1.0f- cosom) > FLOAT_EPSILON)
+  if ((1.0f- cosom) > LUX_FLOAT_EPSILON)
   {
     // standard case (slerp)
     omega = (float)acos(cosom);
@@ -167,7 +167,7 @@ LUX_API void lxQuatFromRotationAxis(lxQuat q,const float angle, const lxVector3 
 
   theta = angle * 0.5f;
   len = (float)sqrt(a[0]*a[0]+ a[1]*a[1]+ a[2]*a[2]); // grab length
-  if (len > FLOAT_EPSILON)
+  if (len > LUX_FLOAT_EPSILON)
   {
     len = (float)lxFastSin(theta) / len;
   }
@@ -191,12 +191,12 @@ LUX_API void lxQuatToRotationAxis(const lxQuat q,float *degrees, lxVector3 a)
   float len;
 
   len = (float)sqrt(q[0]*q[0]+q[1]*q[1]+q[2]*q[2]+q[3]*q[3]); // grab length
-  if (len <= FLOAT_EPSILON) len = 1.0f;
+  if (len <= LUX_FLOAT_EPSILON) len = 1.0f;
   len = 1.0f / len;
   a[0] = q[0]* len;
   a[1] = q[1]* len;
   a[2] = q[2]* len;
-  *degrees = RAD2DEG(2.0f* (float)acos(q[3]));
+  *degrees = LUX_RAD2DEG(2.0f* (float)acos(q[3]));
 }
 
 LUX_API void lxQuatFromEulerXYZ(lxQuat q, const lxVector3 vec)

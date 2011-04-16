@@ -310,8 +310,8 @@ LUX_API void lxBoundingVectors_fromCamera(lxVector3 box[8],const lxMatrix44PTR m
     lxVector3Set(box[7],box[4][0],box[4][1],-box[4][2]);
   }
   else{
-    float tfov = (float)tan(DEG2RAD(fov*0.5f));
-    float tifov = (float)tan(DEG2RAD(fov*invaspect*0.5f));
+    float tfov = (float)tan(LUX_DEG2RAD(fov*0.5f));
+    float tifov = (float)tan(LUX_DEG2RAD(fov*invaspect*0.5f));
 
     lxVector3Set(box[0],tfov*frontplane,frontplane,tifov*frontplane);
     lxVector3Set(box[1],-box[0][0],box[0][1],box[0][2]);
@@ -360,7 +360,7 @@ LUX_API booln lxBoundingCone_checkSphereV(lxBoundingConePTR cone,lxVector3 cente
 
 LUX_API void lxBoundingSphereCone_fromCamera(lxBoundingSpherePTR sphere, lxBoundingConePTR cone,float frontplane, float backplane, lxVector3 pos, lxVector3 dir, float fov){
   lxVector3 p,q,diff;
-  float fFov = DEG2RAD(fov);
+  float fFov = LUX_DEG2RAD(fov);
   float fViewLen = backplane - frontplane;
   // use some trig to find the height of the frustum at the far plane
   float fHeight = fViewLen * (float)tan(fFov * 0.5f);
@@ -404,17 +404,17 @@ LUX_API void lxBoundingSphereCone_fromCamera(lxBoundingSpherePTR sphere, lxBound
   cone->sinSqr *= cone->sinSqr;
 }
 
-LUX_API void lxBoundingSphere_fromFrustumCorners(lxBoundingSpherePTR sphere,lxVector3 box[FRUSTUM_CORNERS])
+LUX_API void lxBoundingSphere_fromFrustumCorners(lxBoundingSpherePTR sphere,lxVector3 box[LUX_FRUSTUM_CORNERS])
 {
   lxVector3 ctr = {0.0f,0.0f,0.0f};
   float rad = 0.0f;
   int i;
-  for (i = 0; i < FRUSTUM_CORNERS; i++){
+  for (i = 0; i < LUX_FRUSTUM_CORNERS; i++){
     lxVector3Add(ctr,ctr,box[i]);
   }
-  lxVector3Scale(ctr,ctr,1.0f/((float)FRUSTUM_CORNERS));
+  lxVector3Scale(ctr,ctr,1.0f/((float)LUX_FRUSTUM_CORNERS));
 
-  for (i = 0; i < FRUSTUM_CORNERS; i++){
+  for (i = 0; i < LUX_FRUSTUM_CORNERS; i++){
     lxVector3 temp;
     float cur;
     lxVector3Sub(temp,ctr,box[i]);
@@ -427,7 +427,7 @@ LUX_API void lxBoundingSphere_fromFrustumCorners(lxBoundingSpherePTR sphere,lxVe
   sphere->radius = lxFastSqrt(rad);
 }
 
-LUX_API void lxBoundingCone_fromFrustumCorners(lxBoundingConePTR cone, lxVector3 box[FRUSTUM_CORNERS])
+LUX_API void lxBoundingCone_fromFrustumCorners(lxBoundingConePTR cone, lxVector3 box[LUX_FRUSTUM_CORNERS])
 {
   lxVector3 near;
   lxVector3 far;
@@ -438,23 +438,23 @@ LUX_API void lxBoundingCone_fromFrustumCorners(lxBoundingConePTR cone, lxVector3
   float rad = 0.0f;
   int i;
 
-  lxVector3Add(near,box[FRUSTUM_C_NTR],box[FRUSTUM_C_NTL]);
-  lxVector3Add(near,near,box[FRUSTUM_C_NBL]);
-  lxVector3Add(near,near,box[FRUSTUM_C_NBR]);
+  lxVector3Add(near,box[LUX_FRUSTUM_C_NTR],box[LUX_FRUSTUM_C_NTL]);
+  lxVector3Add(near,near,box[LUX_FRUSTUM_C_NBL]);
+  lxVector3Add(near,near,box[LUX_FRUSTUM_C_NBR]);
   lxVector3Scale(near,near,0.25f);
 
-  lxVector3Add(far,box[FRUSTUM_C_FTR],box[FRUSTUM_C_FTL]);
-  lxVector3Add(far,far,box[FRUSTUM_C_FBL]);
-  lxVector3Add(far,far,box[FRUSTUM_C_FBR]);
+  lxVector3Add(far,box[LUX_FRUSTUM_C_FTR],box[LUX_FRUSTUM_C_FTL]);
+  lxVector3Add(far,far,box[LUX_FRUSTUM_C_FBL]);
+  lxVector3Add(far,far,box[LUX_FRUSTUM_C_FBR]);
   lxVector3Scale(far,far,0.25f);
 
   for (i = 0; i < 4; i++){
     float distsq;
-    lxVector3Sub(temp,near,box[FRUSTUM_C_NTR+i]);
+    lxVector3Sub(temp,near,box[LUX_FRUSTUM_C_NTR+i]);
     distsq = lxVector3Dot(temp,temp);
     radn = LUX_MAX(radn,distsq);
 
-    lxVector3Sub(temp,far,box[FRUSTUM_C_FTR+i]);
+    lxVector3Sub(temp,far,box[LUX_FRUSTUM_C_FTR+i]);
     distsq = lxVector3Dot(temp,temp);
     radf = LUX_MAX(radf,distsq);
   }

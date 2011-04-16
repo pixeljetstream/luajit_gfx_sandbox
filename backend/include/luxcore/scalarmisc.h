@@ -11,25 +11,6 @@
 extern "C"{
 #endif
 
-typedef enum lxScalarType_e{  
-  // warning may not change order!!
-  // interpolation is based on abs(max)
-  SCALAR_FLOAT32,   // sat: [0,1]
-  SCALAR_INT8,    // sat: [-127,127]
-  SCALAR_UINT8,   // sat: [0,255]               
-  SCALAR_INT16,   // sat: [-SHORT_SIGNEDMAX,SHORT_SIGNEDMAX]
-  SCALAR_UINT16,    // sat: [0,SHORT_UNSIGNEDMAX]
-  SCALAR_INT32,   // sat: same as INT16
-  SCALAR_UINT32,    // sat: same as UINT16
-
-  SCALAR_FLOAT16,   // not supported in conversion and array ops
-  SCALAR_FLOAT64,
-  SCALAR_ILLEGAL,
-  SCALARS,
-}lxScalarType_t;
-
-#define SCALAROPS_MAX_SUPPORTED   (SCALAR_UINT32+1)
-
 typedef union lxScalarPtr_u{
   void*     tvoid;
   float*      tfloat;
@@ -73,11 +54,11 @@ LUX_API void lxScalarType_to32(lxScalarVector_t *pout, lxScalarType_t type, void
 
 //////////////////////////////////////////////////////////////////////////
 
-LUX_API extern size_t lx_gScalarTypeSizes[SCALARS];
+LUX_API extern size_t lx_gScalarTypeSizes[LUX_SCALARS];
 
 LUX_INLINE size_t lxScalarType_getSize(lxScalarType_t type)
 {
-  LUX_ASSUME(type >= 0 && type < SCALARS);
+  LUX_ASSUME(type >= 0 && type < LUX_SCALARS);
   return lx_gScalarTypeSizes[type];
 }
 

@@ -28,9 +28,9 @@ extern "C"{
   typedef booln (lxObjRefCheckDelete_fn)(lxObjRefPTR r);
 
   enum lxObjRefType_e{
-    OBJREF_TYPE_DELETED = -1,
-    OBJREF_TYPE_FREEALLOC = 0,
-    OBJREF_TYPE_USERSTART,
+    LUX_OBJREF_TYPE_DELETED = -1,
+    LUX_OBJREF_TYPE_FREEALLOC = 0,
+    LUX_OBJREF_TYPE_USERSTART,
   };
   typedef int32 lxObjRefType_t;
 
@@ -148,7 +148,7 @@ extern "C"{
 
   LUX_INLINE booln  lxObjRef_releaseUser(lxObjRefPTR cref)
   {
-    booln valid = (cref->id.type >= OBJREF_TYPE_USERSTART);
+    booln valid = (cref->id.type >= LUX_OBJREF_TYPE_USERSTART);
     if( --cref->usecounter == 0 )
     {
       lxObjRefSys_deleteRef(cref->sys,cref);
@@ -160,13 +160,13 @@ extern "C"{
 
   LUX_INLINE booln  lxObjRef_makeVolatile(lxObjRefPTR cref)
   {
-    if (cref->id.type < OBJREF_TYPE_USERSTART || cref->usecounter != 1) return LUX_FALSE;
+    if (cref->id.type < LUX_OBJREF_TYPE_USERSTART || cref->usecounter != 1) return LUX_FALSE;
     cref->usecounter = 0;
     return LUX_TRUE;
   }
   LUX_INLINE booln  lxObjRef_getSafe(lxObjRefPTR cref, void **ptr)
   {
-    booln valid = (cref && cref->id.type >= OBJREF_TYPE_USERSTART);
+    booln valid = (cref && cref->id.type >= LUX_OBJREF_TYPE_USERSTART);
     *ptr = valid ? cref->id.ptr : NULL;
     return valid;
   }
@@ -177,7 +177,7 @@ extern "C"{
   }
   LUX_INLINE lxObjId_t* lxObjRef_getId(lxObjRefPTR cref)
   {
-    return cref->id.type >= OBJREF_TYPE_USERSTART ? (lxObjId_t*)cref : NULL;
+    return cref->id.type >= LUX_OBJREF_TYPE_USERSTART ? (lxObjId_t*)cref : NULL;
   }
 
   LUX_INLINE void lxObjRef_addWeak(lxObjRefPTR cref)
@@ -188,7 +188,7 @@ extern "C"{
 
   LUX_INLINE booln  lxObjRef_addUser(lxObjRefPTR cref)
   {
-    if (cref->id.type < OBJREF_TYPE_USERSTART) return LUX_FALSE;
+    if (cref->id.type < LUX_OBJREF_TYPE_USERSTART) return LUX_FALSE;
 
     cref->usecounter++;
     return LUX_TRUE;

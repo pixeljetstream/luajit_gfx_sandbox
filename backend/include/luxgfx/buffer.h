@@ -14,22 +14,24 @@
 extern "C"{
 #endif
   
-  typedef enum lxgBufferHint_e{
-    LUXGFX_BUFFERHINT_STATIC_DRAW,
-    LUXGFX_BUFFERHINT_STATIC_READ,
-    LUXGFX_BUFFERHINT_STATIC_COPY,
-    LUXGFX_BUFFERHINT_DYNAMIC_DRAW,
-    LUXGFX_BUFFERHINT_DYNAMIC_READ,
-    LUXGFX_BUFFERHINT_DYNAMIC_COPY,
-    LUXGFX_BUFFERHINT_STREAM_DRAW,
-    LUXGFX_BUFFERHINT_STREAM_READ,
-    LUXGFX_BUFFERHINT_STREAM_COPY,
-    LUXGFX_BUFFERHINTS,
-  }lxgBufferHint_t;
+  typedef enum lxgBufferMode_e{
+    LUXGFX_BUFFERMODE_DRAW,
+    LUXGFX_BUFFERMODE_READ,
+    LUXGFX_BUFFERMODE_COPY,
+    LUXGFX_BUFFERMODES,
+  }lxgBufferMode_t;
 
+  typedef enum lxgBufferUpdate_e{
+    LUXGFX_BUFFERUPDATE_STATIC,
+    LUXGFX_BUFFERUPDATE_DYNAMIC,
+    LUXGFX_BUFFERUPDATE_STREAM,
+    LUXGFX_BUFFERUPDATES,
+  }lxgBufferUpdate_t;
 
   typedef struct lxgBuffer_s{
-    lxGLBuffer_t          vgl;
+    lxGLBufferTarget_t    gltarget;
+    GLuint                glid;
+    GLuint64              address;
     lxgContextPTR         ctx;
     void*                 user;
 
@@ -40,16 +42,17 @@ extern "C"{
         
     uint                  size;
     uint                  used;
-    lxgBufferHint_t       hint;
+    lxgBufferMode_t       mode;
+    lxgBufferUpdate_t     update;
   }lxgBuffer_t;
 
 
   // raises used and returns offset withn padsize from start or -1 on error
   LUX_API uint lxgBuffer_alloc(lxgBufferPTR buffer, uint needed, uint padsize);
 
-  LUX_API void lxgBuffer_apply(lxgContextPTR ctx, lxGLBufferTarget_t type, const lxgBufferPTR buffer);
-  LUX_API void lxgBuffer_applyIndexed(lxgContextPTR ctx, lxGLBufferTarget_t type, uint idx, const lxgBufferPTR buffer);
-  LUX_API void lxgBuffer_applyRanged(lxgContextPTR ctx,  lxGLBufferTarget_t type, uint idx, const lxgBufferPTR buffer, size_t offset, size_t size);
+  LUX_API void lxgBuffer_apply(lxgContextPTR ctx, lxGLBufferTarget_t type, lxgBufferPTR buffer);
+  LUX_API void lxgBuffer_applyIndexed(lxgContextPTR ctx, lxGLBufferTarget_t type, uint idx, lxgBufferPTR buffer);
+  LUX_API void lxgBuffer_applyRanged(lxgContextPTR ctx,  lxGLBufferTarget_t type, uint idx, lxgBufferPTR buffer, size_t offset, size_t size);
 
   // implicitly call lxgBuffer_setGL with type used on init
   LUX_API booln lxgBuffer_map(lxgContextPTR ctx, lxgBufferPTR buffer, void**ptr, lxgAccessMode_t type);
@@ -58,26 +61,28 @@ extern "C"{
   LUX_API booln lxgBuffer_unmap(lxgContextPTR ctx, lxgBufferPTR buffer);
   LUX_API booln lxgBuffer_copy(lxgContextPTR ctx, lxgBufferPTR dst, uint dstoffset, lxgBufferPTR src, uint srcoffset, uint size);
 
+  LUX_API GLuint64 lxgBuffer_addressNV(lxgContextPTR ctx, lxgBufferPTR buffer);
+
   LUX_API void lxgBuffer_deinit(lxgContextPTR ctx, lxgBufferPTR buffer);
   LUX_API void lxgBuffer_reset(lxgContextPTR ctx, lxgBufferPTR buffer, void* data);
-  LUX_API void lxgBuffer_init(lxgContextPTR ctx, lxgBufferPTR buffer, lxgBufferHint_t hint, uint size, lxGLBufferTarget_t type, void* data);
+  LUX_API void lxgBuffer_init(lxgContextPTR ctx, lxgBufferPTR buffer, lxgBufferMode_t hint, lxgBufferUpdate_t update, uint size, void* data);
 
   //////////////////////////////////////////////////////////////////////////
 
-  LUX_INLINE void lxgBuffer_apply( lxgContextPTR ctx, lxGLBufferTarget_t type, const lxgBufferPTR buffer )
+  LUX_INLINE void lxgBuffer_apply( lxgContextPTR ctx, lxGLBufferTarget_t type, lxgBufferPTR buffer )
   {
-    glBindBuffer(type,buffer ? buffer->vgl.id : 0);
+    glBindBuffer(type,buffer ? buffer->glid : 0);
   }
 
-  LUX_INLINE void  lxgBuffer_applyIndexed(lxgContextPTR ctx, lxGLBufferTarget_t type, uint idx, const lxgBufferPTR buffer)
+  LUX_INLINE void  lxgBuffer_applyIndexed(lxgContextPTR ctx, lxGLBufferTarget_t type, uint idx, lxgBufferPTR buffer)
   {
-    glBindBufferBase(type,idx,buffer ? buffer->vgl.id : 0);
+    glBindBufferBase(type,idx,buffer ? buffer->glid : 0);
   }
 
-  LUX_INLINE void  lxgBuffer_applyRanged(lxgContextPTR ctx, lxGLBufferTarget_t type, uint idx, const lxgBufferPTR buffer, size_t offset, size_t size)
+  LUX_INLINE void  lxgBuffer_applyRanged(lxgContextPTR ctx, lxGLBufferTarget_t type, uint idx, lxgBufferPTR buffer, size_t offset, size_t size)
   {
     LUX_DEBUGASSERT(offset + size < buffer->size);
-    glBindBufferRange(type,idx,buffer ? buffer->vgl.id : 0, offset, size);
+    glBindBufferRange(type,idx,buffer ? buffer->glid : 0, offset, size);
   }
 
 #ifdef __cplusplus

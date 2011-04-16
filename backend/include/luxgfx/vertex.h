@@ -53,14 +53,6 @@ extern "C"{
     unsigned  offset :  8;
   }lxgVertexElement_t;
 
-
-  LUX_INLINE lxgVertexElement_t 
-    lxgVertexElement_set(uint cnt, enum lxScalarType_e type, booln normalize, booln integer, uint stride,uint offset, uint stream)
-  {
-    lxgVertexElement_t  elem = {normalize,integer,cnt-1,stream,type,stride/2,offset};
-    return elem;
-  }
-
   //////////////////////////////////////////////////////////////////////////
   // lxgVertexPointer
 
@@ -76,6 +68,7 @@ extern "C"{
   typedef struct lxgStreamHost_s{
     lxgBufferPTR        buffer;
     void*               ptr;
+    size_t              len;
   }lxgStreamHost_t;
   
   typedef struct lxgVertexPointer_s{
@@ -104,17 +97,24 @@ extern "C"{
     lxgStreamHost_t     streams[LUXGFX_MAX_VERTEX_STREAMS];
   }lxgFeedbackState_t;
 
+
+  LUX_API lxgVertexElement_t lxgVertexElement_set(
+    uint cnt, enum lxScalarType_e type, booln normalize, 
+    booln integer, uint stride,uint offset, uint stream);
+
   LUX_API void lxgVertexAttribs_apply(lxgContextPTR ctx, flags32 attribs, flags32 changed);
   LUX_API void lxgVertexAttribs_applyFIXED(lxgContextPTR ctx, flags32 attribs, flags32 changed);
   LUX_API void lxgVertexAttrib_setFloat(lxgContextPTR ctx, lxgVertexAttrib_t attrib, const float* vec4);
   LUX_API void lxgVertexAttrib_setInteger(lxgContextPTR ctx, lxgVertexAttrib_t attrib, const int* vec4);
   LUX_API void lxgVertexAttrib_setFloatFIXED(lxgContextPTR ctx, lxgVertexAttrib_t attrib, const float* vec4);
 
-  LUX_API void lxgVertexDecl_apply(lxgContextPTR ctx, lxgVertexDeclPTR decl);
-  LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, const lxgVertexDeclPTR decl, const lxgStreamHostPTR hosts);
+  LUX_API void lxgVertexDecl_apply( lxgVertexDeclPTR decl, lxgContextPTR ctx );
+  LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, lxgVertexDeclPTR decl, lxgStreamHostPTR hosts);
   LUX_API void lxgVertexSetup_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host);
   LUX_API void lxgVertexSetup_apply(lxgContextPTR ctx);
   LUX_API void lxgVertexSetup_applyFIXED(lxgContextPTR ctx);
+  LUX_API void lxgVertexSetup_applyNV(lxgContextPTR ctx);
+  LUX_API void lxgVertexSetup_applyFIXEDNV(lxgContextPTR ctx);
 
   LUX_API void lxgFeedback_enable(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams);
   LUX_API void lxgFeedback_disable(lxgContextPTR ctx);
@@ -122,8 +122,19 @@ extern "C"{
   LUX_API void lxgFeedback_resume(lxgContextPTR ctx);
 
   LUX_API void lxgFeedback_applyStreams(lxgContextPTR ctx);
-  LUX_API void lxgFeedback_setStreams(lxgContextPTR ctx, const lxgStreamHostPTR hosts, int numStreams);
+  LUX_API void lxgFeedback_setStreams(lxgContextPTR ctx, lxgStreamHostPTR hosts, int numStreams);
   LUX_API void lxgFeedback_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host );
+
+  //////////////////////////////////////////////////////////////////////////
+
+  LUX_INLINE lxgVertexElement_t 
+    lxgVertexElement_set(uint cnt, enum lxScalarType_e type, booln normalize, booln integer, uint stride,uint offset, uint stream)
+  {
+    lxgVertexElement_t  elem = {normalize,integer,cnt-1,stream,type,stride/2,offset};
+    return elem;
+  }
+
+
 
 #ifdef __cplusplus
 }

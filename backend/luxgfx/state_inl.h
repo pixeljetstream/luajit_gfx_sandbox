@@ -94,7 +94,7 @@ LUX_INLINE lxGLAccessMode_t lxGLAccessMode_get(lxgAccessMode_t mode)
 
 static LUX_INLINE GLenum  lxScalarType_to(lxScalarType_t data)
 {
-  GLenum standard[SCALARS] = {
+  GLenum standard[LUX_SCALARS] = {
     GL_FLOAT,
     GL_BYTE,
     GL_UNSIGNED_BYTE,

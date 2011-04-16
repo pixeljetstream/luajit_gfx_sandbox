@@ -58,34 +58,34 @@ extern "C"{
   //////////////////////////////////////////////////////////////////////////
 
   typedef enum lxFrustumPlaneType_e{
-    FRUSTUM_TOP,
-    FRUSTUM_BOTTOM,
-    FRUSTUM_NEAR,
-    FRUSTUM_FAR,
-    FRUSTUM_LEFT,
-    FRUSTUM_RIGHT,
+    LUX_FRUSTUM_TOP,
+    LUX_FRUSTUM_BOTTOM,
+    LUX_FRUSTUM_NEAR,
+    LUX_FRUSTUM_FAR,
+    LUX_FRUSTUM_LEFT,
+    LUX_FRUSTUM_RIGHT,
 
-    FRUSTUM_PLANES,
+    LUX_FRUSTUM_PLANES,
   }lxFrustumPlaneType_t;
 
   typedef enum lxFrustumCornerType_e{
-    FRUSTUM_C_NTR,
-    FRUSTUM_C_NTL,
-    FRUSTUM_C_NBL,
-    FRUSTUM_C_NBR,
+    LUX_FRUSTUM_C_NTR,
+    LUX_FRUSTUM_C_NTL,
+    LUX_FRUSTUM_C_NBL,
+    LUX_FRUSTUM_C_NBR,
 
-    FRUSTUM_C_FTR,
-    FRUSTUM_C_FTL,
-    FRUSTUM_C_FBL,
-    FRUSTUM_C_FBR,
+    LUX_FRUSTUM_C_FTR,
+    LUX_FRUSTUM_C_FTL,
+    LUX_FRUSTUM_C_FBL,
+    LUX_FRUSTUM_C_FBR,
 
-    FRUSTUM_CORNERS,
+    LUX_FRUSTUM_CORNERS,
   }lxFrustumCornerType_t;
 
   typedef enum lxCullType_e{
-    CULL_INTERSECT = -1,
-    CULL_OUTSIDE = 0,
-    CULL_INSIDE = 1,
+    LUX_CULL_INTERSECT = -1,
+    LUX_CULL_OUTSIDE = 0,
+    LUX_CULL_INSIDE = 1,
   }lxCullType_t;
 
   typedef struct lxFrustumPlane_s{
@@ -111,7 +111,7 @@ extern "C"{
 
   typedef struct lxFrustum_s
   {
-    lxFrustumPlane_t  fplanes[FRUSTUM_PLANES];
+    lxFrustumPlane_t  fplanes[LUX_FRUSTUM_PLANES];
   }lxFrustum_t;
   typedef lxFrustum_t* lxFrustumPTR;
 
@@ -159,41 +159,41 @@ extern "C"{
 #define LUX_BARYCENTRIC(u,v,w,p0,p1,p2)  ((u)*(p0) + (v)*(p1) + (w)*(p2))
 
   // makes a void data value from the float
-  LUX_INLINE void* float2void(float f) {
+  LUX_INLINE void* lxfloat2void(float f) {
     return (void*)*(size_t*)((void*)&f);
   }
   // makes a float from a data value
-  LUX_INLINE float void2float(void *f) {
+  LUX_INLINE float lxvoid2float(void *f) {
     return *(float*)&f;
   }
 
-#define DIV_255     (0.003921568627451f)
-#define FLOAT_EPSILON (1.192092896e-07F)
+#define LUX_DIV_255     (0.003921568627451f)
+#define LUX_FLOAT_EPSILON (1.192092896e-07F)
 
-#ifndef MUL_PI
-#define MUL_PI    (3.1415926535897932384626433832795f)
+#ifndef LUX_MUL_PI
+#define LUX_MUL_PI    (3.1415926535897932384626433832795f)
 #endif
-#ifndef MUL_HALF_PI
-#define MUL_HALF_PI (1.5707963267948966192313216916395f)
+#ifndef LUX_MUL_HALF_PI
+#define LUX_MUL_HALF_PI (1.5707963267948966192313216916395f)
 #endif
-#ifndef DIV_PI
-#define DIV_PI    (0.31830988618379067153776752674503f)
+#ifndef LUX_DIV_PI
+#define LUX_DIV_PI    (0.31830988618379067153776752674503f)
 #endif
 
-#define MUL_TWOPI (6.283185307179586476925286766559f)
-#define DEG2RAD( a ) (( (a) * MUL_PI   ) * 0.005555555555555555555555555555555f)
-#define RAD2DEG( a ) (( (a) * 180.0f ) * DIV_PI )
-#define SQRT_2 (1.4142135623730950488016887242097f)
-#define SQRT_3 (1.7320508075688772935274463415059f)
+#define LUX_MUL_TWOPI (6.283185307179586476925286766559f)
+#define LUX_DEG2RAD( a ) (( (a) * LUX_MUL_PI   ) * 0.005555555555555555555555555555555f)
+#define LUX_RAD2DEG( a ) (( (a) * 180.0f ) * LUX_DIV_PI )
+#define LUX_SQRT_2 (1.4142135623730950488016887242097f)
+#define LUX_SQRT_3 (1.7320508075688772935274463415059f)
 
-#define SHORT_SIGNEDMAX   (32767)
-#define SHORT_UNSIGNEDMAX (0xffff)
+#define LUX_SHORT_SIGNEDMAX   (32767)
+#define LU_SHORT_UNSIGNEDMAX (0xffff)
 
-#define M_SHORT   (32767.0f)
-#define DIV_SHORT (3.0518509475997192297128208258309e-5f)
+#define LUX_MUL_SHORT   (32767.0f)
+#define LUX_DIV_SHORT (3.0518509475997192297128208258309e-5f)
 
-#define M_USHORT  (65535.0f)
-#define DIV_USHORT  (1.5259021896696421759365224689097e-5f)
+#define LUX_MUL_USHORT  (65535.0f)
+#define LUX_DIV_USHORT  (1.5259021896696421759365224689097e-5f)
 
 
 #ifdef __cplusplus

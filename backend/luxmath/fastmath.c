@@ -52,7 +52,7 @@ LUX_API void lxFastMath_init(lxFastMathCache_t* cache)
   }
 
   for (i = 0; i < MATH_MAX_CIRCLE_ANGLE; i++){
-    cache->mathcossintable[i] = (float)sin((double)i * MUL_PI / MATH_HALF_MAX_CIRCLE_ANGLE);
+    cache->mathcossintable[i] = (float)sin((double)i * LUX_MUL_PI / MATH_HALF_MAX_CIRCLE_ANGLE);
   }
 
   for (i = 0; i < 0x10000; i++){

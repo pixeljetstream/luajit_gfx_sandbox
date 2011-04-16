@@ -61,7 +61,7 @@ extern "C"{
   }lxgRenderAssignType_t;
 
   typedef struct lxgRenderTarget_s{
-    lxGLFrameBuffer_t   vgl;
+    GLuint              glid;
     lxgContextPTR       ctx;
 
     uint                maxidx;

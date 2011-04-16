@@ -157,7 +157,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib luxplatform.lib glewgl.lib"
-				OutputFile="..\..\..\runtime\clibs_Windows_x86\luxbackend.dll"
+				OutputFile="..\..\..\runtime\bin_Windows_x86\luxbackend.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 			/>
 			<Tool

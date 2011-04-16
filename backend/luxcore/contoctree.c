@@ -14,7 +14,7 @@
 // DEFS
 
 #define OCTREE_NODELIST_MIN     4
-#define OCTREE_NUMCHILDS      8
+#define LUX_OCTREE_NUMCHILDS      8
 
 typedef struct lxOcNodeBands_s{
   lxOcContainerBox_t  **final;
@@ -184,7 +184,7 @@ static lxOcNode_t* OcNode_init(lxOcNode_t *self, lxOcContainerBox_t** liststart,
   if (self==NULL) return NULL;
   OcBounds_invalidate(&self->volume);
 
-  memset(self->childs,0,sizeof(lxOcNode_t*)*OCTREE_NUMCHILDS);
+  memset(self->childs,0,sizeof(lxOcNode_t*)*LUX_OCTREE_NUMCHILDS);
 
   self->listCount = 0;
   self->childListCount = 0;
@@ -196,8 +196,8 @@ static lxOcNode_t* OcNode_init(lxOcNode_t *self, lxOcContainerBox_t** liststart,
 
 static booln OcNode_buildSplit(lxOcNode_t *self, OcTree_t *tree, lxOcNodeBands_t bands)
 {
-  uint  counters[OCTREE_NUMCHILDS+1] = {0,0,0,0, 0,0,0,0, 0};
-  lxOcNode_t* childs[OCTREE_NUMCHILDS+1];
+  uint  counters[LUX_OCTREE_NUMCHILDS+1] = {0,0,0,0, 0,0,0,0, 0};
+  lxOcNode_t* childs[LUX_OCTREE_NUMCHILDS+1];
 
   uint  listCount = self->listCount;
   uint  i;
@@ -241,7 +241,7 @@ static booln OcNode_buildSplit(lxOcNode_t *self, OcTree_t *tree, lxOcNodeBands_t
       sector = (a<<2)|(b<<1)|c;
     }
     else{
-      sector = OCTREE_NUMCHILDS;
+      sector = LUX_OCTREE_NUMCHILDS;
     }
 
     container->sector = sector;
@@ -252,7 +252,7 @@ static booln OcNode_buildSplit(lxOcNode_t *self, OcTree_t *tree, lxOcNodeBands_t
   // generate children and setup ptrs
   // all stuff is put into temp first
 
-  for (i = 0; i < OCTREE_NUMCHILDS; i++){
+  for (i = 0; i < LUX_OCTREE_NUMCHILDS; i++){
     if (counters[i]){
       float a = (float)((i & (1<<2)) != 0);
       float b = (float)((i & (1<<1)) != 0);
@@ -274,7 +274,7 @@ static booln OcNode_buildSplit(lxOcNode_t *self, OcTree_t *tree, lxOcNodeBands_t
       }
     }
   }
-  childs[OCTREE_NUMCHILDS] = self;
+  childs[LUX_OCTREE_NUMCHILDS] = self;
   self->list = newlist;
   self->listCount = 0;
   self->dataList = tree->dataList+offset;
@@ -291,7 +291,7 @@ static booln OcNode_buildSplit(lxOcNode_t *self, OcTree_t *tree, lxOcNodeBands_t
   memcpy(finallist,bands.temp,sizeof(lxOcContainerBox_t*)*listCount);
 
   // rebase lists
-  for (i = 0; i < OCTREE_NUMCHILDS; i++){
+  for (i = 0; i < LUX_OCTREE_NUMCHILDS; i++){
     lxOcNode_t* child = childs[i];
 
     if (counters[i] && child != self){
@@ -328,12 +328,12 @@ static booln OcNode_build(lxOcNode_t *self, OcTree_t *tree, lxOcNodeBands_t band
 
     if (depth>0) {
       int i;
-      for (i = 0;i < OCTREE_NUMCHILDS;i++)
+      for (i = 0;i < LUX_OCTREE_NUMCHILDS;i++)
       {
         if (self->childs[i]!=NULL) {
           l_traverseStack.items[pos].node    = self->childs[i];
           l_traverseStack.items[pos++].depth = depth - 1;
-          LUX_DEBUGASSERT(OCTREE_MAX_STACKITEMS!=pos);// stack overflow of local stack
+          LUX_DEBUGASSERT(LUX_OCTREE_MAX_STACKITEMS!=pos);// stack overflow of local stack
         }
       }
     }
@@ -358,11 +358,11 @@ static void OcNode_traverse(lxOcNode_t *self, lxOcTravStack_t *threadstack, lxOc
     if (OcBounds_intersects(&self->volume,&box->bounds) &&
       !traversefn(self,depth,upvalue)) continue;
 
-    for (i=0;i<OCTREE_NUMCHILDS;i++)
+    for (i=0;i<LUX_OCTREE_NUMCHILDS;i++)
       if (self->childs[i]!=NULL) {
         threadstack->items[pos].node = self->childs[i];
         threadstack->items[pos++].depth = depth + 1;
-        LUX_DEBUGASSERT(OCTREE_MAX_STACKITEMS!=pos);// stack overflow of local stack
+        LUX_DEBUGASSERT(LUX_OCTREE_MAX_STACKITEMS!=pos);// stack overflow of local stack
       }
   }
 }
@@ -383,13 +383,13 @@ static void OcNode_addContact (lxOcNode_t *self, lxOcTravStack_t *threadstack, l
 
     if (!tester(contbox,self,depth,upvalue)) continue;
 
-    for (i = 0;i<OCTREE_NUMCHILDS;i++)
+    for (i = 0;i<LUX_OCTREE_NUMCHILDS;i++)
       if (self->childs[i]!=NULL)
         if (OcNode_intersectsCenter(self->childs[i],&contbox->box))
       {
         threadstack->items[pos].node = self->childs[i];
         threadstack->items[pos++].depth = depth + 1;
-        LUX_DEBUGASSERT(OCTREE_MAX_STACKITEMS!=pos); // stack overflow of local stack
+        LUX_DEBUGASSERT(LUX_OCTREE_MAX_STACKITEMS!=pos); // stack overflow of local stack
       }
   }
 }
@@ -417,7 +417,7 @@ static void OcNode_draw_recursive(lxOcNode_t *self,int depth,lxOcDrawBox_fn *dra
       }
     }
   }
-  for (i = 0;i < OCTREE_NUMCHILDS;i++)
+  for (i = 0;i < LUX_OCTREE_NUMCHILDS;i++)
     if (self->childs[i]!=NULL)
       OcNode_draw_recursive(self->childs[i],depth+1,drawfunc,drawfrom,drawto);
 }
@@ -512,7 +512,7 @@ LUX_API booln lxOcTree_build(OcTree_t *self, int maxDepth, uint nodeExtraMem, lx
   if (self->memuse == 0) 
     return LUX_FALSE;
 
-  self->maxdepth = LUX_MIN(OCTREE_MAX_DEPTH,maxDepth);
+  self->maxdepth = LUX_MIN(LUX_OCTREE_MAX_DEPTH,maxDepth);
 
   if (self->memsize/self->memuse < 4 || self->memsize < minmemsize) {
     int oldsize = self->memsize;
@@ -574,7 +574,7 @@ static void OcNode_getLists_recursive(lxOcNode_t *self, lxOcListNodeTraverse_fn 
 {
   int i;
   listcollector(self->listCount, self->list, self->dataList, upvalue);
-  for (i=0;i<OCTREE_NUMCHILDS;i++){
+  for (i=0;i<LUX_OCTREE_NUMCHILDS;i++){
     if (self->childs[i]!=NULL){
       OcNode_getLists_recursive(self->childs[i],listcollector,upvalue);
     }

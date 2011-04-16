@@ -23,13 +23,10 @@ static lxGLBufferTarget_t l_vglbuffers[] = {
   LUXGL_BUFFER_NVPARAM_TESSEVAL,
 };
 
-
+static lxGLBufferTarget_t l_default = LUXGL_BUFFER_VERTEX;
 static LUX_INLINE void lxgBuffer_applyDefault(lxgContextPTR ctx, lxgBufferPTR buffer)
 {
-  if (buffer->vgl.target == LUXGL_BUFFER_VERTEX){
-    lxgContext_resetVertexStreams(ctx);
-  }
-  glBindBuffer(buffer->vgl.target,buffer->vgl.id);
+  glBindBuffer(buffer->gltarget,buffer->glid);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -40,50 +37,59 @@ LUX_API void lxgBuffer_deinit(lxgContextPTR ctx, lxgBufferPTR buffer)
 
   if (buffer->mapped){
     lxgBuffer_applyDefault(ctx,buffer);
-    glUnmapBuffer(buffer->vgl.target);
+    glUnmapBuffer(buffer->gltarget);
   }
 
-  glDeleteBuffers(1,&buffer->vgl.id);
+  glDeleteBuffers(1,&buffer->glid);
 
   buffer->mapped = NULL;
-  buffer->vgl.id = 0;
+  buffer->glid = 0;
 }
 
 
 LUX_API void lxgBuffer_reset(lxgContextPTR ctx, lxgBufferPTR buffer, void *data)
 {
-  static const GLenum hinttoGL[LUXGFX_BUFFERHINTS] = {
-    GL_STREAM_DRAW,
-    GL_STREAM_READ,
-    GL_STREAM_COPY,
+  static const GLenum hinttoGL[] = {
     GL_STATIC_DRAW,
     GL_STATIC_READ,
     GL_STATIC_COPY,
     GL_DYNAMIC_DRAW,
     GL_DYNAMIC_READ,
     GL_DYNAMIC_COPY,
+    GL_STREAM_DRAW,
+    GL_STREAM_READ,
+    GL_STREAM_COPY,
   };
-  void* buf = NULL;
+  int index = (buffer->update * 3) + buffer->mode;
+  LUX_DEBUGASSERT(index >= 0 && index < 9);
 
   lxgBuffer_applyDefault(ctx,buffer);
-  glBufferData(buffer->vgl.target,buffer->size,data,hinttoGL[buffer->hint]);
+  glBufferData(buffer->gltarget,buffer->size,data,hinttoGL[index]);
 
   buffer->used = data ? buffer->size : 0;
 }
 
-LUX_API void lxgBuffer_init(lxgContextPTR ctx, lxgBufferPTR buffer, lxGLBufferTarget_t type, lxgBufferHint_t hint, uint size, void* data )
+LUX_API void lxgBuffer_init(lxgContextPTR ctx, lxgBufferPTR buffer, lxgBufferMode_t mode, lxgBufferUpdate_t update, uint size, void* data )
 {
 //  LUX_ASSERT(buffer->glID == 0);
 
   buffer->ctx = ctx;
-  buffer->vgl.target = type;
-  buffer->hint = hint;
+  buffer->gltarget = l_default;
+  buffer->mode = mode;
+  buffer->update = update;
   buffer->mapped = NULL;
   buffer->size = size;
   buffer->used = 0;
 
-  glGenBuffers(1,&buffer->vgl.id);
+  glGenBuffers(1,&buffer->glid);
   lxgBuffer_reset(ctx,buffer,data);
+}
+
+LUX_API GLuint64 lxgBuffer_addressNV(lxgContextPTR ctx, lxgBufferPTR buffer)
+{
+  lxgBuffer_applyDefault(ctx,buffer);
+  glGetBufferParameterui64vNV(buffer->gltarget,GL_BUFFER_GPU_ADDRESS_NV,&buffer->address);
+  return buffer->address;
 }
 
 LUX_API uint lxgBuffer_alloc(lxgBufferPTR buffer, uint size, uint padsize)
@@ -118,10 +124,10 @@ LUX_API booln lxgBuffer_map(lxgContextPTR ctx, lxgBufferPTR buffer, void** ptr, 
   lxgBuffer_applyDefault(ctx,buffer);
 
   if (type >= LUXGFX_ACCESS_WRITEDISCARD && ctx->capbits){
-    buffer->mapped = glMapBufferRange(buffer->vgl.target,0,buffer->size,GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+    buffer->mapped = glMapBufferRange(buffer->gltarget,0,buffer->size,GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
   }
   else{
-    buffer->mapped = glMapBuffer(buffer->vgl.target,typetoGL[type]);
+    buffer->mapped = glMapBuffer(buffer->gltarget,typetoGL[type]);
   }
 
 
@@ -187,7 +193,7 @@ LUX_API booln lxgBuffer_submit(lxgContextPTR ctx, lxgBufferPTR buffer, uint offs
     return LUX_FALSE;
 
   lxgBuffer_applyDefault(ctx,buffer);
-  glBufferSubDataARB(buffer->vgl.target,offset,size,data);
+  glBufferSubDataARB(buffer->gltarget,offset,size,data);
   
   return LUX_TRUE;
 }
@@ -198,7 +204,7 @@ LUX_API booln lxgBuffer_retrieve(lxgContextPTR ctx, lxgBufferPTR buffer, uint of
     return LUX_FALSE;
 
   lxgBuffer_applyDefault(ctx,buffer);
-  glGetBufferSubDataARB(buffer->vgl.target,offset,size,data);
+  glGetBufferSubDataARB(buffer->gltarget,offset,size,data);
 
   return LUX_TRUE;
 }
@@ -223,7 +229,7 @@ LUX_API booln lxgBuffer_mapRange(lxgContextPTR ctx, lxgBufferPTR buffer, void**p
     GLbitfield bitfield = bitfieldsGL[type];
     bitfield |= (manualflush ? GL_MAP_FLUSH_EXPLICIT_BIT : 0) | (unsynch ? GL_MAP_UNSYNCHRONIZED_BIT : 0);
 
-    buffer->mapped = glMapBufferRange(buffer->vgl.target,from,length,bitfield);
+    buffer->mapped = glMapBufferRange(buffer->gltarget,from,length,bitfield);
   }
   else{
     static const GLenum typetoGL[LUXGFX_ACCESSS] = {
@@ -234,7 +240,7 @@ LUX_API booln lxgBuffer_mapRange(lxgContextPTR ctx, lxgBufferPTR buffer, void**p
       GL_WRITE_ONLY,
     };
 
-    buffer->mapped = ((byte*)glMapBuffer(buffer->vgl.target,typetoGL[type])) + from;
+    buffer->mapped = ((byte*)glMapBuffer(buffer->gltarget,typetoGL[type])) + from;
   }
 
   buffer->mapstart = from;
@@ -252,7 +258,7 @@ LUX_API booln lxgBuffer_flushRange(lxgContextPTR ctx, lxgBufferPTR buffer, uint 
   if (!buffer->mapped) return LUX_FALSE;
 
   lxgBuffer_applyDefault(ctx,buffer);
-  glFlushMappedBufferRange(buffer->vgl.target,from,length);
+  glFlushMappedBufferRange(buffer->gltarget,from,length);
 
   return LUX_TRUE;
 }
@@ -261,7 +267,7 @@ LUX_API booln lxgBuffer_unmap(lxgContextPTR ctx, lxgBufferPTR buffer)
   if(!buffer->mapped) return LUX_FALSE;
 
   lxgBuffer_applyDefault(ctx,buffer);
-  glUnmapBuffer(buffer->vgl.target);
+  glUnmapBuffer(buffer->gltarget);
 
   buffer->maplength = buffer->mapstart = 0;
   buffer->mapped = NULL;

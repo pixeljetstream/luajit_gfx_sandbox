@@ -67,10 +67,10 @@ LUX_API void lxVector3Spread(lxVector3 out, lxVector3 in, const float radin, con
   lxVector3Cross(up,forward,right);
 
   spread = radin + lxFrand()*(radout-radin);
-  if (spread > MUL_HALF_PI)
+  if (spread > LUX_MUL_HALF_PI)
     length = -length;
   spread = lxFastSin(spread)/lxFastCos(spread); // (float)tan (spread);
-  angle = lxFrand()*MUL_TWOPI;
+  angle = lxFrand()*LUX_MUL_TWOPI;
 
   lxVector3Copy(out,forward);
   lxVector3ScaledAdd(out,out,spread*lxFastSin(angle),right);

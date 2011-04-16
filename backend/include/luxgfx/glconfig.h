@@ -197,63 +197,6 @@ extern "C"{
     LUXGL_PARAM_BUFFER = 0xABCDEF,
   }lxGLParameterType_t;
 
-  typedef struct lxGLBuffer_s{
-    lxGLBufferTarget_t    target;
-    GLuint                id;
-  }lxGLBuffer_t;
-
-  typedef struct lxGLTexture_s{
-    lxGLTextureTarget_t   target;
-    GLuint                id;
-  }lxGLTexture_t;
-
-  typedef struct lxGLSampler_s{
-    GLuint                id;
-  }lxGLSampler_t;
-
-  typedef struct lxGLFrameBuffer_s{
-    GLuint                id;
-  }lxGLFrameBuffer_t;
-
-  typedef struct lxGLRenderBuffer_s{
-    GLuint                id;
-  }lxGLRenderBuffer_t;
-
-  typedef struct lxGLParameter_s{
-    lxGLParameterType_t   type;
-    union{
-      GLuint              id;
-      GLenum              target;
-    };
-    GLuint                location;
-  }lxGLParameter_t;
-
-  typedef struct lxGLDomainProgram_s{
-    union{
-      lxGLShaderType_t    type;
-      lxGLProgramType_t   target;
-    };
-    GLuint                id;
-  }lxGLDomainProgram_t;
-
-  typedef struct lxGLProgram_s{
-    GLuint                id;
-  }lxGLProgram_t;
-
-  typedef struct lxGLTextureImage_s{
-    GLenum                format;
-    GLenum                access;
-  }lxGLTextureImage_t;
-
-  typedef struct lxGLTextureData_s{
-    GLenum      internalformat;
-    GLenum      datatype;
-    GLenum      dataformat;
-  }lxGLTextureData_t;
-
-  typedef struct lxGLDiplayList_s{
-    GLuint      displaylist;
-  }lxGLDiplayList_t;
   
 #ifdef __cplusplus
 }

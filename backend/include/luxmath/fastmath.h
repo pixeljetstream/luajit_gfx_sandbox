@@ -262,7 +262,7 @@ LUX_INLINE float lxFastCos(const float n)
   float f;
   int i;
 
-  f = n * MATH_HALF_MAX_CIRCLE_ANGLE * DIV_PI;
+  f = n * MATH_HALF_MAX_CIRCLE_ANGLE * LUX_DIV_PI;
   lxFloatToInt(&i, f);
   if (i < 0)
   {
@@ -286,7 +286,7 @@ LUX_INLINE float lxFastSin(const float n)
   float f;
   int i;
 
-  f = n * MATH_HALF_MAX_CIRCLE_ANGLE * DIV_PI;
+  f = n * MATH_HALF_MAX_CIRCLE_ANGLE * LUX_DIV_PI;
   lxFloatToInt(&i, f);
   if (i < 0)
   {

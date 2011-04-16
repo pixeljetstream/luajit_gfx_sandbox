@@ -90,6 +90,23 @@ typedef struct lxVec4f_s{
 }lxVec4f_t;
 typedef struct lxVec4f_s* lxVec4fPTR;
 
+typedef enum lxScalarType_e{  
+  // warning may not change order!!
+  // interpolation is based on abs(max)
+  LUX_SCALAR_FLOAT32,   // sat: [0,1]
+  LUX_SCALAR_INT8,    // sat: [-127,127]
+  LUX_SCALAR_UINT8,   // sat: [0,255]               
+  LUX_SCALAR_INT16,   // sat: [-SHORT_SIGNEDMAX,SHORT_SIGNEDMAX]
+  LUX_SCALAR_UINT16,    // sat: [0,SHORT_UNSIGNEDMAX]
+  LUX_SCALAR_INT32,   // sat: same as INT16
+  LUX_SCALAR_UINT32,    // sat: same as UINT16
+
+  LUX_SCALAR_FLOAT16,   // not supported in conversion and array ops
+  LUX_SCALAR_FLOAT64,
+  LUX_SCALAR_ILLEGAL,
+  LUX_SCALARS,
+}lxScalarType_t;
+
 #define LUX_MAX(a,b)     (((a) > (b)) ? (a) : (b))
 #define LUX_MIN(a,b)     (((a) < (b)) ? (a) : (b))
 

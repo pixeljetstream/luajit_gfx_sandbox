@@ -4,8 +4,8 @@
 
 
 
-#ifndef __LUXMATH_FRUSTUM_H__
-#define __LUXMATH_FRUSTUM_H__
+#ifndef __LUXMATH_LUX_FRUSTUM_H__
+#define __LUXMATH_LUX_FRUSTUM_H__
 
 #include <luxmath/basetypes.h>
 
@@ -39,8 +39,8 @@ LUX_API lxCullType_t  lxFrustum_cullPoints(const lxFrustumPTR frustum, const lxV
 LUX_API lxCullType_t  lxFrustum_cullAABBv(const lxFrustumPTR frustum, const float minmaxs[6]);
 
 // generates corner points for a frustum
-LUX_API void lxFrustum_getCorners(const lxFrustumPTR frustum, lxVector3 box[FRUSTUM_CORNERS]);
-LUX_API void lxFrustum_fromCorners(lxFrustumPTR frustum, const lxVector3 box[FRUSTUM_CORNERS]);
+LUX_API void lxFrustum_getCorners(const lxFrustumPTR frustum, lxVector3 box[LUX_FRUSTUM_CORNERS]);
+LUX_API void lxFrustum_fromCorners(lxFrustumPTR frustum, const lxVector3 box[LUX_FRUSTUM_CORNERS]);
 
 LUX_API void lxFrustum_updateSigns(lxFrustumPTR frustum);
 
@@ -56,7 +56,7 @@ LUX_INLINE booln lxFrustum_checkPointCoherent(const lxFrustumPTR pFrustum,const 
   {
     return LUX_TRUE;
   }
-  for(i = 0; i < FRUSTUM_PLANES; i++ )
+  for(i = 0; i < LUX_FRUSTUM_PLANES; i++ )
   {
     if(i != skip && pFrustum->fplanes[i].pvec[0] * vec[0] + pFrustum->fplanes[i].pvec[1] * vec[1] + pFrustum->fplanes[i].pvec[2] * vec[2] + pFrustum->fplanes[i].pvec[3] <= 0)
     {
@@ -78,7 +78,7 @@ LUX_INLINE booln lxFrustum_checkSphereCoherent(const lxFrustumPTR pFrustum,const
     return LUX_TRUE;
   }
 
-  for( i = 0; i < FRUSTUM_PLANES; i++ )
+  for( i = 0; i < LUX_FRUSTUM_PLANES; i++ )
   {
     if(i != skip &&  pFrustum->fplanes[i].pvec[0] * vec[0] + pFrustum->fplanes[i].pvec[1] * vec[1] + pFrustum->fplanes[i].pvec[2] * vec[2] + pFrustum->fplanes[i].pvec[3] <= -radius )
     {
@@ -105,7 +105,7 @@ LUX_INLINE booln  lxFrustum_checkAABBvCoherent(const lxFrustumPTR pFrustum,const
   }
 
 
-  for (i = 0; i < FRUSTUM_PLANES; i++){
+  for (i = 0; i < LUX_FRUSTUM_PLANES; i++){
     if (i != skip){
 
       const lxFrustumPlanePTR sp = &pFrustum->fplanes[i];

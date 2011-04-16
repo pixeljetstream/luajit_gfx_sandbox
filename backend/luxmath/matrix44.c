@@ -76,9 +76,9 @@ LUX_API void lxMatrix44FromEulerXYZ(lxMatrix44PTR m_mat, lxVector3PTR angles)
 LUX_API void lxMatrix44FromEulerZYXdeg( lxMatrix44PTR m_mat, const lxVector3PTR angles )
 {
   float vec[3];
-  vec[0] = ( float )( DEG2RAD(angles[0]) );
-  vec[1] = ( float )( DEG2RAD(angles[1]) );
-  vec[2] = ( float )( DEG2RAD(angles[2]) );
+  vec[0] = ( float )( LUX_DEG2RAD(angles[0]) );
+  vec[1] = ( float )( LUX_DEG2RAD(angles[1]) );
+  vec[2] = ( float )( LUX_DEG2RAD(angles[2]) );
   lxMatrix44FromEulerZYX(m_mat, vec );
 }
 
@@ -94,14 +94,14 @@ LUX_API void lxMatrix44ToEulerZYX( const lxMatrix44PTR mat, lxVector3PTR angles)
     else
     {
       angles[2] = -(float)atan2(mat[4],mat[8]);
-      angles[1] = MUL_HALF_PI;
+      angles[1] = LUX_MUL_HALF_PI;
       angles[0] = 0.0f;
     }
   }
   else
   {
     angles[2] = (float)atan2(-mat[4],-mat[8]);
-    angles[1] = -MUL_HALF_PI;
+    angles[1] = -LUX_MUL_HALF_PI;
     angles[0] = 0.0f;
   }
 }
@@ -134,14 +134,14 @@ LUX_API void lxMatrix44ToEulerXYZ( const lxMatrix44PTR a_mat, lxVector3PTR angle
     else
     {
       angles[0] = -(float)atan2(a_mat[1],a_mat[5]);
-      angles[1] = -MUL_HALF_PI;
+      angles[1] = -LUX_MUL_HALF_PI;
       angles[2] = 0.0f;
     }
   }
   else
   {
     angles[0] = (float)atan2(a_mat[1],a_mat[5]);
-    angles[1] = MUL_HALF_PI;
+    angles[1] = LUX_MUL_HALF_PI;
     angles[2] = 0.0f;
   }
 #endif
@@ -153,7 +153,7 @@ LUX_API void lxMatrix44Perspective(lxMatrix44PTR mat, const float fov, const flo
   float sine, cotangent, deltaZ;
   float radians;
 
-  radians = fov / 2.0f * MUL_PI / 180.0f;
+  radians = fov / 2.0f * LUX_MUL_PI / 180.0f;
 
   deltaZ = back - front;
   sine = lxFastSin(radians);
@@ -174,7 +174,7 @@ LUX_API void lxMatrix44PerspectiveInf(lxMatrix44PTR mat, const float fov, const 
   float sine, cotangent;
   float radians;
 
-  radians = fov / 2.0f * MUL_PI / 180.0f;
+  radians = fov / 2.0f * LUX_MUL_PI / 180.0f;
 
   sine = lxFastSin(radians);
   if ((sine == 0.0f) || (aspect == 0.0f)) {
@@ -403,14 +403,14 @@ LUX_API void lxMatrix44RotateAngle(lxMatrix44PTR mat, lxVector3PTR from, lxVecto
   lxVector3Cross(v,from,to);
   e=lxVector3Dot(from,to);
 
-  if(e>1.0-FLOAT_EPSILON) // "from" almost or equal to "to"-vector?
+  if(e>1.0-LUX_FLOAT_EPSILON) // "from" almost or equal to "to"-vector?
   {
     // return identity
     M(0, 0)=1.0; M(0, 1)=0.0; M(0, 2)=0.0;
     M(1, 0)=0.0; M(1, 1)=1.0; M(1, 2)=0.0;
     M(2, 0)=0.0; M(2, 1)=0.0; M(2, 2)=1.0;
   }
-  else if(e<-1.0+FLOAT_EPSILON) // "from" almost or equal to negated "to"?
+  else if(e<-1.0+LUX_FLOAT_EPSILON) // "from" almost or equal to negated "to"?
   {
     float up[3],left[3];
     float fxx,fyy,fzz,fxy,fxz,fyz;
@@ -418,7 +418,7 @@ LUX_API void lxMatrix44RotateAngle(lxMatrix44PTR mat, lxVector3PTR from, lxVecto
     float lxx,lyy,lzz,lxy,lxz,lyz;
     // left=CROSS(from, (1,0,0))
     left[0]=0.0; left[1]=from[2]; left[2]=-from[1];
-    if(lxVector3Dot(left,left)<FLOAT_EPSILON) // was left=CROSS(from,(1,0,0)) a good choice?
+    if(lxVector3Dot(left,left)<LUX_FLOAT_EPSILON) // was left=CROSS(from,(1,0,0)) a good choice?
     {
       // here we now that left = CROSS(from, (1,0,0)) will be a good choice
       left[0]=-from[2]; left[1]=0.0; left[2]=from[0];
@@ -655,7 +655,7 @@ static void Matrix44Invert_(lxMatrix44PTR inv_mat, lxMatrix44PTR mat)
     mat[11] * (mat[0] * det02 -mat[4] * det04 +mat[12] * det06) +
     mat[15] * (mat[0] * det03 -mat[4] * det05 +mat[8] * det06);
 
-  if (fabs(det) < FLOAT_EPSILON)
+  if (fabs(det) < LUX_FLOAT_EPSILON)
   {
     lxMatrix44Identity(inv_mat);
   }

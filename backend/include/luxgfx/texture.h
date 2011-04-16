@@ -51,7 +51,7 @@ extern "C"{
   }lxgSamplerLod_t;
 
   typedef struct lxgSampler_s{
-    lxGLSampler_t         vgl;
+    GLuint                glid;
     uint32                incarnation;
     lxgCompareMode_t      cmpfunc : 8;
     lxgSamplerFilter_t    filter : 3;
@@ -145,10 +145,11 @@ extern "C"{
   }lxgTextureDataType_t;
 
   typedef struct lxgTexture_s{
-    lxGLTexture_t     vgl;
-    lxgSamplerPTR     lastSampler;
-    uint32            lastSamplerIncarnation;
-    lxgContextPTR     ctx;
+    lxGLTextureTarget_t   gltarget;
+    GLuint                glid;
+    lxgSamplerPTR         lastSampler;
+    uint32                lastSamplerIncarnation;
+    lxgContextPTR         ctx;
 
     lxgTextureChannel_t   formattype;
     lxgTextureDataType_t  datatype;
@@ -169,12 +170,14 @@ extern "C"{
     uint          components;
     uint          componentsize;
 
-    lxgSampler_t        sampler;
-    lxGLTextureData_t   vgldata;
+    lxgSampler_t  sampler;
+    GLenum        glinternalformat;
+    GLenum        gldatatype;
+    GLenum        gldataformat;
   }lxgTexture_t;
 
   typedef struct lxgRenderBuffer_s{
-    lxGLRenderBuffer_t    vgl;
+    GLuint                glid;
     lxgContextPTR         ctx;
 
     lxgTextureChannel_t formattype;
@@ -195,11 +198,12 @@ extern "C"{
   //////////////////////////////////////////////////////////////////////////
 
   typedef struct lxgTextureImage_s{
-    lxgTexturePTR             tex;
-    int                       level;
-    booln                     layered;
-    int                       layer;
-    lxGLTextureImage_t        vgl;
+    lxgTexturePTR     tex;
+    int               level;
+    booln             layered;
+    int               layer;
+    GLenum            glformat;
+    GLenum            glaccess;
   }lxgTextureImage_t;
 
   //////////////////////////////////////////////////////////////////////////
@@ -212,7 +216,8 @@ extern "C"{
   // lxgTexture
 
    // for multisampled textures depth = samples
-  LUX_API booln lxgTexture_init(lxgContextPTR ctx, lxgTexturePTR tex, 
+  LUX_API void lxgTexture_init(lxgContextPTR ctx, lxgTexturePTR tex);
+  LUX_API booln lxgTexture_setup(lxgContextPTR ctx, lxgTexturePTR tex, 
     lxGLTextureTarget_t type, lxgTextureChannel_t format, lxgTextureDataType_t data,
     int width, int height, int depth, int arraysize, flags32 flags);
 

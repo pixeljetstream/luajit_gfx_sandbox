@@ -349,10 +349,10 @@ LUX_INLINE void lxVector4TransformT1( lxVector4 v1, const lxMatrix44PTR mat )
 
 LUX_INLINE void lxVector4float_FROM_ubyte( lxVector4 vec4, const uchar ub4[4]) 
 {
-  (vec4)[0] = (float)(ub4)[0]*DIV_255;
-  (vec4)[1] = (float)(ub4)[1]*DIV_255;
-  (vec4)[2] = (float)(ub4)[2]*DIV_255;
-  (vec4)[3] = (float)(ub4)[3]*DIV_255;
+  (vec4)[0] = (float)(ub4)[0]*LUX_DIV_255;
+  (vec4)[1] = (float)(ub4)[1]*LUX_DIV_255;
+  (vec4)[2] = (float)(ub4)[2]*LUX_DIV_255;
+  (vec4)[3] = (float)(ub4)[3]*LUX_DIV_255;
 }
 
 LUX_INLINE void lxVector4ubyte_FROM_float( uchar ub4[4], const lxVector4 vec4) 
@@ -365,34 +365,34 @@ LUX_INLINE void lxVector4ubyte_FROM_float( uchar ub4[4], const lxVector4 vec4)
 
 LUX_INLINE void lxVector4float_FROM_short( lxVector4 vec4, const short shrt4[4]) 
 {
-  (vec4)[0]= DIV_SHORT*(float)(shrt4)[0];
-  (vec4)[1]= DIV_SHORT*(float)(shrt4)[1];
-  (vec4)[2]= DIV_SHORT*(float)(shrt4)[2];
-  (vec4)[3]= DIV_SHORT*(float)(shrt4)[3];
+  (vec4)[0]= LUX_DIV_SHORT*(float)(shrt4)[0];
+  (vec4)[1]= LUX_DIV_SHORT*(float)(shrt4)[1];
+  (vec4)[2]= LUX_DIV_SHORT*(float)(shrt4)[2];
+  (vec4)[3]= LUX_DIV_SHORT*(float)(shrt4)[3];
 }
 
 LUX_INLINE void lxVector4short_FROM_float( short shrt4[4], const lxVector4 vec4) 
 {
-  (shrt4)[0]= (short)(M_SHORT*(vec4)[0]);
-  (shrt4)[1]= (short)(M_SHORT*(vec4)[1]);
-  (shrt4)[2]= (short)(M_SHORT*(vec4)[2]);
-  (shrt4)[3]= (short)(M_SHORT*(vec4)[3]);
+  (shrt4)[0]= (short)(LUX_MUL_SHORT*(vec4)[0]);
+  (shrt4)[1]= (short)(LUX_MUL_SHORT*(vec4)[1]);
+  (shrt4)[2]= (short)(LUX_MUL_SHORT*(vec4)[2]);
+  (shrt4)[3]= (short)(LUX_MUL_SHORT*(vec4)[3]);
 }
 
 LUX_INLINE void lxVector4float_FROM_ushort( lxVector4 vec4, const ushort shrt4[4]) 
 {
-  (vec4)[0]= DIV_USHORT*(float)(shrt4)[0];
-  (vec4)[1]= DIV_USHORT*(float)(shrt4)[1];
-  (vec4)[2]= DIV_USHORT*(float)(shrt4)[2];
-  (vec4)[3]= DIV_USHORT*(float)(shrt4)[3];
+  (vec4)[0]= LUX_DIV_USHORT*(float)(shrt4)[0];
+  (vec4)[1]= LUX_DIV_USHORT*(float)(shrt4)[1];
+  (vec4)[2]= LUX_DIV_USHORT*(float)(shrt4)[2];
+  (vec4)[3]= LUX_DIV_USHORT*(float)(shrt4)[3];
 }
 
 LUX_INLINE void lxVector4ushort_FROM_float( ushort shrt4[4], const lxVector4 vec4) 
 {
-  (shrt4)[0]= (short)(M_USHORT*(vec4)[0]);
-  (shrt4)[1]= (short)(M_USHORT*(vec4)[1]);
-  (shrt4)[2]= (short)(M_USHORT*(vec4)[2]);
-  (shrt4)[3]= (short)(M_USHORT*(vec4)[3]);
+  (shrt4)[0]= (short)(LUX_MUL_USHORT*(vec4)[0]);
+  (shrt4)[1]= (short)(LUX_MUL_USHORT*(vec4)[1]);
+  (shrt4)[2]= (short)(LUX_MUL_USHORT*(vec4)[2]);
+  (shrt4)[3]= (short)(LUX_MUL_USHORT*(vec4)[3]);
 }
 
 LUX_INLINE void lxVector4ubyte_FROM_ushort( uchar vec4[4], const ushort shrt4[4]) 

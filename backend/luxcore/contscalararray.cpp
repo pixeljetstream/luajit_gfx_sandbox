@@ -21,7 +21,7 @@ extern "C"{
 
 //////////////////////////////////////////////////////////////////////////
 
-size_t lx_gScalarTypeSizes[SCALARS] = {
+size_t lx_gScalarTypeSizes[LUX_SCALARS] = {
   sizeof(float),
   sizeof(int8),
   sizeof(uint8),
@@ -34,26 +34,26 @@ size_t lx_gScalarTypeSizes[SCALARS] = {
   0,
 };
 
-static int l_ScalarMax[SCALARS] = {
+static int l_ScalarMax[LUX_SCALARS] = {
   1,
   127,
   255,
-  SHORT_SIGNEDMAX,
-  SHORT_UNSIGNEDMAX,
-  SHORT_SIGNEDMAX,
-  SHORT_UNSIGNEDMAX,
+  LUX_SHORT_SIGNEDMAX,
+  LU_SHORT_UNSIGNEDMAX,
+  LUX_SHORT_SIGNEDMAX,
+  LU_SHORT_UNSIGNEDMAX,
   1,
   1,
   0,
 };
 
-static int l_ScalarMin[SCALARS] = {
+static int l_ScalarMin[LUX_SCALARS] = {
   0,
   -127,
   0,
-  -SHORT_SIGNEDMAX,
+  -LUX_SHORT_SIGNEDMAX,
   0,
-  -SHORT_SIGNEDMAX,
+  -LUX_SHORT_SIGNEDMAX,
   0,
 
   0,
@@ -61,7 +61,7 @@ static int l_ScalarMin[SCALARS] = {
   0,
 };
 
-static booln l_ScalarSign[SCALARS] = {
+static booln l_ScalarSign[LUX_SCALARS] = {
   LUX_TRUE,
   
   LUX_TRUE,
@@ -195,7 +195,7 @@ void LUX_INLINE Float_normalize(float* to, const float *from, uint vectordim, co
 }
 
 
-static TScalarType_convert_fn* l_TtoFloat[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarType_convert_fn* l_TtoFloat[LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarType_convert<float,float>,
   TScalarType_convert<float,int8>,
   TScalarType_convert<float,uint8>,
@@ -204,7 +204,7 @@ static TScalarType_convert_fn* l_TtoFloat[SCALAROPS_MAX_SUPPORTED] = {
   TScalarType_convert<float,int32>,
   TScalarType_convert<float,uint32>,
 };
-static TScalarType_convert_fn* l_TfromFloat[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarType_convert_fn* l_TfromFloat[LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarType_convert<float,float>,
   TScalarType_convert<int8,float>,
   TScalarType_convert<uint8,float>,
@@ -216,28 +216,28 @@ static TScalarType_convert_fn* l_TfromFloat[SCALAROPS_MAX_SUPPORTED] = {
 
 void lxScalarType_toFloat(float* pout, lxScalarType_t intype, const void *pin, uint vectordim)
 {
-  LUX_DEBUGASSERT(intype < SCALAROPS_MAX_SUPPORTED);
+  LUX_DEBUGASSERT(intype < LUX_SCALAROPS_MAX_SUPPORTED);
   l_TtoFloat[intype](pout,pin,vectordim);
 }
 void lxScalarType_fromFloat(void* pout, lxScalarType_t outtype, const float *pin, uint vectordim)
 {
-  LUX_DEBUGASSERT(outtype < SCALAROPS_MAX_SUPPORTED);
+  LUX_DEBUGASSERT(outtype < LUX_SCALAROPS_MAX_SUPPORTED);
   l_TfromFloat[outtype](pout,pin,vectordim);
 }
-static const ScalarNormalize_t l_FloatNormalize[SCALAROPS_MAX_SUPPORTED] = {
+static const ScalarNormalize_t l_FloatNormalize[LUX_SCALAROPS_MAX_SUPPORTED] = {
   {-1.0f,1.0f,1.0f,1.0f },
   {-1.0f,1.0f,127.0f,1.0f/127.0f },
   {0.0f,1.0f,255.0f,1.0f/255.0f },
-  {-1.0f,1.0f,M_SHORT,DIV_SHORT },
-  {0.0f,1.0f,M_USHORT,DIV_USHORT },
-  {-1.0f,1.0f,M_SHORT,DIV_SHORT },
-  {0.0f,1.0f,M_USHORT,DIV_USHORT },
+  {-1.0f,1.0f,LUX_MUL_SHORT,LUX_DIV_SHORT },
+  {0.0f,1.0f,LUX_MUL_USHORT,LUX_DIV_USHORT },
+  {-1.0f,1.0f,LUX_MUL_SHORT,LUX_DIV_SHORT },
+  {0.0f,1.0f,LUX_MUL_USHORT,LUX_DIV_USHORT },
 };
 
 void lxScalarType_toFloatNormalized(float* pout, lxScalarType_t intype, void *pin, uint vectordim)
 {
   lxVector4 temp;
-  LUX_DEBUGASSERT(intype < SCALAROPS_MAX_SUPPORTED);
+  LUX_DEBUGASSERT(intype < LUX_SCALAROPS_MAX_SUPPORTED);
   l_TtoFloat[intype](temp,pin,vectordim);
   Float_normalize(pout,temp,vectordim,l_FloatNormalize[intype]);
 }
@@ -245,8 +245,8 @@ void lxScalarType_toFloatNormalized(float* pout, lxScalarType_t intype, void *pi
 void lxScalarType_fromFloatNormalized(void* pout, lxScalarType_t outtype, const float *pin, uint vectordim)
 {
   lxVector4 temp;
-  LUX_DEBUGASSERT(outtype < SCALAROPS_MAX_SUPPORTED);
-  if (outtype != SCALAR_UINT8){
+  LUX_DEBUGASSERT(outtype < LUX_SCALAROPS_MAX_SUPPORTED);
+  if (outtype != LUX_SCALAR_UINT8){
     Float_normalizeClamped(temp,pin,vectordim,l_FloatNormalize[outtype]);
     l_TfromFloat[outtype](pout,temp,vectordim);
   }
@@ -278,15 +278,15 @@ void lxScalarType_fromFloatNormalized(void* pout, lxScalarType_t outtype, const 
 
 void lxScalarType_normalizedFloat(float* pout, lxScalarType_t intype, float *pin, uint vectordim)
 {
-  LUX_DEBUGASSERT(intype < SCALAROPS_MAX_SUPPORTED);
+  LUX_DEBUGASSERT(intype < LUX_SCALAROPS_MAX_SUPPORTED);
   Float_normalize(pout,pin,vectordim,l_FloatNormalize[intype]);
 }
 
 void lxScalarType_from32(lxScalarVector_t *pout, lxScalarType_t type, void *pin, uint vectordim)
 {
-  LUX_DEBUGASSERT(type < SCALAROPS_MAX_SUPPORTED);
+  LUX_DEBUGASSERT(type < LUX_SCALAROPS_MAX_SUPPORTED);
   switch(type){
-  case SCALAR_FLOAT32:
+  case LUX_SCALAR_FLOAT32:
     {
       float *pfloat = (float*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -294,7 +294,7 @@ void lxScalarType_from32(lxScalarVector_t *pout, lxScalarType_t type, void *pin,
       }
     }
     break;
-  case SCALAR_INT32:
+  case LUX_SCALAR_INT32:
     {
       int32 *pint = (int32*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -302,7 +302,7 @@ void lxScalarType_from32(lxScalarVector_t *pout, lxScalarType_t type, void *pin,
       }
     }
     break;
-  case SCALAR_UINT32:
+  case LUX_SCALAR_UINT32:
     {
       int32 *pint = (int32*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -310,7 +310,7 @@ void lxScalarType_from32(lxScalarVector_t *pout, lxScalarType_t type, void *pin,
       }
     }
     break;
-  case SCALAR_INT8:
+  case LUX_SCALAR_INT8:
     {
       int32 *pint = (int32*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -318,7 +318,7 @@ void lxScalarType_from32(lxScalarVector_t *pout, lxScalarType_t type, void *pin,
       }
     }
     break;
-  case SCALAR_UINT8:
+  case LUX_SCALAR_UINT8:
     {
       int32 *pint = (int32*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -326,19 +326,19 @@ void lxScalarType_from32(lxScalarVector_t *pout, lxScalarType_t type, void *pin,
       }
     }
     break;
-  case SCALAR_INT16:
+  case LUX_SCALAR_INT16:
     {
       int32 *pint = (int32*)pin;
       for (uint i = 0; i < vectordim; i++){
-        pout->tint16[i] =  LUX_CLAMP(pint[i],-SHORT_SIGNEDMAX,SHORT_SIGNEDMAX);
+        pout->tint16[i] =  LUX_CLAMP(pint[i],-LUX_SHORT_SIGNEDMAX,LUX_SHORT_SIGNEDMAX);
       }
     }
     break;
-  case SCALAR_UINT16:
+  case LUX_SCALAR_UINT16:
     {
       int32 *pint = (int32*)pin;
       for (uint i = 0; i < vectordim; i++){
-        pout->tuint16[i] =  LUX_CLAMP(pint[i],0,SHORT_UNSIGNEDMAX);
+        pout->tuint16[i] =  LUX_CLAMP(pint[i],0,LU_SHORT_UNSIGNEDMAX);
       }
     }
     break;
@@ -347,9 +347,9 @@ void lxScalarType_from32(lxScalarVector_t *pout, lxScalarType_t type, void *pin,
 
 void lxScalarType_to32(lxScalarVector_t *pout, lxScalarType_t type, void *pin, uint vectordim)
 {
-  LUX_DEBUGASSERT(type < SCALAROPS_MAX_SUPPORTED);
+  LUX_DEBUGASSERT(type < LUX_SCALAROPS_MAX_SUPPORTED);
   switch(type){
-  case SCALAR_FLOAT32:
+  case LUX_SCALAR_FLOAT32:
     {
       float *pfloat = (float*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -357,7 +357,7 @@ void lxScalarType_to32(lxScalarVector_t *pout, lxScalarType_t type, void *pin, u
       }
     }
     break;
-  case SCALAR_INT32:
+  case LUX_SCALAR_INT32:
     {
       int32 *pint = (int32*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -365,7 +365,7 @@ void lxScalarType_to32(lxScalarVector_t *pout, lxScalarType_t type, void *pin, u
       }
     }
     break;
-  case SCALAR_UINT32:
+  case LUX_SCALAR_UINT32:
     {
       uint32 *pint = (uint32*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -373,7 +373,7 @@ void lxScalarType_to32(lxScalarVector_t *pout, lxScalarType_t type, void *pin, u
       }
     }
     break;
-  case SCALAR_INT8:
+  case LUX_SCALAR_INT8:
     {
       int8 *pint = (int8*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -381,7 +381,7 @@ void lxScalarType_to32(lxScalarVector_t *pout, lxScalarType_t type, void *pin, u
       }
     }
     break;
-  case SCALAR_UINT8:
+  case LUX_SCALAR_UINT8:
     {
       uint8 *pint = (uint8*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -389,14 +389,14 @@ void lxScalarType_to32(lxScalarVector_t *pout, lxScalarType_t type, void *pin, u
       }
     }
     break;
-  case SCALAR_INT16:
+  case LUX_SCALAR_INT16:
     {
       int16 *pint = (int16*)pin;
       for (uint i = 0; i < vectordim; i++){
         pout->tint32[i] = pint[i];
       }
     }
-  case SCALAR_UINT16:
+  case LUX_SCALAR_UINT16:
     {
       uint16 *pint = (uint16*)pin;
       for (uint i = 0; i < vectordim; i++){
@@ -945,7 +945,7 @@ booln LUX_FASTCALL TScalarArrayOp_in0(lxScalarArrayOp_t op, TScalarLoop &loop, l
   T *pOut = (T*)sOut.data.tvoid;
 
   switch(op){
-  case SCALAR_OP0_CLEAR:
+  case LUX_SCALAR_OP0_CLEAR:
     do{
       if (loop.stride == loop.vectordim){
         size_t rowsize = loop.cntvec * loop.vectordim;
@@ -984,7 +984,7 @@ booln LUX_FASTCALL TScalarArrayOp_in1(lxScalarArrayOp_t op, TScalarLoop1 &loop, 
 
   if (sArg0.vectordim == 1){
     switch(op){
-    case SCALAR_OP1_COPY:
+    case LUX_SCALAR_OP1_COPY:
       do{
 #define   SCALAR_CURRENT_INIT
 #define   SCALAR_CURRENT_OP( idx ) \
@@ -1002,7 +1002,7 @@ booln LUX_FASTCALL TScalarArrayOp_in1(lxScalarArrayOp_t op, TScalarLoop1 &loop, 
   }
   else{
     switch(op){
-    case SCALAR_OP1_COPY:
+    case LUX_SCALAR_OP1_COPY:
       do{
         if (loop.stride == loop.vectordim && loop.stride0 == loop.vectordim){
           size_t rowsize = loop.cntvec * loop.vectordim;
@@ -1055,7 +1055,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
 
   // Warning, if pointers are not 16-byte aligned we are DOOMED!!!
   switch(op){
-  case SCALAR_OP2_ADD:
+  case LUX_SCALAR_OP2_ADD:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1063,7 +1063,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_SUB:
+  case LUX_SCALAR_OP2_SUB:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1071,7 +1071,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_MUL:
+  case LUX_SCALAR_OP2_MUL:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1082,7 +1082,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_DIV:
+  case LUX_SCALAR_OP2_DIV:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1090,7 +1090,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_MIN:
+  case LUX_SCALAR_OP2_MIN:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1098,7 +1098,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_MAX:
+  case LUX_SCALAR_OP2_MAX:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1107,7 +1107,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
     XMMLOOP_END
     break;
 
-  case SCALAR_OP2_ADD_SAT:
+  case LUX_SCALAR_OP2_ADD_SAT:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1115,7 +1115,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_SUB_SAT:
+  case LUX_SCALAR_OP2_SUB_SAT:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1123,7 +1123,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_MUL_SAT:
+  case LUX_SCALAR_OP2_MUL_SAT:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1131,7 +1131,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v44(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_DIV_SAT:
+  case LUX_SCALAR_OP2_DIV_SAT:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1160,7 +1160,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
   
 
   switch(op){
-  case SCALAR_OP2_ADD:
+  case LUX_SCALAR_OP2_ADD:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1169,7 +1169,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_SUB:
+  case LUX_SCALAR_OP2_SUB:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1178,7 +1178,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_MUL:
+  case LUX_SCALAR_OP2_MUL:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1190,7 +1190,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_DIV:
+  case LUX_SCALAR_OP2_DIV:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1199,7 +1199,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_MIN:
+  case LUX_SCALAR_OP2_MIN:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1208,7 +1208,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_MAX:
+  case LUX_SCALAR_OP2_MAX:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1217,7 +1217,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_ADD_SAT:
+  case LUX_SCALAR_OP2_ADD_SAT:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1226,7 +1226,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_SUB_SAT:
+  case LUX_SCALAR_OP2_SUB_SAT:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1235,7 +1235,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_MUL_SAT:
+  case LUX_SCALAR_OP2_MUL_SAT:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1247,7 +1247,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in2_v41(lxScalarArrayOp_t op, TScalarLoop2 &
     }
     XMMLOOP_END
     break;
-  case SCALAR_OP2_DIV_SAT:
+  case LUX_SCALAR_OP2_DIV_SAT:
     XMMLOOP_START
     XMMLOOP_FOR
     {
@@ -1286,7 +1286,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in3_v44(lxScalarArrayOp_t op, TScalarLoop3 &
 
   // Warning, if pointers are not 16-byte aligned we are DOOMED!!!
   switch(op){
-  case SCALAR_OP3_LERP:
+  case LUX_SCALAR_OP3_LERP:
     // ((out) = (a) + (((b)-(a))*(t)))
     XMMLOOP_START
     XMMLOOP_FOR
@@ -1299,7 +1299,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in3_v44(lxScalarArrayOp_t op, TScalarLoop3 &
     }
     XMMLOOP_END
     return LUX_FALSE;
-  case SCALAR_OP3_LERPINV:
+  case LUX_SCALAR_OP3_LERPINV:
     // ((out) = (a) + (((b)-(a))*(1-t)))
     XMMLOOP_START
     XMMLOOP_FOR
@@ -1312,7 +1312,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in3_v44(lxScalarArrayOp_t op, TScalarLoop3 &
     }
     XMMLOOP_END
     return LUX_FALSE;
-  case SCALAR_OP3_MADD:
+  case LUX_SCALAR_OP3_MADD:
     // ((out) = (a + b*c)
     XMMLOOP_START
     XMMLOOP_FOR
@@ -1321,7 +1321,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in3_v44(lxScalarArrayOp_t op, TScalarLoop3 &
     }
     XMMLOOP_END
     return LUX_FALSE;
-  case SCALAR_OP3_MADD_SAT:
+  case LUX_SCALAR_OP3_MADD_SAT:
     // ((out) = (a + b*c)
     XMMLOOP_START
     XMMLOOP_FOR
@@ -1352,7 +1352,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in3_v41(lxScalarArrayOp_t op, TScalarLoop3 &
 
   // Warning, if pointers are not 16-byte aligned we are DOOMED!!!
   switch(op){
-  case SCALAR_OP3_LERP:
+  case LUX_SCALAR_OP3_LERP:
     // ((out) = (a) + (((b)-(a))*(t)))
     XMMLOOP_START
     XMMLOOP_FOR
@@ -1366,7 +1366,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in3_v41(lxScalarArrayOp_t op, TScalarLoop3 &
     }
     XMMLOOP_END
     return LUX_FALSE;
-  case SCALAR_OP3_LERPINV:
+  case LUX_SCALAR_OP3_LERPINV:
     // ((out) = (a) + (((b)-(a))*(1-t)))
     XMMLOOP_START
     XMMLOOP_FOR
@@ -1380,7 +1380,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in3_v41(lxScalarArrayOp_t op, TScalarLoop3 &
     }
     XMMLOOP_END
     return LUX_FALSE;
-  case SCALAR_OP3_MADD:
+  case LUX_SCALAR_OP3_MADD:
     // ((out) = (a + b*c)
     XMMLOOP_START
     XMMLOOP_FOR
@@ -1390,7 +1390,7 @@ booln LUX_FASTCALL XMMScalarArrayOp_in3_v41(lxScalarArrayOp_t op, TScalarLoop3 &
     }
     XMMLOOP_END
     return LUX_FALSE;
-  case SCALAR_OP3_MADD_SAT:
+  case LUX_SCALAR_OP3_MADD_SAT:
     // ((out) = (a + b*c)
     XMMLOOP_START
     XMMLOOP_FOR
@@ -1454,7 +1454,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
   if (single){
 
     switch(op){
-    case SCALAR_OP2_ADD:
+    case LUX_SCALAR_OP2_ADD:
       do{
 #define   SCALAR_CURRENT_INIT
 #define   SCALAR_CURRENT_OP( idx ) \
@@ -1467,7 +1467,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_SUB:
+    case LUX_SCALAR_OP2_SUB:
       do{
 #define   SCALAR_CURRENT_INIT
 #define   SCALAR_CURRENT_OP( idx ) \
@@ -1480,7 +1480,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_MUL:
+    case LUX_SCALAR_OP2_MUL:
       do{
 #define   SCALAR_CURRENT_INIT
 #define   SCALAR_CURRENT_OP( idx ) \
@@ -1493,7 +1493,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_DIV:
+    case LUX_SCALAR_OP2_DIV:
       do{
 #define   SCALAR_CURRENT_INIT
 #define   SCALAR_CURRENT_OP( idx ) \
@@ -1506,7 +1506,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_MIN:
+    case LUX_SCALAR_OP2_MIN:
       do{
 #define   SCALAR_CURRENT_INIT
 #define   SCALAR_CURRENT_OP( idx ) \
@@ -1519,7 +1519,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_MAX:
+    case LUX_SCALAR_OP2_MAX:
       do{
 #define   SCALAR_CURRENT_INIT
 #define   SCALAR_CURRENT_OP( idx ) \
@@ -1533,7 +1533,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       return LUX_FALSE;
 
 
-    case SCALAR_OP2_ADD_SAT:
+    case LUX_SCALAR_OP2_ADD_SAT:
       do{
 #define   SCALAR_CURRENT_INIT \
   Ttemp temp;
@@ -1548,7 +1548,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_SUB_SAT:
+    case LUX_SCALAR_OP2_SUB_SAT:
       do{
 #define   SCALAR_CURRENT_INIT \
   Ttemp temp;
@@ -1563,7 +1563,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_MUL_SAT:
+    case LUX_SCALAR_OP2_MUL_SAT:
       do{
 #define   SCALAR_CURRENT_INIT \
   Ttemp temp;
@@ -1578,7 +1578,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_DIV_SAT:
+    case LUX_SCALAR_OP2_DIV_SAT:
       do{
 #define   SCALAR_CURRENT_INIT \
   Ttemp temp;
@@ -1599,7 +1599,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
   }
   else{
     switch(op){
-    case SCALAR_OP2_ADD:
+    case LUX_SCALAR_OP2_ADD:
       do{
   #define   SCALAR_CURRENT_INIT
   #define   SCALAR_CURRENT_OP( idx ) \
@@ -1612,7 +1612,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_SUB:
+    case LUX_SCALAR_OP2_SUB:
       do{
   #define   SCALAR_CURRENT_INIT
   #define   SCALAR_CURRENT_OP( idx ) \
@@ -1625,7 +1625,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_MUL:
+    case LUX_SCALAR_OP2_MUL:
       do{
   #define   SCALAR_CURRENT_INIT
   #define   SCALAR_CURRENT_OP( idx ) \
@@ -1638,7 +1638,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_DIV:
+    case LUX_SCALAR_OP2_DIV:
       do{
   #define   SCALAR_CURRENT_INIT
   #define   SCALAR_CURRENT_OP( idx ) \
@@ -1651,7 +1651,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_MIN:
+    case LUX_SCALAR_OP2_MIN:
       do{
   #define   SCALAR_CURRENT_INIT
   #define   SCALAR_CURRENT_OP( idx ) \
@@ -1664,7 +1664,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_MAX:
+    case LUX_SCALAR_OP2_MAX:
       do{
   #define   SCALAR_CURRENT_INIT
   #define   SCALAR_CURRENT_OP( idx ) \
@@ -1678,7 +1678,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       return LUX_FALSE;
 
 
-    case SCALAR_OP2_ADD_SAT:
+    case LUX_SCALAR_OP2_ADD_SAT:
       do{
 #define   SCALAR_CURRENT_INIT \
   Ttemp temp;
@@ -1693,7 +1693,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_SUB_SAT:
+    case LUX_SCALAR_OP2_SUB_SAT:
       do{
 #define   SCALAR_CURRENT_INIT \
   Ttemp temp;
@@ -1708,7 +1708,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_MUL_SAT:
+    case LUX_SCALAR_OP2_MUL_SAT:
       do{
 #define   SCALAR_CURRENT_INIT \
   Ttemp temp;
@@ -1723,7 +1723,7 @@ booln LUX_FASTCALL TScalarArrayOp_in2(lxScalarArrayOp_t op, TScalarLoop2 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
 
-    case SCALAR_OP2_DIV_SAT:
+    case LUX_SCALAR_OP2_DIV_SAT:
       do{
 #define   SCALAR_CURRENT_INIT \
   Ttemp temp;
@@ -1770,7 +1770,7 @@ booln LUX_FASTCALL TScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
 
   if (single){
     switch(op){
-    case SCALAR_OP3_LERP:
+    case LUX_SCALAR_OP3_LERP:
       {
       // ((out) = (a) + (((b)-(a))*(t)))
       do{
@@ -1785,7 +1785,7 @@ booln LUX_FASTCALL TScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
       }
-    case SCALAR_OP3_LERPINV:
+    case LUX_SCALAR_OP3_LERPINV:
       {
       // ((out) = (a) + (((b)-(a))*(t)))
       do{
@@ -1801,7 +1801,7 @@ booln LUX_FASTCALL TScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
       }
-    case SCALAR_OP3_MADD:
+    case LUX_SCALAR_OP3_MADD:
       {
       do{
   #define   SCALAR_CURRENT_INIT
@@ -1815,7 +1815,7 @@ booln LUX_FASTCALL TScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
       } while( loop.cnt );
       return LUX_FALSE;
       }
-    case SCALAR_OP3_MADD_SAT:
+    case LUX_SCALAR_OP3_MADD_SAT:
       {
       do{
 #define   SCALAR_CURRENT_INIT
@@ -1837,7 +1837,7 @@ booln LUX_FASTCALL TScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
   }
   else{
     switch(op){
-    case SCALAR_OP3_LERP:
+    case LUX_SCALAR_OP3_LERP:
       {
         // ((out) = (a) + (((b)-(a))*(t)))
         do{
@@ -1852,7 +1852,7 @@ booln LUX_FASTCALL TScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
         } while( loop.cnt );
         return LUX_FALSE;
       }
-    case SCALAR_OP3_LERPINV:
+    case LUX_SCALAR_OP3_LERPINV:
       {
         // ((out) = (a) + (((b)-(a))*(t)))
         do{
@@ -1869,7 +1869,7 @@ booln LUX_FASTCALL TScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
         } while( loop.cnt );
         return LUX_FALSE;
       }
-    case SCALAR_OP3_MADD:
+    case LUX_SCALAR_OP3_MADD:
       {
         do{
 #define   SCALAR_CURRENT_INIT
@@ -1883,7 +1883,7 @@ booln LUX_FASTCALL TScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
         } while( loop.cnt );
         return LUX_FALSE;
       }
-    case SCALAR_OP3_MADD_SAT:
+    case LUX_SCALAR_OP3_MADD_SAT:
       {
         do{
 #define   SCALAR_CURRENT_INIT
@@ -1943,7 +1943,7 @@ booln LUX_FASTCALL FScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
 
   if (single){
     switch(op){
-    case SCALAR_OP3_LERP:
+    case LUX_SCALAR_OP3_LERP:
       {
       do{
   #define   SCALAR_CURRENT_INIT
@@ -1958,7 +1958,7 @@ booln LUX_FASTCALL FScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
       }
       return LUX_FALSE;
 
-    case SCALAR_OP3_LERPINV:
+    case LUX_SCALAR_OP3_LERPINV:
       {
         do{
   #define   SCALAR_CURRENT_INIT \
@@ -1973,7 +1973,7 @@ booln LUX_FASTCALL FScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
         } while( loop.cnt );
       }
       return LUX_FALSE;
-    case SCALAR_OP3_MADD:
+    case LUX_SCALAR_OP3_MADD:
       {
         do{
 #define   SCALAR_CURRENT_INIT
@@ -1987,7 +1987,7 @@ booln LUX_FASTCALL FScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
         } while( loop.cnt );
         return LUX_FALSE;
       }
-    case SCALAR_OP3_MADD_SAT:
+    case LUX_SCALAR_OP3_MADD_SAT:
       {
         do{
 #define   SCALAR_CURRENT_INIT
@@ -2009,7 +2009,7 @@ booln LUX_FASTCALL FScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
   }
   else {
     switch(op){
-    case SCALAR_OP3_LERP:
+    case LUX_SCALAR_OP3_LERP:
       {
         do{
   #define   SCALAR_CURRENT_INIT
@@ -2024,7 +2024,7 @@ booln LUX_FASTCALL FScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
       }
       return LUX_FALSE;
 
-    case SCALAR_OP3_LERPINV:
+    case LUX_SCALAR_OP3_LERPINV:
       {
         do{
   #define   SCALAR_CURRENT_INIT 
@@ -2039,7 +2039,7 @@ booln LUX_FASTCALL FScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
       }
       return LUX_FALSE;
 
-    case SCALAR_OP3_MADD:
+    case LUX_SCALAR_OP3_MADD:
       {
         do{
 #define   SCALAR_CURRENT_INIT
@@ -2053,7 +2053,7 @@ booln LUX_FASTCALL FScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
         } while( loop.cnt );
         return LUX_FALSE;
       }
-    case SCALAR_OP3_MADD_SAT:
+    case LUX_SCALAR_OP3_MADD_SAT:
       {
         do{
 #define   SCALAR_CURRENT_INIT
@@ -2082,7 +2082,7 @@ booln LUX_FASTCALL FScalarArrayOp_in3(lxScalarArrayOp_t op, TScalarLoop3 &loop, 
 
 typedef booln (LUX_FASTCALL TScalarArrayOp_in0_fn)(lxScalarArrayOp_t op, ScalarLoop &loop, lxScalarArray_t &sRet);
 
-static TScalarArrayOp_in0_fn* l_TOp0[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArrayOp_in0_fn* l_TOp0[LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarArrayOp_in0<float,ScalarLoop>,
   TScalarArrayOp_in0<int8,ScalarLoop>,
   TScalarArrayOp_in0<uint8,ScalarLoop>,
@@ -2101,7 +2101,7 @@ LUX_API booln lxScalarArray_Op0(lxScalarArray_t *ret, lxScalarArrayOp_t op)
 
 typedef booln (LUX_FASTCALL TScalarArrayOp_in1_fn)(lxScalarArrayOp_t op, ScalarLoop1 &loop, lxScalarArray_t &sOut, const lxScalarArray_t &sIn);
 
-static TScalarArrayOp_in1_fn* l_TOp1[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArrayOp_in1_fn* l_TOp1[LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarArrayOp_in1<float,ScalarLoop1>,
   TScalarArrayOp_in1<int8,ScalarLoop1>,
   TScalarArrayOp_in1<uint8,ScalarLoop1>,
@@ -2124,7 +2124,7 @@ LUX_API booln lxScalarArray_Op1(lxScalarArray_t *ret, lxScalarArrayOp_t op,
 
 typedef booln (LUX_FASTCALL TScalarArrayOp_in2_fn)(lxScalarArrayOp_t op, ScalarLoop2 &loop, lxScalarArray_t &sOut, const lxScalarArray_t &sArg0, const lxScalarArray_t &sArg1);
 
-static TScalarArrayOp_in2_fn* l_TOp2[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArrayOp_in2_fn* l_TOp2[LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarArrayOp_in2<float,ScalarLoop2, float,1>,
   TScalarArrayOp_in2<int8,ScalarLoop2,  int32,0>,
   TScalarArrayOp_in2<uint8,ScalarLoop2, int32,0>,
@@ -2147,7 +2147,7 @@ LUX_API booln lxScalarArray_Op2(lxScalarArray_t *ret, lxScalarArrayOp_t op,
 
 typedef booln (LUX_FASTCALL TScalarArrayOp_in3_fn)(lxScalarArrayOp_t op, ScalarLoop3 &loop, lxScalarArray_t &sOut, const lxScalarArray_t &sArg0, const lxScalarArray_t &sArg1, const lxScalarArray_t &sArg2);
 
-static TScalarArrayOp_in3_fn* l_TOp3[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArrayOp_in3_fn* l_TOp3[LUX_SCALAROPS_MAX_SUPPORTED] = {
   FScalarArrayOp_in3<ScalarLoop3>,
   TScalarArrayOp_in3<int8,ScalarLoop3,  int32>,
   TScalarArrayOp_in3<uint8,ScalarLoop3, int32>,
@@ -2178,7 +2178,7 @@ LUX_API booln lxScalarArray_Op3(lxScalarArray_t *ret, lxScalarArrayOp_t op,
 
 typedef booln (LUX_FASTCALL TScalarArrayOp3D_in0_fn)(lxScalarArrayOp_t op, Scalar3DLoop &loop, lxScalarArray_t &sRet);
 
-static TScalarArrayOp3D_in0_fn* l_T3DOp0[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArrayOp3D_in0_fn* l_T3DOp0[LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarArrayOp_in0<float,Scalar3DLoop>,
   TScalarArrayOp_in0<int8,Scalar3DLoop>,
   TScalarArrayOp_in0<uint8,Scalar3DLoop>,
@@ -2199,7 +2199,7 @@ LUX_API booln lxScalarArray3D_Op0(lxScalarArray3D_t *ret, uint region[3], lxScal
 
 typedef booln (LUX_FASTCALL TScalarArrayOp3D_in1_fn)(lxScalarArrayOp_t op, Scalar3DLoop1 &loop, lxScalarArray_t &sOut, const lxScalarArray_t &sIn);
 
-static TScalarArrayOp3D_in1_fn* l_T3DOp1[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArrayOp3D_in1_fn* l_T3DOp1[LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarArrayOp_in1<float,Scalar3DLoop1>,
   TScalarArrayOp_in1<int8,Scalar3DLoop1>,
   TScalarArrayOp_in1<uint8,Scalar3DLoop1>,
@@ -2224,7 +2224,7 @@ LUX_API booln lxScalarArray3D_Op1(lxScalarArray3D_t *ret, uint region[3], lxScal
 
 typedef booln (LUX_FASTCALL TScalarArrayOp3D_in2_fn)(lxScalarArrayOp_t op, Scalar3DLoop2 &loop, lxScalarArray_t &sOut, const lxScalarArray_t &sArg0, const lxScalarArray_t &sArg1);
 
-static TScalarArrayOp3D_in2_fn* l_T3DOp2[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArrayOp3D_in2_fn* l_T3DOp2[LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarArrayOp_in2<float,Scalar3DLoop2, float,1>,
   TScalarArrayOp_in2<int8,Scalar3DLoop2,  int32,0>,
   TScalarArrayOp_in2<uint8,Scalar3DLoop2, int32,0>,
@@ -2250,7 +2250,7 @@ LUX_API booln lxScalarArray3D_Op2(lxScalarArray3D_t *ret, uint region[3], lxScal
 
 typedef booln (LUX_FASTCALL TScalarArrayOp3D_in3_fn)(lxScalarArrayOp_t op, Scalar3DLoop3 &loop, lxScalarArray_t &sOut, const lxScalarArray_t &sArg0, const lxScalarArray_t &sArg1, const lxScalarArray_t &sArg2);
 
-static TScalarArrayOp3D_in3_fn* l_T3DOp3[SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArrayOp3D_in3_fn* l_T3DOp3[LUX_SCALAROPS_MAX_SUPPORTED] = {
   FScalarArrayOp_in3<Scalar3DLoop3>,
   TScalarArrayOp_in3<int8,Scalar3DLoop3,  int32>,
   TScalarArrayOp_in3<uint8,Scalar3DLoop3, int32>,
@@ -2391,7 +2391,7 @@ SCALAR_INT32,
 SCALAR_UINT32,
 */
 
-static TScalarArray_convert_fn* l_TConv[SCALAROPS_MAX_SUPPORTED*SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArray_convert_fn* l_TConv[LUX_SCALAROPS_MAX_SUPPORTED*LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarArray_convert<float,float>,
   TScalarArray_convert<float,int8>,
   TScalarArray_convert<float,uint8>,
@@ -2457,12 +2457,12 @@ LUX_API booln lxScalarArray_convert(lxScalarArray_t *sarrayOut, const lxScalarAr
   LUX_ASSERT(sarrayOut->stride);
   LUX_ASSERT(sarrayIn->vectordim > 0 && sarrayIn->vectordim < 5);
 
-  l_TConv[(sarrayOut->type*SCALAROPS_MAX_SUPPORTED) + sarrayIn->type](*sarrayOut,*sarrayIn);
+  l_TConv[(sarrayOut->type*LUX_SCALAROPS_MAX_SUPPORTED) + sarrayIn->type](*sarrayOut,*sarrayIn);
 
   return LUX_FALSE;
 }
 
-static TScalarArray_convertRanged_fn* l_TConvRanged[SCALAROPS_MAX_SUPPORTED*SCALAROPS_MAX_SUPPORTED] = {
+static TScalarArray_convertRanged_fn* l_TConvRanged[LUX_SCALAROPS_MAX_SUPPORTED*LUX_SCALAROPS_MAX_SUPPORTED] = {
   TScalarArray_convertRanged<float,float,float>,
   TScalarArray_convertRanged<float,int8,float>,
   TScalarArray_convertRanged<float,uint8,float>,
@@ -2531,7 +2531,7 @@ LUX_API booln lxScalarArray_convertRanged(
   LUX_ASSERT(sarrayOut->stride);
   LUX_ASSERT(sarrayIn->vectordim > 0 && sarrayIn->vectordim < 5);
 
-  l_TConvRanged[(sarrayOut->type*SCALAROPS_MAX_SUPPORTED) + sarrayIn->type](*sarrayOut,(void*)outminmax,*sarrayIn,(void*)inminmax);
+  l_TConvRanged[(sarrayOut->type*LUX_SCALAROPS_MAX_SUPPORTED) + sarrayIn->type](*sarrayOut,(void*)outminmax,*sarrayIn,(void*)inminmax);
 
   return LUX_FALSE;
 }
@@ -2539,12 +2539,12 @@ static float32  l_float32minmaxu[2] = {0.0f,1.0f};
 static float32  l_float32minmaxs[2] = {-1.0f,1.0f};
 static int8   l_tint8minmax[2] = {-127,127};
 static uint8  l_tuint8minmax[2] = {0,255};
-static int16  l_tint16minmax[2] = {SHORT_SIGNEDMAX,SHORT_SIGNEDMAX};
-static uint16 l_tuint16minmax[2] = {0,SHORT_UNSIGNEDMAX};
+static int16  l_tint16minmax[2] = {LUX_SHORT_SIGNEDMAX,LUX_SHORT_SIGNEDMAX};
+static uint16 l_tuint16minmax[2] = {0,LU_SHORT_UNSIGNEDMAX};
 static int32  l_tint32minmax[2] = {INT_MIN,INT_MAX};
 static uint32 l_tuint32minmax[2] = {0,UINT_MAX};
 
-static void*  l_tminmax[SCALAROPS_MAX_SUPPORTED*2] = {
+static void*  l_tminmax[LUX_SCALAROPS_MAX_SUPPORTED*2] = {
   &l_float32minmaxu[0],
   &l_tint8minmax[0],
   &l_tuint8minmax[0],
@@ -2572,10 +2572,10 @@ LUX_API booln lxScalarArray_convertNormalized(
   LUX_ASSERT(sarrayOut->stride);
   LUX_ASSERT(sarrayIn->vectordim > 0 && sarrayIn->vectordim < 5);
 
-  void* inminmax  = l_tminmax[sarrayIn->type + (l_ScalarSign[sarrayOut->type]*SCALAROPS_MAX_SUPPORTED)];
-  void* outminmax = l_tminmax[sarrayOut->type + (l_ScalarSign[sarrayIn->type]*SCALAROPS_MAX_SUPPORTED)];
+  void* inminmax  = l_tminmax[sarrayIn->type + (l_ScalarSign[sarrayOut->type]*LUX_SCALAROPS_MAX_SUPPORTED)];
+  void* outminmax = l_tminmax[sarrayOut->type + (l_ScalarSign[sarrayIn->type]*LUX_SCALAROPS_MAX_SUPPORTED)];
 
-  l_TConvRanged[(sarrayOut->type*SCALAROPS_MAX_SUPPORTED) + sarrayIn->type](*sarrayOut,(void*)outminmax,*sarrayIn,(void*)inminmax);
+  l_TConvRanged[(sarrayOut->type*LUX_SCALAROPS_MAX_SUPPORTED) + sarrayIn->type](*sarrayOut,(void*)outminmax,*sarrayIn,(void*)inminmax);
 
   return LUX_FALSE;
 }
@@ -2849,7 +2849,7 @@ booln LUX_FASTCALL TScalarArray_sampleLinear(float * LUX_RESTRICT outvals, const
 
 //////////////////////////////////////////////////////////////////////////
 
-static TScalarArray_sampleLinear_fn* l_TSampleL[SCALAROPS_MAX_SUPPORTED*4] = {
+static TScalarArray_sampleLinear_fn* l_TSampleL[LUX_SCALAROPS_MAX_SUPPORTED*4] = {
   TScalarArray_sampleLinear<float,1>,
   TScalarArray_sampleLinear<int8,1>,
   TScalarArray_sampleLinear<uint8,1>,
@@ -2892,14 +2892,14 @@ LUX_API LUX_INLINE booln lxScalarArray_sampleLinear(float* LUX_RESTRICT outvals,
     return LUX_TRUE;
 
 #ifdef SCALAR_USE_XMM
-  if (sarray->type == SCALAR_FLOAT32 && sarray->vectordim == 4 && 
+  if (sarray->type == LUX_SCALAR_FLOAT32 && sarray->vectordim == 4 && 
     LUX_IS_ALIGNED(sarray->data.tvoid,16) && sarray->stride % 4 == 0 )
   {
     return XMMScalarArray_sampleLinear(outvals,*sarray,size,coords,clamped);
   }
 #endif
 
-  return l_TSampleL[sarray->type + ((sarray->vectordim-1)*SCALAROPS_MAX_SUPPORTED)](outvals,*sarray,size,coords,clamped);
+  return l_TSampleL[sarray->type + ((sarray->vectordim-1)*LUX_SCALAROPS_MAX_SUPPORTED)](outvals,*sarray,size,coords,clamped);
 }
 
 LUX_API booln lxScalarArray3D_sampleLinear(float* LUX_RESTRICT outvals, const lxScalarArray3D_t *sarray, 
@@ -3385,7 +3385,7 @@ booln LUX_FASTCALL TFScalarArray_curveLinear(lxScalarArray_t &sOut, const lxScal
 }
 
 
-static TScalarArray_curveSpline_fn* l_CurveSpline[SCALAROPS_MAX_SUPPORTED*4*2] = {
+static TScalarArray_curveSpline_fn* l_CurveSpline[LUX_SCALAROPS_MAX_SUPPORTED*4*2] = {
   TFScalarArray_curveSpline<1,LUX_FALSE>,
   TScalarArray_curveSpline<int8,1,LUX_FALSE>,
   TScalarArray_curveSpline<uint8,1,LUX_FALSE>,
@@ -3451,7 +3451,7 @@ static TScalarArray_curveSpline_fn* l_CurveSpline[SCALAROPS_MAX_SUPPORTED*4*2] =
   TScalarArray_curveSpline<uint32,4,LUX_TRUE>,
 };
 
-static TScalarArray_curveLinear_fn* l_CurveLinear[SCALAROPS_MAX_SUPPORTED*4*2] = {
+static TScalarArray_curveLinear_fn* l_CurveLinear[LUX_SCALAROPS_MAX_SUPPORTED*4*2] = {
   TFScalarArray_curveLinear<1,LUX_FALSE>,
   TScalarArray_curveLinear<int8,1,LUX_FALSE>,
   TScalarArray_curveLinear<uint8,1,LUX_FALSE>,
@@ -3526,7 +3526,7 @@ LUX_API booln lxScalarArray_curveLinear(lxScalarArray_t *sarray, const lxScalarA
     return LUX_TRUE;
 
 #ifdef SCALAR_USE_XMM
-  if (sarray->type == SCALAR_FLOAT32 && sarray->vectordim == 4 && 
+  if (sarray->type == LUX_SCALAR_FLOAT32 && sarray->vectordim == 4 && 
         LUX_IS_ALIGNED(sarray->data.tvoid,16) && LUX_IS_ALIGNED(sarray0->data.tvoid,16) &&
         sarray->stride % 4 == 0 && sarray0->stride % 4 == 0)
   {
@@ -3535,7 +3535,7 @@ LUX_API booln lxScalarArray_curveLinear(lxScalarArray_t *sarray, const lxScalarA
 #endif
   booln compact = sarray->vectordim==sarray->stride && sarray0->vectordim==sarray0->stride;
 
-  return l_CurveLinear[sarray->type + ((sarray->vectordim-1)*SCALAROPS_MAX_SUPPORTED) + ((compact)*SCALAROPS_MAX_SUPPORTED*4)](*sarray,*sarray0,closed);
+  return l_CurveLinear[sarray->type + ((sarray->vectordim-1)*LUX_SCALAROPS_MAX_SUPPORTED) + ((compact)*LUX_SCALAROPS_MAX_SUPPORTED*4)](*sarray,*sarray0,closed);
 }
 LUX_API booln lxScalarArray_curveSpline(lxScalarArray_t *sarray, const lxScalarArray_t *sarray0, booln closed)
 {
@@ -3544,7 +3544,7 @@ LUX_API booln lxScalarArray_curveSpline(lxScalarArray_t *sarray, const lxScalarA
     return LUX_TRUE;
 
 #ifdef SCALAR_USE_XMM
-  if (sarray->type == SCALAR_FLOAT32 && sarray->vectordim == 4 && 
+  if (sarray->type == LUX_SCALAR_FLOAT32 && sarray->vectordim == 4 && 
     LUX_IS_ALIGNED(sarray->data.tvoid,16) && LUX_IS_ALIGNED(sarray0->data.tvoid,16) &&
     sarray->stride % 4 == 0 && sarray0->stride % 4 == 0)
   {
@@ -3553,7 +3553,7 @@ LUX_API booln lxScalarArray_curveSpline(lxScalarArray_t *sarray, const lxScalarA
 #endif
   booln compact = sarray->vectordim==sarray->stride && sarray0->vectordim==sarray0->stride;
 
-  return l_CurveSpline[sarray->type + ((sarray->vectordim-1)*SCALAROPS_MAX_SUPPORTED) + ((compact)*SCALAROPS_MAX_SUPPORTED*4)](*sarray,*sarray0,closed);
+  return l_CurveSpline[sarray->type + ((sarray->vectordim-1)*LUX_SCALAROPS_MAX_SUPPORTED) + ((compact)*LUX_SCALAROPS_MAX_SUPPORTED*4)](*sarray,*sarray0,closed);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -3959,7 +3959,7 @@ typedef void (LUX_FASTCALL TFScalarArray_transform1_fn)(lxScalarArray_t &sOut, c
 
 
 #ifdef SCALAR_USE_XMM
-static TFScalarArray_transform0_fn *l_FTransform0SSE[FSCALAR_OP1S*3] =
+static TFScalarArray_transform0_fn *l_FTransform0SSE[LUX_FSCALAR_OP1S*3] =
 {
   TFScalarArray_transform0<FVector4SSE,FVectorTransform,4>,
   TFScalarArray_transform0<FVector4SSE,FVectorTransformRot,4>,
@@ -3968,7 +3968,7 @@ static TFScalarArray_transform0_fn *l_FTransform0SSE[FSCALAR_OP1S*3] =
   TFScalarArray_transform0<FVector4SSE,FVectorNormalizeAcc,4>,
 };
 
-static TFScalarArray_transform1_fn *l_FTransform1SSE[FSCALAR_OP1S*3] =
+static TFScalarArray_transform1_fn *l_FTransform1SSE[LUX_FSCALAR_OP1S*3] =
 {
   TFScalarArray_transform1<FVector4SSE,FVectorTransform,4>,
   TFScalarArray_transform1<FVector4SSE,FVectorTransformRot,4>,
@@ -3979,7 +3979,7 @@ static TFScalarArray_transform1_fn *l_FTransform1SSE[FSCALAR_OP1S*3] =
 
 #endif
 
-static TFScalarArray_transform0_fn *l_FTransform0[FSCALAR_OP1S*3] =
+static TFScalarArray_transform0_fn *l_FTransform0[LUX_FSCALAR_OP1S*3] =
 {
   TFScalarArray_transform0<FVector2,FVectorTransform,2>,
   TFScalarArray_transform0<FVector3,FVectorTransform,3>,
@@ -4005,7 +4005,7 @@ static TFScalarArray_transform0_fn *l_FTransform0[FSCALAR_OP1S*3] =
 
 
 
-static TFScalarArray_transform1_fn *l_FTransform1[FSCALAR_OP1S*3] =
+static TFScalarArray_transform1_fn *l_FTransform1[LUX_FSCALAR_OP1S*3] =
 {
   TFScalarArray_transform1<FVector2,FVectorTransform,2>,
   TFScalarArray_transform1<FVector3,FVectorTransform,3>,
@@ -4031,7 +4031,7 @@ static TFScalarArray_transform1_fn *l_FTransform1[FSCALAR_OP1S*3] =
 // works on vector2,3,4
 LUX_API booln lxFScalarArray_op1(lxScalarArray_t *sarray, lxFScalarArrayOp_t op, const lxScalarArray_t *sarray0, const float * LUX_RESTRICT arg)
 {
-  if (sarray->type != SCALAR_FLOAT32 || sarray->type != sarray0->type || sarray->vectordim != sarray0->vectordim || sarray->vectordim < 2)
+  if (sarray->type != LUX_SCALAR_FLOAT32 || sarray->type != sarray0->type || sarray->vectordim != sarray0->vectordim || sarray->vectordim < 2)
     return LUX_TRUE;
 
   LUX_ASSERT(sarray->vectordim < 5);
@@ -4171,7 +4171,7 @@ static TFScalarArray_relLength_fn *l_FRelLength[4] = {
 
 LUX_API booln lxFScalarArray_relLength(lxScalarArray_t *sarray, lxScalarArray_t *sarray0, float *outlength)
 {
-  if (sarray->type != SCALAR_FLOAT32 || sarray->type != sarray0->type || 
+  if (sarray->type != LUX_SCALAR_FLOAT32 || sarray->type != sarray0->type || 
     sarray0->count < 2 || sarray->count < 2 || sarray->vectordim != 1)
   {
     return LUX_TRUE;

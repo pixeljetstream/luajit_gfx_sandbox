@@ -303,7 +303,7 @@ LUX_INLINE void lxVector3Random(lxVector3 out){
   while (zero){
     for (i = 0; i < 3; i++){
       out[i] = lxFrand() - 0.5f;
-      if (out[i] > FLOAT_EPSILON || out[i] < FLOAT_EPSILON)
+      if (out[i] > LUX_FLOAT_EPSILON || out[i] < LUX_FLOAT_EPSILON)
         zero = LUX_FALSE;
     }
   }
@@ -476,23 +476,23 @@ LUX_INLINE void lxVector3TransformRot1( lxVector3 v1, const lxMatrix44PTR mat )
 
 LUX_INLINE void lxVector3Rad2Deg(lxVector3 dst, lxVector3 src)
 {
-  (dst)[0]=RAD2DEG((src)[0]);
-  (dst)[1]=RAD2DEG((src)[1]);
-  (dst)[2]=RAD2DEG((src)[2]);
+  (dst)[0]=LUX_RAD2DEG((src)[0]);
+  (dst)[1]=LUX_RAD2DEG((src)[1]);
+  (dst)[2]=LUX_RAD2DEG((src)[2]);
 }
 
 LUX_INLINE void lxVector3Deg2Rad(lxVector3 dst, lxVector3 src)
 {
-  (dst)[0]=DEG2RAD((src)[0]);
-  (dst)[1]=DEG2RAD((src)[1]);
-  (dst)[2]=DEG2RAD((src)[2]);
+  (dst)[0]=LUX_DEG2RAD((src)[0]);
+  (dst)[1]=LUX_DEG2RAD((src)[1]);
+  (dst)[2]=LUX_DEG2RAD((src)[2]);
 }
 
 LUX_INLINE void lxVector3float_FROM_ubyte( lxVector3 vec3, const uchar ub3[3]) 
 {
-  (vec3)[0] = (float)(ub3)[0]*DIV_255;
-  (vec3)[1] = (float)(ub3)[1]*DIV_255;
-  (vec3)[2] = (float)(ub3)[2]*DIV_255;
+  (vec3)[0] = (float)(ub3)[0]*LUX_DIV_255;
+  (vec3)[1] = (float)(ub3)[1]*LUX_DIV_255;
+  (vec3)[2] = (float)(ub3)[2]*LUX_DIV_255;
 }
 
 LUX_INLINE void lxVector3ubyte_FROM_float( uchar ub3[3], const lxVector3 vec3) 
@@ -504,30 +504,30 @@ LUX_INLINE void lxVector3ubyte_FROM_float( uchar ub3[3], const lxVector3 vec3)
 
 LUX_INLINE void lxVector3float_FROM_short( lxVector3 vec3, const short shrt3[3]) 
 {
-  (vec3)[0]= DIV_SHORT*(float)(shrt3)[0];
-  (vec3)[1]= DIV_SHORT*(float)(shrt3)[1];
-  (vec3)[2]= DIV_SHORT*(float)(shrt3)[2];
+  (vec3)[0]= LUX_DIV_SHORT*(float)(shrt3)[0];
+  (vec3)[1]= LUX_DIV_SHORT*(float)(shrt3)[1];
+  (vec3)[2]= LUX_DIV_SHORT*(float)(shrt3)[2];
 }
 
 LUX_INLINE void lxVector3short_FROM_float( short shrt3[3], const lxVector3 vec3) 
 {
-  (shrt3)[0]= (short)(M_SHORT*(vec3)[0]);
-  (shrt3)[1]= (short)(M_SHORT*(vec3)[1]);
-  (shrt3)[2]= (short)(M_SHORT*(vec3)[2]);
+  (shrt3)[0]= (short)(LUX_MUL_SHORT*(vec3)[0]);
+  (shrt3)[1]= (short)(LUX_MUL_SHORT*(vec3)[1]);
+  (shrt3)[2]= (short)(LUX_MUL_SHORT*(vec3)[2]);
 }
 
 LUX_INLINE void lxVector3float_FROM_ushort( lxVector3 vec3, const ushort shrt3[3]) 
 {
-  (vec3)[0]= DIV_USHORT*(float)(shrt3)[0];
-  (vec3)[1]= DIV_USHORT*(float)(shrt3)[1];
-  (vec3)[2]= DIV_USHORT*(float)(shrt3)[2];
+  (vec3)[0]= LUX_DIV_USHORT*(float)(shrt3)[0];
+  (vec3)[1]= LUX_DIV_USHORT*(float)(shrt3)[1];
+  (vec3)[2]= LUX_DIV_USHORT*(float)(shrt3)[2];
 }
 
 LUX_INLINE void lxVector3ushort_FROM_float( ushort shrt3[3], const lxVector3 vec3) 
 {
-  (shrt3)[0]= (short)(M_USHORT*(vec3)[0]);
-  (shrt3)[1]= (short)(M_USHORT*(vec3)[1]);
-  (shrt3)[2]= (short)(M_USHORT*(vec3)[2]);
+  (shrt3)[0]= (short)(LUX_MUL_USHORT*(vec3)[0]);
+  (shrt3)[1]= (short)(LUX_MUL_USHORT*(vec3)[1]);
+  (shrt3)[2]= (short)(LUX_MUL_USHORT*(vec3)[2]);
 }
 
 LUX_INLINE void lxVector3ubyte_FROM_ushort( uchar vec3[3], const ushort shrt3[3]) 
@@ -545,9 +545,9 @@ LUX_INLINE void lxVector3ushort_FROM_ubyte( ushort shrt3[3], const uchar vec3[3]
 }
 
 LUX_INLINE void lxVector3pkubyte_FROM_short(uchar pkub3[3], const short shrt3[3]){
-  pkub3[0] = ((((int)shrt3[0])/2)+SHORT_SIGNEDMAX)>>8;
-  pkub3[1] = ((((int)shrt3[1])/2)+SHORT_SIGNEDMAX)>>8;
-  pkub3[2] = ((((int)shrt3[2])/2)+SHORT_SIGNEDMAX)>>8;
+  pkub3[0] = ((((int)shrt3[0])/2)+LUX_SHORT_SIGNEDMAX)>>8;
+  pkub3[1] = ((((int)shrt3[1])/2)+LUX_SHORT_SIGNEDMAX)>>8;
+  pkub3[2] = ((((int)shrt3[2])/2)+LUX_SHORT_SIGNEDMAX)>>8;
 }
 
 LUX_INLINE void lxVector3short_FROM_pkubyte(short shrt3[3], const uchar pkub3[3]){

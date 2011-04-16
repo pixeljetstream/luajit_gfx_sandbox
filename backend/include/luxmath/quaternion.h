@@ -309,7 +309,7 @@ LUX_INLINE void lxQuatNormalized(lxQuat q)
   len = lxQuatLength(q); // grab length
 
   // be carefull with floating point range
-  if (len >= FLOAT_EPSILON)
+  if (len >= LUX_FLOAT_EPSILON)
   {
     // use the reciprocal to save us some cycles,
     // 1 div and 4 muls is faster than 4 divides
@@ -357,7 +357,7 @@ LUX_INLINE void lxQuatNaturalLog(lxQuat q1, const lxQuat q)
   }
   else
   {
-    len = (MUL_PI* 0.5f);
+    len = (LUX_MUL_PI* 0.5f);
   }
   q1[0] = q[0]* len;
   q1[1] = q[1]* len;
@@ -373,7 +373,7 @@ LUX_INLINE void lxQuatExponent(lxQuat q1,const lxQuat q)
   len = (float)sqrt(q[0]*q[0]+ q[1]*q[1]+ q[2]*q[2]);
 
   // avoid div by 0
-  if (len >= FLOAT_EPSILON)
+  if (len >= LUX_FLOAT_EPSILON)
   {
     tmp = (float)sin(len) / len;
   }

@@ -102,7 +102,7 @@ LUX_API void lxObjRefSys_deinit(lxObjRefSysPTR sys, lxObjRefCheckDelete_fn *func
     for (i = 0; i < OBJREFSYS_ALLOC_PERPAGE; i++)
     {
       lxObjRef_t  *cref = &page->block[i];
-      if (cref->id.type >= OBJREF_TYPE_USERSTART &&
+      if (cref->id.type >= LUX_OBJREF_TYPE_USERSTART &&
         (!func || func(cref)) &&
         sys->typeinfos[cref->id.type].fnDelete)
       {
@@ -123,7 +123,7 @@ LUX_API void lxObjRefSys_register(lxObjRefSysPTR sys, lxObjRefType_t type, lxObj
   static const lxObjTypeInfo_t nullinfo = {NULL};
   size_t sz = lxContVector_size(&sys->typeinfovec);
 
-  LUX_ASSERT(type != OBJREF_TYPE_FREEALLOC);
+  LUX_ASSERT(type != LUX_OBJREF_TYPE_FREEALLOC);
 
   if ((size_t)type+1 > sz){
     lxContVector_resize(&sys->typeinfovec,(type+1),&nullinfo);
@@ -139,7 +139,7 @@ LUX_API void lxObjRefSys_deleteAlloc(lxObjRefSysPTR sys, lxObjRefPTR data)
   
   if (data){
     data->id.ptr = allocator->freerefs;
-    data->id.type = OBJREF_TYPE_FREEALLOC;
+    data->id.type = LUX_OBJREF_TYPE_FREEALLOC;
     allocator->freerefs = data;
     LUX_PROFILING_OP(sys->count--);
   }
@@ -173,7 +173,7 @@ LUX_API lxObjRefPTR lxObjRefSys_newRef(lxObjRefSysPTR sys, lxObjRefType_t type, 
 {
   lxObjRefPTR cref = (lxObjRefPTR) lxObjRefSys_newAlloc(sys);
 
-  LUX_ASSERT(type >= OBJREF_TYPE_USERSTART);
+  LUX_ASSERT(type >= LUX_OBJREF_TYPE_USERSTART);
 
   cref->id.ptr = ptr;
   cref->id.type = type;
@@ -197,7 +197,7 @@ LUX_API void  lxObjRefSys_deleteRef(lxObjRefSysPTR sys, lxObjRefPTR cref)
         fndel(cref);
       }
     }
-    cref->id.type = OBJREF_TYPE_DELETED;
+    cref->id.type = LUX_OBJREF_TYPE_DELETED;
     cref->id.ptr = NULL;
     lxObjRef_releaseWeak(cref);
   }
@@ -216,7 +216,7 @@ LUX_API booln lxObjRefSys_invalidateRef(lxObjRefSysPTR sys,lxObjRefPTR cref, boo
       fndel(cref);
     }
   }
-  cref->id.type = OBJREF_TYPE_DELETED;
+  cref->id.type = LUX_OBJREF_TYPE_DELETED;
   cref->id.ptr = NULL;
   return (cref->usecounter > 0);
 }

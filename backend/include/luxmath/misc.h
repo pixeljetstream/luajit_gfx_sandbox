@@ -46,17 +46,17 @@ LUX_API int   lxGetIntMaxOfN (const int *array, int n); // returns the max of n 
 #define lxMatrix44UnpackTranslation(matrix) LUX_ARRAYUNPACK3(matrix,12)
 
 // perform linear interpolation between two vectors
-#define LUX_ARRAY3LERPTYPE(type, out,  t,  a,  b)  (\
-  out[0] = (type)((float)((a)[0])+ ((float)((b)[0])- (float)((a)[0]))* (float)t),\
-  out[1] = (type)((float)((a)[1])+ ((float)((b)[1])- (float)((a)[1]))* (float)t),\
-  out[2] = (type)((float)((a)[2])+ ((float)((b)[2])- (float)((a)[2]))* (float)t))
+#define LUX_ARRAY3LERPTYPE(gltype, out,  t,  a,  b)  (\
+  out[0] = (gltype)((float)((a)[0])+ ((float)((b)[0])- (float)((a)[0]))* (float)t),\
+  out[1] = (gltype)((float)((a)[1])+ ((float)((b)[1])- (float)((a)[1]))* (float)t),\
+  out[2] = (gltype)((float)((a)[2])+ ((float)((b)[2])- (float)((a)[2]))* (float)t))
 
 // perform linear interpolation between two vectors
-#define LUX_ARRAY4LERPTYPE(type, out,  t,  a,  b)  (\
-  out[0] = (type)((float)((a)[0])+ ((float)((b)[0])- (float)((a)[0]))* (float)t),\
-  out[1] = (type)((float)((a)[1])+ ((float)((b)[1])- (float)((a)[1]))* (float)t),\
-  out[2] = (type)((float)((a)[2])+ ((float)((b)[2])- (float)((a)[2]))* (float)t),\
-  out[3] = (type)((float)((a)[3])+ ((float)((b)[3])- (float)((a)[3]))* (float)t))
+#define LUX_ARRAY4LERPTYPE(gltype, out,  t,  a,  b)  (\
+  out[0] = (gltype)((float)((a)[0])+ ((float)((b)[0])- (float)((a)[0]))* (float)t),\
+  out[1] = (gltype)((float)((a)[1])+ ((float)((b)[1])- (float)((a)[1]))* (float)t),\
+  out[2] = (gltype)((float)((a)[2])+ ((float)((b)[2])- (float)((a)[2]))* (float)t),\
+  out[3] = (gltype)((float)((a)[3])+ ((float)((b)[3])- (float)((a)[3]))* (float)t))
 
 #define LUX_ARRAY4CLAMP(color,min,max) \
   ((color)[0] = ((color)[0] > max) ? max : ((color)[0] < min) ? min : (color)[0], \

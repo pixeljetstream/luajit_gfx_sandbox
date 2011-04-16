@@ -62,8 +62,8 @@ LUX_API booln lxBoundingCone_checkSphereV(lxBoundingConePTR cone,lxVector3 cente
 
 // approximates frustum via Sphere & Cone, dir must be normalized
 LUX_API void lxBoundingSphereCone_fromCamera(lxBoundingSpherePTR sphere, lxBoundingConePTR cone,float frontplane, float backplane, lxVector3 pos, lxVector3 dir, float fov);
-LUX_API void lxBoundingCone_fromFrustumCorners(lxBoundingConePTR cone, lxVector3 box[FRUSTUM_CORNERS]);
-LUX_API void lxBoundingSphere_fromFrustumCorners(lxBoundingSpherePTR sphere,lxVector3 box[FRUSTUM_CORNERS]);
+LUX_API void lxBoundingCone_fromFrustumCorners(lxBoundingConePTR cone, lxVector3 box[LUX_FRUSTUM_CORNERS]);
+LUX_API void lxBoundingSphere_fromFrustumCorners(lxBoundingSpherePTR sphere,lxVector3 box[LUX_FRUSTUM_CORNERS]);
 
 //////////////////////////////////////////////////////////////////////////
 LUX_INLINE void lxBoundingBox_init(lxBoundingBoxPTR box)

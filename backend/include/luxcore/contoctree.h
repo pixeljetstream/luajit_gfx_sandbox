@@ -17,9 +17,9 @@
 extern "C"{
 #endif
 
-#define OCTREE_MAX_DEPTH    31
-#define OCTREE_MAX_STACKITEMS ((OCTREE_MAX_DEPTH+1)*8)
-#define OCTREE_NUMCHILDS    8
+#define LUX_OCTREE_MAX_DEPTH    31
+#define LUX_OCTREE_MAX_STACKITEMS ((LUX_OCTREE_MAX_DEPTH+1)*8)
+#define LUX_OCTREE_NUMCHILDS    8
 
 typedef struct lxOcBounds_s
 {
@@ -49,7 +49,7 @@ typedef struct lxOcNode_s {
   void        **dataList; 
 
   uint        childListCount;
-  struct lxOcNode_s   *childs[OCTREE_NUMCHILDS];
+  struct lxOcNode_s   *childs[LUX_OCTREE_NUMCHILDS];
 } lxOcNode_t;
 
 typedef struct lxOcTravStackItem_s {
@@ -58,7 +58,7 @@ typedef struct lxOcTravStackItem_s {
 } lxOcTravStackItem_t;
 
 typedef struct lxOcTravStack_s {
-  lxOcTravStackItem_t items[OCTREE_MAX_STACKITEMS];
+  lxOcTravStackItem_t items[LUX_OCTREE_MAX_STACKITEMS];
 }lxOcTravStack_t;
 
 typedef struct lxOcTree_s*  lxOcTreePTR;

@@ -52,6 +52,7 @@ typedef struct ScalarArray3D_s{
   uint        offset[3];
 }lxScalarArray3D_t;
 
+#define LUX_SCALAROPS_MAX_SUPPORTED   (LUX_SCALAR_UINT32+1)
 
 typedef enum lxScalarArrayOp_e{
 // Basic Operations
@@ -61,36 +62,36 @@ typedef enum lxScalarArrayOp_e{
 
   // operate on array directly
   // outarray = op(outarray)
-  SCALAR_OP0_CLEAR,
+  LUX_SCALAR_OP0_CLEAR,
 
   // from one to other array
   // outarray = op(arg0array)
-  SCALAR_OP1_COPY,
+  LUX_SCALAR_OP1_COPY,
 
   // outarray = op(arg0array, arg1array)
-  SCALAR_OP2_ADD,
-  SCALAR_OP2_SUB,
-  SCALAR_OP2_MUL,
-  SCALAR_OP2_DIV,
-  SCALAR_OP2_MIN,
-  SCALAR_OP2_MAX,
+  LUX_SCALAR_OP2_ADD,
+  LUX_SCALAR_OP2_SUB,
+  LUX_SCALAR_OP2_MUL,
+  LUX_SCALAR_OP2_DIV,
+  LUX_SCALAR_OP2_MIN,
+  LUX_SCALAR_OP2_MAX,
   // saturated, performs clamp to natural range post-op
-  SCALAR_OP2_ADD_SAT,
-  SCALAR_OP2_SUB_SAT,
-  SCALAR_OP2_MUL_SAT,
-  SCALAR_OP2_DIV_SAT,
+  LUX_SCALAR_OP2_ADD_SAT,
+  LUX_SCALAR_OP2_SUB_SAT,
+  LUX_SCALAR_OP2_MUL_SAT,
+  LUX_SCALAR_OP2_DIV_SAT,
 
   // outarray = op(arg0array, arg1array, arg2array )
   // arg2 has weights, integers are interpreted as 0-1 float
-  SCALAR_OP3_LERP,
+  LUX_SCALAR_OP3_LERP,
   // 1-fracc is used
-  SCALAR_OP3_LERPINV,
+  LUX_SCALAR_OP3_LERPINV,
   // arg0 + arg1*arg2
-  SCALAR_OP3_MADD,
+  LUX_SCALAR_OP3_MADD,
   // saturated, performs clamp to natural range post-op
-  SCALAR_OP3_MADD_SAT,
+  LUX_SCALAR_OP3_MADD_SAT,
 
-  SCALAR_OPS,
+  LUX_SCALAR_OPS,
 }lxScalarArrayOp_t;
 
 
@@ -191,13 +192,13 @@ LUX_API booln lxScalarArray_curveSpline(lxScalarArray_t *sarray, const lxScalarA
 
 typedef enum lxFScalarArrayOp_e{
   // arg is Matrix44
-  FSCALAR_OP1_TRANSFORM,
-  FSCALAR_OP1_TRANSFORMROT,
-  FSCALAR_OP1_TRANSFORMFULL,
+  LUX_FSCALAR_OP1_TRANSFORM,
+  LUX_FSCALAR_OP1_TRANSFORMROT,
+  LUX_FSCALAR_OP1_TRANSFORMFULL,
   // arg is NULL
-  FSCALAR_OP1_NORMALIZE,
-  FSCALAR_OP1_NORMALIZEACC,
-  FSCALAR_OP1S,
+  LUX_FSCALAR_OP1_NORMALIZE,
+  LUX_FSCALAR_OP1_NORMALIZEACC,
+  LUX_FSCALAR_OP1S,
 }lxFScalarArrayOp_t;
 
   // works on vector2,3,4
