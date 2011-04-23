@@ -9,6 +9,9 @@ Third party code/libraries:
  * 5. DevIL
  * 6. CUDA
  * 7. ASSIMP
+ * 8. ZMQ
+ * 9. MojoShader
+ 
 
 1. Lua License
 =============================================================================
@@ -181,4 +184,22 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF 
 THE POSSIBILITY OF SUCH DAMAGE.
 
+=============================================================================
+
+8. ZMQ
+=============================================================================
+Copyright: © 2007-2011 iMatix Corporation and Contributors
+Homepage: http://www.zeromq.org/
+License:  http://www.zeromq.org/area:licensing
+
+LuaZMQ
+Copyright: © 2011 by Robert G. Jakabosky
+Homepage: https://github.com/Neopallium/lua-zmq
+=============================================================================
+
+9. MojoShader
+=============================================================================
+Copyright: © 2008-2010 Ryan C. Gordon
+Homepage: http://icculus.org/mojoshader/
+License:  http://hg.icculus.org/icculus/mojoshader/raw-file/tip/LICENSE.txt
 =============================================================================

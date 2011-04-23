@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="ffihelper"
-	ProjectGUID="{DE837221-FEEE-40CB-8C3B-B4B1D55FD51E}"
+	Name="mojoshader"
+	ProjectGUID="{DE837551-FAAA-40CB-8C3B-B4B1D55FD51F}"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="0"
 	>
@@ -40,7 +40,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../../../depend/include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;FFIHELPER_EXPORTS;LUA_BUILD_AS_DLL;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;mojoshader_EXPORTS;LUA_BUILD_AS_DLL;"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -60,10 +60,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua5.1.lib"
-				OutputFile="..\..\..\runtime\clibs_Windows_x86\ffihelper.dll"
+				AdditionalDependencies="lua5.1.lib mojoshader.lib"
+				OutputFile="..\..\..\runtime\clibs_Windows_x86\mojoshader.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\depend\lib\win32_debug\msvc9;..\..\..\depend\lib\win32_debug"
+				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug;..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86\"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -114,7 +114,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../../../depend/include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;FFIHELPER_EXPORTS;LUA_BUILD_AS_DLL;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;mojoshader_EXPORTS;LUA_BUILD_AS_DLL;"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -132,10 +132,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua5.1.lib"
-				OutputFile="..\..\..\runtime\clibs_Windows_x86\ffihelper.dll"
+				AdditionalDependencies="lua5.1.lib mojoshader.lib"
+				OutputFile="..\..\..\runtime\clibs_Windows_x86\mojoshader.dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\depend\lib\win32\msvc9;..\..\..\depend\lib\win32"
+				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -186,7 +186,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\ffihelper\ffihelper.c"
+				RelativePath="..\..\mojoshader\mojoshader.cpp"
 				>
 			</File>
 		</Filter>

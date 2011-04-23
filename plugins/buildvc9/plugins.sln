@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffihelper", "ffihelper\ffihelper.vcproj", "{DE837221-FEEE-40CB-8C3B-B4B1D55FD51E}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glewgl", "glewgl\glewgl.vcproj", "{DA837221-FE7E-40CB-4C3B-B4C1D55BD514}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mojoshader", "mojoshader\mojoshader.vcproj", "{DE837551-FAAA-40CB-8C3B-B4B1D55FD51F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +11,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DE837221-FEEE-40CB-8C3B-B4B1D55FD51E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{DE837221-FEEE-40CB-8C3B-B4B1D55FD51E}.Debug|Win32.Build.0 = Debug|Win32
-		{DE837221-FEEE-40CB-8C3B-B4B1D55FD51E}.Release|Win32.ActiveCfg = Release|Win32
-		{DE837221-FEEE-40CB-8C3B-B4B1D55FD51E}.Release|Win32.Build.0 = Release|Win32
 		{DA837221-FE7E-40CB-4C3B-B4C1D55BD514}.Debug|Win32.ActiveCfg = Debug|Win32
 		{DA837221-FE7E-40CB-4C3B-B4C1D55BD514}.Debug|Win32.Build.0 = Debug|Win32
 		{DA837221-FE7E-40CB-4C3B-B4C1D55BD514}.Release|Win32.ActiveCfg = Release|Win32
 		{DA837221-FE7E-40CB-4C3B-B4C1D55BD514}.Release|Win32.Build.0 = Release|Win32
+		{DE837551-FAAA-40CB-8C3B-B4B1D55FD51F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE837551-FAAA-40CB-8C3B-B4B1D55FD51F}.Debug|Win32.Build.0 = Debug|Win32
+		{DE837551-FAAA-40CB-8C3B-B4B1D55FD51F}.Release|Win32.ActiveCfg = Release|Win32
+		{DE837551-FAAA-40CB-8C3B-B4B1D55FD51F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
