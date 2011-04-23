@@ -159,12 +159,12 @@ static int mo_preprocess(lua_State *L)
       snprintf(error,1024,"%s:%d - %s",pd->errors[i].filename,pd->errors[i].error_position,pd->errors[i].error);
       errorout << error << std::endl;
     }
+    lua_pushnil(L);
     lua_pushstring(L,errorout.str().c_str());
     free(include_paths);
     free(defines);
     MOJOSHADER_freePreprocessData(pd);
-    lua_error(L);
-    return 1;
+    return 2;
   }
   free(include_paths);
   free(defines);
