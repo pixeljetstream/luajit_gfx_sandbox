@@ -8,17 +8,17 @@
 #include <luxplatform/luxplatform.h>
 #include <luxplatform/debug.h>
 
+#include "glconfig.h"
+#include "vertex.h"
+#include "buffer.h"
+#include "texture.h"
+#include "state.h"
+#include "rendertarget.h"
+#include "program.h"
+
 #ifdef __cplusplus
 extern "C"{
 #endif
-
-  #include "glconfig.h"
-  #include "vertex.h"
-  #include "buffer.h"
-  #include "texture.h"
-  #include "state.h"
-  #include "rendertarget.h"
-  #include "program.h"
 
   //////////////////////////////////////////////////////////////////////////
   enum lxgCapability_e{
@@ -45,6 +45,7 @@ extern "C"{
 
     LUXGFX_CAP_BUFMAPRANGE = 1<<17,
     LUXGFX_CAP_BUFCOPY = 1<<18,
+    LUXGFX_CAP_DEPTHCLAMP = 1<<19,
 
     LUXGFX_CAP_SM0    = 1<<20,    // DOT3,CROSSBAR,CUBE
     LUXGFX_CAP_SM1    = 1<<21,    // VERTEX,SHADOW
@@ -110,16 +111,11 @@ extern "C"{
     lxgFeedbackState_t  feedback;
 
     flags32             rflag;
-    lxgAlpha_t          alpha;
     lxgBlend_t          blend;
-
     lxgDepth_t          depth;
     lxgStencil_t        stencil;
     lxgLogic_t          logic;
 
-    lxgLine_t           line;
-
-    lxgRasterizer_t     rasterizer;
     lxgViewPort_t       viewport;
     lxgFrameBounds_t    framebounds;
     lxgFrameBounds_t    window;
@@ -147,11 +143,9 @@ extern "C"{
   LUX_API void  lxgProgram_apply(lxgProgramPTR obj, lxgContextPTR ctx );
 
   // perform check if same state, prior to setting
-  LUX_API void lxgAlpha_checked(lxgAlphaPTR obj, lxgContextPTR ctx);
   LUX_API void lxgBlend_checked(lxgBlendPTR obj, lxgContextPTR ctx);
   LUX_API void lxgDepth_checked(lxgDepthPTR obj, lxgContextPTR ctx);
   LUX_API void lxgLogic_checked(lxgLogicPTR obj, lxgContextPTR ctx);
-  LUX_API void lxgLine_checked(lxgLinePTR obj, lxgContextPTR ctx);
   LUX_API void lxgStencil_checked(lxgStencilPTR obj, lxgContextPTR ctx);
   LUX_API void lxgTexture_checked(lxgTexturePTR tex,lxgContextPTR ctx, uint imageunit );
   LUX_API void lxgSampler_checked(lxgSamplerPTR samp,lxgContextPTR ctx, uint imageunit );
@@ -174,13 +168,6 @@ extern "C"{
 
   //////////////////////////////////////////////////////////////////////////
 
-  LUX_INLINE void lxgAlpha_checked(lxgAlphaPTR obj, lxgContextPTR ctx)
-  {
-    if (memcmp(&ctx->alpha,obj,sizeof(lxgAlpha_t)))
-    {
-      lxgAlpha_apply(obj,ctx);
-    }
-  }
   LUX_INLINE void lxgBlend_checked(lxgBlendPTR obj, lxgContextPTR ctx)
   {
     if (memcmp(&ctx->blend,obj,sizeof(lxgBlend_t)))
@@ -200,13 +187,6 @@ extern "C"{
     if (memcmp(&ctx->logic,obj,sizeof(lxgLogic_t)))
     {
       lxgLogic_apply(obj,ctx);
-    }
-  }
-  LUX_INLINE void lxgLine_checked(lxgLinePTR obj, lxgContextPTR ctx)
-  {
-    if (memcmp(&ctx->line,obj,sizeof(lxgLine_t)))
-    {
-      lxgLine_apply(obj,ctx);
     }
   }
   LUX_INLINE void lxgStencil_checked(lxgStencilPTR obj, lxgContextPTR ctx)

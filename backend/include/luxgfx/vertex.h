@@ -36,8 +36,6 @@ extern "C"{
     LUXGFX_VERTEX_ATTRIBS,
   }lxgVertexAttrib_t;
 
-  #define LUXGFX_MAX_VERTEX_STREAMS 8
-
   //////////////////////////////////////////////////////////////////////////
   // lxgVertexElement_t
   //

@@ -15,10 +15,8 @@ LUX_API void lxFrustum_update(lxFrustumPTR pFrustum,const lxMatrix44PTR viewproj
   float magnitude;
   int   side;
 
-
   // Now we actually want to get the sides of the pFrustum->planes.  To do this we take
   // the clipping planes we received above and extract the sides from them.
-
 
   pFrustum->fplanes[LUX_FRUSTUM_RIGHT].pvec[0] = clip[3] - clip[0];
   pFrustum->fplanes[LUX_FRUSTUM_RIGHT].pvec[1] = clip[7] - clip[4];

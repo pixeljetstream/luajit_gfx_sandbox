@@ -17,14 +17,14 @@ extern "C"{
 // Endianess
 
 
-LUX_API booln lxEndian_isBig();
+booln lxEndian_isBig();
 
-LUX_API short lxEndian_shortBig(short val);
-LUX_API short lxEndian_shortLittle(short  val);
-LUX_API long  lxEndian_longBig(long val);
-LUX_API long  lxEndian_longLittle(long  val);
-LUX_API float lxEndian_floatBig(float val);
-LUX_API float lxEndian_floatLittle(float  val);
+short lxEndian_shortBig(short val);
+short lxEndian_shortLittle(short  val);
+long  lxEndian_longBig(long val);
+long  lxEndian_longLittle(long  val);
+float lxEndian_floatBig(float val);
+float lxEndian_floatLittle(float  val);
 
 #ifdef __cplusplus
 };  

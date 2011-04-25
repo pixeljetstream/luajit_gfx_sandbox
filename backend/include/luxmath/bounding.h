@@ -5,7 +5,7 @@
 
 
 #ifndef __LUXMATH_BOUNDING_H__
-#define __LUXMATH_BOUDNING_H__
+#define __LUXMATH_BOUNDING_H__
 
 #include <luxmath/basetypes.h>
 

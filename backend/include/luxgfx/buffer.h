@@ -62,6 +62,8 @@ extern "C"{
   LUX_API booln lxgBuffer_copy(lxgBufferPTR buffer, uint bufferoffset, lxgBufferPTR src, uint srcoffset, uint size);
 
   LUX_API GLuint64 lxgBuffer_addressNV(lxgBufferPTR buffer);
+  LUX_API void lxgBuffer_residentNV(lxgBufferPTR buffer, lxgAccessMode_t mode);
+  LUX_API void lxgBuffer_unresidentNV(lxgBufferPTR buffer);
 
   LUX_API void lxgBuffer_deinit(lxgBufferPTR buffer, lxgContextPTR ctx);
   LUX_API void lxgBuffer_reset(lxgBufferPTR buffer, void* data);
@@ -83,6 +85,10 @@ extern "C"{
   {
     LUX_DEBUGASSERT(offset + size < buffer->size);
     glBindBufferRange(type,idx,buffer ? buffer->glid : 0, offset, size);
+  }
+
+  LUX_INLINE void lxgBuffer_unresidentNV(lxgBufferPTR buffer){
+    glMakeNamedBufferNonResidentNV(buffer->glid);
   }
 
 #ifdef __cplusplus

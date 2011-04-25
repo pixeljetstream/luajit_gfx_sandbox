@@ -58,6 +58,10 @@ LUX_API const char* lxgContext_init(lxgContextPTR ctx)
   }
   glGetIntegerv(GL_MAX_TEXTURE_SIZE,&ctx->capabilites.texsize);
 
+  if (GLEW_ARB_depth_clamp || GLEW_VERSION_3_3 || GLEW_NV_depth_clamp){
+    ctx->capbits |= LUXGFX_CAP_DEPTHCLAMP;
+  }
+
   if ((GLEW_ARB_texture_env_dot3 || GLEW_EXT_texture_env_dot3) &&
     (GLEW_ARB_texture_env_crossbar || GLEW_NV_texture_env_combine4))
   {
@@ -179,11 +183,9 @@ LUX_API void lxgContext_syncStates(lxgContextPTR ctx)
   ctx->rflag = lxgRenderFlag_sync(ctx);
 
   lxgDepth_sync(&ctx->depth, ctx );
-  lxgAlpha_sync(&ctx->alpha, ctx );
   lxgBlend_sync(&ctx->blend, ctx );
   lxgStencil_sync(&ctx->stencil, ctx );
   lxgViewPort_sync(&ctx->viewport, ctx );
-  lxgRasterizer_sync(&ctx->rasterizer, ctx );
 }
 
 
@@ -196,16 +198,6 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
 
     if (memcmp(state,&test,sizeof(lxgDepth_t))){
       return ("VIDDepth_t");
-    }
-  }
-
-  {
-    lxgAlphaPTR state = &ctx->alpha;
-    lxgAlpha_t test;
-    lxgAlpha_sync( &test, ctx );
-
-    if (memcmp(state,&test,sizeof(lxgAlpha_t))){
-      return ("VIDAlpha_t");
     }
   }
 
@@ -230,32 +222,12 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
   }
 
   {
-    lxgLinePTR state = &ctx->line;
-    lxgLine_t test;
-    lxgLine_sync( &test, ctx );
-
-    if (memcmp(state,&test,sizeof(lxgLine_t))){
-      return ("VIDLine_t");
-    }
-  }
-
-  {
     lxgViewPortPTR state = &ctx->viewport;
     lxgViewPort_t test;
     lxgViewPort_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgViewPort_t))){
       return ("VIDViewPort_t");
-    }
-  }
-
-  {
-    lxgRasterizerPTR state = &ctx->rasterizer;
-    lxgRasterizer_t test;
-    lxgRasterizer_sync( &test, ctx );
-
-    if (memcmp(state,&test,sizeof(lxgRasterizer_t))){
-      return ("VIDRasterizer_t");
     }
   }
 

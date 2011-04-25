@@ -37,24 +37,6 @@ extern "C"{
   #define lxMatrix34PTR   float* LUX_RESTRICT
   #define lxQuatPTR       float* LUX_RESTRICT
 
-#if 0
-  typedef float*  LUX_RESTRICT lxVector2PTR;
-  typedef float*  LUX_RESTRICT lxVector3PTR;
-  typedef float*  LUX_RESTRICT lxVector4PTR;
-  typedef float*  LUX_RESTRICT lxPlanePTR;
-  typedef float*  LUX_RESTRICT lxMatrix44PTR;
-  typedef float*  LUX_RESTRICT lxMatrix34PTR;
-  typedef float*  LUX_RESTRICT lxQuatPTR;
-
-  typedef const float*  LUX_RESTRICT lxVector2PTRconst;
-  typedef const float*  LUX_RESTRICT lxVector3PTRconst;
-  typedef const float*  LUX_RESTRICT lxVector4PTRconst;
-  typedef const float*  LUX_RESTRICT lxPlanePTRconst;
-  typedef const float*  LUX_RESTRICT lxMatrix44PTRconst;
-  typedef const float*  LUX_RESTRICT lxMatrix34PTRconst;
-  typedef const float*  LUX_RESTRICT lxQuatPTRconst;
-#endif
-
   //////////////////////////////////////////////////////////////////////////
 
   typedef enum lxFrustumPlaneType_e{
@@ -107,13 +89,13 @@ extern "C"{
       };
     };
   }lxFrustumPlane_t;
-  typedef lxFrustumPlane_t* lxFrustumPlanePTR;
+  #define lxFrustumPlanePTR lxFrustumPlane_t* 
 
   typedef struct lxFrustum_s
   {
     lxFrustumPlane_t  fplanes[LUX_FRUSTUM_PLANES];
   }lxFrustum_t;
-  typedef lxFrustum_t* lxFrustumPTR;
+  #define lxFrustumPTR lxFrustum_t*
 
   typedef struct lxBoundingBox_s
   {
@@ -122,7 +104,7 @@ extern "C"{
     lxVector3 center;
     lxVector3 length;
   }lxBoundingBox_t;
-  typedef lxBoundingBox_t* lxBoundingBoxPTR;
+  #define lxBoundingBoxPTR lxBoundingBox_t*
 
   typedef struct lxBoundingSphere_s
   {
@@ -130,7 +112,7 @@ extern "C"{
     float radius;
     float radiusSqr;
   }lxBoundingSphere_t;
-  typedef lxBoundingSphere_t* lxBoundingSpherePTR;
+  #define lxBoundingSpherePTR lxBoundingSphere_t*
 
   typedef struct lxBoundingCone_s
   {
@@ -140,7 +122,7 @@ extern "C"{
     float sinSqr;
     float cosSqr;
   }lxBoundingCone_t;
-  typedef lxBoundingCone_t* lxBoundingConePTR;
+  #define lxBoundingConePTR lxBoundingCone_t*
 
   typedef struct lxBoundingCapsule_s
   {
@@ -149,7 +131,7 @@ extern "C"{
     float radius;
     float radiusSqr;
   }lxBoundingCapsule_t;
-  typedef lxBoundingCapsule_t* lxBoundingCapsulePTR;
+  #define lxBoundingCapsulePTR lxBoundingCapsule_t*
 
   //////////////////////////////////////////////////////////////////////////
 

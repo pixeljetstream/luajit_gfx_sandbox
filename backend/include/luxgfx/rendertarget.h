@@ -28,7 +28,7 @@ extern "C"{
     booln             scissor;
     lxRectanglei_t    scissorRect;
     lxRectanglei_t    viewRect;
-    lxgViewDepth_t  depth;
+    lxgViewDepth_t    depth;
   }lxgViewPort_t;
 
   typedef struct lxgViewPortMrt_s{
@@ -37,7 +37,7 @@ extern "C"{
 
     lxRectanglef_t    bounds[LUXGFX_MAX_RENDERTARGETS];
     lxRectanglei_t    scissors[LUXGFX_MAX_RENDERTARGETS];
-    lxgViewDepth_t  depths[LUXGFX_MAX_RENDERTARGETS];
+    lxgViewDepth_t    depths[LUXGFX_MAX_RENDERTARGETS];
   }lxgViewPortMrt_t;
 
   typedef enum lxgRenderTargetType_e{
@@ -47,8 +47,8 @@ extern "C"{
   }lxgRenderTargetType_t;
 
   typedef struct lxgRenderAssign_s{
-    lxgTexturePTR       tex;
-    lxgRenderBufferPTR  rbuf;
+    lxgTexturePTR         tex;
+    lxgRenderBufferPTR    rbuf;
     uint                  mip;
     uint                  layer;
   }lxgRenderAssign_t;

@@ -87,9 +87,20 @@ LUX_API void lxgBuffer_init(lxgBufferPTR buffer, lxgContextPTR ctx, lxgBufferMod
 
 LUX_API GLuint64 lxgBuffer_addressNV(lxgBufferPTR buffer)
 {
-  lxgBuffer_bindDefault(buffer);
-  glGetBufferParameterui64vNV(buffer->gltarget,GL_BUFFER_GPU_ADDRESS_NV,&buffer->address);
+  glGetNamedBufferParameterui64vNV(buffer->glid,GL_BUFFER_GPU_ADDRESS_NV,&buffer->address);
   return buffer->address;
+}
+
+LUX_API void lxgBuffer_residentNV(lxgBufferPTR buffer, lxgAccessMode_t access)
+{
+  static const GLenum typetoGL[LUXGFX_ACCESSES] = {
+    GL_READ_ONLY,
+    GL_WRITE_ONLY,
+    GL_READ_WRITE,
+    GL_WRITE_ONLY,
+    GL_WRITE_ONLY,
+  };
+  glMakeNamedBufferResidentNV(buffer->glid,typetoGL[access]);
 }
 
 LUX_API uint lxgBuffer_alloc(lxgBufferPTR buffer, uint size, uint padsize)
@@ -111,7 +122,7 @@ LUX_API uint lxgBuffer_alloc(lxgBufferPTR buffer, uint size, uint padsize)
 
 LUX_API booln lxgBuffer_map(lxgBufferPTR buffer, void** ptr, lxgAccessMode_t type)
 {
-  static const GLenum typetoGL[LUXGFX_ACCESSS] = {
+  static const GLenum typetoGL[LUXGFX_ACCESSES] = {
     GL_READ_ONLY,
     GL_WRITE_ONLY,
     GL_READ_WRITE,
@@ -119,7 +130,7 @@ LUX_API booln lxgBuffer_map(lxgBufferPTR buffer, void** ptr, lxgAccessMode_t typ
     GL_WRITE_ONLY,
   };
 
-  if(buffer->mapped) return LUX_FALSE;
+  if(LUXGFX_VALIDITY && buffer->mapped) return LUX_FALSE;
 
   lxgBuffer_bindDefault(buffer);
 
@@ -218,7 +229,7 @@ LUX_API booln lxgBuffer_mapRange(lxgBufferPTR buffer, void**ptr, lxgAccessMode_t
 
   if ((buffer->ctx->capbits & LUXGFX_CAP_BUFMAPRANGE))
   {
-    static const GLbitfield bitfieldsGL[LUXGFX_ACCESSS] = {
+    static const GLbitfield bitfieldsGL[LUXGFX_ACCESSES] = {
       GL_MAP_READ_BIT,
       GL_MAP_WRITE_BIT,
       GL_MAP_READ_BIT | GL_MAP_WRITE_BIT,
@@ -232,7 +243,7 @@ LUX_API booln lxgBuffer_mapRange(lxgBufferPTR buffer, void**ptr, lxgAccessMode_t
     buffer->mapped = glMapBufferRange(buffer->gltarget,from,length,bitfield);
   }
   else{
-    static const GLenum typetoGL[LUXGFX_ACCESSS] = {
+    static const GLenum typetoGL[LUXGFX_ACCESSES] = {
       GL_READ_ONLY,
       GL_WRITE_ONLY,
       GL_READ_WRITE,
@@ -271,7 +282,7 @@ LUX_API booln lxgBuffer_unmap(lxgBufferPTR buffer)
 
   buffer->maplength = buffer->mapstart = 0;
   buffer->mapped = NULL;
-  buffer->maptype = LUXGFX_ACCESSS;
+  buffer->maptype = LUXGFX_ACCESSES;
 
   return LUX_TRUE;
 }

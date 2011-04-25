@@ -14,7 +14,7 @@
 //////////////////////////////////////////////////////////////////////////
 // Debug
 
-LUX_API void lxDebugAssertFailed( const char *file, int line, const char *expression )
+void lxDebugAssertFailed( const char *file, int line, const char *expression )
 {
   lxDebugPrintf("Assert Failed: %s,%d; expr: %s\n",file,line,expression);
 
@@ -42,7 +42,7 @@ LUX_API void lxDebugAssertFailed( const char *file, int line, const char *expres
 
 }
 
-LUX_API void lxDebugPrintf(const char* fmt, ...)
+void lxDebugPrintf(const char* fmt, ...)
 {
   // FIXME
   char    text[1024];
@@ -74,7 +74,7 @@ LUX_API void lxDebugPrintf(const char* fmt, ...)
 //////////////////////////////////////////////////////////////////////////
 // Endianess
 
-LUX_API booln lxEndian_isBig()
+booln lxEndian_isBig()
 {
 #if defined(LUX_ENDIAN_BIG)
   booln state = LUX_TRUE;

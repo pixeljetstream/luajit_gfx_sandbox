@@ -34,29 +34,12 @@ typedef struct lxgViewPortMrt_s* lxgViewPortMrtPTR;
 typedef struct lxgFrameBounds_s* lxgFrameBoundsPTR;
 typedef struct lxgRenderAssign_s* lxgRenderAssignPTR;
 
-typedef struct lxgAlpha_s* lxgAlphaPTR;
-typedef struct lxgLine_s* lxgLinePTR;
-typedef struct lxgAlpha_s* lxgAlphaPTR;
 typedef struct lxgBlendMrt_s* lxgBlendMrtPTR;
 typedef struct lxgBlend_s* lxgBlendPTR;
 typedef struct lxgStencil_s* lxgStencilPTR;
 typedef struct lxgLogic_s* lxgLogicPTR;
 typedef struct lxgDepth_s* lxgDepthPTR;
-typedef struct lxgRasterizer_s* lxgRasterizerPTR;
 typedef flags32 lxgRenderFlag_t;
-
-typedef enum lxgCompareMode_e{
-  LUXGFX_COMPARE_NEVER,
-  LUXGFX_COMPARE_LESS,
-  LUXGFX_COMPARE_EQUAL,
-  LUXGFX_COMPARE_LEQUAL,
-  LUXGFX_COMPARE_GREATER,
-  LUXGFX_COMPARE_NOTEQUAL,
-  LUXGFX_COMPARE_GEQUAL,
-  LUXGFX_COMPARE_ALWAYS,
-  LUXGFX_COMPARE_DONTEXECUTE,
-  LUXGFX_COMPARE_ILLEGAL,
-}lxgCompareMode_t;
 
 typedef enum lxgAccessMode_e{
   LUXGFX_ACCESS_READ,
@@ -66,7 +49,7 @@ typedef enum lxgAccessMode_e{
   LUXGFX_ACCESS_WRITEDISCARD,
   LUXGFX_ACCESS_WRITEDISCARDALL,
 
-  LUXGFX_ACCESSS,
+  LUXGFX_ACCESSES,
 }lxgAccessMode_t;
 
 #endif

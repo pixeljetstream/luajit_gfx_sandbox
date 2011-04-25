@@ -1324,7 +1324,7 @@ LUX_API void lxgSampler_init( lxgSamplerPTR self )
   self->lod.min = -1000.0f;
   self->lod.max = 1000.0f;
   self->lod.bias = 0.0f;
-  self->cmpfunc = LUXGFX_COMPARE_LEQUAL;
+  self->cmpfunc = LUXGL_COMPARE_LEQUAL;
   LUX_ARRAY4SET(self->border,0,0,0,0);
 }
 
@@ -1340,9 +1340,9 @@ LUX_API void lxgSampler_setAddress(lxgSamplerPTR self, uint n, lxgSamplerAddress
   }
 }
 
-LUX_API void lxgSampler_setCompare(lxgSamplerPTR self, lxgCompareMode_t cmp)
+LUX_API void lxgSampler_setCompare(lxgSamplerPTR self, lxGLCompareMode_t cmp)
 {
-  self->cmpfunc = lxGLCompareMode_get(cmp);
+  self->cmpfunc = (cmp);
 }
 
 LUX_API void lxgSampler_changed(lxgSamplerPTR self)
@@ -1384,7 +1384,7 @@ LUX_API void lxgSampler_updateHW(lxgSamplerPTR sampler, lxgContextPTR ctx)
   glSamplerParameteri(glid,GL_TEXTURE_COMPARE_MODE_ARB,
     runcmp ? GL_COMPARE_R_TO_TEXTURE : GL_NONE);
   glSamplerParameteri(glid,GL_TEXTURE_COMPARE_FUNC_ARB,
-    runcmp ? lxGLCompareMode_get(sampler->cmpfunc) : GL_LEQUAL);
+    runcmp ? (sampler->cmpfunc) : GL_LEQUAL);
 
   glSamplerParameteri(glid, GL_TEXTURE_MAX_ANISOTROPY_EXT, sampler->aniso);
 
@@ -1522,12 +1522,12 @@ typedef enum lxGLAccessFormat_e{
 LUX_API booln lxgTextureImage_init( lxgTextureImagePTR img, lxgContextPTR ctx, lxgTexturePTR tex, lxgAccessMode_t access, uint level, booln layered, int layer )
 {
   static GLenum modes[] = {
-    LUXGL_ACCESS_READ,
-    LUXGL_ACCESS_WRITE,
-    LUXGL_ACCESS_READWRITE,
+    GL_READ_ONLY,
+    GL_WRITE_ONLY,
+    GL_READ_WRITE,
 
-    LUXGL_ACCESS_WRITEDISCARD,
-    LUXGL_ACCESS_WRITEDISCARDALL,
+    GL_WRITE_ONLY,
+    GL_WRITE_ONLY,
   };
 
   static lxGLAccessFormat_t formats[] = {

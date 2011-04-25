@@ -14,8 +14,6 @@
 extern "C"{
 #endif
 
-  #define LUXGFX_TEXTURE_MAXMIPMAPS 16
-
   typedef enum lxgSamplerFilter_e{
     LUXGFX_SAMPLERFILTER_NEAREST,
     LUXGFX_SAMPLERFILTER_LINEAR,
@@ -53,12 +51,12 @@ extern "C"{
   typedef struct lxgSampler_s{
     GLuint                glid;
     uint32                incarnation;
-    lxgCompareMode_t      cmpfunc : 8;
-    lxgSamplerFilter_t    filter : 3;
-    lxgSamplerAddress_t   addru : 3;
-    lxgSamplerAddress_t   addrv : 3;
-    lxgSamplerAddress_t   addrw : 3;
-    uint                  aniso : 4;
+    lxGLCompareMode_t     cmpfunc;
+    lxgSamplerFilter_t    filter;
+    lxgSamplerAddress_t   addru;
+    lxgSamplerAddress_t   addrv;
+    lxgSamplerAddress_t   addrw;
+    uint                  aniso;
     lxgSamplerLod_t       lod;
 
     float                 border[4];
@@ -163,9 +161,9 @@ extern "C"{
 
     flags32       mipsdefined;
     uint          miplevels;
-    lxVec3i_t     mipsizes[LUXGFX_TEXTURE_MAXMIPMAPS];
-    uint          pixelsizes[LUXGFX_TEXTURE_MAXMIPMAPS];
-    size_t        nativesizes[LUXGFX_TEXTURE_MAXMIPMAPS];
+    lxVec3i_t     mipsizes[LUXGFX_MAX_TEXTURE_MIPMAPS];
+    uint          pixelsizes[LUXGFX_MAX_TEXTURE_MIPMAPS];
+    size_t        nativesizes[LUXGFX_MAX_TEXTURE_MIPMAPS];
 
     uint          components;
     uint          componentsize;
@@ -254,7 +252,7 @@ extern "C"{
 
   LUX_API void lxgSampler_init(lxgSamplerPTR self);
   LUX_API void lxgSampler_setAddress(lxgSamplerPTR self, uint n, lxgSamplerAddress_t address);
-  LUX_API void lxgSampler_setCompare(lxgSamplerPTR self, enum lxgCompareMode_e cmp);
+  LUX_API void lxgSampler_setCompare(lxgSamplerPTR self, enum lxGLCompareMode_t cmp);
   LUX_API void lxgSampler_changed(lxgSamplerPTR self);
   
     // require SM4
