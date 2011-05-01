@@ -1,19 +1,20 @@
 Third party code/libraries:
- * 1. Lua
- * 1.1. LuaJIT 2
- * 1.2. LuaFileSystem
- * 1.3. LuaSockets
- * 2. GLFW
- * 3. GLEW
- * 4. Cg
- * 5. DevIL
- * 6. CUDA
- * 7. ASSIMP
- * 8. ZMQ
- * 9. MojoShader
+ * Lua
+ * LuaJIT 2
+ * LuaFileSystem
+ * LuaSockets
+ * GLFW
+ * GLEW
+ * Malkia's LuaJIT Bindings
+ * Cg
+ * DevIL
+ * CUDA
+ * ASSIMP
+ * ZMQ
+ * MojoShader
  
 
-1. Lua License
+Lua License
 =============================================================================
 Copyright: © 1994-2011 Lua.org, PUC-Rio.
 Homepage: http://www.lua.org
@@ -38,14 +39,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. 
 =============================================================================
 
-1.1 LuaJIT
+LuaJIT
 =============================================================================
 Copyright: © 2005-2011 Mike Pall
 Homepage: http://www.luajit.org
 License:  http://www.opensource.org/licenses/mit-license.php
 =============================================================================
 
-1.2 LuaFileSystem
+LuaFileSystem
 =============================================================================
 LuaFileSystem was designed by Roberto Ierusalimschy, André Carregal and Tomás 
 Guisasola as part of the Kepler Project, which holds its copyright.
@@ -53,14 +54,14 @@ Homepage: http://www.keplerproject.org/luafilesystem/index.html
 License:  http://www.keplerproject.org/luafilesystem/license.html
 =============================================================================
 
-1.2 LuaSockets
+LuaSockets
 =============================================================================
 Copyright: © 2004-2006 Diego Nehab. All rights reserved.
 Homepage: http://www.cs.princeton.edu/~diego/professional/luasocket/
 License:  http://www.lua.org/copyright.html (same as LUA)
 =============================================================================
 
-2. GLFW 
+GLFW 
 =============================================================================
 Copyright: © 2002-2009 Camilla Berglund
 Homepage: http://www.glfw.org/
@@ -69,7 +70,7 @@ License:  http://www.glfw.org/documentation.html#license
 Used for cross platform window creation and input callback handling.
 =============================================================================
 
-3. GLEW 
+GLEW 
 =============================================================================
 Copyright: http://glew.sourceforge.net/credits.html
 Homepage:  http://glew.sourceforge.net/
@@ -81,7 +82,15 @@ A modified version from university of Utah is used so that there
 is no dependency on opengl32.lib.
 =============================================================================
 
-4. Nvidia Cg 
+
+Malkia's LuaJIT Bindings
+=============================================================================
+Copyright: © Dimiter 'malkia' Stanev
+Homepage: https://github.com/malkia/ufo
+License:  https://github.com/malkia/ufo/blob/master/COPYRIGHT
+=============================================================================
+
+Nvidia Cg 
 =============================================================================
 Copyright: © 2002-2011 NVIDIA Corporation
 Homepage: http://developer.nvidia.com/object/cg_toolkit.html
@@ -102,7 +111,7 @@ USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF NVIDIA HAS BEEN ADVISED OF
 THE POSSIBILITY OF SUCH DAMAGES.
 =============================================================================
 
-5. DevIL 
+DevIL 
 =============================================================================
 Copyright: © 2000-2009 by Denton Woods
 Homepage: http://openil.sourceforge.net/
@@ -110,7 +119,7 @@ Homepage: http://openil.sourceforge.net/
 Cross Platform Image Library
 =============================================================================
 
-6. CUDA
+CUDA
 =============================================================================
 Copyright: © 1993-2011 NVIDIA Corporation.  
 Homepage: http://www.nvidia.com/object/cuda_home_new.html
@@ -147,7 +156,7 @@ NVidias Compute Driver API
  * the above Disclaimer and U.S. Government End Users Notice.
 =============================================================================
 
-7. ASSIMP
+ASSIMP
 =============================================================================
 Copyright: © 2008-2011 ASSIMP Development Team 
 Homepage: http://assimp.sourceforge.net/
@@ -186,7 +195,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 =============================================================================
 
-8. ZMQ
+ZMQ
 =============================================================================
 Copyright: © 2007-2011 iMatix Corporation and Contributors
 Homepage: http://www.zeromq.org/
@@ -197,9 +206,10 @@ Copyright: © 2011 by Robert G. Jakabosky
 Homepage: https://github.com/Neopallium/lua-zmq
 =============================================================================
 
-9. MojoShader
+MojoShader
 =============================================================================
 Copyright: © 2008-2010 Ryan C. Gordon
 Homepage: http://icculus.org/mojoshader/
 License:  http://hg.icculus.org/icculus/mojoshader/raw-file/tip/LICENSE.txt
 =============================================================================
+
