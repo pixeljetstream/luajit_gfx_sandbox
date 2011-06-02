@@ -31,7 +31,7 @@
   http://home.comcast.net/~tom_forsyth/papers/fast_vert_cache_opt.html
 */
 
-#include <luxcore/meshvcacheopt.h>
+#include <luxbackend/meshvcacheopt.h>
 
 #include <math.h>
 #include <string.h>
@@ -347,13 +347,13 @@ LUX_API void* lxVertexCacheOptimize_forsyth(void* indices,
         int nTriangles,
         int nVertices,
         int vcache,
-        lxVertexIndexType_t type )
+        lxMeshIndexType_t type )
 {
   switch(type){
-  case VERTEX_INDEX_TYPE_UINT16:
+  case LUX_MESH_INDEX_UINT16:
     return TreorderForsyth<uint16>((uint16*)indices,nTriangles,nVertices,vcache);
     break;
-  case VERTEX_INDEX_TYPE_UINT32:
+  case LUX_MESH_INDEX_UINT32:
     return TreorderForsyth<uint32>((uint32*)indices,nTriangles,nVertices,vcache);
   default:
     return NULL;

@@ -3,7 +3,7 @@
   http://castano.ludicon.com/blog/2009/02/02/optimal-grid-rendering
 */
 
-#include <luxcore/meshvcacheopt.h>
+#include <luxbackend/meshvcacheopt.h>
 
 template<class VertexIndexType>
 VertexIndexType* TgridGen(VertexIndexType* pcurrent, VertexIndexType* pend, int x0, int x1, int y0, int y1, int width, int cacheSize)
@@ -56,7 +56,7 @@ VertexIndexType* TgridGen(VertexIndexType* pcurrent, VertexIndexType* pend, int 
 LUX_API void* lxVertexCacheOptimize_grid_castano(
   const void* indices,  int maxTriangles,
   int width,  int height,
-  int vcache, lxVertexIndexType_t type,
+  int vcache, lxMeshIndexType_t type,
   int *writtenTriangles)
 {
   int x0 = 0;
@@ -65,7 +65,7 @@ LUX_API void* lxVertexCacheOptimize_grid_castano(
   int y1 = height;
 
   switch(type){
-  case VERTEX_INDEX_TYPE_UINT16:
+  case LUX_MESH_INDEX_UINT16:
     {
       uint16* pstart = (uint16*)indices;
       uint16* pend = pstart + (maxTriangles*3);
@@ -76,7 +76,7 @@ LUX_API void* lxVertexCacheOptimize_grid_castano(
       return pwritten ? pstart : NULL;
     }
     
-  case VERTEX_INDEX_TYPE_UINT32:
+  case LUX_MESH_INDEX_UINT32:
     {
       uint32* pstart = (uint32*)indices;
       uint32* pend = pstart + (maxTriangles*3);

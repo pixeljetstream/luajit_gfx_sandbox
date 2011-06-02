@@ -31,7 +31,7 @@
   http://www.cs.princeton.edu/gfx/pubs/Sander_2007_%3ETR/tipsy.pdf
 */
 
-#include <luxcore/meshvcacheopt.h>
+#include <luxbackend/meshvcacheopt.h>
 
 #include <stdlib.h>
 #include <string.h>
@@ -280,13 +280,13 @@ LUX_API void* lxVertexCacheOptimize_tipsify(void* indices,
         int nTriangles,
         int nVertices,
         int k,
-        lxVertexIndexType_t type )
+        lxMeshIndexType_t type )
 {
   switch(type){
-  case VERTEX_INDEX_TYPE_UINT16:
+  case LUX_MESH_INDEX_UINT16:
     return Ttipsify<uint16>((uint16*)indices,nTriangles,nVertices,k);
     break;
-  case VERTEX_INDEX_TYPE_UINT32:
+  case LUX_MESH_INDEX_UINT32:
     return Ttipsify<uint32>((uint32*)indices,nTriangles,nVertices,k);
   default:
     return NULL;

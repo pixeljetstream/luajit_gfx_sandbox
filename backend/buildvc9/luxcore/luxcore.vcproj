@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="luxcore"
 	ProjectGUID="{2C4C470D-11B6-452D-B817-0DBFA34B1509}"
 	RootNamespace="Library"
@@ -241,18 +241,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\luxcore\meshvcacheoptcastano.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\luxcore\meshvcacheoptforsyth.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\luxcore\meshvcacheopttipsify.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\luxcore\refsys.c"
 				>
 			</File>
@@ -354,14 +342,6 @@
 			</File>
 			<File
 				RelativePath="..\..\include\luxcore\memorystack.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\luxcore\mesh.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\luxcore\meshvcacheopt.h"
 				>
 			</File>
 			<File

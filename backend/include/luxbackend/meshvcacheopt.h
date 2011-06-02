@@ -4,10 +4,11 @@
 //
 // Forwards to Code by Martin Storsjö, Ignacio Castanio, Tom Forsyth
 
-#ifndef __LUXCORE_MESHVCACHEOPT_H__
-#define __LUXCORE_MESHVCACHEOPT_H__
+#ifndef __LUXBACKEND_MESHVCACHEOPT_H__
+#define __LUXBACKEND_MESHVCACHEOPT_H__
 
 #include <luxplatform/luxplatform.h>
+#include <luxbackend/meshbase.h>
 
 #if defined(__cplusplus)
 extern "C"
@@ -17,10 +18,6 @@ extern "C"
 //////////////////////////////////////////////////////////////////////////
 // Vertex Cache Optimizations
 
-typedef enum lxVertexIndexType_e{
-  VERTEX_INDEX_TYPE_UINT16,
-  VERTEX_INDEX_TYPE_UINT32, // only within signed range
-}lxVertexIndexType_t;
 
 // Original Algorithm:
 // http://www.cs.princeton.edu/gfx/pubs/Sander_2007_%3ETR/tipsy.pdf
@@ -29,7 +26,7 @@ LUX_API void* lxVertexCacheOptimize_tipsify(
   int nTriangles,
   int nVertices,
   int k,
-  lxVertexIndexType_t type );
+  lxMeshIndexType_t type );
 
 
 // Original Algorithm:
@@ -42,7 +39,7 @@ LUX_API void* lxVertexCacheOptimize_forsyth(
   int nTriangles,
   int nVertices,
   int vcache,
-  lxVertexIndexType_t type );
+  lxMeshIndexType_t type );
 
 
 // Optimal Grid VertexCache, by Igancio Castano
@@ -56,7 +53,7 @@ LUX_API void* lxVertexCacheOptimize_grid_castano(
   int width,
   int height,
   int vcache,
-  lxVertexIndexType_t type,
+  lxMeshIndexType_t type,
   int *writtenTriangles);
 
 #if defined(__cplusplus)

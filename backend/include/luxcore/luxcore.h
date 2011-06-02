@@ -11,7 +11,6 @@
 #include "arraymisc.h"
 #include "strmisc.h"
 #include "sortradix.h"
-#include "mesh.h"
 #include "refsys.h"
 #include "handlesys.h"
 

@@ -182,9 +182,16 @@ enum {
     GLFW_FSAA_SAMPLES          = 0x00020012,
     GLFW_OPENGL_VERSION_MAJOR  = 0x00020013,
     GLFW_OPENGL_VERSION_MINOR  = 0x00020014,
-    GLFW_OPENGL_FORWARD_COMPAT = 0x00020015,
-    GLFW_OPENGL_DEBUG_CONTEXT  = 0x00020016,
-    GLFW_OPENGL_PROFILE        = 0x00020017,
+    GLFW_OPENGL_REVISION       = 0x00020015,
+    GLFW_OPENGL_FORWARD_COMPAT = 0x00020016,
+    GLFW_OPENGL_DEBUG_CONTEXT  = 0x00020017,
+    GLFW_OPENGL_PROFILE        = 0x00020018,
+    GLFW_OPENGL_ROBUSTNESS     = 0x00020019,
+    
+    GLFW_OPENGL_NO_ROBUSTNESS         = 0x00000000,
+    GLFW_OPENGL_NO_RESET_NOTIFICATION = 0x00000001,
+    GLFW_OPENGL_LOSE_CONTEXT_ON_RESET = 0x00000002,
+    
     GLFW_OPENGL_CORE_PROFILE   = 0x00000001,
     GLFW_OPENGL_COMPAT_PROFILE = 0x00000002,
     GLFW_OPENGL_ES2_PROFILE    = 0x00000004,
@@ -224,8 +231,20 @@ typedef struct {
             unsigned short blue[GLFW_GAMMA_RAMP_SIZE];
 } GLFWgammaramp;
 
+typedef struct
+{
+    GLFWmallocfun malloc;
+    GLFWfreefun free;
+} GLFWallocator;
+
+typedef struct
+{
+    int dummy;
+} GLFWthreadmodel;
+
 int         glfwInit(                 void );
 void        glfwTerminate(            void );
+int         glfwInitWithModels(GLFWthreadmodel* threading, GLFWallocator* allocator);
 void        glfwGetVersion(           int* major, int* minor, int* rev );
 const char* glfwGetVersionString(     void );
 int         glfwGetError(             void );
@@ -267,6 +286,7 @@ void        glfwSwapBuffers(          void );
 void        glfwSwapInterval(         int interval );
 int         glfwExtensionSupported(   const char* extension );
 void*       glfwGetProcAddress(       const char* procname );
+void        glfwCopyGLState(GLFWwindow src, GLFWwindow dst, unsigned long mask);
 void        glfwGetGLVersion(         int* major, int* minor, int* rev );
 void        glfwEnable(               GLFWwindow window, int token );
 void        glfwDisable(              GLFWwindow window, int token );

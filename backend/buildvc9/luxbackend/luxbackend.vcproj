@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="luxbackend"
 	ProjectGUID="{234C470D-17B6-452D-B817-0DBFA34C1509}"
 	RootNamespace="Library"
@@ -70,11 +70,12 @@
 				Name="VCLinkerTool"
 				UseLibraryDependencyInputs="false"
 				AdditionalDependencies="luxgfx.lib luxcore.lib luxplatform.lib luxmath.lib glewgl.lib"
-				OutputFile="..\..\..\runtime\clibs_Windows_x86\luxbackend_d.dll"
+				OutputFile="..\..\..\runtime\bin_Windows_x86\luxbackend_d.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug"
 				GenerateMapFile="true"
 				MapExports="true"
 				OptimizeReferences="0"
+				ImportLibrary="..\..\..\depend\lib\Windows_x86_debug\msvc9\$(TargetName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -129,7 +130,7 @@
 				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="1"
 				EnableFiberSafeOptimizations="true"
-				AdditionalIncludeDirectories="&quot;..\..\..\backend\include&quot;;&quot;..\..\..\depend\include&quot;;&quot;..\..\..\depend\include&quot;;"
+				AdditionalIncludeDirectories="&quot;..\..\..\backend\include&quot;;&quot;..\..\..\depend\include&quot;;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_DLL;"
 				StringPooling="true"
 				RuntimeLibrary="2"
@@ -159,6 +160,7 @@
 				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib luxplatform.lib glewgl.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x86\luxbackend.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
+				ImportLibrary="..\..\..\depend\lib\Windows_x86\msvc9\$(TargetName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -191,6 +193,38 @@
 			>
 			<File
 				RelativePath="..\..\luxbackend\main.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\luxbackend\meshbase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\luxbackend\meshvcacheoptcastano.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\luxbackend\meshvcacheoptforsyth.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\luxbackend\meshvcacheopttipsify.cpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="include"
+			>
+			<File
+				RelativePath="..\..\include\luxbackend\mesh.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\luxbackend\meshbase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\luxbackend\meshvcacheopt.h"
 				>
 			</File>
 		</Filter>
