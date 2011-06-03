@@ -72,8 +72,9 @@
 				AdditionalDependencies="luxgfx.lib luxcore.lib luxplatform.lib luxmath.lib glewgl.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x86\luxbackend_d.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug"
-				GenerateMapFile="true"
-				MapExports="true"
+				GenerateDebugInformation="true"
+				GenerateMapFile="false"
+				MapExports="false"
 				OptimizeReferences="0"
 				ImportLibrary="..\..\..\depend\lib\Windows_x86_debug\msvc9\$(TargetName).lib"
 			/>

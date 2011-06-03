@@ -8,7 +8,9 @@ extern "C"{
 
 #include <luxcore/contscalararray.h>
 #include <luxplatform/debug.h>
-#include <luxmath/luxmath.h>
+#include <luxmath/vector2.h>
+#include <luxmath/matrix44.h>
+#include <luxmath/simdmath.h>
 #include <memory.h>
 
 #ifdef __cplusplus

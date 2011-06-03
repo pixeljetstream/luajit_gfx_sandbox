@@ -89,22 +89,20 @@ extern "C"{
       };
     };
   }lxFrustumPlane_t;
-  #define lxFrustumPlanePTR lxFrustumPlane_t* 
+  #define lxFrustumPlanePTR lxFrustumPlane_t* LUX_RESTRICT
 
   typedef struct lxFrustum_s
   {
     lxFrustumPlane_t  fplanes[LUX_FRUSTUM_PLANES];
   }lxFrustum_t;
-  #define lxFrustumPTR lxFrustum_t*
+  #define lxFrustumPTR lxFrustum_t* LUX_RESTRICT
 
   typedef struct lxBoundingBox_s
   {
     lxVector3 min;
     lxVector3 max;
-    lxVector3 center;
-    lxVector3 length;
   }lxBoundingBox_t;
-  #define lxBoundingBoxPTR lxBoundingBox_t*
+  #define lxBoundingBoxPTR lxBoundingBox_t* LUX_RESTRICT
 
   typedef struct lxBoundingSphere_s
   {
@@ -112,7 +110,7 @@ extern "C"{
     float radius;
     float radiusSqr;
   }lxBoundingSphere_t;
-  #define lxBoundingSpherePTR lxBoundingSphere_t*
+  #define lxBoundingSpherePTR lxBoundingSphere_t* LUX_RESTRICT
 
   typedef struct lxBoundingCone_s
   {
@@ -122,7 +120,7 @@ extern "C"{
     float sinSqr;
     float cosSqr;
   }lxBoundingCone_t;
-  #define lxBoundingConePTR lxBoundingCone_t*
+  #define lxBoundingConePTR lxBoundingCone_t* LUX_RESTRICT
 
   typedef struct lxBoundingCapsule_s
   {
@@ -131,7 +129,7 @@ extern "C"{
     float radius;
     float radiusSqr;
   }lxBoundingCapsule_t;
-  #define lxBoundingCapsulePTR lxBoundingCapsule_t*
+  #define lxBoundingCapsulePTR lxBoundingCapsule_t* LUX_RESTRICT
 
   //////////////////////////////////////////////////////////////////////////
 

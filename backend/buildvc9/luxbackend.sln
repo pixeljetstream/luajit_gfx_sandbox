@@ -24,6 +24,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "luxgfx", "luxgfx\luxgfx.vcp
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcproj", "{48D41885-CABF-4E9A-B019-D2163E9D893F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{234C470D-17B6-452D-B817-0DBFA34C1509} = {234C470D-17B6-452D-B817-0DBFA34C1509}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

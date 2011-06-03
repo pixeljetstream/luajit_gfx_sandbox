@@ -264,13 +264,19 @@ LUX_API void lxMatrix44ModifyProjectionClipplane(lxMatrix44PTR projmatrix,const 
 }
 #undef sgn
 
-LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3PTR forward,lxVector3PTR up, int axis)
+LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, const lxVector3PTR forwardn, const lxVector3PTR upn, int axis)
 {
   lxVector3 side;
-  float *x,*y,*z;
+  lxVector3 up;
+  lxVector3 forward;
+  const lxVector3PTR x;
+  const lxVector3PTR y;
+  const lxVector3PTR z;
 
-  lxVector3Cross(side,forward, up);
-  lxVector3Cross(up,side, forward);
+  lxVector3Copy(forward,forwardn);
+
+  lxVector3Cross(side,upn,forward);
+  lxVector3Cross(up,forward,side);
 
   //Vector3Invert(forward);
   lxVector3NormalizedA(side);
@@ -311,7 +317,7 @@ LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3PTR forward,lxVector3P
 
 }
 
-LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, lxVector3PTR from, lxVector3PTR to, lxVector3PTR upn)
+LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, const lxVector3PTR from, const lxVector3PTR to, const lxVector3PTR upn)
 {
   lxMatrix44 m2;
   lxVector3 forward, side, up;
@@ -319,12 +325,9 @@ LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, lxVector3PTR from, lxVector3PTR
   lxVector3Sub(forward,to,from);
   lxVector3NormalizedA(forward);
 
-
-  lxVector3Copy(up,upn);
-
-  lxVector3Cross(side,forward, up);
+  lxVector3Cross(side,upn,forward);
   lxVector3NormalizedA(side);
-  lxVector3Cross(up,side, forward);
+  lxVector3Cross(up,forward,side);
   lxVector3NormalizedA(up);
 
   mat[0] = side[0];

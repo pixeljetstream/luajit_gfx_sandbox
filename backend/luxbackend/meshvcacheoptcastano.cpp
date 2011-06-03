@@ -54,7 +54,7 @@ VertexIndexType* TgridGen(VertexIndexType* pcurrent, VertexIndexType* pend, int 
 
 
 LUX_API void* lxVertexCacheOptimize_grid_castano(
-  const void* indices,  int maxTriangles,
+  void* indices,  int maxTriangles,
   int width,  int height,
   int vcache, lxMeshIndexType_t type,
   int *writtenTriangles)

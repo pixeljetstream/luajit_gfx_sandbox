@@ -5,7 +5,7 @@
 #include <luxmath/fastmath.h>
 #include <luxmath/float16.h>
 
-lxFastMathCache_t*  g_fmcache;
+lxFastMathCache_t*  lx_gFastMath;
 
 //////////////////////////////////////////////////////////////////////////
 // build up tables
@@ -17,7 +17,7 @@ typedef union FastSqrtUnion
 
 LUX_API void lxFastMath_initset(lxFastMathCache_t* cache)
 {
-  g_fmcache = cache;
+  lx_gFastMath = cache;
 }
 
 LUX_API void lxFastMath_init(lxFastMathCache_t* cache)
@@ -26,7 +26,7 @@ LUX_API void lxFastMath_init(lxFastMathCache_t* cache)
   unsigned int i;
   FastSqrtUnion s;
 
-  g_fmcache = cache;
+  lx_gFastMath = cache;
 
   for (i = 0; i <= 0x7FFF; i++)
   {

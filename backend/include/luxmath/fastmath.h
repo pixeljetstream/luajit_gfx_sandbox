@@ -223,7 +223,7 @@ LUX_INLINE float lxFastFrac(float f)
 }
 
 //////////////////////////////////////////////////////////////////////////
-extern lxFastMathCache_t* g_fmcache;
+extern lxFastMathCache_t* lx_gFastMath;
 
 LUX_INLINE float lxFastSqrt(float n)
 {
@@ -233,7 +233,7 @@ LUX_INLINE float lxFastSqrt(float n)
 
 #ifdef MATH_SQRT_TABLE
 
-  FP_BITS(n) = g_fmcache->fast_sqrt_table[(FP_BITS(n) >> 8) & 0xFFFF] | ((((FP_BITS(n) - 0x3F800000) >> 1) + 0x3F800000) & 0x7F800000);
+  FP_BITS(n) = lx_gFastMath->fast_sqrt_table[(FP_BITS(n) >> 8) & 0xFFFF] | ((((FP_BITS(n) - 0x3F800000) >> 1) + 0x3F800000) & 0x7F800000);
 
   return n;
 #elif defined(LUX_SIMD_SSE)
@@ -266,11 +266,11 @@ LUX_INLINE float lxFastCos(const float n)
   lxFloatToInt(&i, f);
   if (i < 0)
   {
-    return g_fmcache->mathcossintable[((-i) + MATH_QUARTER_MAX_CIRCLE_ANGLE)&MATH_MASK_MAX_CIRCLE_ANGLE];
+    return lx_gFastMath->mathcossintable[((-i) + MATH_QUARTER_MAX_CIRCLE_ANGLE)&MATH_MASK_MAX_CIRCLE_ANGLE];
   }
   else
   {
-    return g_fmcache->mathcossintable[(i + MATH_QUARTER_MAX_CIRCLE_ANGLE)&MATH_MASK_MAX_CIRCLE_ANGLE];
+    return lx_gFastMath->mathcossintable[(i + MATH_QUARTER_MAX_CIRCLE_ANGLE)&MATH_MASK_MAX_CIRCLE_ANGLE];
   }
 #elif defined(LUX_SIMD_SSE)
   __m128 res = lxFastCos_ps(_mm_set_ps1(n));
@@ -290,11 +290,11 @@ LUX_INLINE float lxFastSin(const float n)
   lxFloatToInt(&i, f);
   if (i < 0)
   {
-    return g_fmcache->mathcossintable[(-((-i)&MATH_MASK_MAX_CIRCLE_ANGLE)) + MATH_MAX_CIRCLE_ANGLE];
+    return lx_gFastMath->mathcossintable[(-((-i)&MATH_MASK_MAX_CIRCLE_ANGLE)) + MATH_MAX_CIRCLE_ANGLE];
   }
   else
   {
-    return g_fmcache->mathcossintable[i&MATH_MASK_MAX_CIRCLE_ANGLE];
+    return lx_gFastMath->mathcossintable[i&MATH_MASK_MAX_CIRCLE_ANGLE];
   }
 #elif defined(LUX_SIMD_SSE)
   __m128 res = lxFastSin_ps(_mm_set_ps1(n));
@@ -306,7 +306,7 @@ LUX_INLINE float lxFastSin(const float n)
 
 LUX_INLINE float lxFastFloat16To32(const float16 n)
 {
-  return g_fmcache->float16conv[(ushort)n];
+  return lx_gFastMath->float16conv[(ushort)n];
 }
 
 
