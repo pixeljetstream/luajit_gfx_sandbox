@@ -10,6 +10,24 @@
 #include "state_inl.h"
 
 
+//////////////////////////////////////////////////////////////////////////
+
+static LUX_INLINE lxGLShaderType_t getDomainType(lxgProgramDomain_t type)
+{
+  lxGLShaderType_t types[] = {
+    LUXGL_SHADER_VERTEX,
+    LUXGL_SHADER_FRAGMENT,
+    LUXGL_SHADER_GEOMETRY,
+    LUXGL_SHADER_TESSCTRL,
+    LUXGL_SHADER_TESSEVAL,
+  };
+
+  return types[type];
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+
 static void lxgUpdateFloat1GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform1fv(param->gllocation, param->count, data);
 }
@@ -389,6 +407,14 @@ static LUX_INLINE void lxgUpdateBufferNV(lxgProgramParameterPTR param, lxgContex
   }
 }
 
+static void lxgUpdateSubroutineNV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramSubroutineParametersuivNV(param->gltarget,param->count,data);
+}
+
+static void lxgUpdateSubroutineGLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glUniformSubroutinesuiv(param->glshadertype,param->count,data);
+}
+
 
 static void lxgUpdateSampler(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   lxgTexture_checked(data,ctx,param->gllocation);
@@ -397,7 +423,7 @@ static void lxgUpdateImage(lxgProgramParameterPTR param, lxgContextPTR ctx, void
   lxgTextureImage_checked(data,ctx,param->gllocation);
 }
 
-LUX_API void lxgProgramParameter_initDomainNV(lxgProgramParameterPTR param, lxgProgramDomain_t domain)
+LUX_API void lxgProgramParameter_initFuncNV( lxgProgramParameterPTR param, lxgProgramDomain_t domain )
 {
   if (param->gltype == LUXGL_PARAM_BUFFER){
     static lxGLBufferTarget_t types[LUXGFX_MAX_DOMAINS] = {
@@ -421,10 +447,7 @@ LUX_API void lxgProgramParameter_initDomainNV(lxgProgramParameterPTR param, lxgP
 
     param->gltarget = types[domain];
   }
-}
 
-LUX_API void lxgProgramParameter_initFuncNV( lxgProgramParameterPTR param )
-{
   param->func = NULL;
   switch(param->gltype)
   {
@@ -562,13 +585,16 @@ LUX_API void lxgProgramParameter_initFuncNV( lxgProgramParameterPTR param )
   case LUXGL_PARAM_UIMAGE_BUFFER:
     param->func = lxgUpdateImage; return;
 
+  case LUXGL_PARAM_SUBROUTINES:
+    param->func = lxgUpdateSubroutineNV; return;
+
   case LUXGL_PARAM_SPECIAL:
     return;
   }
   LUX_DEBUGASSERT(0 && "illegal parameter type");
 }
 
-LUX_API void lxgProgramParameter_initFunc( lxgProgramParameterPTR param )
+LUX_API void lxgProgramParameter_initFunc( lxgProgramParameterPTR param, lxgProgramDomain_t domain )
 {
   param->func = NULL;
   switch(param->gltype)
@@ -707,13 +733,17 @@ LUX_API void lxgProgramParameter_initFunc( lxgProgramParameterPTR param )
   case LUXGL_PARAM_UIMAGE_BUFFER:
     param->func = lxgUpdateImage; return;
 
+  case LUXGL_PARAM_SUBROUTINES:
+    param->glshadertype = getDomainType(domain);
+    param->func = lxgUpdateSubroutineGLSL; return;
+
   case LUXGL_PARAM_SPECIAL:
     return;
   }
   LUX_DEBUGASSERT(0 && "illegal parameter type");
 }
 
-LUX_API void lxgProgramParameter_initFuncSEP( lxgProgramParameterPTR param , GLuint progid)
+LUX_API void lxgProgramParameter_initFuncSEP( lxgProgramParameterPTR param, lxgProgramDomain_t domain, GLuint progid)
 {
   param->glid = progid;
   param->func = NULL;
@@ -852,6 +882,10 @@ LUX_API void lxgProgramParameter_initFuncSEP( lxgProgramParameterPTR param , GLu
   case LUXGL_PARAM_UIMAGE_2DMSARRAY:
   case LUXGL_PARAM_UIMAGE_BUFFER:
     param->func = lxgUpdateImage; return;
+
+  case LUXGL_PARAM_SUBROUTINES:
+    param->glshadertype = getDomainType(domain);
+    param->func = lxgUpdateSubroutineGLSL; return;
 
   case LUXGL_PARAM_SPECIAL:
     return;
@@ -1057,20 +1091,6 @@ LUX_API void lxgProgram_setDomainNV( lxgProgramPTR prog, lxgProgramDomain_t type
 }
 
 //////////////////////////////////////////////////////////////////////////
-
-static LUX_INLINE lxGLShaderType_t getDomainType(lxgProgramDomain_t type)
-{
-  lxGLShaderType_t types[] = {
-    LUXGL_SHADER_VERTEX,
-    LUXGL_SHADER_FRAGMENT,
-    LUXGL_SHADER_GEOMETRY,
-    LUXGL_SHADER_TESSCTRL,
-    LUXGL_SHADER_TESSEVAL,
-  };
-
-  return types[type];
-}
-
 
 
 LUX_API void lxgDomainProgram_init( lxgDomainProgramPTR stage, lxgContextPTR ctx, lxgProgramDomain_t type)

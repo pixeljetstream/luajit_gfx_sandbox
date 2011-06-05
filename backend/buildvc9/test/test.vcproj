@@ -179,11 +179,27 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\test\gfxprogram.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\test\gfxtexture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\test\gfxvertex.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\test\main.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\test\mesh.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\test\shader.cpp"
 				>
 			</File>
 			<File

@@ -34,13 +34,14 @@ extern "C"{
     lxGLParameterType_t   gltype;
     lxgParmeterUpdate_fn  func;
     union{
-      GLuint              glid;
-      GLenum              gltarget;
+      GLuint              glid;         // for SEP
+      GLenum              gltarget;     // for NV
+      GLenum              glshadertype; // for subroutines
     };
     GLuint                gllocation;
     ushort                count;
     bool16                transpose;
-    const char*           name;  // only to aid debugging
+    const char*           name;         // only to aid debugging
   }lxgProgramParameter_t;
 
   typedef struct lxgDomainProgram_s{
@@ -70,7 +71,8 @@ extern "C"{
   LUX_API void lxgProgram_applyImages( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgTextureImagePTR *data );
 
   // GLSL
-  LUX_API void lxgProgramParameter_initFunc(lxgProgramParameterPTR param);
+    // domain is only important to subroutines
+  LUX_API void lxgProgramParameter_initFunc(lxgProgramParameterPTR param, lxgProgramDomain_t domain);
 
   LUX_API void lxgDomainProgram_init(lxgDomainProgramPTR stage, lxgContextPTR ctx, lxgProgramDomain_t type);
   LUX_API void lxgDomainProgram_deinit(lxgDomainProgramPTR stage, lxgContextPTR ctx);
@@ -86,11 +88,11 @@ extern "C"{
   LUX_API void lxgProgram_applyBuffersGLSL(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data);
 
   // GLSL SEPERATE or DSA
-  LUX_API void lxgProgramParameter_initFuncSEP(lxgProgramParameterPTR param, GLuint progid);
+  LUX_API void lxgProgramParameter_initFuncSEP(lxgProgramParameterPTR param, lxgProgramDomain_t domain, GLuint progid);
 
   // NV/ARB PROGRAM
-  LUX_API void lxgProgramParameter_initDomainNV(lxgProgramParameterPTR param, lxgProgramDomain_t domain);
-  LUX_API void lxgProgramParameter_initFuncNV(lxgProgramParameterPTR param);
+    // domain is always important
+  LUX_API void lxgProgramParameter_initFuncNV(lxgProgramParameterPTR param, lxgProgramDomain_t domain);
 
   LUX_API void lxgDomainProgram_initNV(lxgDomainProgramPTR stage, lxgContextPTR ctx, lxgProgramDomain_t type);
   LUX_API void lxgDomainProgram_deinitNV(lxgDomainProgramPTR stage, lxgContextPTR ctx);
