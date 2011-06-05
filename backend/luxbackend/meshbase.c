@@ -24,8 +24,12 @@ LUX_API void lxMeshPlane_initTriangles(int segs[2], lxVector3* pos, lxVector3* n
   float ymove = 1.0f/(float)segs[1];
 
   int vert = 0;
-  for (int y = 0; y < ydim + 1; y++){
-    for (int x = 0; x < xdim + 1; x++, vert++){
+  int idx = 0;
+  int width = (xdim + 1);
+
+  int x,y;
+  for (y = 0; y < ydim + 1; y++){
+    for (x = 0; x < xdim + 1; x++, vert++){
       float xpos = ((float)x * xmove);
       float ypos = ((float)y * ymove);
       pos[vert][0] = (xpos - 0.5f) * 2.0f;
@@ -41,10 +45,8 @@ LUX_API void lxMeshPlane_initTriangles(int segs[2], lxVector3* pos, lxVector3* n
     }
   }
 
-  int idx = 0;
-  int width = (xdim + 1);
-  for (int y = 0; y < ydim; y++){
-    for (int x = 0; x < xdim; x++){
+  for (y = 0; y < ydim; y++){
+    for (x = 0; x < xdim; x++){
       // lower tris
       indices[idx++] = (x)      + (y)     * width;
       indices[idx++] = (x + 1)  + (y)     * width;
@@ -65,19 +67,20 @@ LUX_API void lxMeshPlane_initOutline(int segs[2], uint32* indices)
 
   int idx = 0;
   int width = (xdim + 1);
-  for (int y = 0; y < ydim; y++){
+  int x,y;
+  for (y = 0; y < ydim; y++){
     indices[idx++] = (y)     * width;
     indices[idx++] = (y + 1) * width;
   }
-  for (int y = 0; y < ydim; y++){
+  for (y = 0; y < ydim; y++){
     indices[idx++] = (y)     * width + xdim;
     indices[idx++] = (y + 1) * width + xdim;
   }
-  for (int x = 0; x < xdim; x++){
+  for (x = 0; x < xdim; x++){
     indices[idx++] = (x)    ;
     indices[idx++] = (x + 1);
   }
-  for (int x = 0; x < xdim; x++){
+  for (x = 0; x < xdim; x++){
     indices[idx++] = (x)     + ydim * width;
     indices[idx++] = (x + 1) + ydim * width;
   }
@@ -97,8 +100,10 @@ LUX_API void lxMeshDisc_initTriangles(int segs[2], lxVector3* pos, lxVector3* no
   int idim = segs[1];
   float oshift = LUX_MUL_TWOPI / (float)odim;
   float ishift = 1.0f / (float)idim;
+  int i,o;
 
   int vertex = 0;
+  int index = 0;
   // center
   pos[vertex][0] = 0.0f;
   pos[vertex][1] = 0.0f;
@@ -113,8 +118,8 @@ LUX_API void lxMeshDisc_initTriangles(int segs[2], lxVector3* pos, lxVector3* no
   vertex++;
 
   // rings
-  for (int i = 1; i <= idim; i++){
-    for (int o = 0; o < odim; o++, vertex++){
+  for (i = 1; i <= idim; i++){
+    for (o = 0; o < odim; o++, vertex++){
       float angle = oshift * (float)o;
       float xpos = cosf(angle) * ishift * (float)i;
       float ypos = sinf(angle) * ishift * (float)i;
@@ -131,11 +136,10 @@ LUX_API void lxMeshDisc_initTriangles(int segs[2], lxVector3* pos, lxVector3* no
     }
   }
 
-  int index = 0;
   vertex = 1;
-  for (int i = 0; i < idim; i++){
+  for (i = 0; i < idim; i++){
     int vertexstart = vertex;
-    for (int o = 0; o < odim; o++, vertex++){
+    for (o = 0; o < odim; o++, vertex++){
       int vertexnext = (o != odim - 1) ? vertex + 1 : vertexstart;
       if (i == 0){
         indices[index++] = vertex;
@@ -162,9 +166,10 @@ LUX_API void lxMeshDisc_initOutline(int segs[2], uint32* indices)
 
   int index = 0;
   int vertex = 1;
-  for (int i = 0; i < idim; i++){
+  int i,o;
+  for (i = 0; i < idim; i++){
     int vertexstart = vertex;
-    for (int o = 0; o < odim; o++, vertex++){
+    for (o = 0; o < odim; o++, vertex++){
       int vertexnext = (o != odim - 1) ? vertex + 1 : vertexstart;
       if (i == idim-1){
         indices[index++] = vertex;
@@ -206,7 +211,8 @@ LUX_API void lxMeshBox_getMemsize(int segs[3], int* numVertices, int* numTriangl
 static void lxMeshHelper_applyTransform(int num, lxVector3* pos, lxVector3* normal, lxMatrix44 matrix)
 {
   lxVector3 nrm = {0.0f, 0.0f, -1.0f};
-  for (int i = 0; i < num; i++){
+  int i;
+  for (i = 0; i < num; i++){
     lxVector3 vec = {pos[i][0], pos[i][1], -1.0f};
     lxVector3Transform(pos[i],    vec, matrix);
     lxVector3Transform(normal[i], nrm, matrix);
@@ -215,7 +221,8 @@ static void lxMeshHelper_applyTransform(int num, lxVector3* pos, lxVector3* norm
 
 static void lxMeshHelper_applyOffset(int num, uint32* indices, int offset)
 {
-  for (int i = 0; i < num; i++){
+  int i;
+  for (i = 0; i < num; i++){
     indices[i] += offset;
   }
 }
@@ -240,7 +247,8 @@ LUX_API void lxMeshBox_initTriangles(int segs[3], lxVector3* pos, lxVector3* nor
     {segs[0],segs[2]},
   };
 
-  for (int side = 0; side < 6; side++){
+  int side;
+  for (side = 0; side < 6; side++){
     lxVector3 angles;
     switch (side)
     {
@@ -298,8 +306,8 @@ LUX_API void lxMeshBox_initOutline(int segs[3], uint32* indices)
     {segs[0],segs[2]},
   };
 
-  int idx = 0;
-  for (int side = 0; side < 6; side++){
+  int side;
+  for (side = 0; side < 6; side++){
     lxMeshPlane_getMemsize(configs[side],&numv,&numtris,&numline);
     lxMeshPlane_initOutline(configs[side],indices + offsetline);
     lxMeshHelper_applyOffset(numline,indices + offsetline,offsetv);
@@ -323,10 +331,13 @@ LUX_API void lxMeshSphere_initTriangles(int segs[2], lxVector3* pos, lxVector3* 
 
   float xyshift = 1.0f / (float)xydim;
   float zshift  = 1.0f / (float)zdim;
-  
+  int width = xydim + 1;
+
   int vertex = 0;
-  for (int z = 0; z < zdim + 1; z++){
-    for (int xy = 0; xy < xydim + 1; xy++, vertex++){
+  int index = 0;
+  int xy,z;
+  for (z = 0; z < zdim + 1; z++){
+    for (xy = 0; xy < xydim + 1; xy++, vertex++){
       float curxy = xyshift * (float)xy;
       float curz  = zshift  * (float)z;
       float anglexy = curxy * LUX_MUL_TWOPI;
@@ -339,11 +350,10 @@ LUX_API void lxMeshSphere_initTriangles(int segs[2], lxVector3* pos, lxVector3* 
       uv[vertex][1]  = curz;
     }
   }
-  int index = 0;
+  
   vertex = 0;
-  int width = xydim + 1;
-  for (int z = 0; z < zdim; z++){
-    for (int xy = 0; xy < xydim; xy++, vertex++){
+  for (z = 0; z < zdim; z++){
+    for (xy = 0; xy < xydim; xy++, vertex++){
       if (z != zdim-1){
         indices[index++] = vertex;
         indices[index++] = vertex + width;
@@ -369,14 +379,15 @@ LUX_API void lxMeshSphere_initOutline(int segs[2], uint32* indices)
   int width = xydim + 1;
   int index = 0;
   // aequatorial line (xy)
-  for (int xy = 0; xy < xydim; xy++){
+  int i,xy,z;
+  for (xy = 0; xy < xydim; xy++){
     indices[index++] = middlez * width + xy;
     indices[index++] = middlez * width + xy + 1;
   }
 
-  for (int i = 0; i < 4; i++){
+  for (i = 0; i < 4; i++){
     int x = (segs[0] * i) / 4;
-    for (int z = 0; z < zdim; z++){
+    for (z = 0; z < zdim; z++){
       indices[index++] = x + width * (z);
       indices[index++] = x + width * (z + 1);
     }
@@ -419,6 +430,7 @@ LUX_API void lxMeshCylinder_initTriangles(int segs[3], lxVector3* pos, lxVector3
 
   int offsetv = 0;
   int offsettris = 0;
+  int v;
 
   used[0] = segs[0];
   used[1] = segs[1];
@@ -445,7 +457,8 @@ LUX_API void lxMeshCylinder_initTriangles(int segs[3], lxVector3* pos, lxVector3
   lxMeshPlane_initTriangles(used,pos + offsetv, normal + offsetv, uv + offsetv, indices + offsettris);
   lxMeshHelper_applyOffset(numtris, indices + offsettris, offsetv);
 
-  for (int v = 0; v < numv; v++){
+
+  for (v = 0; v < numv; v++){
     // x becomes z
     float zpos = pos[offsetv + v][0];
 
@@ -474,6 +487,8 @@ LUX_API void lxMeshCylinder_initOutline(int segs[3], uint32* indices)
   int offsetv = 0;
   int offsetline = 0;
 
+  int i,x;
+
   used[0] = segs[0];
   used[1] = segs[1];
   lxMeshDisc_getMemsize(used,&numv,&numtris,&numline);
@@ -485,13 +500,15 @@ LUX_API void lxMeshCylinder_initOutline(int segs[3], uint32* indices)
   offsetline += numline;
   offsetv    += numv;
   // let's add 4 z(x) lines
-  int index = offsetline;
-  int width = segs[2] + 1;
-  for (int i = 0; i < 4; i++){
-    int y = (segs[0] * i) / 4;
-    for (int x = 0; x < segs[2]; x++){
-      indices[index++] = offsetv + y * width + x;
-      indices[index++] = offsetv + y * width + x + 1;
+  {
+    int index = offsetline;
+    int width = segs[2] + 1;
+    for (i = 0; i < 4; i++){
+      int y = (segs[0] * i) / 4;
+      for (x = 0; x < segs[2]; x++){
+        indices[index++] = offsetv + y * width + x;
+        indices[index++] = offsetv + y * width + x + 1;
+      }
     }
   }
 }

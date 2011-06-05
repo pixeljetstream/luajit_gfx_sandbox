@@ -197,7 +197,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\luxbackend\meshbase.cpp"
+				RelativePath="..\..\luxbackend\meshbase.c"
 				>
 			</File>
 			<File
@@ -210,6 +210,10 @@
 			</File>
 			<File
 				RelativePath="..\..\luxbackend\meshvcacheopttipsify.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\luxbackend\shader.c"
 				>
 			</File>
 		</Filter>
@@ -226,6 +230,10 @@
 			</File>
 			<File
 				RelativePath="..\..\include\luxbackend\meshvcacheopt.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\luxbackend\shader.h"
 				>
 			</File>
 		</Filter>
