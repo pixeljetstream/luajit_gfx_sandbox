@@ -2461,6 +2461,9 @@ PFNGLPROGRAMLOCALPARAMETERI4UIVNVPROC glProgramLocalParameterI4uivNV = NULL;
 PFNGLPROGRAMLOCALPARAMETERSI4IVNVPROC glProgramLocalParametersI4ivNV = NULL;
 PFNGLPROGRAMLOCALPARAMETERSI4UIVNVPROC glProgramLocalParametersI4uivNV = NULL;
 
+PFNGLPROGRAMSUBROUTINEPARAMETERSUIVNVPROC glProgramSubroutineParametersuivNV = NULL;
+PFNGLGETPROGRAMSUBROUTINEPARAMETERUIVNVPROC glGetProgramSubroutineParameteruivNV = NULL;
+
 PFNGLGETUNIFORMI64VNVPROC glGetUniformi64vNV = NULL;
 PFNGLGETUNIFORMUI64VNVPROC glGetUniformui64vNV = NULL;
 PFNGLPROGRAMUNIFORM1I64NVPROC glProgramUniform1i64NV = NULL;
@@ -7640,6 +7643,16 @@ static GLboolean _glewInit_GL_NV_gpu_program4 (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #ifdef GL_NV_gpu_program5
 
+static GLboolean _glewInit_GL_NV_gpu_program5 (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((glProgramSubroutineParametersuivNV = (PFNGLPROGRAMSUBROUTINEPARAMETERSUIVNVPROC)glewGetProcAddress(fqn_from_convention(glew_convention, "glProgramSubroutineParametersuivNV "))) == NULL) || r;
+  r = ((glGetProgramSubroutineParameteruivNV = (PFNGLGETPROGRAMSUBROUTINEPARAMETERUIVNVPROC)glewGetProcAddress(fqn_from_convention(glew_convention, "glGetProgramSubroutineParameteruivNV "))) == NULL) || r;
+
+  return r;  
+}
+
 #endif /* GL_NV_gpu_program5 */
 
 #ifdef GL_NV_gpu_program_fp64
@@ -9923,6 +9936,7 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #endif /* GL_NV_gpu_program4 */
 #ifdef GL_NV_gpu_program5
   CONST_CAST(GLEW_NV_gpu_program5) = glewGetExtension("GL_NV_gpu_program5");
+  if (glewExperimental || GLEW_NV_gpu_program5) CONST_CAST(GLEW_NV_gpu_program5) = !_glewInit_GL_NV_gpu_program5(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_NV_gpu_program5 */
 #ifdef GL_NV_gpu_program_fp64
   CONST_CAST(GLEW_NV_gpu_program_fp64) = glewGetExtension("GL_NV_gpu_program_fp64");
