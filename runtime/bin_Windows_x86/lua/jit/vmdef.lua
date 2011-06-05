@@ -4,7 +4,7 @@ module(...)
 
 bcnames = "ISLT  ISGE  ISLE  ISGT  ISEQV ISNEV ISEQS ISNES ISEQN ISNEN ISEQP ISNEP ISTC  ISFC  IST   ISF   MOV   NOT   UNM   LEN   ADDVN SUBVN MULVN DIVVN MODVN ADDNV SUBNV MULNV DIVNV MODNV ADDVV SUBVV MULVV DIVVV MODVV POW   CAT   KSTR  KCDATAKSHORTKNUM  KPRI  KNIL  UGET  USETV USETS USETN USETP UCLO  FNEW  TNEW  TDUP  GGET  GSET  TGETV TGETS TGETB TSETV TSETS TSETB TSETM CALLM CALL  CALLMTCALLT ITERC ITERN VARG  ISNEXTRETM  RET   RET0  RET1  FORI  JFORI FORL  IFORL JFORL ITERL IITERLJITERLLOOP  ILOOP JLOOP JMP   FUNCF IFUNCFJFUNCFFUNCV IFUNCVJFUNCVFUNCC FUNCCW"
 
-irnames = "LT    GE    LE    GT    ULT   UGE   ULE   UGT   EQ    NE    ABC   RETF  NOP   BASE  HIOP  LOOP  PHI   RENAMEKPRI  KINT  KGC   KPTR  KKPTR KNULL KNUM  KINT64KSLOT BNOT  BSWAP BAND  BOR   BXOR  BSHL  BSHR  BSAR  BROL  BROR  ADD   SUB   MUL   DIV   MOD   POW   NEG   ABS   ATAN2 LDEXP MIN   MAX   FPMATHADDOV SUBOV AREF  HREFK HREF  NEWREFUREFO UREFC FREF  STRREFALOAD HLOAD ULOAD FLOAD XLOAD SLOAD VLOAD ASTOREHSTOREUSTOREFSTOREXSTORESNEW  XSNEW TNEW  TDUP  CNEW  CNEWI TBAR  OBAR  XBAR  CONV  TOBIT TOSTR STRTO CALLN CALLL CALLS CALLXSCARG  "
+irnames = "LT    GE    LE    GT    ULT   UGE   ULE   UGT   EQ    NE    ABC   RETF  NOP   BASE  HIOP  LOOP  USE   PHI   RENAMEKPRI  KINT  KGC   KPTR  KKPTR KNULL KNUM  KINT64KSLOT BNOT  BSWAP BAND  BOR   BXOR  BSHL  BSHR  BSAR  BROL  BROR  ADD   SUB   MUL   DIV   MOD   POW   NEG   ABS   ATAN2 LDEXP MIN   MAX   FPMATHADDOV SUBOV MULOV AREF  HREFK HREF  NEWREFUREFO UREFC FREF  STRREFALOAD HLOAD ULOAD FLOAD XLOAD SLOAD VLOAD ASTOREHSTOREUSTOREFSTOREXSTORESNEW  XSNEW TNEW  TDUP  CNEW  CNEWI TBAR  OBAR  XBAR  CONV  TOBIT TOSTR STRTO CALLN CALLL CALLS CALLXSCARG  "
 
 irfpm = { [0]="floor", "ceil", "trunc", "sqrt", "exp", "exp2", "log", "log2", "log10", "sin", "cos", "tan", "other", }
 
@@ -24,6 +24,7 @@ ircall = {
 "lj_gc_barrieruv",
 "lj_mem_newgco",
 "lj_math_random_step",
+"lj_vm_modi",
 "lj_carith_mul64",
 "lj_carith_divi64",
 "lj_carith_divu64",
@@ -31,6 +32,7 @@ ircall = {
 "lj_carith_modu64",
 "lj_carith_powi64",
 "lj_carith_powu64",
+"lj_cdata_setfin",
 "strlen",
 "memcpy",
 "memset",
@@ -139,9 +141,9 @@ ffnames = {
 "math.deg",
 "math.rad",
 "math.atan2",
-"math.ldexp",
 "math.pow",
 "math.fmod",
+"math.ldexp",
 "math.min",
 "math.max",
 "math.random",
@@ -267,13 +269,16 @@ ffnames = {
 "ffi.new",
 "ffi.cast",
 "ffi.typeof",
+"ffi.istype",
 "ffi.sizeof",
 "ffi.alignof",
 "ffi.offsetof",
+"ffi.errno",
 "ffi.string",
 "ffi.copy",
 "ffi.fill",
 "ffi.abi",
+"ffi.metatype",
 "ffi.gc",
 "ffi.load",
 }
