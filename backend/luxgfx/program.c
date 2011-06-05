@@ -10,155 +10,220 @@
 #include "state_inl.h"
 
 
-static void lxgUpdateFloat1(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateFloat1GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform1fv(param->gllocation, param->count, data);
 }
-static void lxgUpdateFloat2(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateFloat2GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform2fv(param->gllocation, param->count, data);
 }
-static void lxgUpdateFloat3(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateFloat3GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform3fv(param->gllocation, param->count, data);
 }
-static void lxgUpdateFloat4(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateFloat4GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform4fv(param->gllocation, param->count, data);
 }
 
-static void lxgUpdateInt1(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateInt1GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform1iv(param->gllocation, param->count, data);
 }
-static void lxgUpdateInt2(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateInt2GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform2iv(param->gllocation, param->count, data);
 }
-static void lxgUpdateInt3(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateInt3GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform3iv(param->gllocation, param->count, data);
 }
-static void lxgUpdateInt4(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateInt4GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform4iv(param->gllocation, param->count, data);
 }
 
-static void lxgUpdateUInt1(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateUInt1GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform1uiv(param->gllocation, param->count, data);
 }
-static void lxgUpdateUInt2(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateUInt2GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform2uiv(param->gllocation, param->count, data);
 }
-static void lxgUpdateUInt3(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateUInt3GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform3uiv(param->gllocation, param->count, data);
 }
-static void lxgUpdateUInt4(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateUInt4GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniform4uiv(param->gllocation, param->count, data);
 }
 
-static void lxgUpdateMat2(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat2GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniformMatrix2fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
-static void lxgUpdateMat3(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat3GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniformMatrix3fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
-static void lxgUpdateMat4(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat4GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniformMatrix4fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
-static void lxgUpdateMat2x3(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat2x3GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniformMatrix2x3fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
-static void lxgUpdateMat2x4(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat2x4GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniformMatrix2x4fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
-static void lxgUpdateMat3x2(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat3x2GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniformMatrix3x2fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
-static void lxgUpdateMat3x4(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat3x4GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniformMatrix3x4fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
-static void lxgUpdateMat4x2(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat4x2GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniformMatrix4x2fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
-static void lxgUpdateMat4x3(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat4x3GLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glUniformMatrix4x3fv(param->gllocation, param->count, (GLboolean)param->transpose, data);
 }
-static void lxgUpdateBuffer(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static LUX_INLINE void lxgUpdateBufferGLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   if (lxgBuffer_queryUniform(data,ctx,param->gllocation)){
     lxgBuffer_bindIndexed(data,LUXGL_BUFFER_UNIFORM,param->gllocation);
   }
 }
+static void lxgUpdateFloat1SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform1fv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateFloat2SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform2fv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateFloat3SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform3fv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateFloat4SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform4fv(param->glid, param->gllocation, param->count, data);
+}
 
-static void lxgUpdateFloat1NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateInt1SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform1iv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateInt2SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform2iv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateInt3SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform3iv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateInt4SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform4iv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateUInt1SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform1uiv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateUInt2SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform2uiv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateUInt3SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform3uiv(param->glid, param->gllocation, param->count, data);
+}
+static void lxgUpdateUInt4SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniform4uiv(param->glid, param->gllocation, param->count, data);
+}
+
+static void lxgUpdateMat2SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniformMatrix2fv(param->glid, param->gllocation, param->count, (GLboolean)param->transpose, data);
+}
+static void lxgUpdateMat3SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniformMatrix3fv(param->glid, param->gllocation, param->count, (GLboolean)param->transpose, data);
+}
+static void lxgUpdateMat4SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniformMatrix4fv(param->glid, param->gllocation, param->count, (GLboolean)param->transpose, data);
+}
+static void lxgUpdateMat2x3SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniformMatrix2x3fv(param->glid, param->gllocation, param->count, (GLboolean)param->transpose, data);
+}
+static void lxgUpdateMat2x4SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniformMatrix2x4fv(param->glid, param->gllocation, param->count, (GLboolean)param->transpose, data);
+}
+static void lxgUpdateMat3x2SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniformMatrix3x2fv(param->glid, param->gllocation, param->count, (GLboolean)param->transpose, data);
+}
+static void lxgUpdateMat3x4SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniformMatrix3x4fv(param->glid, param->gllocation, param->count, (GLboolean)param->transpose, data);
+}
+static void lxgUpdateMat4x2SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniformMatrix4x2fv(param->glid, param->gllocation, param->count, (GLboolean)param->transpose, data);
+}
+static void lxgUpdateMat4x3SEP(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  glProgramUniformMatrix4x3fv(param->glid, param->gllocation, param->count, (GLboolean)param->transpose, data);
+}
+
+static void lxgUpdateFloat1NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   float* vec = (float*)data;
   uint i;
   for (i = 0; i < param->count; ++i, vec++){
     glProgramLocalParameter4fARB(param->gltarget,param->gllocation + i,vec[0],0.0f,0.0f,0.0f);
   }
 }
-static void lxgUpdateFloat2NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateFloat2NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   float* vec = (float*)data;
   uint i;
   for (i = 0; i < param->count; ++i, vec+=2){
     glProgramLocalParameter4fARB(param->gltarget,param->gllocation + i,vec[0],vec[1],0.0f,0.0f);
   }
 }
-static void lxgUpdateFloat3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateFloat3NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   float* vec = (float*)data;
   uint i;
   for (i = 0; i < param->count; ++i, vec+=3){
     glProgramLocalParameter4fARB(param->gltarget,param->gllocation + i,vec[0],vec[1],vec[2],0.0f);
   }
 }
-static void lxgUpdateFloat4NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateFloat4NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glProgramLocalParameters4fvEXT(param->gltarget,param->gllocation,param->count,data);
 }
 
-static void lxgUpdateInt1NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateInt1NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   int* vec = (int*)data;
   uint i;
   for (i = 0; i < param->count; ++i, vec++){
     glProgramLocalParameterI4iNV(param->gltarget,param->gllocation + i,vec[0],0,0,0);
   }
 }
-static void lxgUpdateInt2NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateInt2NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   int* vec = (int*)data;
   uint i;
   for (i = 0; i < param->count; ++i, vec+=2){
     glProgramLocalParameterI4iNV(param->gltarget,param->gllocation + i,vec[0],vec[1],0,0);
   }
 }
-static void lxgUpdateInt3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateInt3NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   int* vec = (int*)data;
   uint i;
   for (i = 0; i < param->count; ++i, vec+=3){
     glProgramLocalParameterI4iNV(param->gltarget,param->gllocation + i,vec[0],vec[1],vec[2],0);
   }
 }
-static void lxgUpdateInt4NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateInt4NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glProgramLocalParametersI4ivNV(param->gltarget,param->gllocation,param->count,data);
 }
 
-static void lxgUpdateUInt1NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateUInt1NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   uint* vec = (uint*)data;
   uint i;
   for (i = 0; i < param->count; ++i, vec++){
     glProgramLocalParameterI4uiNV(param->gltarget,param->gllocation + i,vec[0],0,0,0);
   }
 }
-static void lxgUpdateUInt2NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateUInt2NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   uint* vec = (uint*)data;
   uint i;
   for (i = 0; i < param->count; ++i, vec+=2){
     glProgramLocalParameterI4uiNV(param->gltarget,param->gllocation + i,vec[0],vec[1],0,0);
   }
 }
-static void lxgUpdateUInt3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateUInt3NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   uint* vec = (uint*)data;
   uint i;
   for (i = 0; i < param->count; ++i, vec+=3){
     glProgramLocalParameterI4uiNV(param->gltarget,param->gllocation + i,vec[0],vec[1],vec[2],0);
   }
 }
-static void lxgUpdateUInt4NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateUInt4NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   glProgramLocalParametersI4uivNV(param->gltarget,param->gllocation,param->count,data);
 }
 
 
-static void lxgUpdateMat2NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat2NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   float* vec = (float*)data;
   GLuint loc = param->gllocation;
   uint i;
@@ -175,7 +240,7 @@ static void lxgUpdateMat2NV(lxgContextPTR ctx, lxgProgramParameterPTR param, voi
     }
   }
 }
-static void lxgUpdateMat3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat3NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   float* vec = (float*)data;
   GLuint loc = param->gllocation;
   uint i;
@@ -194,7 +259,7 @@ static void lxgUpdateMat3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, voi
     }
   }
 }
-static void lxgUpdateMat4NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat4NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   if (!param->transpose){
     glProgramLocalParameters4fvEXT(param->gltarget,param->gllocation,((int)param->count) * 4,data);
   }
@@ -210,7 +275,7 @@ static void lxgUpdateMat4NV(lxgContextPTR ctx, lxgProgramParameterPTR param, voi
     }
   }
 }
-static void lxgUpdateMat2x3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat2x3NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   float* vec = (float*)data;
   GLuint loc = param->gllocation;
   uint i;
@@ -227,7 +292,7 @@ static void lxgUpdateMat2x3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, v
     }
   }
 }
-static void lxgUpdateMat2x4NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat2x4NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   if (!param->transpose){
     glProgramLocalParameters4fvEXT(param->gltarget,param->gllocation,((int)param->count) * 2,data);
   }
@@ -241,7 +306,7 @@ static void lxgUpdateMat2x4NV(lxgContextPTR ctx, lxgProgramParameterPTR param, v
     }
   }
 }
-static void lxgUpdateMat3x2NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat3x2NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   float* vec = (float*)data;
   GLuint loc = param->gllocation;
   uint i;
@@ -260,7 +325,7 @@ static void lxgUpdateMat3x2NV(lxgContextPTR ctx, lxgProgramParameterPTR param, v
     }
   }
 }
-static void lxgUpdateMat3x4NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat3x4NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   if (!param->transpose){
     glProgramLocalParameters4fvEXT(param->gltarget,param->gllocation,((int)param->count) * 3,data);
   }
@@ -275,7 +340,7 @@ static void lxgUpdateMat3x4NV(lxgContextPTR ctx, lxgProgramParameterPTR param, v
     }
   }
 }
-static void lxgUpdateMat4x2NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat4x2NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   float* vec = (float*)data;
   GLuint loc = param->gllocation;
   uint i;
@@ -296,7 +361,7 @@ static void lxgUpdateMat4x2NV(lxgContextPTR ctx, lxgProgramParameterPTR param, v
     }
   }
 }
-static void lxgUpdateMat4x3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateMat4x3NV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   float* vec = (float*)data;
   GLuint loc = param->gllocation;
   uint i;
@@ -317,24 +382,25 @@ static void lxgUpdateMat4x3NV(lxgContextPTR ctx, lxgProgramParameterPTR param, v
     }
   }
 }
-static void lxgUpdateBufferNV(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
-  if (lxgBuffer_queryUniform(data,ctx,param->gllocation)){
+static LUX_INLINE void lxgUpdateBufferNV(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
+  GLuint domain = param->gltarget - LUXGL_BUFFER_NVPARAM_TESSCTRL;
+  if (lxgBuffer_queryUniform(data,ctx,param->gllocation + domain * LUXGFX_MAX_DOMAIN_BUFFERS)){
     lxgBuffer_bindIndexed(data,param->gltarget,param->gllocation);
   }
 }
 
 
-static void lxgUpdateSampler(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateSampler(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   lxgTexture_checked(data,ctx,param->gllocation);
 }
-static void lxgUpdateImage(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data){
+static void lxgUpdateImage(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data){
   lxgTextureImage_checked(data,ctx,param->gllocation);
 }
 
 LUX_API void lxgProgramParameter_initDomainNV(lxgProgramParameterPTR param, lxgProgramDomain_t domain)
 {
   if (param->gltype == LUXGL_PARAM_BUFFER){
-    static lxGLBufferTarget_t types[5] = {
+    static lxGLBufferTarget_t types[LUXGFX_MAX_DOMAINS] = {
       LUXGL_BUFFER_NVPARAM_VERTEX,
       LUXGL_BUFFER_NVPARAM_FRAGMENT,
       LUXGL_BUFFER_NVPARAM_GEOMETRY,
@@ -345,7 +411,7 @@ LUX_API void lxgProgramParameter_initDomainNV(lxgProgramParameterPTR param, lxgP
     param->gltarget = types[domain];
   }
   else{
-    static lxGLProgramType_t types[5] = {
+    static lxGLProgramType_t types[LUXGFX_MAX_DOMAINS] = {
       LUXGL_PROGRAM_VERTEX,
       LUXGL_PROGRAM_FRAGMENT,
       LUXGL_PROGRAM_GEOMETRY,
@@ -495,6 +561,9 @@ LUX_API void lxgProgramParameter_initFuncNV( lxgProgramParameterPTR param )
   case LUXGL_PARAM_UIMAGE_2DMSARRAY:
   case LUXGL_PARAM_UIMAGE_BUFFER:
     param->func = lxgUpdateImage; return;
+
+  case LUXGL_PARAM_SPECIAL:
+    return;
   }
   LUX_DEBUGASSERT(0 && "illegal parameter type");
 }
@@ -505,57 +574,57 @@ LUX_API void lxgProgramParameter_initFunc( lxgProgramParameterPTR param )
   switch(param->gltype)
   {
   case LUXGL_PARAM_FLOAT:
-    param->func = lxgUpdateFloat1; return;
+    param->func = lxgUpdateFloat1GLSL; return;
   case LUXGL_PARAM_FLOAT2:
-    param->func = lxgUpdateFloat2; return;
+    param->func = lxgUpdateFloat2GLSL; return;
   case LUXGL_PARAM_FLOAT3:
-    param->func = lxgUpdateFloat3; return;
+    param->func = lxgUpdateFloat3GLSL; return;
   case LUXGL_PARAM_FLOAT4:
-    param->func = lxgUpdateFloat4; return;
+    param->func = lxgUpdateFloat4GLSL; return;
   case LUXGL_PARAM_INT:
-    param->func = lxgUpdateInt1; return;
+    param->func = lxgUpdateInt1GLSL; return;
   case LUXGL_PARAM_INT2:
-    param->func = lxgUpdateInt2; return;
+    param->func = lxgUpdateInt2GLSL; return;
   case LUXGL_PARAM_INT3:
-    param->func = lxgUpdateInt3; return;
+    param->func = lxgUpdateInt3GLSL; return;
   case LUXGL_PARAM_INT4:
-    param->func = lxgUpdateInt4; return;
+    param->func = lxgUpdateInt4GLSL; return;
   case LUXGL_PARAM_UINT:
-    param->func = lxgUpdateUInt1; return;
+    param->func = lxgUpdateUInt1GLSL; return;
   case LUXGL_PARAM_UINT2:
-    param->func = lxgUpdateUInt2; return;
+    param->func = lxgUpdateUInt2GLSL; return;
   case LUXGL_PARAM_UINT3:
-    param->func = lxgUpdateUInt3; return;
+    param->func = lxgUpdateUInt3GLSL; return;
   case LUXGL_PARAM_UINT4:
-    param->func = lxgUpdateUInt4; return;
+    param->func = lxgUpdateUInt4GLSL; return;
   case LUXGL_PARAM_BOOL:
-    param->func = lxgUpdateFloat1; return;
+    param->func = lxgUpdateFloat1GLSL; return;
   case LUXGL_PARAM_BOOL2:
-    param->func = lxgUpdateFloat2; return;
+    param->func = lxgUpdateFloat2GLSL; return;
   case LUXGL_PARAM_BOOL3:
-    param->func = lxgUpdateFloat3; return;
+    param->func = lxgUpdateFloat3GLSL; return;
   case LUXGL_PARAM_BOOL4:
-    param->func = lxgUpdateFloat4; return;
+    param->func = lxgUpdateFloat4GLSL; return;
   case LUXGL_PARAM_MAT2:
-    param->func = lxgUpdateMat2; return;
+    param->func = lxgUpdateMat2GLSL; return;
   case LUXGL_PARAM_MAT3:
-    param->func = lxgUpdateMat3; return;
+    param->func = lxgUpdateMat3GLSL; return;
   case LUXGL_PARAM_MAT4:
-    param->func = lxgUpdateMat4; return;
+    param->func = lxgUpdateMat4GLSL; return;
   case LUXGL_PARAM_MAT2x3:
-    param->func = lxgUpdateMat2x3; return;
+    param->func = lxgUpdateMat2x3GLSL; return;
   case LUXGL_PARAM_MAT2x4:
-    param->func = lxgUpdateMat2x4; return;
+    param->func = lxgUpdateMat2x4GLSL; return;
   case LUXGL_PARAM_MAT3x2:
-    param->func = lxgUpdateMat3x2; return;
+    param->func = lxgUpdateMat3x2GLSL; return;
   case LUXGL_PARAM_MAT3x4:
-    param->func = lxgUpdateMat3x4; return;
+    param->func = lxgUpdateMat3x4GLSL; return;
   case LUXGL_PARAM_MAT4x2:
-    param->func = lxgUpdateMat4x2; return;
+    param->func = lxgUpdateMat4x2GLSL; return;
   case LUXGL_PARAM_MAT4x3:
-    param->func = lxgUpdateMat4x3; return;
+    param->func = lxgUpdateMat4x3GLSL; return;
   case LUXGL_PARAM_BUFFER:
-    param->func = lxgUpdateBuffer; return;
+    param->func = lxgUpdateBufferGLSL; return;
   case LUXGL_PARAM_SAMPLER_1D:
   case LUXGL_PARAM_SAMPLER_2D:
   case LUXGL_PARAM_SAMPLER_3D:
@@ -636,23 +705,190 @@ LUX_API void lxgProgramParameter_initFunc( lxgProgramParameterPTR param )
   case LUXGL_PARAM_UIMAGE_CUBEARRAY:
   case LUXGL_PARAM_UIMAGE_2DMSARRAY:
   case LUXGL_PARAM_UIMAGE_BUFFER:
-
     param->func = lxgUpdateImage; return;
+
+  case LUXGL_PARAM_SPECIAL:
+    return;
   }
   LUX_DEBUGASSERT(0 && "illegal parameter type");
 }
 
-LUX_API void lxgProgram_updateParameters( lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, void **data )
+LUX_API void lxgProgramParameter_initFuncSEP( lxgProgramParameterPTR param , GLuint progid)
+{
+  param->glid = progid;
+  param->func = NULL;
+  switch(param->gltype)
+  {
+  case LUXGL_PARAM_FLOAT:
+    param->func = lxgUpdateFloat1SEP; return;
+  case LUXGL_PARAM_FLOAT2:
+    param->func = lxgUpdateFloat2SEP; return;
+  case LUXGL_PARAM_FLOAT3:
+    param->func = lxgUpdateFloat3SEP; return;
+  case LUXGL_PARAM_FLOAT4:
+    param->func = lxgUpdateFloat4SEP; return;
+  case LUXGL_PARAM_INT:
+    param->func = lxgUpdateInt1SEP; return;
+  case LUXGL_PARAM_INT2:
+    param->func = lxgUpdateInt2SEP; return;
+  case LUXGL_PARAM_INT3:
+    param->func = lxgUpdateInt3SEP; return;
+  case LUXGL_PARAM_INT4:
+    param->func = lxgUpdateInt4SEP; return;
+  case LUXGL_PARAM_UINT:
+    param->func = lxgUpdateUInt1SEP; return;
+  case LUXGL_PARAM_UINT2:
+    param->func = lxgUpdateUInt2SEP; return;
+  case LUXGL_PARAM_UINT3:
+    param->func = lxgUpdateUInt3SEP; return;
+  case LUXGL_PARAM_UINT4:
+    param->func = lxgUpdateUInt4SEP; return;
+  case LUXGL_PARAM_BOOL:
+    param->func = lxgUpdateFloat1SEP; return;
+  case LUXGL_PARAM_BOOL2:
+    param->func = lxgUpdateFloat2SEP; return;
+  case LUXGL_PARAM_BOOL3:
+    param->func = lxgUpdateFloat3SEP; return;
+  case LUXGL_PARAM_BOOL4:
+    param->func = lxgUpdateFloat4SEP; return;
+  case LUXGL_PARAM_MAT2:
+    param->func = lxgUpdateMat2SEP; return;
+  case LUXGL_PARAM_MAT3:
+    param->func = lxgUpdateMat3SEP; return;
+  case LUXGL_PARAM_MAT4:
+    param->func = lxgUpdateMat4SEP; return;
+  case LUXGL_PARAM_MAT2x3:
+    param->func = lxgUpdateMat2x3SEP; return;
+  case LUXGL_PARAM_MAT2x4:
+    param->func = lxgUpdateMat2x4SEP; return;
+  case LUXGL_PARAM_MAT3x2:
+    param->func = lxgUpdateMat3x2SEP; return;
+  case LUXGL_PARAM_MAT3x4:
+    param->func = lxgUpdateMat3x4SEP; return;
+  case LUXGL_PARAM_MAT4x2:
+    param->func = lxgUpdateMat4x2SEP; return;
+  case LUXGL_PARAM_MAT4x3:
+    param->func = lxgUpdateMat4x3SEP; return;
+  case LUXGL_PARAM_BUFFER:
+    param->func = lxgUpdateBufferGLSL; return;
+  case LUXGL_PARAM_SAMPLER_1D:
+  case LUXGL_PARAM_SAMPLER_2D:
+  case LUXGL_PARAM_SAMPLER_3D:
+  case LUXGL_PARAM_SAMPLER_CUBE:
+  case LUXGL_PARAM_SAMPLER_2DRECT:
+  case LUXGL_PARAM_SAMPLER_2DMS:
+  case LUXGL_PARAM_SAMPLER_1DARRAY:
+  case LUXGL_PARAM_SAMPLER_2DARRAY:
+  case LUXGL_PARAM_SAMPLER_CUBEARRAY:
+  case LUXGL_PARAM_SAMPLER_2DMSARRAY:
+  case LUXGL_PARAM_SAMPLER_BUFFER:
+
+  case LUXGL_PARAM_ISAMPLER_1D:
+  case LUXGL_PARAM_ISAMPLER_2D:
+  case LUXGL_PARAM_ISAMPLER_3D:
+  case LUXGL_PARAM_ISAMPLER_CUBE:
+  case LUXGL_PARAM_ISAMPLER_2DRECT:
+  case LUXGL_PARAM_ISAMPLER_2DMS:
+  case LUXGL_PARAM_ISAMPLER_1DARRAY:
+  case LUXGL_PARAM_ISAMPLER_2DARRAY:
+  case LUXGL_PARAM_ISAMPLER_CUBEARRAY:
+  case LUXGL_PARAM_ISAMPLER_2DMSARRAY:
+  case LUXGL_PARAM_ISAMPLER_BUFFER:
+
+  case LUXGL_PARAM_USAMPLER_1D:
+  case LUXGL_PARAM_USAMPLER_2D:
+  case LUXGL_PARAM_USAMPLER_3D:
+  case LUXGL_PARAM_USAMPLER_CUBE:
+  case LUXGL_PARAM_USAMPLER_2DRECT:
+  case LUXGL_PARAM_USAMPLER_2DMS:
+  case LUXGL_PARAM_USAMPLER_1DARRAY:
+  case LUXGL_PARAM_USAMPLER_2DARRAY:
+  case LUXGL_PARAM_USAMPLER_CUBEARRAY:
+  case LUXGL_PARAM_USAMPLER_2DMSARRAY:
+  case LUXGL_PARAM_USAMPLER_BUFFER:
+
+  case LUXGL_PARAM_SAMPLER_1D_SHADOW:
+  case LUXGL_PARAM_SAMPLER_2D_SHADOW:
+  case LUXGL_PARAM_SAMPLER_CUBE_SHADOW:
+  case LUXGL_PARAM_SAMPLER_2DRECT_SHADOW:
+  case LUXGL_PARAM_SAMPLER_1DARRAY_SHADOW:
+  case LUXGL_PARAM_SAMPLER_2DARRAY_SHADOW:
+  case LUXGL_PARAM_SAMPLER_CUBEARRAY_SHADOW:
+    param->func = lxgUpdateSampler; return;
+
+  case LUXGL_PARAM_IMAGE_1D:
+  case LUXGL_PARAM_IMAGE_2D:
+  case LUXGL_PARAM_IMAGE_3D:
+  case LUXGL_PARAM_IMAGE_CUBE:
+  case LUXGL_PARAM_IMAGE_2DRECT:
+  case LUXGL_PARAM_IMAGE_2DMS:
+  case LUXGL_PARAM_IMAGE_1DARRAY:
+  case LUXGL_PARAM_IMAGE_2DARRAY:
+  case LUXGL_PARAM_IMAGE_CUBEARRAY:
+  case LUXGL_PARAM_IMAGE_2DMSARRAY:
+  case LUXGL_PARAM_IMAGE_BUFFER:
+
+  case LUXGL_PARAM_IIMAGE_1D:
+  case LUXGL_PARAM_IIMAGE_2D:
+  case LUXGL_PARAM_IIMAGE_3D:
+  case LUXGL_PARAM_IIMAGE_CUBE:
+  case LUXGL_PARAM_IIMAGE_2DRECT:
+  case LUXGL_PARAM_IIMAGE_2DMS:
+  case LUXGL_PARAM_IIMAGE_1DARRAY:
+  case LUXGL_PARAM_IIMAGE_2DARRAY:
+  case LUXGL_PARAM_IIMAGE_CUBEARRAY:
+  case LUXGL_PARAM_IIMAGE_2DMSARRAY:
+  case LUXGL_PARAM_IIMAGE_BUFFER:
+
+  case LUXGL_PARAM_UIMAGE_1D:
+  case LUXGL_PARAM_UIMAGE_2D:
+  case LUXGL_PARAM_UIMAGE_3D:
+  case LUXGL_PARAM_UIMAGE_CUBE:
+  case LUXGL_PARAM_UIMAGE_2DRECT:
+  case LUXGL_PARAM_UIMAGE_2DMS:
+  case LUXGL_PARAM_UIMAGE_1DARRAY:
+  case LUXGL_PARAM_UIMAGE_2DARRAY:
+  case LUXGL_PARAM_UIMAGE_CUBEARRAY:
+  case LUXGL_PARAM_UIMAGE_2DMSARRAY:
+  case LUXGL_PARAM_UIMAGE_BUFFER:
+    param->func = lxgUpdateImage; return;
+
+  case LUXGL_PARAM_SPECIAL:
+    return;
+  }
+  LUX_DEBUGASSERT(0 && "illegal parameter type");
+}
+
+
+LUX_API void lxgProgram_applyParameters( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, void **data )
 {
   uint i;
-  glUseProgram(prog->glid);
+  LUX_DEBUGASSERT(ctx->program == prog);
   for (i = 0; i < num; ++i){
     LUX_DEBUGASSERT(params[i]->func);
-    params[i]->func(ctx,params[i],data[i]);
+    params[i]->func(params[i],ctx,data[i]);
   }
 }
 
-LUX_API void lxgProgram_updateSamplers( lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgTexturePTR *data )
+LUX_API void lxgProgram_applyBuffersGLSL(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data )
+{
+  uint i;
+  for (i = 0; i < num; ++i){
+    LUX_DEBUGASSERT(params[i]->func == lxgUpdateBufferGLSL);
+    lxgUpdateBufferGLSL(params[i],ctx,data[i]);
+  }
+}
+
+LUX_API void lxgProgram_applyBuffersNV(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data )
+{
+  uint i;
+  for (i = 0; i < num; ++i){
+    LUX_DEBUGASSERT(params[i]->func == lxgUpdateBufferNV);
+    lxgUpdateBufferNV(params[i],ctx,data[i]);
+  }
+}
+
+LUX_API void lxgProgram_applySamplers( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgTexturePTR *data )
 {
   uint i;
   for (i = 0; i < num; ++i){
@@ -661,7 +897,7 @@ LUX_API void lxgProgram_updateSamplers( lxgContextPTR ctx, lxgProgramPTR prog, u
   }
 }
 
-LUX_API void lxgProgram_updateImages( lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgTextureImagePTR *data )
+LUX_API void lxgProgram_applyImages( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgTextureImagePTR *data )
 {
   uint i;
   for (i = 0; i < num; ++i){
@@ -669,18 +905,6 @@ LUX_API void lxgProgram_updateImages( lxgContextPTR ctx, lxgProgramPTR prog, uin
     lxgTextureImage_checked(data[i],ctx,params[i]->gllocation);
   }
 }
-
-LUX_API void lxgProgram_updateBuffers( lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data )
-{
-  uint i;
-  for (i = 0; i < num; ++i){
-    LUX_DEBUGASSERT(params[i]->func == lxgUpdateBuffer);
-    if (lxgBuffer_queryUniform(data[i],ctx,params[i]->gllocation)){
-      lxgBuffer_bindIndexed(data[i],LUXGL_BUFFER_UNIFORM,params[i]->gllocation);
-    }
-  }
-}
-
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -728,7 +952,7 @@ LUX_API const char* lxgProgram_log( lxgProgramPTR prog, char* buffer, int len)
   return (used > 0) ? buffer : NULL;
 }
 
-static LUX_INLINE lxgProgram_stateARBNV(flags32 flags, flags32 changed, lxgDomainProgramPTR domains[LUXGFX_DOMAINS])
+static LUX_INLINE lxgProgram_stateNV(flags32 flags, flags32 changed, lxgDomainProgramPTR domains[LUXGFX_DOMAINS])
 {
   if (changed & (1<<LUXGFX_DOMAIN_VERTEX)){
     if (flags & (1<<LUXGFX_DOMAIN_VERTEX)){
@@ -796,8 +1020,8 @@ LUX_API void  lxgProgram_apply( lxgProgramPTR prog, lxgContextPTR ctx)
     switch (oldtype){
     case LUXGFX_PROGRAM_GLSL:
       glUseProgram(0); break;
-    case LUXGFX_PROGRAM_ARBNV:
-      lxgProgram_stateARBNV(0,oldprog->usedProgs,NULL);
+    case LUXGFX_PROGRAM_NV:
+      lxgProgram_stateNV(0,oldprog->usedProgs,NULL);
       break;
     }
   }
@@ -805,7 +1029,7 @@ LUX_API void  lxgProgram_apply( lxgProgramPTR prog, lxgContextPTR ctx)
     glUseProgram(prog->glid);
   }
   else{
-    lxgProgram_stateARBNV(prog->usedProgs,oldprog->usedProgs ^ prog->usedProgs, prog->programs);
+    lxgProgram_stateNV(prog->usedProgs,oldprog->usedProgs ^ prog->usedProgs, prog->programs);
   }
   
   ctx->program = prog;
@@ -817,7 +1041,7 @@ LUX_API void lxgProgram_initNV( lxgProgramPTR prog, lxgContextPTR ctx )
 {
   memset(prog,0,sizeof(lxgProgram_t));
   prog->ctx = ctx;
-  prog->type = LUXGFX_PROGRAM_ARBNV;
+  prog->type = LUXGFX_PROGRAM_NV;
 }
 
 LUX_API void lxgProgram_deinitNV( lxgProgramPTR prog, lxgContextPTR ctx )
@@ -904,7 +1128,7 @@ LUX_API void lxgDomainProgram_initNV( lxgDomainProgramPTR stage, lxgContextPTR c
   stage->ctx = ctx;
   glGenProgramsARB(1,&stage->glid);
   stage->gltarget = getDomainTargetNV(type);
-  stage->progtype = LUXGFX_PROGRAM_ARBNV;
+  stage->progtype = LUXGFX_PROGRAM_NV;
 }
 
 LUX_API void lxgDomainProgram_deinitNV( lxgDomainProgramPTR stage, lxgContextPTR ctx)

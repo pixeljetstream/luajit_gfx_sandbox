@@ -16,7 +16,7 @@ extern "C"{
   typedef enum lxgProgramType_e{
     LUXGFX_PROGRAM_NONE,
     LUXGFX_PROGRAM_GLSL,
-    LUXGFX_PROGRAM_ARBNV,
+    LUXGFX_PROGRAM_NV,
   }lxgProgramType_t;
 
   typedef enum lxgShaderDomain_e{
@@ -28,32 +28,20 @@ extern "C"{
     LUXGFX_DOMAINS,
   }lxgProgramDomain_t;
 
-  typedef void (*lxgParmeterUpdate_fn)(lxgContextPTR ctx, lxgProgramParameterPTR param, void* data);
+  typedef void (*lxgParmeterUpdate_fn)(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data);
 
   typedef struct lxgProgramParameter_s{
     lxGLParameterType_t   gltype;
+    lxgParmeterUpdate_fn  func;
     union{
       GLuint              glid;
       GLenum              gltarget;
     };
     GLuint                gllocation;
-    lxgParmeterUpdate_fn  func;
     ushort                count;
     bool16                transpose;
-    uint                  size;
-    const char*           name;
+    const char*           name;  // only to aid debugging
   }lxgProgramParameter_t;
-
-  typedef struct lxgProgramData_s{
-    uint                      numParams;
-    lxgProgramParameterPTR    parameters;
-    uint                      numSampler;
-    lxgProgramParameterPTR    samplers;
-    uint                      numBuffers;
-    lxgProgramParameterPTR    buffer;
-    uint                      numImages;
-    lxgProgramParameterPTR    images;
-  }lxgProgramData_t;
 
   typedef struct lxgDomainProgram_s{
     union{
@@ -61,7 +49,6 @@ extern "C"{
       lxGLProgramType_t   gltarget;
     };
     GLuint                glid;
-    lxgProgramDataPTR     data;
     lxgContextPTR         ctx;
     lxgProgramType_t      progtype;
   }lxgDomainProgram_t;
@@ -71,9 +58,16 @@ extern "C"{
     lxgProgramType_t      type;
     flags32               usedProgs;
     lxgDomainProgramPTR   programs[LUXGFX_DOMAINS];
-    lxgProgramDataPTR     data;
     lxgContextPTR         ctx;
   }lxgProgram_t;
+
+
+  // COMMON
+  LUX_API void lxgProgram_apply( lxgProgramPTR prog, lxgContextPTR ctx);
+  LUX_API void lxgProgram_applyParameters(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, void **data);
+  LUX_API void lxgProgram_applySamplers( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgTexturePTR *data);
+  LUX_API void lxgProgram_applyBuffers(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data);
+  LUX_API void lxgProgram_applyImages( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgTextureImagePTR *data );
 
   // GLSL
   LUX_API void lxgProgramParameter_initFunc(lxgProgramParameterPTR param);
@@ -89,11 +83,10 @@ extern "C"{
   LUX_API booln lxgProgram_link(lxgProgramPTR prog);
   LUX_API const char* lxgProgram_log(lxgProgramPTR prog, char* buffer, int len);
 
-  // COMMON
-  LUX_API void lxgProgram_applyParameters(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, void **data);
-  LUX_API void lxgProgram_applySamplers( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgTexturePTR *data);
-  LUX_API void lxgProgram_applyBuffers(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data);
-  LUX_API void lxgProgram_applyImages( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgTextureImagePTR *data );
+  LUX_API void lxgProgram_applyBuffersGLSL(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data);
+
+  // GLSL SEPERATE or DSA
+  LUX_API void lxgProgramParameter_initFuncSEP(lxgProgramParameterPTR param, GLuint progid);
 
   // NV/ARB PROGRAM
   LUX_API void lxgProgramParameter_initDomainNV(lxgProgramParameterPTR param, lxgProgramDomain_t domain);
@@ -107,6 +100,21 @@ extern "C"{
   LUX_API void  lxgProgram_initNV(lxgProgramPTR prog, lxgContextPTR ctx);
   LUX_API void  lxgProgram_deinitNV(lxgProgramPTR prog, lxgContextPTR ctx);
   LUX_API void  lxgProgram_setDomainNV(lxgProgramPTR prog, lxgProgramDomain_t type, lxgDomainProgramPTR stage);
+
+  LUX_API void lxgProgram_applyBuffersNV(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data);
+
+  //////////////////////////////////////////////////////////////////////////
+
+
+  LUX_INLINE void lxgProgram_applyBuffers(lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, lxgBufferPTR *data )
+  {
+    if (prog->type != LUXGFX_PROGRAM_NV){
+      lxgProgram_applyBuffersGLSL(prog,ctx,num,params,data);
+    }
+    else{
+      lxgProgram_applyBuffersNV(prog,ctx,num,params,data);
+    }
+  }
 
 #ifdef __cplusplus
 }
