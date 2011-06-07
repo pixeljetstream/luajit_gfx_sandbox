@@ -217,6 +217,20 @@ enum {
 
 typedef struct _GLFWwindow* GLFWwindow;
 
+typedef void (* GLFWerrorfun)(int,const char*);
+typedef void (* GLFWwindowsizefun)(GLFWwindow,int,int);
+typedef int  (* GLFWwindowclosefun)(GLFWwindow);
+typedef void (* GLFWwindowrefreshfun)(GLFWwindow);
+typedef void (* GLFWwindowfocusfun)(GLFWwindow,int);
+typedef void (* GLFWwindowiconifyfun)(GLFWwindow,int);
+typedef void (* GLFWmousebuttonfun)(GLFWwindow,int,int);
+typedef void (* GLFWmouseposfun)(GLFWwindow,int,int);
+typedef void (* GLFWscrollfun)(GLFWwindow,int,int);
+typedef void (* GLFWkeyfun)(GLFWwindow,int,int);
+typedef void (* GLFWcharfun)(GLFWwindow,int);
+typedef void* (* GLFWmallocfun)(size_t);
+typedef void (* GLFWfreefun)(void*);
+
 typedef struct {
             int width;
             int height;
