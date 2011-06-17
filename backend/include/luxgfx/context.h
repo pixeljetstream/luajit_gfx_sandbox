@@ -67,14 +67,6 @@ extern "C"{
     LUXGFX_GPUVENDOR_INTEL,
   }lxgGPUVendor_t;
 
-  typedef enum lxgGPUDomain_e{
-    LUXGFX_GPUDOMAIN_VERTEX,
-    LUXGFX_GPUDOMAIN_FRAGMENT,
-    LUXGFX_GPUDOMAIN_GEOMETRY,
-    LUXGFX_GPUDOMAIN_TESS_EVAL,
-    LUXGFX_GPUDOMAIN_TESS_CTRL,
-    LUXGFX_GPUDOMAINS,
-  }lxgGPUDomain_t;
 
   typedef enum lxgGPUMode_e{
     LUXGFX_GPUMODE_FIXED,
@@ -101,14 +93,14 @@ extern "C"{
 
   typedef struct lxgContext_s{
     flags32             capbits;
-    lxgProgramPTR       program;
     lxgVertexState_t    vertex;
     lxgTexturePTR       textures[LUXGFX_MAX_TEXTURE_IMAGES];
     lxgSamplerPTR       samplers[LUXGFX_MAX_TEXTURE_IMAGES];
     lxgRenderTargetPTR  rendertargets[LUXGFX_RENDERTARGETS];
     lxgTextureImagePTR  images[LUXGFX_MAX_RWTEXTURE_IMAGES];
-    lxgBufferPTR        uniform[LUXGFX_MAX_UNIFORM_BUFFERS];
+    lxgBufferPTR        uniform[LUXGFX_MAX_STAGE_BUFFERS * LUXGFX_STAGES];
     lxgFeedbackState_t  feedback;
+    lxgProgramState_t   program;
 
     flags32             rflag;
     lxgBlend_t          blend;
@@ -221,7 +213,7 @@ extern "C"{
 
   LUX_INLINE void lxgProgram_checked(lxgProgramPTR prog, lxgContextPTR ctx )
   {
-    if (ctx->program != prog){
+    if (ctx->program.current != prog){
       lxgProgram_apply(prog,ctx);
     }
   }

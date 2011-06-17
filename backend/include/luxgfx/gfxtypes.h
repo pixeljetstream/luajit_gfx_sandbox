@@ -24,9 +24,8 @@ typedef struct lxgRenderBuffer_s* lxgRenderBufferPTR;
 typedef struct lxgTextureUpdate_s* lxgTextureUpdatePTR;
 
 typedef struct lxgProgramParameter_s* lxgProgramParameterPTR;
-typedef struct lxgDomainProgram_s* lxgDomainProgramPTR;
+typedef struct lxgStageProgram_s* lxgStageProgramPTR;
 typedef struct lxgProgram_s* lxgProgramPTR;
-typedef struct lxgProgramData_s* lxgProgramDataPTR;
 
 typedef struct lxgRenderTarget_s* lxgRenderTargetPTR;
 typedef struct lxgViewPort_s* lxgViewPortPTR;

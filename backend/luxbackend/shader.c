@@ -46,6 +46,7 @@ LUX_API void lxShaderUpdate_pushData( lxShaderUpdate_t* update, uint num, int* p
   LUX_DEBUGASSERT( level == 0 && num == update->numParams && "must provide all parameters at baselevel");
 
   if ( level == 0 ){
+    // TODO optimize, if separable shaders are used, check previous sub-shader programs
     memset(update->buildDatas, 0, banksize);
     update->dirtyMinMax[0] = min;
     update->dirtyMinMax[1] = max;
@@ -66,9 +67,16 @@ LUX_API void lxShaderUpdate_pushData( lxShaderUpdate_t* update, uint num, int* p
 #ifdef LUX_SHADER_PROPAGATE_SINGLE
     {
       int n;
+#if 0
       for (n = level; n < LUX_SHADER_UPDATELEVELS; n++){
         update->levelDatas[n][index] = data[i];
       }
+#else
+      // avoids branching
+      for (n = 0; n < LUX_SHADER_UPDATELEVELS; n++){
+        update->levelDatas[level+n][index] = data[i];
+      }
+#endif
     }
 #else
     update->levelDatas[level][index] = data[i];

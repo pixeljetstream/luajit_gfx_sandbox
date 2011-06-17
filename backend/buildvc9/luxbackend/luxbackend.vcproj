@@ -215,6 +215,14 @@
 			<File
 				RelativePath="..\..\luxbackend\shader.c"
 				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						AssemblerOutput="4"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter

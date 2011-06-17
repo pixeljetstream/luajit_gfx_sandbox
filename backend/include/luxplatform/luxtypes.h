@@ -33,6 +33,8 @@ typedef unsigned short  bool16;
 typedef unsigned int    bool32;
 
 typedef unsigned int        enum32;
+typedef unsigned int        flags8;
+typedef unsigned int        flags16;
 typedef unsigned int        flags32;
 typedef unsigned long long  flags64;
 

@@ -21,9 +21,9 @@ extern "C"
   typedef struct lxShaderParameter_s{
     lxGLParameterType_t   type;
     lxStrDictKey          namekey;
-    lxStrDictName         name;
     uint                  progOffset;
-    uint                  progCount;
+    ushort                progCount;
+    flags16               stageBits;
   }lxShaderParameter_t;
 
   // for optimal performance group parameters based on the level
@@ -47,7 +47,7 @@ extern "C"
     int                     level;
 
     void**                  buildDatas;
-    void**                  levelDatas[LUX_SHADER_UPDATELEVELS];
+    void**                  levelDatas[LUX_SHADER_UPDATELEVELS*2];
 
     int                     dirtyMinMax[2];
     int                     levelMinMax[LUX_SHADER_UPDATELEVELS][2];
