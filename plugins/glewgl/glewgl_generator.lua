@@ -60,14 +60,18 @@ local function processHeader(name,idir,odir,onlybinding)
       
       local pfn,fn = l:match("GLEW_FUN_EXPORT ([_%w]+) ([_%w]+)")
       fn = lkfuncmangled[fn]
-      output = "GLEW_FUN_EXPORT "..pfn.." "..fn..";"..eol
 
       if (pfn and lkfunctypes[pfn]) then
+        local typ = lkfunctypes[pfn]
         lkfuncused[pfn] = true
         lkfuncnames[pfn] = fn
-        local fndef = lkfunctypes[pfn].str:sub(9,-1)
+        local fndef = typ.str:sub(9,-1)
         fndef = fndef:gsub(pfn,fn)
         table.insert(funcs, {str=fndef, name = fn})
+        
+        output = "GLEW_FUN_EXPORT "..(typ.orig:sub(9,-1):gsub(pfn,fn))
+      else
+        output = "GLEW_FUN_EXPORT "..pfn.." "..fn..";"..eol
       end
       
     elseif (l:match("GLEW_VAR_EXPORT GLboolean")) then
@@ -100,7 +104,7 @@ local function processHeader(name,idir,odir,onlybinding)
       --  typedef void (GLAPIENTRY * PFNGLACCUMPROC) (GLenum op, GLfloat value);
       local api,pfn = l:match("^typedef [^%(]+ %(([%w]+)%s*%*%s*([_%w]+)%)")
       local fn  = l:match("(.+;)"):gsub(api,"")
-      lkfunctypes[pfn] = {str=fn, name=pfn}
+      lkfunctypes[pfn] = {str=fn, name=pfn, orig=l}
       
     elseif (record and l:match("typedef ")) then
       -- due to different platform types, let's use the last definition
