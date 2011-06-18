@@ -30,6 +30,12 @@ extern "C"{
   }lxgProgramStage_t;
 
   typedef void (*lxgParmeterUpdate_fn)(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data);
+  typedef uint32 lxgSubroutineKey;
+
+  typedef struct lxgProgramSubroutine_s{
+    GLuint              glindex;
+    lxgSubroutineKey    namekey;
+  }lxgProgramSubroutine_t;
 
   typedef struct lxgProgramParameter_s{
     lxGLParameterType_t   gltype;
@@ -37,12 +43,28 @@ extern "C"{
     union{
       GLuint              glid;         // for SEP
       GLenum              gltarget;     // for NV
-      lxgProgramStage_t  domain;       // for subroutines
-      void*               user;
+      lxgProgramStage_t   domain;       // for subroutines
     };
     GLuint                gllocation;
-    ushort                count;
-    bool16                transpose;
+    union{
+      struct {
+        ushort            count;
+        bool16            transpose;
+      } uniform;
+      struct{
+        int               size;
+      } buffer;
+      struct{
+        lxgProgramSubroutine_t    last;
+        int                       numCompatible;
+        lxgProgramSubroutine_t*   compatible;
+      } subroutine;
+      struct{
+        uint32            userkey;
+        void*             userdata;
+      } user;
+    };
+    
     const char*           name;
   }lxgProgramParameter_t;
 
@@ -84,7 +106,7 @@ extern "C"{
 
   // GLSL
     // domain is only important to subroutines
-  LUX_API void  lxgProgramParameter_initFunc(lxgProgramParameterPTR param, lxgProgramStage_t domain);
+  LUX_API void  lxgProgramParameter_initFunc(lxgProgramParameterPTR param);
 
   LUX_API void  lxgStageProgram_init(lxgStageProgramPTR stage, lxgContextPTR ctx, lxgProgramStage_t type);
   LUX_API void  lxgStageProgram_deinit(lxgStageProgramPTR stage, lxgContextPTR ctx);
@@ -97,12 +119,12 @@ extern "C"{
   LUX_API booln lxgProgram_link(lxgProgramPTR prog);
   LUX_API const char* lxgProgram_log(lxgProgramPTR prog, char* buffer, int len);
 
-  LUX_API int lxgProgram_getParameterCount( lxgProgramPTR prog, int* maxNameLen);
+  LUX_API int lxgProgram_getParameterCount( lxgProgramPTR prog, int* maxNameLen, int* totalCompatibleSubroutines);
     // namesBuffer[maxNameLen * num]
   LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int num, lxgProgramParameter_t* params, int maxNameLen, char* namesBuffer);
 
   // GLSL SEPERATE or DSA
-  LUX_API void lxgProgramParameter_initFuncSEP(lxgProgramParameterPTR param, lxgProgramStage_t domain, GLuint progid);
+  LUX_API void lxgProgramParameter_initFuncSEP(lxgProgramParameterPTR param, GLuint progid);
 
   // GLSLSEP
   LUX_API void  lxgProgram_initForSEP( lxgProgramPTR prog, lxgContextPTR ctx);
