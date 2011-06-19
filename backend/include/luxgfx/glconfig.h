@@ -276,7 +276,7 @@ extern "C"{
     LUXGL_PARAM_BUFFER          = 0xABCDEFFF,
     LUXGL_PARAM_SUBROUTINE     = 0xFAFBECDF,
     LUXGL_PARAM_USER            = 0xFFFEDCBA,
-  }lxGLParameterType_t;
+  }lxgParameterType_t;
 
   
 #ifdef __cplusplus

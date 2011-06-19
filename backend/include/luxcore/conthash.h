@@ -65,7 +65,7 @@ extern "C"{
   LUX_API void  lxContPtrHash_delete(lxContPtrHashPTR cv);
 
   // return true on overwrite
-  LUX_API booln lxContPtrHash_set(lxContPtrHashPTR cv, void* key, void *val);
+  LUX_API booln lxContPtrHash_set(lxContPtrHashPTR cv, void* key, const void *val);
   // return true on success and stores to outval
   LUX_API booln lxContPtrHash_get(const lxContPtrHashPTR cv, void* key, void** outval);
   // returns true on success

@@ -28,7 +28,7 @@ typedef struct lxStrDict_s{
   lxContHash_t    hashtable;
 }lxStrDict_t;
 
-LUX_INLINE size_t CharStrDict_sizeof(uint bins)
+LUX_INLINE size_t lxStrDict_sizeof(uint bins)
 {
   return (sizeof(lxStrDict_t)+lxContHash_sizeof(bins)-sizeof(lxContHash_t));
 }
@@ -36,7 +36,7 @@ LUX_INLINE size_t CharStrDict_sizeof(uint bins)
 LUX_API lxStrDictPTR  lxStrDict_new(lxMemoryAllocatorPTR allocator, uint numBins)
 {
   uint sizes[9] = {4,8,16,24,32,48,64,128,256};
-  lxStrDict_t* self = (lxStrDict_t*)lxMemoryAllocator_malloc(allocator,CharStrDict_sizeof(numBins));
+  lxStrDict_t* self = (lxStrDict_t*)lxMemoryAllocator_malloc(allocator,lxStrDict_sizeof(numBins));
 
   lxContHash_init(&self->hashtable,allocator,numBins,sizeof(lxStrDictEntry_t));
   lxMemoryList_init(&self->memstr,allocator,sizeof(sizes)/sizeof(sizes[0]),sizes,512,0);
@@ -48,12 +48,12 @@ LUX_API void  lxStrDict_delete(lxStrDictPTR self)
 {
   lxContHash_deinit(&self->hashtable);
   lxMemoryList_deinit(&self->memstr);
-  lxMemoryAllocator_free(self->memstr.allocator,self,CharStrDict_sizeof(self->hashtable.numBins));
+  lxMemoryAllocator_free(self->memstr.allocator,self,lxStrDict_sizeof(self->hashtable.numBins));
 }
 
 typedef struct lxStrHashLen_s{
   uint32    key;
-  uint    len;
+  uint      len;
 }lxStrHashLen_t;
 
 LUX_INLINE lxStrHashLen_t lxStrHashLen(const char *str)

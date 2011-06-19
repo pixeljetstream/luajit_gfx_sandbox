@@ -18,43 +18,66 @@ extern "C"
     LUX_SHADER_UPDATELEVELS = 4,
   };
 
+  //////////////////////////////////////////////////////////////////////////
+
   typedef struct lxShaderParameter_s{
-    lxGLParameterType_t   type;
     lxStrDictKey          namekey;
+    lxgParameterType_t    type;
     uint                  progOffset;
-    ushort                progCount;
-    flags16               stageBits;
+    uint                  progCount;
   }lxShaderParameter_t;
 
   // for optimal performance group parameters based on the level
   // you typically want to update them
 
   typedef struct lxShaderProgram_s{
+    lxgProgramPTR           program;
+    booln                   hasMulti;
     uint                    numParams;
     lxShaderParameter_t*    params;
     uint                    numProgParams;
-    lxgProgramParameter_t*  progParams;
+    lxgProgramParameter_t** progParams;
     lxStrDictPTR            dict;
     lxContHashPTR           paramHash;
+    uint                    numGpuProgParams;
+    lxgProgramParameterPTR  gpuProgParams;
+    uint                    numAddProgParams;
+    lxgProgramParameterPTR  addProgParams;
   }lxShaderProgram_t;
 
-  LUX_API int  lxShaderProgram_getUpdateIndex(lxShaderProgram_t* shader, lxStrDictKey namekey);
+  LUX_API void    lxShaderProgram_init(lxShaderProgram_t* shader, lxStrDictPTR dict, lxgProgramPTR program, int numProgParams,lxgProgramParameterPTR  gpuProgParams);
+  LUX_API uint    lxShaderProgram_getParameterCount(lxShaderProgram_t* shader);
+  LUX_API size_t  lxShaderProgram_getMemSize(lxShaderProgram_t* shader);
+  LUX_API void    lxShaderProgram_initMem(lxShaderProgram_t* shader, size_t size, void* buffer);
+  LUX_API void    lxShaderProgram_initParameters(lxShaderProgram_t* shader, lxgProgramParameter_t** optionalSort);
+  LUX_API void    lxShaderProgram_useHash(lxShaderProgram_t* shader,lxContHashPTR hash);
+  LUX_API int     lxShaderProgram_getUpdateIndex(lxShaderProgram_t* shader, lxStrDictKey namekey, lxgParameterType_t type );
 
-    // all arrays must be numParams wide
+  //////////////////////////////////////////////////////////////////////////
+
   typedef struct lxShaderUpdate_s{
+    uint                    (*funcBuildProgramParams)( struct lxShaderUpdate_s* update);
     lxShaderProgram_t*      shader;
     uint                    numParams;
+    uint                    numProgParams;
     int                     level;
 
-    void**                  buildDatas;
-    void**                  levelDatas[LUX_SHADER_UPDATELEVELS*2];
+    // must be numParams wide
+    void **                 buildDatas;
+    void **                 levelDatas[LUX_SHADER_UPDATELEVELS*2];
 
     int                     dirtyMinMax[2];
     int                     levelMinMax[LUX_SHADER_UPDATELEVELS][2];
-    // must be as wide as numProgParams
-    lxgProgramParameter_t** progParams;
-    void**                  progDatas;
+    // must be numProgParams wide
+    lxgProgramParameter_t ** progParams;
+    void **                  progDatas;
+
   }lxShaderUpdate_t;
+
+
+  LUX_API void    lxShaderUpdate_init(lxShaderUpdate_t* update, lxShaderProgram_t* program);
+  LUX_API size_t  lxShaderUpdate_getMemSize(lxShaderUpdate_t* update);
+  LUX_API void    lxShaderUpdate_initMem(lxShaderUpdate_t* update, size_t size, void* buffer);
 
     // data content pointers must be valid until consumption!
   LUX_API void lxShaderUpdate_pushData(lxShaderUpdate_t* update, uint num, int* paramIndices, void** data);
@@ -63,6 +86,12 @@ extern "C"
     // sets the progParams and progDatas and returns how many are used
     // use with lxgProgram_applyParameters
   LUX_API uint lxShaderUpdate_buildProgramParams(lxShaderUpdate_t* update);
+
+  //////////////////////////////////////////////////////////////////////////
+
+  LUX_INLINE uint lxShaderUpdate_buildProgramParams(lxShaderUpdate_t* update){
+    return update->funcBuildProgramParams(update);
+  }
 
 #if defined(__cplusplus)
 }

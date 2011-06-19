@@ -22,7 +22,7 @@ extern "C"{
   typedef uint32      lxStrDictKey;
 
   LUX_API lxStrDictPTR  lxStrDict_new(lxMemoryAllocatorPTR allocator, uint numBins);
-  LUX_API void      lxStrDict_delete(lxStrDictPTR dc);
+  LUX_API void          lxStrDict_delete(lxStrDictPTR dc);
 
   // returns hashkey
   LUX_API lxStrDictKey  lxStrDict_add(lxStrDictPTR dc, const char *str);

@@ -276,7 +276,7 @@ LUX_API void  lxContPtrHash_delete(lxContPtrHashPTR cv)
   lxMemoryAllocator_free(cv->mempool.allocator,cv,lxContPtrHash_sizeof(cv->numBins));
 }
 
-LUX_API booln lxContPtrHash_set(lxContPtrHashPTR cv, void* key, void *val)
+LUX_API booln lxContPtrHash_set(lxContPtrHashPTR cv, void* key, const void *val)
 {
   uint idx = CONT_HASH_FUNC(cv,key);
   uint valueSize = cv->valueSize;
@@ -287,7 +287,7 @@ LUX_API booln lxContPtrHash_set(lxContPtrHashPTR cv, void* key, void *val)
   while (entry){
     if (entry->key == key){
       if (!valueSize){
-        entry->data = val;
+        entry->data = (void*)val;
       }
       else{
         memcpy(entry->bytes,val,valueSize);
