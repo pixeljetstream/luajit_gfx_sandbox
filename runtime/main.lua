@@ -82,7 +82,7 @@ do
 	
 	-----------------------------
 
-	local p = relativeFilepath "clibs_"..jit.os.."_"..jit.arch
+	local p = relativeFilepath "bin_"..jit.os.."_"..jit.arch.."/clibs"
 	local l = relativeFilepath "lua"
 	local s = jit.os == "Windows" and ".dll" or ".so"
 	local cstr = string.format(";%s/?%s;%s/?51%s;%s/?/?%s;%s/?/?51%s;",p,s,p,s,p,s,p,s)
