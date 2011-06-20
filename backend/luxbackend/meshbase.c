@@ -8,7 +8,7 @@
 
 
 // segs = x,y
-LUX_API void lxMeshPlane_getMemsize(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
+LUX_API void lxMeshPlane_getCounts(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
 {
   *numVertices = (segs[0] + 1) * (segs[1] + 1);
   *numTriangleIndices = (segs[0] * segs[1] * 2) * 3;
@@ -87,7 +87,7 @@ LUX_API void lxMeshPlane_initOutline(int segs[2], uint32* indices)
 }
 
 // segs = outer (x,y),cap
-LUX_API void lxMeshDisc_getMemsize(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
+LUX_API void lxMeshDisc_getCounts(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
 {
   *numVertices = (segs[0]) + ((segs[1] - 1) * segs[0]) + 1;
   *numTriangleIndices = ((segs[0] * (segs[1]-1) * 2) + segs[0]) * 3;
@@ -179,7 +179,7 @@ LUX_API void lxMeshDisc_initOutline(int segs[2], uint32* indices)
   }
 }
 
-LUX_API void lxMeshBox_getMemsize(int segs[3], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
+LUX_API void lxMeshBox_getCounts(int segs[3], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
 {
   int used[2];
   int numv;
@@ -188,21 +188,21 @@ LUX_API void lxMeshBox_getMemsize(int segs[3], int* numVertices, int* numTriangl
 
   used[0] = segs[0];
   used[1] = segs[1];
-  lxMeshPlane_getMemsize(used,&numv,&numtris,&numline);
+  lxMeshPlane_getCounts(used,&numv,&numtris,&numline);
   *numVertices = numv * 2;
   *numTriangleIndices = numtris * 2;
   *numOutlineIndices  = numline * 2;
 
   used[0] = segs[0];
   used[1] = segs[2];
-  lxMeshPlane_getMemsize(used,&numv,&numtris,&numline);
+  lxMeshPlane_getCounts(used,&numv,&numtris,&numline);
   *numVertices += numv * 2;
   *numTriangleIndices += numtris * 2;
   *numOutlineIndices  += numline * 2;
 
   used[0] = segs[1];
   used[1] = segs[2];
-  lxMeshPlane_getMemsize(used,&numv,&numtris,&numline);
+  lxMeshPlane_getCounts(used,&numv,&numtris,&numline);
   *numVertices += numv * 2;
   *numTriangleIndices += numtris * 2;
   *numOutlineIndices  += numline * 2;
@@ -277,7 +277,7 @@ LUX_API void lxMeshBox_initTriangles(int segs[3], lxVector3* pos, lxVector3* nor
       break;
     }
 
-    lxMeshPlane_getMemsize(configs[side],&numv,&numtris,&numline);
+    lxMeshPlane_getCounts(configs[side],&numv,&numtris,&numline);
     lxMeshPlane_initTriangles(configs[side],pos + offsetv,normal + offsetv,uv + offsetv,indices + offsettris);
     lxMeshHelper_applyOffset(numtris,indices + offsettris,offsetv);
     lxMeshHelper_applyTransform(numv,pos + offsetv,normal + offsetv,matrix);
@@ -308,7 +308,7 @@ LUX_API void lxMeshBox_initOutline(int segs[3], uint32* indices)
 
   int side;
   for (side = 0; side < 6; side++){
-    lxMeshPlane_getMemsize(configs[side],&numv,&numtris,&numline);
+    lxMeshPlane_getCounts(configs[side],&numv,&numtris,&numline);
     lxMeshPlane_initOutline(configs[side],indices + offsetline);
     lxMeshHelper_applyOffset(numline,indices + offsetline,offsetv);
     offsetline += numline;
@@ -317,7 +317,7 @@ LUX_API void lxMeshBox_initOutline(int segs[3], uint32* indices)
 }
 
 // segs = x & y, z
-LUX_API void lxMeshSphere_getMemsize(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
+LUX_API void lxMeshSphere_getCounts(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
 {
   *numVertices = (segs[0]+1) * (segs[1]+1);
   *numTriangleIndices = ((segs[0] * (segs[1]-2) * 2) + (segs[0] * 2)) * 3;
@@ -396,7 +396,7 @@ LUX_API void lxMeshSphere_initOutline(int segs[2], uint32* indices)
 }
 
 // segs = x,cap,z
-LUX_API void lxMeshCylinder_getMemsize(int segs[3], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
+LUX_API void lxMeshCylinder_getCounts(int segs[3], int* numVertices, int* numTriangleIndices, int* numOutlineIndices)
 {
   int used[2];
   int numv;
@@ -405,14 +405,14 @@ LUX_API void lxMeshCylinder_getMemsize(int segs[3], int* numVertices, int* numTr
 
   used[0] = segs[0];
   used[1] = segs[1];
-  lxMeshDisc_getMemsize(used,&numv,&numtris,&numline);
+  lxMeshDisc_getCounts(used,&numv,&numtris,&numline);
   *numVertices = numv * 2;
   *numTriangleIndices = numtris * 2;
   *numOutlineIndices = numline * 2;
 
   used[0] = segs[0];
   used[1] = segs[2];
-  lxMeshPlane_getMemsize(used,&numv,&numtris,&numline);
+  lxMeshPlane_getCounts(used,&numv,&numtris,&numline);
   *numVertices += numv;
   *numTriangleIndices += numtris;
   *numOutlineIndices += segs[2]*4 * 2;
@@ -434,7 +434,7 @@ LUX_API void lxMeshCylinder_initTriangles(int segs[3], lxVector3* pos, lxVector3
 
   used[0] = segs[0];
   used[1] = segs[1];
-  lxMeshDisc_getMemsize(used,&numv,&numtris,&numline);
+  lxMeshDisc_getCounts(used,&numv,&numtris,&numline);
 
   lxMeshDisc_initTriangles(used,pos + offsetv, normal + offsetv, uv + offsetv, indices + offsettris);
   lxMatrix44Identity(matrix);
@@ -453,7 +453,7 @@ LUX_API void lxMeshCylinder_initTriangles(int segs[3], lxVector3* pos, lxVector3
 
   used[0] = segs[2];
   used[1] = segs[0];
-  lxMeshPlane_getMemsize(used,&numv,&numtris,&numline);
+  lxMeshPlane_getCounts(used,&numv,&numtris,&numline);
   lxMeshPlane_initTriangles(used,pos + offsetv, normal + offsetv, uv + offsetv, indices + offsettris);
   lxMeshHelper_applyOffset(numtris, indices + offsettris, offsetv);
 
@@ -491,7 +491,7 @@ LUX_API void lxMeshCylinder_initOutline(int segs[3], uint32* indices)
 
   used[0] = segs[0];
   used[1] = segs[1];
-  lxMeshDisc_getMemsize(used,&numv,&numtris,&numline);
+  lxMeshDisc_getCounts(used,&numv,&numtris,&numline);
   lxMeshDisc_initOutline(used,indices + offsetline);
   offsetv    += numv;
   offsetline += numline;

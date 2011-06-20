@@ -19,27 +19,27 @@ extern "C"
   }lxMeshIndexType_t;
 
     // segs = x,y
-  LUX_API void lxMeshPlane_getMemsize(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
+  LUX_API void lxMeshPlane_getCounts(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
   LUX_API void lxMeshPlane_initTriangles(int segs[2], lxVector3* pos, lxVector3* normal, lxVector2* uv, uint32* indices);
   LUX_API void lxMeshPlane_initOutline(int segs[2], uint32* indices);
 
     // segs = outer (x,y),cap
-  LUX_API void lxMeshDisc_getMemsize(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
+  LUX_API void lxMeshDisc_getCounts(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
   LUX_API void lxMeshDisc_initTriangles(int segs[2], lxVector3* pos, lxVector3* normal, lxVector2* uv, uint32* indices);
   LUX_API void lxMeshDisc_initOutline(int segs[2], uint32* indices);
 
     // segs = x,y,z
-  LUX_API void lxMeshBox_getMemsize(int segs[3], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
+  LUX_API void lxMeshBox_getCounts(int segs[3], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
   LUX_API void lxMeshBox_initTriangles(int segs[3], lxVector3* pos, lxVector3* normal, lxVector2* uv, uint32* indices);
   LUX_API void lxMeshBox_initOutline(int segs[3], uint32* indices);
 
     // segs = x & y,z
-  LUX_API void lxMeshSphere_getMemsize(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
+  LUX_API void lxMeshSphere_getCounts(int segs[2], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
   LUX_API void lxMeshSphere_initTriangles(int segs[2], lxVector3* pos, lxVector3* normal, lxVector2* uv, uint32* indices);
   LUX_API void lxMeshSphere_initOutline(int segs[2], uint32* indices);
 
     // segs = outer,cap,z
-  LUX_API void lxMeshCylinder_getMemsize(int segs[3], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
+  LUX_API void lxMeshCylinder_getCounts(int segs[3], int* numVertices, int* numTriangleIndices, int* numOutlineIndices);
   LUX_API void lxMeshCylinder_initTriangles(int segs[3], lxVector3* pos, lxVector3* normal, lxVector2* uv, uint32* indices);
   LUX_API void lxMeshCylinder_initOutline(int segs[3], uint32* indices);
 

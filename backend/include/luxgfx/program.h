@@ -38,7 +38,7 @@ extern "C"{
   }lxgProgramSubroutine_t;
 
   typedef struct lxgProgramParameter_s{
-    lxgParameterType_t   type;
+    lxgParameterType_t    type;
     lxgParmeterUpdate_fn  func;
     union{
       GLuint              glid;         // for SEP

@@ -1379,6 +1379,7 @@ LUX_API void lxgProgram_initNV( lxgProgramPTR prog, lxgContextPTR ctx )
 {
   memset(prog,0,sizeof(lxgProgram_t));
   prog->ctx = ctx;
+  prog->isSeparable = LUX_TRUE;
   prog->type = LUXGFX_PROGRAM_NV;
 }
 

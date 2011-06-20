@@ -71,8 +71,6 @@ ffi.cdef [[
   {
     lxVector3 min;
     lxVector3 max;
-    lxVector3 center;
-    lxVector3 length;
   }lxBoundingBox_t;
 
   typedef struct lxBoundingSphere_s
@@ -268,46 +266,46 @@ ffi.cdef [[
 // BOUNDING VOLUMES
 
  void lxBoundingBox_init(lxBoundingBox_t* box);
- void lxBoundingBox_complete(lxBoundingBox_t* box, booln fromMinMax);
+ void lxBoundingBox_toCenter(const lxBoundingBox_t* box, lxVector3 center, lxVector3 size);
 
 // copy a bounding volume to another
- lxBoundingBox_t* lxBoundingBox_copy(lxBoundingBox_t* out, lxBoundingBox_t* in);
+ lxBoundingBox_t* lxBoundingBox_copy(lxBoundingBox_t* out, const lxBoundingBox_t* in);
  lxBoundingSphere_t* lxBoundingSphere_copy(lxBoundingSphere_t* out, const lxBoundingSphere_t* in);
 
 
 // use min/max
 // ------------
 // merge two bounding volumes
- lxBoundingBox_t*  lxBoundingBox_merge(lxBoundingBox_t* out, lxBoundingBox_t* a, lxBoundingBox_t* b);
+ lxBoundingBox_t*  lxBoundingBox_merge(lxBoundingBox_t* out, const lxBoundingBox_t* a, const lxBoundingBox_t* b);
 // returns TRUE if result differs from a
- booln lxBoundingBox_mergeChange(lxBoundingBox_t* out, lxBoundingBox_t* a, lxBoundingBox_t* b);
+ booln lxBoundingBox_mergeChange(lxBoundingBox_t* out, const lxBoundingBox_t* a, const lxBoundingBox_t* b);
  booln lxBoundingSphere_mergeChange(lxBoundingSphere_t* out, const lxBoundingSphere_t* a, const lxBoundingSphere_t* b);
 
 // converts a bounding box to a bounding sphere
- lxBoundingSphere_t* lxBoundingBox_toSphere(lxBoundingBox_t* bbox, lxBoundingSphere_t* sphere);
+ lxBoundingSphere_t* lxBoundingBox_toSphere(const lxBoundingBox_t* bbox, lxBoundingSphere_t* sphere);
  void lxBoundingBox_toSphereV(const lxVector3 min,const lxVector3 max, lxVector3 center, float *radius);
 
 // convert bounding box to capsule
 // a capsule along major axis of boundingbox is generated with radius
 // of the greater half dimension of the other 2 axis
- lxBoundingCapsule_t* lxBoundingBox_toCapsule(lxBoundingBox_t* bbox,lxBoundingCapsule_t* capsule);
+ lxBoundingCapsule_t* lxBoundingBox_toCapsule(const lxBoundingBox_t* bbox, lxBoundingCapsule_t* capsule);
 
 // transforms a bounding box to an axis aligned bounding box
- lxBoundingBox_t* lxBoundingBox_transform( lxBoundingBox_t* out, lxBoundingBox_t* in, lxMatrix44 trans);
- void lxBoundingBox_transformBoxCorners(const lxBoundingBox_t* in, const lxMatrix44 trans, lxVector3 box[8]);
- void lxBoundingBox_transformV(lxVector3 outmins, lxVector3 outmaxs,lxVector3 mins, lxVector3 maxs, lxMatrix44 trans);
+ lxBoundingBox_t* lxBoundingBox_transform(lxBoundingBox_t* out, const lxBoundingBox_t* in, const lxMatrix44 trans);
+ void lxBoundingBox_transformBoxCorners(const lxBoundingBox_t* in, const lxMatrix44 trans, const lxVector3 box[8]);
+ void lxBoundingBox_transformV(lxVector3 outmins, lxVector3 outmaxs,const lxVector3 mins,const lxVector3 maxs, lxMatrix44 trans);
 
  void lxBoundingBox_fromCorners(lxBoundingBox_t* bbox,const lxVector3 vecs[8]);
  void lxBoundingVectors_fromCamera(lxVector3 vecs[8],const lxMatrix44 mat,const float fov, const float frontplane, const float backplane, const float aspect);
 
  booln lxBoundingBox_intersect(const lxBoundingBox_t* a,const lxBoundingBox_t* b);
  booln lxBoundingBox_checkPoint(const lxBoundingBox_t* out,const lxVector3 point);
- booln lxBoundingCone_checkSphereV(lxBoundingCone_t* cone,lxVector3 center, float radius, float radiusSqr);
+ booln lxBoundingCone_checkSphereV(lxBoundingCone_t* cone, const lxVector3 center, float radius, float radiusSqr);
 
 // approximates frustum via Sphere & Cone, dir must be normalized
- void lxBoundingSphereCone_fromCamera(lxBoundingSphere_t* sphere, lxBoundingCone_t* cone,float frontplane, float backplane, lxVector3 pos, lxVector3 dir, float fov);
- void lxBoundingCone_fromFrustumCorners(lxBoundingCone_t* cone, lxVector3 box[LUX_FRUSTUM_CORNERS]);
- void lxBoundingSphere_fromFrustumCorners(lxBoundingSphere_t* sphere,lxVector3 box[LUX_FRUSTUM_CORNERS]);
+ void lxBoundingSphereCone_fromCamera(lxBoundingSphere_t* sphere, lxBoundingCone_t* cone,float frontplane, float backplane, const lxVector3 pos, const lxVector3 dir, float fov);
+ void lxBoundingCone_fromFrustumCorners(lxBoundingCone_t* cone, const lxVector3 box[LUX_FRUSTUM_CORNERS]);
+ void lxBoundingSphere_fromFrustumCorners(lxBoundingSphere_t* sphere, const lxVector3 box[LUX_FRUSTUM_CORNERS]);
 
 //////////////////////////////////////////////////
 /// __LUXMATH_GEOMETRY_H__

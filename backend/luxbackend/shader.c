@@ -9,7 +9,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 
-LUX_API void lxShaderProgram_init( lxShaderProgram_t* shader, lxStrDictPTR dict, lxgProgramPTR program, int numProgParams,lxgProgramParameter_t* gpuProgParams )
+LUX_API void lxShaderProgram_init( lxShaderProgram_t* shader, lxStrDictPTR dict, lxgProgramPTR program, int numProgParams,lxgProgramParameter_t** gpuProgParams )
 {
   memset(shader,0,sizeof(lxShaderProgram_t));
   shader->program = program;
@@ -49,10 +49,10 @@ LUX_API uint lxShaderProgram_getParameterCount( lxShaderProgram_t* shader )
   // compare every name with everyother name
   // count the "last" ones that don't find a match as unique ones
   for (i = 0; i < num; i++){
-    lxgProgramParameter_t* pa = i >= numGpu ? &shader->addProgParams[i-numGpu] : &shader->gpuProgParams[i];
+    lxgProgramParameter_t* pa = i >= numGpu ? shader->addProgParams[i-numGpu] : shader->gpuProgParams[i];
     uint notfound = 1;
     for (n = i+1; n < num; n++){
-      lxgProgramParameter_t* pb = n >= numGpu ? &shader->addProgParams[n-numGpu] : &shader->gpuProgParams[n];
+      lxgProgramParameter_t* pb = n >= numGpu ? shader->addProgParams[n-numGpu] : shader->gpuProgParams[n];
       if (strcmp(pa->name, pb->name) == 0){
         LUX_DEBUGASSERT(pa->type == pb->type);
         notfound = 0;
@@ -78,12 +78,12 @@ LUX_API void lxShaderProgram_initParameters( lxShaderProgram_t* shader, lxgProgr
   // first phase, find unique and add names
   for (i = 0; i < num; i++){
     lxgProgramParameter_t* pa = customSort ? customSort[i] : 
-          (i >= numGpu ? &shader->addProgParams[i-numGpu] : &shader->gpuProgParams[i]);
+          (i >= numGpu ? shader->addProgParams[i-numGpu] : shader->gpuProgParams[i]);
     uint notfound = 1;
 
     for (n = i+1; n < num; n++){
       lxgProgramParameter_t* pb = customSort ? customSort[n] : 
-          (n >= numGpu ? &shader->addProgParams[n-numGpu] : &shader->gpuProgParams[n]);
+          (n >= numGpu ? shader->addProgParams[n-numGpu] : shader->gpuProgParams[n]);
       if (strcmp(pa->name, pb->name) == 0){
         LUX_DEBUGASSERT(pa->type == pb->type);
         notfound = 0;
@@ -104,7 +104,7 @@ LUX_API void lxShaderProgram_initParameters( lxShaderProgram_t* shader, lxgProgr
     sparam->progOffset = offset;
     for (n = 0; n < num; n++){
       lxgProgramParameter_t* pb = customSort ? customSort[n] : 
-        (n >= numGpu ? &shader->addProgParams[n-numGpu] : &shader->gpuProgParams[n]);
+        (n >= numGpu ? shader->addProgParams[n-numGpu] : shader->gpuProgParams[n]);
 
       if (strcmp(lxStrDict_getFromKey(shader->dict,sparam->namekey), pb->name) == 0){
         shader->progParams[offset++] = pb;

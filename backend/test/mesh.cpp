@@ -83,27 +83,27 @@ public:
     Geometry& Cylinder  = m_geometries[3];
     Geometry& Sphere    = m_geometries[4];
 
-    lxMeshPlane_getMemsize(subdiv,&vertices,&indicesTris,&indicesLines);
+    lxMeshPlane_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
     Plane.allocMem(vertices,indicesTris,indicesLines);
     lxMeshPlane_initTriangles(subdiv,(lxVector3*)&Plane.pos[0],(lxVector3*)&Plane.normal[0],(lxVector2*)&Plane.uv[0],&Plane.indicesTris[0]);
     lxMeshPlane_initOutline(subdiv,&Plane.indicesLines[0]);
 
-    lxMeshBox_getMemsize(subdiv,&vertices,&indicesTris,&indicesLines);
+    lxMeshBox_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
     Box.allocMem(vertices,indicesTris,indicesLines);
     lxMeshBox_initTriangles(subdiv,(lxVector3*)&Box.pos[0],(lxVector3*)&Box.normal[0],(lxVector2*)&Box.uv[0],&Box.indicesTris[0]);
     lxMeshBox_initOutline(subdiv,&Box.indicesLines[0]);
 
-    lxMeshDisc_getMemsize(subdiv,&vertices,&indicesTris,&indicesLines);
+    lxMeshDisc_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
     Disc.allocMem(vertices,indicesTris,indicesLines);
     lxMeshDisc_initTriangles(subdiv,(lxVector3*)&Disc.pos[0],(lxVector3*)&Disc.normal[0],(lxVector2*)&Disc.uv[0],&Disc.indicesTris[0]);
     lxMeshDisc_initOutline(subdiv,&Disc.indicesLines[0]);
 
-    lxMeshCylinder_getMemsize(subdiv,&vertices,&indicesTris,&indicesLines);
+    lxMeshCylinder_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
     Cylinder.allocMem(vertices,indicesTris,indicesLines);
     lxMeshCylinder_initTriangles(subdiv,(lxVector3*)&Cylinder.pos[0],(lxVector3*)&Cylinder.normal[0],(lxVector2*)&Cylinder.uv[0],&Cylinder.indicesTris[0]);
     lxMeshCylinder_initOutline(subdiv,&Cylinder.indicesLines[0]);
 
-    lxMeshSphere_getMemsize(subdiv,&vertices,&indicesTris,&indicesLines);
+    lxMeshSphere_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
     Sphere.allocMem(vertices,indicesTris,indicesLines);
     lxMeshSphere_initTriangles(subdiv,(lxVector3*)&Sphere.pos[0],(lxVector3*)&Sphere.normal[0],(lxVector2*)&Sphere.uv[0],&Sphere.indicesTris[0]);
     lxMeshSphere_initOutline(subdiv,&Sphere.indicesLines[0]);

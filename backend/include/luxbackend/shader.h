@@ -40,12 +40,12 @@ extern "C"
     lxStrDictPTR            dict;
     lxContHashPTR           paramHash;
     uint                    numGpuProgParams;
-    lxgProgramParameterPTR  gpuProgParams;
+    lxgProgramParameter_t** gpuProgParams;
     uint                    numAddProgParams;
-    lxgProgramParameterPTR  addProgParams;
+    lxgProgramParameter_t** addProgParams;
   }lxShaderProgram_t;
 
-  LUX_API void    lxShaderProgram_init(lxShaderProgram_t* shader, lxStrDictPTR dict, lxgProgramPTR program, int numProgParams,lxgProgramParameterPTR  gpuProgParams);
+  LUX_API void    lxShaderProgram_init(lxShaderProgram_t* shader, lxStrDictPTR dict, lxgProgramPTR program, int numProgParams,lxgProgramParameterPTR* gpuProgParams);
   LUX_API uint    lxShaderProgram_getParameterCount(lxShaderProgram_t* shader);
   LUX_API size_t  lxShaderProgram_getMemSize(lxShaderProgram_t* shader);
   LUX_API void    lxShaderProgram_initMem(lxShaderProgram_t* shader, size_t size, void* buffer);
