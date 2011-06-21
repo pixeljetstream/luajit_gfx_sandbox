@@ -64,7 +64,7 @@
 				AdditionalDependencies="luxbackend_d.lib glewgl.lib glfwdll.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x86\$(ProjectName)_d.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
+				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug;..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
