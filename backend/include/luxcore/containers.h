@@ -8,6 +8,7 @@
 #include "contbitarray.h"
 #include "contoctree.h"
 #include "contscalararray.h"
+#include "contmap.h"
 #include "contstringmap.h"
 #include "contvector.h"
 #include "conthash.h"

@@ -169,37 +169,37 @@ LUX_API char* lxStrGetPath(char *out,const char *filename)
   return out;
 }
 
-LUX_API char* lxStrFormatedNumber(char *buffer,int number,int sep)
+LUX_API char* lxStrFormatedNumber(char *buffer,size_t buffersize, int number,int sep)
 {
   char *ptr;
   switch(sep)
   {
   case 0:
-    sprintf(buffer,"%3d",number);
+    lxStrPrintf(buffer,buffersize,"%3d",number);
     break;
   case 1:
     if (number > 1000)
-      sprintf(buffer,"%3d,%3d",number/1000,number%1000);
+      lxStrPrintf(buffer,buffersize,"%3d,%3d",number/1000,number%1000);
     else 
-      sprintf(buffer,"%7d",number);
+      lxStrPrintf(buffer,buffersize,"%7d",number);
     break;
   case 2:
     if (number > 1000000)
-      sprintf(buffer,"%3d,%3d,%3d",number/1000000,(number%1000000)/1000,(number%1000000)%1000);
+      lxStrPrintf(buffer,buffersize,"%3d,%3d,%3d",number/1000000,(number%1000000)/1000,(number%1000000)%1000);
     else if (number > 1000)
-      sprintf(buffer,"%7d,%3d",number/1000,number%1000);
+      lxStrPrintf(buffer,buffersize,"%7d,%3d",number/1000,number%1000);
     else 
-      sprintf(buffer,"%11d",number);
+      lxStrPrintf(buffer,buffersize,"%11d",number);
     break;
   case 3:
     if (number > 1000000000)
-      sprintf(buffer,"%3d,%3d,%3d,%3d",number/1000000000,(number%1000000000)/1000000,((number%1000000000)%1000000)/1000,((number%1000000000)%1000000)%1000);
+      lxStrPrintf(buffer,buffersize,"%3d,%3d,%3d,%3d",number/1000000000,(number%1000000000)/1000000,((number%1000000000)%1000000)/1000,((number%1000000000)%1000000)%1000);
     else if (number > 1000000)
-      sprintf(buffer,"%7d,%3d,%3d",number/1000000,(number%1000000)/1000,(number%1000000)%1000);
+      lxStrPrintf(buffer,buffersize,"%7d,%3d,%3d",number/1000000,(number%1000000)/1000,(number%1000000)%1000);
     else if (number > 1000)
-      sprintf(buffer,"%11d,%3d",number/1000,number%1000);
+      lxStrPrintf(buffer,buffersize,"%11d,%3d",number/1000,number%1000);
     else 
-      sprintf(buffer,"%15d",number);
+      lxStrPrintf(buffer,buffersize,"%15d",number);
     break;
   }
   ptr = buffer+1;

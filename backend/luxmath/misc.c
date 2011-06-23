@@ -65,27 +65,17 @@ LUX_API int lxGetIntMaxOfN (const int *array, int n) {
   return max;
 }
 
-LUX_API void  lxPermutation(int *out, int n, int *temp)
+LUX_API void  lxPermutation(uint32 *out, int32 n)
 {
-  int i;
-  int index;
-  int *pInt;
-
-
-  pInt = temp;
-  for (i = 0; i < n; i++,pInt++){
-    *pInt = i;
+  // Fisher–Yates shuffle
+  int32 i;
+  for (i = 0; i < n; i++){
+    out[i] = i;
   }
-
-  pInt = out;
-  for (i = 0; i < n; i++,pInt){
-    index = rand()%n;
-    while (temp[index] < 0){
-      index++;
-      index%=n;
-    }
-
-    *pInt = temp[index];
-    temp[index] = -1;
+  for (i = n-1; i > 0; i-- ){
+    int32 k = (rand()<<15 | rand()) % (i+1);
+    uint32 temp = out[i];
+    out[i] = out[k];
+    out[k] = temp;
   }
 }

@@ -5,7 +5,7 @@
 #ifndef __LUXCORE_MEMORY_H__
 #define __LUXCORE_MEMORY_H__
 
-
+#include "memorybase.h"
 #include "memorygeneric.h"
 #include "memorypool.h"
 #include "memorystack.h"

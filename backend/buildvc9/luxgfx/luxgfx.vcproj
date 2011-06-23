@@ -70,7 +70,7 @@
 				Name="VCLibrarianTool"
 				AdditionalDependencies="glewgl.lib"
 				OutputFile="..\..\..\depend\lib\Windows_x86_debug\msvc9\luxgfx.lib"
-				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug"
+				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug;..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 				SuppressStartupBanner="true"
 				IgnoreAllDefaultLibraries="true"
 			/>

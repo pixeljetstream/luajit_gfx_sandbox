@@ -37,7 +37,7 @@ LUX_API char* lxStrToUpper(char* output, const char *input);
 LUX_API char* lxStrGetPath(char *out,const char *filename);
 
   // returns formatted integer eg. 1,000 
-LUX_API char* lxStrFormatedNumber(char *buffer,int number,int sep);
+LUX_API char* lxStrFormatedNumber(char *buffer,size_t buffersize,int number,int sep);
 
 LUX_API const char* lxStrFindAsLower(const char* inputaslower, const char *search);
 

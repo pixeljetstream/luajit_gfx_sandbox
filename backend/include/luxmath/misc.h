@@ -25,7 +25,7 @@ LUX_API float lxZigzag(const float in);
 LUX_API float lxVariance(const float in,const float var, const float rand);
 LUX_API void  lxSwapFloat(float *a, float *b);
 
-LUX_API void  lxPermutation(int *array, int n, int *temp);
+LUX_API void  lxPermutation(uint32 *array, int32 n);
 
 LUX_API float lxGetAverageOfN (const float *array, int n); // calculates the avg of n elements in array
 LUX_API float lxGetMinOfN (const float *array, int n);  // returns the min of n elements in array
