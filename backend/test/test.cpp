@@ -4,6 +4,34 @@
 
 #include "test.hpp"
 #include <luxmath/bounding.h>
+#include <luxbackend/meshbase.h>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+//////////////////////////////////////////////////////////////////////////
+
+static std::string ReadFile(const char* filename)
+{
+  string str;
+  size_t filesize;
+
+  ifstream file (filename,ios::in|ios::end);
+  filesize=file.tellg();
+
+  str.reserve(filesize);
+
+  file.seekg(0);
+  while (!file.eof())
+  {
+    str += file.get();
+  }
+  str[str.size()-1] = 0;
+  return str;
+}
+
+//////////////////////////////////////////////////////////////////////////
 
 void RenderHelper::init(GLFWwindow win, const lxCVector3& up)
 {
@@ -97,8 +125,25 @@ void RenderHelper::setCameraGL()
   glLoadMatrixf(m_viewmatrix);
 }
 
-void RenderHelper::doArcBall()
+void RenderHelper::doArcBall(int w, int h )
 {
+  int mb1 = glfwGetMouseButton(m_window,GLFW_MOUSE_BUTTON_1);
+  int mb2 = glfwGetMouseButton(m_window,GLFW_MOUSE_BUTTON_2);
+  if (!mb1 && !mb2) return;
+
+  
+  if (mb1 && !mb2){
+    // rotate
+
+  }
+  else if(mb2 && !mb1){
+    // pan
+
+  }
+  else{
+    // zoom
+
+  }
 
 }
 
@@ -132,3 +177,282 @@ GLuint RenderHelper::generateUVTexture( int w, int h )
 
   return tex;
 }
+
+GLuint RenderHelper::loadShader(GLenum type, const char* filename, const char* prepend )
+{
+  string content = ReadFile(filename);
+  content = string(prepend) + content;
+  GLuint obj = glCreateShader(type);
+  const GLchar* strings[] = {
+    content.c_str(),
+  };
+  GLsizei sizes[] = {
+    strlen(content.c_str()),
+  };
+  glShaderSource(obj,1,strings,sizes);
+  return obj;
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+void Geometry::allocMem( int numVertices, int numIndicesTris, int numIndicesLines )
+{
+  pos.resize(numVertices);
+  normal.resize(numVertices);
+  uv.resize(numVertices);
+  indicesTris.resize(numIndicesTris);
+  indicesLines.resize(numIndicesLines);
+}
+
+void Geometry::updateBO()
+{
+  if (!vbo){
+    glGenBuffers(1,&vbo);
+  }
+  if (!ibo){
+    glGenBuffers(1,&ibo);
+  }
+
+  glBindBuffer(GL_ARRAY_BUFFER, vbo);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(VertexDefault) * pos.size(), NULL, GL_STATIC_DRAW);
+  VertexDefault* vertices = (VertexDefault*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+  for (size_t i = 0; i < pos.size(); ++i){
+    vertices[i].pos = pos[i];
+    vertices[i].normal = normal[i];
+    vertices[i].uv = uv[i];
+  }
+  glUnmapBuffer(GL_ARRAY_BUFFER);
+  glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32) * (indicesTris.size() + indicesLines.size()), NULL, GL_STATIC_DRAW);
+  uint32* indices = (uint32*)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+  memcpy(indices, &indicesTris[0], sizeof(uint32) * (indicesTris.size()));
+  memcpy(indices + indicesTris.size(), &indicesLines[0], sizeof(uint32) * (indicesLines.size()));
+  glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void Geometry::drawVBO( booln outline, booln bind)
+{
+  VertexDefault*  ptr = (VertexDefault*)0;
+  if (bind){
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glVertexPointer(3,GL_FLOAT, sizeof(VertexDefault), (void*)&ptr->pos);
+    glNormalPointer(GL_FLOAT, sizeof(VertexDefault), (void*)&ptr->normal);
+    glTexCoordPointer(2,GL_FLOAT, sizeof(VertexDefault), (void*)&ptr->uv);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+  }
+  if (!outline){
+    glDrawElements(GL_TRIANGLES, indicesTris.size(), GL_UNSIGNED_INT, NULL);
+  }
+  else{
+    glDrawElements(GL_LINES, indicesLines.size(), GL_UNSIGNED_INT, (void*)(sizeof(uint32) * indicesTris.size()));
+  }
+}
+
+void Geometry::drawVA( booln outline )
+{
+  glVertexPointer(3,GL_FLOAT,0, &pos[0]);
+  glNormalPointer(GL_FLOAT,0, &normal[0]);
+  glTexCoordPointer(2,GL_FLOAT,0, &uv[0]);
+  if (!outline){
+    glDrawElements(GL_TRIANGLES, indicesTris.size(), GL_UNSIGNED_INT, &indicesTris[0]);
+  }
+  else{
+    glDrawElements(GL_LINES, indicesLines.size(), GL_UNSIGNED_INT, &indicesLines[0]);
+  }
+}
+
+void Geometry::clearBO()
+{
+  if (vbo){
+    glDeleteBuffers(1,&vbo);
+    vbo = 0;
+  }
+  if (ibo){
+    glDeleteBuffers(1,&ibo);
+    ibo = 0;
+  }
+}
+
+void Geometry::clearDL()
+{
+  if (dltris){
+    glDeleteLists(dltris,1);
+    dltris = 0;
+  }
+  if (dlline){
+    glDeleteLists(dlline,1);
+    dlline = 0;
+  }
+}
+
+Geometry::~Geometry()
+{
+  clearDL();
+  clearBO();
+}
+
+void Geometry::drawDL( booln outline )
+{
+  if (!outline){
+    glCallList(dltris);
+  }
+  else{
+    glCallList(dlline);
+  }
+}
+
+void Geometry::updateDL()
+{
+  glBindBuffer(GL_ARRAY_BUFFER,0);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,0);
+
+  if (!dlline){
+    dlline = glGenLists(1);
+  }
+  if (!dltris){
+    dltris = glGenLists(1);
+  }
+  glNewList(dlline,GL_COMPILE);
+  drawVA(1);
+  glEndList();
+
+  glNewList(dltris,GL_COMPILE);
+  drawVA(0);
+  glEndList();
+}
+
+
+void GeometryBox::update( int x, int y, int z )
+{
+  int numVerts, numTris, numLines;
+  int subdiv[] = {x,y,z};
+
+  lxMeshBox_getCounts(subdiv,&numVerts,&numTris,&numLines);
+  allocMem(numVerts,numTris,numLines);
+  lxMeshBox_initTriangles(subdiv,(lxVector3*)&pos[0],(lxVector3*)&normal[0],(lxVector2*)&uv[0],&indicesTris[0]);
+  lxMeshBox_initOutline(subdiv,&indicesLines[0]);
+}
+
+void GeometryCylinder::update( int x, int y, int z )
+{
+  int numVerts, numTris, numLines;
+  int subdiv[] = {x,y,z};
+
+  lxMeshCylinder_getCounts(subdiv,&numVerts,&numTris,&numLines);
+  allocMem(numVerts,numTris,numLines);
+  lxMeshCylinder_initTriangles(subdiv,(lxVector3*)&pos[0],(lxVector3*)&normal[0],(lxVector2*)&uv[0],&indicesTris[0]);
+  lxMeshCylinder_initOutline(subdiv,&indicesLines[0]);
+}
+
+void GeometryPlane::update( int x, int y)
+{
+  int numVerts, numTris, numLines;
+  int subdiv[] = {x,y};
+
+  lxMeshPlane_getCounts(subdiv,&numVerts,&numTris,&numLines);
+  allocMem(numVerts,numTris,numLines);
+  lxMeshPlane_initTriangles(subdiv,(lxVector3*)&pos[0],(lxVector3*)&normal[0],(lxVector2*)&uv[0],&indicesTris[0]);
+  lxMeshPlane_initOutline(subdiv,&indicesLines[0]);
+}
+
+void GeometryDisc::update( int x, int y)
+{
+  int numVerts, numTris, numLines;
+  int subdiv[] = {x,y};
+
+  lxMeshDisc_getCounts(subdiv,&numVerts,&numTris,&numLines);
+  allocMem(numVerts,numTris,numLines);
+  lxMeshDisc_initTriangles(subdiv,(lxVector3*)&pos[0],(lxVector3*)&normal[0],(lxVector2*)&uv[0],&indicesTris[0]);
+  lxMeshDisc_initOutline(subdiv,&indicesLines[0]);
+}
+
+void GeometrySphere::update( int x, int y)
+{
+  int numVerts, numTris, numLines;
+  int subdiv[] = {x,y};
+
+  lxMeshSphere_getCounts(subdiv,&numVerts,&numTris,&numLines);
+  allocMem(numVerts,numTris,numLines);
+  lxMeshSphere_initTriangles(subdiv,(lxVector3*)&pos[0],(lxVector3*)&normal[0],(lxVector2*)&uv[0],&indicesTris[0]);
+  lxMeshSphere_initOutline(subdiv,&indicesLines[0]);
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+void Material::random()
+{
+  float* diff = diffuse;
+  float* amb = ambient;
+  float* emi = emission;
+  float* spec = specular;
+  for (int i = 0; i < 4; i++){
+    diff[i] = randomFloat(0.25f,0.95f);
+    amb[i]  = randomFloat(0.0f,0.2f);
+    emi[i]  = randomFloat(0.0f,0.05f);
+    spec[i] = randomFloat(0.0f,0.2f);
+  }
+}
+
+
+MaterialState::~MaterialState()
+{
+  clearBO();
+}
+
+void MaterialState::clearBO()
+{
+  if (buffer){
+    glMakeNamedBufferNonResidentNV(buffer);
+    glDeleteBuffers(1,&buffer);
+    buffer = 0;
+  }
+}
+
+void MaterialState::updateBO()
+{
+  if (!buffer){
+    glGenBuffers(1,&buffer);
+  }
+
+  glBindBuffer(GL_ARRAY_BUFFER,buffer);
+  glBufferData(GL_ARRAY_BUFFER,sizeof(MaterialState),this,GL_STATIC_DRAW);
+  glGetBufferParameterui64vNV(GL_ARRAY_BUFFER,GL_BUFFER_GPU_ADDRESS_NV,&address);
+  glMakeBufferResidentNV(GL_ARRAY_BUFFER,GL_READ_ONLY);
+  glBindBuffer(GL_ARRAY_BUFFER,0);
+}
+
+void MaterialState::random()
+{
+  front.random();
+  back = front;
+}
+
+void MaterialState::stateFixed()
+{
+  glMaterialfv(GL_FRONT,GL_AMBIENT,front.ambient);
+  glMaterialfv(GL_FRONT,GL_DIFFUSE,front.diffuse);
+  glMaterialfv(GL_FRONT,GL_SPECULAR,front.specular);
+  glMaterialfv(GL_FRONT,GL_EMISSION,front.emission);
+
+  glMaterialfv(GL_BACK,GL_AMBIENT,back.ambient);
+  glMaterialfv(GL_BACK,GL_DIFFUSE,back.diffuse);
+  glMaterialfv(GL_BACK,GL_SPECULAR,back.specular);
+  glMaterialfv(GL_BACK,GL_EMISSION,back.emission);
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////
+
+Test* TestManager::getTest(const char* name){
+  for (size_t i = 0; i < m_tests.size(); ++i){
+    if (strcmp(name,m_tests[i]->getName())==0){
+      return m_tests[i];
+    }
+  }
+  return NULL;
+}
+

@@ -5,53 +5,22 @@
 #include "test.hpp"
 #include <luxbackend/meshbase.h>
 
-class Geometry {
-public:
-
-  Geometry() {}
-
-  std::vector<lxCVector3>  pos;
-  std::vector<lxCVector3>  normal;
-  std::vector<lxCVector2>  uv;
-  std::vector<uint32>     indicesTris;
-  std::vector<uint32>     indicesLines;
-
-  void allocMem(int numVertices, int numIndicesTris, int numIndicesLines) {
-    pos.resize(numVertices);
-    normal.resize(numVertices);
-    uv.resize(numVertices);
-    indicesTris.resize(numIndicesTris);
-    indicesLines.resize(numIndicesLines);
-  }
-
-  void drawVA(booln outline){
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_NORMAL_ARRAY);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glVertexPointer(3,GL_FLOAT,0, &pos[0]);
-    glNormalPointer(GL_FLOAT,0, &normal[0]);
-    glTexCoordPointer(2,GL_FLOAT,0, &uv[0]);
-    if (!outline){
-      glDrawElements(GL_TRIANGLES, indicesTris.size(), GL_UNSIGNED_INT, &indicesTris[0]);
-    }
-    else{
-      glDrawElements(GL_LINES, indicesLines.size(), GL_UNSIGNED_INT, &indicesLines[0]);
-    }
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_NORMAL_ARRAY);
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-  }
-};
 
 class MeshTest : public Test
 {
 private:
-  static const int GEOMETRIES = 5;
 
   RenderHelper  m_rh;
   int           m_model;
   int           m_wire;
-  Geometry      m_geometries[GEOMETRIES];
+  GeometryPlane     m_plane;
+  GeometryBox       m_box;
+  GeometryDisc      m_disc;
+  GeometryCylinder  m_cylinder;
+  GeometrySphere    m_sphere;
+  std::vector<Geometry*>   m_geometries;
+  int                      m_numGeometries;
+  KeyTracker    m_keys;
 
   GLFWwindow    m_window;
   int           m_lastSpace;
@@ -66,50 +35,26 @@ public:
     , m_wire(0)
     , m_model(0)
   {
-
+    m_geometries.push_back(&m_plane);
+    m_geometries.push_back(&m_box);
+    m_geometries.push_back(&m_disc);
+    m_geometries.push_back(&m_cylinder);
+    m_geometries.push_back(&m_sphere);
+    m_numGeometries = (int)m_geometries.size();
+    m_keys.add(GLFW_KEY_SPACE);
+    m_keys.add(GLFW_KEY_W);
   }
 
   void updateGeometry(int x, int y, int z)
   {
-    int subdiv[3] = {x,y,z};
-
-    int vertices;
-    int indicesTris;
-    int indicesLines;
-
-    Geometry& Plane     = m_geometries[0];
-    Geometry& Box       = m_geometries[1];
-    Geometry& Disc      = m_geometries[2];
-    Geometry& Cylinder  = m_geometries[3];
-    Geometry& Sphere    = m_geometries[4];
-
-    lxMeshPlane_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
-    Plane.allocMem(vertices,indicesTris,indicesLines);
-    lxMeshPlane_initTriangles(subdiv,(lxVector3*)&Plane.pos[0],(lxVector3*)&Plane.normal[0],(lxVector2*)&Plane.uv[0],&Plane.indicesTris[0]);
-    lxMeshPlane_initOutline(subdiv,&Plane.indicesLines[0]);
-
-    lxMeshBox_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
-    Box.allocMem(vertices,indicesTris,indicesLines);
-    lxMeshBox_initTriangles(subdiv,(lxVector3*)&Box.pos[0],(lxVector3*)&Box.normal[0],(lxVector2*)&Box.uv[0],&Box.indicesTris[0]);
-    lxMeshBox_initOutline(subdiv,&Box.indicesLines[0]);
-
-    lxMeshDisc_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
-    Disc.allocMem(vertices,indicesTris,indicesLines);
-    lxMeshDisc_initTriangles(subdiv,(lxVector3*)&Disc.pos[0],(lxVector3*)&Disc.normal[0],(lxVector2*)&Disc.uv[0],&Disc.indicesTris[0]);
-    lxMeshDisc_initOutline(subdiv,&Disc.indicesLines[0]);
-
-    lxMeshCylinder_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
-    Cylinder.allocMem(vertices,indicesTris,indicesLines);
-    lxMeshCylinder_initTriangles(subdiv,(lxVector3*)&Cylinder.pos[0],(lxVector3*)&Cylinder.normal[0],(lxVector2*)&Cylinder.uv[0],&Cylinder.indicesTris[0]);
-    lxMeshCylinder_initOutline(subdiv,&Cylinder.indicesLines[0]);
-
-    lxMeshSphere_getCounts(subdiv,&vertices,&indicesTris,&indicesLines);
-    Sphere.allocMem(vertices,indicesTris,indicesLines);
-    lxMeshSphere_initTriangles(subdiv,(lxVector3*)&Sphere.pos[0],(lxVector3*)&Sphere.normal[0],(lxVector2*)&Sphere.uv[0],&Sphere.indicesTris[0]);
-    lxMeshSphere_initOutline(subdiv,&Sphere.indicesLines[0]);
+    m_plane.update(x,y);
+    m_box.update(x,y,z);
+    m_disc.update(x,y);
+    m_cylinder.update(x,y,z);
+    m_sphere.update(x,y);
   }
 
-  void onInit(GLFWwindow win) {
+  void onInit(GLFWwindow win, int argc, const char** argv) {
     m_window = win;
 
     updateGeometry(4,2,1);
@@ -125,7 +70,29 @@ public:
     m_texture = RenderHelper::generateUVTexture(256,256);
   }
 
+  void logic(int width, int height)
+  {
+    m_keys.update(m_window);
+    if (m_keys.onPress(GLFW_KEY_SPACE)){
+      m_model++;
+      if (m_model >= m_numGeometries*2){
+        int scale = m_model/(m_numGeometries*2);
+        scale++;
+        updateGeometry(4*scale,2*scale,1*scale);
+      }
+    }
+    if (m_keys.onPress(GLFW_KEY_W)){
+      m_wire = !m_wire;
+    }
+  }
+
   void onDraw(int width, int height) {
+    logic(width,height);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
     lxCVector4 lightpos(0,0,0,1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -133,31 +100,13 @@ public:
     glEnable(GL_LIGHT0);
     glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
 
-    glDisable(GL_CULL_FACE);
-
     m_rh.updateProjection(width,height);
     m_rh.setCameraGL();
-
-    int space = glfwGetKey(m_window,GLFW_KEY_SPACE);
-    if (!m_lastSpace && space){
-      m_model++;
-      if (m_model >= GEOMETRIES*2){
-        int scale = m_model/(GEOMETRIES*2);
-        scale++;
-        updateGeometry(4*scale,2*scale,1*scale);
-      }
-    }
-    m_lastSpace = space;
-    int wire  = glfwGetKey(m_window,GLFW_KEY_W);
-    if (!m_lastWire && wire){
-      m_wire = !m_wire;
-    }
-    m_lastWire  = wire;
 
     glBindTexture(GL_TEXTURE_2D,m_texture);
     glEnable(GL_TEXTURE_2D);
     glPolygonMode(GL_FRONT_AND_BACK,m_wire ? GL_LINE : GL_FILL);
-    m_geometries[(m_model/2) % GEOMETRIES].drawVA(m_model % 2);
+    m_geometries[(m_model/2) % m_numGeometries]->drawVA(m_model % 2);
     glBindTexture(GL_TEXTURE_2D,0);
   }
 

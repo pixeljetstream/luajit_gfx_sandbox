@@ -5,7 +5,7 @@
 #include "test.hpp"
 #include <string>
 
-int main(int argc, char** argv)
+int main(int argc, const char** argv)
 {
   Test* test = argc > 1 ? TestManager::Get().getTest(argv[1]) : NULL;
   std::string caption = "lux backend test: " + std::string(test ? test->getName() : "no test specified");
@@ -18,12 +18,17 @@ int main(int argc, char** argv)
   glewInit();
 
   if (test)
-    test->onInit(win);
+    test->onInit(win,argc,argv);
+
+  const int TIMES = 16;
+  double times[TIMES];
+  int curtime = 0;
 
   while( glfwIsWindow(win) && glfwGetKey(win,GLFW_KEY_ESCAPE) != GLFW_PRESS)
   {
     int width;
     int height;
+    double begin = glfwGetTime();
     glfwGetWindowSize(win, &width, &height);
     glViewport(0,0,width,height);
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -34,6 +39,18 @@ int main(int argc, char** argv)
     glfwSwapBuffers();
     glFinish();
     glfwPollEvents();
+
+    times[(curtime++) % TIMES] = (glfwGetTime()-begin);
+    double dur = 0;
+    int cnt = std::min(curtime, TIMES);
+    for (int i = 0; i < cnt; i++){
+      dur += times[i];
+    }
+    dur /= double(TIMES);
+
+    char buffer[128];
+    sprintf_s(buffer,128," %.1f ms %5d fps", dur * 1000.0, (int)floor(1.0/dur));
+    glfwSetWindowTitle(win, (caption + std::string(buffer)).c_str());
   }
 
   if (glfwIsWindow(win)){
