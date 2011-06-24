@@ -1,10 +1,8 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
 #include "test.hpp"
-#include <luxbackend/meshbase.h>
-
 
 class MeshTest : public Test
 {
@@ -20,18 +18,14 @@ private:
   GeometrySphere    m_sphere;
   std::vector<Geometry*>   m_geometries;
   int                      m_numGeometries;
-  KeyTracker    m_keys;
 
+  KeyTracker    m_keys;
   GLFWwindow    m_window;
-  int           m_lastSpace;
-  int           m_lastWire;
   GLuint        m_texture;
 
 public:
   MeshTest() 
     : Test("mesh")
-    , m_lastWire(0)
-    , m_lastSpace(0)
     , m_wire(0)
     , m_model(0)
   {
@@ -112,5 +106,5 @@ public:
 
 };
 
-MeshTest test;
+static MeshTest test;
 

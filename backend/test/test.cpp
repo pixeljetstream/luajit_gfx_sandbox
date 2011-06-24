@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
@@ -204,6 +204,33 @@ void Geometry::allocMem( int numVertices, int numIndicesTris, int numIndicesLine
   indicesLines.resize(numIndicesLines);
 }
 
+
+void Geometry::fillVerts( VertexDefault* vertices )
+{
+  for (size_t i = 0; i < pos.size(); ++i){
+    vertices[i].pos = pos[i];
+    vertices[i].normal = normal[i];
+    vertices[i].uv = uv[i];
+  }
+}
+
+
+void Geometry::fillIndices( lxMeshIndexType_t type, void* indices, uint32 vertexoffset, booln outline )
+{
+  size_t num = outline ? indicesLines.size() : indicesTris.size() ;
+  uint32* src = outline ? &indicesLines[0] : &indicesTris[0];
+  if (type == LUX_MESH_INDEX_UINT16){
+    uint16* LUX_RESTRICT dst = (uint16*)indices;
+    for (size_t i = 0; i < num; ++i){
+      dst[i] = src[i] + vertexoffset;
+    }
+  }
+  else{
+    memcpy(indices,src,sizeof(uint32)*num);
+  }
+}
+
+
 void Geometry::updateBO()
 {
   if (!vbo){
@@ -216,19 +243,15 @@ void Geometry::updateBO()
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
   glBufferData(GL_ARRAY_BUFFER, sizeof(VertexDefault) * pos.size(), NULL, GL_STATIC_DRAW);
   VertexDefault* vertices = (VertexDefault*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-  for (size_t i = 0; i < pos.size(); ++i){
-    vertices[i].pos = pos[i];
-    vertices[i].normal = normal[i];
-    vertices[i].uv = uv[i];
-  }
+  fillVerts(vertices);
   glUnmapBuffer(GL_ARRAY_BUFFER);
   glBindBuffer(GL_ARRAY_BUFFER, 0);
 
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32) * (indicesTris.size() + indicesLines.size()), NULL, GL_STATIC_DRAW);
   uint32* indices = (uint32*)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
-  memcpy(indices, &indicesTris[0], sizeof(uint32) * (indicesTris.size()));
-  memcpy(indices + indicesTris.size(), &indicesLines[0], sizeof(uint32) * (indicesLines.size()));
+  fillIndices(LUX_MESH_INDEX_UINT32,indices);
+  fillIndices(LUX_MESH_INDEX_UINT32,indices+ indicesTris.size(),0,LUX_TRUE);
   glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
@@ -323,7 +346,6 @@ void Geometry::updateDL()
   drawVA(0);
   glEndList();
 }
-
 
 void GeometryBox::update( int x, int y, int z )
 {

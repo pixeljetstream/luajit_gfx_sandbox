@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
@@ -10,6 +10,7 @@
 
 #include <luxmath/luxmath.h>
 #include <luxmath/basetypes.hpp>
+#include <luxbackend/meshbase.h>
 
 #include <string.h>
 #include <vector>
@@ -93,6 +94,19 @@ public:
   GLuint                    ibo;
   GLuint                    dltris;
   GLuint                    dlline;
+
+  inline size_t  numVertices() const {
+    return pos.size();
+  }
+  inline size_t numIndicesTris() const {
+    return indicesTris.size();
+  }
+  inline size_t numIndicesLines() const {
+    return indicesLines.size();
+  }
+
+  void fillVerts(VertexDefault* verts);
+  void fillIndices(lxMeshIndexType_t  type, void* indices, uint32 vertexoffset=0, booln outline=0);
 
   void updateBO();
   void updateDL();
@@ -264,4 +278,5 @@ private:
 
 
 #endif
+
 
