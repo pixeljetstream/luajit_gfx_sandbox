@@ -25,11 +25,11 @@ typedef struct lxBitArray_s{
 LUX_API void  lxBitArray_set(lxBitArray_t *ba, uint bit, booln state);
 LUX_API booln lxBitArray_get(const lxBitArray_t *ba, uint bit);
 // sets all to 0
-LUX_API void  lxBitArrray_clear(lxBitArray_t *ba);
+LUX_API void  lxBitArray_clear(lxBitArray_t *ba);
 // sets all to 1
-LUX_API void  lxBitArrray_all(lxBitArray_t *ba);
+LUX_API void  lxBitArray_all(lxBitArray_t *ba);
 // is any bit set
-LUX_API booln lxBitArrray_any(const lxBitArray_t *ba);
+LUX_API booln lxBitArray_any(const lxBitArray_t *ba);
 // index of first item with state, -1 returned 
 LUX_API int32 lxBitArray_getFirst(const lxBitArray_t *ba, booln state);
 
@@ -53,15 +53,15 @@ LUX_INLINE booln  lxBitArray_get(const lxBitArray_t *ba, uint bit)
   return (ba->bits[bit/32] & 1<<(bit%32))!= 0;
 }
 
-LUX_INLINE void lxBitArrray_clear(lxBitArray_t *ba)
+LUX_INLINE void lxBitArray_clear(lxBitArray_t *ba)
 {
   memset(ba->bits,0,sizeof(uint32)*ba->num32);
 }
-LUX_INLINE void lxBitArrray_all(lxBitArray_t *ba)
+LUX_INLINE void lxBitArray_all(lxBitArray_t *ba)
 {
   memset(ba->bits,0xFFFFFFFF,sizeof(uint32)*ba->num32);
 }
-LUX_INLINE booln  lxBitArrray_any(const lxBitArray_t *ba)
+LUX_INLINE booln  lxBitArray_any(const lxBitArray_t *ba)
 {
   const uint32 *start = ba->bits;
   const uint32 *end = start + ba->num32;
