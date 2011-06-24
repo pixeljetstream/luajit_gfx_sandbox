@@ -6,6 +6,8 @@
 #include <luxplatform/debug.h>
 #include <luxcore/contmacrolinkedlist.h>
 
+#include <malloc.h>
+#include <memory.h>
 
 //////////////////////////////////////////////////////////////////////////
 // MemoryGeneric
@@ -13,7 +15,7 @@
 typedef struct MemInfo_s
 {
   size_t    size;
-  int     line;
+  int       line;
   const char* src;
 
   struct MemInfo_s LUX_LISTNODEVARS;
@@ -25,8 +27,9 @@ typedef struct MemStats_s{
 
 
 typedef struct lxMemoryGeneric_s{
-  lxMemoryAllocator_t   allocator;
-  lxMemoryGenericInfo_t info;
+  lxMemoryAllocator_t     allocator;
+  lxMemoryGenericDescr_t  descr;
+  lxMemoryGenericInfo_t   info;
   #if defined(MEMORY_STATS)
   MemStats_t    stats;
   #endif
@@ -39,10 +42,10 @@ lxMemoryGenericInfo_t lxMemoryGeneric_getInfo(lxMemoryGenericPTR gen)
 }
 
 
-#define MEMORY_GLOBAL_CALLOC(a,b)     calloc(a,b)
-#define MEMORY_GLOBAL_MALLOC(a)       malloc(a)
-#define MEMORY_GLOBAL_REALLOC(a,b)    realloc(a,b)
-#define MEMORY_GLOBAL_FREE(a)         free(a)
+#define MEMORY_GLOBAL_CALLOC(a,b)     gen->descr.calloc_fn(gen->descr.sys,a,b)
+#define MEMORY_GLOBAL_MALLOC(a)       gen->descr.malloc_fn(gen->descr.sys,a)
+#define MEMORY_GLOBAL_REALLOC(a,b)    gen->descr.realloc_fn(gen->descr.sys,a,b)
+#define MEMORY_GLOBAL_FREE(a)         gen->descr.free_fn(gen->descr.sys,a)
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -435,9 +438,10 @@ booln lxMemoryGeneric_deinitStats(lxMemoryGenericPTR gen)
 }
 
 
-static void lxMemoryGeneric_init(lxMemoryGenericPTR gen)
+static void lxMemoryGeneric_init(lxMemoryGenericPTR gen,lxMemoryGenericDescr_t descr)
 {
   memset(gen,0,sizeof(lxMemoryGeneric_t));
+  gen->descr = descr;
 #ifdef MEMORY_STATS
   gen->allocator._malloc = (lxMallocStats_fn)lxMemoryGeneric_mallocStats;
   gen->allocator._calloc = (lxCallocStats_fn)lxMemoryGeneric_callocStats;
@@ -459,15 +463,41 @@ static void lxMemoryGeneric_init(lxMemoryGenericPTR gen)
 #endif
 }
 
-LUX_API lxMemoryGenericPTR lxMemoryGeneric_new()
+LUX_API lxMemoryGenericPTR lxMemoryGeneric_new(lxMemoryGenericDescr_t  descr)
 {
-  lxMemoryGenericPTR gen = MEMORY_GLOBAL_MALLOC(sizeof(lxMemoryGeneric_t));
-  lxMemoryGeneric_init(gen);
+  lxMemoryGenericPTR gen = (lxMemoryGeneric_t*)descr.malloc_fn(descr.sys,sizeof(lxMemoryGeneric_t));
+  lxMemoryGeneric_init(gen,descr);
   return gen;
 }
 
 LUX_API void lxMemoryGeneric_delete(lxMemoryGenericPTR gen)
 {
   MEMORY_GLOBAL_FREE(gen);
+}
+
+static void* default_malloc(void* sys, size_t sz)
+{
+  return malloc(sz);
+}
+
+static void* default_calloc(void* sys, size_t sz, size_t num)
+{
+  return calloc(sz,num);
+}
+
+static void* default_realloc(void* sys, void* ptr, size_t sz)
+{
+  return realloc(ptr,sz);
+}
+
+static void default_free(void* sys, void* ptr)
+{
+  free(ptr);
+}
+
+LUX_API lxMemoryGenericDescr_t lxMemoryGenericDescr_default()
+{
+  static lxMemoryGenericDescr_t descr = {NULL,default_malloc, default_calloc, default_realloc, default_free};
+  return descr;
 }
 

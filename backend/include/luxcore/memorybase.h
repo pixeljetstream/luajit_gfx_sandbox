@@ -6,9 +6,8 @@
 #define __LUXCORE_MEMORYBASE_H__
 
 #include <luxplatform/luxplatform.h>
-#include <malloc.h>
-#include <memory.h>
 #include <string.h>
+
 //////////////////////////////////////////////////////////////////////////
 // Switches
 //

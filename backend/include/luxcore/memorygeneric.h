@@ -13,7 +13,7 @@ extern "C"{
 #endif
 
 //////////////////////////////////////////////////////////////////////////
-// MemoryGeneric, implementation of an 
+// MemoryGeneric, wrapper of an 
 // generic allocator, mostly for profiling/ debugging/ stat tracking
 // zalloc = set to 0
 
@@ -22,9 +22,18 @@ typedef struct lxMemoryGenericInfo_s{
   ptrdiff_t mem;
 }lxMemoryGenericInfo_t;
 
+typedef struct lxMemoryGenericDescr_s{
+  void* sys;
+  void* (__cdecl *malloc_fn)(void* sys, size_t sz);
+  void* (__cdecl *calloc_fn)(void* sys, size_t sz, size_t num);
+  void* (__cdecl *realloc_fn)(void* sys, void* ptr, size_t sz);
+  void  (__cdecl *free_fn)(void* sys, void* ptr);
+}lxMemoryGenericDescr_t;
+
 typedef struct lxMemoryGeneric_s* lxMemoryGenericPTR;
 
-LUX_API lxMemoryGenericPTR lxMemoryGeneric_new();
+LUX_API lxMemoryGenericDescr_t lxMemoryGenericWrap_default();
+LUX_API lxMemoryGenericPTR lxMemoryGeneric_new(lxMemoryGenericDescr_t descr);
 LUX_API void lxMemoryGeneric_delete(lxMemoryGenericPTR gen);
 
 LUX_API lxMemoryGenericInfo_t lxMemoryGeneric_getInfo(lxMemoryGenericPTR gen);

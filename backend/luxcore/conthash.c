@@ -300,7 +300,7 @@ LUX_API booln lxContPtrHash_set(lxContPtrHashPTR cv, void* key, const void *val)
   entry = (lxContPtrHashEntry_t*)lxMemoryPool_allocItem(&cv->mempool);
 
   if (!valueSize){
-    entry->data = val;
+    entry->data = (void*)val;
   }
   else{
     memcpy((void*)entry->bytes,val,valueSize);
