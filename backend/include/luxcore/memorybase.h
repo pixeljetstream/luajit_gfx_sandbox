@@ -15,7 +15,7 @@
 
 
 #ifdef _DEBUG
-#define MEMORY_STATS
+#define LUX_MEMORY_STATS
 #endif
 
 #ifdef __cplusplus
@@ -45,30 +45,30 @@ extern "C"{
   typedef void  (__cdecl *lxFreeStats_fn)(lxMemoryAllocatorPTR, void*, size_t oldsz, const char *file, int line);
   typedef void  (__cdecl *lxFreeAlignedStats_fn)(lxMemoryAllocatorPTR, void*, size_t oldsz, const char *file, int line);
 
+  typedef struct lxMemoryTracker_s{
+    lxMallocStats_fn          _malloc;
+    lxCallocStats_fn          _calloc;
+    lxReallocStats_fn         _realloc;
+    lxFreeStats_fn            _free;
+    lxMallocAlignedStats_fn   _mallocAligned;
+    lxCallocAlignedStats_fn   _callocAligned;
+    lxReallocAlignedStats_fn  _reallocAligned;
+    lxFreeAlignedStats_fn     _freeAligned;
+  }lxMemoryTracker_t;
   
   typedef struct lxMemoryAllocator_s{
-#ifdef MEMORY_STATS
-    lxMallocStats_fn _malloc;
-    lxCallocStats_fn _calloc;
-    lxReallocStats_fn _realloc;
-    lxFreeStats_fn _free;
-    lxMallocAlignedStats_fn _mallocAligned;
-    lxCallocAlignedStats_fn _callocAligned;
-    lxReallocAlignedStats_fn _reallocAligned;
-    lxFreeAlignedStats_fn _freeAligned;
-#else
-    lxMalloc_fn _malloc;
-    lxCalloc_fn _calloc;
-    lxRealloc_fn _realloc;
-    lxFree_fn _free;
-    lxMallocAligned_fn _mallocAligned;
-    lxCallocAligned_fn _callocAligned;
-    lxReallocAligned_fn _reallocAligned;
-    lxFreeAligned_fn _freeAligned;
-#endif
+    lxMalloc_fn           _malloc;
+    lxCalloc_fn           _calloc;
+    lxRealloc_fn          _realloc;
+    lxFree_fn             _free;
+    lxMallocAligned_fn    _mallocAligned;
+    lxCallocAligned_fn    _callocAligned;
+    lxReallocAligned_fn   _reallocAligned;
+    lxFreeAligned_fn      _freeAligned;
+    lxMemoryTracker_t*    tracker;
   }lxMemoryAllocator_t;
 
-#ifndef MEMORY_STATS
+#ifndef LUX_MEMORY_STATS
   void* lxMemoryAllocator_malloc(lxMemoryAllocatorPTR alloc, size_t sz);
   void* lxMemoryAllocator_mallocAligned(lxMemoryAllocatorPTR alloc, size_t sz, size_t align);
   void* lxMemoryAllocator_calloc(lxMemoryAllocatorPTR alloc, size_t sz, size_t num);
@@ -102,15 +102,15 @@ void* lxPointerAlign(void *ptr, size_t align);
 size_t  lxSizeAlign(size_t val, size_t align);
 
 //////////////////////////////////////////////////////////////////////////
-#ifdef MEMORY_STATS
-#define lxMemoryAllocator_malloc(a,s)                 (a->_malloc((a),(s),__FILE__,__LINE__))
-#define lxMemoryAllocator_mallocAligned(a,s,al)       (a->_mallocAligned((a),(s),(al),__FILE__,__LINE__))
-#define lxMemoryAllocator_calloc(a,e,s)               (a->_calloc((a),(e),(s),__FILE__,__LINE__))
-#define lxMemoryAllocator_callocAligned(a,e,s,al)     (a->_callocAligned((a),(e),(s),(al),__FILE__,__LINE__))
-#define lxMemoryAllocator_realloc(a,p,s,o)            (a->_realloc((a),(p),(s),(o),__FILE__,__LINE__))
-#define lxMemoryAllocator_reallocAligned(a,p,s,o,al)  (a->_reallocAligned((a),(p),(s),(o),(al),__FILE__,__LINE__))
-#define lxMemoryAllocator_free(a,p,o)                 (a->_free((a),(p),(o),__FILE__,__LINE__))
-#define lxMemoryAllocator_freeAligned(a,p,o)          (a->_freeAligned((a),(p),(o),__FILE__,__LINE__))
+#ifdef LUX_MEMORY_STATS
+#define lxMemoryAllocator_malloc(a,s)                 (a->tracker->_malloc((a),(s),__FILE__,__LINE__))
+#define lxMemoryAllocator_mallocAligned(a,s,al)       (a->tracker->_mallocAligned((a),(s),(al),__FILE__,__LINE__))
+#define lxMemoryAllocator_calloc(a,e,s)               (a->tracker->_calloc((a),(e),(s),__FILE__,__LINE__))
+#define lxMemoryAllocator_callocAligned(a,e,s,al)     (a->tracker->_callocAligned((a),(e),(s),(al),__FILE__,__LINE__))
+#define lxMemoryAllocator_realloc(a,p,s,o)            (a->tracker->_realloc((a),(p),(s),(o),__FILE__,__LINE__))
+#define lxMemoryAllocator_reallocAligned(a,p,s,o,al)  (a->tracker->_reallocAligned((a),(p),(s),(o),(al),__FILE__,__LINE__))
+#define lxMemoryAllocator_free(a,p,o)                 (a->tracker->_free((a),(p),(o),__FILE__,__LINE__))
+#define lxMemoryAllocator_freeAligned(a,p,o)          (a->tracker->_freeAligned((a),(p),(o),__FILE__,__LINE__))
 #else
 LUX_INLINE void* lxMemoryAllocator_malloc(lxMemoryAllocatorPTR alloc, size_t sz){
   return alloc->_malloc(alloc,sz);

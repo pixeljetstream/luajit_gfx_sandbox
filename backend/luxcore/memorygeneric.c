@@ -30,13 +30,12 @@ typedef struct lxMemoryGeneric_s{
   lxMemoryAllocator_t     allocator;
   lxMemoryGenericDescr_t  descr;
   lxMemoryGenericInfo_t   info;
-  #if defined(MEMORY_STATS)
-  MemStats_t    stats;
-  #endif
+  lxMemoryTracker_t       tracker;
+  MemStats_t              stats;
 }lxMemoryGeneric_t;
 
 
-lxMemoryGenericInfo_t lxMemoryGeneric_getInfo(lxMemoryGenericPTR gen)
+LUX_API lxMemoryGenericInfo_t lxMemoryGeneric_getInfo(lxMemoryGenericPTR gen)
 {
   return gen->info;
 }
@@ -49,14 +48,14 @@ lxMemoryGenericInfo_t lxMemoryGeneric_getInfo(lxMemoryGenericPTR gen)
 
 //////////////////////////////////////////////////////////////////////////
 
-LUX_API void lxMemoryGeneric_free(lxMemoryGenericPTR gen, void *ptr, size_t size) {
+static void lxMemoryGeneric_free(lxMemoryGenericPTR gen, void *ptr, size_t size) {
   gen->info.allocs--;
   gen->info.mem -= size;
 
   MEMORY_GLOBAL_FREE(ptr);
 }
 
-LUX_API void *lxMemoryGeneric_zalloc(lxMemoryGenericPTR gen, size_t size)
+static void *lxMemoryGeneric_zalloc(lxMemoryGenericPTR gen, size_t size)
 {
   gen->info.allocs++;
   gen->info.mem += size;
@@ -67,7 +66,7 @@ LUX_API void *lxMemoryGeneric_zalloc(lxMemoryGenericPTR gen, size_t size)
   }
 }
 
-LUX_API void *lxMemoryGeneric_calloc(lxMemoryGenericPTR gen, size_t num, size_t size)
+static void *lxMemoryGeneric_calloc(lxMemoryGenericPTR gen, size_t num, size_t size)
 {
   gen->info.allocs++;
   gen->info.mem += size;
@@ -78,7 +77,7 @@ LUX_API void *lxMemoryGeneric_calloc(lxMemoryGenericPTR gen, size_t num, size_t 
   }
 }
 
-LUX_API void *lxMemoryGeneric_malloc(lxMemoryGenericPTR gen, size_t size)
+static void *lxMemoryGeneric_malloc(lxMemoryGenericPTR gen, size_t size)
 {
   gen->info.allocs++;
   gen->info.mem += size;
@@ -89,7 +88,7 @@ LUX_API void *lxMemoryGeneric_malloc(lxMemoryGenericPTR gen, size_t size)
   }
 }
 
-LUX_API void *lxMemoryGeneric_realloc(lxMemoryGenericPTR gen, void* ptr, size_t size, size_t oldsize)
+static void *lxMemoryGeneric_realloc(lxMemoryGenericPTR gen, void* ptr, size_t size, size_t oldsize)
 {
   gen->info.mem += size-oldsize;
 
@@ -97,14 +96,14 @@ LUX_API void *lxMemoryGeneric_realloc(lxMemoryGenericPTR gen, void* ptr, size_t 
   return ptr;
 }
 
-LUX_API void lxMemoryGeneric_freeAligned(lxMemoryGenericPTR gen, void *ptr, size_t size) {
+static void lxMemoryGeneric_freeAligned(lxMemoryGenericPTR gen, void *ptr, size_t size) {
   gen->info.allocs--;
 
   ptr = lxMemAlignedToOrig(ptr);
   MEMORY_GLOBAL_FREE(ptr);
 }
 
-LUX_API void *lxMemoryGeneric_zallocAligned(lxMemoryGenericPTR gen, size_t size, size_t alignsize)
+static void *lxMemoryGeneric_zallocAligned(lxMemoryGenericPTR gen, size_t size, size_t alignsize)
 {
   void *ptr = MEMORY_GLOBAL_MALLOC(size + alignsize + sizeof(size_t));
 
@@ -117,7 +116,7 @@ LUX_API void *lxMemoryGeneric_zallocAligned(lxMemoryGenericPTR gen, size_t size,
   return ptr;
 }
 
-LUX_API void *lxMemoryGeneric_mallocAligned(lxMemoryGenericPTR gen, size_t size, size_t alignsize)
+static void *lxMemoryGeneric_mallocAligned(lxMemoryGenericPTR gen, size_t size, size_t alignsize)
 {
   void *ptr = MEMORY_GLOBAL_MALLOC(size + alignsize + sizeof(size_t));
 
@@ -129,7 +128,7 @@ LUX_API void *lxMemoryGeneric_mallocAligned(lxMemoryGenericPTR gen, size_t size,
   return ptr;
 }
 
-LUX_API void *lxMemoryGeneric_callocAligned(lxMemoryGenericPTR gen, size_t num, size_t size, size_t alignsize)
+static void *lxMemoryGeneric_callocAligned(lxMemoryGenericPTR gen, size_t num, size_t size, size_t alignsize)
 {
   void *ptr = MEMORY_GLOBAL_CALLOC(1,(size*num) + alignsize + sizeof(size_t));
 
@@ -141,7 +140,7 @@ LUX_API void *lxMemoryGeneric_callocAligned(lxMemoryGenericPTR gen, size_t num, 
   return ptr;
 }
 
-LUX_API void *lxMemoryGeneric_reallocAligned(lxMemoryGenericPTR gen, void* ptr, size_t newsize, size_t oldsize, size_t alignsize)
+static void *lxMemoryGeneric_reallocAligned(lxMemoryGenericPTR gen, void* ptr, size_t newsize, size_t oldsize, size_t alignsize)
 {
   byte* oldptr = (byte*)lxMemAlignedToOrig(ptr);
   size_t shiftold = (((byte*)ptr)-oldptr)-sizeof(size_t);
@@ -154,7 +153,7 @@ LUX_API void *lxMemoryGeneric_reallocAligned(lxMemoryGenericPTR gen, void* ptr, 
   return lxMemAlignedFromOrig(ptr,alignsize);
 }
 
-LUX_API size_t lxMemoryGeneric_offsetAligned(lxMemoryGenericPTR gen, void *ptr)
+static size_t lxMemoryGeneric_offsetAligned(lxMemoryGenericPTR gen, void *ptr)
 {
   byte* inptr = (byte*)ptr;
   byte* optr  = (byte*)lxMemAlignedToOrig(ptr);
@@ -165,9 +164,8 @@ LUX_API size_t lxMemoryGeneric_offsetAligned(lxMemoryGenericPTR gen, void *ptr)
 
 //////////////////////////////////////////////////////////////////////////
 
-#if defined(MEMORY_STATS)
 
-LUX_API void lxMemoryGeneric_freeStats(lxMemoryGenericPTR gen, void *ptr, size_t size,const char *source, int line)
+static void lxMemoryGeneric_freeStats(lxMemoryGenericPTR gen, void *ptr, size_t size,const char *source, int line)
 {
   MemInfo_t *info;
 
@@ -188,7 +186,7 @@ LUX_API void lxMemoryGeneric_freeStats(lxMemoryGenericPTR gen, void *ptr, size_t
 
 #define MEMORY_ALIGNED_MAGIC  0xAABBCCDD
 
-LUX_API size_t  lxMemoryGeneric_offsetAlignedStats(lxMemoryGenericPTR gen, void *alptr)
+static size_t  lxMemoryGeneric_offsetAlignedStats(lxMemoryGenericPTR gen, void *alptr)
 {
   size_t *ptr1 = ((size_t *)alptr) - 3;
   size_t *ptr2 = ((size_t *)alptr) - 2;
@@ -201,7 +199,7 @@ LUX_API size_t  lxMemoryGeneric_offsetAlignedStats(lxMemoryGenericPTR gen, void 
   return *ptr3;
 }
 
-LUX_API void* lxMemoryGeneric_reallocStats(lxMemoryGenericPTR gen, void *ptr, size_t size,size_t oldsize,const char *source, int line)
+static void* lxMemoryGeneric_reallocStats(lxMemoryGenericPTR gen, void *ptr, size_t size,size_t oldsize,const char *source, int line)
 {
   ptrdiff_t sz = size;
   MemInfo_t *info;
@@ -232,7 +230,7 @@ LUX_API void* lxMemoryGeneric_reallocStats(lxMemoryGenericPTR gen, void *ptr, si
   return mem+sizeof(MemInfo_t);
 }
 
-LUX_API void *lxMemoryGeneric_zallocStats(lxMemoryGenericPTR gen, size_t size,const char *source,int line)
+static void *lxMemoryGeneric_zallocStats(lxMemoryGenericPTR gen, size_t size,const char *source,int line)
 {
   char *mem;
   MemInfo_t *info;
@@ -276,7 +274,7 @@ void *lxMemoryGeneric_callocStats(lxMemoryGenericPTR gen, size_t num, size_t siz
   return mem+sizeof(MemInfo_t);
 }
 
-LUX_API void *lxMemoryGeneric_mallocStats(lxMemoryGenericPTR gen, size_t size,const char *source,int line)
+static void *lxMemoryGeneric_mallocStats(lxMemoryGenericPTR gen, size_t size,const char *source,int line)
 {
   char *mem;
   MemInfo_t *info;
@@ -298,7 +296,7 @@ LUX_API void *lxMemoryGeneric_mallocStats(lxMemoryGenericPTR gen, size_t size,co
   return mem+sizeof(MemInfo_t);
 }
 
-LUX_API void* lxMemoryGeneric_zallocAlignedStats(lxMemoryGenericPTR gen, size_t size, size_t alignsize,const char *source,int line)
+static void* lxMemoryGeneric_zallocAlignedStats(lxMemoryGenericPTR gen, size_t size, size_t alignsize,const char *source,int line)
 {
   char *ptr = (char*)lxMemoryGeneric_zallocStats(gen,size + (sizeof(size_t)*3) + alignsize,source,line);
   char *alptr = (char*)lxPointerAlign(ptr+sizeof(size_t)*3,alignsize);
@@ -317,7 +315,7 @@ LUX_API void* lxMemoryGeneric_zallocAlignedStats(lxMemoryGenericPTR gen, size_t 
   return alptr;
 }
 
-LUX_API void* lxMemoryGeneric_mallocAlignedStats(lxMemoryGenericPTR gen, size_t size, size_t alignsize,const char *source,int line)
+static void* lxMemoryGeneric_mallocAlignedStats(lxMemoryGenericPTR gen, size_t size, size_t alignsize,const char *source,int line)
 {
   char *ptr = (char*)lxMemoryGeneric_mallocStats(gen,size + (sizeof(size_t)*3) + alignsize,source,line);
   char *alptr = (char*)lxPointerAlign(ptr+sizeof(size_t)*3,alignsize);
@@ -336,12 +334,12 @@ LUX_API void* lxMemoryGeneric_mallocAlignedStats(lxMemoryGenericPTR gen, size_t 
   return alptr;
 }
 
-LUX_API void* lxMemoryGeneric_callocAlignedStats(lxMemoryGenericPTR gen, size_t num, size_t size, size_t alignsize,const char *source,int line)
+static void* lxMemoryGeneric_callocAlignedStats(lxMemoryGenericPTR gen, size_t num, size_t size, size_t alignsize,const char *source,int line)
 {
   return lxMemoryGeneric_zallocAlignedStats(gen, num*size,alignsize,source,line);
 }
 
-LUX_API void* lxMemoryGeneric_reallocAlignedStats(lxMemoryGenericPTR gen, void* ptr,size_t size,size_t alignsize,size_t oldsize,const char *source,int line)
+static void* lxMemoryGeneric_reallocAlignedStats(lxMemoryGenericPTR gen, void* ptr,size_t size,size_t alignsize,size_t oldsize,const char *source,int line)
 {
   size_t *ptr1 = ((size_t *)ptr) - 3;
   size_t *ptr2 = ((size_t *)ptr) - 2;
@@ -396,15 +394,18 @@ LUX_API void  lxMemoryGeneric_freeAlignedStats(lxMemoryGenericPTR gen, void *ptr
 
 #undef MEMORY_ALIGNED_MAGIC
 
-#endif // #if defined(MEMORY_STATS)
 
 //////////////////////////////////////////////////////////////////////////
 
 LUX_API void lxMemoryGeneric_dumpStats(lxMemoryGenericPTR gen, const char* fname)
 {
-#if defined(MEMORY_STATS)
+#if defined(LUX_MEMORY_STATS)
   MemInfo_t* browse;
-  FILE* of = fopen(fname,"wb");
+  FILE* of;
+
+  if (!gen->stats.List) return;
+
+  of = fopen(fname,"wb");
   fprintf(of,"return {\n");
   lxListNode_forEach(gen->stats.List,browse)
     fprintf(of,"{file=[[%s]],\tline=%d,\tsize=%d,},\n",browse->src,browse->line,browse->size);
@@ -414,24 +415,28 @@ LUX_API void lxMemoryGeneric_dumpStats(lxMemoryGenericPTR gen, const char* fname
 #endif
 }
 
-booln lxMemoryGeneric_deinitStats(lxMemoryGenericPTR gen)
+LUX_API booln lxMemoryGeneric_deinitStats(lxMemoryGenericPTR gen, const char* fname)
 {
-#if !defined(MEMORY_STATS)
+#if !defined(LUX_MEMORY_STATS)
   return LUX_TRUE;
 #else
   MemInfo_t* browse;
   int i,sz;
-
+  FILE* of;
 
   if (gen->stats.List == NULL) return LUX_TRUE;
+
   i = 0; sz = 0;
-  LUX_PRINTF("Unfreed blocks:\n");
+  of = fopen(fname,"wb");
+  fprintf(of,"return {\n");
   while (gen->stats.List) {
     lxListNode_popBack(gen->stats.List,browse);
-    LUX_PRINTF("    %5.i: %p (%5.i): %s (l:%i)\n",++i,browse+1,browse->size,browse->src,browse->line);
+    fprintf(of,"  { num = %5.i, ptr = %p, size = %5.i, src = \"%s(%i)\",},\n",++i,browse+1,browse->size,browse->src,browse->line);
     sz+=browse->size;
   }
-  LUX_PRINTF("Number of unfreed blocks: %i (%i bytes)\n",i,sz);
+  fprintf(of,"--Number of unfreed blocks: %i (%i bytes)\n",i,sz);
+  fprintf(of,"}\n");
+  fclose(of);
 
   return LUX_FALSE;
 #endif
@@ -442,16 +447,6 @@ static void lxMemoryGeneric_init(lxMemoryGenericPTR gen,lxMemoryGenericDescr_t d
 {
   memset(gen,0,sizeof(lxMemoryGeneric_t));
   gen->descr = descr;
-#ifdef MEMORY_STATS
-  gen->allocator._malloc = (lxMallocStats_fn)lxMemoryGeneric_mallocStats;
-  gen->allocator._calloc = (lxCallocStats_fn)lxMemoryGeneric_callocStats;
-  gen->allocator._realloc = (lxReallocStats_fn)lxMemoryGeneric_reallocStats;
-  gen->allocator._free = (lxFreeStats_fn)lxMemoryGeneric_freeStats;
-  gen->allocator._mallocAligned = (lxMallocAlignedStats_fn)lxMemoryGeneric_mallocAlignedStats;
-  gen->allocator._callocAligned = (lxCallocAlignedStats_fn)lxMemoryGeneric_callocAlignedStats;
-  gen->allocator._reallocAligned = (lxReallocAlignedStats_fn)lxMemoryGeneric_reallocAlignedStats;
-  gen->allocator._freeAligned = (lxFreeAlignedStats_fn)lxMemoryGeneric_freeStats;
-#else
   gen->allocator._malloc = (lxMalloc_fn)lxMemoryGeneric_malloc;
   gen->allocator._calloc = (lxCalloc_fn)lxMemoryGeneric_calloc;
   gen->allocator._realloc = (lxRealloc_fn)lxMemoryGeneric_realloc;
@@ -460,7 +455,15 @@ static void lxMemoryGeneric_init(lxMemoryGenericPTR gen,lxMemoryGenericDescr_t d
   gen->allocator._callocAligned = (lxCallocAligned_fn)lxMemoryGeneric_callocAligned;
   gen->allocator._reallocAligned = (lxReallocAligned_fn)lxMemoryGeneric_reallocAligned;
   gen->allocator._freeAligned = (lxFreeAligned_fn)lxMemoryGeneric_free;
-#endif
+  gen->allocator.tracker = &gen->tracker;
+  gen->tracker._malloc = (lxMallocStats_fn)lxMemoryGeneric_mallocStats;
+  gen->tracker._calloc = (lxCallocStats_fn)lxMemoryGeneric_callocStats;
+  gen->tracker._realloc = (lxReallocStats_fn)lxMemoryGeneric_reallocStats;
+  gen->tracker._free = (lxFreeStats_fn)lxMemoryGeneric_freeStats;
+  gen->tracker._mallocAligned = (lxMallocAlignedStats_fn)lxMemoryGeneric_mallocAlignedStats;
+  gen->tracker._callocAligned = (lxCallocAlignedStats_fn)lxMemoryGeneric_callocAlignedStats;
+  gen->tracker._reallocAligned = (lxReallocAlignedStats_fn)lxMemoryGeneric_reallocAlignedStats;
+  gen->tracker._freeAligned = (lxFreeAlignedStats_fn)lxMemoryGeneric_freeStats;
 }
 
 LUX_API lxMemoryGenericPTR lxMemoryGeneric_new(lxMemoryGenericDescr_t  descr)
