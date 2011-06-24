@@ -24,10 +24,10 @@ typedef struct lxMemoryGenericInfo_s{
 
 typedef struct lxMemoryGenericDescr_s{
   void* sys;
-  void* (__cdecl *malloc_fn)(void* sys, size_t sz);
-  void* (__cdecl *calloc_fn)(void* sys, size_t sz, size_t num);
-  void* (__cdecl *realloc_fn)(void* sys, void* ptr, size_t sz);
-  void  (__cdecl *free_fn)(void* sys, void* ptr);
+  void* (__cdecl *_malloc)(void* sys, size_t sz);
+  void* (__cdecl *_calloc)(void* sys, size_t sz, size_t num);
+  void* (__cdecl *_realloc)(void* sys, void* ptr, size_t sz);
+  void  (__cdecl *_free)(void* sys, void* ptr);
 }lxMemoryGenericDescr_t;
 
 typedef struct lxMemoryGeneric_s* lxMemoryGenericPTR;
@@ -38,7 +38,7 @@ LUX_API void lxMemoryGeneric_delete(lxMemoryGenericPTR gen);
 
 LUX_API lxMemoryGenericInfo_t lxMemoryGeneric_getInfo(lxMemoryGenericPTR gen);
 // returns FALSE on error
-LUX_API booln lxMemoryGeneric_deinitStats(lxMemoryGenericPTR gen, const char* fname);
+LUX_API booln lxMemoryGeneric_deinitStats(lxMemoryGenericPTR gen);
 LUX_API void  lxMemoryGeneric_dumpStats(lxMemoryGenericPTR gen, const char* fname);
 LUX_API lxMemoryAllocatorPTR lxMemoryGeneric_allocator(lxMemoryGenericPTR gen);
 
