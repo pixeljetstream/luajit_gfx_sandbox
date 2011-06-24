@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
@@ -28,7 +28,7 @@ LUX_API const char* lxgContext_init(lxgContextPTR ctx)
     return "TEXENV_COMBINE|TEXENV_ADD";
   }
 
-  if (!GLEW_EXT_blend_func_separate || GLEW_EXT_blend_minmax || GLEW_EXT_blend_subtract){
+  if (!(GLEW_EXT_blend_func_separate || GLEW_EXT_blend_minmax || GLEW_EXT_blend_subtract)){
     return "BLEND_FUNC_SEP|BLEND_MINMAX|BLEND_SUBTRACT";
   }
 
@@ -161,14 +161,14 @@ LUX_API const char* lxgContext_init(lxgContextPTR ctx)
   }
 
   if (GLEW_ARB_point_parameters && GLEW_ARB_point_sprite){
-    float val1;
-    float val2;
+    float minmax1[2];
+    float minmax2[2];
 
     ctx->capbits |= LUXGFX_CAP_POINTSPRITE;
 
-    glGetFloatv(GL_ALIASED_POINT_SIZE_RANGE,&val1);
-    glGetFloatv(GL_SMOOTH_POINT_SIZE_RANGE,&val2);
-    ctx->capabilites.pointsize = LUX_MAX(val1,val2);
+    glGetFloatv(GL_ALIASED_POINT_SIZE_RANGE,minmax1);
+    glGetFloatv(GL_SMOOTH_POINT_SIZE_RANGE,minmax2);
+    ctx->capabilites.pointsize = LUX_MAX(minmax1[0],minmax2[0]);
   }
 
   lxgContext_syncStates(ctx);

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
@@ -40,6 +40,18 @@ extern "C"{
     LUXGL_COMPARE_ALWAYS = GL_ALWAYS,
     LUXGL_COMPARE_DONTEXECUTE = 0xFFFFFFFFu,
   }lxGLCompareMode_t;
+
+  typedef enum lxGLBufferHint_e{
+    LUXGL_STATIC_DRAW  = GL_STATIC_DRAW,
+    LUXGL_STATIC_READ  = GL_STATIC_READ,
+    LUXGL_STATIC_COPY  = GL_STATIC_COPY,
+    LUXGL_DYNAMIC_DRAW = GL_DYNAMIC_DRAW,
+    LUXGL_DYNAMIC_READ = GL_DYNAMIC_READ,
+    LUXGL_DYNAMIC_COPY = GL_DYNAMIC_COPY,
+    LUXGL_STREAM_DRAW  = GL_STREAM_DRAW,
+    LUXGL_STREAM_READ  = GL_STREAM_READ,
+    LUXGL_STREAM_COPY  = GL_STREAM_COPY,
+  }lxGLBufferHint_t;
 
   typedef enum lxGLStencilMode_e{
     LUXGL_STENCIL_KEEP = GL_KEEP,

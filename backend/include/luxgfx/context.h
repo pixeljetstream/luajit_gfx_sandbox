@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
@@ -287,15 +287,9 @@ extern "C"{
     memset(ctx->textures,0,sizeof(void*)*LUXGFX_MAX_TEXTURE_IMAGES);
   }
 
-  LUX_INLINE void lxgContext_resetVertexStreams(lxgContextPTR ctx)
+  LUX_INLINE void lxgVertexSetup_checked(lxgContextPTR ctx)
   {
-    ctx->vertex.streamvalid = 0;
-    ctx->vertex.streamchange = 0;
-  }
-
-  LUX_INLINE LUX_API void lxgVertexSetup_checked(lxgContextPTR ctx)
-  {
-    lxgVertexStatePTR vtx = &ctx->vertex;
+    lxgVertexState_t* vtx = &ctx->vertex;
     flags32 changed = vtx->declchange & vtx->declvalid;
     flags32 streamchanged = vtx->streamchange;
     if (changed || streamchanged ){
@@ -303,9 +297,9 @@ extern "C"{
     }
   }
 
-  LUX_INLINE LUX_API void lxgVertexSetup_checkedFIXED(lxgContextPTR ctx)
+  LUX_INLINE void lxgVertexSetup_checkedFIXED(lxgContextPTR ctx)
   {
-    lxgVertexStatePTR vtx = &ctx->vertex;
+    lxgVertexState_t* vtx = &ctx->vertex;
     flags32 changed = vtx->declchange & vtx->declvalid;
     flags32 streamchanged = vtx->streamchange;
     if (changed || streamchanged ){
@@ -313,9 +307,9 @@ extern "C"{
     }
   }
 
-  LUX_INLINE LUX_API void lxgVertexSetup_checkedNV(lxgContextPTR ctx)
+  LUX_INLINE void lxgVertexSetup_checkedNV(lxgContextPTR ctx)
   {
-    lxgVertexStatePTR vtx = &ctx->vertex;
+    lxgVertexState_t* vtx = &ctx->vertex;
     flags32 changed = vtx->declchange & vtx->declvalid;
     flags32 streamchanged = vtx->streamchange;
     if (changed || streamchanged ){
@@ -323,14 +317,20 @@ extern "C"{
     }
   }
 
-  LUX_INLINE LUX_API void lxgVertexSetup_checkedFIXEDNV(lxgContextPTR ctx)
+  LUX_INLINE void lxgVertexSetup_checkedFIXEDNV(lxgContextPTR ctx)
   {
-    lxgVertexStatePTR vtx = &ctx->vertex;
+    lxgVertexState_t* vtx = &ctx->vertex;
     flags32 changed = vtx->declchange & vtx->declvalid;
     flags32 streamchanged = vtx->streamchange;
     if (changed || streamchanged ){
       lxgVertexSetup_applyFIXEDNV(ctx);
     }
+  }
+
+  LUX_INLINE void lxgVertexSetup_resetStreams(lxgContextPTR ctx)
+  {
+    ctx->vertex.streamvalid = 0;
+    ctx->vertex.streamchange = 0;
   }
 
 #ifdef __cplusplus

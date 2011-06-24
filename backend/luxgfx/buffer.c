@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
@@ -49,34 +49,19 @@ LUX_API void lxgBuffer_deinit(lxgBufferPTR buffer, lxgContextPTR ctx)
 
 LUX_API void lxgBuffer_reset(lxgBufferPTR buffer, void *data)
 {
-  static const GLenum hinttoGL[] = {
-    GL_STATIC_DRAW,
-    GL_STATIC_READ,
-    GL_STATIC_COPY,
-    GL_DYNAMIC_DRAW,
-    GL_DYNAMIC_READ,
-    GL_DYNAMIC_COPY,
-    GL_STREAM_DRAW,
-    GL_STREAM_READ,
-    GL_STREAM_COPY,
-  };
-  int index = (buffer->update * 3) + buffer->mode;
-  LUX_DEBUGASSERT(index >= 0 && index < 9);
-
   lxgBuffer_bindDefault(buffer);
-  glBufferData(buffer->gltarget,buffer->size,data,hinttoGL[index]);
+  glBufferData(buffer->gltarget,buffer->size,data,buffer->hint);
 
   buffer->used = data ? buffer->size : 0;
 }
 
-LUX_API void lxgBuffer_init(lxgBufferPTR buffer, lxgContextPTR ctx, lxgBufferMode_t mode, lxgBufferUpdate_t update, uint size, void* data )
+LUX_API void lxgBuffer_init(lxgBufferPTR buffer, lxgContextPTR ctx, lxGLBufferHint_t hint, uint size, void* data )
 {
 //  LUX_ASSERT(buffer->glID == 0);
 
   buffer->ctx = ctx;
   buffer->gltarget = l_default;
-  buffer->mode = mode;
-  buffer->update = update;
+  buffer->hint = hint;
   buffer->mapped = NULL;
   buffer->size = size;
   buffer->used = 0;
@@ -120,7 +105,7 @@ LUX_API uint lxgBuffer_alloc(lxgBufferPTR buffer, uint size, uint padsize)
   return oldused;
 }
 
-LUX_API booln lxgBuffer_map(lxgBufferPTR buffer, void** ptr, lxgAccessMode_t type)
+LUX_API void* lxgBuffer_map(lxgBufferPTR buffer, lxgAccessMode_t type, booln* succ)
 {
   static const GLenum typetoGL[LUXGFX_ACCESSES] = {
     GL_READ_ONLY,
@@ -130,7 +115,10 @@ LUX_API booln lxgBuffer_map(lxgBufferPTR buffer, void** ptr, lxgAccessMode_t typ
     GL_WRITE_ONLY,
   };
 
-  if(LUXGFX_VALIDITY && buffer->mapped) return LUX_FALSE;
+  if(LUXGFX_VALIDITY && buffer->mapped){
+    if (succ) *succ = LUX_FALSE;
+    return NULL;
+  }
 
   lxgBuffer_bindDefault(buffer);
 
@@ -146,8 +134,8 @@ LUX_API booln lxgBuffer_map(lxgBufferPTR buffer, void** ptr, lxgAccessMode_t typ
   buffer->maplength = buffer->size;
   buffer->maptype = type;
 
-  *ptr = buffer->mapped;
-  return LUX_TRUE;
+  if (succ) *succ = LUX_TRUE;
+  return buffer->mapped;
 }
 
 LUX_API booln lxgBuffer_copy(lxgBufferPTR dst, uint dstoffset, lxgBufferPTR src, uint srcoffset, uint size)
@@ -171,10 +159,8 @@ LUX_API booln lxgBuffer_copy(lxgBufferPTR dst, uint dstoffset, lxgBufferPTR src,
   }
   else if ((dst->ctx->capbits & LUXGFX_CAP_BUFMAPRANGE) || src != dst){
     // temporarily map both
-    void* psrc;
-    void* pdst;
-    lxgBuffer_mapRange(src,&psrc,srcoffset,size,LUXGFX_ACCESS_READ,LUX_FALSE,LUX_FALSE);
-    lxgBuffer_mapRange(dst,&pdst,dstoffset,size,LUXGFX_ACCESS_WRITEDISCARD,LUX_FALSE,LUX_FALSE);
+    void* psrc = lxgBuffer_mapRange(src,srcoffset,size,LUXGFX_ACCESS_READ,LUX_FALSE,LUX_FALSE,NULL);
+    void* pdst = lxgBuffer_mapRange(dst,dstoffset,size,LUXGFX_ACCESS_WRITEDISCARD,LUX_FALSE,LUX_FALSE,NULL);
 
     memcpy(pdst,psrc,size);
 
@@ -184,8 +170,7 @@ LUX_API booln lxgBuffer_copy(lxgBufferPTR dst, uint dstoffset, lxgBufferPTR src,
   }
   else{
     // temporarily map
-    byte* p;
-    booln succ = lxgBuffer_map(src,(void**)&p,LUXGFX_ACCESS_READWRITE);
+    byte* p = (byte*) lxgBuffer_map(src,LUXGFX_ACCESS_READWRITE,NULL);
     byte* psrc = p+srcoffset;
     byte* pdst = p+dstoffset;
 
@@ -220,10 +205,12 @@ LUX_API booln lxgBuffer_retrieve(lxgBufferPTR buffer, uint offset, uint size, vo
   return LUX_TRUE;
 }
 
-LUX_API booln lxgBuffer_mapRange(lxgBufferPTR buffer, void**ptr, lxgAccessMode_t type, uint from, uint length,  booln manualflush, booln unsynch)
+LUX_API void* lxgBuffer_mapRange(lxgBufferPTR buffer, uint from, uint length, lxgAccessMode_t type, booln manualflush, booln unsynch, booln *succ)
 {
-  if (LUXGFX_VALIDITY && (buffer->mapped || from+length > buffer->size))
-    return LUX_FALSE;
+  if (LUXGFX_VALIDITY && (buffer->mapped || from+length > buffer->size)){
+    if (succ) *succ = LUX_FALSE;
+    return NULL;
+  }
 
   lxgBuffer_bindDefault(buffer);
 
@@ -258,10 +245,8 @@ LUX_API booln lxgBuffer_mapRange(lxgBufferPTR buffer, void**ptr, lxgAccessMode_t
   buffer->maplength = length;
   buffer->maptype = type;
 
-
-  *ptr = buffer->mapped;
-
-  return LUX_TRUE;
+  if (succ) *succ = LUX_TRUE;
+  return buffer->mapped;
 }
 
 LUX_API booln lxgBuffer_flushRange(lxgBufferPTR buffer, uint from, uint length)

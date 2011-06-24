@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
@@ -65,7 +65,10 @@ extern "C"{
 
   typedef struct lxgStreamHost_s{
     lxgBufferPTR        buffer;
-    void*               ptr;
+    union{
+      void*             ptr;
+      size_t            offset;
+    };
     size_t              len;
   }lxgStreamHost_t;
   
@@ -96,6 +99,8 @@ extern "C"{
   }lxgFeedbackState_t;
 
 
+  LUX_API flags32 lxgVertexAttrib_bit(lxgVertexAttrib_t attrib);
+
   LUX_API lxgVertexElement_t lxgVertexElement_set(
     uint cnt, enum lxScalarType_e type, booln normalize, 
     booln integer, uint stride,uint offset, uint stream);
@@ -107,7 +112,10 @@ extern "C"{
   LUX_API void lxgVertexAttrib_setFloatFIXED(lxgVertexAttrib_t attrib, const float* vec4);
 
   LUX_API void lxgVertexDecl_apply( lxgVertexDeclPTR decl, lxgContextPTR ctx );
-  LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, lxgVertexDeclPTR decl, lxgStreamHostPTR hosts);
+  LUX_API void lxgVertexDecl_setStreams(lxgVertexDeclPTR decl, lxgStreamHostPTR hosts, lxgContextPTR ctx);
+
+  LUX_API void lxgVertexSetup_reset(lxgContextPTR ctx);
+  LUX_API void lxgVertexSetup_resetStreams(lxgContextPTR ctx);
   LUX_API void lxgVertexSetup_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host);
   LUX_API void lxgVertexSetup_apply(lxgContextPTR ctx);
   LUX_API void lxgVertexSetup_applyFIXED(lxgContextPTR ctx);
@@ -130,6 +138,10 @@ extern "C"{
   {
     lxgVertexElement_t  elem = {normalize,integer,cnt-1,stream,type,stride/2,offset};
     return elem;
+  }
+
+  LUX_INLINE flags32 lxgVertexAttrib_bit(lxgVertexAttrib_t attrib){
+    return 1 << attrib;
   }
 
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
@@ -12,9 +12,6 @@ typedef struct lxgContext_s* LUX_RESTRICT lxgContextPTR;
 typedef struct lxgBuffer_s* lxgBufferPTR;
 typedef struct lxgStreamHost_s* lxgStreamHostPTR;
 typedef struct lxgVertexDecl_s* lxgVertexDeclPTR;
-typedef struct lxgVertexPointer_s* lxgVertexPointerPTR;
-typedef struct lxgVertexElement_s* lxgVertexElementPTR;
-typedef struct lxgVertexState_s* lxgVertexStatePTR;
 typedef struct lxgFeedbackState_s* lxgFeedbackStatePTR;
 
 typedef struct lxgTextureImage_s* lxgTextureImagePTR;

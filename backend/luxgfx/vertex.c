@@ -1,4 +1,4 @@
-// Copyright (C) 2004-2011 Christoph Kubisch
+// Copyright (C) 2010-2011 Christoph Kubisch
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
@@ -16,28 +16,28 @@
 #define VERTEX_INT(vpt)   (vpt->integer)
 #define VERTEX_NORMALIZE(vpt)   (vpt->normalize)
 
-typedef void (lxGLVertexAttrib_fn)(const lxgVertexElementPTR, lxgVertexAttrib_t, void* ptr );
+typedef void (lxGLVertexAttrib_fn)(const lxgVertexElement_t*, lxgVertexAttrib_t, void* ptr );
 typedef void (lxGLVertexAttribState_fn)(lxgVertexAttrib_t );
 
-static LUX_INLINE void lxGLVertexPointer(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLVertexPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   glVertexPointer(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
 }
-static LUX_INLINE void lxGLNormalPointer(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLNormalPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   glNormalPointer(VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
 }
-static LUX_INLINE void lxGLColorPointer(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLColorPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   glColorPointer(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
 }
-static LUX_INLINE void lxGLTexCoordPointer(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLTexCoordPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   glClientActiveTexture(GL_TEXTURE0 + (attr - LUXGFX_VERTEX_ATTRIB_TEXCOORD0));
   glTexCoordPointer(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
 }
 
-static LUX_INLINE void lxGLAttribPointer(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLAttribPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   if (!VERTEX_INT(vpt)){
     glVertexAttribPointer((uint)attr,VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_NORMALIZE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
@@ -47,7 +47,7 @@ static LUX_INLINE void lxGLAttribPointer(const lxgVertexElementPTR vpt, lxgVerte
   }
 }
 
-static LUX_INLINE void lxgVertexPointer_applyFIXED(const lxgVertexElementPTR elem, const lxgStreamHostPTR host, lxgVertexAttrib_t attr)
+static LUX_INLINE void lxgVertexPointer_applyFIXED(const lxgVertexElement_t* elem, const lxgStreamHostPTR host, lxgVertexAttrib_t attr)
 {
   static lxGLVertexAttrib_fn* funcs[] = {
     lxGLVertexPointer,
@@ -73,13 +73,13 @@ static LUX_INLINE void lxgVertexPointer_applyFIXED(const lxgVertexElementPTR ele
 
 LUX_API void lxgVertexSetup_applyFIXED(lxgContextPTR ctx)
 {
-  lxgVertexStatePTR vtx = &ctx->vertex;
+  lxgVertexState_t* vtx = &ctx->vertex;
   flags32 changed = vtx->declchange & vtx->declvalid;
   flags32 streamchanged = vtx->streamchange;
 
   int i;
   for (i = 0; i < LUXGFX_VERTEX_ATTRIBS; i++){
-    const lxgVertexElementPTR elem = &vtx->setup.element[i];
+    const lxgVertexElement_t* elem = &vtx->setup.element[i];
     uint stream = elem->stream;
     const lxgStreamHostPTR    host = &vtx->setup.streams[stream];
     if (changed & (1<<i) || streamchanged & (1<<stream)){
@@ -91,7 +91,7 @@ LUX_API void lxgVertexSetup_applyFIXED(lxgContextPTR ctx)
   vtx->streamchange = 0;
 }
 
-static LUX_INLINE void lxgVertexPointer_apply(const lxgVertexElementPTR elem, const lxgStreamHostPTR host, lxgVertexAttrib_t attr)
+static LUX_INLINE void lxgVertexPointer_apply(const lxgVertexElement_t* elem, const lxgStreamHostPTR host, lxgVertexAttrib_t attr)
 {
   lxgBuffer_bind(host->buffer,LUXGL_BUFFER_VERTEX);
   lxGLAttribPointer(elem,attr,host->ptr);
@@ -99,13 +99,13 @@ static LUX_INLINE void lxgVertexPointer_apply(const lxgVertexElementPTR elem, co
 
 LUX_API void lxgVertexSetup_apply(lxgContextPTR ctx)
 {
-  lxgVertexStatePTR vtx = &ctx->vertex;
+  lxgVertexState_t* vtx = &ctx->vertex;
   flags32 changed = vtx->declchange & vtx->declvalid;
   flags32 streamchanged = vtx->streamchange;
 
   int i;
   for (i = 0; i < LUXGFX_VERTEX_ATTRIBS; i++){
-    const lxgVertexElementPTR elem = &vtx->setup.element[i];
+    const lxgVertexElement_t* elem = &vtx->setup.element[i];
     uint stream = elem->stream;
     const lxgStreamHostPTR    host = &vtx->setup.streams[stream];
     if (changed & (1<<i) || streamchanged & (1<<stream)){
@@ -117,25 +117,25 @@ LUX_API void lxgVertexSetup_apply(lxgContextPTR ctx)
   vtx->streamchange = 0;
 }
 
-static LUX_INLINE void lxGLVertexPointerNV(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLVertexPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   glVertexFormatNV(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt));
 }
-static LUX_INLINE void lxGLNormalPointerNV(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLNormalPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   glNormalFormatNV(VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt));
 }
-static LUX_INLINE void lxGLColorPointerNV(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLColorPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   glColorFormatNV(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt));
 }
-static LUX_INLINE void lxGLTexCoordPointerNV(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLTexCoordPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   glClientActiveTexture(GL_TEXTURE0 + (attr - LUXGFX_VERTEX_ATTRIB_TEXCOORD0));
   glTexCoordFormatNV(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt));
 }
 
-static LUX_INLINE void lxGLAttribPointerNV(const lxgVertexElementPTR vpt, lxgVertexAttrib_t attr, void* ptr)
+static LUX_INLINE void lxGLAttribPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
   if (!VERTEX_INT(vpt)){
     glVertexAttribFormatNV((uint)attr,VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_NORMALIZE(vpt),VERTEX_STRIDE(vpt));
@@ -145,7 +145,7 @@ static LUX_INLINE void lxGLAttribPointerNV(const lxgVertexElementPTR vpt, lxgVer
   }
 }
 
-static LUX_INLINE void lxgVertexPointer_applyFormatNV(const lxgVertexElementPTR elem, lxgVertexAttrib_t attr, booln fixed)
+static LUX_INLINE void lxgVertexPointer_applyFormatNV(const lxgVertexElement_t* elem, lxgVertexAttrib_t attr, booln fixed)
 {
   static lxGLVertexAttrib_fn* funcs[] = {
     lxGLVertexPointerNV,
@@ -173,7 +173,7 @@ static LUX_INLINE void lxgVertexPointer_applyFormatNV(const lxgVertexElementPTR 
   }
 }
 
-static LUX_INLINE void lxgVertexPointer_applyBufferNV(const lxgVertexElementPTR elem, const lxgStreamHostPTR host, lxgVertexAttrib_t attr, booln fixed)
+static LUX_INLINE void lxgVertexPointer_applyBufferNV(const lxgVertexElement_t* elem, const lxgStreamHostPTR host, lxgVertexAttrib_t attr, booln fixed)
 {
   static GLenum bindless[] = {
     GL_VERTEX_ARRAY_ADDRESS_NV,
@@ -206,13 +206,13 @@ static LUX_INLINE void lxgVertexPointer_applyBufferNV(const lxgVertexElementPTR 
 
 LUX_API void lxgVertexSetup_applyNV(lxgContextPTR ctx)
 {
-  lxgVertexStatePTR vtx = &ctx->vertex;
+  lxgVertexState_t* vtx = &ctx->vertex;
   flags32 declchanged = vtx->declchange & vtx->declvalid;
   flags32 streamchanged = vtx->streamchange;
 
   int i;
   for (i = 0; i < LUXGFX_VERTEX_ATTRIBS; i++){
-    const lxgVertexElementPTR elem = &vtx->setup.element[i];
+    const lxgVertexElement_t* elem = &vtx->setup.element[i];
     uint stream = elem->stream;
     const lxgStreamHostPTR    host = &vtx->setup.streams[stream];
     if (declchanged & (1<<i)){
@@ -229,13 +229,13 @@ LUX_API void lxgVertexSetup_applyNV(lxgContextPTR ctx)
 
 LUX_API void lxgVertexSetup_applyFIXEDNV(lxgContextPTR ctx)
 {
-  lxgVertexStatePTR vtx = &ctx->vertex;
+  lxgVertexState_t* vtx = &ctx->vertex;
   flags32 declchanged = vtx->declchange & vtx->declvalid;
   flags32 streamchanged = vtx->streamchange;
 
   int i;
   for (i = 0; i < LUXGFX_VERTEX_ATTRIBS; i++){
-    const lxgVertexElementPTR elem = &vtx->setup.element[i];
+    const lxgVertexElement_t* elem = &vtx->setup.element[i];
     uint stream = elem->stream;
     const lxgStreamHostPTR    host = &vtx->setup.streams[stream];
     if (declchanged & (1<<i)){
@@ -353,7 +353,7 @@ LUX_API void  lxgVertexAttribs_apply(flags32 attribs, lxgContextPTR ctx, flags32
 
 LUX_API void lxgVertexDecl_apply( lxgVertexDeclPTR decl, lxgContextPTR ctx )
 {
-  lxgVertexStatePTR vtx = &ctx->vertex;
+  lxgVertexState_t* vtx = &ctx->vertex;
   int i;
   vtx->decl = decl;
   vtx->declvalid = decl->available;
@@ -375,9 +375,9 @@ LUX_INLINE booln lxgStreamHost_unequal(const lxgStreamHostPTR a, lxgStreamHostPT
   return !!memcmp(a,b,sizeof(lxgStreamHost_t));
 }
 
-LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, lxgVertexDeclPTR decl, lxgStreamHostPTR streams)
+LUX_API void lxgVertexDecl_setStreams(lxgVertexDeclPTR decl, lxgStreamHostPTR streams, lxgContextPTR ctx)
 {
-  lxgVertexStatePTR vtx = &ctx->vertex;
+  lxgVertexState_t* vtx = &ctx->vertex;
   flags32 changed = 0;
   uint i;
 
@@ -396,7 +396,7 @@ LUX_API void lxgVertexSetup_setStreams(lxgContextPTR ctx, lxgVertexDeclPTR decl,
 
 LUX_API void lxgVertexSetup_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
 {
-  lxgVertexStatePTR vtx = &ctx->vertex;
+  lxgVertexState_t* vtx = &ctx->vertex;
   booln changed = 0;
   
   if (!lxgStreamHost_valid(host)){
@@ -407,6 +407,13 @@ LUX_API void lxgVertexSetup_setStream(lxgContextPTR ctx, uint idx, lxgStreamHost
   vtx->streamchange |= lxgStreamHost_unequal(&vtx->setup.streams[idx],host) << idx;
   vtx->streamvalid |= (1 << idx);
   vtx->setup.streams[idx] = *host;
+}
+
+LUX_API void lxgVertexSetup_reset( lxgContextPTR ctx )
+{
+  lxgVertexState_t* vtx = &ctx->vertex;
+  memset(vtx,0,sizeof(lxgVertexState_t));
+  lxgVertexAttribs_applyFIXED(0,ctx, 0xFFFFFFFF);
 }
 
 LUX_API void lxgVertexAttrib_setFloat(lxgVertexAttrib_t type, const float* vec4)
@@ -546,4 +553,6 @@ LUX_API void lxgFeedback_resume(lxgContextPTR ctx)
 {
   glResumeTransformFeedback();
 }
+
+
 
