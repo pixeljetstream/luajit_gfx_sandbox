@@ -3,7 +3,7 @@
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
 #include "test.hpp"
-
+#include <luxgfx/luxgfx.h>
 
 class GfxTexture : public Test
 {
@@ -14,13 +14,18 @@ private:
 
   KeyTracker    m_keys;
   GLFWwindow    m_window;
-  GLuint        m_texture;
+  
+  lxgContext_t  m_ctx;
+  lxgTexture_t  m_tex;
+  lxgSampler_t  m_samplerNearest;
+  lxgSampler_t  m_samplerTriLinear;
+  lxgSamplerPTR m_sampler;
 
 public:
   GfxTexture() 
     : Test("gfxtexture")
   {
-
+      m_keys.add(GLFW_KEY_SPACE);
   }
 
   void updateGeometry(int x, int y, int z)
@@ -41,13 +46,37 @@ public:
     m_rh.cameraPerspective(&bbox, 30.0f);
     m_rh.cameraOrtho(&bbox);
 
-    m_texture = RenderHelper::generateUVTexture(256,256);
+    lxgContext_init(&m_ctx);
+
+    lxgTexture_init(&m_tex, &m_ctx);
+    int w = 16;
+    int h = 16;
+    lxgTexture_setup(&m_tex, LUXGL_TEXTURE_2D, LUXGFX_TEXTURECHANNEL_RGB, LUXGFX_TEXTUREDATA_UNORM8,w,h,0,0,LUXGFX_TEXTUREFLAG_AUTOMIPMAP);
+    size_t buffersize = w * h * sizeof(lxCVector3);
+    lxCVector3* buffer = new lxCVector3[w * h];
+    RenderHelper::generateUVData(w,h,buffer);
+    lxgTextureUpdate_t update = {{0,0,0},{0,0,0},{w,h,0}};
+    lxgTexture_readData(&m_tex,&update,0,GL_FLOAT,GL_RGB,buffer,buffersize);
+    delete[] buffer;
+    lxGLErrorCheck();
+
+    lxgSampler_initHW(&m_samplerNearest, &m_ctx);
+    m_samplerNearest.filter = LUXGFX_SAMPLERFILTER_NEAREST;
+    lxgSampler_updateHW(&m_samplerNearest);
+
+    lxgSampler_initHW(&m_samplerTriLinear, &m_ctx);
+    m_samplerTriLinear.filter = LUXGFX_SAMPLERFILTER_MIPMAP_LINEAR;
+    lxgSampler_updateHW(&m_samplerTriLinear);
+
+    m_sampler = &m_samplerNearest;
   }
 
   void logic(int width, int height)
   {
     m_keys.update(m_window);
-
+    if (m_keys.onPress(GLFW_KEY_SPACE)){
+      m_sampler = m_sampler == &m_samplerNearest ? &m_samplerTriLinear : &m_samplerNearest;
+    }
   }
 
   void onDraw(int width, int height) {
@@ -56,6 +85,7 @@ public:
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    lxGLErrorCheck();
 
     lxCVector4 lightpos(0,0,0,1);
     glMatrixMode(GL_MODELVIEW);
@@ -63,15 +93,19 @@ public:
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+    lxGLErrorCheck();
 
     m_rh.updateProjection(width,height);
     m_rh.setCameraGL();
+    lxGLErrorCheck();
 
-    glBindTexture(GL_TEXTURE_2D,m_texture);
+    lxgTexture_apply(&m_tex, &m_ctx, 0);
+    lxgSampler_apply(m_sampler, &m_ctx, 0);
     glEnable(GL_TEXTURE_2D);
     m_box.drawVA();
     glDisable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D,0);
+    lxgTexture_apply(NULL,&m_ctx,0);
+    lxgSampler_apply(NULL,&m_ctx,0);
   }
 
 };

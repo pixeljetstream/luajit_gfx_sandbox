@@ -147,15 +147,8 @@ void RenderHelper::doArcBall(int w, int h )
 
 }
 
-GLuint RenderHelper::generateUVTexture( int w, int h )
+void  RenderHelper::generateUVData( int w, int h, lxCVector3 *pixels)
 {
-  GLuint tex;
-  glGenTextures(1,&tex);
-  glBindTexture(GL_TEXTURE_2D,tex);
-  glTexParameteri(GL_TEXTURE_2D,GL_GENERATE_MIPMAP,GL_TRUE);
-
-  lxCVector3* pixels = new lxCVector3[w * h];
-
   float hdiv = 1.0f/(float)(LUX_MAX(1,h-1));
   float wdiv = 1.0f/(float)(LUX_MAX(1,w-1));
 
@@ -168,6 +161,17 @@ GLuint RenderHelper::generateUVTexture( int w, int h )
       pixels[y*w +x].Set( xpos + add, ypos + add, add);
     }
   }
+}
+
+GLuint RenderHelper::generateUVTexture( int w, int h )
+{
+  GLuint tex;
+  glGenTextures(1,&tex);
+  glBindTexture(GL_TEXTURE_2D,tex);
+  glTexParameteri(GL_TEXTURE_2D,GL_GENERATE_MIPMAP,GL_TRUE);
+
+  lxCVector3* pixels = new lxCVector3[w * h];
+  generateUVData(w,h,pixels);
 
   glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,w,h,0,GL_RGB,GL_FLOAT,pixels);
   glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT_ARB);

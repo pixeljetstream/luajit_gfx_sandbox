@@ -205,6 +205,7 @@ class RenderHelper {
 public:
 
   static GLuint generateUVTexture(int w, int h);
+  static void   generateUVData( int w, int h, lxCVector3 *pixels);
   static GLuint loadShader(GLenum type, const char* filename, const char* prepend );
 
   void init(GLFWwindow win, const lxCVector3& up);
@@ -213,7 +214,6 @@ public:
   void updateProjection(int width, int height);
   void setCameraGL();
   void doArcBall(int width, int height);
-
 private:
 
   GLFWwindow  m_window;

@@ -3,10 +3,21 @@
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
 #include "test.hpp"
-
+#include <luxgfx/luxgfx.h>
 
 class GfxProgram : public Test
 {
+  static const int PARAMSETS = 4;
+
+  struct ParamSet{
+    lxgTexture_t  texture;
+    lxgBuffer_t   buffer;
+    lxCMatrix44   matrix;
+    GLuint        subroutine[2];
+    void**        datas;
+  };
+
+
 private:
 
   RenderHelper      m_rh;
@@ -14,7 +25,15 @@ private:
 
   KeyTracker    m_keys;
   GLFWwindow    m_window;
-  GLuint        m_texture;
+
+  lxgContext_t            m_ctx;
+  lxgProgram_t            m_program;
+  lxgProgramStage_t       m_stageVert;
+  lxgProgramStage_t       m_stageFrag;
+  uint                    m_numParams;
+  lxgProgramParameter_t*  m_params;
+  lxgProgramParameterPTR* m_paramPtrs;
+  ParamSet                m_paramsets[PARAMSETS];
 
 public:
   GfxProgram() 
@@ -41,7 +60,6 @@ public:
     m_rh.cameraPerspective(&bbox, 30.0f);
     m_rh.cameraOrtho(&bbox);
 
-    m_texture = RenderHelper::generateUVTexture(256,256);
   }
 
   void logic(int width, int height)
@@ -67,11 +85,12 @@ public:
     m_rh.updateProjection(width,height);
     m_rh.setCameraGL();
 
-    glBindTexture(GL_TEXTURE_2D,m_texture);
-    glEnable(GL_TEXTURE_2D);
-    m_box.drawVA();
-    glDisable(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D,0);
+    lxgProgram_apply(&m_program, &m_ctx);
+    for (int i = 0; i < PARAMSETS; i++){
+      lxgProgram_applyParameters(&m_program, &m_ctx, m_numParams, m_paramPtrs, m_paramsets[i].datas);
+      m_box.drawVA();
+    }
+    lxgProgram_apply(NULL, &m_ctx);
   }
 
 };
