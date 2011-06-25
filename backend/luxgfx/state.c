@@ -42,7 +42,7 @@ LUX_API flags32 lxgRenderFlag_sync(lxgContextPTR ctx){
     renderflag |= LUXGFX_RFLAG_CULL;
   if (glIsEnabled(GL_STENCIL_TEST))
     renderflag |= LUXGFX_RFLAG_STENCILTEST;
-  if (glIsEnabled(GL_LOGIC_OP_MODE))
+  if (glIsEnabled(GL_LOGIC_OP))
     renderflag |= LUXGFX_RFLAG_LOGIC;
   glGetBooleanv(GL_DEPTH_WRITEMASK,state);
   if (state[0])
@@ -71,7 +71,6 @@ LUX_API flags32 lxgRenderFlag_sync(lxgContextPTR ctx){
   glGetIntegerv(GL_FRONT_FACE,blah);
   if (blah[0] == GL_CCW)
     renderflag |= LUXGFX_RFLAG_CCW;
-
   return renderflag;
 
 }

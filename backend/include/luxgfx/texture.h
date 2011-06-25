@@ -96,6 +96,7 @@ extern "C"{
 #endif
 
     LUXGFX_TEXTURECHANNEL_CUSTOM,
+    LUXGFX_TEXTURECHANNEL_NATIVE,
   }lxgTextureChannel_t;
 
   typedef enum lxgTextureDataType_e{
@@ -210,6 +211,11 @@ extern "C"{
   // Type checks
   LUX_API booln lxgTextureChannel_valid(lxgContextPTR ctx, lxgTextureChannel_t channel);
   LUX_API booln lxgTextureTarget_valid(lxgContextPTR ctx, lxGLTextureTarget_t type);
+
+  LUX_API GLenum lxgTextureChannel_getFormat(lxgTextureChannel_t type, booln rev, booln integer);
+  LUX_API GLenum lxgTextureDataType_getData(lxgTextureDataType_t data, booln rev, booln depthstencil);
+  LUX_API GLenum lxgTextureChannel_getInternal(lxgTextureChannel_t type, lxgTextureDataType_t data);
+  
   
   // lxgTexture
 
@@ -225,20 +231,22 @@ extern "C"{
   LUX_API void  lxgTexture_deinit(lxgTexturePTR tex, lxgContextPTR ctx);
   
   LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx, 
-    const lxgTextureUpdatePTR update, uint miplevel);
+    const lxgTextureUpdate_t* update, uint miplevel);
 
     // if scalartype is set to invalid, we assume "native" data (matching
     // internal)
   LUX_API booln lxgTexture_readData(lxgTexturePTR tex, 
-    const lxgTextureUpdatePTR update, uint miplevel,
-    enum lxScalarType_e scalar, const void* buffer, uint buffersize);
+    const lxgTextureUpdate_t* update, uint miplevel,
+    GLenum datatype, GLenum dataformat, const void* buffer, uint buffersize);
 
   LUX_API booln lxgTexture_readBuffer(lxgTexturePTR tex, 
-    const lxgTextureUpdatePTR update, uint miplevel,
-    enum lxScalarType_e scalar, const lxgBufferPTR buffer, uint bufferoffset);
+    const lxgTextureUpdate_t* update, uint miplevel,
+    GLenum datatype, GLenum dataformat, const struct lxgBuffer_s* buffer, uint bufferoffset);
 
-  LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompressed, booln onlydepth, uint mip, enum lxScalarType_e d, void* buffer, uint buffersize);
-  LUX_API booln lxgTexture_writeBuffer(lxgTexturePTR tex, uint side, booln ascompressed, booln onlydepth, uint mip, enum lxScalarType_e d, lxgBufferPTR buffer, uint bufferoffset);
+  LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompressed, uint mip, 
+    GLenum datatype, GLenum dataformat, void* buffer, uint buffersize);
+  LUX_API booln lxgTexture_writeBuffer(lxgTexturePTR tex, uint side, booln ascompressed, uint mip, 
+    GLenum datatype, GLenum dataformat, lxgBufferPTR buffer, uint bufferoffset);
 
   LUX_API void  lxgTexture_getSampler(lxgTexturePTR tex, lxgSamplerPTR sampler);
   LUX_API const lxVec3iPTR  lxgTexture_getMipSize(lxgTexturePTR tex, uint mipLevel);
@@ -258,7 +266,7 @@ extern "C"{
     // require SM4
   LUX_API void lxgSampler_initHW(lxgSamplerPTR self, lxgContextPTR ctx);
   LUX_API void lxgSampler_deinitHW(lxgSamplerPTR self, lxgContextPTR ctx);
-  LUX_API void lxgSampler_updateHW(lxgSamplerPTR self, lxgContextPTR ctx);
+  LUX_API void lxgSampler_updateHW(lxgSamplerPTR self);
   
   //////////////////////////////////////////////////////////////////////////
   // lxgRenderBuffer
@@ -277,6 +285,8 @@ extern "C"{
 
   LUX_API booln lxgTextureImage_init(lxgTextureImagePTR img, lxgContextPTR ctx, lxgTexturePTR tex, lxgAccessMode_t acces, 
     uint level, booln layered, int layer);
+  
+
 
 
 #ifdef __cplusplus

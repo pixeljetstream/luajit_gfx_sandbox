@@ -123,7 +123,6 @@ extern "C"{
   LUX_API void  lxgContext_syncStates(lxgContextPTR ctx);
   LUX_API booln lxgContext_checkStates(lxgContextPTR ctx);
   LUX_API void  lxgContext_resetTextures(lxgContextPTR ctx);
-  LUX_API void  lxgContext_resetVertexStreams(lxgContextPTR ctx);
 
   LUX_API void  lxgTexture_apply(lxgTexturePTR obj, lxgContextPTR ctx, uint imageunit);
   LUX_API void  lxgSampler_apply(lxgSamplerPTR obj, lxgContextPTR ctx, uint imageunit);
@@ -193,9 +192,6 @@ extern "C"{
   {
     if (ctx->textures[imageunit] != tex){
       lxgTexture_apply(tex,ctx,imageunit);
-    }
-    else{
-      glActiveTexture(GL_TEXTURE0_ARB + imageunit);
     }
   }
   LUX_INLINE void lxgSampler_checked(lxgSamplerPTR sampler, lxgContextPTR ctx, uint imageunit )

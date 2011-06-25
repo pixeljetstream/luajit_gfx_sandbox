@@ -165,7 +165,7 @@ static GLenum  GetDataTypeSize(lxgTextureDataType_t data, booln depthstencil)
 }
 
 
-static GLenum  GetDataType(lxgTextureDataType_t data, booln rev, booln depthstencil)
+LUX_API GLenum  lxgTextureDataType_getData(lxgTextureDataType_t data, booln rev, booln depthstencil)
 {
   static GLenum standard[LUXGFX_TEXTUREDATAS] = {
     GL_UNSIGNED_BYTE,
@@ -222,16 +222,16 @@ static GLenum  GetDataType(lxgTextureDataType_t data, booln rev, booln depthsten
   return 0;
 }
 
-static GLenum  GetDataFormat(lxgTextureChannel_t type, booln rev, booln integer)
+LUX_API GLenum  lxgTextureChannel_getFormat(lxgTextureChannel_t type, booln rev, booln integer)
 {
   switch(type){
   case LUXGFX_TEXTURECHANNEL_RGB:
-    if (integer) return rev ? GL_BGR : GL_RGB;
-    else return rev ? GL_BGR_INTEGER : GL_RGB_INTEGER;
+    if (integer) return rev ? GL_BGR_INTEGER : GL_RGB_INTEGER;
+    else return rev ? GL_BGR : GL_RGB;
 
   case LUXGFX_TEXTURECHANNEL_RGBA:
-    if (integer) return rev ? GL_BGRA : GL_RGBA;
-    else return rev ? GL_BGRA_INTEGER : GL_RGBA_INTEGER;
+    if (integer) return rev ? GL_BGRA_INTEGER : GL_RGBA_INTEGER;
+    else return rev ? GL_BGRA : GL_RGBA;
 
   case LUXGFX_TEXTURECHANNEL_R:
     return integer ? GL_RED_INTEGER : GL_RED;
@@ -305,7 +305,7 @@ static GLenum  GetCompressed(lxgTextureChannel_t type)
   }
 }
 
-static GLenum  GetInternal(lxgTextureChannel_t type, lxgTextureDataType_t data)
+LUX_API GLenum  lxgTextureChannel_getInternal(lxgTextureChannel_t type, lxgTextureDataType_t data)
 {
   static GLenum rgb[LUXGFX_TEXTUREDATAS] = {
     GL_RGB,
@@ -560,9 +560,9 @@ static booln lxGLTextureData_init(lxgContextPTR ctx, lxgTexturePTR tex,
       ){
     return LUX_FALSE;
   }
-  tex->gldataformat = GetDataFormat(format,LUX_FALSE,data > LUXGFX_TEXTUREDATA_FLOAT32);
-  tex->gldatatype = GetDataType(data,LUX_FALSE,format == LUXGFX_TEXTURECHANNEL_DEPTHSTENCIL);
-  tex->glinternalformat = GetInternal(format,data);
+  tex->gldataformat = lxgTextureChannel_getFormat(format,LUX_FALSE,data > LUXGFX_TEXTUREDATA_FLOAT32);
+  tex->gldatatype = lxgTextureDataType_getData(data,LUX_FALSE,format == LUXGFX_TEXTURECHANNEL_DEPTHSTENCIL);
+  tex->glinternalformat = lxgTextureChannel_getInternal(format,data);
   if (!tex->gldataformat || !tex->gldatatype || !tex->glinternalformat)
     return LUX_FALSE;
 
@@ -575,22 +575,28 @@ static booln lxGLTextureData_init(lxgContextPTR ctx, lxgTexturePTR tex,
 static LUX_INLINE void lxgTexture_bindDefault(lxgTexturePTR tex)
 {
   glBindTexture(tex->gltarget,tex->glid);
+  lxGLErrorCheck();
 }
 
-LUX_API void lxgTexture_apply(  lxgTexturePTR tex, lxgContextPTR ctx, uint imageunit)
+LUX_API LUX_INLINE void lxgTexture_apply(  lxgTexturePTR tex, lxgContextPTR ctx, uint imageunit)
 {
-  ctx->textures[imageunit] = tex;
+  lxgTexturePTR old = ctx->textures[imageunit];
   glActiveTexture(GL_TEXTURE0_ARB + imageunit);
-  glBindTexture(tex->gltarget,tex->glid);
+  if (tex){
+    glBindTexture(tex->gltarget,tex->glid);
+  }
+  else if (old){
+    glBindTexture(old->gltarget,0);
+  }
+  lxGLErrorCheck();
+  ctx->textures[imageunit] = tex;
 }
 
 LUX_API void  lxgTextures_apply(lxgTexturePTR *texs, lxgContextPTR ctx, uint start, uint num)
 {
   int i;
   for (i = num-1; i >= 0; i--){
-    ctx->textures[i+start] = texs[i];
-    glActiveTexture(GL_TEXTURE0_ARB + i);
-    glBindTexture(texs[i]->gltarget,texs[i]->glid);
+    lxgTexture_apply(texs[i], ctx, i);
   }
 }
 
@@ -664,50 +670,62 @@ typedef void (*TexUpload_fn) (TexUpload_t* tu);
 static void TexUpload_1D(TexUpload_t*  tu)
 {
   glTexImage1D(tu->target,tu->level,tu->internal,tu->size.x,tu->border,tu->format,tu->type,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_1DCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage1DARB(tu->target,tu->level,tu->format,tu->size.x,tu->border,tu->compressedsize,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_2D(TexUpload_t*  tu)
 {
   glTexImage2D(tu->target,tu->level,tu->internal,tu->size.x,tu->size.y,tu->border,tu->format,tu->type,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_2DCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage2DARB(tu->target,tu->level,tu->format,tu->size.x,tu->size.y,tu->border,tu->compressedsize,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_3D(TexUpload_t*  tu)
 {
   glTexImage3D(tu->target,tu->level,tu->internal,tu->size.x,tu->size.y,tu->size.z,tu->border,tu->format,tu->type,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_3DCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage3DARB(tu->target,tu->level,tu->format,tu->size.x,tu->size.y,tu->size.z,tu->border,tu->compressedsize,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_1DARRAY(TexUpload_t*  tu)
 {
   glTexImage2D(tu->target,tu->level,tu->internal,tu->size.x,tu->arraysize,tu->border,tu->format,tu->type,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_1DARRAYCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage2DARB(tu->target,tu->level,tu->format,tu->size.x,tu->arraysize,tu->border,tu->compressedsize,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_2DARRAY(TexUpload_t*  tu)
 {
   glTexImage3D(tu->target,tu->level,tu->internal,tu->size.x,tu->size.y,tu->arraysize,tu->border,tu->format,tu->type,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_2DARRAYCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage3DARB(tu->target,tu->level,tu->format,tu->size.x,tu->size.y,tu->arraysize,tu->border,tu->compressedsize,NULL);
+  lxGLErrorCheck();
 }
 static void TexUpload_2DMS(TexUpload_t*  tu)
 {
   glTexImage2DMultisample(tu->target,tu->samples,tu->internal,tu->size.x,tu->size.y,tu->samplesfixed);
+  lxGLErrorCheck();
 }
 static void TexUpload_2DMSARRAY(TexUpload_t*  tu)
 {
   glTexImage3DMultisample(tu->target,tu->samples,tu->internal,tu->size.x,tu->size.y,tu->arraysize,tu->samplesfixed);
+  lxGLErrorCheck();
 }
 
 static TexUpload_fn l_uploadfuncs[] =
@@ -896,6 +914,7 @@ static void lxgTexture_updateSizes(lxgTexturePTR tex, int width, int height, int
   else{
     TexUpload_run(&up,tex,tex->flags & LUXGFX_TEXTUREFLAG_MANMIPMAP);
   }
+
 }
 
 LUX_API booln lxgTexture_resize(lxgTexturePTR tex, int width, int height, int depth, int arraysize)
@@ -937,7 +956,7 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
   booln compressed = flags & LUXGFX_TEXTUREFLAG_COMPRESSED;
   lxgContextPTR ctx = tex->ctx;
 
-    if (!(lxgTextureTarget_valid(ctx,type) && lxgTextureChannel_valid(ctx,format)))
+  if (!(lxgTextureTarget_valid(ctx,type) && lxgTextureChannel_valid(ctx,format)))
     return LUX_FALSE;
 
   if (type == LUXGL_TEXTURE_BUFFER ||
@@ -948,8 +967,8 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
   if ((!compressed) && (flags & LUXGFX_TEXTUREFLAG_COMPRESS))
   {
     tex->glinternalformat = GetCompressed(format);
-    tex->gldatatype = GetDataType(data,LUX_FALSE,LUX_FALSE);
-    tex->gldataformat = GetDataFormat(format,LUX_FALSE,LUX_FALSE);
+    tex->gldatatype = lxgTextureDataType_getData(data,LUX_FALSE,LUX_FALSE);
+    tex->gldataformat = lxgTextureChannel_getFormat(format,LUX_FALSE,LUX_FALSE);
   }
 
   // convert to GL internalformat
@@ -961,10 +980,11 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
     glGenTextures(1,&tex->glid);
   }
   tex->gltarget = type;
-  lxgTexture_bindDefault(tex);
+  lxgTexture_apply(tex, ctx, 0);
 
   if (flags & LUXGFX_TEXTUREFLAG_AUTOMIPMAP){
     glTexParameteri(lxGLTARGET(tex),GL_GENERATE_MIPMAP,GL_TRUE);
+    lxGLErrorCheck();
   }
 
 
@@ -981,6 +1001,7 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
     glTexParameteri(lxGLTARGET(tex),GL_DEPTH_TEXTURE_MODE,GL_LUMINANCE);
     tex->sampler.filter = (lxgSamplerFilter_t)((uint)tex->sampler.filter+4);
     tex->flags |= LUXGFX_TEXTUREFLAG_HASCOMPARE;
+    lxGLErrorCheck();
   }
   lxgTextureUnit_setSampler(ctx,0,&tex->sampler,LUXGFX_SAMPLERATTRIB_ALL);
   return LUX_TRUE;
@@ -999,7 +1020,7 @@ LUX_API void lxgTexture_deinit( lxgTexturePTR tex,lxgContextPTR ctx )
 
 
 LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
-  const lxgTextureUpdatePTR update, uint mip)
+  const lxgTextureUpdate_t* update, uint mip)
 {
   GLenum target = tex->gltarget;
   int depth = tex->depth;
@@ -1014,6 +1035,7 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         return LUX_FALSE;
       }
       glCopyTexSubImage1D(target,mip,update->to.x,update->from.x,update->from.y,update->size.x);
+      lxGLErrorCheck();
       break;
     case LUXGL_TEXTURE_CUBE:
       target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + update->to.z;
@@ -1027,6 +1049,7 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         return LUX_FALSE;
       }
       glCopyTexSubImage2D(target,mip,update->to.x,update->to.y,update->from.x,update->from.y,update->size.x,update->size.y);
+      lxGLErrorCheck();
       break;
     case LUXGL_TEXTURE_1DARRAY:
       if (LUXGFX_VALIDITY && (mip >= tex->miplevels ||
@@ -1036,6 +1059,7 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         return LUX_FALSE;
       }
       glCopyTexSubImage2D(target,mip,update->to.x,update->to.y,update->from.x,update->from.y,update->size.x,update->size.y);
+      lxGLErrorCheck();
       break;
     case LUXGL_TEXTURE_CUBEARRAY:
     case LUXGL_TEXTURE_2DARRAY:
@@ -1049,6 +1073,7 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         return LUX_FALSE;
       }
       glCopyTexSubImage3D(target,mip,update->to.x,update->to.y,update->to.z,update->from.x,update->from.y,update->size.x,update->size.y);
+      lxGLErrorCheck();
       break;
   }
   return LUX_TRUE;
@@ -1057,12 +1082,10 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
 // if scalartype is set to invalid, we assume "native" data (matching
 // internal)
 LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
-    const lxgTextureUpdatePTR update,uint mip,
-    enum lxScalarType_e d, const void* data, uint size)
+    const lxgTextureUpdate_t* update,uint mip,
+    GLenum datatype, GLenum dataformat, const void* data, uint size)
 {
   GLenum target = tex->gltarget;
-  GLenum dataformat = tex->gldataformat;
-  GLenum datatype = tex->gldatatype;
   booln compressed = (tex->flags & LUXGFX_TEXTUREFLAG_COMPRESSED);
   int depth = tex->depth;
   size_t nativesize = tex->nativesizes[mip];
@@ -1088,6 +1111,7 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
       glTexSubImage1D(target,mip,update->to.x,update->size.x,dataformat,datatype,data);
     else
       glCompressedTexSubImage1D(target,mip,update->to.x,update->size.x,dataformat,nativesize,data);
+    lxGLErrorCheck();
     break;
   case LUXGL_TEXTURE_CUBE:
     target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + update->to.z;
@@ -1105,6 +1129,7 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
       glTexSubImage2D(target,mip,update->to.x,update->to.y,update->size.x,update->size.y,dataformat,datatype,data);
     else
       glCompressedTexSubImage2D(target,mip,update->to.x,update->to.y,update->size.x,update->size.y,dataformat,nativesize,data);
+    lxGLErrorCheck();
     break;
   case LUXGL_TEXTURE_CUBEARRAY:
   case LUXGL_TEXTURE_2DARRAY:
@@ -1121,6 +1146,7 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
       glTexSubImage3D(target,mip,update->to.x,update->to.y,update->to.z,update->size.x,update->size.y,update->size.z,dataformat,datatype,data);
     else
       glCompressedTexSubImage3D(target,mip,update->to.x,update->to.y,update->to.z,update->size.x,update->size.y,update->size.z,dataformat,nativesize,data);
+    lxGLErrorCheck();
     break;
   }
 
@@ -1129,21 +1155,19 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
 }
 
 LUX_API booln lxgTexture_readBuffer(lxgTexturePTR tex, 
-    const lxgTextureUpdatePTR update,uint miplevel,
-    enum lxScalarType_e scalar, const lxgBufferPTR buffer, uint bufferoffset)
+    const lxgTextureUpdate_t* update,uint miplevel,
+    GLenum datatype, GLenum dataformat, const lxgBuffer_t* buffer, uint bufferoffset)
 {
   if (LUXGFX_VALIDITY && buffer->size < bufferoffset) return LUX_FALSE;
 
   lxgBuffer_bind(buffer,LUXGL_BUFFER_PIXELREAD);
-  return lxgTexture_readData(tex,update,miplevel,scalar,(void*)bufferoffset,buffer->size - bufferoffset);
+  return lxgTexture_readData(tex,update,miplevel,datatype,dataformat,(void*)bufferoffset,buffer->size - bufferoffset);
 }
 
-LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompressed, booln onlydepth, 
-    uint mip, enum lxScalarType_e d, void* buffer, uint buffersize)
+LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompressed, 
+    uint mip, GLenum datatype, GLenum dataformat, void* buffer, uint buffersize)
 {
   GLenum target = tex->gltarget;
-  GLenum dataformat = tex->gldataformat;
-  GLenum datatype = tex->gldatatype;
   booln compressed = (tex->flags & (LUXGFX_TEXTUREFLAG_COMPRESSED | LUXGFX_TEXTUREFLAG_COMPRESS));
   int depth = tex->depth;
   size_t nativesize = tex->nativesizes[mip]; // CORRECT BASED ON MIP
@@ -1153,14 +1177,6 @@ LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompres
   if (LUXGFX_VALIDITY && (mip >= tex->miplevels ))
   {
     return LUX_FALSE;
-  }
-
-  if (tex->formattype == LUXGFX_TEXTURECHANNEL_DEPTHSTENCIL){
-    dataformat = onlydepth ? GL_DEPTH_COMPONENT : GL_DEPTH_STENCIL;
-  }
-
-  if (d != LUX_SCALAR_ILLEGAL){
-    datatype = lxScalarType_to(d);
   }
 
   switch(target){
@@ -1177,6 +1193,7 @@ LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompres
       glGetTexImage(target,mip,dataformat,datatype,buffer);
     else
       glGetCompressedTexImage(target,mip,buffer);
+    lxGLErrorCheck();
     break;
   }
 
@@ -1184,12 +1201,12 @@ LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompres
 }
 
 LUX_API booln lxgTexture_writeBuffer(lxgTexturePTR tex, uint side,
-    booln ascompressed, booln onlydepth, uint mip, enum lxScalarType_e d, lxgBufferPTR buffer, uint bufferoffset)
+    booln ascompressed, uint mip, GLenum datatype, GLenum dataformat, lxgBufferPTR buffer, uint bufferoffset)
 {
   if (LUXGFX_VALIDITY && buffer->size < bufferoffset) return LUX_FALSE;
 
   lxgBuffer_bind(buffer,LUXGL_BUFFER_PIXELWRITE);
-  return lxgTexture_writeData(tex,side,ascompressed,onlydepth,mip,d,(void*)bufferoffset,buffer->size - bufferoffset);
+  return lxgTexture_writeData(tex,side,ascompressed,mip,datatype,dataformat,(void*)bufferoffset,buffer->size - bufferoffset);
 }
 
 
@@ -1222,10 +1239,12 @@ LUX_API LUX_INLINE void lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageu
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_S,address[sampler->addru]);
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_T,address[sampler->addrv]);
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_R,address[sampler->addrw]);
+    lxGLErrorCheck();
   }
 
   if (what & LUXGFX_SAMPLERATTRIB_BORDER){
     glTexParameterfv(lxGLTARGET(tex),GL_TEXTURE_BORDER_COLOR,sampler->border);
+    lxGLErrorCheck();
   }
   
   if (what & (LUXGFX_SAMPLERATTRIB_CMP)){
@@ -1235,12 +1254,14 @@ LUX_API LUX_INLINE void lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageu
          run ? GL_COMPARE_R_TO_TEXTURE : GL_NONE);
 
       glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_FUNC_ARB,run ? sampler->cmpfunc : GL_LEQUAL);
+      lxGLErrorCheck();
     }
   }
 
   if (what & LUXGFX_SAMPLERATTRIB_ANISO){
     if (sampler->aniso){
       glTexParameteri(lxGLTARGET(tex), GL_TEXTURE_MAX_ANISOTROPY_EXT, sampler->aniso);
+      lxGLErrorCheck();
     }
   }
 
@@ -1250,6 +1271,7 @@ LUX_API LUX_INLINE void lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageu
       glTexParameterf(lxGLTARGET(tex),GL_TEXTURE_MAX_LOD,sampler->lod.max);
 
       glTexParameterf(lxGLTARGET(tex),GL_TEXTURE_LOD_BIAS_EXT,sampler->lod.bias);
+      lxGLErrorCheck();
     }
   }
 
@@ -1277,6 +1299,7 @@ LUX_API LUX_INLINE void lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageu
 
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_MIN_FILTER,minfilter);
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_MAG_FILTER,magfilter);
+    lxGLErrorCheck();
   }
 
   tex->lastSampler = sampler;
@@ -1361,7 +1384,7 @@ LUX_API void lxgSampler_deinitHW(lxgSamplerPTR self, lxgContextPTR ctx)
   if (self->glid) glDeleteSamplers(1,&self->glid);
 }
 
-LUX_API void lxgSampler_updateHW(lxgSamplerPTR sampler, lxgContextPTR ctx)
+LUX_API void lxgSampler_updateHW(lxgSamplerPTR sampler)
 {
   static GLenum address[] = {
     LUXGL_SAMPLERADDRESS_REPEAT,
@@ -1375,10 +1398,11 @@ LUX_API void lxgSampler_updateHW(lxgSamplerPTR sampler, lxgContextPTR ctx)
   GLenum magfilter;
   booln runcmp = sampler->cmpfunc != LUXGL_COMPARE_DONTEXECUTE;
 
+  lxGLErrorCheck();
   glSamplerParameteri(glid,GL_TEXTURE_WRAP_S,address[sampler->addru]);
   glSamplerParameteri(glid,GL_TEXTURE_WRAP_T,address[sampler->addrv]);
   glSamplerParameteri(glid,GL_TEXTURE_WRAP_R,address[sampler->addrw]);
-
+  
   glSamplerParameterfv(glid,GL_TEXTURE_BORDER_COLOR,sampler->border);
 
   glSamplerParameteri(glid,GL_TEXTURE_COMPARE_MODE_ARB,
@@ -1412,20 +1436,26 @@ LUX_API void lxgSampler_updateHW(lxgSamplerPTR sampler, lxgContextPTR ctx)
 
   glSamplerParameteri(glid,GL_TEXTURE_MIN_FILTER,minfilter);
   glSamplerParameteri(glid,GL_TEXTURE_MAG_FILTER,magfilter);
+  lxGLErrorCheck();
 }
 
-LUX_API void lxgSampler_apply(lxgSamplerPTR self, lxgContextPTR ctx, uint imageunit)
+LUX_API LUX_INLINE void lxgSampler_apply(lxgSamplerPTR self, lxgContextPTR ctx, uint imageunit)
 {
   ctx->samplers[imageunit] = self;
-  if (self->glid) glBindSampler(imageunit,self->glid);
+  if (self){
+    if (self->glid) glBindSampler(imageunit,self->glid);
+  }
+  else if (ctx->capbits & LUXGFX_CAP_SM4){
+    glBindSampler(imageunit,0);
+  }
+  lxGLErrorCheck();
 }
 
 LUX_API void  lxgSamplers_apply(lxgSamplerPTR *samps, lxgContextPTR ctx, uint start, uint num)
 {
   uint i;
   for (i = 0; i < num; i++){
-    ctx->samplers[i+start] = samps[i];
-    if (samps[i]->glid) glBindSampler(i+start,samps[i]->glid);
+    lxgSampler_apply(samps[i], ctx, start + i);
   }
 }
 
@@ -1453,9 +1483,9 @@ LUX_API booln lxgRenderBuffer_change(lxgRenderBufferPTR rb,
   
   glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, rb->glid);
   if (samples)
-    glRenderbufferStorageMultisampleEXT(GL_RENDERBUFFER_EXT, samples, GetInternal(format,LUXGFX_TEXTUREDATA_BASE), width, height);
+    glRenderbufferStorageMultisampleEXT(GL_RENDERBUFFER_EXT, samples, lxgTextureChannel_getInternal(format,LUXGFX_TEXTUREDATA_BASE), width, height);
   else
-    glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GetInternal(format,LUXGFX_TEXTUREDATA_BASE), width, height);
+    glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, lxgTextureChannel_getInternal(format,LUXGFX_TEXTUREDATA_BASE), width, height);
 
   glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);
 

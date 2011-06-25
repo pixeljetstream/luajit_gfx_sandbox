@@ -290,6 +290,27 @@ extern "C"{
     LUXGL_PARAM_USER            = 0xFFFEDCBA,
   }lxgParameterType_t;
 
+  typedef enum lxGLError_e{
+    LUXGL_ERROR_NONE = GL_NO_ERROR,
+    LUXGL_ERROR_OP = GL_INVALID_OPERATION,
+    LUXGL_ERROR_ENUM = GL_INVALID_ENUM,
+    LUXGL_ERROR_VALUE = GL_INVALID_VALUE,
+    LUXGL_ERROR_INDEX = GL_INVALID_INDEX,
+    LUXGL_ERROR_FBOP = GL_INVALID_FRAMEBUFFER_OPERATION,
+  }lxGLError_t;
+
+
+#ifdef _DEBUG
+  LUX_INLINE void lxGLErrorCheck(){
+    lxGLError_t err;
+    while (err = (lxGLError_t)glGetError()){
+      err = err;
+    }
+  }
+#else
+  #define lxGLErrorCheck  LUX_NOOP
+#endif
+
   
 #ifdef __cplusplus
 }

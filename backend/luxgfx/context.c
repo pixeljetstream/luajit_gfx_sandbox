@@ -170,8 +170,8 @@ LUX_API const char* lxgContext_init(lxgContextPTR ctx)
     glGetFloatv(GL_SMOOTH_POINT_SIZE_RANGE,minmax2);
     ctx->capabilites.pointsize = LUX_MAX(minmax1[0],minmax2[0]);
   }
-
   lxgContext_syncStates(ctx);
+  lxGLErrorCheck();
 
   return NULL;
 }

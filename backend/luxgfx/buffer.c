@@ -88,6 +88,10 @@ LUX_API void lxgBuffer_residentNV(lxgBufferPTR buffer, lxgAccessMode_t access)
   glMakeNamedBufferResidentNV(buffer->glid,typetoGL[access]);
 }
 
+LUX_API void lxgBuffer_unresidentNV(lxgBufferPTR buffer){
+  glMakeNamedBufferNonResidentNV(buffer->glid);
+}
+
 LUX_API uint lxgBuffer_alloc(lxgBufferPTR buffer, uint size, uint padsize)
 { 
   // pad to biggest 

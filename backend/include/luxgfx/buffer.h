@@ -35,9 +35,9 @@ extern "C"{
   // raises used and returns offset withn padsize from start or -1 on error
   LUX_API uint lxgBuffer_alloc(lxgBufferPTR buffer, uint needed, uint padsize);
 
-  LUX_API void lxgBuffer_bind(lxgBufferPTR buffer, lxGLBufferTarget_t type);
-  LUX_API void lxgBuffer_bindIndexed(lxgBufferPTR buffer, lxGLBufferTarget_t type, uint idx);
-  LUX_API void lxgBuffer_bindRanged(lxgBufferPTR buffer, lxGLBufferTarget_t type, uint idx, size_t offset, size_t size);
+  LUX_API void lxgBuffer_bind(const lxgBuffer_t* buffer, lxGLBufferTarget_t type);
+  LUX_API void lxgBuffer_bindIndexed(const lxgBuffer_t* buffer, lxGLBufferTarget_t type, uint idx);
+  LUX_API void lxgBuffer_bindRanged(const lxgBuffer_t* buffer, lxGLBufferTarget_t type, uint idx, size_t offset, size_t size);
 
   // implicitly call lxgBuffer_setGL with type used on init
   LUX_API void* lxgBuffer_map(lxgBufferPTR buffer, lxgAccessMode_t type, booln *succ);
@@ -56,24 +56,23 @@ extern "C"{
 
   //////////////////////////////////////////////////////////////////////////
 
-  LUX_INLINE void lxgBuffer_bind(lxgBufferPTR buffer, lxGLBufferTarget_t type )
+  LUX_INLINE void lxgBuffer_bind(const lxgBuffer_t* buffer, lxGLBufferTarget_t type )
   {
     glBindBuffer(type,buffer ? buffer->glid : 0);
+    lxGLErrorCheck();
   }
 
-  LUX_INLINE void  lxgBuffer_bindIndexed(lxgBufferPTR buffer, lxGLBufferTarget_t type, uint idx )
+  LUX_INLINE void  lxgBuffer_bindIndexed(const lxgBuffer_t* buffer, lxGLBufferTarget_t type, uint idx )
   {
     glBindBufferBase(type,idx,buffer ? buffer->glid : 0);
+    lxGLErrorCheck();
   }
 
-  LUX_INLINE void  lxgBuffer_bindRanged( lxgBufferPTR buffer, lxGLBufferTarget_t type, uint idx, size_t offset, size_t size)
+  LUX_INLINE void  lxgBuffer_bindRanged(const lxgBuffer_t* buffer, lxGLBufferTarget_t type, uint idx, size_t offset, size_t size)
   {
-    LUX_DEBUGASSERT(offset + size < buffer->size);
+    LUX_DEBUGASSERT(buffer ? (offset + size < buffer->size) : 1);
     glBindBufferRange(type,idx,buffer ? buffer->glid : 0, offset, size);
-  }
-
-  LUX_INLINE void lxgBuffer_unresidentNV(lxgBufferPTR buffer){
-    glMakeNamedBufferNonResidentNV(buffer->glid);
+    lxGLErrorCheck();
   }
 
 #ifdef __cplusplus

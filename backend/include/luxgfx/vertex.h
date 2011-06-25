@@ -81,6 +81,7 @@ extern "C"{
     lxgVertexDeclPTR    decl;
     flags32             active;
     flags32             declvalid;
+    flags32             declstreams;
     flags32             streamvalid;
     flags32             declchange;
     flags32             streamchange;
