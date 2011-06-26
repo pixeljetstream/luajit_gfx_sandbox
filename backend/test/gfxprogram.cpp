@@ -27,12 +27,7 @@ private:
   GLFWwindow    m_window;
 
   lxgContext_t            m_ctx;
-  lxgProgram_t            m_program;
-  lxgProgramStage_t       m_stageVert;
-  lxgProgramStage_t       m_stageFrag;
-  uint                    m_numParams;
-  lxgProgramParameter_t*  m_params;
-  lxgProgramParameterPTR* m_paramPtrs;
+  RenderProgram           m_prog;
   ParamSet                m_paramsets[PARAMSETS];
 
 public:
@@ -47,6 +42,8 @@ public:
     m_box.update(x,y,z);
   }
 
+
+
   void onInit(GLFWwindow win, int argc, const char** argv) {
     m_window = win;
 
@@ -60,6 +57,14 @@ public:
     m_rh.cameraPerspective(&bbox, 30.0f);
     m_rh.cameraOrtho(&bbox);
 
+    lxgContext_init(&m_ctx);
+
+    m_prog.init(&m_ctx);
+    m_prog.addStageProgram(LUXGFX_STAGE_VERTEX,RESFILENAME("gfxprogram.vert").c_str(),NULL);
+    m_prog.addStageProgram(LUXGFX_STAGE_FRAGMENT,RESFILENAME("gfxprogram.frag").c_str(),NULL);
+    m_prog.finish();
+
+    // TODO init parmasets
   }
 
   void logic(int width, int height)
@@ -85,9 +90,9 @@ public:
     m_rh.updateProjection(width,height);
     m_rh.setCameraGL();
 
-    lxgProgram_apply(&m_program, &m_ctx);
+    lxgProgram_apply(&m_prog.m_program, &m_ctx);
     for (int i = 0; i < PARAMSETS; i++){
-      lxgProgram_applyParameters(&m_program, &m_ctx, m_numParams, m_paramPtrs, m_paramsets[i].datas);
+      lxgProgram_applyParameters(&m_prog.m_program, &m_ctx, m_prog.m_params.size(), &m_prog.m_paramPtrs[0], m_paramsets[i].datas);
       m_box.drawVA();
     }
     lxgProgram_apply(NULL, &m_ctx);

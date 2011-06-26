@@ -12,7 +12,7 @@ using namespace std;
 
 //////////////////////////////////////////////////////////////////////////
 
-static std::string ReadFile(const char* filename)
+std::string ReadFile(const char* filename)
 {
   string str;
   size_t filesize;
@@ -27,8 +27,13 @@ static std::string ReadFile(const char* filename)
   {
     str += file.get();
   }
-  str[str.size()-1] = 0;
+  str += (char)0;
   return str;
+}
+
+std::string RESFILENAME( const char* name )
+{
+  return std::string("../backend/test/resources/") + std::string(name);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -196,6 +201,7 @@ GLuint RenderHelper::loadShader(GLenum type, const char* filename, const char* p
   glShaderSource(obj,1,strings,sizes);
   return obj;
 }
+
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -482,3 +488,70 @@ Test* TestManager::getTest(const char* name){
   return NULL;
 }
 
+//////////////////////////////////////////////////////////////////////////
+
+void RenderProgram::init( lxgContextPTR ctx )
+{
+  lxgProgram_init(&m_program, ctx);
+}
+
+booln RenderProgram::addStageProgram(lxgProgramStage_t type, const char * filename, const char* prepend )
+{
+  lxgStageProgram_t stage;
+  lxgStageProgram_init(&stage, m_program.ctx, type);
+  std::string src = ReadFile(filename);
+  if (prepend){
+    src = std::string(prepend) + src;
+  }
+  int errlen = lxgStageProgram_compile(&stage,src.c_str(), strlen(src.c_str()));
+  if (errlen){
+    std::string error;
+    error.resize(errlen,0);
+    lxgStageProgram_error(&stage, &error[0], errlen);
+    printf("stage program compile error:\n%s\n\n",error.c_str());
+    return LUX_FALSE;
+  }
+  m_stages.push_back(stage);
+  m_stageTypes.push_back(type);
+  return LUX_TRUE;
+}
+
+booln RenderProgram::finish()
+{
+  // attach
+  for (size_t i = 0; i < m_stages.size(); i++){
+    lxgProgram_setStage(&m_program, m_stageTypes[i], &m_stages[i]);
+  }
+
+  // link
+  int errlen = lxgProgram_link(&m_program);
+  if (errlen){
+    std::string error;
+    error.resize(errlen,0);
+    lxgProgram_log(&m_program, &error[0], errlen);
+    printf("program link error:\n%s\n\n",error.c_str());
+    return LUX_FALSE;
+  }
+
+  // build parameter info
+  int numCompat = 0;
+  int numNameSize = 0;
+  int numParams = lxgProgram_getParameterCount(&m_program, &numNameSize, &numCompat);
+  int numSubNameSize = 0;
+  int numSubs = 0;
+  if (numCompat){
+    numSubs = lxgProgram_getSubroutineCount(&m_program, &numSubNameSize);
+    m_subroutines.resize(numSubs,NULL);
+    m_compats.resize(numCompat);
+  }
+  m_namebuffer.resize(numNameSize + numSubNameSize, 0);
+  m_params.resize(numParams);
+  lxgProgram_initParameters(&m_program, numParams, &m_params[0], numNameSize, &m_namebuffer[0]);
+  if (numCompat){
+    lxgProgram_initSubroutineParameters(&m_program, numParams, &m_params[0], 
+      numSubNameSize, &m_namebuffer[numNameSize], &m_subroutines[0],
+      numCompat, &m_compats[0]);
+  }
+
+  return LUX_TRUE;
+}

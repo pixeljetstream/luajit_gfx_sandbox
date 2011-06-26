@@ -11,8 +11,10 @@
 #include <luxmath/luxmath.h>
 #include <luxmath/basetypes.hpp>
 #include <luxbackend/meshbase.h>
+#include <luxgfx/luxgfx.h>
 
 #include <string.h>
+#include <string>
 #include <vector>
 
 //////////////////////////////////////////////////////////////////////////
@@ -201,6 +203,24 @@ struct DrawNode{
 
 //////////////////////////////////////////////////////////////////////////
 
+class RenderProgram{
+public:
+  lxgProgram_t                        m_program;
+  std::vector<lxgStageProgram_t>      m_stages;
+  std::vector<lxgProgramStage_t>      m_stageTypes;
+  std::vector<lxgProgramParameter_t>  m_params;
+  std::vector<lxgProgramParameterPTR> m_paramPtrs;
+  std::vector<lxgProgramSubroutine_t> m_compats;
+  std::vector<char*>                  m_subroutines;
+  std::string                         m_namebuffer;
+
+  void    init(lxgContextPTR ctx);
+  booln   addStageProgram(lxgProgramStage_t type, const char * filename, const char* prepend);
+  booln   finish();
+};
+
+//////////////////////////////////////////////////////////////////////////
+
 class RenderHelper {
 public:
 
@@ -270,6 +290,9 @@ public:
 private:
   const char*   m_name;
 };
+
+std::string ReadFile(const char* filename);
+std::string RESFILENAME(const char* name);
 
 //////////////////////////////////////////////////////////////////////////
 
