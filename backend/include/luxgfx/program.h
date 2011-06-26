@@ -43,7 +43,7 @@ extern "C"{
     union{
       GLuint              glid;         // for SEP
       GLenum              gltarget;     // for NV
-      lxgProgramStage_t   domain;       // for subroutines
+      lxgProgramStage_t   stage;       // for subroutines
     };
     GLuint                gllocation;
     union{
@@ -56,7 +56,8 @@ extern "C"{
       } buffer;
       struct{
         lxgProgramSubroutine_t    last;
-        int                       numCompatible;
+        ushort                    count;
+        ushort                    numCompatible;
         lxgProgramSubroutine_t*   compatible;
       } subroutine;
       struct{
@@ -110,18 +111,23 @@ extern "C"{
 
   LUX_API void  lxgStageProgram_init(lxgStageProgramPTR stage, lxgContextPTR ctx, lxgProgramStage_t type);
   LUX_API void  lxgStageProgram_deinit(lxgStageProgramPTR stage, lxgContextPTR ctx);
-  LUX_API booln lxgStageProgram_compile(lxgStageProgramPTR stage, const char *src, int len);
+  LUX_API int   lxgStageProgram_compile(lxgStageProgramPTR stage, const char *src, int len);
   LUX_API const char* lxgStageProgram_error(lxgStageProgramPTR stage, char *buffer, int len);
 
   LUX_API void  lxgProgram_init(lxgProgramPTR prog, lxgContextPTR ctx);
   LUX_API void  lxgProgram_deinit(lxgProgramPTR prog, lxgContextPTR ctx);
-  LUX_API void  lxgProgram_setDomain(lxgProgramPTR prog, lxgProgramStage_t type, lxgStageProgramPTR stage);
-  LUX_API booln lxgProgram_link(lxgProgramPTR prog);
+  LUX_API void  lxgProgram_setStage(lxgProgramPTR prog, lxgProgramStage_t type, lxgStageProgramPTR stage);
+  LUX_API int   lxgProgram_link(lxgProgramPTR prog);
   LUX_API const char* lxgProgram_log(lxgProgramPTR prog, char* buffer, int len);
 
-  LUX_API int lxgProgram_getParameterCount( lxgProgramPTR prog, int* maxNameLen, int* totalCompatibleSubroutines);
-    // namesBuffer[maxNameLen * num]
-  LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int num, lxgProgramParameter_t* params, int maxNameLen, char* namesBuffer);
+  LUX_API int   lxgProgram_getParameterCount( lxgProgramPTR prog, int* namesSize, int* compatibleSubroutines);
+  LUX_API void  lxgProgram_initParameters( lxgProgramPTR prog, int num, lxgProgramParameter_t* params, 
+    int namesSize, char* namesBuffer);
+
+  LUX_API int   lxgProgram_getSubroutineCount(lxgProgramPTR prog, int* namesSize);
+  LUX_API void  lxgProgram_initSubroutineParameters( lxgProgramPTR prog, int numParams, lxgProgramParameter_t* params, 
+    int namesSize, char* namesBuffer, char** subroutineNames, 
+    int compatibles, lxgProgramSubroutine_t *compatibleData );
 
   // GLSL SEPERATE or DSA
   LUX_API void lxgProgramParameter_initFuncSEP(lxgProgramParameterPTR param, GLuint progid);
@@ -139,12 +145,13 @@ extern "C"{
 
   LUX_API void  lxgStageProgram_initNV(lxgStageProgramPTR stage, lxgContextPTR ctx, lxgProgramStage_t type);
   LUX_API void  lxgStageProgram_deinitNV(lxgStageProgramPTR stage, lxgContextPTR ctx);
-  LUX_API booln lxgStageProgram_compileNV(lxgStageProgramPTR stage, const char *src, int len);
+  LUX_API int   lxgStageProgram_compileNV(lxgStageProgramPTR stage, const char *src, int len);
   LUX_API const char* lxgStageProgram_errorNV(lxgStageProgramPTR stage, char *buffer, int len);
 
   LUX_API void  lxgProgram_initNV(lxgProgramPTR prog, lxgContextPTR ctx);
   LUX_API void  lxgProgram_deinitNV(lxgProgramPTR prog, lxgContextPTR ctx);
-  LUX_API void  lxgProgram_setDomainNV(lxgProgramPTR prog, lxgProgramStage_t type, lxgStageProgramPTR stage);
+  LUX_API void  lxgProgram_setStageNV(lxgProgramPTR prog, lxgProgramStage_t type, lxgStageProgramPTR stage);
+ 
 
 
 #ifdef __cplusplus
