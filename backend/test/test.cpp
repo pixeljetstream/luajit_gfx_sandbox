@@ -18,6 +18,12 @@ std::string ReadFile(const char* filename)
   size_t filesize;
 
   ifstream file (filename,ios::in|ios::end);
+
+  if (!file.is_open()){
+    printf("error: could not open file %s\n",filename);
+    return str;
+  }
+
   filesize=file.tellg();
 
   str.reserve(filesize);
@@ -27,13 +33,13 @@ std::string ReadFile(const char* filename)
   {
     str += file.get();
   }
-  str += (char)0;
+  str[str.size()-1] = 0;
   return str;
 }
 
 std::string RESFILENAME( const char* name )
 {
-  return std::string("../backend/test/resources/") + std::string(name);
+  return std::string("../../backend/test/resources/") + std::string(name);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -546,11 +552,15 @@ booln RenderProgram::finish()
   }
   m_namebuffer.resize(numNameSize + numSubNameSize, 0);
   m_params.resize(numParams);
+  m_paramPtrs.resize(numParams);
   lxgProgram_initParameters(&m_program, numParams, &m_params[0], numNameSize, &m_namebuffer[0]);
   if (numCompat){
     lxgProgram_initSubroutineParameters(&m_program, numParams, &m_params[0], 
       numSubNameSize, &m_namebuffer[numNameSize], &m_subroutines[0],
       numCompat, &m_compats[0]);
+  }
+  for (int i = 0; i < numParams; i++){
+    m_paramPtrs[i] = &m_params[i];
   }
 
   return LUX_TRUE;

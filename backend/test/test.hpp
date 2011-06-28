@@ -206,6 +206,7 @@ struct DrawNode{
 class RenderProgram{
 public:
   lxgProgram_t                        m_program;
+private:
   std::vector<lxgStageProgram_t>      m_stages;
   std::vector<lxgProgramStage_t>      m_stageTypes;
   std::vector<lxgProgramParameter_t>  m_params;
@@ -214,9 +215,24 @@ public:
   std::vector<char*>                  m_subroutines;
   std::string                         m_namebuffer;
 
+
+public:
   void    init(lxgContextPTR ctx);
   booln   addStageProgram(lxgProgramStage_t type, const char * filename, const char* prepend);
   booln   finish();
+
+  inline size_t numParams() {
+    return m_paramPtrs.size();
+  }
+  inline const lxgProgramParameter_t* getParams(){
+    return &m_params[0];
+  }
+  inline char** getSubs() {
+    return &m_subroutines[0];
+  }
+  inline lxgProgramParameterPTR* getPtrs() {
+    return &m_paramPtrs[0];
+  }
 };
 
 //////////////////////////////////////////////////////////////////////////

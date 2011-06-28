@@ -10,6 +10,7 @@ class GfxProgram : public Test
   static const int PARAMSETS = 4;
 
   struct ParamSet{
+    // FIXME doesn't match anymore
     lxgTexture_t  texture;
     lxgBuffer_t   buffer;
     lxCMatrix44   matrix;
@@ -92,7 +93,8 @@ public:
 
     lxgProgram_apply(&m_prog.m_program, &m_ctx);
     for (int i = 0; i < PARAMSETS; i++){
-      lxgProgram_applyParameters(&m_prog.m_program, &m_ctx, m_prog.m_params.size(), &m_prog.m_paramPtrs[0], m_paramsets[i].datas);
+      //FIXME requires proper data setup
+      //lxgProgram_applyParameters(&m_prog.m_program, &m_ctx, m_prog.numParams(), m_prog.getPtrs(), m_paramsets[i].datas);
       m_box.drawVA();
     }
     lxgProgram_apply(NULL, &m_ctx);
