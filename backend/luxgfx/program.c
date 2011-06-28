@@ -1122,7 +1122,7 @@ LUX_API int lxgProgram_getSubroutineCount(lxgProgramPTR prog, int* namesSize)
 
   for (s = 0; s < LUXGFX_STAGES; s++){
     GLenum gltype = lxgProgramStage_gltype(s);
-    if (! (prog->usedProgs | lxgProgramStage_bit(s))) continue;
+    if (! (prog->usedProgs & lxgProgramStage_bit(s))) continue;
 
     glGetProgramStageiv(prog->glid,gltype,GL_ACTIVE_SUBROUTINES, &num);
     glGetProgramStageiv(prog->glid,gltype,GL_ACTIVE_SUBROUTINE_MAX_LENGTH, &maxNameLen);
@@ -1182,6 +1182,7 @@ LUX_API int lxgProgram_getParameterCount( lxgProgramPTR prog, int* namesSize, in
       nameLen = maxNameLen - 1;
     }
     outNameLen  += nameLen + 1;
+    outNum++;
   }
   if (sm4){
     // add buffers
@@ -1189,7 +1190,7 @@ LUX_API int lxgProgram_getParameterCount( lxgProgramPTR prog, int* namesSize, in
     outNum += num;
     for (i = 0 ; i < num; i++){
       glGetActiveUniformBlockiv(prog->glid,i,GL_UNIFORM_BLOCK_NAME_LENGTH,&nameLen);
-      outNameLen -= nameLen;
+      outNameLen += nameLen;
     }
     
   }
@@ -1198,7 +1199,7 @@ LUX_API int lxgProgram_getParameterCount( lxgProgramPTR prog, int* namesSize, in
     int s;
     for (s = 0; s < LUXGFX_STAGES; s++){
       GLenum gltype = lxgProgramStage_gltype(s);
-      if (! (prog->usedProgs | lxgProgramStage_bit(s))) continue;
+      if (! (prog->usedProgs & lxgProgramStage_bit(s))) continue;
       
       glGetProgramStageiv(prog->glid,gltype,GL_ACTIVE_SUBROUTINE_UNIFORMS, &num);
       outNum += num;
@@ -1242,7 +1243,7 @@ LUX_API void lxgProgram_initSubroutineParameters(
     GLenum gltype = lxgProgramStage_gltype(s);
     GLint num;
     GLint written;
-    if (! (prog->usedProgs | lxgProgramStage_bit(s))) continue;
+    if (! (prog->usedProgs & lxgProgramStage_bit(s))) continue;
 
     glGetProgramStageiv(prog->glid,gltype,GL_ACTIVE_SUBROUTINES, &num);
     for (i = 0; i < num; i++){
@@ -1274,15 +1275,18 @@ LUX_API void lxgProgram_initSubroutineParameters(
     compatibleCur += params->subroutine.numCompatible;
   }
 
+  LUX_DEBUGASSERT( compatibleCur == compatibleData + compatibles );
 }
 
-LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgProgramParameter_t* params, int namesSize, char* namesBuffer)
+LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgProgramParameter_t* paramsBuffer, int namesSize, char* namesBuffer)
 {
   GLint num;
   GLsizei written;
   booln sm4 = prog->ctx->capbits & LUXGFX_CAP_SM4;
   booln sm5 = prog->ctx->capbits & LUXGFX_CAP_SM5;
+  lxgProgramParameter_t* params = paramsBuffer;
   int i;
+  char checkBuffer[4];
   glGetProgramiv(prog->glid,GL_ACTIVE_UNIFORMS,&num);
 
   LUX_DEBUGASSERT(prog->type == LUXGFX_PROGRAM_GLSL);
@@ -1299,14 +1303,18 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
         continue;
       }
     }
-
-    LUX_DEBUGASSERT(namesSize > 0);
-    glGetActiveUniform(prog->glid,i,namesSize,&written,&sz,&type,namesBuffer);
-
-    if (strstr(namesBuffer,"gl_")){
+    
+    glGetActiveUniform(prog->glid,i,sizeof(checkBuffer),&written,&sz,&type,checkBuffer);
+    checkBuffer[sizeof(checkBuffer)- 1] = 0;
+    if (strstr(checkBuffer,"gl_")){
       continue;
     }
 
+    LUX_DEBUGASSERT(namesSize > 0);
+    LUX_DEBUGASSERT(params < paramsBuffer + numParams);
+
+    glGetActiveUniform(prog->glid,i,namesSize,&written,&sz,&type,namesBuffer);
+    
     params->uniform.count = sz;
     params->name = namesBuffer;
     params->type = type;
@@ -1320,6 +1328,7 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
     // add buffers
     glGetProgramiv(prog->glid,GL_ACTIVE_UNIFORM_BLOCKS, &num);
     for (i = 0 ; i < num; i++){
+      LUX_DEBUGASSERT(params < paramsBuffer + numParams);
       LUX_DEBUGASSERT(namesSize > 0);
       glGetActiveUniformBlockiv(prog->glid, i, GL_UNIFORM_BLOCK_BINDING, &params->gllocation);
       glGetActiveUniformBlockiv(prog->glid, i, GL_UNIFORM_BLOCK_DATA_SIZE, &params->buffer.size);
@@ -1338,13 +1347,13 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
     int s;
     for (s = 0; s < LUXGFX_STAGES; s++){
       GLenum gltype = lxgProgramStage_gltype(s);
-      if (! (prog->usedProgs | lxgProgramStage_bit(s))) continue;
+      if (! (prog->usedProgs & lxgProgramStage_bit(s))) continue;
       
       glGetProgramStageiv(prog->glid,gltype,GL_ACTIVE_SUBROUTINE_UNIFORMS, &num);
       prog->stagePrograms[s]->numSubroutines = num;
       for (i = 0 ; i < num; i++){
         GLint num;
-
+        LUX_DEBUGASSERT(params < paramsBuffer + numParams);
         LUX_DEBUGASSERT(namesSize > 0);
         glGetActiveSubroutineUniformiv(prog->glid, gltype, i, GL_NUM_COMPATIBLE_SUBROUTINES, &num);
         params->subroutine.numCompatible = num;
@@ -1362,6 +1371,19 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
       }
     }
   }
+
+
+  if (prog->isSeparable){
+    for (i = 0; i < numParams; i++){
+      lxgProgramParameter_initFuncSEP(&paramsBuffer[i],prog->glid);
+    }
+  }
+  else{
+    for (i = 0; i < numParams; i++){
+      lxgProgramParameter_initFunc(&paramsBuffer[i]);
+    }
+  }
+  
 
   LUX_DEBUGASSERT(namesSize == 0);
 
