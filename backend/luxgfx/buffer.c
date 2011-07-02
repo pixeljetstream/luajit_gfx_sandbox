@@ -29,6 +29,11 @@ static LUX_INLINE void lxgBuffer_bindDefault(lxgBufferPTR buffer)
   glBindBuffer(buffer->gltarget,buffer->glid);
 }
 
+static LUX_INLINE void lxgBuffer_unbindDefault(lxgBufferPTR buffer)
+{
+  glBindBuffer(buffer->gltarget,0);
+}
+
 //////////////////////////////////////////////////////////////////////////
 // lxgBuffer
 
@@ -38,9 +43,11 @@ LUX_API void lxgBuffer_deinit(lxgBufferPTR buffer, lxgContextPTR ctx)
   if (buffer->mapped){
     lxgBuffer_bindDefault(buffer);
     glUnmapBuffer(buffer->gltarget);
+    lxgBuffer_unbindDefault(buffer);
   }
 
   glDeleteBuffers(1,&buffer->glid);
+  
 
   buffer->mapped = NULL;
   buffer->glid = 0;
@@ -51,7 +58,7 @@ LUX_API void lxgBuffer_reset(lxgBufferPTR buffer, void *data)
 {
   lxgBuffer_bindDefault(buffer);
   glBufferData(buffer->gltarget,buffer->size,data,buffer->hint);
-
+  lxgBuffer_unbindDefault(buffer);
   buffer->used = data ? buffer->size : 0;
 }
 
@@ -133,6 +140,7 @@ LUX_API void* lxgBuffer_map(lxgBufferPTR buffer, lxgAccessMode_t type, booln* su
     buffer->mapped = glMapBuffer(buffer->gltarget,typetoGL[type]);
   }
 
+  lxgBuffer_unbindDefault(buffer);
 
   buffer->mapstart = 0;
   buffer->maplength = buffer->size;
@@ -194,7 +202,8 @@ LUX_API booln lxgBuffer_submit(lxgBufferPTR buffer, uint offset, uint size, void
 
   lxgBuffer_bindDefault(buffer);
   glBufferSubDataARB(buffer->gltarget,offset,size,data);
-  
+  lxgBuffer_unbindDefault(buffer);
+
   return LUX_TRUE;
 }
 
@@ -205,6 +214,7 @@ LUX_API booln lxgBuffer_retrieve(lxgBufferPTR buffer, uint offset, uint size, vo
 
   lxgBuffer_bindDefault(buffer);
   glGetBufferSubDataARB(buffer->gltarget,offset,size,data);
+  lxgBuffer_unbindDefault(buffer);
 
   return LUX_TRUE;
 }
@@ -245,6 +255,8 @@ LUX_API void* lxgBuffer_mapRange(lxgBufferPTR buffer, uint from, uint length, lx
     buffer->mapped = ((byte*)glMapBuffer(buffer->gltarget,typetoGL[type])) + from;
   }
 
+  lxgBuffer_unbindDefault(buffer);
+
   buffer->mapstart = from;
   buffer->maplength = length;
   buffer->maptype = type;
@@ -259,6 +271,7 @@ LUX_API booln lxgBuffer_flushRange(lxgBufferPTR buffer, uint from, uint length)
 
   lxgBuffer_bindDefault(buffer);
   glFlushMappedBufferRange(buffer->gltarget,from,length);
+  lxgBuffer_unbindDefault(buffer);
 
   return LUX_TRUE;
 }
@@ -268,6 +281,7 @@ LUX_API booln lxgBuffer_unmap(lxgBufferPTR buffer)
 
   lxgBuffer_bindDefault(buffer);
   glUnmapBuffer(buffer->gltarget);
+  lxgBuffer_unbindDefault(buffer);
 
   buffer->maplength = buffer->mapstart = 0;
   buffer->mapped = NULL;

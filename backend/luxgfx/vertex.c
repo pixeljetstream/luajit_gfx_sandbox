@@ -71,7 +71,7 @@ static LUX_INLINE void lxgVertexPointer_applyFIXED(const lxgVertexElement_t* ele
   funcs[attr](elem,attr,host->ptr);
 }
 
-LUX_API void lxgVertexSetup_applyFIXED(lxgContextPTR ctx)
+LUX_API void lxgVertexContext_applyFIXED(lxgContextPTR ctx)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 changed = vtx->declchange & vtx->declvalid;
@@ -97,7 +97,7 @@ static LUX_INLINE void lxgVertexPointer_apply(const lxgVertexElement_t* elem, co
   lxGLAttribPointer(elem,attr,host->ptr);
 }
 
-LUX_API void lxgVertexSetup_apply(lxgContextPTR ctx)
+LUX_API void lxgVertexContext_apply(lxgContextPTR ctx)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 changed = vtx->declchange & vtx->declvalid;
@@ -204,7 +204,7 @@ static LUX_INLINE void lxgVertexPointer_applyBufferNV(const lxgVertexElement_t* 
   glBufferAddressRangeNV(bind,(int)attr + index, host->buffer->address + ((GLuint64)host->ptr) + (GLuint64)elem->offset, host->len);
 }
 
-LUX_API void lxgVertexSetup_applyNV(lxgContextPTR ctx)
+LUX_API void lxgVertexContext_applyNV(lxgContextPTR ctx)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 declchanged = vtx->declchange & vtx->declvalid;
@@ -227,7 +227,7 @@ LUX_API void lxgVertexSetup_applyNV(lxgContextPTR ctx)
   vtx->streamchange = 0;
 }
 
-LUX_API void lxgVertexSetup_applyFIXEDNV(lxgContextPTR ctx)
+LUX_API void lxgVertexContext_applyFIXEDNV(lxgContextPTR ctx)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 declchanged = vtx->declchange & vtx->declvalid;
@@ -396,7 +396,7 @@ LUX_API void lxgVertexDecl_setStreams(lxgVertexDeclPTR decl, lxgStreamHostPTR st
 }
 
 
-LUX_API void lxgVertexSetup_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
+LUX_API void lxgVertexContext_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   booln changed = 0;
@@ -411,7 +411,7 @@ LUX_API void lxgVertexSetup_setStream(lxgContextPTR ctx, uint idx, lxgStreamHost
   vtx->setup.streams[idx] = *host;
 }
 
-LUX_API void lxgVertexSetup_reset( lxgContextPTR ctx )
+LUX_API void lxgVertexContext_reset( lxgContextPTR ctx )
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   memset(vtx,0,sizeof(lxgVertexState_t));
@@ -471,7 +471,7 @@ LUX_API void lxgVertexAttrib_setFloatFIXED(lxgVertexAttrib_t type, const float* 
   }
 }
 
-LUX_API void lxgFeedback_setStreams(lxgContextPTR ctx, lxgStreamHostPTR streams, int numStreams)
+LUX_API void lxgFeedbackContext_setStreams(lxgContextPTR ctx, lxgStreamHostPTR streams, int numStreams)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
   flags32 changed = 0;
@@ -490,7 +490,7 @@ LUX_API void lxgFeedback_setStreams(lxgContextPTR ctx, lxgStreamHostPTR streams,
 }
 
 
-LUX_API void lxgFeedback_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
+LUX_API void lxgFeedbackContext_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
   
@@ -504,7 +504,7 @@ LUX_API void lxgFeedback_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR
   xfb->streams[idx] = *host;
 }
 
-LUX_API LUX_INLINE void lxgFeedback_applyStreams(lxgContextPTR ctx)
+LUX_API LUX_INLINE void lxgFeedbackContext_applyStreams(lxgContextPTR ctx)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
   flags32 streamchanged = xfb->streamchange;
@@ -523,7 +523,7 @@ LUX_API LUX_INLINE void lxgFeedback_applyStreams(lxgContextPTR ctx)
   xfb->streamchange = 0;
 }
 
-LUX_API void lxgFeedback_enable(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams)
+LUX_API void lxgFeedbackContext_enable(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
 
@@ -533,12 +533,12 @@ LUX_API void lxgFeedback_enable(lxgContextPTR ctx, lxGLPrimitiveType_t type, int
   xfb->active = numStreams;
   xfb->usedvalid = (1<<numStreams) - 1;
 
-  lxgFeedback_applyStreams(ctx);
+  lxgFeedbackContext_applyStreams(ctx);
 
   glBeginTransformFeedback(type);
 }
 
-LUX_API void lxgFeedback_disable(lxgContextPTR ctx)
+LUX_API void lxgFeedbackContext_disable(lxgContextPTR ctx)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
 
@@ -547,11 +547,11 @@ LUX_API void lxgFeedback_disable(lxgContextPTR ctx)
   glEndTransformFeedback();
 }
 
-LUX_API void lxgFeedback_pause(lxgContextPTR ctx)
+LUX_API void lxgFeedbackContext_pause(lxgContextPTR ctx)
 {
   glPauseTransformFeedback();
 }
-LUX_API void lxgFeedback_resume(lxgContextPTR ctx)
+LUX_API void lxgFeedbackContext_resume(lxgContextPTR ctx)
 {
   glResumeTransformFeedback();
 }

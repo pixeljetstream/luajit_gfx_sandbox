@@ -206,6 +206,13 @@ extern "C"{
   }lxgTextureImage_t;
 
   //////////////////////////////////////////////////////////////////////////
+
+
+  LUX_API void  lxgTextureContext_reset(lxgContextPTR ctx);
+  LUX_API void  lxgTextureContext_setCompare(lxgContextPTR ctx, uint imageunit, enum lxgCompareMode_e cmp);
+  LUX_API void  lxgTextureContext_setSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
+  LUX_API void  lxgTextureContext_checkedSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
+  
   
 
   // Type checks
@@ -249,12 +256,10 @@ extern "C"{
     GLenum datatype, GLenum dataformat, lxgBufferPTR buffer, uint bufferoffset);
 
   LUX_API void  lxgTexture_getSampler(lxgTexturePTR tex, lxgSamplerPTR sampler);
+  LUX_API void  lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSamplerPTR sampler, flags32 what);
   LUX_API const lxVec3iPTR  lxgTexture_getMipSize(lxgTexturePTR tex, uint mipLevel);
   
-  LUX_API void  lxgTextureUnit_setCompare(lxgContextPTR ctx, uint imageunit, enum lxgCompareMode_e cmp);
-  LUX_API void  lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
-  LUX_API void  lxgTextureUnit_checkedSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
-
+  
   //////////////////////////////////////////////////////////////////////////
   // lxgSampler_t
 
@@ -286,6 +291,7 @@ extern "C"{
   LUX_API booln lxgTextureImage_init(lxgTextureImagePTR img, lxgContextPTR ctx, lxgTexturePTR tex, lxgAccessMode_t acces, 
     uint level, booln layered, int layer);
   
+
 
 
 

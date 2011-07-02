@@ -288,7 +288,7 @@ extern "C"{
     LUXGL_PARAM_BUFFER          = 0x7FFFFFF0,
     LUXGL_PARAM_SUBROUTINE     = 0x7FFFFFF1,
     LUXGL_PARAM_USER            = 0x7FFFFFFF,
-  }lxgParameterType_t;
+  }lxGLParameterType_t;
 
   typedef enum lxGLError_e{
     LUXGL_ERROR_NONE = GL_NO_ERROR,

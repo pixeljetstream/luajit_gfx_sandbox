@@ -176,7 +176,10 @@ LUX_API const char* lxgContext_init(lxgContextPTR ctx)
   return NULL;
 }
 
-
+LUX_API void lxgUniformContext_reset(lxgContextPTR ctx)
+{
+  memset(ctx->uniform,0,sizeof(void*)*LUXGFX_MAX_TEXTURE_IMAGES);
+}
 
 LUX_API void lxgContext_syncStates(lxgContextPTR ctx)
 {

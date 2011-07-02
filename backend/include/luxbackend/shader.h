@@ -22,7 +22,7 @@ extern "C"
 
   typedef struct lxShaderParameter_s{
     lxStrDictKey          namekey;
-    lxgParameterType_t    type;
+    lxGLParameterType_t    type;
     uint                  progOffset;
     uint                  progCount;
   }lxShaderParameter_t;
@@ -51,7 +51,7 @@ extern "C"
   LUX_API void    lxShaderProgram_initMem(lxShaderProgram_t* shader, size_t size, void* buffer);
   LUX_API void    lxShaderProgram_initParameters(lxShaderProgram_t* shader, lxgProgramParameter_t** optionalSort);
   LUX_API void    lxShaderProgram_useHash(lxShaderProgram_t* shader,lxContHashPTR hash);
-  LUX_API int     lxShaderProgram_getUpdateIndex(lxShaderProgram_t* shader, lxStrDictKey namekey, lxgParameterType_t type );
+  LUX_API int     lxShaderProgram_getUpdateIndex(lxShaderProgram_t* shader, lxStrDictKey namekey, lxGLParameterType_t type );
 
   //////////////////////////////////////////////////////////////////////////
 

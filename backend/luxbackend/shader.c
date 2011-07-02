@@ -127,7 +127,7 @@ LUX_API void lxShaderProgram_useHash( lxShaderProgram_t* shader,lxContHashPTR ha
 }
 
 
-LUX_API int lxShaderProgram_getUpdateIndex( lxShaderProgram_t* shader, lxStrDictKey namekey, lxgParameterType_t type )
+LUX_API int lxShaderProgram_getUpdateIndex( lxShaderProgram_t* shader, lxStrDictKey namekey, lxGLParameterType_t type )
 {
   if (!shader->paramHash){
     uint i;

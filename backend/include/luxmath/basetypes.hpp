@@ -66,7 +66,6 @@ public:
   template <typename S>
   LUX_INLINE lxCVector3(S x, S y, S z) : x(float(x)),y(float(y)),z(float(z)) {};
   template <typename S>
-  LUX_INLINE lxCVector3(S x, S y, S z, S w) : x(float(x)),y(float(y)),z(float(z)) {};
   LUX_INLINE lxCVector3(const lxCVector2 &vec, float z) : x(vec.x),y(vec.y),z(z) {};
 
   LUX_INLINE operator float* () {

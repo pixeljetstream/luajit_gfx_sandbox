@@ -578,6 +578,12 @@ static LUX_INLINE void lxgTexture_bindDefault(lxgTexturePTR tex)
   lxGLErrorCheck();
 }
 
+static LUX_INLINE void lxgTexture_unbindDefault(lxgTexturePTR tex)
+{
+  glBindTexture(tex->gltarget,0);
+  lxGLErrorCheck();
+}
+
 LUX_API LUX_INLINE void lxgTexture_apply(  lxgTexturePTR tex, lxgContextPTR ctx, uint imageunit)
 {
   lxgTexturePTR old = ctx->textures[imageunit];
@@ -914,7 +920,7 @@ static void lxgTexture_updateSizes(lxgTexturePTR tex, int width, int height, int
   else{
     TexUpload_run(&up,tex,tex->flags & LUXGFX_TEXTUREFLAG_MANMIPMAP);
   }
-
+  lxgTexture_unbindDefault(tex);
 }
 
 LUX_API booln lxgTexture_resize(lxgTexturePTR tex, int width, int height, int depth, int arraysize)
@@ -980,8 +986,8 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
     glGenTextures(1,&tex->glid);
   }
   tex->gltarget = type;
-  lxgTexture_apply(tex, ctx, 0);
 
+  lxgTexture_bindDefault(tex);
   if (flags & LUXGFX_TEXTUREFLAG_AUTOMIPMAP){
     glTexParameteri(lxGLTARGET(tex),GL_GENERATE_MIPMAP,GL_TRUE);
     lxGLErrorCheck();
@@ -995,6 +1001,7 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
 
   lxgTexture_updateSizes(tex,w,h,d,arraysize,d);
 
+  lxgTexture_bindDefault(tex);
   tex->flags |= (ctx->capbits & LUXGFX_CAP_SM4) ? LUXGFX_TEXTUREFLAG_HASLOD : 0;
   lxgSampler_init(&tex->sampler);
   if (format == LUXGFX_TEXTURECHANNEL_DEPTH || format == LUXGFX_TEXTURECHANNEL_DEPTHSTENCIL){
@@ -1003,7 +1010,10 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
     tex->flags |= LUXGFX_TEXTUREFLAG_HASCOMPARE;
     lxGLErrorCheck();
   }
-  lxgTextureUnit_setSampler(ctx,0,&tex->sampler,LUXGFX_SAMPLERATTRIB_ALL);
+  
+  lxgTexture_boundSetSampler(tex,&tex->sampler,LUXGFX_SAMPLERATTRIB_ALL);
+  lxgTexture_unbindDefault(tex);
+
   return LUX_TRUE;
 }
 
@@ -1032,6 +1042,7 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
       if (LUXGFX_VALIDITY &&(mip >= tex->miplevels ||
         tex->width < update->to.x + update->size.x))
       {
+        lxgTexture_unbindDefault(tex);
         return LUX_FALSE;
       }
       glCopyTexSubImage1D(target,mip,update->to.x,update->from.x,update->from.y,update->size.x);
@@ -1046,6 +1057,7 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         tex->width < update->to.x + update->size.x || 
         tex->height < update->to.y + update->size.y))
       {
+        lxgTexture_unbindDefault(tex);
         return LUX_FALSE;
       }
       glCopyTexSubImage2D(target,mip,update->to.x,update->to.y,update->from.x,update->from.y,update->size.x,update->size.y);
@@ -1056,6 +1068,7 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         tex->width < update->to.x + update->size.x || 
         tex->arraysize < update->to.y + update->size.y))
       {
+        lxgTexture_unbindDefault(tex);
         return LUX_FALSE;
       }
       glCopyTexSubImage2D(target,mip,update->to.x,update->to.y,update->from.x,update->from.y,update->size.x,update->size.y);
@@ -1070,12 +1083,15 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         tex->height < update->to.y + update->size.y ||
         depth < update->to.z))
       {
+        lxgTexture_unbindDefault(tex);
         return LUX_FALSE;
       }
       glCopyTexSubImage3D(target,mip,update->to.x,update->to.y,update->to.z,update->from.x,update->from.y,update->size.x,update->size.y);
       lxGLErrorCheck();
       break;
   }
+
+  lxgTexture_unbindDefault(tex);
   return LUX_TRUE;
 }
 
@@ -1090,8 +1106,6 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
   int depth = tex->depth;
   size_t nativesize = tex->nativesizes[mip];
   
-  lxgTexture_bindDefault(tex);
-
   if (LUXGFX_VALIDITY && (mip >= tex->miplevels) || (compressed && 
     (update->to.x%4 != 0  || update->to.y%4 != 0 ||
      update->size.x%4 != 0 || update->size.y%4 != 0))
@@ -1100,11 +1114,13 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
     return LUX_FALSE;
   }
 
+  lxgTexture_bindDefault(tex);
   switch(target){
   case LUXGL_TEXTURE_1D:
     if (LUXGFX_VALIDITY && (
       tex->width < update->to.x+update->size.x))
     {
+      lxgTexture_unbindDefault(tex);
       return LUX_FALSE;
     }
     if (!compressed)
@@ -1123,6 +1139,7 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
       tex->width < update->to.x + update->size.x || 
       tex->height < update->to.y + update->size.y))
     {
+      lxgTexture_unbindDefault(tex);
       return LUX_FALSE;
     }
     if (!compressed)
@@ -1140,6 +1157,7 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
       tex->height < update->to.y + update->size.y ||
       depth < update->to.z + update->size.z))
     {
+      lxgTexture_unbindDefault(tex);
       return LUX_FALSE;
     }
     if (!compressed)
@@ -1149,6 +1167,8 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
     lxGLErrorCheck();
     break;
   }
+
+  lxgTexture_unbindDefault(tex);
 
   return LUX_TRUE;
 
@@ -1172,12 +1192,12 @@ LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompres
   int depth = tex->depth;
   size_t nativesize = tex->nativesizes[mip]; // CORRECT BASED ON MIP
 
-  lxgTexture_bindDefault(tex);
-
   if (LUXGFX_VALIDITY && (mip >= tex->miplevels ))
   {
     return LUX_FALSE;
   }
+
+  lxgTexture_bindDefault(tex);
 
   switch(target){
   case LUXGL_TEXTURE_CUBE:
@@ -1197,6 +1217,8 @@ LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompres
     break;
   }
 
+  lxgTexture_unbindDefault(tex);
+
   return LUX_TRUE;
 }
 
@@ -1209,21 +1231,7 @@ LUX_API booln lxgTexture_writeBuffer(lxgTexturePTR tex, uint side,
   return lxgTexture_writeData(tex,side,ascompressed,mip,datatype,dataformat,(void*)bufferoffset,buffer->size - bufferoffset);
 }
 
-
-LUX_API void lxgTextureUnit_setCompare(lxgContextPTR ctx, uint imageunit, lxGLCompareMode_t cmpfunc)
-{
-  lxgTexturePTR tex = ctx->textures[imageunit];
-  booln run = cmpfunc != LUXGL_COMPARE_DONTEXECUTE;
-
-  glActiveTexture(GL_TEXTURE0_ARB + imageunit);
-  glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_MODE_ARB,
-    run ? GL_COMPARE_R_TO_TEXTURE : GL_NONE);
-
-  glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_FUNC_ARB,run ? cmpfunc : GL_LEQUAL);
-  tex->sampler.cmpfunc = cmpfunc;
-}
-
-LUX_API LUX_INLINE void lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler , flags32 what)
+LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSamplerPTR sampler, flags32 what)
 {
   static GLenum address[]= {
     LUXGL_SAMPLERADDRESS_REPEAT,
@@ -1231,10 +1239,7 @@ LUX_API LUX_INLINE void lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageu
     LUXGL_SAMPLERADDRESS_CLAMP,
     LUXGL_SAMPLERADDRESS_BORDER,
   };
-  lxgTexturePTR tex = ctx->textures[imageunit];
 
-  glActiveTexture(GL_TEXTURE0_ARB + imageunit);
-  
   if (what & LUXGFX_SAMPLERATTRIB_ADDRESS){
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_S,address[sampler->addru]);
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_T,address[sampler->addrv]);
@@ -1246,12 +1251,12 @@ LUX_API LUX_INLINE void lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageu
     glTexParameterfv(lxGLTARGET(tex),GL_TEXTURE_BORDER_COLOR,sampler->border);
     lxGLErrorCheck();
   }
-  
+
   if (what & (LUXGFX_SAMPLERATTRIB_CMP)){
     if (tex->flags & LUXGFX_TEXTUREFLAG_HASCOMPARE){
       booln run = sampler->cmpfunc != LUXGL_COMPARE_DONTEXECUTE;
       glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_MODE_ARB,
-         run ? GL_COMPARE_R_TO_TEXTURE : GL_NONE);
+        run ? GL_COMPARE_R_TO_TEXTURE : GL_NONE);
 
       glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_FUNC_ARB,run ? sampler->cmpfunc : GL_LEQUAL);
       lxGLErrorCheck();
@@ -1306,9 +1311,42 @@ LUX_API LUX_INLINE void lxgTextureUnit_setSampler(lxgContextPTR ctx, uint imageu
   tex->lastSamplerIncarnation = sampler->incarnation;
   tex->sampler = *sampler;
   tex->sampler.glid = 0;
+
 }
 
-LUX_API void lxgTextureUnit_checkedSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what){
+//////////////////////////////////////////////////////////////////////////
+
+
+LUX_API void lxgTextureContext_reset(lxgContextPTR ctx)
+{
+  memset(ctx->textures,0,sizeof(lxgTexturePTR)*LUXGFX_MAX_TEXTURE_IMAGES);
+  memset(ctx->images,0,sizeof(lxgTextureImagePTR)*LUXGFX_MAX_TEXTURE_IMAGES);
+  memset(ctx->samplers,0,sizeof(lxgSamplerPTR)*LUXGFX_MAX_TEXTURE_IMAGES);
+}
+
+LUX_API void lxgTextureContext_setCompare(lxgContextPTR ctx, uint imageunit, lxGLCompareMode_t cmpfunc)
+{
+  lxgTexturePTR tex = ctx->textures[imageunit];
+  booln run = cmpfunc != LUXGL_COMPARE_DONTEXECUTE;
+
+  glActiveTexture(GL_TEXTURE0_ARB + imageunit);
+  glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_MODE_ARB,
+    run ? GL_COMPARE_R_TO_TEXTURE : GL_NONE);
+
+  glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_FUNC_ARB,run ? cmpfunc : GL_LEQUAL);
+  tex->sampler.cmpfunc = cmpfunc;
+}
+
+
+LUX_API void lxgTextureContext_setSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler , flags32 what)
+{
+
+  lxgTexturePTR tex = ctx->textures[imageunit];
+  glActiveTexture(GL_TEXTURE0_ARB + imageunit);
+  lxgTexture_boundSetSampler(tex,sampler,what);
+}
+
+LUX_API void lxgTextureContext_checkedSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what){
   lxgTexturePTR tex = ctx->textures[imageunit];
   flags32 change = 0;
 
@@ -1326,7 +1364,8 @@ LUX_API void lxgTextureUnit_checkedSampler(lxgContextPTR ctx, uint imageunit, lx
     memcmp(&tex->sampler.lod,&sampler->lod,sizeof(sampler->lod)) == 0);
 
   if (change){
-    lxgTextureUnit_setSampler(ctx,imageunit,sampler,change);
+    glActiveTexture(GL_TEXTURE0_ARB + imageunit);
+    lxgTexture_boundSetSampler(tex,sampler,change);
   }
 }
 
@@ -1499,10 +1538,19 @@ LUX_API void  lxgRenderBuffer_deinit(lxgRenderBufferPTR rb,lxgContextPTR ctx)
 
 //////////////////////////////////////////////////////////////////////////
 
-LUX_API void  lxgTextureImage_apply(lxgTextureImagePTR img,lxgContextPTR ctx, uint imageunit)
+LUX_API LUX_INLINE void  lxgTextureImage_apply(lxgTextureImagePTR img,lxgContextPTR ctx, uint imageunit)
 {
   glBindImageTextureEXT(imageunit,img->tex->glid,img->level,img->layered,img->layer,img->glaccess,img->glformat);
   ctx->images[imageunit] = img;
+}
+
+
+LUX_API void  lxgTextureImages_apply(lxgTextureImagePTR *imgs, lxgContextPTR ctx, uint start, uint num)
+{
+  int i;
+  for (i = num-1; i >= 0; i--){
+    lxgTextureImage_apply(imgs[i], ctx, i);
+  }
 }
 
 

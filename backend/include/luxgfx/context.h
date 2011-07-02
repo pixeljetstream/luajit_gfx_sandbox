@@ -122,16 +122,19 @@ extern "C"{
   LUX_API const char* lxgContext_init(lxgContextPTR ctx);
   LUX_API void  lxgContext_syncStates(lxgContextPTR ctx);
   LUX_API booln lxgContext_checkStates(lxgContextPTR ctx);
-  LUX_API void  lxgContext_resetTextures(lxgContextPTR ctx);
+
+  LUX_API void  lxgTextureContext_reset(lxgContextPTR ctx);
+  LUX_API void  lxgVertexContext_reset(lxgContextPTR ctx);
+  LUX_API void  lxgUniformContext_reset(lxgContextPTR ctx);
 
   LUX_API void  lxgTexture_apply(lxgTexturePTR obj, lxgContextPTR ctx, uint imageunit);
   LUX_API void  lxgSampler_apply(lxgSamplerPTR obj, lxgContextPTR ctx, uint imageunit);
   LUX_API void  lxgTextures_apply(lxgTexturePTR *texs, lxgContextPTR ctx, uint start, uint num);
   LUX_API void  lxgSamplers_apply(lxgSamplerPTR *samps, lxgContextPTR ctx, uint start, uint num);
-  LUX_API void  lxgTextureImage_apply(lxgTextureImagePTR obj, lxgContextPTR ctx, uint imageunit);
+  LUX_API void  lxgTextureImages_apply(lxgTextureImagePTR *imgs, lxgContextPTR ctx, uint start, uint num);
+  LUX_API void  lxgTextureImage_apply(lxgTextureImagePTR img, lxgContextPTR ctx, uint imageunit);
   LUX_API void  lxgRenderTarget_apply(lxgRenderTargetPTR obj, lxgContextPTR ctx, lxgRenderTargetType_t type);
   LUX_API void  lxgRenderTarget_applyDraw(lxgRenderTargetPTR obj, lxgContextPTR ctx, booln setViewport);
-  LUX_API void  lxgProgram_apply(lxgProgramPTR obj, lxgContextPTR ctx );
 
   // perform check if same state, prior to setting
   LUX_API void lxgBlend_checked(lxgBlendPTR obj, lxgContextPTR ctx);
@@ -140,22 +143,25 @@ extern "C"{
   LUX_API void lxgStencil_checked(lxgStencilPTR obj, lxgContextPTR ctx);
   LUX_API void lxgTexture_checked(lxgTexturePTR tex,lxgContextPTR ctx, uint imageunit );
   LUX_API void lxgSampler_checked(lxgSamplerPTR samp,lxgContextPTR ctx, uint imageunit );
+  LUX_API void lxgTextureImage_checked(lxgTextureImagePTR img, lxgContextPTR ctx, uint imageunit);
   LUX_API void lxgTextures_checked(lxgTexturePTR *texs,lxgContextPTR ctx, uint start, uint num );
   LUX_API void lxgSamplers_checked(lxgSamplerPTR *samps,lxgContextPTR ctx, uint start, uint num );
+  LUX_API void lxgTextureImages_checked(lxgTextureImagePTR* imgs, lxgContextPTR ctx, uint start, uint num );
   LUX_API void lxgRenderFlag_checked(flags32 needed,lxgContextPTR ctx );
   LUX_API void lxgVertexDecl_checked(lxgVertexDeclPTR decl,lxgContextPTR ctx );
   LUX_API void lxgVertexAttrib_checked(flags32 needed,lxgContextPTR ctx);
   LUX_API void lxgVertexAttrib_checkedFIXED(flags32 needed,lxgContextPTR ctx);
   LUX_API void lxgRenderTarget_checked(lxgRenderTargetPTR rt,lxgContextPTR ctx, lxgRenderTargetType_t type);
-  LUX_API void lxgTextureImage_checked(lxgTextureImagePTR img, lxgContextPTR ctx, uint imageunit);
+  
+  
   LUX_API void lxgProgram_checked(lxgProgramPTR prog, lxgContextPTR ctx);
-  LUX_API void lxgVertexSetup_checked(lxgContextPTR ctx);
-  LUX_API void lxgVertexSetup_checkedNV(lxgContextPTR ctx);
-  LUX_API void lxgVertexSetup_checkedFIXED(lxgContextPTR ctx);
-  LUX_API void lxgVertexSetup_checkedFIXEDNV(lxgContextPTR ctx);
+  LUX_API void lxgVertexContext_checked(lxgContextPTR ctx);
+  LUX_API void lxgVertexContext_checkedNV(lxgContextPTR ctx);
+  LUX_API void lxgVertexContext_checkedFIXED(lxgContextPTR ctx);
+  LUX_API void lxgVertexContext_checkedFIXEDNV(lxgContextPTR ctx);
 
   LUX_API void  lxgViewPortScissor_checked(lxRectangleiPTR rect, lxgContextPTR ctx);
-  LUX_API booln lxgBuffer_queryUniform(lxgBufferPTR buffer, lxgContextPTR ctx, uint idx );
+  LUX_API booln lxgUniformContext_setBuffer(lxgContextPTR ctx, uint idx, lxgBufferPTR buffer);
 
   //////////////////////////////////////////////////////////////////////////
 
@@ -214,7 +220,7 @@ extern "C"{
     }
   }
 
-  LUX_INLINE booln lxgBuffer_queryUniform(lxgBufferPTR buffer, lxgContextPTR ctx, uint idx )
+  LUX_INLINE booln lxgUniformContext_setBuffer(lxgContextPTR ctx, uint idx, lxgBufferPTR buffer)
   {
     booln res = ctx->uniform[idx] != buffer;
     ctx->uniform[idx] = buffer;
@@ -223,17 +229,26 @@ extern "C"{
   LUX_INLINE void lxgTextures_checked(lxgTexturePTR *texs, lxgContextPTR ctx, uint start, uint num )
   {
     LUX_ASSUME(num >= 1 && num <= LUXGFX_MAX_TEXTURE_IMAGES);
-    if (memcmp(ctx->textures,texs,sizeof(lxgTexturePTR )*num)){
+    if (memcmp(&ctx->textures[start],texs,sizeof(lxgTexturePTR )*num)){
       lxgTextures_apply(texs,ctx,start,num);
     }
   }
   LUX_INLINE void lxgSamplers_checked(lxgSamplerPTR *samps, lxgContextPTR ctx, uint start, uint num )
   {
     LUX_ASSUME(num >= 1 && num <= LUXGFX_MAX_TEXTURE_IMAGES);
-    if (memcmp(ctx->textures,samps,sizeof(lxgSamplerPTR)*num)){
+    if (memcmp(&ctx->samplers[start],samps,sizeof(lxgSamplerPTR)*num)){
       lxgSamplers_apply(samps,ctx,start,num);
     }
   }
+
+  LUX_INLINE void lxgTextureImages_checked(lxgTextureImagePTR* imgs, lxgContextPTR ctx, uint start, uint num )
+  {
+    LUX_ASSUME(num >= 1 && num <= LUXGFX_MAX_RWTEXTURE_IMAGES);
+    if (memcmp(&ctx->images[start],imgs,sizeof(lxgTextureImagePTR)*num)){
+      lxgTextureImages_apply(imgs,ctx,start,num);
+    }
+  }
+
   LUX_INLINE void lxgRenderFlag_checked(flags32 needed, lxgContextPTR ctx){
     flags32 changed = (needed ^ ctx->rflag);
     if (changed){
@@ -278,52 +293,47 @@ extern "C"{
     lxgRenderTarget_apply(rt,ctx,type);
   }
 
-  LUX_INLINE void lxgContext_resetTextures(lxgContextPTR ctx)
-  {
-    memset(ctx->textures,0,sizeof(void*)*LUXGFX_MAX_TEXTURE_IMAGES);
-  }
-
-  LUX_INLINE void lxgVertexSetup_checked(lxgContextPTR ctx)
+  LUX_INLINE void lxgVertexContext_checked(lxgContextPTR ctx)
   {
     lxgVertexState_t* vtx = &ctx->vertex;
     flags32 changed = vtx->declchange & vtx->declvalid;
     flags32 streamchanged = vtx->streamchange;
     if (changed || streamchanged ){
-      lxgVertexSetup_apply(ctx);
+      lxgVertexContext_apply(ctx);
     }
   }
 
-  LUX_INLINE void lxgVertexSetup_checkedFIXED(lxgContextPTR ctx)
+  LUX_INLINE void lxgVertexContext_checkedFIXED(lxgContextPTR ctx)
   {
     lxgVertexState_t* vtx = &ctx->vertex;
     flags32 changed = vtx->declchange & vtx->declvalid;
     flags32 streamchanged = vtx->streamchange;
     if (changed || streamchanged ){
-      lxgVertexSetup_applyFIXED(ctx);
+      lxgVertexContext_applyFIXED(ctx);
     }
   }
 
-  LUX_INLINE void lxgVertexSetup_checkedNV(lxgContextPTR ctx)
+  LUX_INLINE void lxgVertexContext_checkedNV(lxgContextPTR ctx)
   {
     lxgVertexState_t* vtx = &ctx->vertex;
     flags32 changed = vtx->declchange & vtx->declvalid;
     flags32 streamchanged = vtx->streamchange;
     if (changed || streamchanged ){
-      lxgVertexSetup_applyNV(ctx);
+      lxgVertexContext_applyNV(ctx);
     }
   }
 
-  LUX_INLINE void lxgVertexSetup_checkedFIXEDNV(lxgContextPTR ctx)
+  LUX_INLINE void lxgVertexContext_checkedFIXEDNV(lxgContextPTR ctx)
   {
     lxgVertexState_t* vtx = &ctx->vertex;
     flags32 changed = vtx->declchange & vtx->declvalid;
     flags32 streamchanged = vtx->streamchange;
     if (changed || streamchanged ){
-      lxgVertexSetup_applyFIXEDNV(ctx);
+      lxgVertexContext_applyFIXEDNV(ctx);
     }
   }
 
-  LUX_INLINE void lxgVertexSetup_resetStreams(lxgContextPTR ctx)
+  LUX_INLINE void lxgVertexContext_resetStreams(lxgContextPTR ctx)
   {
     ctx->vertex.streamvalid = 0;
     ctx->vertex.streamchange = 0;

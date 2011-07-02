@@ -29,7 +29,7 @@ extern "C"{
     LUXGFX_STAGES,
   }lxgProgramStage_t;
 
-  typedef void (*lxgParmeterUpdate_fn)(lxgProgramParameterPTR param, lxgContextPTR ctx, void* data);
+  typedef void (*lxgParmeterUpdate_fn)(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data);
   typedef uint32 lxgSubroutineKey;
 
   typedef struct lxgProgramSubroutine_s{
@@ -38,21 +38,23 @@ extern "C"{
   }lxgProgramSubroutine_t;
 
   typedef struct lxgProgramParameter_s{
-    lxgParameterType_t    type;
+    lxGLParameterType_t    type;
     lxgParmeterUpdate_fn  func;
     union{
       GLuint              glid;         // for SEP
       GLenum              gltarget;     // for NV
-      lxgProgramStage_t   stage;       // for subroutines
+      lxgProgramStage_t   stage;        // for subroutines
+      uint32              userid;
     };
     GLuint                gllocation;
     union{
       struct {
+        uint32            unit;        // sampler
         ushort            count;
         bool16            transpose;
       } uniform;
       struct{
-        int               size;
+        int32             size;
       } buffer;
       struct{
         lxgProgramSubroutine_t    last;
@@ -83,12 +85,15 @@ extern "C"{
   typedef struct lxgProgram_s{
     GLuint                glid;
     lxgProgramType_t      type;
-    flags32               usedProgs;
+    flags16               usedProgs;
+    bool8                 isSeparable;
+    bool8                 hasSubroutines;
     union{
       lxgProgramPTR       sepPrograms[LUXGFX_STAGES];
       lxgStageProgramPTR  stagePrograms[LUXGFX_STAGES];
     };
-    booln                 isSeparable;
+    uint16                numSubroutines[LUXGFX_STAGES];
+
     lxgContextPTR         ctx;
   }lxgProgram_t;
 
