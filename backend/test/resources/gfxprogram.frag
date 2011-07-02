@@ -6,9 +6,8 @@
 varying vec2 inTexcoord;
 varying vec3 inNormal;
 
-layout(std140) uniform block {
-  vec4  ycolor;
-};
+uniform int       arrtexIndex;
+uniform sampler2D arrtex[2];
 
 subroutine vec3 shuffle_fn(vec3 v); 
 
@@ -24,9 +23,17 @@ vec3 shuffle_zyx(vec3 v)
   return v.zyx;
 }
 
-uniform sampler2D ztex;
-uniform vec4*     xcolor;
+subroutine (shuffle_fn)
+vec3 shuffle_arr(vec3 v)
+{
+  return texture2D(arrtex[arrtexIndex],v.xy).xyz;
+}
 
+uniform vec4*     xcolor;
+layout(std140) uniform ybuffer {
+  vec4  ycolor;
+};
+uniform sampler2D ztex;
 subroutine uniform shuffle_fn shuffleFunc;
 
 void main()

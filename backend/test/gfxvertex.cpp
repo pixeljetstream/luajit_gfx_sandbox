@@ -122,14 +122,14 @@ public:
 
     m_rh.updateProjection(width,height);
     m_rh.setCameraGL();
-    lxgVertexSetup_reset(&m_ctx);
+    lxgVertexContext_reset(&m_ctx);
 
     glBindTexture(GL_TEXTURE_2D,m_texture);
     glEnable(GL_TEXTURE_2D);
     
     lxgVertexDecl_checked(&m_vdecl, &m_ctx);
-    lxgVertexSetup_setStream(&m_ctx, 0, &m_stream);
-    lxgVertexSetup_checkedFIXED(&m_ctx);
+    lxgVertexContext_setStream(&m_ctx, 0, &m_stream);
+    lxgVertexContext_checkedFIXED(&m_ctx);
     lxgVertexAttrib_checkedFIXED(m_vattribs, &m_ctx);
     lxgBuffer_bind(&m_ibo, LUXGL_BUFFER_INDEX);
     glDrawElements(GL_TRIANGLES, m_box.numIndicesTris(), GL_UNSIGNED_INT, NULL);

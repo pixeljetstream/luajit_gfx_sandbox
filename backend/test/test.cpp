@@ -90,12 +90,12 @@ void RenderHelper::cameraOrtho( lxBoundingBox_t* bbox )
   lxCVector3  offset(-1,1,-1);
   lxCVector3  campos;
 
-  lxMatrix44Identity(m_viewmatrix);
+  lxMatrix44Identity(m_viewMatrix);
   //m_viewmatrix[14] = -length * 4.0f;
 
   lxVector3NormalizedA(offset);
   lxVector3ScaledAdd(campos,m_sceneCenter,length * 4.0f, offset);
-  lxMatrix44LookAt(m_viewmatrix,campos,m_sceneCenter,m_up);
+  lxMatrix44LookAt(m_viewMatrix,campos,m_sceneCenter,m_up);
 }
 
 void RenderHelper::cameraPerspective( lxBoundingBox_t* bbox, float fovdeg )
@@ -110,30 +110,30 @@ void RenderHelper::cameraPerspective( lxBoundingBox_t* bbox, float fovdeg )
   // tan = opp/adj
   length = length / tanf(LUX_DEG2RAD(fovdeg) * 0.5f);
   
-  lxMatrix44Identity(m_viewmatrix);
+  lxMatrix44Identity(m_viewMatrix);
 
   lxVector3NormalizedA(offset);
   lxVector3ScaledAdd(campos,m_sceneCenter,length, offset);
-  lxMatrix44LookAt(m_viewmatrix,campos,m_sceneCenter,m_up);
+  lxMatrix44LookAt(m_viewMatrix,campos,m_sceneCenter,m_up);
 }
 
 void RenderHelper::updateProjection( int width, int height )
 {
   float size = lxVector3LengthA(m_sceneSize);
   if (m_ortho){
-    lxMatrix44Ortho(m_projmatrix, m_ortho, size / 4096.0f, size * 16.0f, (float)width / (float) height);
+    lxMatrix44Ortho(m_projMatrix, m_ortho, size / 4096.0f, size * 16.0f, (float)width / (float) height);
   }
   else{
-    lxMatrix44Perspective(m_projmatrix, m_fov, size / 4096.0f, size * 16.0f, (float)width / (float) height);
+    lxMatrix44Perspective(m_projMatrix, m_fov, size / 4096.0f, size * 16.0f, (float)width / (float) height);
   }
 }
 
 void RenderHelper::setCameraGL()
 {
   glMatrixMode(GL_PROJECTION);
-  glLoadMatrixf(m_projmatrix);
+  glLoadMatrixf(m_projMatrix);
   glMatrixMode(GL_MODELVIEW);
-  glLoadMatrixf(m_viewmatrix);
+  glLoadMatrixf(m_viewMatrix);
 }
 
 void RenderHelper::doArcBall(int w, int h )
@@ -206,6 +206,11 @@ GLuint RenderHelper::loadShader(GLenum type, const char* filename, const char* p
   };
   glShaderSource(obj,1,strings,sizes);
   return obj;
+}
+
+void RenderHelper::updateCamera()
+{
+  lxMatrix44MultiplyFull(m_viewprojMatrix,m_projMatrix,m_viewMatrix);
 }
 
 
@@ -564,4 +569,32 @@ booln RenderProgram::finish()
   }
 
   return LUX_TRUE;
+}
+
+void RenderProgram::deinit( lxgContextPTR ctx )
+{
+  for (size_t i = 0; i < m_stages.size(); ++i){
+    lxgStageProgram_deinit(&m_stages[i],ctx);
+  }
+  lxgProgram_deinit(&m_program,ctx);
+}
+
+lxgProgramParameterPTR RenderProgram::getParameter( const char* name )
+{
+  for (size_t i = 0; i < m_params.size(); i++){
+    if (strcmp(m_params[i].name,name)==0){
+      return &m_params[i];
+    }
+  }
+  return NULL;
+}
+
+lxgSubroutineKey RenderProgram::getSubRoutine( const char* name )
+{
+  for (size_t i = 0; i < m_subroutines.size(); i++){
+    if (strcmp(m_subroutines[i],name)==0){
+      return m_subroutines[i] - m_subroutines[0];
+    }
+  }
+  return NULL;
 }

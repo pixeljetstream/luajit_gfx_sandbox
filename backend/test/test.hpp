@@ -220,6 +220,10 @@ public:
   void    init(lxgContextPTR ctx);
   booln   addStageProgram(lxgProgramStage_t type, const char * filename, const char* prepend);
   booln   finish();
+  void    deinit(lxgContextPTR ctx);
+
+  lxgProgramParameterPTR  getParameter( const char* name);
+  lxgSubroutineKey        getSubRoutine( const char* name);
 
   inline size_t numParams() {
     return m_paramPtrs.size();
@@ -248,6 +252,7 @@ public:
   void cameraOrtho(lxBoundingBox_t* bbox);
   void cameraPerspective(lxBoundingBox_t* bbox, float fovdeg);
   void updateProjection(int width, int height);
+  void updateCamera();
   void setCameraGL();
   void doArcBall(int width, int height);
 private:
@@ -256,8 +261,9 @@ private:
 
   float       m_ortho;
   float       m_fov;
-  lxCMatrix44 m_viewmatrix;
-  lxCMatrix44 m_projmatrix;
+  lxCMatrix44 m_viewMatrix;
+  lxCMatrix44 m_projMatrix;
+  lxCMatrix44 m_viewprojMatrix;
   lxCVector3  m_sceneCenter;
   lxCVector3  m_sceneSize;
 
