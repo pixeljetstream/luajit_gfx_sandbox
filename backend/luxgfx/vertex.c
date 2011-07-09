@@ -352,7 +352,7 @@ LUX_API void  lxgContext_applyVertexAttribs( lxgContextPTR ctx, flags32 attribs,
   ctx->vertex.active = attribs;
 }
 
-LUX_API void lxgContext_setVertexDecl( lxgContextPTR ctx,  lxgVertexDeclPTR decl )
+LUX_API void lxgContext_setVertexDecl( lxgContextPTR ctx,  lxgVertexDeclCPTR decl )
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   int i;
@@ -367,17 +367,17 @@ LUX_API void lxgContext_setVertexDecl( lxgContextPTR ctx,  lxgVertexDeclPTR decl
   vtx->declstreams = (1 << decl->streams ) - 1;
 }
 
-static LUX_INLINE booln lxgStreamHost_valid(const lxgStreamHostPTR host)
+static LUX_INLINE booln lxgStreamHost_valid(const lxgStreamHostCPTR host)
 {
   return (host && (host->buffer || host->ptr));
 }
 
-static LUX_INLINE booln lxgStreamHost_unequal(const lxgStreamHostPTR a, lxgStreamHostPTR b)
+static LUX_INLINE booln lxgStreamHost_unequal(const lxgStreamHostCPTR a, lxgStreamHostCPTR b)
 {
   return !!memcmp(a,b,sizeof(lxgStreamHost_t));
 }
 
-LUX_API void lxgContext_setVertexDeclStreams(lxgContextPTR ctx, lxgVertexDeclPTR decl, lxgStreamHostPTR streams)
+LUX_API void lxgContext_setVertexDeclStreams(lxgContextPTR ctx, lxgVertexDeclCPTR decl, lxgStreamHostCPTR streams)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 changed = 0;
@@ -396,7 +396,7 @@ LUX_API void lxgContext_setVertexDeclStreams(lxgContextPTR ctx, lxgVertexDeclPTR
 }
 
 
-LUX_API void lxgContext_setVertexStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
+LUX_API void lxgContext_setVertexStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   booln changed = 0;
@@ -471,7 +471,7 @@ LUX_API void lxgVertexAttrib_applyFloatFIXED(lxgVertexAttrib_t type, const float
   }
 }
 
-LUX_API void lxgContext_setFeedbackStreams(lxgContextPTR ctx, lxgStreamHostPTR streams, int numStreams)
+LUX_API void lxgContext_setFeedbackStreams(lxgContextPTR ctx, lxgStreamHostCPTR streams, int numStreams)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
   flags32 changed = 0;
@@ -490,7 +490,7 @@ LUX_API void lxgContext_setFeedbackStreams(lxgContextPTR ctx, lxgStreamHostPTR s
 }
 
 
-LUX_API void lxgContext_setFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
+LUX_API void lxgContext_setFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
   

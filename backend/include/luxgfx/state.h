@@ -142,6 +142,14 @@ extern "C"{
   LUX_API void  lxgContext_applyBlend( lxgContextPTR ctx, lxgBlendCPTR obj);
   LUX_API void  lxgContext_applyRasterizer( lxgContextPTR ctx, lxgRasterizerCPTR obj);
 
+  LUX_API void  lxgProgramParameter_stateColor( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj);
+  LUX_API void  lxgProgramParameter_stateDepth( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj);
+  LUX_API void  lxgProgramParameter_stateLogic( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj);
+  LUX_API void  lxgProgramParameter_stateStencil( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj);
+  LUX_API void  lxgProgramParameter_stateBlend( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj);
+  LUX_API void  lxgProgramParameter_stateRasterizer( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj);
+
+
 #ifdef __cplusplus
 }
 #endif

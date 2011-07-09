@@ -1516,7 +1516,7 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
 
 //////////////////////////////////////////////////////////////////////////
 
-static LUX_INLINE lxgProgram_stateNV(flags32 flags, flags32 changed, lxgStageProgramPTR domains[LUXGFX_STAGES])
+static LUX_INLINE lxgProgram_stateNV(flags32 flags, flags32 changed, const lxgStageProgramCPTR* domains)
 {
   if (changed & lxgProgramStage_bit(LUXGFX_STAGE_VERTEX)){
     if (flags & lxgProgramStage_bit(LUXGFX_STAGE_VERTEX)){
@@ -1575,10 +1575,10 @@ static LUX_INLINE lxgProgram_stateNV(flags32 flags, flags32 changed, lxgStagePro
   }
 }
 
-LUX_API void  lxgContext_applyProgram( lxgContextPTR ctx, lxgProgramPTR prog)
+LUX_API void  lxgContext_applyProgram( lxgContextPTR ctx, lxgProgramCPTR prog)
 {
   lxgProgramType_t type = prog ? prog->type : LUXGFX_PROGRAM_NONE;
-  lxgProgramPTR    oldprog = ctx->program.current;
+  lxgProgramCPTR    oldprog = ctx->program.current;
   lxgProgramType_t oldtype = oldprog ? oldprog->type : LUXGFX_PROGRAM_NONE;
   int i;
   if (type != oldtype){
@@ -1619,7 +1619,7 @@ LUX_API void  lxgContext_applyProgram( lxgContextPTR ctx, lxgProgramPTR prog)
 }
 
 
-LUX_INLINE LUX_API void lxgContext_updateProgramSubroutines( lxgContextPTR ctx, lxgProgramPTR prog){
+LUX_INLINE LUX_API void lxgContext_updateProgramSubroutines( lxgContextPTR ctx, lxgProgramCPTR prog){
   lxgProgramState_t* state = &ctx->program;
   int i;
   LUX_DEBUGASSERT(ctx->program.current == prog);
@@ -1641,7 +1641,7 @@ LUX_INLINE LUX_API void lxgContext_updateProgramSubroutines( lxgContextPTR ctx, 
   ctx->program.dirtySubroutines = 0;
 }
 
-LUX_API void lxgContext_applyProgramParameters(  lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, void **data )
+LUX_API void lxgContext_applyProgramParameters(  lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, void **data )
 {
   uint i;
   LUX_DEBUGASSERT(ctx->program.current == prog);

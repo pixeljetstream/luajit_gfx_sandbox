@@ -124,22 +124,22 @@ extern "C"{
   LUX_API void lxgContext_applyVertexStateNV(lxgContextPTR ctx);      //bindless
   LUX_API void lxgContext_applyVertexStateFIXEDNV(lxgContextPTR ctx); //bindless
 
-  LUX_API void lxgContext_setVertexDecl(lxgContextPTR ctx, lxgVertexDeclPTR decl);
-  LUX_API void lxgContext_setVertexDeclStreams(lxgContextPTR ctx, lxgVertexDeclPTR decl, lxgStreamHostPTR hosts );
-  LUX_API void lxgContext_setVertexStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host);
+  LUX_API void lxgContext_setVertexDecl(lxgContextPTR ctx, lxgVertexDeclCPTR decl);
+  LUX_API void lxgContext_setVertexDeclStreams(lxgContextPTR ctx, lxgVertexDeclCPTR decl, lxgStreamHostCPTR hosts );
+  LUX_API void lxgContext_setVertexStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host);
   LUX_API void lxgContext_invalidateVertexStreams(lxgContextPTR ctx);
 
   LUX_API void lxgContext_clearFeedbackState(lxgContextPTR ctx);
   LUX_API void lxgContext_applyFeedbackStreams(lxgContextPTR ctx);
-  LUX_API void lxgContext_setFeedbackStreams(lxgContextPTR ctx, lxgStreamHostPTR hosts, int numStreams);
-  LUX_API void lxgContext_setFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host );
+  LUX_API void lxgContext_setFeedbackStreams(lxgContextPTR ctx, lxgStreamHostCPTR hosts, int numStreams);
+  LUX_API void lxgContext_setFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host );
   LUX_API void lxgContext_enableFeedback(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams);
   LUX_API void lxgContext_disableFeedback(lxgContextPTR ctx);
   
   LUX_API void  lxgContext_clearProgramState(lxgContextPTR ctx);
-  LUX_API void  lxgContext_applyProgram(  lxgContextPTR ctx, lxgProgramPTR prog);
-  LUX_API void  lxgContext_applyProgramParameters( lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, void **data);
-  LUX_API void  lxgContext_updateProgramSubroutines( lxgContextPTR ctx, lxgProgramPTR prog);
+  LUX_API void  lxgContext_applyProgram(  lxgContextPTR ctx, lxgProgramCPTR prog);
+  LUX_API void  lxgContext_applyProgramParameters( lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, void **data);
+  LUX_API void  lxgContext_updateProgramSubroutines( lxgContextPTR ctx, lxgProgramCPTR prog);
 
   LUX_API void  lxgContext_clearTextureState(lxgContextPTR ctx);
   LUX_API void  lxgContext_setTextureSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);

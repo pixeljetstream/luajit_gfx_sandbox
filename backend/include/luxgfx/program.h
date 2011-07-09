@@ -98,12 +98,12 @@ extern "C"{
   }lxgProgram_t;
 
   typedef struct lxgProgramState_s{
-    lxgProgramPTR         current;
+    lxgProgramCPTR        current;
     flags32               dirtySubroutines;
     uint                  numSubroutines[LUXGFX_STAGES];
     GLenum                typeSubroutines[LUXGFX_STAGES];
     GLuint                subroutines[LUXGFX_STAGES][LUXGFX_MAX_STAGE_SUBROUTINES];
-    lxgBufferPTR          uniform[LUXGFX_MAX_STAGE_BUFFERS * LUXGFX_STAGES];
+    lxgBufferCPTR         uniform[LUXGFX_MAX_STAGE_BUFFERS * LUXGFX_STAGES];
   }lxgProgramState_t;
 
 
@@ -113,9 +113,9 @@ extern "C"{
   LUX_API booln lxGLParameterType_isImage(lxGLParameterType_t type);
 
 
-  LUX_API void  lxgContext_applyProgram( lxgContextPTR ctx,  lxgProgramPTR prog);
-  LUX_API void  lxgContext_applyProgramParameters( lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, void **data);
-  LUX_API void  lxgContext_updateProgramSubroutines( lxgContextPTR ctx, lxgProgramPTR prog);
+  LUX_API void  lxgContext_applyProgram( lxgContextPTR ctx,  lxgProgramCPTR prog);
+  LUX_API void  lxgContext_applyProgramParameters( lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, void **data);
+  LUX_API void  lxgContext_updateProgramSubroutines( lxgContextPTR ctx, lxgProgramCPTR prog);
 
   // GLSL
     // domain is only important to subroutines

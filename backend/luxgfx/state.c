@@ -398,4 +398,24 @@ LUX_API void lxgContext_applyStencil( lxgContextPTR ctx, lxgStencilCPTR obj)
   ctx->raster.stencilObj = obj;
 }
 
+//////////////////////////////////////////////////////////////////////////
+
+LUX_API void  lxgProgramParameter_stateColor( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj){
+  lxgContext_checkedColor(ctx,(lxgColorCPTR)obj);
+}
+LUX_API void  lxgProgramParameter_stateDepth( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj){
+  lxgContext_checkedDepth(ctx,(lxgDepthCPTR)obj);
+}
+LUX_API void  lxgProgramParameter_stateLogic( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj){
+  lxgContext_checkedLogic(ctx,(lxgLogicCPTR)obj);
+}
+LUX_API void  lxgProgramParameter_stateStencil( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj){
+  lxgContext_checkedStencil(ctx,(lxgStencilCPTR)obj);
+}
+LUX_API void  lxgProgramParameter_stateBlend( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj){
+  lxgContext_checkedBlend(ctx,(lxgBlendCPTR)obj);
+}
+LUX_API void  lxgProgramParameter_stateRasterizer( lxgProgramParameterPTR param, lxgContextPTR ctx, const void* obj){
+  lxgContext_checkedRasterizer(ctx,(lxgRasterizerCPTR)obj);
+}
 
