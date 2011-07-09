@@ -17,16 +17,40 @@ extern "C"{
   //////////////////////////////////////////////////////////////////////////
 
   typedef struct lxgDepth_s{
+    bool16              enabled;
+    bool16              write;
     lxGLCompareMode_t   func;
   }lxgDepth_t;
 
   //////////////////////////////////////////////////////////////////////////
 
   typedef struct lxgLogic_s{
+    bool32            enabled;
     lxGLLogicOp_t     op;
   }lxgLogic_t;
 
   //////////////////////////////////////////////////////////////////////////
+
+  typedef enum lxgColorChannel_e{
+    LUXGFX_COLOR_RED,
+    LUXGFX_COLOR_GREEN,
+    LUXGFX_COLOR_BLUE,
+    LUXGFX_COLOR_ALPHA,
+    LUXGFX_COLORS,
+  }lxgColorChannel_t;
+
+  typedef struct lxgColor_s{
+    bool32            individual;
+    bool8             write[LUXGFX_MAX_RENDERTARGETS][LUXGFX_COLORS];
+  }lxgColor_t;
+
+  //////////////////////////////////////////////////////////////////////////
+
+  typedef enum lxgFaceSide_e{
+    LUXGFX_FACE_FRONT,
+    LUXGFX_FACE_BACK,
+    LUXGFX_FACES,
+  }lxgFaceSide_t;
 
   typedef struct lxgStencilOp_s
   {
@@ -37,96 +61,86 @@ extern "C"{
   }lxgStencilOp_t;
 
   typedef struct lxgStencil_s{
-    uint16      refvalue;
-    uint16      mask;
+    bool8         enabled;
+    flags32       write;
+    flags32       mask;
+    uint32        refvalue;
 
-    lxgStencilOp_t  ops[2]; // 0 = front 1 = back
+    lxgStencilOp_t  ops[LUXGFX_FACES]; // 0 = front 1 = back
   }lxgStencil_t;
 
   //////////////////////////////////////////////////////////////////////////
 
   typedef struct lxgBlendMode_s{
-    lxGLBlendWeight_t srcw;
-    lxGLBlendWeight_t dstw;
+    lxGLBlendWeight_t   srcw;
+    lxGLBlendWeight_t   dstw;
     lxGLBlendEquation_t equ;
   }lxgBlendMode_t;
 
-  typedef struct lxgBlend_s{
+  typedef struct lxgBlendStage_s{
+    bool32            enabled;
     lxgBlendMode_t    colormode;
     lxgBlendMode_t    alphamode;
+  }lxgBlendStage_t;
+
+  typedef struct lxgBlend_s{
+    bool32          individual;
+    lxgBlendStage_t blends[LUXGFX_MAX_RENDERTARGETS];
   }lxgBlend_t;
 
-  typedef struct lxgBlendMrt_s{
-    uint16          individual;
-    uint16          numused;
-    flags32         enabled;
-    lxgBlend_t      blends[LUXGFX_MAX_RENDERTARGETS];
-  }lxgBlendMrt_t;
+  //////////////////////////////////////////////////////////////////////////
+
+  typedef struct lxgRasterizer_s{
+    bool8           cull;
+    bool8           cullfront;
+    bool8           ccw;
+    enum32          fill;
+  }lxgRasterizer_t;
 
   //////////////////////////////////////////////////////////////////////////
 
-  enum lxgRenderFlag_e {
-    LUXGFX_RFLAG_STENCILWRITE1 = 1<<0,
-    LUXGFX_RFLAG_STENCILWRITE2 = 1<<1,
-    LUXGFX_RFLAG_STENCILWRITE3 = 1<<2,
-    LUXGFX_RFLAG_STENCILWRITE4 = 1<<3,
-    LUXGFX_RFLAG_STENCILWRITE5 = 1<<4,
-    LUXGFX_RFLAG_STENCILWRITE6 = 1<<5,
-    LUXGFX_RFLAG_STENCILWRITE7 = 1<<6,
-    LUXGFX_RFLAG_STENCILWRITE8 = 1<<7,
-    LUXGFX_RFLAG_STENCILWRITE = LUXGFX_RFLAG_STENCILWRITE1 |
-                                LUXGFX_RFLAG_STENCILWRITE2 |
-                                LUXGFX_RFLAG_STENCILWRITE3 |
-                                LUXGFX_RFLAG_STENCILWRITE4 |
-                                LUXGFX_RFLAG_STENCILWRITE5 |
-                                LUXGFX_RFLAG_STENCILWRITE6 |
-                                LUXGFX_RFLAG_STENCILWRITE7 |
-                                LUXGFX_RFLAG_STENCILWRITE8,
-    LUXGFX_RFLAG_FRONTCULL  =    1<<8,
-    LUXGFX_RFLAG_DEPTHWRITE =    1<<9,
-    LUXGFX_RFLAG_CCW =          1<<10,
-    LUXGFX_RFLAG_CULL =         1<<11,
-    LUXGFX_RFLAG_COLORWRITER =  1<<12,
-    LUXGFX_RFLAG_COLORWRITEG =  1<<13,
-    LUXGFX_RFLAG_COLORWRITEB =  1<<14,
-    LUXGFX_RFLAG_COLORWRITEA =  1<<15,
-    LUXGFX_RFLAG_COLORWRITE =   LUXGFX_RFLAG_COLORWRITER |
-                                LUXGFX_RFLAG_COLORWRITEG |
-                                LUXGFX_RFLAG_COLORWRITEB |
-                                LUXGFX_RFLAG_COLORWRITEA,
-    LUXGFX_RFLAG_BLEND =        1<<16,
-    LUXGFX_RFLAG_STENCILTEST =  1<<17,
-    LUXGFX_RFLAG_LOGIC =        1<<18,
-    LUXGFX_RFLAG_DEPTHTEST =    1<<19,
-    LUXGFX_RFLAG_WIRE =         1<<20,
-  };
+  typedef struct lxgRasterState_s{
+    lxgRasterizerCPTR   rasterizerObj;
+    lxgColorCPTR        colorObj;
+    lxgBlendCPTR        blendObj;
+    lxgDepthCPTR        depthObj;
+    lxgStencilCPTR      stencilObj;
+    lxgLogicCPTR        logicObj;
+
+    lxgRasterizer_t   rasterizer;
+    lxgColor_t        color;
+    lxgBlend_t        blend;
+    lxgDepth_t        depth;
+    lxgStencil_t      stencil;
+    lxgLogic_t        logic;
+  }lxgRasterState_t;
 
   //////////////////////////////////////////////////////////////////////////
 
+  LUX_API void  lxgRasterizer_init(lxgRasterizerPTR obj);
+  LUX_API void  lxgRasterizer_sync(lxgRasterizerPTR obj, lxgContextPTR ctx);
+
+  LUX_API void  lxgColor_init(lxgColorPTR obj);
+  LUX_API void  lxgColor_sync(lxgColorPTR obj, lxgContextPTR ctx);
 
   LUX_API void  lxgDepth_init(lxgDepthPTR obj);
-  LUX_API void  lxgDepth_apply(lxgDepthPTR obj, lxgContextPTR ctx);
   LUX_API void  lxgDepth_sync(lxgDepthPTR obj, lxgContextPTR ctx);
 
   LUX_API void  lxgLogic_init(lxgLogicPTR obj);
-  LUX_API void  lxgLogic_apply(lxgLogicPTR obj, lxgContextPTR ctx);
   LUX_API void  lxgLogic_sync(lxgLogicPTR obj, lxgContextPTR ctx);
 
   LUX_API void  lxgStencil_init(lxgStencilPTR obj);
-  LUX_API void  lxgStencil_apply(lxgStencilPTR obj, lxgContextPTR ctx);
   LUX_API void  lxgStencil_sync(lxgStencilPTR obj, lxgContextPTR ctx);
 
   LUX_API void  lxgBlend_init(lxgBlendPTR obj);
-  LUX_API void  lxgBlend_apply(lxgBlendPTR obj, lxgContextPTR ctx);
   LUX_API void  lxgBlend_sync(lxgBlendPTR obj, lxgContextPTR ctx);
 
-  LUX_API void  lxgBlendMrt_apply(lxgBlendMrtPTR obj, lxgContextPTR ctx);
-  LUX_API void  lxgBlendMrt_sync(lxgBlendMrtPTR obj, lxgContextPTR ctx);
-
-  LUX_API flags32 lxgRenderFlag_init();
-  LUX_API flags32 lxgRenderFlag_sync(lxgContextPTR ctx);
-  LUX_API void    lxgRenderFlag_apply(flags32 flags, lxgContextPTR ctx, flags32 changed);
-  LUX_API const char* lxgRenderFlag_test(lxgContextPTR ctx);
+  LUX_API void  lxgContext_applyColor( lxgContextPTR ctx, lxgColorCPTR obj);
+  LUX_API void  lxgContext_applyDepth( lxgContextPTR ctx, lxgDepthCPTR obj);
+  LUX_API void  lxgContext_applyLogic( lxgContextPTR ctx, lxgLogicCPTR obj);
+  LUX_API void  lxgContext_applyStencil( lxgContextPTR ctx, lxgStencilCPTR obj);
+  LUX_API void  lxgContext_applyBlend( lxgContextPTR ctx, lxgBlendCPTR obj);
+  LUX_API void  lxgContext_applyRasterizer( lxgContextPTR ctx, lxgRasterizerCPTR obj);
 
 #ifdef __cplusplus
 }

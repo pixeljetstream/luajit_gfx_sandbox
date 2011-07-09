@@ -71,7 +71,7 @@ static LUX_INLINE void lxgVertexPointer_applyFIXED(const lxgVertexElement_t* ele
   funcs[attr](elem,attr,host->ptr);
 }
 
-LUX_API void lxgVertexContext_applyFIXED(lxgContextPTR ctx)
+LUX_API void lxgContext_applyVertexStateFIXED(lxgContextPTR ctx)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 changed = vtx->declchange & vtx->declvalid;
@@ -97,7 +97,7 @@ static LUX_INLINE void lxgVertexPointer_apply(const lxgVertexElement_t* elem, co
   lxGLAttribPointer(elem,attr,host->ptr);
 }
 
-LUX_API void lxgVertexContext_apply(lxgContextPTR ctx)
+LUX_API void lxgContext_applyVertexState(lxgContextPTR ctx)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 changed = vtx->declchange & vtx->declvalid;
@@ -204,7 +204,7 @@ static LUX_INLINE void lxgVertexPointer_applyBufferNV(const lxgVertexElement_t* 
   glBufferAddressRangeNV(bind,(int)attr + index, host->buffer->address + ((GLuint64)host->ptr) + (GLuint64)elem->offset, host->len);
 }
 
-LUX_API void lxgVertexContext_applyNV(lxgContextPTR ctx)
+LUX_API void lxgContext_applyVertexStateNV(lxgContextPTR ctx)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 declchanged = vtx->declchange & vtx->declvalid;
@@ -227,7 +227,7 @@ LUX_API void lxgVertexContext_applyNV(lxgContextPTR ctx)
   vtx->streamchange = 0;
 }
 
-LUX_API void lxgVertexContext_applyFIXEDNV(lxgContextPTR ctx)
+LUX_API void lxgContext_applyVertexStateFIXEDNV(lxgContextPTR ctx)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 declchanged = vtx->declchange & vtx->declvalid;
@@ -256,7 +256,7 @@ LUX_API void lxgVertexContext_applyFIXEDNV(lxgContextPTR ctx)
 #define CASE_END      }
 
 
-LUX_API void  lxgVertexAttribs_applyFIXED(flags32 attribs, lxgContextPTR ctx, flags32 changed)
+LUX_API void  lxgContext_applyVertexAttribsFIXED( lxgContextPTR ctx, flags32 attribs, flags32 changed)
 {
 
 #define ENABLE_VERTEX_TEX(i)    {glClientActiveTexture(GL_TEXTURE0+i); glEnableClientState(GL_TEXTURE_COORD_ARRAY);}
@@ -335,7 +335,7 @@ LUX_API void  lxgVertexAttribs_applyFIXED(flags32 attribs, lxgContextPTR ctx, fl
   ctx->vertex.active = attribs;
 }
 
-LUX_API void  lxgVertexAttribs_apply(flags32 attribs, lxgContextPTR ctx, flags32 changed)
+LUX_API void  lxgContext_applyVertexAttribs( lxgContextPTR ctx, flags32 attribs, flags32 changed)
 {
   int i = 0;
 
@@ -352,7 +352,7 @@ LUX_API void  lxgVertexAttribs_apply(flags32 attribs, lxgContextPTR ctx, flags32
   ctx->vertex.active = attribs;
 }
 
-LUX_API void lxgVertexDecl_apply( lxgVertexDeclPTR decl, lxgContextPTR ctx )
+LUX_API void lxgContext_setVertexDecl( lxgContextPTR ctx,  lxgVertexDeclPTR decl )
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   int i;
@@ -367,17 +367,17 @@ LUX_API void lxgVertexDecl_apply( lxgVertexDeclPTR decl, lxgContextPTR ctx )
   vtx->declstreams = (1 << decl->streams ) - 1;
 }
 
-LUX_INLINE booln lxgStreamHost_valid(const lxgStreamHostPTR host)
+static LUX_INLINE booln lxgStreamHost_valid(const lxgStreamHostPTR host)
 {
   return (host && (host->buffer || host->ptr));
 }
 
-LUX_INLINE booln lxgStreamHost_unequal(const lxgStreamHostPTR a, lxgStreamHostPTR b)
+static LUX_INLINE booln lxgStreamHost_unequal(const lxgStreamHostPTR a, lxgStreamHostPTR b)
 {
   return !!memcmp(a,b,sizeof(lxgStreamHost_t));
 }
 
-LUX_API void lxgVertexDecl_setStreams(lxgVertexDeclPTR decl, lxgStreamHostPTR streams, lxgContextPTR ctx)
+LUX_API void lxgContext_setVertexDeclStreams(lxgContextPTR ctx, lxgVertexDeclPTR decl, lxgStreamHostPTR streams)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   flags32 changed = 0;
@@ -396,7 +396,7 @@ LUX_API void lxgVertexDecl_setStreams(lxgVertexDeclPTR decl, lxgStreamHostPTR st
 }
 
 
-LUX_API void lxgVertexContext_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
+LUX_API void lxgContext_setVertexStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   booln changed = 0;
@@ -411,24 +411,24 @@ LUX_API void lxgVertexContext_setStream(lxgContextPTR ctx, uint idx, lxgStreamHo
   vtx->setup.streams[idx] = *host;
 }
 
-LUX_API void lxgVertexContext_reset( lxgContextPTR ctx )
+LUX_API void lxgContext_clearVertexState( lxgContextPTR ctx )
 {
   lxgVertexState_t* vtx = &ctx->vertex;
   memset(vtx,0,sizeof(lxgVertexState_t));
-  lxgVertexAttribs_applyFIXED(0,ctx, 0xFFFFFFFF);
+  lxgContext_applyVertexAttribsFIXED(ctx,0,0xFFFFFFFF);
 }
 
-LUX_API void lxgVertexAttrib_setFloat(lxgVertexAttrib_t type, const float* vec4)
+LUX_API void lxgVertexAttrib_applyFloat(lxgVertexAttrib_t type, const float* vec4)
 {
   glVertexAttrib4fv(type, vec4);
 }
 
-LUX_API void lxgVertexAttrib_setInteger(lxgVertexAttrib_t type, const int* vec4)
+LUX_API void lxgVertexAttrib_applyInteger(lxgVertexAttrib_t type, const int* vec4)
 {
   glVertexAttribI4iv(type, vec4);
 }
 
-LUX_API void lxgVertexAttrib_setFloatFIXED(lxgVertexAttrib_t type, const float* vec4)
+LUX_API void lxgVertexAttrib_applyFloatFIXED(lxgVertexAttrib_t type, const float* vec4)
 {
   switch (type){
   case LUXGFX_VERTEX_ATTRIB_POS:
@@ -471,7 +471,7 @@ LUX_API void lxgVertexAttrib_setFloatFIXED(lxgVertexAttrib_t type, const float* 
   }
 }
 
-LUX_API void lxgFeedbackContext_setStreams(lxgContextPTR ctx, lxgStreamHostPTR streams, int numStreams)
+LUX_API void lxgContext_setFeedbackStreams(lxgContextPTR ctx, lxgStreamHostPTR streams, int numStreams)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
   flags32 changed = 0;
@@ -490,7 +490,7 @@ LUX_API void lxgFeedbackContext_setStreams(lxgContextPTR ctx, lxgStreamHostPTR s
 }
 
 
-LUX_API void lxgFeedbackContext_setStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
+LUX_API void lxgContext_setFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostPTR host)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
   
@@ -504,7 +504,7 @@ LUX_API void lxgFeedbackContext_setStream(lxgContextPTR ctx, uint idx, lxgStream
   xfb->streams[idx] = *host;
 }
 
-LUX_API LUX_INLINE void lxgFeedbackContext_applyStreams(lxgContextPTR ctx)
+LUX_API LUX_INLINE void lxgContext_applyFeedbackStreams(lxgContextPTR ctx)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
   flags32 streamchanged = xfb->streamchange;
@@ -523,7 +523,14 @@ LUX_API LUX_INLINE void lxgFeedbackContext_applyStreams(lxgContextPTR ctx)
   xfb->streamchange = 0;
 }
 
-LUX_API void lxgFeedbackContext_enable(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams)
+LUX_API void lxgContext_clearFeedbackState(lxgContextPTR ctx)
+{
+  ctx->feedback.streamvalid = 0;
+  ctx->feedback.streamchange = 0;
+  memset(ctx->feedback.streams,0,sizeof(ctx->feedback.streams));
+}
+
+LUX_API void lxgContext_enableFeedback(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
 
@@ -533,28 +540,19 @@ LUX_API void lxgFeedbackContext_enable(lxgContextPTR ctx, lxGLPrimitiveType_t ty
   xfb->active = numStreams;
   xfb->usedvalid = (1<<numStreams) - 1;
 
-  lxgFeedbackContext_applyStreams(ctx);
-
+  lxgContext_applyFeedbackStreams(ctx);
   glBeginTransformFeedback(type);
 }
 
-LUX_API void lxgFeedbackContext_disable(lxgContextPTR ctx)
+LUX_API void lxgContext_disableFeedback(lxgContextPTR ctx)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
 
   LUX_DEBUGASSERT(xfb->active); 
-
   glEndTransformFeedback();
+  xfb->active = 0;
 }
 
-LUX_API void lxgFeedbackContext_pause(lxgContextPTR ctx)
-{
-  glPauseTransformFeedback();
-}
-LUX_API void lxgFeedbackContext_resume(lxgContextPTR ctx)
-{
-  glResumeTransformFeedback();
-}
 
 
 

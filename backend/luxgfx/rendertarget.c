@@ -155,16 +155,16 @@ LUX_API void lxgRenderTarget_applyAssigns(lxgRenderTargetPTR rt, lxgRenderTarget
   rt->maxidx = 0;
 }
 
-LUX_API void  lxgRenderTarget_applyDraw( lxgRenderTargetPTR rt, lxgContextPTR ctx, booln setViewport)
+LUX_API void  lxgContext_applyRenderTargetDraw( lxgContextPTR ctx, lxgRenderTargetPTR rt, booln setViewport)
 {
-  lxgRenderTarget_apply(rt,ctx,LUXGFX_RENDERTARGET_DRAW);
+  lxgContext_applyRenderTarget(ctx, rt,LUXGFX_RENDERTARGET_DRAW);
   if (setViewport){
     lxRectanglei_t rect = {0,0,ctx->framebounds.width,ctx->framebounds.height};
-    lxgViewPortRect_apply(&rect,ctx);
+    lxgContext_applyViewPortRect(ctx, &rect);
   }
 }
 
-LUX_API void  lxgRenderTarget_apply(lxgRenderTargetPTR rt, lxgContextPTR ctx, lxgRenderTargetType_t mode )
+LUX_API void  lxgContext_applyRenderTarget( lxgContextPTR ctx, lxgRenderTargetPTR rt, lxgRenderTargetType_t mode )
 {
   GLenum target = l_FBOmode[mode];
   glBindFramebuffer(target,rt ? rt->glid : 0);
@@ -175,10 +175,10 @@ LUX_API void  lxgRenderTarget_apply(lxgRenderTargetPTR rt, lxgContextPTR ctx, lx
   }
 }
 
-LUX_API void lxgRenderTarget_applyBlit(lxgRenderTargetPTR to, lxgContextPTR ctx, lxgRenderTargetPTR from, lxgRenderTargetBlitPTR update, flags32 mask, booln linearFilter)
+LUX_API void lxgRenderTarget_applyBlit( lxgContextPTR ctx, lxgRenderTargetPTR to, lxgRenderTargetPTR from, lxgRenderTargetBlitPTR update, flags32 mask, booln linearFilter)
 {
-  lxgRenderTarget_checked(to,ctx,LUXGFX_RENDERTARGET_DRAW);
-  lxgRenderTarget_checked(from,ctx,LUXGFX_RENDERTARGET_READ);
+  lxgContext_checkedRenderTarget(ctx, to,LUXGFX_RENDERTARGET_DRAW);
+  lxgContext_checkedRenderTarget(ctx, from,LUXGFX_RENDERTARGET_READ);
   glBlitFramebuffer(
     update->fromStart.x,  update->fromStart.y,  update->fromEnd.x,  update->fromEnd.y,
     update->toStart.x,    update->toStart.y,    update->toEnd.x,    update->toEnd.y, mask, linearFilter ? GL_LINEAR : GL_NEAREST);
@@ -243,7 +243,7 @@ LUX_API void lxgViewPort_sync(lxgViewPortPTR view, lxgContextPTR ctx)
   glGetIntegerv(GL_SCISSOR_BOX,&view->scissorRect.x);
 }
 
-LUX_API booln lxgViewPortRect_apply(lxRectangleiPTR viewRect, lxgContextPTR ctx)
+LUX_API booln lxgContext_applyViewPortRect(lxgContextPTR ctx, lxRectangleiPTR viewRect)
 {
   glViewport(LUX_ARRAY4UNPACK(&viewRect->x));
   ctx->viewport.viewRect = *viewRect;
@@ -264,7 +264,7 @@ LUX_API booln lxgViewPortRect_apply(lxRectangleiPTR viewRect, lxgContextPTR ctx)
   
 }
 
-LUX_API booln lxgViewPortScissor_applyState(booln state, lxgContextPTR ctx)
+LUX_API booln lxgContext_applyViewPortScissorState(lxgContextPTR ctx, booln state)
 {
   booln retstate = state;
   if(state){
@@ -288,9 +288,9 @@ LUX_API booln lxgViewPortScissor_applyState(booln state, lxgContextPTR ctx)
   return retstate;
 }
 
-LUX_API booln lxgViewPort_apply(lxgViewPortPTR view, lxgContextPTR ctx)
+LUX_API booln lxgContext_applyViewPort(lxgContextPTR ctx, lxgViewPortPTR view)
 {
-  booln res = lxgViewPortRect_apply(&view->viewRect,ctx);
+  booln res = lxgContext_applyViewPortRect(ctx, &view->viewRect);
   ctx->viewport = *view;
   glDepthRange(view->depth.near,view->depth.far);
   
@@ -305,7 +305,7 @@ LUX_API booln lxgViewPort_apply(lxgViewPortPTR view, lxgContextPTR ctx)
   return res || ctx->viewport.scissor;
 }
 
-LUX_API void   lxgViewPortMrt_apply(lxgViewPortMrtPTR objmrt, lxgContextPTR ctx)
+LUX_API void   lxgContext_applyViewPortMrt(lxgContextPTR ctx, lxgViewPortMrtPTR objmrt)
 {
   uint i;
   uint numused = objmrt->numused;
@@ -323,7 +323,7 @@ LUX_API void   lxgViewPortMrt_apply(lxgViewPortMrtPTR objmrt, lxgContextPTR ctx)
   }
 }
 
-LUX_API void  lxgViewPortMrt_sync(lxgViewPortMrtPTR objmrt,lxgContextPTR ctx)
+LUX_API void  lxgViewPortMrt_sync(lxgViewPortMrtPTR objmrt, lxgContextPTR ctx)
 {
   int i;
   memset(objmrt,0,sizeof(lxgViewPortMrt_t));

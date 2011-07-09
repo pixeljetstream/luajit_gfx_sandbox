@@ -98,7 +98,7 @@ public:
     // stream
     m_stream.buffer = &m_vbo;
     m_stream.offset = 0;
-    m_stream.len    = (uint32)vsize;
+    m_stream.len    = vsize;
 
 
 
@@ -122,15 +122,15 @@ public:
 
     m_rh.updateProjection(width,height);
     m_rh.setCameraGL();
-    lxgVertexContext_reset(&m_ctx);
+    lxgContext_clearVertexState(&m_ctx);
 
     glBindTexture(GL_TEXTURE_2D,m_texture);
     glEnable(GL_TEXTURE_2D);
     
-    lxgVertexDecl_checked(&m_vdecl, &m_ctx);
-    lxgVertexContext_setStream(&m_ctx, 0, &m_stream);
-    lxgVertexContext_checkedFIXED(&m_ctx);
-    lxgVertexAttrib_checkedFIXED(m_vattribs, &m_ctx);
+    lxgContext_checkedVertexDecl(&m_ctx, &m_vdecl);
+    lxgContext_setVertexStream(&m_ctx, 0, &m_stream);
+    lxgContext_checkedVertexFIXED(&m_ctx);
+    lxgContext_checkedVertexAttribFIXED(&m_ctx, m_vattribs);
     lxgBuffer_bind(&m_ibo, LUXGL_BUFFER_INDEX);
     glDrawElements(GL_TRIANGLES, m_box.numIndicesTris(), GL_UNSIGNED_INT, NULL);
 

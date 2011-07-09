@@ -77,7 +77,7 @@ LUX_API booln lxGLParameterType_isValue(lxGLParameterType_t type)
   }
 }
 
-LUX_API booln lxGLParameterType_isSampler(lxGLParameterType_t type)
+LUX_API booln lxGLParameterType_isTexture(lxGLParameterType_t type)
 {
   switch(type){
   case LUXGL_PARAM_SAMPLER_1D:
@@ -562,14 +562,14 @@ static void lxgUpdateUint64NV(lxgProgramParameterPTR param, lxgContextPTR ctx, c
 
 
 static LUX_INLINE void lxgUpdateBufferGLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
-  if (lxgUniformContext_setBuffer(ctx,param->gllocation,(lxgBufferPTR)data)){
+  if (lxgContext_setProgramBuffer(ctx,param->gllocation,(lxgBufferPTR)data)){
     lxgBuffer_bindIndexed((lxgBufferPTR)data,LUXGL_BUFFER_UNIFORM,param->gllocation);
   }
 }
 
 static LUX_INLINE void lxgUpdateBufferNV(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
   GLuint domain = param->gltarget - LUXGL_BUFFER_NVPARAM_TESSCTRL;
-  if (lxgUniformContext_setBuffer(ctx,param->gllocation + domain * LUXGFX_MAX_STAGE_BUFFERS,(lxgBufferPTR)data)){
+  if (lxgContext_setProgramBuffer(ctx,param->gllocation + domain * LUXGFX_MAX_STAGE_BUFFERS,(lxgBufferPTR)data)){
     lxgBuffer_bindIndexed((lxgBufferPTR)data,param->gltarget,param->gllocation);
   }
 }
@@ -605,18 +605,18 @@ static void lxgUpdateSubroutine(lxgProgramParameterPTR param, lxgContextPTR ctx,
 
 }
 
-static void lxgUpdateSamplerArray(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
-  lxgTextures_checked((lxgTexturePTR*)data,ctx,param->uniform.unit,param->uniform.count);
+static void lxgUpdateTextureArray(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
+  lxgContext_checkedTextures(ctx, (lxgTexturePTR*)data,param->uniform.unit,param->uniform.count);
 }
 static void lxgUpdateImageArray(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
-  lxgTextureImages_checked((lxgTextureImagePTR*)data,ctx,param->uniform.unit,param->uniform.count);
+  lxgContext_checkedTextureImages(ctx, (lxgTextureImagePTR*)data,param->uniform.unit,param->uniform.count);
 }
 
-static void lxgUpdateSampler(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
-  lxgTexture_checked(*(lxgTexturePTR*)data,ctx,param->uniform.unit);
+static void lxgUpdateTexture(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
+  lxgContext_checkedTexture(ctx, (lxgTexturePTR)data,param->uniform.unit);
 }
 static void lxgUpdateImage(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
-  lxgTextureImage_checked(*(lxgTextureImagePTR*)data,ctx,param->uniform.unit);
+  lxgContext_checkedTextureImage(ctx, (lxgTextureImagePTR)data,param->uniform.unit);
 }
 
 LUX_API void lxgProgramParameter_initFuncNV( lxgProgramParameterPTR param, lxgProgramStage_t domain )
@@ -742,7 +742,7 @@ LUX_API void lxgProgramParameter_initFuncNV( lxgProgramParameterPTR param, lxgPr
   case LUXGL_PARAM_SAMPLER_1DARRAY_SHADOW:
   case LUXGL_PARAM_SAMPLER_2DARRAY_SHADOW:
   case LUXGL_PARAM_SAMPLER_CUBEARRAY_SHADOW:
-    param->func = param->uniform.count == 1 ? lxgUpdateSampler : lxgUpdateSamplerArray; return;
+    param->func = param->uniform.count == 1 ? lxgUpdateTexture : lxgUpdateTextureArray; return;
 
   case LUXGL_PARAM_IMAGE_1D:
   case LUXGL_PARAM_IMAGE_2D:
@@ -894,7 +894,7 @@ LUX_API void lxgProgramParameter_initFunc( lxgProgramParameterPTR param)
   case LUXGL_PARAM_SAMPLER_1DARRAY_SHADOW:
   case LUXGL_PARAM_SAMPLER_2DARRAY_SHADOW:
   case LUXGL_PARAM_SAMPLER_CUBEARRAY_SHADOW:
-    param->func = param->uniform.count == 1 ? lxgUpdateSampler : lxgUpdateSamplerArray; return;
+    param->func = param->uniform.count == 1 ? lxgUpdateTexture : lxgUpdateTextureArray; return;
 
   case LUXGL_PARAM_IMAGE_1D:
   case LUXGL_PARAM_IMAGE_2D:
@@ -1051,7 +1051,7 @@ LUX_API void lxgProgramParameter_initFuncSEP( lxgProgramParameterPTR param, GLui
   case LUXGL_PARAM_SAMPLER_1DARRAY_SHADOW:
   case LUXGL_PARAM_SAMPLER_2DARRAY_SHADOW:
   case LUXGL_PARAM_SAMPLER_CUBEARRAY_SHADOW:
-    param->func = param->uniform.count == 1 ? lxgUpdateSampler : lxgUpdateSamplerArray; return;
+    param->func = param->uniform.count == 1 ? lxgUpdateTexture : lxgUpdateTextureArray; return;
 
   case LUXGL_PARAM_IMAGE_1D:
   case LUXGL_PARAM_IMAGE_2D:
@@ -1100,42 +1100,6 @@ LUX_API void lxgProgramParameter_initFuncSEP( lxgProgramParameterPTR param, GLui
     return;
   }
   LUX_DEBUGASSERT(0 && "illegal parameter type");
-}
-
-LUX_INLINE LUX_API lxgProgram_updateSubroutines(lxgProgramPTR prog, lxgContextPTR ctx){
-  lxgProgramState_t* state = &ctx->program;
-  int i;
-  LUX_DEBUGASSERT(ctx->program.current == prog);
-  if (prog->type == LUXGFX_PROGRAM_NV){
-    for (i = 0; i < LUXGFX_STAGES; i++){
-      if (ctx->program.dirtySubroutines & lxgProgramStage_bit(i)){
-        glProgramSubroutineParametersuivNV(state->typeSubroutines[i],state->numSubroutines[i],state->subroutines[i]);
-      }
-    }
-  }
-  else{
-    for (i = 0; i < LUXGFX_STAGES; i++){
-      if (ctx->program.dirtySubroutines & lxgProgramStage_bit(i)){
-        glUniformSubroutinesuiv(state->typeSubroutines[i],state->numSubroutines[i],state->subroutines[i]);
-      }
-    }
-  }
-  lxGLErrorCheck();
-  ctx->program.dirtySubroutines = 0;
-}
-
-LUX_API void lxgProgram_applyParameters( lxgProgramPTR prog, lxgContextPTR ctx, uint num, lxgProgramParameterPTR *params, void **data )
-{
-  uint i;
-  LUX_DEBUGASSERT(ctx->program.current == prog);
-  for (i = 0; i < num; ++i){
-    LUX_DEBUGASSERT(params[i]->func);
-    params[i]->func(params[i],ctx,data[i]);
-    lxGLErrorCheck();
-  }
-  if (ctx->program.dirtySubroutines){
-    lxgProgram_updateSubroutines(prog,ctx);
-  }
 }
 
 
@@ -1470,7 +1434,7 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
     params->type = type;
     params->gllocation = glGetUniformLocation(prog->glid,namesBuffer);
 
-    if ( lxGLParameterType_isSampler(type) || lxGLParameterType_isImage(type)){
+    if ( lxGLParameterType_isTexture(type) || lxGLParameterType_isImage(type)){
       glGetUniformiv(prog->glid, params->gllocation, &params->uniform.unit);
     }
 
@@ -1550,6 +1514,8 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
 
 }
 
+//////////////////////////////////////////////////////////////////////////
+
 static LUX_INLINE lxgProgram_stateNV(flags32 flags, flags32 changed, lxgStageProgramPTR domains[LUXGFX_STAGES])
 {
   if (changed & lxgProgramStage_bit(LUXGFX_STAGE_VERTEX)){
@@ -1609,7 +1575,7 @@ static LUX_INLINE lxgProgram_stateNV(flags32 flags, flags32 changed, lxgStagePro
   }
 }
 
-LUX_API void  lxgProgram_apply( lxgProgramPTR prog, lxgContextPTR ctx)
+LUX_API void  lxgContext_applyProgram( lxgContextPTR ctx, lxgProgramPTR prog)
 {
   lxgProgramType_t type = prog ? prog->type : LUXGFX_PROGRAM_NONE;
   lxgProgramPTR    oldprog = ctx->program.current;
@@ -1650,6 +1616,48 @@ LUX_API void  lxgProgram_apply( lxgProgramPTR prog, lxgContextPTR ctx)
       ctx->program.typeSubroutines[i] = type != LUXGFX_PROGRAM_NV ? lxgProgramStage_typeGL(i) : lxgProgramStage_typeNV(i);
     }
   }
+}
+
+
+LUX_INLINE LUX_API void lxgContext_updateProgramSubroutines( lxgContextPTR ctx, lxgProgramPTR prog){
+  lxgProgramState_t* state = &ctx->program;
+  int i;
+  LUX_DEBUGASSERT(ctx->program.current == prog);
+  if (prog->type == LUXGFX_PROGRAM_NV){
+    for (i = 0; i < LUXGFX_STAGES; i++){
+      if (ctx->program.dirtySubroutines & lxgProgramStage_bit(i)){
+        glProgramSubroutineParametersuivNV(state->typeSubroutines[i],state->numSubroutines[i],state->subroutines[i]);
+      }
+    }
+  }
+  else{
+    for (i = 0; i < LUXGFX_STAGES; i++){
+      if (ctx->program.dirtySubroutines & lxgProgramStage_bit(i)){
+        glUniformSubroutinesuiv(state->typeSubroutines[i],state->numSubroutines[i],state->subroutines[i]);
+      }
+    }
+  }
+  lxGLErrorCheck();
+  ctx->program.dirtySubroutines = 0;
+}
+
+LUX_API void lxgContext_applyProgramParameters(  lxgContextPTR ctx, lxgProgramPTR prog, uint num, lxgProgramParameterPTR *params, void **data )
+{
+  uint i;
+  LUX_DEBUGASSERT(ctx->program.current == prog);
+  for (i = 0; i < num; ++i){
+    LUX_DEBUGASSERT(params[i]->func);
+    params[i]->func(params[i],ctx,data[i]);
+    lxGLErrorCheck();
+  }
+  if (ctx->program.dirtySubroutines){
+    lxgContext_updateProgramSubroutines(ctx, prog);
+  }
+}
+
+LUX_API void lxgContext_clearProgramState( lxgContextPTR ctx )
+{
+  memset(&ctx->program,0,sizeof(ctx->program));
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -156,15 +156,15 @@ public:
     m_rh.updateCamera();
     m_rh.setCameraGL();
 
-    lxgTextureContext_reset(&m_ctx);
-    lxgUniformContext_reset(&m_ctx);
+    lxgContext_clearTextureState(&m_ctx);
+    lxgContext_clearProgramState(&m_ctx);
 
-    lxgProgram_apply(&m_prog.m_program, &m_ctx);
+    lxgContext_applyProgram(&m_ctx, &m_prog.m_program);
     for (int i = 0; i < PARAMSETS; i++){
-      lxgProgram_applyParameters(&m_prog.m_program, &m_ctx, PARAMS, m_paramsets[i].params, m_paramsets[i].datas);
+      lxgContext_applyProgramParameters(&m_ctx,&m_prog.m_program, PARAMS, m_paramsets[i].params, m_paramsets[i].datas);
       m_box.drawVA();
     }
-    lxgProgram_apply(NULL, &m_ctx);
+    lxgContext_applyProgram(&m_ctx, NULL);
   }
 
 };

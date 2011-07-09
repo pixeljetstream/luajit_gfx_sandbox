@@ -81,28 +81,37 @@ extern "C"{
   }lxgRenderTargetBlit_t;
   typedef struct lxgRenderTargetBlit_s* lxgRenderTargetBlitPTR;
 
+  //////////////////////////////////////////////////////////////////////////
+
   LUX_API void lxgRenderTarget_init(lxgRenderTargetPTR rt, lxgContextPTR ctx);
   LUX_API void lxgRenderTarget_deinit(lxgRenderTargetPTR rt, lxgContextPTR ctx);
 
   LUX_API void lxgRenderTarget_applyAssigns(lxgRenderTargetPTR rt, lxgRenderTargetType_t mode);
 
-
-  // to and from may be NULL
-  LUX_API void lxgRenderTarget_applyBlit(lxgRenderTargetPTR to, lxgContextPTR ctx, lxgRenderTargetPTR from, lxgRenderTargetBlitPTR update, flags32 mask, booln linearFilter);
-
-  LUX_API void lxgRenderTarget_setAssign(lxgRenderTargetPTR rt, uint assigntype, lxgRenderAssignPTR assign);
+  LUX_API void  lxgRenderTarget_setAssign(lxgRenderTargetPTR rt, uint assigntype, lxgRenderAssignPTR assign);
   LUX_API booln lxgRenderTarget_checkSize(lxgRenderTargetPTR rt);
-  LUX_API const lxgFrameBoundsPTR lxgRenderTarget_getBounds(lxgRenderTargetPTR rt);
+  LUX_API lxgFrameBoundsCPTR lxgRenderTarget_getBounds(lxgRenderTargetPTR rt);
 
+  //////////////////////////////////////////////////////////////////////////
+
+  LUX_API void  lxgViewPort_sync(lxgViewPortPTR obj, lxgContextPTR ctx);
+  LUX_API void  lxgViewPortMrt_sync(lxgViewPortMrtPTR obj, lxgContextPTR ctx);
+
+  //////////////////////////////////////////////////////////////////////////
+
+    // rts may be NULL
+  LUX_API void  lxgContext_applyRenderTarget( lxgContextPTR ctx, lxgRenderTargetPTR obj, lxgRenderTargetType_t type);
+  LUX_API void  lxgContext_applyRenderTargetDraw( lxgContextPTR ctx, lxgRenderTargetPTR obj, booln setViewport);
+  LUX_API void  lxgContext_blitRenderTargets(lxgContextPTR ctx, lxgRenderTargetPTR to, lxgRenderTargetPTR from, 
+    lxgRenderTargetBlitPTR update, flags32 mask, booln linearFilter);
 
   // return the actual scissor state (can be enabled indirectly through viewport != framebounds)
-  LUX_API booln lxgViewPortRect_apply(lxRectangleiPTR rect, lxgContextPTR ctx);
-  LUX_API booln lxgViewPortScissor_applyState(booln state, lxgContextPTR ctx);
-  LUX_API booln lxgViewPort_apply(lxgViewPortPTR obj, lxgContextPTR ctx);
-  LUX_API void  lxgViewPort_sync(lxgViewPortPTR obj, lxgContextPTR ctx);
+  LUX_API booln lxgContext_applyViewPortRect(lxgContextPTR ctx, lxRectangleiPTR rect);
+  LUX_API booln lxgContext_applyViewPortScissorState(lxgContextPTR ctx, booln state);
+  LUX_API booln lxgContext_applyViewPort(lxgContextPTR ctx, lxgViewPortPTR obj);
 
-  LUX_API void  lxgViewPortMrt_apply(lxgViewPortMrtPTR obj, lxgContextPTR ctx);
-  LUX_API void  lxgViewPortMrt_sync(lxgViewPortMrtPTR obj, lxgContextPTR ctx);
+  LUX_API void  lxgContext_applyViewPortMrt(lxgContextPTR ctx, lxgViewPortMrtPTR obj);
+  
 
 
 

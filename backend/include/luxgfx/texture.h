@@ -208,34 +208,32 @@ extern "C"{
   //////////////////////////////////////////////////////////////////////////
 
 
-  LUX_API void  lxgTextureContext_reset(lxgContextPTR ctx);
-  LUX_API void  lxgTextureContext_setCompare(lxgContextPTR ctx, uint imageunit, enum lxgCompareMode_e cmp);
-  LUX_API void  lxgTextureContext_setSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
-  LUX_API void  lxgTextureContext_checkedSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
-  
-  
+  LUX_API void  lxgContext_clearTextureState(lxgContextPTR ctx);
+  LUX_API void  lxgContext_setTextureCompare(lxgContextPTR ctx, uint imageunit, lxGLCompareMode_t cmp);
+  LUX_API void  lxgContext_setTextureSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
+  LUX_API void  lxgContext_changedTextureSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
 
   // Type checks
   LUX_API booln lxgTextureChannel_valid(lxgContextPTR ctx, lxgTextureChannel_t channel);
   LUX_API booln lxgTextureTarget_valid(lxgContextPTR ctx, lxGLTextureTarget_t type);
 
-  LUX_API GLenum lxgTextureChannel_getFormat(lxgTextureChannel_t type, booln rev, booln integer);
   LUX_API GLenum lxgTextureDataType_getData(lxgTextureDataType_t data, booln rev, booln depthstencil);
+  LUX_API GLenum lxgTextureChannel_getFormat(lxgTextureChannel_t type, booln rev, booln integer);
   LUX_API GLenum lxgTextureChannel_getInternal(lxgTextureChannel_t type, lxgTextureDataType_t data);
   
   
   // lxgTexture
+  LUX_API void lxgTexture_init(lxgTexturePTR tex, lxgContextPTR ctx);
+  LUX_API void  lxgTexture_deinit(lxgTexturePTR tex, lxgContextPTR ctx);
 
    // for multisampled textures depth = samples
-  LUX_API void lxgTexture_init(lxgTexturePTR tex, lxgContextPTR ctx);
   LUX_API booln lxgTexture_setup(lxgTexturePTR tex, 
     lxGLTextureTarget_t type, lxgTextureChannel_t format, lxgTextureDataType_t data,
     int width, int height, int depth, int arraysize, flags32 flags);
 
   LUX_API booln lxgTexture_resize(lxgTexturePTR tex, 
     int width, int height, int depth, int arraysize);
-
-  LUX_API void  lxgTexture_deinit(lxgTexturePTR tex, lxgContextPTR ctx);
+  
   
   LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx, 
     const lxgTextureUpdate_t* update, uint miplevel);

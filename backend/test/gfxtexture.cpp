@@ -99,13 +99,13 @@ public:
     m_rh.setCameraGL();
     lxGLErrorCheck();
 
-    lxgTexture_apply(&m_tex, &m_ctx, 0);
-    lxgSampler_apply(m_sampler, &m_ctx, 0);
+    lxgContext_applyTexture( &m_ctx,&m_tex, 0);
+    lxgContext_applySampler( &m_ctx,m_sampler, 0);
     glEnable(GL_TEXTURE_2D);
     m_box.drawVA();
     glDisable(GL_TEXTURE_2D);
-    lxgTexture_apply(NULL,&m_ctx,0);
-    lxgSampler_apply(NULL,&m_ctx,0);
+    lxgContext_applyTexture( &m_ctx,NULL,0);
+    lxgContext_applySampler( &m_ctx,NULL,0);
   }
 
 };

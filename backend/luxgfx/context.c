@@ -74,12 +74,14 @@ LUX_API const char* lxgContext_init(lxgContextPTR ctx)
       ctx->capbits |= LUXGFX_CAP_SM2;
       glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS,&ctx->capabilites.teximages);
       glGetIntegerv(GL_MAX_TEXTURE_COORDS,&ctx->capabilites.texcoords);
+      ctx->capabilites.teximages = LUX_MIN(ctx->capabilites.teximages,LUXGFX_MAX_TEXTURE_IMAGES);
     }
     if (GLEW_ARB_draw_buffers && (GLEW_ARB_texture_float || GLEW_ATI_texture_float) &&
       GLEW_ARB_fragment_shader && GLEW_ARB_vertex_shader)
     {
       glGetIntegerv(GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS,&ctx->capabilites.texvtxunits);
       glGetIntegerv(GL_MAX_DRAW_BUFFERS,&ctx->capabilites.drawbuffers);
+      ctx->capabilites.drawbuffers = LUX_MIN(ctx->capabilites.drawbuffers,LUXGFX_MAX_RENDERTARGETS);
 
       ctx->capbits |= LUXGFX_CAP_SM2EXT;
       if ((GLEW_NV_fragment_program2 || GLEW_ATI_shader_texture_lod) && 
@@ -170,57 +172,99 @@ LUX_API const char* lxgContext_init(lxgContextPTR ctx)
     glGetFloatv(GL_SMOOTH_POINT_SIZE_RANGE,minmax2);
     ctx->capabilites.pointsize = LUX_MAX(minmax1[0],minmax2[0]);
   }
-  lxgContext_syncStates(ctx);
+ 
+  lxgContext_clearProgramState(ctx);
+  lxgContext_clearRasterState(ctx);
+  lxgContext_clearTextureState(ctx);
+  lxgContext_clearVertexState(ctx);
+  lxgContext_clearFeedbackState(ctx);
+
+  lxgContext_syncRasterStates(ctx);
   lxGLErrorCheck();
 
   return NULL;
 }
 
-LUX_API void lxgUniformContext_reset(lxgContextPTR ctx)
+
+LUX_API void lxgContext_syncRasterStates(lxgContextPTR ctx)
 {
-  memset(ctx->uniform,0,sizeof(void*)*LUXGFX_MAX_TEXTURE_IMAGES);
+  lxgRasterizer_init(&ctx->raster.rasterizer);
+  lxgColor_init(&ctx->raster.color);
+  lxgDepth_init(&ctx->raster.depth);
+  lxgBlend_init(&ctx->raster.blend);
+  lxgStencil_init(&ctx->raster.stencil);
+
+  lxgRasterizer_sync(&ctx->raster.rasterizer, ctx );
+  lxgColor_sync(&ctx->raster.color, ctx );
+  lxgDepth_sync(&ctx->raster.depth, ctx );
+  lxgBlend_sync(&ctx->raster.blend, ctx );
+  lxgStencil_sync(&ctx->raster.stencil, ctx );
+  lxgViewPort_sync(&ctx->viewport, ctx );
 }
 
-LUX_API void lxgContext_syncStates(lxgContextPTR ctx)
+LUX_API void lxgContext_clearRasterState( lxgContextPTR ctx )
 {
-  ctx->rflag = lxgRenderFlag_sync(ctx);
-
-  lxgDepth_sync(&ctx->depth, ctx );
-  lxgBlend_sync(&ctx->blend, ctx );
-  lxgStencil_sync(&ctx->stencil, ctx );
-  lxgViewPort_sync(&ctx->viewport, ctx );
+  ctx->raster.blendObj = NULL;
+  ctx->raster.depthObj = NULL;
+  ctx->raster.logicObj = NULL;
+  ctx->raster.stencilObj = NULL;
 }
 
 
 LUX_API const char* lxgContext_test(lxgContextPTR ctx)
 {
   {
-    lxgDepthPTR state = &ctx->depth;
+    lxgColorPTR state = &ctx->raster.color;
+    lxgColor_t test;
+    lxgColor_init( &test);
+    lxgColor_sync( &test, ctx );
+
+    if (memcmp(state,&test,sizeof(lxgColor_t))){
+      return ("lxgColor_t");
+    }
+  }
+
+  {
+    lxgRasterizerPTR state = &ctx->raster.rasterizer;
+    lxgRasterizer_t test;
+    lxgRasterizer_init( &test);
+    lxgRasterizer_sync( &test, ctx );
+
+    if (memcmp(state,&test,sizeof(lxgRasterizer_t))){
+      return ("lxgRasterizer_t");
+    }
+  }
+
+  {
+    lxgDepthPTR state = &ctx->raster.depth;
     lxgDepth_t test;
+    lxgDepth_init( &test);
     lxgDepth_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgDepth_t))){
-      return ("VIDDepth_t");
+      return ("lxgDepth_t");
     }
   }
 
   {
-    lxgBlendPTR state = &ctx->blend;
+    lxgBlendPTR state = &ctx->raster.blend;
     lxgBlend_t test;
+    lxgBlend_init( &test);
     lxgBlend_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgBlend_t))){
-      return ("VIDBlend_t");
+      return ("lxgBlend_t");
     }
   }
 
   {
-    lxgStencilPTR state = &ctx->stencil;
+    lxgStencilPTR state = &ctx->raster.stencil;
     lxgStencil_t test;
+    lxgStencil_init( &test);
     lxgStencil_sync( &test, ctx );
 
     if (memcmp(state,&test,sizeof(lxgStencil_t))){
-      return ("VIDStencil_t");
+      return ("lxgStencil_t");
     }
   }
 
@@ -234,8 +278,12 @@ LUX_API const char* lxgContext_test(lxgContextPTR ctx)
     }
   }
 
-  return lxgRenderFlag_test(ctx);
+  return NULL;
 }
+
+
+
+
 
 
 
