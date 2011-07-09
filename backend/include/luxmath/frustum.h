@@ -16,30 +16,30 @@ extern "C"{
 //////////////////////////////////////////////////////////////////////////
 // Frustum
 
-LUX_API void lxFrustum_update(lxFrustumPTR frustum, const lxMatrix44PTR viewproj);
+LUX_API void lxFrustum_update(lxFrustumPTR frustum, lxMatrix44CPTR viewproj);
 
 // returns FALSE if inside else TRUE
 // the plane it failed on will be saved to it as well
-LUX_API booln  lxFrustum_checkPointCoherent(const lxFrustumPTR frustum, const lxVector3 vec, int *clipplane);
+LUX_API booln  lxFrustum_checkPointCoherent(lxFrustumCPTR frustum, const lxVector3 vec, int *clipplane);
 
 // returns FALSE if inside/intersect
-LUX_API booln  lxFrustum_checkSphereCoherent(const lxFrustumPTR frustum, const lxVector3 center, const float radius,int *clipplane);
+LUX_API booln  lxFrustum_checkSphereCoherent(lxFrustumCPTR frustum, const lxVector3 center, const float radius,int *clipplane);
 
 // returns FALSE if sphere is fully inside
-LUX_API booln  lxFrustum_checkSphereFull(const lxFrustumPTR frustum, const lxVector3 center, const float radius);
+LUX_API booln  lxFrustum_checkSphereFull(lxFrustumCPTR frustum, const lxVector3 center, const float radius);
 
 // returns FALSE if inside/intersect
-LUX_API booln  lxFrustum_checkAABBvCoherent(const lxFrustumPTR frustum, const float minmaxs[6], int *clipplane);
+LUX_API booln  lxFrustum_checkAABBvCoherent(lxFrustumCPTR frustum, const float minmaxs[6], int *clipplane);
 
 // masking & temporal coherency
 // cullF can report outside even if extends of box are outside all planes
-LUX_API lxCullType_t  lxFrustum_cullAABBvMaskedCoherent(const lxFrustumPTR pFrustum, const float minmax[6], int in_mask, int *out_mask, int *inoutstart_id);
+LUX_API lxCullType_t  lxFrustum_cullAABBvMaskedCoherent(lxFrustumCPTR pFrustum, const float minmax[6], int in_mask, int *out_mask, int *inoutstart_id);
 
-LUX_API lxCullType_t  lxFrustum_cullPoints(const lxFrustumPTR frustum, const lxVector4 *vecarray, const int numVec);
-LUX_API lxCullType_t  lxFrustum_cullAABBv(const lxFrustumPTR frustum, const float minmaxs[6]);
+LUX_API lxCullType_t  lxFrustum_cullPoints(lxFrustumCPTR frustum, const lxVector4 *vecarray, const int numVec);
+LUX_API lxCullType_t  lxFrustum_cullAABBv(lxFrustumCPTR frustum, const float minmaxs[6]);
 
 // generates corner points for a frustum
-LUX_API void lxFrustum_getCorners(const lxFrustumPTR frustum, lxVector3 box[LUX_FRUSTUM_CORNERS]);
+LUX_API void lxFrustum_getCorners(lxFrustumCPTR frustum, lxVector3 box[LUX_FRUSTUM_CORNERS]);
 LUX_API void lxFrustum_fromCorners(lxFrustumPTR frustum, const lxVector3 box[LUX_FRUSTUM_CORNERS]);
 
 LUX_API void lxFrustum_updateSigns(lxFrustumPTR frustum);
@@ -47,7 +47,7 @@ LUX_API void lxFrustum_updateSigns(lxFrustumPTR frustum);
 //////////////////////////////////////////////////////////////////////////
 //
 
-LUX_INLINE booln lxFrustum_checkPointCoherent(const lxFrustumPTR pFrustum,const lxVector3 vec, int *clipplane)
+LUX_INLINE booln lxFrustum_checkPointCoherent(lxFrustumCPTR pFrustum,const lxVector3 vec, int *clipplane)
 {
   int i,skip;
 
@@ -68,7 +68,7 @@ LUX_INLINE booln lxFrustum_checkPointCoherent(const lxFrustumPTR pFrustum,const 
   return LUX_FALSE;
 }
 
-LUX_INLINE booln lxFrustum_checkSphereCoherent(const lxFrustumPTR pFrustum,const lxVector3 vec,const float radius, int *clipplane)
+LUX_INLINE booln lxFrustum_checkSphereCoherent(lxFrustumCPTR pFrustum,const lxVector3 vec,const float radius, int *clipplane)
 {
   int i,skip;
 
@@ -90,12 +90,12 @@ LUX_INLINE booln lxFrustum_checkSphereCoherent(const lxFrustumPTR pFrustum,const
 }
 
 
-LUX_INLINE booln  lxFrustum_checkAABBvCoherent(const lxFrustumPTR pFrustum,const float minmax[6], int *clipplane)
+LUX_INLINE booln  lxFrustum_checkAABBvCoherent(lxFrustumCPTR pFrustum,const float minmax[6], int *clipplane)
 {
   int i,skip;
   skip = *clipplane;
   {
-    const lxFrustumPlanePTR sp = &pFrustum->fplanes[skip];
+    lxFrustumPlaneCPTR sp = &pFrustum->fplanes[skip];
     if ((sp->pvec[0] * minmax[sp->px]) + 
       (sp->pvec[1] * minmax[sp->py]) + 
       (sp->pvec[2] * minmax[sp->pz]) + sp->pvec[3] < 0)
@@ -108,7 +108,7 @@ LUX_INLINE booln  lxFrustum_checkAABBvCoherent(const lxFrustumPTR pFrustum,const
   for (i = 0; i < LUX_FRUSTUM_PLANES; i++){
     if (i != skip){
 
-      const lxFrustumPlanePTR sp = &pFrustum->fplanes[i];
+      lxFrustumPlaneCPTR sp = &pFrustum->fplanes[i];
       if ((sp->pvec[0] * minmax[sp->px]) + 
         (sp->pvec[1] * minmax[sp->py]) + 
         (sp->pvec[2] * minmax[sp->pz]) + sp->pvec[3] < 0)

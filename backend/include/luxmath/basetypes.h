@@ -29,13 +29,41 @@ extern "C"{
   typedef float lxMatrix34[12];
   typedef float lxQuat[4];
 
-  #define lxVector2PTR    float* LUX_RESTRICT
-  #define lxVector3PTR    float* LUX_RESTRICT
-  #define lxVector4PTR    float* LUX_RESTRICT
-  #define lxPlanePTR      float* LUX_RESTRICT
-  #define lxMatrix44PTR   float* LUX_RESTRICT
-  #define lxMatrix34PTR   float* LUX_RESTRICT
-  #define lxQuatPTR       float* LUX_RESTRICT
+  typedef float* LUX_RESTRICT lxVector2PTR;
+  typedef float* LUX_RESTRICT lxVector3PTR;
+  typedef float* LUX_RESTRICT lxVector4PTR;
+  typedef float* LUX_RESTRICT lxPlanePTR;
+  typedef float* LUX_RESTRICT lxMatrix44PTR;
+  typedef float* LUX_RESTRICT lxMatrix34PTR;
+  typedef float* LUX_RESTRICT lxQuatPTR;
+
+  typedef const float* LUX_RESTRICT lxVector2CPTR;
+  typedef const float* LUX_RESTRICT lxVector3CPTR;
+  typedef const float* LUX_RESTRICT lxVector4CPTR;
+  typedef const float* LUX_RESTRICT lxPlaneCPTR;
+  typedef const float* LUX_RESTRICT lxMatrix44CPTR;
+  typedef const float* LUX_RESTRICT lxMatrix34CPTR;
+  typedef const float* LUX_RESTRICT lxQuatCPTR;
+
+
+  typedef struct lxFrustumPlane_s* LUX_RESTRICT lxFrustumPlanePTR;
+  typedef const struct lxFrustumPlane_s* LUX_RESTRICT lxFrustumPlaneCPTR;
+
+  typedef struct lxFrustum_s* LUX_RESTRICT lxFrustumPTR;
+  typedef const struct lxFrustum_s* LUX_RESTRICT lxFrustumCPTR;
+
+  typedef struct lxBoundingBox_s* LUX_RESTRICT lxBoundingBoxPTR;
+  typedef const struct lxBoundingBox_s* LUX_RESTRICT lxBoundingBoxCPTR;
+
+  typedef struct lxBoundingSphere_s* LUX_RESTRICT lxBoundingSpherePTR;
+  typedef const struct lxBoundingSphere_s* LUX_RESTRICT lxBoundingSphereCPTR;
+
+  typedef struct lxBoundingCone_s* LUX_RESTRICT lxBoundingConePTR;
+  typedef const struct lxBoundingCone_s* LUX_RESTRICT lxBoundingConeCPTR;
+
+  typedef struct lxBoundingCapsule_s* LUX_RESTRICT lxBoundingCapsulePTR;
+  typedef const struct lxBoundingCapsule_s* LUX_RESTRICT lxBoundingCapsuleCPTR;
+
 
   //////////////////////////////////////////////////////////////////////////
 
@@ -78,6 +106,7 @@ extern "C"{
         int   nx;
         int   ny;
         int   nz;
+        int   _npad;
       };
     };
     union{
@@ -86,50 +115,48 @@ extern "C"{
         int   px;
         int   py;
         int   pz;
+        int   _ppad;
       };
     };
   }lxFrustumPlane_t;
-  #define lxFrustumPlanePTR lxFrustumPlane_t* LUX_RESTRICT
 
   typedef struct lxFrustum_s
   {
     lxFrustumPlane_t  fplanes[LUX_FRUSTUM_PLANES];
   }lxFrustum_t;
-  #define lxFrustumPTR lxFrustum_t* LUX_RESTRICT
 
   typedef struct lxBoundingBox_s
   {
-    lxVector3 min;
-    lxVector3 max;
+    lxVector4 min;
+    lxVector4 max;
   }lxBoundingBox_t;
-  #define lxBoundingBoxPTR lxBoundingBox_t* LUX_RESTRICT
 
   typedef struct lxBoundingSphere_s
   {
-    lxVector3 center;
+    lxVector4 center;
     float radius;
     float radiusSqr;
+    float _pad[2];
   }lxBoundingSphere_t;
-  #define lxBoundingSpherePTR lxBoundingSphere_t* LUX_RESTRICT
 
   typedef struct lxBoundingCone_s
   {
-    lxVector3 top;
-    lxVector3 axis;
+    lxVector4 top;
+    lxVector4 axis;
     float sinDiv;
     float sinSqr;
     float cosSqr;
+    float _pad;
   }lxBoundingCone_t;
-  #define lxBoundingConePTR lxBoundingCone_t* LUX_RESTRICT
 
   typedef struct lxBoundingCapsule_s
   {
-    lxVector3 origin;
-    lxVector3 toEnd;    // end-origin, non normalized
+    lxVector4 origin;
+    lxVector4 toEnd;    // end-origin, non normalized
     float radius;
     float radiusSqr;
+    float _pad[2];
   }lxBoundingCapsule_t;
-  #define lxBoundingCapsulePTR lxBoundingCapsule_t* LUX_RESTRICT
 
   //////////////////////////////////////////////////////////////////////////
 

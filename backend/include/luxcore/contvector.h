@@ -23,7 +23,7 @@ extern "C"{
   //  a simple vector implementation (continous memory)
   //  grows allocation as necessary
 
-  #define CONTVECTOR_SMALL  (8)
+  #define LUX_CONTVECTOR_SMALL  (8)
 
   typedef struct lxContVector_s{
     ushort    elemsize;
@@ -34,7 +34,8 @@ extern "C"{
     byte*   eos;
     lxMemoryAllocatorPTR allocator;
   }lxContVector_t;
-  typedef lxContVector_t* lxContVectorPTR;
+  typedef struct lxContVector_s* lxContVectorPTR;
+  typedef const struct lxContVector_s* lxContVectorCPTR;
 
   LUX_API void lxContVector_init(lxContVectorPTR cv,lxMemoryAllocatorPTR allocator, uint elemsize);
 
@@ -47,14 +48,14 @@ extern "C"{
   LUX_API void* lxContVector_front(lxContVectorPTR cv);
   LUX_API void* lxContVector_back(lxContVectorPTR cv);
   LUX_API void* lxContVector_at(lxContVectorPTR cv, uint idx);
-  LUX_API int   lxContVector_find(const lxContVectorPTR cv, const void *val);
+  LUX_API int   lxContVector_find(lxContVectorCPTR cv, const void *val);
 
-  LUX_API uint  lxContVector_elemsize(const lxContVectorPTR cv);
-  LUX_API uint  lxContVector_capacity(const lxContVectorPTR cv);
-  LUX_API uint  lxContVector_size(const lxContVectorPTR cv);
-  LUX_API uint  lxContVector_memused(const lxContVectorPTR cv);
-  LUX_API uint  lxContVector_memreserved(const lxContVectorPTR cv);
-  LUX_API booln lxContVector_isEmpty(const lxContVectorPTR cv);
+  LUX_API uint  lxContVector_elemsize(lxContVectorCPTR cv);
+  LUX_API uint  lxContVector_capacity(lxContVectorCPTR cv);
+  LUX_API uint  lxContVector_size(lxContVectorCPTR cv);
+  LUX_API uint  lxContVector_memused(lxContVectorCPTR cv);
+  LUX_API uint  lxContVector_memreserved(lxContVectorCPTR cv);
+  LUX_API booln lxContVector_isEmpty(lxContVectorCPTR cv);
 
   LUX_API void  lxContVector_pushBack(lxContVectorPTR cv, const void *data);
   LUX_API void  lxContVector_popBack(lxContVectorPTR cv);
@@ -107,28 +108,28 @@ extern "C"{
     return cv;
   }
 
-  LUX_INLINE uint lxContVector_elemsize(const lxContVectorPTR cv){
+  LUX_INLINE uint lxContVector_elemsize(lxContVectorCPTR cv){
     return cv->elemsize;
   }
-  LUX_INLINE uint lxContVector_memused(const lxContVectorPTR cv){
+  LUX_INLINE uint lxContVector_memused(lxContVectorCPTR cv){
     return (uint)(cv->end-cv->beg);
   }
-  LUX_INLINE uint lxContVector_memreserved(const lxContVectorPTR cv){
+  LUX_INLINE uint lxContVector_memreserved(lxContVectorCPTR cv){
     return (uint)(cv->eos-cv->beg);
   }
-  LUX_INLINE uint lxContVector_capacityS(const lxContVectorPTR cv, uint elemsize){
+  LUX_INLINE uint lxContVector_capacityS(lxContVectorCPTR cv, uint elemsize){
     return (uint)((cv->eos-cv->beg)/elemsize);
   }
-  LUX_INLINE uint lxContVector_capacity(const lxContVectorPTR cv){
+  LUX_INLINE uint lxContVector_capacity(lxContVectorCPTR cv){
     return lxContVector_capacityS(cv,(uint)cv->elemsize);
   }
-  LUX_INLINE uint lxContVector_sizeS(const lxContVectorPTR cv, uint elemsize){
+  LUX_INLINE uint lxContVector_sizeS(lxContVectorCPTR cv, uint elemsize){
     return (uint)((cv->end-cv->beg)/elemsize);
   }
-  LUX_INLINE uint lxContVector_size(const lxContVectorPTR cv){
+  LUX_INLINE uint lxContVector_size(lxContVectorCPTR cv){
     return lxContVector_sizeS(cv,cv->elemsize);
   }
-  LUX_INLINE booln  lxContVector_isEmpty(const lxContVectorPTR cv){
+  LUX_INLINE booln  lxContVector_isEmpty(lxContVectorCPTR cv){
     return cv->beg == cv->end;
   }
   LUX_INLINE void lxContVector_makeEmpty(lxContVectorPTR cv){
@@ -152,7 +153,7 @@ extern "C"{
   LUX_INLINE void*  lxContVector_at(lxContVectorPTR cv, uint idx){
     return lxContVector_atS(cv,cv->elemsize,idx);
   }
-  LUX_INLINE int  lxContVector_findS(const lxContVectorPTR cv, uint elemsize, const void *val){
+  LUX_INLINE int  lxContVector_findS(lxContVectorCPTR cv, uint elemsize, const void *val){
     byte* beg = cv->beg;
     while (beg < cv->end){
       if (!memcmp(val,beg,elemsize))
@@ -162,7 +163,7 @@ extern "C"{
 
     return -1;
   }
-  LUX_INLINE int  lxContVector_find(const lxContVectorPTR cv, const void *val){
+  LUX_INLINE int  lxContVector_find(lxContVectorCPTR cv, const void *val){
     return lxContVector_findS(cv,cv->elemsize,val);
   }
   

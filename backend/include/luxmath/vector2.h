@@ -20,12 +20,12 @@ LUX_API void lxVector2Copy( lxVector2 pOut, const lxVector2 pV1);
 LUX_API void lxVector2Clear( lxVector2 pOut);
 LUX_API void lxVector2Scale( lxVector2 pOut, const lxVector2 pV1, float val);
 
-LUX_API void lxVector2Transform( lxVector2 output, const lxVector2 v1,  const lxMatrix44PTR mat );
-LUX_API void lxVector2Transform1( lxVector2 v1,  const lxMatrix44PTR mat );
-LUX_API void lxVector2TransformRot( lxVector2 output, const lxVector2 v1,  const lxMatrix44PTR mat );
-LUX_API void lxVector2TransformRot1( lxVector2 output, const lxMatrix44PTR mat );
-LUX_API void lxVector2InvTransform( lxVector2 output, const lxVector2 v1,  const lxMatrix44PTR mat ) ;
-LUX_API void lxVector2InvTransform1( lxVector2 v1,  const lxMatrix44PTR mat );
+LUX_API void lxVector2Transform( lxVector2 output, const lxVector2 v1,  lxMatrix44CPTR mat );
+LUX_API void lxVector2Transform1( lxVector2 v1,  lxMatrix44CPTR mat );
+LUX_API void lxVector2TransformRot( lxVector2 output, const lxVector2 v1,  lxMatrix44CPTR mat );
+LUX_API void lxVector2TransformRot1( lxVector2 output, lxMatrix44CPTR mat );
+LUX_API void lxVector2InvTransform( lxVector2 output, const lxVector2 v1,  lxMatrix44CPTR mat ) ;
+LUX_API void lxVector2InvTransform1( lxVector2 v1,  lxMatrix44CPTR mat );
 
 LUX_API float lxVector2LengthA( const lxVector2 pV );
 LUX_API float lxVector2Length( const lxVector2 pV );
@@ -126,13 +126,13 @@ LUX_INLINE float lxVector2Normalized( lxVector2 pOut )
   return 1.0f/lengthdiv;
 }
 
-LUX_INLINE void lxVector2Transform( lxVector2 output, const lxVector2 v1,  const lxMatrix44PTR mat ) 
+LUX_INLINE void lxVector2Transform( lxVector2 output, const lxVector2 v1,  lxMatrix44CPTR mat ) 
 {
   (output)[0] = (v1)[0]*(mat)[0]+(v1)[1]*(mat)[4]+(mat)[12];
   (output)[1] = (v1)[0]*(mat)[1]+(v1)[1]*(mat)[5]+(mat)[13];
 }
 
-LUX_INLINE void lxVector2Transform1( lxVector2 v1,  const lxMatrix44PTR mat ) 
+LUX_INLINE void lxVector2Transform1( lxVector2 v1,  lxMatrix44CPTR mat ) 
 {
   lxVector2 output;
 
@@ -141,13 +141,13 @@ LUX_INLINE void lxVector2Transform1( lxVector2 v1,  const lxMatrix44PTR mat )
   lxVector2Copy(v1,output);
 }
 
-LUX_INLINE void lxVector2TransformRot( lxVector2 output, const lxVector2 v1,  const lxMatrix44PTR mat ) 
+LUX_INLINE void lxVector2TransformRot( lxVector2 output, const lxVector2 v1,  lxMatrix44CPTR mat ) 
 {
   (output)[0] = (v1)[0]*(mat)[0]+(v1)[1]*(mat)[4];
   (output)[1] = (v1)[0]*(mat)[1]+(v1)[1]*(mat)[5];
 }
 
-LUX_INLINE void lxVector2TransformRot1( lxVector2 v1,  const lxMatrix44PTR mat ) 
+LUX_INLINE void lxVector2TransformRot1( lxVector2 v1,  lxMatrix44CPTR mat ) 
 {
   lxVector2 output;
 
@@ -156,13 +156,13 @@ LUX_INLINE void lxVector2TransformRot1( lxVector2 v1,  const lxMatrix44PTR mat )
   lxVector2Copy(v1,output);
 }
 
-LUX_INLINE void lxVector2InvTransform( lxVector2 output, const lxVector2 v1,  const lxMatrix44PTR mat ) 
+LUX_INLINE void lxVector2InvTransform( lxVector2 output, const lxVector2 v1,  lxMatrix44CPTR mat ) 
 {
   (output)[0] = (v1)[0]*(mat)[0]+(v1)[1]*(mat)[1]-(mat[0]*mat[12]+mat[1]*mat[13]+mat[2]*mat[14]);
   (output)[1] = (v1)[0]*(mat)[4]+(v1)[1]*(mat)[5]-(mat[4]*mat[12]+mat[5]*mat[13]+mat[6]*mat[14]);
 }
 
-LUX_INLINE void lxVector2InvTransform1( lxVector2 v1,  const lxMatrix44PTR mat ) 
+LUX_INLINE void lxVector2InvTransform1( lxVector2 v1,  lxMatrix44CPTR mat ) 
 {
   lxVector2 output;
 

@@ -62,10 +62,10 @@ LUX_API int   lxStrReadBitMask(const char* str, enum32 *val){
   return i;
 }
 LUX_API int   lxStrReadVector3(const char* str, float vec[3]){
-  return sscanf(str,STR_FORMAT_VECTOR3,&vec[0],&vec[1],&vec[2]);
+  return sscanf(str,LUX_STR_FORMAT_VECTOR3,&vec[0],&vec[1],&vec[2]);
 }
 LUX_API int   lxStrReadVector4(const char* str, float vec[4]){
-  return sscanf(str,STR_FORMAT_VECTOR4,&vec[0],&vec[1],&vec[2],&vec[3]);
+  return sscanf(str,LUX_STR_FORMAT_VECTOR4,&vec[0],&vec[1],&vec[2],&vec[3]);
 }
 LUX_API int   lxStrReadFloat(const char* str, float *val){
   return sscanf(str,"%f",val);

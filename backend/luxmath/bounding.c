@@ -9,7 +9,7 @@
 // ----------------
 
 
-LUX_API booln lxBoundingBox_mergeChange(lxBoundingBoxPTR out, const lxBoundingBoxPTR a, const lxBoundingBoxPTR b)
+LUX_API booln lxBoundingBox_mergeChange(lxBoundingBoxPTR out, lxBoundingBoxCPTR a, lxBoundingBoxCPTR b)
 {
   int change = LUX_FALSE;
   float temp;
@@ -36,7 +36,7 @@ LUX_API booln lxBoundingBox_mergeChange(lxBoundingBoxPTR out, const lxBoundingBo
   return change;
 }
 
-LUX_API booln lxBoundingSphere_mergeChange(lxBoundingSpherePTR out, const lxBoundingSpherePTR a, const lxBoundingSpherePTR b)
+LUX_API booln lxBoundingSphere_mergeChange(lxBoundingSpherePTR out, lxBoundingSphereCPTR a, lxBoundingSphereCPTR b)
 {
   lxVector3 vec;
   float rad;
@@ -99,7 +99,7 @@ LUX_API void lxBoundingBox_toSphereV(const lxVector3 min,const lxVector3 max, lx
   lxVector3Add( center,center, min);
 }
 
-LUX_API lxBoundingSpherePTR lxBoundingBox_toSphere(const lxBoundingBoxPTR bbox, lxBoundingSpherePTR sphere)
+LUX_API lxBoundingSpherePTR lxBoundingBox_toSphere(lxBoundingBoxCPTR bbox, lxBoundingSpherePTR sphere)
 {
   lxBoundingBox_toSphereV(bbox->min, bbox->max, sphere->center, &sphere->radius);
   sphere->radiusSqr = sphere->radius * sphere->radius;
@@ -108,7 +108,7 @@ LUX_API lxBoundingSpherePTR lxBoundingBox_toSphere(const lxBoundingBoxPTR bbox, 
 
 
 
-LUX_API lxBoundingCapsulePTR lxBoundingBox_toCapsule(const lxBoundingBoxPTR bbox, lxBoundingCapsulePTR capsule)
+LUX_API lxBoundingCapsulePTR lxBoundingBox_toCapsule(lxBoundingBoxCPTR bbox, lxBoundingCapsulePTR capsule)
 {
   lxVector3 center;
   lxVector3 length;
@@ -149,7 +149,7 @@ LUX_API lxBoundingCapsulePTR lxBoundingBox_toCapsule(const lxBoundingBoxPTR bbox
 
 
 
-LUX_API void lxBoundingBox_transformBoxCorners(const lxBoundingBoxPTR in, const lxMatrix44PTR trans, lxVector3 box[8])
+LUX_API void lxBoundingBox_transformBoxCorners(lxBoundingBoxCPTR in, lxMatrix44CPTR trans, lxVector3 box[8])
 {
   int i;
   // create box corners
@@ -170,7 +170,7 @@ LUX_API void lxBoundingBox_transformBoxCorners(const lxBoundingBoxPTR in, const 
     lxVector3Transform1(box[i],trans);
 }
 
-LUX_API void lxBoundingBox_transformV(lxVector3 outmins, lxVector3 outmaxs,const lxVector3 mins, const lxVector3 maxs, const lxMatrix44PTR trans)
+LUX_API void lxBoundingBox_transformV(lxVector3 outmins, lxVector3 outmaxs,const lxVector3 mins, const lxVector3 maxs, lxMatrix44CPTR trans)
 {
   int i;
   lxVector3 test;
@@ -207,7 +207,7 @@ LUX_API void lxBoundingBox_transformV(lxVector3 outmins, lxVector3 outmaxs,const
   }
 }
 
-LUX_API lxBoundingBoxPTR lxBoundingBox_transform(lxBoundingBoxPTR out, const lxBoundingBoxPTR in, const lxMatrix44PTR trans)
+LUX_API lxBoundingBoxPTR lxBoundingBox_transform(lxBoundingBoxPTR out, lxBoundingBoxCPTR in, lxMatrix44CPTR trans)
 {
   lxBoundingBox_transformV(out->min,out->max,in->min, in->max, trans);
   return out;
@@ -234,7 +234,7 @@ LUX_API void lxBoundingBox_fromCorners(lxBoundingBoxPTR bbox,const lxVector3 vec
   }
 }
 
-LUX_API void lxBoundingVectors_fromCamera(lxVector3 box[8],const lxMatrix44PTR mat,const float fov, const float frontplane, const float backplane, const float aspect)
+LUX_API void lxBoundingVectors_fromCamera(lxVector3 box[8],lxMatrix44CPTR mat,const float fov, const float frontplane, const float backplane, const float aspect)
 {
   int i;
   float invaspect = 1.0f/aspect;
@@ -272,7 +272,7 @@ LUX_API void lxBoundingVectors_fromCamera(lxVector3 box[8],const lxMatrix44PTR m
 
 
 
-LUX_API booln lxBoundingCone_checkSphereV(const lxBoundingConePTR cone, const lxVector3 center, float radius, float radiusSqr)
+LUX_API booln lxBoundingCone_checkSphereV(lxBoundingConeCPTR cone, const lxVector3 center, float radius, float radiusSqr)
 {
   lxVector3 d;
 

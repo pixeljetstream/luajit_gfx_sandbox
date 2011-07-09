@@ -3,6 +3,7 @@
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
 #include <luxcore/arraymisc.h>
+#include <luxcore/contbitarray.h>
 
 template <class T>
 static LUX_INLINE int lxArrayFindOrAddT(T *data, int *inoutCnt, T value, int maxCnt)
@@ -42,3 +43,41 @@ LUX_API int lxArrayFindOrAddPtr(void **data, int *inoutCnt, void* value, int max
 {
   return lxArrayFindOrAddT<void*>(data,inoutCnt,value,maxCnt);
 }
+
+// index of first item with state
+LUX_API int32  lxBitArray_getFirst(const lxBitArray_t *ba, booln state)
+{
+  const uint32 *start = ba->bits;
+  const uint32 *end = start + ba->num32;
+  uint32 cur;
+
+  if (state){
+    while (start < end){
+      if ((cur = *start)){
+        int i;
+        for (i=0; i < 32; i++){
+          if (cur & (1<<i)){
+            return (start-ba->bits)*32 + i;
+          }
+        }
+      }
+      start++;
+    }
+  }
+  else{
+    while (start < end){
+      if (!(cur = *start)){
+        int i;
+        for (i=0; i < 32; i++){
+          if (!(cur & (1<<i))){
+            return (start-ba->bits)*32 + i;
+          }
+        }
+      }
+      start++;
+    }
+  }
+
+  return -1;
+}
+

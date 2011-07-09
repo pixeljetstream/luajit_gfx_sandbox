@@ -20,7 +20,7 @@ private:
 
 public:
   LUX_INLINE operator lxContVectorPTR () {return &m_vector;}
-  LUX_INLINE operator const lxContVectorPTR () const {return &m_vector;}
+  LUX_INLINE operator lxContVectorCPTR () const {return &m_vector;}
 
   LUX_INLINE lxCContVector(){
     lxContVector_initAligned(&m_vector,sizeof(T),ALIGN);

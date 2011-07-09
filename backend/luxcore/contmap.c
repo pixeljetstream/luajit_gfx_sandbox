@@ -29,7 +29,7 @@ LUX_API booln lxContMap_remove(lxContMapPTR cv, void *key)
 
   return LUX_TRUE;
 }
-LUX_API booln lxContMap_get(lxContMapPTR cv, void *key, void**outval)
+LUX_API booln lxContMap_get(lxContMapCPTR cv, void *key, void**outval)
 {
   int idx = lxContVector_find(&cv->keys,key);
   if (idx == -1) return LUX_FALSE;

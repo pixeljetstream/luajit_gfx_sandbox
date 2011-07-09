@@ -74,42 +74,6 @@ LUX_INLINE booln  lxBitArray_any(const lxBitArray_t *ba)
   return LUX_FALSE;
 }
 
-// index of first item with state
-LUX_INLINE int32  lxBitArray_getFirst(const lxBitArray_t *ba, booln state)
-{
-  const uint32 *start = ba->bits;
-  const uint32 *end = start + ba->num32;
-  uint32 cur;
-
-  if (state){
-    while (start < end){
-      if ((cur = *start)){
-        int i;
-        for (i=0; i < 32; i++){
-          if (cur & (1<<i)){
-            return (start-ba->bits)*32 + i;
-          }
-        }
-      }
-      start++;
-    }
-  }
-  else{
-    while (start < end){
-      if (!(cur = *start)){
-        int i;
-        for (i=0; i < 32; i++){
-          if (!(cur & (1<<i))){
-            return (start-ba->bits)*32 + i;
-          }
-        }
-      }
-      start++;
-    }
-  }
-
-  return -1;
-}
 
 #ifdef __cplusplus
 };  

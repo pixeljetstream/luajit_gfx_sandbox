@@ -12,8 +12,8 @@
 extern "C"{
 #endif
 
-#define STR_FORMAT_VECTOR3 "(%f,%f,%f)"
-#define STR_FORMAT_VECTOR4 "(%f,%f,%f,%f)"
+#define LUX_STR_FORMAT_VECTOR3 "(%f,%f,%f)"
+#define LUX_STR_FORMAT_VECTOR4 "(%f,%f,%f,%f)"
 
 //////////////////////////////////////////////////////////////////////////
 // string helpers

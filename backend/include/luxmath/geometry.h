@@ -15,7 +15,7 @@ extern "C"{
 
 LUX_API void lxPlaneSet(lxPlanePTR plane, const lxVector3 a, const lxVector3 b, const lxVector3 c);
 
-LUX_API void lxPlaneIntersect(lxVector3 out, const lxPlanePTR planea,const lxPlanePTR planeb,const lxPlanePTR planec);
+LUX_API void lxPlaneIntersect(lxVector3 out, lxPlaneCPTR planea,lxPlaneCPTR planeb,lxPlaneCPTR planec);
 
 LUX_API void lxPlaneVecCheckLine(lxVector3 intersectpoint, const lxVector3 planenormal, 
           const lxVector3 planepoint, const lxVector3 raystart, const lxVector3 rayend);

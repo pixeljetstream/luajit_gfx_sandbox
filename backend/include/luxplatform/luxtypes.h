@@ -42,13 +42,29 @@ typedef unsigned short  float16;
 typedef float           float32;
 typedef double          float64;
 
+typedef struct lxRectanglei_s* LUX_RESTRICT lxRectangleiPTR;
+typedef struct lxRectanglef_s* LUX_RESTRICT lxRectanglefPTR;
+typedef struct lxVec2i_s* LUX_RESTRICT lxVec2iPTR;
+typedef struct lxVec3i_s* LUX_RESTRICT lxVec3iPTR;
+typedef struct lxVec2f_s* LUX_RESTRICT lxVec2fPTR;
+typedef struct lxVec3f_s* LUX_RESTRICT lxVec3fPTR;
+typedef struct lxVec4f_s* LUX_RESTRICT lxVec4fPTR;
+
+typedef const struct lxRectanglei_s* LUX_RESTRICT lxRectangleiCPTR;
+typedef const struct lxRectanglef_s* LUX_RESTRICT lxRectanglefCPTR;
+typedef const struct lxVec2i_s* LUX_RESTRICT lxVec2iCPTR;
+typedef const struct lxVec3i_s* LUX_RESTRICT lxVec3iCPTR;
+typedef const struct lxVec2f_s* LUX_RESTRICT lxVec2fCPTR;
+typedef const struct lxVec3f_s* LUX_RESTRICT lxVec3fCPTR;
+typedef const struct lxVec4f_s* LUX_RESTRICT lxVec4fCPTR;
+
+
 typedef struct lxRectanglei_s{
   int   x;
   int   y;
   int   width;
   int   height;
 }lxRectanglei_t;
-typedef lxRectanglei_t* lxRectangleiPTR;
 
 typedef struct lxRectanglef_s{
   float x;
@@ -56,33 +72,28 @@ typedef struct lxRectanglef_s{
   float width;
   float height;
 }lxRectanglef_t;
-typedef struct lxRectanglef_s* lxRectanglefPTR;
 
 typedef struct lxVec2i_s{
   int   x;
   int   y;
 }lxVec2i_t;
-typedef struct lxVec2i_s* lxVec2iPTR;
 
 typedef struct lxVec3i_s{
   int   x;
   int   y;
   int   z;
 }lxVec3i_t;
-typedef struct lxVec3i_s* lxVec3iPTR;
 
 typedef struct lxVec2f_s{
   float   x;
   float   y;
 }lxVec2f_t;
-typedef struct lxVec2f_s* lxVec2fPTR;
 
 typedef struct lxVec3f_s{
   float   x;
   float   y;
   float   z;
 }lxVec3f_t;
-typedef struct lxVec3f_s* lxVec3fPTR;
 
 typedef struct lxVec4f_s{
   float   x;
@@ -90,7 +101,7 @@ typedef struct lxVec4f_s{
   float   z;
   float   w;
 }lxVec4f_t;
-typedef struct lxVec4f_s* lxVec4fPTR;
+
 
 typedef enum lxScalarType_e{  
   // warning may not change order!!

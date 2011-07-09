@@ -18,6 +18,7 @@ extern "C"{
   //  MemoryList used for allocations, ideally strings are <= 256
   
   typedef struct lxStrDict_s* lxStrDictPTR;
+  typedef const struct lxStrDict_s* lxStrDictCPTR;
   typedef const char* lxStrDictName;
   typedef uint32      lxStrDictKey;
 
@@ -26,8 +27,8 @@ extern "C"{
 
   // returns hashkey
   LUX_API lxStrDictKey  lxStrDict_add(lxStrDictPTR dc, const char *str);
-  LUX_API lxStrDictName lxStrDict_getFromKey(const lxStrDictPTR dc, lxStrDictKey key);
-  LUX_API lxStrDictKey  lxStrDict_getKey(const lxStrDictPTR dc, const char *str);
+  LUX_API lxStrDictName lxStrDict_getFromKey(lxStrDictCPTR dc, lxStrDictKey key);
+  LUX_API lxStrDictKey  lxStrDict_getKey(lxStrDictCPTR dc, const char *str);
 
   // returns current reference count
   LUX_API int     lxStrDict_rem(lxStrDictPTR dc, lxStrDictName str);

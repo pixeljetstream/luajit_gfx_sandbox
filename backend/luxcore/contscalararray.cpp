@@ -3680,83 +3680,83 @@ struct FVector4SSE{
 #endif
 
 struct FVectorTransform{
-  static void LUX_INLINE proc(FVector2 &avec, FVector2 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, FVector2 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector2Transform(avec.data,bvec.data,matrix44);
   }
-  static void LUX_INLINE proc(FVector3 &avec, FVector3 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, FVector3 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector3Transform(avec.data,bvec.data,matrix44);
   }
-  static void LUX_INLINE proc(FVector4 &avec, FVector4 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, FVector4 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector3Transform(avec.data,bvec.data,matrix44);
     avec.data[3] = 1.0f;
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec, FVector4SSE &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec, FVector4SSE &bvec, lxMatrix44CPTR matrix44)
   {
     avec.data = lxVector4SSE_transformV3(bvec.data,(__m128*)matrix44);
   }
 #endif
 
 
-  static void LUX_INLINE proc(FVector2 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector2Transform1(avec.data,matrix44);
   }
-  static void LUX_INLINE proc(FVector3 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector3Transform1(avec.data,matrix44);
   }
-  static void LUX_INLINE proc(FVector4 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector3Transform1(avec.data,matrix44);
     avec.data[3] = 1.0f;
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec, lxMatrix44CPTR matrix44)
   {
     avec.data = lxVector4SSE_transformV3(avec.data,(__m128*)matrix44);
   }
 #endif
 };
 struct FVectorTransformRot {
-  static void LUX_INLINE proc(FVector2 &avec, FVector2 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, FVector2 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector2TransformRot(avec.data,bvec.data,matrix44);
   }
-  static void LUX_INLINE proc(FVector3 &avec, FVector3 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, FVector3 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector3TransformRot(avec.data,bvec.data,matrix44);
   }
-  static void LUX_INLINE proc(FVector4 &avec, FVector4 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, FVector4 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector3TransformRot(avec.data,bvec.data,matrix44);
     avec.data[3] = 1.0f;
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec, FVector4SSE &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec, FVector4SSE &bvec, lxMatrix44CPTR matrix44)
   {
     avec.data = lxVector4SSE_transformRot(bvec.data,(__m128*)matrix44);
   }
 #endif
 
-  static void LUX_INLINE proc(FVector2 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector2TransformRot1(avec.data,matrix44);
   }
-  static void LUX_INLINE proc(FVector3 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector3TransformRot1(avec.data,matrix44);
   }
-  static void LUX_INLINE proc(FVector4 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector3TransformRot1(avec.data,matrix44);
     avec.data[3] = 1.0f;
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec, lxMatrix44CPTR matrix44)
   {
     avec.data = lxVector4SSE_transformRot(avec.data,(__m128*)matrix44);
   }
@@ -3764,47 +3764,47 @@ struct FVectorTransformRot {
 };
 
 struct FVectorTransformFull {
-  static void LUX_INLINE proc(FVector2 &avec, const FVector2 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, const FVector2 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector4 vec = {bvec.data[0],bvec.data[1],0.0f,1.0f};
     lxVector4Transform1(vec,matrix44);
     lxVector2Scale(avec.data,vec,1.0f/vec[3]);
   }
-  static void LUX_INLINE proc(FVector3 &avec, const FVector3 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, const FVector3 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector4 vec = {bvec.data[0],bvec.data[1],bvec.data[2],1.0f};
     lxVector4Transform1(vec,matrix44);
     lxVector3Scale(avec.data,vec,1.0f/vec[3]);
   }
-  static void LUX_INLINE proc(FVector4 &avec, const FVector4 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, const FVector4 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector4Transform(avec.data,bvec.data,matrix44);
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec,  FVector4SSE &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec,  FVector4SSE &bvec, lxMatrix44CPTR matrix44)
   {
     avec.data = lxVector4SSE_transform(bvec.data,(__m128*)matrix44);
   }
 #endif
 
-  static void LUX_INLINE proc(FVector2 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector4 vec = {avec.data[0],avec.data[1],0.0f,1.0f};
     lxVector4Transform1(vec,matrix44);
     lxVector2Scale(avec.data,vec,1.0f/vec[3]);
   }
-  static void LUX_INLINE proc(FVector3 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector4 vec = {avec.data[0],avec.data[1],avec.data[2],1.0f};
     lxVector4Transform1(vec,matrix44);
     lxVector3Scale(avec.data,vec,1.0f/vec[3]);
   }
-  static void LUX_INLINE proc(FVector4 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector4Transform1(avec.data,matrix44);
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec, lxMatrix44CPTR matrix44)
   {
     avec.data = lxVector4SSE_transform(avec.data,(__m128*)matrix44);
   }
@@ -3812,39 +3812,39 @@ struct FVectorTransformFull {
 };
 
 struct FVectorNormalize {
-  static void LUX_INLINE proc(FVector2 &avec, const FVector2 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, const FVector2 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector2Normalize(avec.data,bvec.data);
   }
-  static void LUX_INLINE proc(FVector3 &avec, const FVector3 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, const FVector3 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector3Normalize(avec.data,bvec.data);
   }
-  static void LUX_INLINE proc(FVector4 &avec, const FVector4 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, const FVector4 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector4Normalize(avec.data,bvec.data);
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec,  FVector4SSE &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec,  FVector4SSE &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector4Normalize(avec.data.m128_f32,bvec.data.m128_f32);
   }
 #endif
 
-  static void LUX_INLINE proc(FVector2 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector2Normalized(avec.data);
   }
-  static void LUX_INLINE proc(FVector3 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector3Normalized(avec.data);
   }
-  static void LUX_INLINE proc(FVector4 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector4Normalized(avec.data);
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec, lxMatrix44CPTR matrix44)
   {
     lxVector4Normalized(avec.data.m128_f32);
   }
@@ -3852,39 +3852,39 @@ struct FVectorNormalize {
 };
 
 struct FVectorNormalizeAcc {
-  static void LUX_INLINE proc(FVector2 &avec, const FVector2 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, const FVector2 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector2NormalizeA(avec.data,bvec.data);
   }
-  static void LUX_INLINE proc(FVector3 &avec, const FVector3 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, const FVector3 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector3NormalizeA(avec.data,bvec.data);
   }
-  static void LUX_INLINE proc(FVector4 &avec, const FVector4 &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, const FVector4 &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector4NormalizeA(avec.data,bvec.data);
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec,  FVector4SSE &bvec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec,  FVector4SSE &bvec, lxMatrix44CPTR matrix44)
   {
     lxVector4NormalizeA(avec.data.m128_f32,bvec.data.m128_f32);
   }
 #endif
 
-  static void LUX_INLINE proc(FVector2 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector2 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector2NormalizedA(avec.data);
   }
-  static void LUX_INLINE proc(FVector3 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector3 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector3NormalizedA(avec.data);
   }
-  static void LUX_INLINE proc(FVector4 &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4 &avec, lxMatrix44CPTR matrix44)
   {
     lxVector4NormalizedA(avec.data);
   }
 #ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec, const lxMatrix44PTR matrix44)
+  static void LUX_INLINE proc(FVector4SSE &avec, lxMatrix44CPTR matrix44)
   {
     lxVector4NormalizedA(avec.data.m128_f32);
   }

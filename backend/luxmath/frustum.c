@@ -9,7 +9,7 @@
 #include <luxmath/vector3.h>
 #include <luxmath/matrix44.h>
 
-LUX_API void lxFrustum_update(lxFrustumPTR pFrustum,const lxMatrix44PTR viewproj)
+LUX_API void lxFrustum_update(lxFrustumPTR pFrustum,lxMatrix44CPTR viewproj)
 {
   const float *clip = viewproj;
   float magnitude;
@@ -97,7 +97,7 @@ LUX_API void lxFrustum_updateSigns(lxFrustumPTR frustum)
 }
 
 #if 0
-booln Frustum_checkPointCoherent(const FrustumPTR pFrustum,const Vector3 vec, int *clipplane)
+booln Frustum_checkPointCoherent(FrustumCPTR pFrustum,const Vector3 vec, int *clipplane)
 {
   int i,skip;
 
@@ -117,7 +117,7 @@ booln Frustum_checkPointCoherent(const FrustumPTR pFrustum,const Vector3 vec, in
 
   return FALSE;
 }
-booln Frustum_checkSphereCoherent(const FrustumPTR pFrustum,const Vector3 vec,const float radius, int *clipplane)
+booln Frustum_checkSphereCoherent(FrustumCPTR pFrustum,const Vector3 vec,const float radius, int *clipplane)
 {
   int i,skip;
 
@@ -139,12 +139,12 @@ booln Frustum_checkSphereCoherent(const FrustumPTR pFrustum,const Vector3 vec,co
 }
 
 
-booln   Frustum_checkAABBvCoherent(const FrustumPTR pFrustum,const float minmax[6], int *clipplane)
+booln   Frustum_checkAABBvCoherent(FrustumCPTR pFrustum,const float minmax[6], int *clipplane)
 {
   int i,skip;
   skip = *clipplane;
   {
-    const FrustumPlanePTR sp = &pFrustum->fplanes[skip];
+    FrustumPlaneCPTR sp = &pFrustum->fplanes[skip];
     if ((sp->pvec[0] * minmax[sp->px]) + 
       (sp->pvec[1] * minmax[sp->py]) + 
       (sp->pvec[2] * minmax[sp->pz]) + sp->pvec[3] < 0)
@@ -157,7 +157,7 @@ booln   Frustum_checkAABBvCoherent(const FrustumPTR pFrustum,const float minmax[
   for (i = 0; i < LUX_FRUSTUM_PLANES; i++){
     if (i != skip){
 
-      const FrustumPlanePTR sp = &pFrustum->fplanes[i];
+      FrustumPlaneCPTR sp = &pFrustum->fplanes[i];
       if ((sp->pvec[0] * minmax[sp->px]) + 
         (sp->pvec[1] * minmax[sp->py]) + 
         (sp->pvec[2] * minmax[sp->pz]) + sp->pvec[3] < 0)
@@ -173,7 +173,7 @@ booln   Frustum_checkAABBvCoherent(const FrustumPTR pFrustum,const float minmax[
 
 #endif
 
-LUX_API booln  lxFrustum_checkSphereFull(const lxFrustumPTR pFrustum, const lxVector3 center, const float radius)
+LUX_API booln  lxFrustum_checkSphereFull(lxFrustumCPTR pFrustum, const lxVector3 center, const float radius)
 {
   int i;
 
@@ -189,7 +189,7 @@ LUX_API booln  lxFrustum_checkSphereFull(const lxFrustumPTR pFrustum, const lxVe
 
 // returns 0 if all points are outside of one of the planes
 // 1 if fully inside, -1 if intersects
-lxCullType_t   lxFrustum_cullPoints(const lxFrustumPTR pFrustum, const lxVector4 *vecarray, const int numVec)
+lxCullType_t   lxFrustum_cullPoints(lxFrustumCPTR pFrustum, const lxVector4 *vecarray, const int numVec)
 {
   const float *vec;
   int i,n;
@@ -225,7 +225,7 @@ lxCullType_t   lxFrustum_cullPoints(const lxFrustumPTR pFrustum, const lxVector4
 }
 
 
-LUX_API lxCullType_t  lxFrustum_cullAABBv(const lxFrustumPTR pFrustum, const float minmax[6])
+LUX_API lxCullType_t  lxFrustum_cullAABBv(lxFrustumCPTR pFrustum, const float minmax[6])
 {
 //#define LUX_FRUSTUM_CULLAABB_DEBUG
 
@@ -263,7 +263,7 @@ LUX_API lxCullType_t  lxFrustum_cullAABBv(const lxFrustumPTR pFrustum, const flo
     lxCullType_t result = LUX_CULL_INSIDE;
     int i;
     for (i = 0; i < LUX_FRUSTUM_PLANES; i++){
-      const lxFrustumPlanePTR sp = &pFrustum->fplanes[i];
+      lxFrustumPlaneCPTR sp = &pFrustum->fplanes[i];
       if ((sp->pvec[0] * minmax[sp->px]) + 
         (sp->pvec[1] * minmax[sp->py]) + 
         (sp->pvec[2] * minmax[sp->pz]) + sp->pvec[3] < 0)
@@ -291,7 +291,7 @@ LUX_API lxCullType_t  lxFrustum_cullAABBv(const lxFrustumPTR pFrustum, const flo
 //////////////////////////////////////////////////////////////////////////
 // http://www.cescg.org/CESCG-2002/DSykoraJJelinek/index.html
 
-LUX_API lxCullType_t lxFrustum_cullAABBvMaskedCoherent(const lxFrustumPTR pFrustum, const float minmax[6], int in_mask, int *out_mask, int *inoutstart_id)
+LUX_API lxCullType_t lxFrustum_cullAABBvMaskedCoherent(lxFrustumCPTR pFrustum, const float minmax[6], int in_mask, int *out_mask, int *inoutstart_id)
 {
   int start_id = *inoutstart_id;
   int i, k = 1 << start_id;
@@ -341,7 +341,7 @@ LUX_API lxCullType_t lxFrustum_cullAABBvMaskedCoherent(const lxFrustumPTR pFrust
   return result;
 }
 
-LUX_API void lxFrustum_getCorners(const lxFrustumPTR pFrustum,lxVector3 box[LUX_FRUSTUM_CORNERS]){
+LUX_API void lxFrustum_getCorners(lxFrustumCPTR pFrustum,lxVector3 box[LUX_FRUSTUM_CORNERS]){
 
   lxPlaneIntersect(box[LUX_FRUSTUM_C_NTR],pFrustum->fplanes[LUX_FRUSTUM_NEAR].pvec,pFrustum->fplanes[LUX_FRUSTUM_TOP].pvec,pFrustum->fplanes[LUX_FRUSTUM_RIGHT].pvec);
   lxPlaneIntersect(box[LUX_FRUSTUM_C_NTL],pFrustum->fplanes[LUX_FRUSTUM_NEAR].pvec,pFrustum->fplanes[LUX_FRUSTUM_TOP].pvec,pFrustum->fplanes[LUX_FRUSTUM_LEFT].pvec);

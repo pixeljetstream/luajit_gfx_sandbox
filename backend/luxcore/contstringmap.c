@@ -128,7 +128,7 @@ LUX_API int lxStrDict_remKey(lxStrDictPTR self, lxStrDictKey key)
   }
 }
 
-LUX_API lxStrDictName lxStrDict_getFromKey(const lxStrDictPTR self, lxStrDictKey key)
+LUX_API lxStrDictName lxStrDict_getFromKey(lxStrDictCPTR self, lxStrDictKey key)
 {
   lxStrDictEntry_t* entry;
   if (lxContHash_get(&self->hashtable,key,(void**)&entry)){
@@ -137,7 +137,7 @@ LUX_API lxStrDictName lxStrDict_getFromKey(const lxStrDictPTR self, lxStrDictKey
   return NULL;
 }
 
-LUX_API lxStrDictKey    lxStrDict_getKey(const lxStrDictPTR self, const char *str)
+LUX_API lxStrDictKey    lxStrDict_getKey(lxStrDictCPTR self, const char *str)
 {
   lxStrHashLen_t  hashlen = lxStrHashLen(str);
   return hashlen.key;

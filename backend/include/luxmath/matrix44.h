@@ -16,71 +16,71 @@
 extern "C"{
 #endif
 
-LUX_API const lxMatrix44PTR lxMatrix44GetIdentity();
+LUX_API lxMatrix44CPTR lxMatrix44GetIdentity();
 LUX_API void lxMatrix44Identity(lxMatrix44PTR dst);
-LUX_API void lxMatrix44Copy(lxMatrix44PTR dst, const lxMatrix44PTR src);
-LUX_API void lxMatrix44CopyRot(lxMatrix44PTR dst, const lxMatrix44PTR src);
-LUX_API void lxMatrix44CopyRotTransposed(lxMatrix44PTR dst, const lxMatrix44PTR src);
+LUX_API void lxMatrix44Copy(lxMatrix44PTR dst, lxMatrix44CPTR src);
+LUX_API void lxMatrix44CopyRot(lxMatrix44PTR dst, lxMatrix44CPTR src);
+LUX_API void lxMatrix44CopyRotTransposed(lxMatrix44PTR dst, lxMatrix44CPTR src);
 
-LUX_API void lxMatrix44SetTranslation( lxMatrix44PTR dst, const lxVector3PTR translation );
-LUX_API void lxMatrix44SetInvTranslation( lxMatrix44PTR dst, const lxVector3PTR translation );
-LUX_API void lxMatrix44SetScale( lxMatrix44PTR dst, const lxVector3PTR scale);
-LUX_API void lxMatrix44PreScale( lxMatrix44PTR dst, const lxMatrix44PTR mat, const lxVector3PTR scale);
+LUX_API void lxMatrix44SetTranslation( lxMatrix44PTR dst, lxVector3CPTR translation );
+LUX_API void lxMatrix44SetInvTranslation( lxMatrix44PTR dst, lxVector3CPTR translation );
+LUX_API void lxMatrix44SetScale( lxMatrix44PTR dst, lxVector3CPTR scale);
+LUX_API void lxMatrix44PreScale( lxMatrix44PTR dst, lxMatrix44CPTR mat, lxVector3CPTR scale);
 LUX_API void lxMatrix44SetRotRows(lxMatrix44PTR dst, 
             float a, float b, float c, 
             float d, float e, float f, 
             float g, float h, float i);
 
-LUX_API float*  lxMatrix44GetTranslation(const lxMatrix44PTR mat, lxVector3PTR vec);
+LUX_API float*  lxMatrix44GetTranslation(lxMatrix44CPTR mat, lxVector3PTR vec);
 
 LUX_API void lxMatrix44Clear(lxMatrix44PTR mat);
 LUX_API void lxMatrix44ClearRot(lxMatrix44PTR mat);
 LUX_API void lxMatrix44ClearTranslation(lxMatrix44PTR mat);
 
-LUX_API void lxMatrix44VectorTransform( const lxMatrix44PTR mat, lxVector3PTR v1 );
-LUX_API void lxMatrix44VectorInvTransform( const lxMatrix44PTR mat, lxVector3PTR pVect );
-LUX_API void lxMatrix44VectorRotate( const lxMatrix44PTR mat, lxVector3PTR v1 );
-LUX_API void lxMatrix44VectorInvRotate( const lxMatrix44PTR mat, lxVector3PTR pVect );
-LUX_API void lxMatrix44VectorTranslate( const lxMatrix44PTR mat, lxVector3PTR pVect );
-LUX_API void lxMatrix44VectorInvTranslate( const lxMatrix44PTR mat, lxVector3PTR pVect );
+LUX_API void lxMatrix44VectorTransform( lxMatrix44CPTR mat, lxVector3PTR v1 );
+LUX_API void lxMatrix44VectorInvTransform( lxMatrix44CPTR mat, lxVector3PTR pVect );
+LUX_API void lxMatrix44VectorRotate( lxMatrix44CPTR mat, lxVector3PTR v1 );
+LUX_API void lxMatrix44VectorInvRotate( lxMatrix44CPTR mat, lxVector3PTR pVect );
+LUX_API void lxMatrix44VectorTranslate( lxMatrix44CPTR mat, lxVector3PTR pVect );
+LUX_API void lxMatrix44VectorInvTranslate( lxMatrix44CPTR mat, lxVector3PTR pVect );
 
-LUX_API void lxMatrix44Multiply( lxMatrix44PTR dst, const lxMatrix44PTR mat1,  const lxMatrix44PTR mat2 );
-LUX_API void lxMatrix44Multiply1( lxMatrix44PTR mat1,  const lxMatrix44PTR mat2 );
-LUX_API void lxMatrix44Multiply2( const lxMatrix44PTR mat1,  lxMatrix44PTR mat2 );
-LUX_API void lxMatrix44MultiplyFull( lxMatrix44PTR clip, const lxMatrix44PTR proj , const lxMatrix44PTR modl);
+LUX_API void lxMatrix44Multiply( lxMatrix44PTR dst, lxMatrix44CPTR mat1,  lxMatrix44CPTR mat2 );
+LUX_API void lxMatrix44Multiply1( lxMatrix44PTR mat1,  lxMatrix44CPTR mat2 );
+LUX_API void lxMatrix44Multiply2( lxMatrix44CPTR mat1,  lxMatrix44PTR mat2 );
+LUX_API void lxMatrix44MultiplyFull( lxMatrix44PTR clip, lxMatrix44CPTR proj , lxMatrix44CPTR modl);
 
-LUX_API void lxMatrix44MultiplyRot(lxMatrix44PTR dst, const lxMatrix44PTR mat1, const lxMatrix44PTR mat2 );
-LUX_API void lxMatrix44MultiplyRot1( lxMatrix44PTR mat1, const lxMatrix44PTR mat2 );
-LUX_API void lxMatrix44MultiplyRot2( const lxMatrix44PTR mat1,  lxMatrix44PTR mat2 );
+LUX_API void lxMatrix44MultiplyRot(lxMatrix44PTR dst, lxMatrix44CPTR mat1, lxMatrix44CPTR mat2 );
+LUX_API void lxMatrix44MultiplyRot1( lxMatrix44PTR mat1, lxMatrix44CPTR mat2 );
+LUX_API void lxMatrix44MultiplyRot2( lxMatrix44CPTR mat1,  lxMatrix44PTR mat2 );
 
 LUX_API void lxMatrix44OrthonormalizeA(lxMatrix44PTR dst,lxMatrix44PTR src);
 
-LUX_API void lxMatrix44Transpose(lxMatrix44PTR dst, const lxMatrix44PTR src);
+LUX_API void lxMatrix44Transpose(lxMatrix44PTR dst, lxMatrix44CPTR src);
 LUX_API void lxMatrix44Transpose1(lxMatrix44PTR mat);
-LUX_API void lxMatrix44TransposeRot(lxMatrix44PTR dst, const lxMatrix44PTR src);
+LUX_API void lxMatrix44TransposeRot(lxMatrix44PTR dst, lxMatrix44CPTR src);
 LUX_API void lxMatrix44TransposeRot1(lxMatrix44PTR mat);
-LUX_API void lxMatrix44TransposeRotIdentity(lxMatrix44PTR dst, const lxMatrix44PTR src);
+LUX_API void lxMatrix44TransposeRotIdentity(lxMatrix44PTR dst, lxMatrix44CPTR src);
 
-LUX_API void lxMatrix44Invert(lxMatrix44PTR dst, const lxMatrix44PTR src);
+LUX_API void lxMatrix44Invert(lxMatrix44PTR dst, lxMatrix44CPTR src);
 LUX_API void lxMatrix44Invert1(lxMatrix44PTR mat);
-LUX_API void lxMatrix44AffineInvert(lxMatrix44PTR dst, const lxMatrix44PTR src);
+LUX_API void lxMatrix44AffineInvert(lxMatrix44PTR dst, lxMatrix44CPTR src);
 
 // rotation
-LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, const lxVector3PTR forward,const lxVector3PTR up, int axis);
-LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, const lxVector3PTR from, const lxVector3PTR to, const lxVector3PTR up);
+LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3CPTR forward,lxVector3CPTR up, int axis);
+LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, lxVector3CPTR from, lxVector3CPTR to, lxVector3CPTR up);
 
-LUX_API void lxMatrix44FromEulerZYX( lxMatrix44PTR mat, const lxVector3PTR angles );
-LUX_API void lxMatrix44FromEulerZYXdeg( lxMatrix44PTR mat, const lxVector3PTR angles );
+LUX_API void lxMatrix44FromEulerZYX( lxMatrix44PTR mat, lxVector3CPTR angles );
+LUX_API void lxMatrix44FromEulerZYXdeg( lxMatrix44PTR mat, lxVector3CPTR angles );
 LUX_API void lxMatrix44FromEulerXYZ(lxMatrix44PTR mat, lxVector3PTR angles);
-LUX_API void lxMatrix44FromAngleAxisFast(lxMatrix44PTR mat, const lxVector3PTR axis, 
+LUX_API void lxMatrix44FromAngleAxisFast(lxMatrix44PTR mat, lxVector3CPTR axis, 
                  float cos, float sin, float oneminuscos);
-LUX_API void lxMatrix44FromAngleAxis(lxMatrix44PTR mat, float anglerad, const lxVector3PTR axis);
+LUX_API void lxMatrix44FromAngleAxis(lxMatrix44PTR mat, float anglerad, lxVector3CPTR axis);
 LUX_API void lxMatrix44RotateAngle(lxMatrix44PTR mat, lxVector3PTR from, lxVector3PTR to);
 LUX_API void lxMatrix44RotateAroundVector(lxMatrix44PTR mat, lxVector3PTR axis, float angleRad);
-LUX_API void lxMatrix44RotateAroundPoint( lxMatrix44PTR mat,  const lxVector3PTR center, const lxVector3PTR angles);
+LUX_API void lxMatrix44RotateAroundPoint( lxMatrix44PTR mat,  lxVector3CPTR center, lxVector3CPTR angles);
 
-LUX_API void lxMatrix44ToEulerXYZ( const lxMatrix44PTR mat, lxVector3PTR angles);
-LUX_API void lxMatrix44ToEulerZYX( const lxMatrix44PTR mat, lxVector3PTR angles);
+LUX_API void lxMatrix44ToEulerXYZ( lxMatrix44CPTR mat, lxVector3PTR angles);
+LUX_API void lxMatrix44ToEulerZYX( lxMatrix44CPTR mat, lxVector3PTR angles);
 
 // projection
 LUX_API void lxMatrix44Perspective(lxMatrix44PTR mat, const float fov, 
@@ -91,9 +91,9 @@ LUX_API void lxMatrix44Ortho(lxMatrix44PTR mat, const float height,
 LUX_API void lxMatrix44OrthoDirect(lxMatrix44PTR mat, const float left, const float right, 
           const float bottom, const float top, 
           const float front, const float back);
-LUX_API void lxMatrix44PlaneProjection(lxMatrix44PTR mat, const lxVector3PTR planenormal);
-LUX_API void lxMatrix44ModifyProjectionClipplane(lxMatrix44PTR projmatrix,const lxMatrix44PTR mview, 
-          const lxMatrix44PTR mviewinv, const lxVector4PTR clipPlane);
+LUX_API void lxMatrix44PlaneProjection(lxMatrix44PTR mat, lxVector3CPTR planenormal);
+LUX_API void lxMatrix44ModifyProjectionClipplane(lxMatrix44PTR projmatrix,lxMatrix44CPTR mview, 
+          lxMatrix44CPTR mviewinv, lxVector4CPTR clipPlane);
 LUX_API void lxMatrix44Reflection(lxMatrix44PTR mat,lxVector4PTR plane);
 
 // misc
@@ -111,7 +111,7 @@ LUX_API void  lxMatrix44Swizzle1(lxMatrix44PTR mat, uint axis[3], lxVector3PTR d
 
 LUX_API extern const float lx_gMatrix44_ident[16];
 
-LUX_INLINE void lxMatrix44Copy(lxMatrix44PTR dst, const lxMatrix44PTR src)
+LUX_INLINE void lxMatrix44Copy(lxMatrix44PTR dst, lxMatrix44CPTR src)
 {
   memcpy(dst,src,sizeof(lxMatrix44));
   /*
@@ -125,7 +125,7 @@ LUX_INLINE void lxMatrix44Copy(lxMatrix44PTR dst, const lxMatrix44PTR src)
   (dst)[14] = (src)[14]; (dst)[15] = (src)[15];
   */
 }
-LUX_INLINE void lxMatrix44CopyRot(lxMatrix44PTR dst, const lxMatrix44PTR src) 
+LUX_INLINE void lxMatrix44CopyRot(lxMatrix44PTR dst, lxMatrix44CPTR src) 
 {
   (dst)[0]  = (src)[0];  (dst)[1]  = (src)[1];  
   (dst)[2]  = (src)[2];   
@@ -135,7 +135,7 @@ LUX_INLINE void lxMatrix44CopyRot(lxMatrix44PTR dst, const lxMatrix44PTR src)
   (dst)[10] = (src)[10];
 }
 
-LUX_INLINE void lxMatrix44CopyRotTransposed(lxMatrix44PTR dst, const lxMatrix44PTR src) 
+LUX_INLINE void lxMatrix44CopyRotTransposed(lxMatrix44PTR dst, lxMatrix44CPTR src) 
 { 
   (dst)[0]  = (src)[0];  (dst)[4]  = (src)[1];  
   (dst)[8]  = (src)[2];   
@@ -179,7 +179,7 @@ LUX_INLINE void lxMatrix44ClearTranslation(lxMatrix44PTR matrix)
   matrix[12] = matrix[13] = matrix[14] = 0.0f;
 }
 
-LUX_INLINE void lxMatrix44FromAngleAxisFast(lxMatrix44PTR mat, const lxVector3PTR axis, float c, float s, float oneminusc)
+LUX_INLINE void lxMatrix44FromAngleAxisFast(lxMatrix44PTR mat, lxVector3CPTR axis, float c, float s, float oneminusc)
 {
   float tmp1,tmp2;
 
@@ -203,9 +203,9 @@ LUX_INLINE void lxMatrix44FromAngleAxisFast(lxMatrix44PTR mat, const lxVector3PT
   (mat)[9] = tmp1 - tmp2;
 }
 
-LUX_INLINE const lxMatrix44PTR lxMatrix44GetIdentity()
+LUX_INLINE lxMatrix44CPTR lxMatrix44GetIdentity()
 {
-  return (const lxMatrix44PTR)lx_gMatrix44_ident;
+  return (lxMatrix44CPTR)lx_gMatrix44_ident;
 }
 
 LUX_INLINE void lxMatrix44Identity(lxMatrix44PTR m_mat)
@@ -213,7 +213,7 @@ LUX_INLINE void lxMatrix44Identity(lxMatrix44PTR m_mat)
   lxMatrix44Copy(m_mat,lxMatrix44GetIdentity());
 }
 
-LUX_INLINE void lxMatrix44FromAngleAxis(lxMatrix44PTR matrix, float anglerad, const lxVector3PTR axis)
+LUX_INLINE void lxMatrix44FromAngleAxis(lxMatrix44PTR matrix, float anglerad, lxVector3CPTR axis)
 {
   float c,s,oneminusc;
   c = lxFastCos(anglerad);
@@ -222,7 +222,7 @@ LUX_INLINE void lxMatrix44FromAngleAxis(lxMatrix44PTR matrix, float anglerad, co
   lxMatrix44FromAngleAxisFast(matrix,axis,c,s,oneminusc);
 }
 
-LUX_INLINE void lxMatrix44PlaneProjection(lxMatrix44PTR matrix, const lxVector3PTR planenormal)
+LUX_INLINE void lxMatrix44PlaneProjection(lxMatrix44PTR matrix, lxVector3CPTR planenormal)
 {
   matrix[3] = matrix[7] = matrix[11] = 0.0f;
   matrix[15] = 1.0f;
@@ -232,7 +232,7 @@ LUX_INLINE void lxMatrix44PlaneProjection(lxMatrix44PTR matrix, const lxVector3P
     -planenormal[0]*planenormal[2],   -planenormal[1]*planenormal[2],   (planenormal[0]*planenormal[0])+(planenormal[1]*planenormal[1]));
 }
 
-LUX_INLINE void lxMatrix44VectorRotate( const lxMatrix44PTR mat, lxVector3PTR v1 )
+LUX_INLINE void lxMatrix44VectorRotate( lxMatrix44CPTR mat, lxVector3PTR v1 )
 {
   float vector[3];
 
@@ -243,7 +243,7 @@ LUX_INLINE void lxMatrix44VectorRotate( const lxMatrix44PTR mat, lxVector3PTR v1
   lxVector3Copy(v1,vector);
 }
 
-LUX_INLINE void lxMatrix44VectorInvRotate( const lxMatrix44PTR m_mat, lxVector3PTR pVect )
+LUX_INLINE void lxMatrix44VectorInvRotate( lxMatrix44CPTR m_mat, lxVector3PTR pVect )
 {
   float vec[3];
 
@@ -254,38 +254,38 @@ LUX_INLINE void lxMatrix44VectorInvRotate( const lxMatrix44PTR m_mat, lxVector3P
   lxVector3Copy(pVect, vec);
 }
 
-LUX_INLINE void lxMatrix44VectorTranslate( const lxMatrix44PTR m_mat, lxVector3PTR pVect )
+LUX_INLINE void lxMatrix44VectorTranslate( lxMatrix44CPTR m_mat, lxVector3PTR pVect )
 {
   pVect[0] = pVect[0]+m_mat[12];
   pVect[1] = pVect[1]+m_mat[13];
   pVect[2] = pVect[2]+m_mat[14];
 }
 
-LUX_INLINE void lxMatrix44VectorInvTranslate( const lxMatrix44PTR m_mat, lxVector3PTR pVect )
+LUX_INLINE void lxMatrix44VectorInvTranslate( lxMatrix44CPTR m_mat, lxVector3PTR pVect )
 {
   pVect[0] = pVect[0]-m_mat[12];
   pVect[1] = pVect[1]-m_mat[13];
   pVect[2] = pVect[2]-m_mat[14];
 }
 
-LUX_INLINE void lxMatrix44VectorTransform( const lxMatrix44PTR mat, lxVector3PTR v1 )
+LUX_INLINE void lxMatrix44VectorTransform( lxMatrix44CPTR mat, lxVector3PTR v1 )
 {
   lxVector3Transform1(v1,mat);
 }
 
-LUX_INLINE void lxMatrix44VectorInvTransform( const lxMatrix44PTR mat, lxVector3PTR v1 )
+LUX_INLINE void lxMatrix44VectorInvTransform( lxMatrix44CPTR mat, lxVector3PTR v1 )
 {
   lxVector3InvTransform1(v1,mat);
 }
 
-LUX_INLINE float* lxMatrix44GetTranslation(const lxMatrix44PTR mat, lxVector3PTR vec){
+LUX_INLINE float* lxMatrix44GetTranslation(lxMatrix44CPTR mat, lxVector3PTR vec){
   vec[0] = mat[12];
   vec[1] = mat[13];
   vec[2] = mat[14];
   return vec;
 }
 
-LUX_INLINE void lxMatrix44MultiplyRot(lxMatrix44PTR newmat, const lxMatrix44PTR m_mat, const lxMatrix44PTR mat )
+LUX_INLINE void lxMatrix44MultiplyRot(lxMatrix44PTR newmat, lxMatrix44CPTR m_mat, lxMatrix44CPTR mat )
 {
   const float *a_mat = m_mat,*b_mat = mat;
 
@@ -303,7 +303,7 @@ LUX_INLINE void lxMatrix44MultiplyRot(lxMatrix44PTR newmat, const lxMatrix44PTR 
 
 }
 
-LUX_INLINE void lxMatrix44Multiply( lxMatrix44PTR newmat, const lxMatrix44PTR m_mat,  const lxMatrix44PTR mat )
+LUX_INLINE void lxMatrix44Multiply( lxMatrix44PTR newmat, lxMatrix44CPTR m_mat,  lxMatrix44CPTR mat )
 {
   const float *a_mat = m_mat,*b_mat = mat;
 
@@ -328,7 +328,7 @@ LUX_INLINE void lxMatrix44Multiply( lxMatrix44PTR newmat, const lxMatrix44PTR m_
   newmat[15] = 1;
 }
 
-LUX_INLINE void lxMatrix44MultiplyFull( lxMatrix44PTR clip, const lxMatrix44PTR proj , const lxMatrix44PTR modl)
+LUX_INLINE void lxMatrix44MultiplyFull( lxMatrix44PTR clip, lxMatrix44CPTR proj , lxMatrix44CPTR modl)
 {
 
   clip[ 0] = modl[ 0] * proj[ 0] + modl[ 1] * proj[ 4] + modl[ 2] * proj[ 8] + modl[ 3] * proj[12];
@@ -353,7 +353,7 @@ LUX_INLINE void lxMatrix44MultiplyFull( lxMatrix44PTR clip, const lxMatrix44PTR 
 
 }
 
-LUX_INLINE void lxMatrix44MultiplyRot1( lxMatrix44PTR m_mat, const lxMatrix44PTR mat )
+LUX_INLINE void lxMatrix44MultiplyRot1( lxMatrix44PTR m_mat, lxMatrix44CPTR mat )
 {
   lxMatrix44 newmat;
   const float *a_mat,*b_mat;
@@ -375,7 +375,7 @@ LUX_INLINE void lxMatrix44MultiplyRot1( lxMatrix44PTR m_mat, const lxMatrix44PTR
 }
 
 
-LUX_INLINE void lxMatrix44Multiply1( lxMatrix44PTR m_mat,  const lxMatrix44PTR mat )
+LUX_INLINE void lxMatrix44Multiply1( lxMatrix44PTR m_mat,  lxMatrix44CPTR mat )
 {
   lxMatrix44 newmat;
   const float *a_mat,*b_mat;
@@ -404,7 +404,7 @@ LUX_INLINE void lxMatrix44Multiply1( lxMatrix44PTR m_mat,  const lxMatrix44PTR m
   lxMatrix44Copy(m_mat,newmat);
 }
 
-LUX_INLINE void lxMatrix44MultiplyRot2( const lxMatrix44PTR m_mat, lxMatrix44PTR mat )
+LUX_INLINE void lxMatrix44MultiplyRot2( lxMatrix44CPTR m_mat, lxMatrix44PTR mat )
 {
   lxMatrix44 newmat;
   const float *a_mat,*b_mat;
@@ -425,7 +425,7 @@ LUX_INLINE void lxMatrix44MultiplyRot2( const lxMatrix44PTR m_mat, lxMatrix44PTR
   lxMatrix44CopyRot(mat,newmat);
 }
 
-LUX_INLINE void lxMatrix44Multiply2( const lxMatrix44PTR m_mat,  lxMatrix44PTR mat )
+LUX_INLINE void lxMatrix44Multiply2( lxMatrix44CPTR m_mat,  lxMatrix44PTR mat )
 {
   lxMatrix44 newmat;
   const float *a_mat,*b_mat;
@@ -454,28 +454,28 @@ LUX_INLINE void lxMatrix44Multiply2( const lxMatrix44PTR m_mat,  lxMatrix44PTR m
   lxMatrix44Copy(mat,newmat);
 }
 
-LUX_INLINE void lxMatrix44SetTranslation( lxMatrix44PTR m_mat, const lxVector3PTR translation )
+LUX_INLINE void lxMatrix44SetTranslation( lxMatrix44PTR m_mat, lxVector3CPTR translation )
 {
   m_mat[12] = translation[0];
   m_mat[13] = translation[1];
   m_mat[14] = translation[2];
 }
 
-LUX_INLINE void lxMatrix44SetInvTranslation( lxMatrix44PTR m_mat, const lxVector3PTR translation )
+LUX_INLINE void lxMatrix44SetInvTranslation( lxMatrix44PTR m_mat, lxVector3CPTR translation )
 {
   m_mat[12] = -translation[0];
   m_mat[13] = -translation[1];
   m_mat[14] = -translation[2];
 }
 
-LUX_INLINE void lxMatrix44SetScale( lxMatrix44PTR mat, const lxVector3PTR scale)
+LUX_INLINE void lxMatrix44SetScale( lxMatrix44PTR mat, lxVector3CPTR scale)
 {
   mat[0] =scale[0];
   mat[5] =scale[1];
   mat[10] =scale[2];
 }
 
-LUX_INLINE void lxMatrix44PreScale( lxMatrix44PTR dst, const lxMatrix44PTR mat, const lxVector3PTR scale)
+LUX_INLINE void lxMatrix44PreScale( lxMatrix44PTR dst, lxMatrix44CPTR mat, lxVector3CPTR scale)
 {
   lxVector4Scale(&dst[0], &mat[0], scale[0]);
   lxVector4Scale(&dst[4], &mat[4], scale[1]);
@@ -510,7 +510,7 @@ LUX_INLINE void lxMatrix44TransposeRot1(lxMatrix44PTR mat)
   tmp = mat[6]; mat[6] = mat[9]; mat[9] = tmp;
 }
 
-LUX_INLINE void lxMatrix44TransposeRot(lxMatrix44PTR mat, const lxMatrix44PTR oldmat)
+LUX_INLINE void lxMatrix44TransposeRot(lxMatrix44PTR mat, lxMatrix44CPTR oldmat)
 {
   mat[0]=oldmat[0];
   mat[4]=oldmat[1];
@@ -525,7 +525,7 @@ LUX_INLINE void lxMatrix44TransposeRot(lxMatrix44PTR mat, const lxMatrix44PTR ol
   mat[10]=oldmat[10];
 }
 
-LUX_INLINE void lxMatrix44TransposeRotIdentity(lxMatrix44PTR mat, const lxMatrix44PTR oldmat)
+LUX_INLINE void lxMatrix44TransposeRotIdentity(lxMatrix44PTR mat, lxMatrix44CPTR oldmat)
 {
   mat[0]=oldmat[0];
   mat[4]=oldmat[1];
@@ -548,7 +548,7 @@ LUX_INLINE void lxMatrix44TransposeRotIdentity(lxMatrix44PTR mat, const lxMatrix
   mat[15]=1.0f;
 }
 
-LUX_INLINE void lxMatrix44Transpose(lxMatrix44PTR mat, const lxMatrix44PTR oldmat){
+LUX_INLINE void lxMatrix44Transpose(lxMatrix44PTR mat, lxMatrix44CPTR oldmat){
   mat[0]=oldmat[0];
   mat[4]=oldmat[1];
   mat[8]=oldmat[2];
@@ -608,7 +608,7 @@ LUX_INLINE void lxMatrix44Invert1(lxMatrix44PTR m)
   lxMatrix44Copy(m,invmat);
 }
 
-LUX_INLINE void lxMatrix44AffineInvert(lxMatrix44PTR outmat, const lxMatrix44PTR mat){
+LUX_INLINE void lxMatrix44AffineInvert(lxMatrix44PTR outmat, lxMatrix44CPTR mat){
   //Matrix44 outmat;
   outmat[0] = mat[0];
   outmat[1] = mat[4];

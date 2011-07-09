@@ -103,7 +103,7 @@ LUX_API booln lxContHash_remove(lxContHashPTR cv, uint32 key)
   
   return LUX_FALSE;
 }
-LUX_API booln lxContHash_get(const lxContHashPTR cv, uint32 key, void** outval)
+LUX_API booln lxContHash_get(lxContHashCPTR cv, uint32 key, void** outval)
 {
   uint idx = CONT_HASH_FUNC(cv,key);
   booln valueSize = cv->valueSize;
@@ -120,7 +120,7 @@ LUX_API booln lxContHash_get(const lxContHashPTR cv, uint32 key, void** outval)
   return LUX_FALSE;
 }
 
-LUX_API booln lxContHash_isEmpty(lxContHashPTR cv)
+LUX_API booln lxContHash_isEmpty(lxContHashCPTR cv)
 {
   uint tabsize = CONT_HASH_SIZE(cv);
   uint idx;
@@ -146,7 +146,7 @@ LUX_API void  lxContHash_iterate(lxContHashPTR cv, lxContHash_Iterator_fn *itfun
   }
 }
 
-LUX_API uint32  lxContHash_getFirstKey(const lxContHashPTR cv)
+LUX_API uint32  lxContHash_getFirstKey(lxContHashCPTR cv)
 {
   uint idx;
   uint tabsize = CONT_HASH_SIZE(cv);
@@ -159,7 +159,7 @@ LUX_API uint32  lxContHash_getFirstKey(const lxContHashPTR cv)
   }
   return 0;
 }
-LUX_API uint32  lxContHash_getNextKey(const lxContHashPTR cv, uint32 key)
+LUX_API uint32  lxContHash_getNextKey(lxContHashCPTR cv, uint32 key)
 {
   uint tabsize = CONT_HASH_SIZE(cv);
   uint idx = CONT_HASH_FUNC(cv,key);
@@ -184,12 +184,11 @@ LUX_API uint32  lxContHash_getNextKey(const lxContHashPTR cv, uint32 key)
   return 0;
 }
 
-LUX_API uint  lxContHash_getCount(const lxContHashPTR cv)
+LUX_API uint  lxContHash_getCount(lxContHashCPTR cv)
 {
   uint tabsize = CONT_HASH_SIZE(cv);
   uint idx;
   uint cnt = 0;
-  cv->mask = 0;
 
   for (idx = 0; idx < tabsize; idx++){
     lxContHashEntry_t* entry = cv->table[idx];
@@ -200,7 +199,7 @@ LUX_API uint  lxContHash_getCount(const lxContHashPTR cv)
   }
   return cnt;
 }
-LUX_API void* lxContHash_getNth(const lxContHashPTR cv, uint n)
+LUX_API void* lxContHash_getNth(lxContHashCPTR cv, uint n)
 {
   uint tabsize = CONT_HASH_SIZE(cv);
   uint idx;
@@ -330,7 +329,7 @@ LUX_API booln lxContPtrHash_remove(lxContPtrHashPTR cv, void* key)
 
   return LUX_FALSE;
 }
-LUX_API booln lxContPtrHash_get(const lxContPtrHashPTR cv, void* key, void** outval)
+LUX_API booln lxContPtrHash_get(lxContPtrHashCPTR cv, void* key, void** outval)
 {
   uint idx = CONT_HASH_FUNC(cv,key);
   booln valueSize = cv->valueSize;
@@ -347,7 +346,7 @@ LUX_API booln lxContPtrHash_get(const lxContPtrHashPTR cv, void* key, void** out
   return LUX_FALSE;
 }
 
-LUX_API booln lxContPtrHash_isEmpty(lxContPtrHashPTR cv)
+LUX_API booln lxContPtrHash_isEmpty(lxContPtrHashCPTR cv)
 {
   uint tabsize = CONT_HASH_SIZE(cv);
   uint idx;

@@ -23,6 +23,7 @@ extern "C"{
 */
 
 typedef struct lxMemoryPool_s* lxMemoryPoolPTR;
+typedef const struct lxMemoryPool_s* lxMemoryPoolCPTR;
 
   // actual pageValues is at least 1 less, due to pool management costs
 LUX_API lxMemoryPoolPTR lxMemoryPool_new (lxMemoryAllocatorPTR allocator, uint varSize, uint pageValues, uint alignSize, booln allowMultiPages);
@@ -36,8 +37,8 @@ LUX_API uint lxMemoryPool_memUsed(lxMemoryPoolPTR mem);
 LUX_API uint lxMemoryPool_memAllocated(lxMemoryPoolPTR mem);
 LUX_API float lxMemoryPool_memRatio(lxMemoryPoolPTR mem);
 
-LUX_API uint lxMemoryPool_varSize(const lxMemoryPoolPTR mem);
-LUX_API uint lxMemoryPool_alignSize(const lxMemoryPoolPTR mem);
+LUX_API uint lxMemoryPool_varSize(lxMemoryPoolCPTR mem);
+LUX_API uint lxMemoryPool_alignSize(lxMemoryPoolCPTR mem);
 
 
 #ifdef __cplusplus

@@ -40,7 +40,7 @@ LUX_API void  lxContVector_reserve(lxContVectorPTR cv,uint n)
 LUX_API void lxContVector_prepGrowth(lxContVectorPTR cv, uint delta)
 {
   const uint s = lxContVector_size(cv);
-  const uint smallThreshold = CONTVECTOR_SMALL;
+  const uint smallThreshold = LUX_CONTVECTOR_SMALL;
   if (s < smallThreshold)
   {
     lxContVector_reserve(cv,LUX_MAX(smallThreshold, delta));

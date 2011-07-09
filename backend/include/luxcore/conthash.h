@@ -19,6 +19,7 @@ extern "C"{
   //  the pointer passed is copied.
 
   typedef struct lxContHash_s* lxContHashPTR;
+  typedef const struct lxContHash_s* lxContHashCPTR;
 
   // if valueSize > 0 then each hash entry allocates enough space
   // and copies the value on "add", otherwise just stores the
@@ -31,18 +32,18 @@ extern "C"{
   // return true on overwrite
   LUX_API booln lxContHash_set(lxContHashPTR cv, uint32 key, const void *val);
   // return true on success and stores to outval
-  LUX_API booln lxContHash_get(const lxContHashPTR cv, uint32 key, void** outval);
+  LUX_API booln lxContHash_get(lxContHashCPTR cv, uint32 key, void** outval);
 
   // returns true on success
   LUX_API booln lxContHash_remove(lxContHashPTR cv, uint32 key);
 
-  LUX_API booln lxContHash_isEmpty(lxContHashPTR cv);
+  LUX_API booln lxContHash_isEmpty(lxContHashCPTR cv);
 
-  LUX_API uint  lxContHash_getCount(const lxContHashPTR cv);
-  LUX_API void* lxContHash_getNth(const lxContHashPTR cv, uint n);
+  LUX_API uint  lxContHash_getCount(lxContHashCPTR cv);
+  LUX_API void* lxContHash_getNth(lxContHashCPTR cv, uint n);
 
-  LUX_API uint32  lxContHash_getFirstKey(const lxContHashPTR cv);
-  LUX_API uint32  lxContHash_getNextKey(const lxContHashPTR cv, uint32 key);
+  LUX_API uint32  lxContHash_getFirstKey(lxContHashCPTR cv);
+  LUX_API uint32  lxContHash_getNextKey(lxContHashCPTR cv, uint32 key);
 
   // iterator returns fnData for next call
   LUX_API typedef void* (lxContHash_Iterator_fn)(void* fnData, uint32 key, void *val);
@@ -59,6 +60,7 @@ extern "C"{
   //  same as above but optimized for pointer hashing
 
   typedef struct lxContPtrHash_s* lxContPtrHashPTR;
+  typedef const struct lxContPtrHash_s* lxContPtrHashCPTR;
 
   // numBins must be power of 2
   LUX_API lxContPtrHashPTR  lxContPtrHash_new(lxMemoryAllocatorPTR allocator, uint numBins, uint valueSize);
@@ -67,11 +69,11 @@ extern "C"{
   // return true on overwrite
   LUX_API booln lxContPtrHash_set(lxContPtrHashPTR cv, void* key, const void *val);
   // return true on success and stores to outval
-  LUX_API booln lxContPtrHash_get(const lxContPtrHashPTR cv, void* key, void** outval);
+  LUX_API booln lxContPtrHash_get(lxContPtrHashCPTR cv, void* key, void** outval);
   // returns true on success
   LUX_API booln lxContPtrHash_remove(lxContPtrHashPTR cv, void* key);
 
-  LUX_API booln lxContPtrHash_isEmpty(lxContPtrHashPTR cv);
+  LUX_API booln lxContPtrHash_isEmpty(lxContPtrHashCPTR cv);
 
   // iterator returns fnData for next call
   LUX_API typedef void* (lxContPtrHash_Iterator_fn)(void* fnData, void* key, void *val);

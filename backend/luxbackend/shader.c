@@ -9,7 +9,7 @@
 //////////////////////////////////////////////////////////////////////////
 
 
-LUX_API void lxShaderProgram_init( lxShaderProgram_t* shader, lxStrDictPTR dict, lxgProgramPTR program, int numProgParams,lxgProgramParameter_t** gpuProgParams )
+LUX_API void lxShaderProgram_init( lxShaderProgram_t* shader, lxStrDictPTR dict, lxgProgramPTR program, int numProgParams,lxgProgramParameterPTR* gpuProgParams )
 {
   memset(shader,0,sizeof(lxShaderProgram_t));
   shader->program = program;
@@ -127,7 +127,7 @@ LUX_API void lxShaderProgram_useHash( lxShaderProgram_t* shader,lxContHashPTR ha
 }
 
 
-LUX_API int lxShaderProgram_getUpdateIndex( lxShaderProgram_t* shader, lxStrDictKey namekey, lxGLParameterType_t type )
+LUX_API lxShaderIndex lxShaderProgram_getUpdateIndex( lxShaderProgram_t* shader, lxStrDictKey namekey, lxGLParameterType_t type )
 {
   if (!shader->paramHash){
     uint i;
@@ -153,7 +153,7 @@ LUX_API int lxShaderProgram_getUpdateIndex( lxShaderProgram_t* shader, lxStrDict
 
 #define LUX_SHADER_PROPAGATE_SINGLE
 
-LUX_API void lxShaderUpdate_pushData( lxShaderUpdate_t* update, uint num, int* paramIndices, void** data )
+LUX_API void lxShaderUpdate_pushData( lxShaderUpdate_t* update, uint num, lxShaderIndex* paramIndices, void** data )
 {
   lxShaderProgram_t*  shader   = update->shader;
   int                 level    = ++update->level;

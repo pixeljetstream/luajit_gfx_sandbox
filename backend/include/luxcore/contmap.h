@@ -16,17 +16,18 @@ extern "C"{
   //  a simple map, that uses memcmp to for comparing keys
   //  Based on vector, therefore removal can be quite costly
 
+  typedef struct lxContMap_s* lxContMapPTR;
+  typedef const struct lxContMap_s* lxContMapCPTR;
+
   typedef struct lxContMap_s{
     lxContVector_t keys;
     lxContVector_t values;
   }lxContMap_t;
-  typedef lxContMap_t* lxContMapPTR;
-
 
   LUX_API void  lxContMap_init(lxContMapPTR cv, lxMemoryAllocatorPTR allocator, size_t keysize, size_t valsize);
   
   LUX_API booln lxContMap_set(lxContMapPTR cv, void *key, void *val);
-  LUX_API booln lxContMap_get(lxContMapPTR cv, void *key, void **outval);
+  LUX_API booln lxContMap_get(lxContMapCPTR cv, void *key, void **outval);
   LUX_API booln lxContMap_remove(lxContMapPTR cv, void *key);
 
     // frees memory

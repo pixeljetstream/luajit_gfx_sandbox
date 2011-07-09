@@ -15,10 +15,10 @@ extern "C"{
 
   //  3 Rows (xyz), 4 Columns (X,Y,Z,T)
 
-LUX_API const lxMatrix34PTR lxMatrix34GetIdentity();
-LUX_API void lxMatrix34Copy(lxMatrix34PTR dst, const lxMatrix34PTR src);
+LUX_API lxMatrix34CPTR lxMatrix34GetIdentity();
+LUX_API void lxMatrix34Copy(lxMatrix34PTR dst, lxMatrix34CPTR src);
 LUX_API void lxMatrix34Identity(lxMatrix34PTR mat);
-LUX_API void lxMatrix34TMultiply44( lxMatrix34PTR dst, const lxMatrix44PTR mat1,  const lxMatrix44PTR mat2 );
+LUX_API void lxMatrix34TMultiply44( lxMatrix34PTR dst, lxMatrix44CPTR mat1,  lxMatrix44CPTR mat2 );
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +29,7 @@ LUX_API void lxMatrix34TMultiply44( lxMatrix34PTR dst, const lxMatrix44PTR mat1,
 
 LUX_API extern const float lx_gMatrix34_ident[12];
 
-LUX_INLINE void lxMatrix34Copy(lxMatrix34PTR dst, const lxMatrix34PTR src)
+LUX_INLINE void lxMatrix34Copy(lxMatrix34PTR dst, lxMatrix34CPTR src)
 {
   (dst)[0]  = (src)[0];  (dst)[1]  = (src)[1];  
   (dst)[2]  = (src)[2];  (dst)[3]  = (src)[3];  
@@ -39,9 +39,9 @@ LUX_INLINE void lxMatrix34Copy(lxMatrix34PTR dst, const lxMatrix34PTR src)
   (dst)[10] = (src)[10]; (dst)[11] = (src)[11]; 
 }
 
-LUX_INLINE const lxMatrix34PTR lxMatrix34GetIdentity()
+LUX_INLINE lxMatrix34CPTR lxMatrix34GetIdentity()
 {
-  return (const lxMatrix34PTR)lx_gMatrix34_ident;
+  return (lxMatrix34CPTR)lx_gMatrix34_ident;
 }
 
 LUX_INLINE void lxMatrix34Identity(lxMatrix34PTR m_mat)
@@ -49,7 +49,7 @@ LUX_INLINE void lxMatrix34Identity(lxMatrix34PTR m_mat)
   lxMatrix34Copy(m_mat,lxMatrix34GetIdentity());
 }
 
-LUX_INLINE void lxMatrix34TMultiply44( lxMatrix34PTR newmat, const lxMatrix44PTR m_mat,  const lxMatrix44PTR mat )
+LUX_INLINE void lxMatrix34TMultiply44( lxMatrix34PTR newmat, lxMatrix44CPTR m_mat,  lxMatrix44CPTR mat )
 {
   const float *a_mat = m_mat;
   const float *b_mat = mat;

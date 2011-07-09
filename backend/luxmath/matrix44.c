@@ -15,7 +15,7 @@ const LUX_ALIGNSIMD_V(float lx_gMatrix44_ident[16]) =
   0.0f, 0.0f, 0.0f, 1.0f,
 };
 
-LUX_API void lxMatrix44FromEulerZYX( lxMatrix44PTR m_mat, const lxVector3PTR angles )
+LUX_API void lxMatrix44FromEulerZYX( lxMatrix44PTR m_mat, lxVector3CPTR angles )
 {
   float sxsy, cxsy;
 
@@ -73,7 +73,7 @@ LUX_API void lxMatrix44FromEulerXYZ(lxMatrix44PTR m_mat, lxVector3PTR angles)
   m_mat[10] = ( cx*cy );
 }
 
-LUX_API void lxMatrix44FromEulerZYXdeg( lxMatrix44PTR m_mat, const lxVector3PTR angles )
+LUX_API void lxMatrix44FromEulerZYXdeg( lxMatrix44PTR m_mat, lxVector3CPTR angles )
 {
   float vec[3];
   vec[0] = ( float )( LUX_DEG2RAD(angles[0]) );
@@ -82,7 +82,7 @@ LUX_API void lxMatrix44FromEulerZYXdeg( lxMatrix44PTR m_mat, const lxVector3PTR 
   lxMatrix44FromEulerZYX(m_mat, vec );
 }
 
-LUX_API void lxMatrix44ToEulerZYX( const lxMatrix44PTR mat, lxVector3PTR angles){
+LUX_API void lxMatrix44ToEulerZYX( lxMatrix44CPTR mat, lxVector3PTR angles){
   if ( mat[2] < 0.998f)
   {
     if ( mat[2] > -0.998f ) 
@@ -106,7 +106,7 @@ LUX_API void lxMatrix44ToEulerZYX( const lxMatrix44PTR mat, lxVector3PTR angles)
   }
 }
 
-LUX_API void lxMatrix44ToEulerXYZ( const lxMatrix44PTR a_mat, lxVector3PTR angles)
+LUX_API void lxMatrix44ToEulerXYZ( lxMatrix44CPTR a_mat, lxVector3PTR angles)
 {
 #if 0
   double angle_y = D =  asin( mat[8]); 
@@ -218,7 +218,7 @@ void lxMatrix44Ortho(lxMatrix44PTR mat, const float height, const float front, c
 }
 
 #define sgn(flt)  ((flt < 0.0f) ? -1.0f : ((flt > 0.0f) ? 1.0f : 0.0f ))
-LUX_API void lxMatrix44ModifyProjectionClipplane(lxMatrix44PTR projmatrix,const lxMatrix44PTR mview, const lxMatrix44PTR mviewinv, const lxVector4PTR clipPlane)
+LUX_API void lxMatrix44ModifyProjectionClipplane(lxMatrix44PTR projmatrix,lxMatrix44CPTR mview, lxMatrix44CPTR mviewinv, lxVector4CPTR clipPlane)
 {
   lxVector4   q;
   lxVector4   eyeplane;
@@ -264,14 +264,14 @@ LUX_API void lxMatrix44ModifyProjectionClipplane(lxMatrix44PTR projmatrix,const 
 }
 #undef sgn
 
-LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, const lxVector3PTR forwardn, const lxVector3PTR upn, int axis)
+LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3CPTR forwardn, lxVector3CPTR upn, int axis)
 {
   lxVector3 side;
   lxVector3 up;
   lxVector3 forward;
-  const lxVector3PTR x;
-  const lxVector3PTR y;
-  const lxVector3PTR z;
+  lxVector3CPTR x;
+  lxVector3CPTR y;
+  lxVector3CPTR z;
 
   lxVector3Copy(forward,forwardn);
 
@@ -317,7 +317,7 @@ LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, const lxVector3PTR forwardn, co
 
 }
 
-LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, const lxVector3PTR from, const lxVector3PTR to, const lxVector3PTR upn)
+LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, lxVector3CPTR from, lxVector3CPTR to, lxVector3CPTR upn)
 {
   lxMatrix44 m2;
   lxVector3 forward, side, up;
@@ -492,7 +492,7 @@ matrix[2][2] =      rcos + w*w*(1-rcos);
 
 */
 
-LUX_API void lxMatrix44RotateAroundPoint( lxMatrix44PTR transforms,  const lxVector3PTR center, const lxVector3PTR angles)
+LUX_API void lxMatrix44RotateAroundPoint( lxMatrix44PTR transforms,  lxVector3CPTR center, lxVector3CPTR angles)
 {
   lxMatrix44 rot;
 
@@ -576,7 +576,7 @@ LUX_API void lxMatrix44Swizzle1(lxMatrix44PTR mat, uint axis[3], lxVector3PTR di
   mat[3] = mat[7] = mat[11] = 0.0f;
 }
 
-LUX_API void lxMatrix44Invert(lxMatrix44PTR inverse, const lxMatrix44PTR src)
+LUX_API void lxMatrix44Invert(lxMatrix44PTR inverse, lxMatrix44CPTR src)
 {
   int i, j, k, swap;
   float t;

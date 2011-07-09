@@ -21,7 +21,7 @@ LUX_API void lxPlaneSet
 }
 
 LUX_API void lxPlaneIntersect
-(lxVector3 out, const lxPlanePTR planea,const lxPlanePTR planeb,const lxPlanePTR planec)
+(lxVector3 out, lxPlaneCPTR planea,lxPlaneCPTR planeb,lxPlaneCPTR planec)
 {
   // http://local.wasp.uwa.edu.au/~pbourke/geometry/3planes/
   lxVector3 da;

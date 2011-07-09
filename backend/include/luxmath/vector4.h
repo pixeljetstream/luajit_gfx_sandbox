@@ -44,10 +44,10 @@ LUX_API float lxVector4Distance( const lxVector4 a, const lxVector4 b);
 LUX_API float lxVector4DistanceA( const lxVector4 a, const lxVector4 b);
 LUX_API float lxVector4SqDistance(const lxVector4 a, const lxVector4 b);
 
-LUX_API void lxVector4Transform( lxVector4 output, const lxVector4 v1,  const lxMatrix44PTR mat ) ;
-LUX_API void lxVector4Transform1( lxVector4 v1,  const lxMatrix44PTR mat );
-LUX_API void lxVector4TransformT( lxVector4 output,  const lxVector4 v1,  const lxMatrix44PTR mat );
-LUX_API void lxVector4TransformT1( lxVector4 v1, const lxMatrix44PTR mat ) ;
+LUX_API void lxVector4Transform( lxVector4 output, const lxVector4 v1,  lxMatrix44CPTR mat ) ;
+LUX_API void lxVector4Transform1( lxVector4 v1,  lxMatrix44CPTR mat );
+LUX_API void lxVector4TransformT( lxVector4 output,  const lxVector4 v1,  lxMatrix44CPTR mat );
+LUX_API void lxVector4TransformT1( lxVector4 v1, lxMatrix44CPTR mat ) ;
 
 
 LUX_API void lxVector4float_FROM_ubyte( lxVector4 vec4, const uchar ub4[4]);
@@ -309,7 +309,7 @@ LUX_INLINE float lxVector4SqDistance(const lxVector4 a, const lxVector4 b)
   return temp[0]*temp[0]+ temp[1]*temp[1]+ temp[2]*temp[2];
 }
 
-LUX_INLINE void lxVector4Transform( lxVector4 output, const lxVector4 v1,  const lxMatrix44PTR mat ) 
+LUX_INLINE void lxVector4Transform( lxVector4 output, const lxVector4 v1,  lxMatrix44CPTR mat ) 
 {
   (output)[0] = (v1)[0]*(mat)[0]+(v1)[1]*(mat)[4]+(v1)[2]*(mat)[8]+(v1)[3]*(mat)[12];
   (output)[1] = (v1)[0]*(mat)[1]+(v1)[1]*(mat)[5]+(v1)[2]*(mat)[9]+(v1)[3]*(mat)[13];
@@ -317,7 +317,7 @@ LUX_INLINE void lxVector4Transform( lxVector4 output, const lxVector4 v1,  const
   (output)[3] = (v1)[0]*(mat)[3]+(v1)[1]*(mat)[7]+(v1)[2]*(mat)[11]+(v1)[3]*(mat)[15];
 }
 
-LUX_INLINE void lxVector4Transform1( lxVector4 v1,  const lxMatrix44PTR mat ) 
+LUX_INLINE void lxVector4Transform1( lxVector4 v1,  lxMatrix44CPTR mat ) 
 {
   lxVector4 vector;
 
@@ -328,7 +328,7 @@ LUX_INLINE void lxVector4Transform1( lxVector4 v1,  const lxMatrix44PTR mat )
   lxVector4Copy(v1,vector);
 }
 
-LUX_INLINE void lxVector4TransformT( lxVector4 output,  const lxVector4 v1,  const lxMatrix44PTR mat )
+LUX_INLINE void lxVector4TransformT( lxVector4 output,  const lxVector4 v1,  lxMatrix44CPTR mat )
 {
   (output)[0] = (v1)[0]*(mat)[0]+(v1)[1]*(mat)[1]+(v1)[2]*(mat)[2]+(v1)[3]*(mat)[3];
   (output)[1] = (v1)[0]*(mat)[4]+(v1)[1]*(mat)[5]+(v1)[2]*(mat)[6]+(v1)[3]*(mat)[7];
@@ -336,7 +336,7 @@ LUX_INLINE void lxVector4TransformT( lxVector4 output,  const lxVector4 v1,  con
   (output)[3] = (v1)[0]*(mat)[12]+(v1)[1]*(mat)[13]+(v1)[2]*(mat)[14]+(v1)[3]*(mat)[15];
 }
 
-LUX_INLINE void lxVector4TransformT1( lxVector4 v1, const lxMatrix44PTR mat ) 
+LUX_INLINE void lxVector4TransformT1( lxVector4 v1, lxMatrix44CPTR mat ) 
 {
   lxVector4 vector;
 

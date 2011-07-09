@@ -22,8 +22,8 @@
 extern "C"{
 #endif
 
-#define MEMORY_MEGS(a)    (a*1048576)
-#define MEMORY_KBS(a)   (a*1024)
+#define LUX_MEMORY_MEGS(a)    (a*1048576)
+#define LUX_MEMORY_KBS(a)   (a*1024)
 
   typedef struct lxMemoryAllocator_s* lxMemoryAllocatorPTR;
 

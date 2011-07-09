@@ -209,12 +209,12 @@ LUX_API float lxMemoryPool_memRatio(lxMemoryPoolPTR mem)
   return (float)lxMemoryPool_memUsed(mem)/(float)lxMemoryPool_memAllocated(mem);
 }
 
-LUX_API uint lxMemoryPool_varSize(const lxMemoryPoolPTR mem)
+LUX_API uint lxMemoryPool_varSize(lxMemoryPoolCPTR mem)
 {
   return mem->valueSize;
 }
 
-LUX_API uint lxMemoryPool_alignSize(const lxMemoryPoolPTR mem)
+LUX_API uint lxMemoryPool_alignSize(lxMemoryPoolCPTR mem)
 {
   return mem->alignSize;
 }
