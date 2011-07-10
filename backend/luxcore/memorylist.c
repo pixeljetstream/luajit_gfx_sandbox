@@ -129,10 +129,7 @@ LUX_API void lxMemoryList_freeItem (lxMemoryListPTR self, void* old, uint oldsiz
     lxMemoryAllocator_freeAligned(self->allocator,old,oldsize);
   }
   
-
-#ifdef LUX_PROFILING
-  LUX_PROFILING_OP( self->memAllocatedOuter -= oldsize);
-#endif
+  self->memAllocatedOuter -= oldsize;
 }
 
 LUX_API void* lxMemoryList_allocItem (lxMemoryListPTR self, uint size)

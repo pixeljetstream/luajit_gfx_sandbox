@@ -141,7 +141,7 @@ LUX_API void lxObjRefSys_deleteAlloc(lxObjRefSysPTR sys, lxObjRefPTR data)
     data->id.ptr = allocator->freerefs;
     data->id.type = LUX_OBJREF_TYPE_FREEALLOC;
     allocator->freerefs = data;
-    LUX_PROFILING_OP(sys->count--);
+    sys->count--;
   }
 }
 
@@ -149,7 +149,7 @@ static lxObjRef_t* lxObjRefSys_newAlloc(lxObjRefSysPTR sys){
   lxObjRefAllocSys_t* allocator = &sys->refalloc;
   lxObjRef_t* block;
 
-  LUX_PROFILING_OP(sys->count++);
+  sys->count++;
   if ( block = allocator->freerefs){
     allocator->freerefs = (lxObjRef_t*)block->id.ptr;
     return block;

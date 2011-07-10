@@ -29,12 +29,14 @@ extern "C"{
   //////////////////////////////////////////////////////////////////////////
   // Inline & Details
 
+#define LUX_HANDLE_TYPE    (6)
 #define LUX_HANDLE_IDX     (12)
+#define LUX_HANDLE_COUNTER (32 - LUX_HANDLE_IDX - LUX_HANDLE_TYPE)
 #define LUX_HANDLESYS_MAX  (1<<LUX_HANDLE_IDX)
 
   typedef struct Handle_s{
-    uint type : 8;
-    uint counter : 12;
+    uint type : LUX_HANDLE_TYPE;
+    uint counter : LUX_HANDLE_COUNTER;
     uint idx : LUX_HANDLE_IDX;
   }Handle_t;
 

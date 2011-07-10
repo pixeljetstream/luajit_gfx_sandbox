@@ -174,7 +174,8 @@ extern "C"{
       lxContVector_prepGrowth(cv,1);
     }
 
-    memcpy(cv->end-elemsize,data,elemsize);
+    memcpy(cv->end,data,elemsize);
+    cv->end += elemsize;
   }
   LUX_INLINE void lxContVector_pushBack(lxContVectorPTR cv, const void *data){
     lxContVector_pushBackS(cv,cv->elemsize,data);

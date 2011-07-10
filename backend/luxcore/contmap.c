@@ -24,8 +24,8 @@ LUX_API booln lxContMap_remove(lxContMapPTR cv, void *key)
   int idx = lxContVector_find(&cv->keys,key) ;
   if (idx != -1) return LUX_FALSE;
 
-  lxContVector_remove(&cv->keys,idx);
-  lxContVector_remove(&cv->values,idx);
+  lxContVector_removeUnsorted(&cv->keys,idx);
+  lxContVector_removeUnsorted(&cv->values,idx);
 
   return LUX_TRUE;
 }
