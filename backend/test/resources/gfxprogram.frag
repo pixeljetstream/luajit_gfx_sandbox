@@ -3,8 +3,11 @@
 #extension GL_ARB_uniform_buffer_object : enable
 #extension GL_NV_shader_buffer_load : enable
 
-varying vec2 inTexcoord;
-varying vec3 inNormal;
+// using older version to make sure lxgfx filters 
+// out potential gl_ named variables
+
+varying vec2 vTexcoord;
+varying vec3 vNormal;
 
 uniform int       arrtexIndex;
 uniform sampler2D arrtex[2];
@@ -38,15 +41,14 @@ subroutine uniform shuffle_fn shuffleFunc;
 
 void main()
 {
-  vec3 normal = abs(normalize(inNormal));
+  vec3 normal = abs(normalize(vNormal));
   vec4 color = (vec4)0;
   
   normal = shuffleFunc(normal);
   
   color += normal.x * xcolor[0];
   color += normal.y * ycolor;
-  color += normal.z * texture2D(ztex,inTexcoord);
+  color += normal.z * texture2D(ztex,vTexcoord);
   
-  
-  gl_FragColor = color;
+  gl_FragColor = vec4(normal*0.5+0.5,1) + 0.01 * color;
 }

@@ -587,6 +587,7 @@ static LUX_INLINE void lxgTexture_unbindDefault(lxgTexturePTR tex)
 LUX_API LUX_INLINE void lxgContext_applyTexture( lxgContextPTR ctx,   lxgTexturePTR tex, uint imageunit)
 {
   lxgTexturePTR old = ctx->textures[imageunit];
+  LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
   glActiveTexture(GL_TEXTURE0_ARB + imageunit);
   if (tex){
     glBindTexture(tex->gltarget,tex->glid);
@@ -596,6 +597,9 @@ LUX_API LUX_INLINE void lxgContext_applyTexture( lxgContextPTR ctx,   lxgTexture
   }
   lxGLErrorCheck();
   ctx->textures[imageunit] = tex;
+  if (!(ctx->capbits & LUXGFX_CAP_SM3)){
+    lxgContext_checkedTextureSampler(ctx,imageunit);
+  }
 }
 
 LUX_API void  lxgContext_applyTextures( lxgContextPTR ctx, lxgTexturePTR *texs, uint start, uint num)
@@ -605,6 +609,7 @@ LUX_API void  lxgContext_applyTextures( lxgContextPTR ctx, lxgTexturePTR *texs, 
     lxgContext_applyTexture(ctx, texs[i], i);
   }
 }
+
 
 LUX_API booln lxgTextureTarget_valid(lxgContextPTR ctx, lxGLTextureTarget_t type)
 {
@@ -1003,7 +1008,8 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
 
   lxgTexture_bindDefault(tex);
   tex->flags |= (ctx->capbits & LUXGFX_CAP_SM4) ? LUXGFX_TEXTUREFLAG_HASLOD : 0;
-  lxgSampler_init(&tex->sampler);
+  lxgSampler_init(&tex->sampler,ctx);
+  lxgSampler_deinit(&tex->sampler,ctx); // we actually don't want a gl-object for sampler state
   if (format == LUXGFX_TEXTURECHANNEL_DEPTH || format == LUXGFX_TEXTURECHANNEL_DEPTHSTENCIL){
     glTexParameteri(lxGLTARGET(tex),GL_DEPTH_TEXTURE_MODE,GL_LUMINANCE);
     tex->sampler.filter = (lxgSamplerFilter_t)((uint)tex->sampler.filter+4);
@@ -1017,7 +1023,7 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
   return LUX_TRUE;
 }
 
-LUX_API const lxVec3iPTR  lxgTexture_getMipSize(lxgTexturePTR tex, uint mipLevel)
+LUX_API lxVec3iCPTR  lxgTexture_getMipSize(lxgTextureCPTR tex, uint mipLevel)
 {
   return &tex->mipsizes[mipLevel];
 }
@@ -1231,7 +1237,7 @@ LUX_API booln lxgTexture_writeBuffer(lxgTexturePTR tex, uint side,
   return lxgTexture_writeData(tex,side,ascompressed,mip,datatype,dataformat,(void*)bufferoffset,buffer->size - bufferoffset);
 }
 
-LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSamplerPTR sampler, flags32 what)
+LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSamplerCPTR sampler, flags32 what)
 {
   static GLenum address[]= {
     LUXGL_SAMPLERADDRESS_REPEAT,
@@ -1319,9 +1325,9 @@ LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSampler
 
 LUX_API void lxgContext_clearTextureState(lxgContextPTR ctx)
 {
-  memset(ctx->textures,0,sizeof(lxgTexturePTR)*LUXGFX_MAX_TEXTURE_IMAGES);
-  memset(ctx->images,0,sizeof(lxgTextureImagePTR)*LUXGFX_MAX_TEXTURE_IMAGES);
-  memset(ctx->samplers,0,sizeof(lxgSamplerPTR)*LUXGFX_MAX_TEXTURE_IMAGES);
+  memset((void*)ctx->textures,0,sizeof(lxgTexturePTR)*LUXGFX_MAX_TEXTURE_IMAGES);
+  memset((void*)ctx->images,0,sizeof(lxgTextureImageCPTR)*LUXGFX_MAX_TEXTURE_IMAGES);
+  memset((void*)ctx->samplers,0,sizeof(lxgSamplerCPTR)*LUXGFX_MAX_TEXTURE_IMAGES);
 }
 
 LUX_API void lxgContext_setTextureCompare(lxgContextPTR ctx, uint imageunit, lxGLCompareMode_t cmp)
@@ -1329,26 +1335,40 @@ LUX_API void lxgContext_setTextureCompare(lxgContextPTR ctx, uint imageunit, lxG
   lxgTexturePTR tex = ctx->textures[imageunit];
   booln run = cmp != LUXGL_COMPARE_DONTEXECUTE;
 
+  LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
+  LUX_DEBUGASSERT(tex);
+
   glActiveTexture(GL_TEXTURE0_ARB + imageunit);
   glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_MODE_ARB,
     run ? GL_COMPARE_R_TO_TEXTURE : GL_NONE);
 
   glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_FUNC_ARB,run ? cmp : GL_LEQUAL);
   tex->sampler.cmpfunc = cmp;
+  tex->sampler.incarnation++;
+  tex->lastSampler = &tex->sampler;
+  tex->lastSamplerIncarnation = tex->sampler.incarnation;
 }
 
 
-LUX_API void lxgContext_setTextureSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler , flags32 what)
+LUX_API void lxgContext_setTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what)
 {
-
   lxgTexturePTR tex = ctx->textures[imageunit];
+  lxgSamplerCPTR sampler = ctx->samplers[imageunit];
+
+  LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
+  LUX_DEBUGASSERT(tex && sampler);
+
   glActiveTexture(GL_TEXTURE0_ARB + imageunit);
   lxgTexture_boundSetSampler(tex,sampler,what);
 }
 
-LUX_API void lxgContext_changedTextureSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what){
+LUX_API void lxgContext_changedTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what){
   lxgTexturePTR tex = ctx->textures[imageunit];
+  lxgSamplerCPTR sampler = ctx->samplers[imageunit];
   flags32 change = 0;
+
+  LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
+  LUX_DEBUGASSERT(tex && sampler);
 
   change |= LUXGFX_SAMPLERATTRIB_ANISO * !!(what & LUXGFX_SAMPLERATTRIB_ANISO && sampler->aniso != tex->sampler.aniso);
   change |= LUXGFX_SAMPLERATTRIB_CMP * !!(what & LUXGFX_SAMPLERATTRIB_CMP && sampler->cmpfunc != tex->sampler.cmpfunc);
@@ -1366,13 +1386,22 @@ LUX_API void lxgContext_changedTextureSampler(lxgContextPTR ctx, uint imageunit,
   }
 }
 
+LUX_API void lxgTexture_getSampler( lxgTextureCPTR tex, lxgSamplerPTR sampler )
+{
+  GLuint glid = sampler->glid;
+  uint32 incarnation = sampler->incarnation;
+  memcpy(sampler, &tex->sampler, sizeof(lxgSampler_t));
+  sampler->glid = glid;
+  sampler->incarnation = incarnation;
+  lxgSampler_update(sampler);
+}
 
 
 
 //////////////////////////////////////////////////////////////////////////
 // lxgSampler_t
 
-LUX_API void lxgSampler_init( lxgSamplerPTR self )
+LUX_API void lxgSampler_init( lxgSamplerPTR self, lxgContextPTR ctx )
 {
   self->glid = 0;
   self->filter = LUXGFX_SAMPLERFILTER_LINEAR;
@@ -1385,8 +1414,16 @@ LUX_API void lxgSampler_init( lxgSamplerPTR self )
   self->lod.bias = 0.0f;
   self->cmpfunc = LUXGL_COMPARE_LEQUAL;
   LUX_ARRAY4SET(self->border,0,0,0,0);
+  if (ctx->capbits & LUXGFX_CAP_SM3){
+    glGenSamplers(1,&self->glid);
+  }
 }
 
+LUX_API void lxgSampler_deinit(lxgSamplerPTR self, lxgContextPTR ctx)
+{
+  if (self->glid) glDeleteSamplers(1,&self->glid);
+  self->glid = 0;
+}
 
 LUX_API void lxgSampler_setAddress(lxgSamplerPTR self, uint n, lxgSamplerAddress_t address)
 {
@@ -1404,23 +1441,7 @@ LUX_API void lxgSampler_setCompare(lxgSamplerPTR self, lxGLCompareMode_t cmp)
   self->cmpfunc = (cmp);
 }
 
-LUX_API void lxgSampler_changed(lxgSamplerPTR self)
-{
-  self->incarnation++;
-}
-
-LUX_API void lxgSampler_initHW(lxgSamplerPTR self, lxgContextPTR ctx)
-{
-  lxgSampler_init(self);
-  glGenSamplers(1,&self->glid);
-}
-
-LUX_API void lxgSampler_deinitHW(lxgSamplerPTR self, lxgContextPTR ctx)
-{
-  if (self->glid) glDeleteSamplers(1,&self->glid);
-}
-
-LUX_API void lxgSampler_updateHW(lxgSamplerPTR sampler)
+static void lxgSampler_updateHW(lxgSamplerPTR sampler)
 {
   static GLenum address[] = {
     LUXGL_SAMPLERADDRESS_REPEAT,
@@ -1475,11 +1496,24 @@ LUX_API void lxgSampler_updateHW(lxgSamplerPTR sampler)
   lxGLErrorCheck();
 }
 
-LUX_API LUX_INLINE void lxgContext_applySampler( lxgContextPTR ctx, lxgSamplerPTR self, uint imageunit)
+LUX_API void lxgSampler_update(lxgSamplerPTR sampler)
 {
-  ctx->samplers[imageunit] = self;
-  if (self){
-    if (self->glid) glBindSampler(imageunit,self->glid);
+  sampler->incarnation++;
+  if (sampler->glid){
+    lxgSampler_updateHW(sampler);
+  }
+}
+
+
+LUX_API LUX_INLINE void lxgContext_applySampler( lxgContextPTR ctx, lxgSamplerCPTR sampler, uint imageunit)
+{
+  LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
+  ctx->samplers[imageunit] = sampler;
+  
+  if (sampler){
+    if (sampler->glid){
+      glBindSampler(imageunit,sampler->glid);
+    }
   }
   else if (ctx->capbits & LUXGFX_CAP_SM4){
     glBindSampler(imageunit,0);
@@ -1487,7 +1521,7 @@ LUX_API LUX_INLINE void lxgContext_applySampler( lxgContextPTR ctx, lxgSamplerPT
   lxGLErrorCheck();
 }
 
-LUX_API void  lxgContext_applySamplers( lxgContextPTR ctx, lxgSamplerPTR *samps, uint start, uint num)
+LUX_API void  lxgContext_applySamplers( lxgContextPTR ctx, lxgSamplerCPTR *samps, uint start, uint num)
 {
   uint i;
   for (i = 0; i < num; i++){
@@ -1535,14 +1569,15 @@ LUX_API void  lxgRenderBuffer_deinit(lxgRenderBufferPTR rb,lxgContextPTR ctx)
 
 //////////////////////////////////////////////////////////////////////////
 
-LUX_API LUX_INLINE void  lxgContext_applyTextureImage( lxgContextPTR ctx, lxgTextureImagePTR img, uint imageunit)
+LUX_API LUX_INLINE void  lxgContext_applyTextureImage( lxgContextPTR ctx, lxgTextureImageCPTR img, uint imageunit)
 {
+  LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_RWTEXTURE_IMAGES);
   glBindImageTextureEXT(imageunit,img->tex->glid,img->level,img->layered,img->layer,img->glaccess,img->glformat);
   ctx->images[imageunit] = img;
 }
 
 
-LUX_API void  lxgContext_applyTextureImages( lxgContextPTR ctx, lxgTextureImagePTR *imgs, uint start, uint num)
+LUX_API void  lxgContext_applyTextureImages( lxgContextPTR ctx, lxgTextureImageCPTR *imgs, uint start, uint num)
 {
   int i;
   for (i = num-1; i >= 0; i--){
@@ -1701,4 +1736,5 @@ LUX_API booln lxgTextureImage_init( lxgTextureImagePTR img, lxgContextPTR ctx, l
 
   return !!(img->glformat);
 }
+
 

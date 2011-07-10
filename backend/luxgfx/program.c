@@ -553,7 +553,7 @@ static void lxgUpdateMat4x3NV(lxgProgramParameterPTR param, lxgContextPTR ctx, c
 }
 
 static void lxgUpdateUint64NV(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
-  int i;
+  uint i;
   const uint64* vec = data;
   for (i = 0; i < param->uniform.count; ++i, vec++){
     glProgramLocalParameterI4uiNV(param->gltarget,param->gllocation + i,(uint)vec[0],(uint)(vec[0] >> 32),0,0);
@@ -562,15 +562,17 @@ static void lxgUpdateUint64NV(lxgProgramParameterPTR param, lxgContextPTR ctx, c
 
 
 static LUX_INLINE void lxgUpdateBufferGLSL(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
-  if (lxgContext_setProgramBuffer(ctx,param->gllocation,(lxgBufferPTR)data)){
-    lxgBuffer_bindIndexed((lxgBufferPTR)data,LUXGL_BUFFER_UNIFORM,param->gllocation);
+  lxgBufferCPTR buffer = *(lxgBufferCPTR*)data;
+  if (lxgContext_setProgramBuffer(ctx,param->buffer.unit,buffer)){
+    lxgBuffer_bindIndexed((lxgBufferPTR)data,LUXGL_BUFFER_UNIFORM,param->buffer.unit);
   }
 }
 
 static LUX_INLINE void lxgUpdateBufferNV(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
+  lxgBufferCPTR buffer = *(lxgBufferCPTR*)data;
   GLuint domain = param->gltarget - LUXGL_BUFFER_NVPARAM_TESSCTRL;
-  if (lxgContext_setProgramBuffer(ctx,param->gllocation + domain * LUXGFX_MAX_STAGE_BUFFERS,(lxgBufferPTR)data)){
-    lxgBuffer_bindIndexed((lxgBufferPTR)data,param->gltarget,param->gllocation);
+  if (lxgContext_setProgramBuffer(ctx,param->buffer.unit + domain * LUXGFX_MAX_STAGE_BUFFERS,buffer)){
+    lxgBuffer_bindIndexed(buffer,param->gltarget,param->buffer.unit);
   }
 }
 
@@ -613,10 +615,10 @@ static void lxgUpdateImageArray(lxgProgramParameterPTR param, lxgContextPTR ctx,
 }
 
 static void lxgUpdateTexture(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
-  lxgContext_checkedTexture(ctx, (lxgTexturePTR)data,param->uniform.unit);
+  lxgContext_checkedTexture(ctx, *(lxgTexturePTR*)data,param->uniform.unit);
 }
 static void lxgUpdateImage(lxgProgramParameterPTR param, lxgContextPTR ctx, const void* data){
-  lxgContext_checkedTextureImage(ctx, (lxgTextureImagePTR)data,param->uniform.unit);
+  lxgContext_checkedTextureImage(ctx, *(lxgTextureImagePTR*)data,param->uniform.unit);
 }
 
 LUX_API void lxgProgramParameter_initFuncNV( lxgProgramParameterPTR param, lxgProgramStage_t domain )
@@ -1397,6 +1399,9 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
   lxgProgramParameter_t* params = paramsBuffer;
   int i;
   char checkBuffer[4];
+  booln setTextures = LUX_TRUE;
+  booln setImages = LUX_TRUE;
+  booln setBuffers = LUX_TRUE;
   glGetProgramiv(prog->glid,GL_ACTIVE_UNIFORMS,&num);
 
   LUX_DEBUGASSERT(prog->type == LUXGFX_PROGRAM_GLSL);
@@ -1436,6 +1441,14 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
 
     if ( lxGLParameterType_isTexture(type) || lxGLParameterType_isImage(type)){
       glGetUniformiv(prog->glid, params->gllocation, &params->uniform.unit);
+      if (params->uniform.unit != 0){
+        if (lxGLParameterType_isTexture(type)){
+          setTextures = LUX_FALSE;
+        }
+        if (lxGLParameterType_isImage(type)){
+          setImages = LUX_FALSE;
+        }
+      }
     }
 
     namesBuffer += ++written;
@@ -1448,16 +1461,24 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
     for (i = 0 ; i < num; i++){
       LUX_DEBUGASSERT(params < paramsBuffer + numParams);
       LUX_DEBUGASSERT(namesSize > 0);
-      glGetActiveUniformBlockiv(prog->glid, i, GL_UNIFORM_BLOCK_BINDING, &params->gllocation);
+      params->gllocation = i;
+      glGetActiveUniformBlockiv(prog->glid, i, GL_UNIFORM_BLOCK_BINDING, &params->buffer.unit);
       glGetActiveUniformBlockiv(prog->glid, i, GL_UNIFORM_BLOCK_DATA_SIZE, &params->buffer.size);
       glGetActiveUniformBlockName(prog->glid, i, namesSize, &written, namesBuffer);
       params->name = namesBuffer;
       params->type = LUXGL_PARAM_BUFFER;
 
+      if (params->buffer.unit != 0){
+        setBuffers = LUX_FALSE;
+      }
+
       namesBuffer += ++written;
       namesSize -= written;
       params++;
     }
+  }
+  else{
+    setBuffers = LUX_FALSE;
   }
 
   if (sm5){
@@ -1506,6 +1527,51 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
   else{
     for (i = 0; i < numParams; i++){
       lxgProgramParameter_initFunc(&paramsBuffer[i]);
+    }
+  }
+
+  if (setImages || setTextures){
+    uint tex = 0;
+    uint img = 0;
+    if (!prog->isSeparable){
+      glUseProgram(prog->glid);
+      lxGLErrorCheck();
+    }
+    for (i = 0 ; i < numParams; i++){
+      booln doit = LUX_FALSE;
+      if (setTextures && lxGLParameterType_isTexture(paramsBuffer[i].type)){
+        paramsBuffer[i].uniform.unit = tex;
+        tex += paramsBuffer[i].uniform.count;
+        doit = LUX_TRUE;
+      }
+      if (setImages && lxGLParameterType_isImage(paramsBuffer[i].type)){
+        paramsBuffer[i].uniform.unit = img;
+        img += paramsBuffer[i].uniform.count;
+        doit = LUX_TRUE;
+      }
+
+      if (doit){
+        if (prog->isSeparable){
+          glProgramUniform1i(prog->glid,paramsBuffer[i].gllocation,paramsBuffer[i].uniform.unit);
+        }
+        else{
+          glUniform1i(paramsBuffer[i].gllocation,paramsBuffer[i].uniform.unit);
+        }
+        lxGLErrorCheck();
+      }
+    }
+    if (!prog->isSeparable){
+      glUseProgram(0);
+    }
+  }
+  
+  if (setBuffers){
+    uint buf = 0;
+    for (i = 0 ; i < numParams; i++){
+      if (paramsBuffer[i].type == LUXGL_PARAM_BUFFER){
+        glUniformBlockBinding(prog->glid,paramsBuffer[i].gllocation,buf);
+        paramsBuffer[i].buffer.unit = buf++;
+      }
     }
   }
   
@@ -1646,6 +1712,7 @@ LUX_API void lxgContext_applyProgramParameters(  lxgContextPTR ctx, lxgProgramCP
   uint i;
   LUX_DEBUGASSERT(ctx->program.current == prog);
   for (i = 0; i < num; ++i){
+    LUX_DEBUGASSERT(params[i]);
     LUX_DEBUGASSERT(params[i]->func);
     params[i]->func(params[i],ctx,data[i]);
     lxGLErrorCheck();

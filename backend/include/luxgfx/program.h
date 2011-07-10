@@ -38,7 +38,7 @@ extern "C"{
   }lxgProgramSubroutine_t;
 
   typedef struct lxgProgramParameter_s{
-    lxGLParameterType_t    type;
+    lxGLParameterType_t   type;
     lxgParmeterUpdate_fn  func;
     union{
       GLuint              glid;         // for SEP
@@ -46,14 +46,15 @@ extern "C"{
       lxgProgramStage_t   stage;        // for subroutines
       uint32              userid;
     };
-    GLuint                gllocation;
+    GLuint                gllocation;   // uniform location / block index
     union{
       struct {
-        uint32            unit;        // sampler
-        ushort            count;
-        bool16            transpose;
+        uint32            unit;         // sampler
+        uint32            count;
+        uint32            transpose;
       } uniform;
       struct{
+        uint32            unit;         // binding
         int32             size;
       } buffer;
       struct{

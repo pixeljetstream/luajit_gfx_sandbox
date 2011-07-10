@@ -78,7 +78,7 @@ extern "C"{
   }lxgVertexPointer_t;
 
   typedef struct lxgVertexState_s{
-    const lxgVertexDecl_t* decl;
+    lxgVertexDeclCPTR   decl;
     flags32             active;
     flags32             declvalid;
     flags32             declstreams;

@@ -27,6 +27,7 @@ class GfxProgram : public Test
     lxCVector4          vecY;
     lxgBuffer_t         bufferX;
     lxgBuffer_t         bufferY;
+    lxgBufferPTR        bufferYptr;
     lxgTexture_t        textureZ;
     lxgTexturePTR       textureZptr;
     lxCMatrix44         matrices[2];
@@ -52,6 +53,7 @@ class GfxProgram : public Test
       lxgBuffer_init(&bufferX, ctx, LUXGL_STATIC_DRAW,sizeof(lxCVector4),&vecX);
       lxgBuffer_residentNV(&bufferX,LUXGFX_ACCESS_READ);
       lxgBuffer_init(&bufferY, ctx, LUXGL_STATIC_DRAW,sizeof(lxCVector4),&vecY);
+      bufferYptr = &bufferY;
 
       lxMatrix44Identity(matrices[0]);
       lxMatrix44Identity(matrices[1]);
@@ -65,7 +67,7 @@ class GfxProgram : public Test
 
       datas[PARAM_MATRICES] = matrices;
       datas[PARAM_XCOLORPTR] = &bufferX.address;
-      datas[PARAM_YCOLORBUFFER] = &bufferY;
+      datas[PARAM_YCOLORBUFFER] = &bufferYptr;
       datas[PARAM_ZTEX] = &textureZptr;
       datas[PARAM_SHUFFLEFUNC] = &shuffle;
     }
@@ -104,8 +106,8 @@ public:
     updateGeometry(4,4,4);
 
     lxBoundingBox_t bbox;
-    lxVector3Set(bbox.min,-1,-1,-1);
-    lxVector3Set(bbox.max, 1, 1, 1);
+    lxVector3Set(bbox.min,-2,-2,-2);
+    lxVector3Set(bbox.max, 2, 2, 2);
     lxCVector3 up(0,1,0);
     m_rh.init(win,up);
     m_rh.cameraPerspective(&bbox, 30.0f);
@@ -122,9 +124,13 @@ public:
     int i = 0;
     for (int y = 0; y < 2; y++){
       for (int x = 0; x < 2; x++,i++){
-        lxCVector3 pos(-1.0f + 2.0f * (float)x, -1.0f + 2.0f * (float)y, 0.0f);
+        lxCVector3 pos(-2.0f + 4.0f * (float)x, -2.0f + 4.0f * (float)y, 0.0f);
         m_paramsets[i].init(&m_ctx,m_prog);
         lxMatrix44SetTranslation(m_paramsets[i].matrices[0],pos);
+        if (i == PARAMSETS-1){
+          lxCVector3 rot(0,45,0);
+          lxMatrix44FromEulerZYXdeg(m_paramsets[i].matrices[0],rot);
+        }
         lxMatrix44Invert(m_paramsets[i].matrices[1],m_paramsets[i].matrices[0]);
         lxMatrix44Transpose1(m_paramsets[i].matrices[1]);
       }

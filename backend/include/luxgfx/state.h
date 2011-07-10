@@ -84,7 +84,8 @@ extern "C"{
   }lxgBlendStage_t;
 
   typedef struct lxgBlend_s{
-    bool32          individual;
+    bool16          individual;
+    bool16          separateStages;
     lxgBlendStage_t blends[LUXGFX_MAX_RENDERTARGETS];
   }lxgBlend_t;
 

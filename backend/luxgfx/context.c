@@ -188,12 +188,6 @@ LUX_API const char* lxgContext_init(lxgContextPTR ctx)
 
 LUX_API void lxgContext_syncRasterStates(lxgContextPTR ctx)
 {
-  lxgRasterizer_init(&ctx->raster.rasterizer);
-  lxgColor_init(&ctx->raster.color);
-  lxgDepth_init(&ctx->raster.depth);
-  lxgBlend_init(&ctx->raster.blend);
-  lxgStencil_init(&ctx->raster.stencil);
-
   lxgRasterizer_sync(&ctx->raster.rasterizer, ctx );
   lxgColor_sync(&ctx->raster.color, ctx );
   lxgDepth_sync(&ctx->raster.depth, ctx );

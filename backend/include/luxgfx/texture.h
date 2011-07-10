@@ -146,7 +146,7 @@ extern "C"{
   typedef struct lxgTexture_s{
     lxGLTextureTarget_t   gltarget;
     GLuint                glid;
-    lxgSamplerPTR         lastSampler;
+    lxgSamplerCPTR        lastSampler;
     uint32                lastSamplerIncarnation;
     lxgContextPTR         ctx;
 
@@ -174,6 +174,8 @@ extern "C"{
     GLenum        gldatatype;
     GLenum        gldataformat;
   }lxgTexture_t;
+
+  //////////////////////////////////////////////////////////////////////////
 
   typedef struct lxgRenderBuffer_s{
     GLuint                glid;
@@ -207,11 +209,16 @@ extern "C"{
 
   //////////////////////////////////////////////////////////////////////////
 
-
+    // always apply samplers before textures
   LUX_API void  lxgContext_clearTextureState(lxgContextPTR ctx);
-  LUX_API void  lxgContext_setTextureCompare(lxgContextPTR ctx, uint imageunit, lxGLCompareMode_t cmp);
-  LUX_API void  lxgContext_setTextureSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
-  LUX_API void  lxgContext_changedTextureSampler(lxgContextPTR ctx, uint imageunit, lxgSamplerPTR sampler, flags32 what);
+  LUX_API void  lxgContext_setTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what);
+  LUX_API void  lxgContext_changedTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what);
+  LUX_API void  lxgContext_applyTexture( lxgContextPTR ctx, lxgTexturePTR obj, uint imageunit);
+  LUX_API void  lxgContext_applyTextures( lxgContextPTR ctx, lxgTexturePTR *texs, uint start, uint num);
+  LUX_API void  lxgContext_applySampler( lxgContextPTR ctx, lxgSamplerCPTR obj, uint imageunit);
+  LUX_API void  lxgContext_applySamplers( lxgContextPTR ctx, lxgSamplerCPTR *samps, uint start, uint num);
+  LUX_API void  lxgContext_applyTextureImages( lxgContextPTR ctx, lxgTextureImageCPTR *imgs, uint start, uint num);
+  LUX_API void  lxgContext_applyTextureImage( lxgContextPTR ctx, lxgTextureImageCPTR img, uint imageunit);
 
   // Type checks
   LUX_API booln lxgTextureChannel_valid(lxgContextPTR ctx, lxgTextureChannel_t channel);
@@ -223,7 +230,7 @@ extern "C"{
   
   
   // lxgTexture
-  LUX_API void lxgTexture_init(lxgTexturePTR tex, lxgContextPTR ctx);
+  LUX_API void  lxgTexture_init(lxgTexturePTR tex, lxgContextPTR ctx);
   LUX_API void  lxgTexture_deinit(lxgTexturePTR tex, lxgContextPTR ctx);
 
    // for multisampled textures depth = samples
@@ -253,23 +260,20 @@ extern "C"{
   LUX_API booln lxgTexture_writeBuffer(lxgTexturePTR tex, uint side, booln ascompressed, uint mip, 
     GLenum datatype, GLenum dataformat, lxgBufferPTR buffer, uint bufferoffset);
 
-  LUX_API void  lxgTexture_getSampler(lxgTexturePTR tex, lxgSamplerPTR sampler);
-  LUX_API void  lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSamplerPTR sampler, flags32 what);
-  LUX_API const lxVec3iPTR  lxgTexture_getMipSize(lxgTexturePTR tex, uint mipLevel);
+    // copies everything except glid
+  LUX_API void  lxgTexture_getSampler(lxgTextureCPTR tex, lxgSamplerPTR sampler);
+  LUX_API void  lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSamplerCPTR sampler, flags32 what);
+  LUX_API lxVec3iCPTR  lxgTexture_getMipSize(lxgTextureCPTR tex, uint mipLevel);
   
   
   //////////////////////////////////////////////////////////////////////////
-  // lxgSampler_t
+  // lxgSampler
 
-  LUX_API void lxgSampler_init(lxgSamplerPTR self);
-  LUX_API void lxgSampler_setAddress(lxgSamplerPTR self, uint n, lxgSamplerAddress_t address);
-  LUX_API void lxgSampler_setCompare(lxgSamplerPTR self, enum lxGLCompareMode_t cmp);
-  LUX_API void lxgSampler_changed(lxgSamplerPTR self);
-  
-    // require SM4
-  LUX_API void lxgSampler_initHW(lxgSamplerPTR self, lxgContextPTR ctx);
-  LUX_API void lxgSampler_deinitHW(lxgSamplerPTR self, lxgContextPTR ctx);
-  LUX_API void lxgSampler_updateHW(lxgSamplerPTR self);
+  LUX_API void lxgSampler_init(lxgSamplerPTR sampler, lxgContextPTR ctx);
+  LUX_API void lxgSampler_deinit(lxgSamplerPTR sampler, lxgContextPTR ctx);
+  LUX_API void lxgSampler_setAddress(lxgSamplerPTR sampler, uint n, lxgSamplerAddress_t address);
+  LUX_API void lxgSampler_setCompare(lxgSamplerPTR sampler, enum lxGLCompareMode_t cmp);
+  LUX_API void lxgSampler_update(lxgSamplerPTR sampler);
   
   //////////////////////////////////////////////////////////////////////////
   // lxgRenderBuffer

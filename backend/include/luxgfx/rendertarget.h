@@ -106,7 +106,7 @@ extern "C"{
     lxgRenderTargetBlitPTR update, flags32 mask, booln linearFilter);
 
   // return the actual scissor state (can be enabled indirectly through viewport != framebounds)
-  LUX_API booln lxgContext_applyViewPortRect(lxgContextPTR ctx, lxRectangleiPTR rect);
+  LUX_API booln lxgContext_applyViewPortRect(lxgContextPTR ctx, lxRectangleiCPTR rect);
   LUX_API booln lxgContext_applyViewPortScissorState(lxgContextPTR ctx, booln state);
   LUX_API booln lxgContext_applyViewPort(lxgContextPTR ctx, lxgViewPortPTR obj);
 

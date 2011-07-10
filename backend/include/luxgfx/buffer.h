@@ -18,7 +18,7 @@ extern "C"{
     lxGLBufferTarget_t    gltarget;
     GLuint                glid;
     GLuint64              address;
-    lxgContextPTR         ctx;
+    flags32               ctxcapbits;
     void*                 user;
 
     void*                 mapped;
@@ -29,6 +29,7 @@ extern "C"{
     uint                  size;
     uint                  used;
     lxGLBufferHint_t      hint;
+    lxgContextPTR         ctx;
   }lxgBuffer_t;
 
 

@@ -59,9 +59,11 @@ LUX_API void lxgColor_init( lxgColorPTR obj )
 LUX_API void lxgColor_sync( lxgColorPTR obj, lxgContextPTR ctx )
 {
   LUX_DEBUGASSERT(sizeof(obj->write[0][0]) == sizeof(GLboolean));
+
+  lxgColor_init(obj);
   glGetBooleanv(GL_COLOR_WRITEMASK,obj->write[0]);
 
-  if (ctx->capbits & LUXGFX_CAP_SM5){
+  if (ctx->capbits & LUXGFX_CAP_SM4){
     int i;
     for (i = 0; i < ctx->capabilites.drawbuffers; i++){
       glGetBooleani_v(GL_COLOR_WRITEMASK,0,obj->write[i]);
@@ -217,12 +219,12 @@ LUX_API void lxgBlend_init(lxgBlendPTR obj)
     lxgBlendStage_init(&obj->blends[i]);
   }
   obj->individual = LUX_FALSE;
+  obj->separateStages = LUX_FALSE;
 }
 
 LUX_API void  lxgContext_applyBlend( lxgContextPTR ctx, lxgBlendCPTR objmrt)
 {
   int i;
-  booln separate;
 
   if (!objmrt->individual){
     if (objmrt->blends[0].enabled){
@@ -234,8 +236,7 @@ LUX_API void  lxgContext_applyBlend( lxgContextPTR ctx, lxgBlendCPTR objmrt)
     }
   }
   else{
-    separate = (ctx->capbits & LUXGFX_CAP_SM4);
-    if (!separate){
+    if (!objmrt->separateStages){
       lxgContext_applyBlendStage(ctx, &objmrt->blends[0]);
     }
 
@@ -243,7 +244,7 @@ LUX_API void  lxgContext_applyBlend( lxgContextPTR ctx, lxgBlendCPTR objmrt)
       const lxgBlendStage_t* obj = &objmrt->blends[i];
       if (obj->enabled){
         glEnablei(GL_BLEND,i);
-        if (separate){
+        if (objmrt->separateStages){
           if (memcmp(&obj->alphamode,&obj->colormode,sizeof(lxgBlendMode_t)) == 0){
             glBlendFunci(i,(obj->colormode.srcw),(obj->colormode.dstw));
             glBlendEquationi(i,(obj->colormode.equ));
@@ -276,8 +277,7 @@ LUX_API void  lxgBlend_sync( lxgBlendPTR obj, lxgContextPTR ctx )
   int i;
   lxgBlendStage_t* last = NULL;
 
-  memset(obj,0,sizeof(lxgBlend_t));
-
+  lxgBlend_init(obj);
   lxgBlendStage_sync(&obj->blends[0],ctx);
 
   for (i = 0; i < ctx->capabilites.drawbuffers; i++){
@@ -309,12 +309,16 @@ LUX_API void  lxgBlend_sync( lxgBlendPTR obj, lxgContextPTR ctx )
       blend->alphamode.dstw = (adst);
       blend->alphamode.equ =  (aequ);
 
-      if (last && memcmp(last,blend,sizeof(lxgBlend_t)))
-        obj->individual = LUX_TRUE;
-
-      last = blend;
     }
 
+    if (last && memcmp(last,blend,sizeof(lxgBlend_t))){
+      obj->individual = LUX_TRUE;
+      if (last->enabled == blend->enabled){
+        obj->separateStages = LUX_TRUE;
+      }
+    }
+
+    last = blend;
   }
 }
 

@@ -243,7 +243,7 @@ LUX_API void lxgViewPort_sync(lxgViewPortPTR view, lxgContextPTR ctx)
   glGetIntegerv(GL_SCISSOR_BOX,&view->scissorRect.x);
 }
 
-LUX_API booln lxgContext_applyViewPortRect(lxgContextPTR ctx, lxRectangleiPTR viewRect)
+LUX_API booln lxgContext_applyViewPortRect(lxgContextPTR ctx, lxRectangleiCPTR viewRect)
 {
   glViewport(LUX_ARRAY4UNPACK(&viewRect->x));
   ctx->viewport.viewRect = *viewRect;

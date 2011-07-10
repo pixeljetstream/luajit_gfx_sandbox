@@ -60,13 +60,13 @@ public:
     delete[] buffer;
     lxGLErrorCheck();
 
-    lxgSampler_initHW(&m_samplerNearest, &m_ctx);
+    lxgSampler_init(&m_samplerNearest, &m_ctx);
     m_samplerNearest.filter = LUXGFX_SAMPLERFILTER_NEAREST;
-    lxgSampler_updateHW(&m_samplerNearest);
+    lxgSampler_update(&m_samplerNearest);
 
-    lxgSampler_initHW(&m_samplerTriLinear, &m_ctx);
+    lxgSampler_init(&m_samplerTriLinear, &m_ctx);
     m_samplerTriLinear.filter = LUXGFX_SAMPLERFILTER_MIPMAP_LINEAR;
-    lxgSampler_updateHW(&m_samplerTriLinear);
+    lxgSampler_update(&m_samplerTriLinear);
 
     m_sampler = &m_samplerNearest;
   }
