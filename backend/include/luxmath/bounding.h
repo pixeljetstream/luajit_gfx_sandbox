@@ -88,7 +88,7 @@ LUX_INLINE booln lxMinMax_intersectsV(const float selfminmax[6], const float oth
     selfminmax[5] >= otherminmax[2] );
 }
 
-LUX_API booln lxBoundingBox_intersect(lxBoundingBoxCPTR a, lxBoundingBoxCPTR b)
+LUX_INLINE booln lxBoundingBox_intersect(lxBoundingBoxCPTR a, lxBoundingBoxCPTR b)
 {
   return (  
     a->min[0] <= b->max[0] && 

@@ -165,41 +165,6 @@ public:
   void update(int x, int y, int z);
 };
 
-//////////////////////////////////////////////////////////////////////////
-
-struct Material{
-  lxCVector4  ambient;
-  lxCVector4  diffuse;
-  lxCVector4  specular;
-  lxCVector4  emission;
-
-  void random();
-};
-
-class MaterialState{
-public:
-  Material  front;
-  Material  back;
-  GLuint    buffer;
-  GLuint64  address;
-
-  MaterialState() : buffer(0) { random(); }
-  ~MaterialState();
-
-  void      clearBO();
-  void      updateBO();
-
-  void      stateFixed();
-
-  void      random();
-};
-
-struct DrawNode{
-  MaterialState*  matstate;
-  Geometry*       geometry;
-  lxCMatrix44*    matrix;
-};
-
 
 //////////////////////////////////////////////////////////////////////////
 

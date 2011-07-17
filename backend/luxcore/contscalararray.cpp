@@ -257,22 +257,22 @@ void lxScalarType_fromFloatNormalized(void* pout, lxScalarType_t outtype, const 
     switch(vectordim)
     {
     case 4:
-      FP_NORM_TO_BYTE((ub)[0],(pin)[0]);
-      FP_NORM_TO_BYTE((ub)[1],(pin)[1]);
-      FP_NORM_TO_BYTE((ub)[2],(pin)[2]);
-      FP_NORM_TO_BYTE((ub)[3],(pin)[3]);
+      LUX_FP_NORM_TO_BYTE((ub)[0],(pin)[0]);
+      LUX_FP_NORM_TO_BYTE((ub)[1],(pin)[1]);
+      LUX_FP_NORM_TO_BYTE((ub)[2],(pin)[2]);
+      LUX_FP_NORM_TO_BYTE((ub)[3],(pin)[3]);
       return;
     case 3:
-      FP_NORM_TO_BYTE((ub)[0],(pin)[0]);
-      FP_NORM_TO_BYTE((ub)[1],(pin)[1]);
-      FP_NORM_TO_BYTE((ub)[2],(pin)[2]);
+      LUX_FP_NORM_TO_BYTE((ub)[0],(pin)[0]);
+      LUX_FP_NORM_TO_BYTE((ub)[1],(pin)[1]);
+      LUX_FP_NORM_TO_BYTE((ub)[2],(pin)[2]);
       return;
     case 2:
-      FP_NORM_TO_BYTE((ub)[0],(pin)[0]);
-      FP_NORM_TO_BYTE((ub)[1],(pin)[1]);
+      LUX_FP_NORM_TO_BYTE((ub)[0],(pin)[0]);
+      LUX_FP_NORM_TO_BYTE((ub)[1],(pin)[1]);
       return;
     case 1:
-      FP_NORM_TO_BYTE((ub)[0],(pin)[0]);
+      LUX_FP_NORM_TO_BYTE((ub)[0],(pin)[0]);
       return;
     }
   }
