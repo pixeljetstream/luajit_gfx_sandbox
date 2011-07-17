@@ -27,14 +27,14 @@ LUX_API void lxVector2TransformRot1( lxVector2 output, lxMatrix44CPTR mat );
 LUX_API void lxVector2InvTransform( lxVector2 output, const lxVector2 v1,  lxMatrix44CPTR mat ) ;
 LUX_API void lxVector2InvTransform1( lxVector2 v1,  lxMatrix44CPTR mat );
 
-LUX_API float lxVector2LengthA( const lxVector2 pV );
 LUX_API float lxVector2Length( const lxVector2 pV );
+LUX_API float lxVector2LengthFast( const lxVector2 pV );
 LUX_API float lxVector2SqLength( const lxVector2 pV );
 LUX_API float lxVector2Dot( const lxVector2 pV1, const lxVector2 pV2 );
-LUX_API float lxVector2NormalizeA( lxVector2 pOut, const lxVector2 pV1 );
 LUX_API float lxVector2Normalize( lxVector2 pOut, const lxVector2 pV1 );
-LUX_API float lxVector2NormalizedA( lxVector2 pOut );
+LUX_API float lxVector2NormalizeFast( lxVector2 pOut, const lxVector2 pV1 );
 LUX_API float lxVector2Normalized( lxVector2 pOut );
+LUX_API float lxVector2NormalizedFast( lxVector2 pOut );
 //////////////////////////////////////////////////////////////////////////
 
 
@@ -61,7 +61,7 @@ LUX_INLINE void lxVector2Scale( lxVector2 pOut, const lxVector2 pV1, float val)
   pOut[1] = pV1[1] * val;
 }
 
-LUX_INLINE float lxVector2LengthA( const lxVector2 pV )
+LUX_INLINE float lxVector2Length( const lxVector2 pV )
 {
 #ifdef __cplusplus
   return sqrtf(pV[0] * pV[0] + pV[1] * pV[1]);
@@ -70,7 +70,7 @@ LUX_INLINE float lxVector2LengthA( const lxVector2 pV )
 #endif
 }
 
-LUX_INLINE float lxVector2Length( const lxVector2 pV )
+LUX_INLINE float lxVector2LengthFast( const lxVector2 pV )
 {
   return lxFastSqrt(pV[0] * pV[0] + pV[1] * pV[1]);
 }
@@ -86,9 +86,9 @@ LUX_INLINE float lxVector2Dot( const lxVector2 pV1, const lxVector2 pV2 )
   return pV1[0] * pV2[0] + pV1[1] * pV2[1];
 }
 
-LUX_INLINE float lxVector2NormalizeA( lxVector2 pOut, const lxVector2 pV1 )
+LUX_INLINE float lxVector2Normalize( lxVector2 pOut, const lxVector2 pV1 )
 {
-  float length = lxVector2LengthA(pV1);
+  float length = lxVector2Length(pV1);
   float lengthdiv = (length < 0.0001f) ? 1.0f : 1.0f/length;
 
   pOut[0] = pV1[0] * lengthdiv;
@@ -97,7 +97,7 @@ LUX_INLINE float lxVector2NormalizeA( lxVector2 pOut, const lxVector2 pV1 )
   return length;
 }
 
-LUX_INLINE float lxVector2Normalize( lxVector2 pOut, const lxVector2 pV1 )
+LUX_INLINE float lxVector2NormalizeFast( lxVector2 pOut, const lxVector2 pV1 )
 {
   float lengthdiv = lxFastSqrtRcp(lxVector2SqLength(pV1));
   pOut[0] = pV1[0] * lengthdiv;
@@ -106,9 +106,9 @@ LUX_INLINE float lxVector2Normalize( lxVector2 pOut, const lxVector2 pV1 )
   return 1.0f/lengthdiv;
 }
 
-LUX_INLINE float lxVector2NormalizedA( lxVector2 pOut )
+LUX_INLINE float lxVector2Normalized( lxVector2 pOut )
 {
-  float length = lxVector2LengthA(pOut);
+  float length = lxVector2Length(pOut);
   float lengthdiv = (length < 0.0001f) ? 1.0f : 1.0f/length;
 
   pOut[0] = pOut[0] * lengthdiv;
@@ -117,7 +117,7 @@ LUX_INLINE float lxVector2NormalizedA( lxVector2 pOut )
   return length;
 }
 
-LUX_INLINE float lxVector2Normalized( lxVector2 pOut )
+LUX_INLINE float lxVector2NormalizedFast( lxVector2 pOut )
 {
   float lengthdiv = lxFastSqrtRcp(lxVector2SqLength(pOut));
   pOut[0] = pOut[0] * lengthdiv;

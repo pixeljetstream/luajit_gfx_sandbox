@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="luxbackend"
 	ProjectGUID="{234C470D-17B6-452D-B817-0DBFA34C1509}"
 	RootNamespace="Library"
@@ -229,6 +229,10 @@
 		<Filter
 			Name="include"
 			>
+			<File
+				RelativePath="..\..\include\luxbackend\drawsystem.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\include\luxbackend\mesh.h"
 				>

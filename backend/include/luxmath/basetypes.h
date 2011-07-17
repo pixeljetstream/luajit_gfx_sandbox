@@ -133,10 +133,8 @@ extern "C"{
 
   typedef struct lxBoundingSphere_s
   {
-    lxVector4 center;
-    float radius;
-    float radiusSqr;
-    float _pad[2];
+    lxVector3 center;
+    float     radius;
   }lxBoundingSphere_t;
 
   typedef struct lxBoundingCone_s
@@ -194,7 +192,7 @@ extern "C"{
 #define LUX_SQRT_3 (1.7320508075688772935274463415059f)
 
 #define LUX_SHORT_SIGNEDMAX   (32767)
-#define LU_SHORT_UNSIGNEDMAX (0xffff)
+#define LUX_SHORT_UNSIGNEDMAX (0xffff)
 
 #define LUX_MUL_SHORT   (32767.0f)
 #define LUX_DIV_SHORT (3.0518509475997192297128208258309e-5f)

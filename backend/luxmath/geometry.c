@@ -16,7 +16,7 @@ LUX_API void lxPlaneSet
   lxVector3Sub(toB,b,a);
   lxVector3Sub(toC,c,a);
   lxVector3Cross(plane,toB,toC);
-  lxVector3NormalizedA(plane);
+  lxVector3Normalized(plane);
   plane[3] = -lxVector3Dot(plane,a);
 }
 
@@ -63,5 +63,5 @@ LUX_API float lxTriangleArea
   lxVector3Sub(b,v2,v0);
   lxVector3Cross(cross,a,b);
 
-  return lxVector3Length(cross)*0.5f;
+  return lxVector3LengthFast(cross)*0.5f;
 }

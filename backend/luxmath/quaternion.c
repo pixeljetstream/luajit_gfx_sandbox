@@ -27,7 +27,7 @@ LUX_API void lxQuatSlerp(lxQuat q,const float t, const lxQuat q1, const lxQuat q
   cosom = (q1[0]*q2[0])+ (q1[1]*q2[1])+ (q1[2]*q2[2])+ (q1[3]*q2[3]);
 
   // adjust signs (if necessary)
-  if (FP_LESS_ZERO(cosom))
+  if (LUX_FP_LESS_ZERO(cosom))
   {
     cosom = -cosom;
     lxQuatSet(q,-q2[0], -q2[1], -q2[2], -q2[3]);
@@ -64,7 +64,7 @@ LUX_API void lxQuatSlerpLongest(lxQuat q,const float t, const lxQuat q1, const l
   float omega, sinom, scale0, scale1;
   float cosom = lxQuatDot(q1,q2);
 
-  if (FP_LESS_ZERO(cosom))
+  if (LUX_FP_LESS_ZERO(cosom))
   {
     lxQuatCopy(q,q2);
   }

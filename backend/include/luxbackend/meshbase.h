@@ -16,6 +16,7 @@ extern "C"
   typedef enum lxMeshIndexType_e{
     LUX_MESH_INDEX_UINT16,
     LUX_MESH_INDEX_UINT32,
+    LUX_MESH_INDICES,
   }lxMeshIndexType_t;
 
     // segs = x,y

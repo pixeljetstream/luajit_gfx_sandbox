@@ -55,11 +55,11 @@ LUX_API void lxBoundingBox_transformBoxCorners(lxBoundingBoxCPTR in, lxMatrix44C
 LUX_API void lxBoundingBox_transformV(lxVector3 outmins, lxVector3 outmaxs, const lxVector3 mins, const lxVector3 maxs, lxMatrix44CPTR trans);
 
 LUX_API void lxBoundingBox_fromCorners(lxBoundingBoxPTR bbox,const lxVector3 vecs[8]);
-LUX_API void lxBoundingVectors_fromCamera(lxVector3 vecs[8],lxMatrix44CPTR mat,const float fov, const float frontplane, const float backplane, const float aspect);
+LUX_API void lxBoundingCorners_fromCamera(lxVector3 vecs[8],lxMatrix44CPTR mat,const float fov, const float frontplane, const float backplane, const float aspect);
 
 LUX_API booln lxBoundingBox_intersect(lxBoundingBoxCPTR a,lxBoundingBoxCPTR b);
 LUX_API booln lxBoundingBox_checkPoint(lxBoundingBoxCPTR out,const lxVector3 point);
-LUX_API booln lxBoundingCone_checkSphereV(lxBoundingConeCPTR cone,const lxVector3 center, float radius, float radiusSqr);
+LUX_API booln lxBoundingCone_checkSphere(lxBoundingConeCPTR cone, lxBoundingSphereCPTR sphere);
 
 // approximates frustum via Sphere & Cone, dir must be normalized
 LUX_API void lxBoundingSphereCone_fromCamera(lxBoundingSpherePTR sphere, lxBoundingConePTR cone,float frontplane, float backplane, const lxVector3 pos, const lxVector3 dir, float fov);
@@ -86,6 +86,17 @@ LUX_INLINE booln lxMinMax_intersectsV(const float selfminmax[6], const float oth
     selfminmax[3] >= otherminmax[0] &&
     selfminmax[4] >= otherminmax[1] &&
     selfminmax[5] >= otherminmax[2] );
+}
+
+LUX_API booln lxBoundingBox_intersect(lxBoundingBoxCPTR a, lxBoundingBoxCPTR b)
+{
+  return (  
+    a->min[0] <= b->max[0] && 
+    a->min[1] <= b->max[1] &&
+    a->min[2] <= b->max[2] &&
+    a->max[0] >= b->min[0] &&
+    a->max[1] >= b->min[1] &&
+    a->max[2] >= b->min[2] );
 }
 
 LUX_INLINE void lxBoundingBox_toCenter(lxBoundingBoxCPTR bbox, lxVector3 center, lxVector3 size)
@@ -126,12 +137,6 @@ LUX_INLINE lxBoundingBoxPTR  lxBoundingBox_merge(lxBoundingBoxPTR out, lxBoundin
   return out;
 }
 
-LUX_INLINE booln lxBoundingBox_intersect(lxBoundingBoxCPTR a,lxBoundingBoxCPTR b)
-{
-  return !( (a)->min[0]>(b)->max[0] || (a)->min[1]>(b)->max[1] ||
-    (a)->min[2]>(b)->max[2] || (a)->max[0]<(b)->min[0] ||
-    (a)->max[1]<(b)->min[1] || (a)->max[2]<(b)->min[2]  );
-}
 
 LUX_INLINE booln lxBoundingBox_checkPoint(lxBoundingBoxCPTR out, const lxVector3 pt){
   if (pt[0] < out->min[0] || pt[0] > out->max[0] ||

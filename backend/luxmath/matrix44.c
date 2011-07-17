@@ -279,8 +279,8 @@ LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3CPTR forwardn, lxVecto
   lxVector3Cross(up,forward,side);
 
   //Vector3Invert(forward);
-  lxVector3NormalizedA(side);
-  lxVector3NormalizedA(up);
+  lxVector3Normalized(side);
+  lxVector3Normalized(up);
 
   switch(axis) {
   case 0:
@@ -323,12 +323,12 @@ LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, lxVector3CPTR from, lxVector3CP
   lxVector3 forward, side, up;
 
   lxVector3Sub(forward,to,from);
-  lxVector3NormalizedA(forward);
+  lxVector3Normalized(forward);
 
   lxVector3Cross(side,upn,forward);
-  lxVector3NormalizedA(side);
+  lxVector3Normalized(side);
   lxVector3Cross(up,forward,side);
-  lxVector3NormalizedA(up);
+  lxVector3Normalized(up);
 
   mat[0] = side[0];
   mat[4] = side[1];
@@ -400,8 +400,8 @@ LUX_API void lxMatrix44RotateAngle(lxMatrix44PTR mat, lxVector3PTR from, lxVecto
   float v[3];
   float e,h;
 
-  lxVector3NormalizedA(from);
-  lxVector3NormalizedA(to);
+  lxVector3Normalized(from);
+  lxVector3Normalized(to);
 
   lxVector3Cross(v,from,to);
   e=lxVector3Dot(from,to);
@@ -427,7 +427,7 @@ LUX_API void lxMatrix44RotateAngle(lxMatrix44PTR mat, lxVector3PTR from, lxVecto
       left[0]=-from[2]; left[1]=0.0; left[2]=from[0];
     }
     // normalize "left"
-    lxVector3NormalizedA(left);
+    lxVector3Normalized(left);
     lxVector3Cross(up,left,from);
     // now we have a coordinate system, i.e., a basis;
     // M=(from, up, left), and we want to rotate to:

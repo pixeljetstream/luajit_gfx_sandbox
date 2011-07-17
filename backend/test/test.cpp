@@ -84,7 +84,7 @@ void RenderHelper::init(GLFWwindow win, const lxCVector3& up)
 void RenderHelper::cameraOrtho( lxBoundingBox_t* bbox )
 {
   lxBoundingBox_toCenter(bbox,m_sceneCenter,m_sceneSize);
-  float length = lxVector3LengthA(m_sceneSize);
+  float length = lxVector3Length(m_sceneSize);
   m_ortho = length * 1.25f;
   m_fov   = 0.0f;
   lxCVector3  offset(-1,1,-1);
@@ -93,7 +93,7 @@ void RenderHelper::cameraOrtho( lxBoundingBox_t* bbox )
   lxMatrix44Identity(m_viewMatrix);
   //m_viewmatrix[14] = -length * 4.0f;
 
-  lxVector3NormalizedA(offset);
+  lxVector3Normalized(offset);
   lxVector3ScaledAdd(campos,m_sceneCenter,length * 4.0f, offset);
   lxMatrix44LookAt(m_viewMatrix,campos,m_sceneCenter,m_up);
 }
@@ -101,7 +101,7 @@ void RenderHelper::cameraOrtho( lxBoundingBox_t* bbox )
 void RenderHelper::cameraPerspective( lxBoundingBox_t* bbox, float fovdeg )
 {
   lxBoundingBox_toCenter(bbox,m_sceneCenter,m_sceneSize);
-  float length = lxVector3LengthA(m_sceneSize) * 0.5f;
+  float length = lxVector3Length(m_sceneSize) * 0.5f;
   lxCVector3  offset(-0.33f,0.33f,-0.66f);
   lxCVector3  campos;
   m_ortho = 0.0f;
@@ -112,14 +112,14 @@ void RenderHelper::cameraPerspective( lxBoundingBox_t* bbox, float fovdeg )
   
   lxMatrix44Identity(m_viewMatrix);
 
-  lxVector3NormalizedA(offset);
+  lxVector3Normalized(offset);
   lxVector3ScaledAdd(campos,m_sceneCenter,length, offset);
   lxMatrix44LookAt(m_viewMatrix,campos,m_sceneCenter,m_up);
 }
 
 void RenderHelper::updateProjection( int width, int height )
 {
-  float size = lxVector3LengthA(m_sceneSize);
+  float size = lxVector3Length(m_sceneSize);
   if (m_ortho){
     lxMatrix44Ortho(m_projMatrix, m_ortho, size / 4096.0f, size * 16.0f, (float)width / (float) height);
   }

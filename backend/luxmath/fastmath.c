@@ -51,11 +51,7 @@ LUX_API void lxFastMath_init(lxFastMathCache_t* cache)
     cache->fast_sqrt_table[i] = (s.i & 0x7FFFFF);
   }
 
-  for (i = 0; i < MATH_MAX_CIRCLE_ANGLE; i++){
+  for (i = 0; i < LUX_MATH_MAX_CIRCLE_ANGLE; i++){
     cache->mathcossintable[i] = (float)sin((double)i * LUX_MUL_PI / MATH_HALF_MAX_CIRCLE_ANGLE);
-  }
-
-  for (i = 0; i < 0x10000; i++){
-    cache->float16conv[i] = lxFloat16To32((float16)i);
   }
 }

@@ -400,7 +400,7 @@ LUX_INLINE void lxQuatFromMatrix(lxQuat q1,lxMatrix44CPTR in_mat)
   tr = a_mat[0]+ a_mat[5]+ a_mat[10];
 
   // check the diagonal
-  if (FP_GREATER_ZERO(tr))
+  if (LUX_FP_GREATER_ZERO(tr))
   {
     tr   += 1.0f;
     s  = (1.0f/lxFastSqrt(tr)) * 0.5f;

@@ -53,7 +53,7 @@ LUX_API void lxMatrix44MultiplyRot(lxMatrix44PTR dst, lxMatrix44CPTR mat1, lxMat
 LUX_API void lxMatrix44MultiplyRot1( lxMatrix44PTR mat1, lxMatrix44CPTR mat2 );
 LUX_API void lxMatrix44MultiplyRot2( lxMatrix44CPTR mat1,  lxMatrix44PTR mat2 );
 
-LUX_API void lxMatrix44OrthonormalizeA(lxMatrix44PTR dst,lxMatrix44PTR src);
+LUX_API void lxMatrix44Orthonormalize(lxMatrix44PTR dst,lxMatrix44PTR src);
 
 LUX_API void lxMatrix44Transpose(lxMatrix44PTR dst, lxMatrix44CPTR src);
 LUX_API void lxMatrix44Transpose1(lxMatrix44PTR mat);
@@ -571,17 +571,17 @@ LUX_INLINE void lxMatrix44Transpose(lxMatrix44PTR mat, lxMatrix44CPTR oldmat){
 }
 
 
-LUX_INLINE void lxMatrix44OrthonormalizeA(lxMatrix44PTR dst,lxMatrix44PTR src)
+LUX_INLINE void lxMatrix44Orthonormalize(lxMatrix44PTR dst,lxMatrix44PTR src)
 {
   lxVector3 u1;
   lxVector3 u2;
   lxVector3 u3;
   float d;
 
-  lxVector3NormalizeA(u1,&src[0]);
+  lxVector3Normalize(u1,&src[0]);
   d = lxVector3Dot(&src[4],u1);
   lxVector3ScaledAdd(u3,&src[4],-d,u1);
-  lxVector3NormalizeA(u2,u3);
+  lxVector3Normalize(u2,u3);
 
   lxVector3Copy(&dst[4],u2);
   dst[7] = 0.0f;
@@ -595,7 +595,7 @@ LUX_INLINE void lxMatrix44OrthonormalizeA(lxMatrix44PTR dst,lxMatrix44PTR src)
   d = lxVector3Dot(&src[8],u2);
   lxVector3ScaledAdd(u1,u3,-d,u1);
 
-  lxVector3NormalizeA(&dst[8],u1);
+  lxVector3Normalize(&dst[8],u1);
   dst[11] = 0.0f;
   lxVector4Copy(&dst[12],&src[12]);
 }

@@ -55,7 +55,7 @@ LUX_API booln lxBoundingSphere_mergeChange(lxBoundingSpherePTR out, lxBoundingSp
   lxVector3Sub(vec,b->center, a->center);
 
   // get distance of the two centers and normalize the vector
-  rad = lxVector3NormalizedA(vec);
+  rad = lxVector3Normalized(vec);
 
   // if one sphere is in the other return the larger sphere
   if(rad + LUX_MIN(a->radius, b->radius) <= LUX_MAX(a->radius, b->radius))
@@ -94,7 +94,7 @@ LUX_API void lxBoundingBox_toSphereV(const lxVector3 min,const lxVector3 max, lx
   center[2] *= 0.5f;
 
   // radius = len((max-min)/2)
-  *radius = lxVector3Length(center);
+  *radius = lxVector3LengthFast(center);
 
   lxVector3Add( center,center, min);
 }
@@ -102,7 +102,6 @@ LUX_API void lxBoundingBox_toSphereV(const lxVector3 min,const lxVector3 max, lx
 LUX_API lxBoundingSpherePTR lxBoundingBox_toSphere(lxBoundingBoxCPTR bbox, lxBoundingSpherePTR sphere)
 {
   lxBoundingBox_toSphereV(bbox->min, bbox->max, sphere->center, &sphere->radius);
-  sphere->radiusSqr = sphere->radius * sphere->radius;
   return sphere;
 }
 
@@ -234,7 +233,7 @@ LUX_API void lxBoundingBox_fromCorners(lxBoundingBoxPTR bbox,const lxVector3 vec
   }
 }
 
-LUX_API void lxBoundingVectors_fromCamera(lxVector3 box[8],lxMatrix44CPTR mat,const float fov, const float frontplane, const float backplane, const float aspect)
+LUX_API void lxBoundingCorners_fromCamera(lxVector3 box[8],lxMatrix44CPTR mat,const float fov, const float frontplane, const float backplane, const float aspect)
 {
   int i;
   float invaspect = 1.0f/aspect;
@@ -272,22 +271,24 @@ LUX_API void lxBoundingVectors_fromCamera(lxVector3 box[8],lxMatrix44CPTR mat,co
 
 
 
-LUX_API booln lxBoundingCone_checkSphereV(lxBoundingConeCPTR cone, const lxVector3 center, float radius, float radiusSqr)
+LUX_API booln lxBoundingCone_checkSphere(lxBoundingConeCPTR cone, lxBoundingSphereCPTR sphere)
 {
   lxVector3 d;
 
-  float flt,e;
-
-  flt = radius * cone->sinDiv;
+  float radius = sphere->radius;
+  float radiusSqr = radius * radius;
+  float flt = radius * cone->sinDiv;
+  float e;
+  
 
   lxVector3ScaledAdd(d,cone->top,-flt,cone->axis);
-  lxVector3Sub(d,center,d);
+  lxVector3Sub(d,sphere->center,d);
 
   flt = lxVector3Dot(d,d);
   e = lxVector3Dot(cone->axis,d);
   if ( e > 0 && e*e >= flt*cone->cosSqr )
   {
-    lxVector3Sub(d,center,cone->top);
+    lxVector3Sub(d,sphere->center,cone->top);
     flt = lxVector3Dot(d,d);
     e = -lxVector3Dot(cone->axis,d);
     if ( e > 0 && e*e >= flt*cone->sinSqr)
@@ -327,8 +328,7 @@ LUX_API void lxBoundingSphereCone_fromCamera(lxBoundingSpherePTR sphere, lxBound
   if (fov < 0.0f)
     sphere->radius = (-fov)*2.0f;
   else
-    sphere->radius = lxVector3Length(diff);
-  sphere->radiusSqr = sphere->radius * sphere->radius;
+    sphere->radius = lxVector3LengthFast(diff);
 
   // calculate the center of the sphere
   fViewLen = fViewLen * 0.5f + frontplane;
@@ -363,8 +363,7 @@ LUX_API void lxBoundingSphere_fromFrustumCorners(lxBoundingSpherePTR sphere, con
   }
 
   lxVector3Copy(sphere->center,ctr);
-  sphere->radiusSqr = rad;
-  sphere->radius = lxFastSqrt(rad);
+  sphere->radius = sqrtf(rad);
 }
 
 LUX_API void lxBoundingCone_fromFrustumCorners(lxBoundingConePTR cone, const lxVector3 box[LUX_FRUSTUM_CORNERS])
@@ -400,13 +399,13 @@ LUX_API void lxBoundingCone_fromFrustumCorners(lxBoundingConePTR cone, const lxV
   }
 
   lxVector3Sub(temp,near,far);
-  radn = lxFastSqrt(radn);
-  radf = lxFastSqrt(radf);
+  radn = sqrtf(radn);
+  radf = sqrtf(radf);
   rad = radn/radf;
 
   if (rad < 0.95f){
     lxVector3Scale(ctr,temp,1.0f/(1.0f-rad));
-    rad = lxVector3LengthA(ctr);
+    rad = lxVector3Length(ctr);
     lxVector3Add(cone->top,ctr,far);
     lxVector3Scale(cone->axis,ctr,-1.0f/rad);
     rad = (float)atan(radf/rad)*2.0f;

@@ -17,14 +17,14 @@ extern "C"{
 LUX_API void lxVector4Set( lxVector4 pV, float x, float y, float z, float w );
 LUX_API void lxVector4Copy( lxVector4 pOut, const lxVector4 pV1);
 LUX_API void lxVector4Clear( lxVector4 pOut);
+LUX_API float lxVector4LengthFast( const lxVector4 pV );
 LUX_API float lxVector4Length( const lxVector4 pV );
-LUX_API float lxVector4LengthA( const lxVector4 pV );
 LUX_API float lxVector4SqLength( const lxVector4 pV );
 LUX_API float lxVector4Dot( const lxVector4 pV1, const lxVector4 pV2 );
 LUX_API float lxVector4Normalize( lxVector4 pOut, const lxVector4 pV1 );
-LUX_API float lxVector4NormalizeA( lxVector4 pOut, const lxVector4 pV1 );
-LUX_API float lxVector4NormalizedA( lxVector4 pOut );
 LUX_API float lxVector4Normalized( lxVector4 pOut );
+LUX_API float lxVector4NormalizeFast( lxVector4 pOut, const lxVector4 pV1 );
+LUX_API float lxVector4NormalizedFast( lxVector4 pOut );
 
 LUX_API void lxVector4Add( lxVector4 pOut, const lxVector4 pV1, const lxVector4 pV2 );
 LUX_API void lxVector4Sub( lxVector4 pOut, const lxVector4 pV1, const lxVector4 pV2 );
@@ -40,8 +40,8 @@ LUX_API void lxVector4CatmullRom(lxVector4 vout, const float t, const lxVector4 
 LUX_API void lxVector4Negate( lxVector4 pOut, const lxVector4 pV1);
 LUX_API void lxVector4Negated( lxVector4 pOut);
 LUX_API void lxVector4Saturated( lxVector4 pOut);
+LUX_API float lxVector4DistanceFast( const lxVector4 a, const lxVector4 b);
 LUX_API float lxVector4Distance( const lxVector4 a, const lxVector4 b);
-LUX_API float lxVector4DistanceA( const lxVector4 a, const lxVector4 b);
 LUX_API float lxVector4SqDistance(const lxVector4 a, const lxVector4 b);
 
 LUX_API void lxVector4Transform( lxVector4 output, const lxVector4 v1,  lxMatrix44CPTR mat ) ;
@@ -84,7 +84,7 @@ LUX_INLINE void lxVector4Clear( lxVector4 pOut)
   pOut[3] = 0.0f;
 }
 
-LUX_INLINE float lxVector4LengthA( const lxVector4 pV )
+LUX_INLINE float lxVector4Length( const lxVector4 pV )
 {
 #ifdef __cplusplus
   return sqrtf(pV[0] * pV[0] + pV[1] * pV[1] + pV[2] * pV[2] + pV[3] * pV[3]);
@@ -93,7 +93,7 @@ LUX_INLINE float lxVector4LengthA( const lxVector4 pV )
 #endif
 }
 
-LUX_INLINE float lxVector4Length( const lxVector4 pV )
+LUX_INLINE float lxVector4LengthFast( const lxVector4 pV )
 {
   return lxFastSqrt(pV[0] * pV[0] + pV[1] * pV[1] + pV[2] * pV[2] + pV[3] * pV[3]);
 }
@@ -109,9 +109,9 @@ LUX_INLINE float lxVector4Dot( const lxVector4 pV1, const lxVector4 pV2 )
   return pV1[0] * pV2[0] + pV1[1] * pV2[1] + pV1[2] * pV2[2] + pV1[3] * pV2[3];
 }
 
-LUX_INLINE float lxVector4NormalizeA( lxVector4 pOut, const lxVector4 pV1 )
+LUX_INLINE float lxVector4Normalize( lxVector4 pOut, const lxVector4 pV1 )
 {
-  float length = lxVector4LengthA(pV1);
+  float length = lxVector4Length(pV1);
   float lengthdiv = (length < 0.0001f) ? 1.0f : 1.0f/length;
 
   pOut[0] = pV1[0] * lengthdiv;
@@ -122,7 +122,7 @@ LUX_INLINE float lxVector4NormalizeA( lxVector4 pOut, const lxVector4 pV1 )
   return length;
 }
 
-LUX_INLINE float lxVector4Normalize( lxVector4 pOut, const lxVector4 pV1 )
+LUX_INLINE float lxVector4NormalizeFast( lxVector4 pOut, const lxVector4 pV1 )
 {
   float lengthdiv = lxFastSqrtRcp(lxVector4SqLength(pV1));
 
@@ -134,9 +134,9 @@ LUX_INLINE float lxVector4Normalize( lxVector4 pOut, const lxVector4 pV1 )
   return 1.0f/lengthdiv;
 }
 
-LUX_INLINE float lxVector4NormalizedA( lxVector4 pOut)
+LUX_INLINE float lxVector4Normalized( lxVector4 pOut)
 {
-  float length = lxVector4LengthA(pOut);
+  float length = lxVector4Length(pOut);
   float lengthdiv = (length < 0.0001f) ? 1.0f : 1.0f/length;
 
   pOut[0] = pOut[0] * lengthdiv;
@@ -147,7 +147,7 @@ LUX_INLINE float lxVector4NormalizedA( lxVector4 pOut)
   return length;
 }
 
-LUX_INLINE float lxVector4Normalized( lxVector4 pOut )
+LUX_INLINE float lxVector4NormalizedFast( lxVector4 pOut )
 {
   float lengthdiv = lxFastSqrtRcp(lxVector4SqLength(pOut));
 
@@ -258,10 +258,10 @@ LUX_INLINE void lxVector4Negated( lxVector4 pOut)
 
 LUX_INLINE void lxVector4Saturated( lxVector4 pOut)
 {
-  pOut[0] = (FP_GREATER_ONE(pOut[0])) ? 1.0f : (FP_LESS_ZERO(pOut[0])) ? 0.0f : pOut[0];
-  pOut[1] = (FP_GREATER_ONE(pOut[1])) ? 1.0f : (FP_LESS_ZERO(pOut[1])) ? 0.0f : pOut[1];
-  pOut[2] = (FP_GREATER_ONE(pOut[2])) ? 1.0f : (FP_LESS_ZERO(pOut[2])) ? 0.0f : pOut[2];
-  pOut[3] = (FP_GREATER_ONE(pOut[3])) ? 1.0f : (FP_LESS_ZERO(pOut[3])) ? 0.0f : pOut[3];
+  pOut[0] = (LUX_FP_GREATER_ONE(pOut[0])) ? 1.0f : (LUX_FP_LESS_ZERO(pOut[0])) ? 0.0f : pOut[0];
+  pOut[1] = (LUX_FP_GREATER_ONE(pOut[1])) ? 1.0f : (LUX_FP_LESS_ZERO(pOut[1])) ? 0.0f : pOut[1];
+  pOut[2] = (LUX_FP_GREATER_ONE(pOut[2])) ? 1.0f : (LUX_FP_LESS_ZERO(pOut[2])) ? 0.0f : pOut[2];
+  pOut[3] = (LUX_FP_GREATER_ONE(pOut[3])) ? 1.0f : (LUX_FP_LESS_ZERO(pOut[3])) ? 0.0f : pOut[3];
 }
 
 LUX_INLINE void lxVector4CatmullRom(lxVector4 vout, const float t, const lxVector4 v0, const lxVector4 v1, const lxVector4 v2, const lxVector4 v3)
@@ -285,20 +285,20 @@ LUX_INLINE void lxVector4CatmullRom(lxVector4 vout, const float t, const lxVecto
 }
 
 
+LUX_INLINE float lxVector4DistanceFast( const lxVector4 a, const lxVector4 b)
+{
+  lxVector4 temp;
+
+  lxVector4Sub(temp,a,b);
+  return lxVector4LengthFast(temp);
+}
+
 LUX_INLINE float lxVector4Distance( const lxVector4 a, const lxVector4 b)
 {
   lxVector4 temp;
 
   lxVector4Sub(temp,a,b);
   return lxVector4Length(temp);
-}
-
-LUX_INLINE float lxVector4DistanceA( const lxVector4 a, const lxVector4 b)
-{
-  lxVector4 temp;
-
-  lxVector4Sub(temp,a,b);
-  return lxVector4LengthA(temp);
 }
 
 LUX_INLINE float lxVector4SqDistance(const lxVector4 a, const lxVector4 b) 
@@ -357,10 +357,10 @@ LUX_INLINE void lxVector4float_FROM_ubyte( lxVector4 vec4, const uchar ub4[4])
 
 LUX_INLINE void lxVector4ubyte_FROM_float( uchar ub4[4], const lxVector4 vec4) 
 {
-  FP_NORM_TO_BYTE((ub4)[0],(vec4)[0]);
-  FP_NORM_TO_BYTE((ub4)[1],(vec4)[1]);
-  FP_NORM_TO_BYTE((ub4)[2],(vec4)[2]);
-  FP_NORM_TO_BYTE((ub4)[3],(vec4)[3]);
+  LUX_FP_NORM_TO_BYTE((ub4)[0],(vec4)[0]);
+  LUX_FP_NORM_TO_BYTE((ub4)[1],(vec4)[1]);
+  LUX_FP_NORM_TO_BYTE((ub4)[2],(vec4)[2]);
+  LUX_FP_NORM_TO_BYTE((ub4)[3],(vec4)[3]);
 }
 
 LUX_INLINE void lxVector4float_FROM_short( lxVector4 vec4, const short shrt4[4]) 

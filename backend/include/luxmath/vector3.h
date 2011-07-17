@@ -19,8 +19,8 @@ LUX_API void lxVector3Set( lxVector3 pV, float x, float y, float z );
 LUX_API void lxVector3Copy( lxVector3 pOut, const lxVector3 pV1);
 LUX_API void lxVector3Clear( lxVector3 pOut);
 
+LUX_API float lxVector3LengthFast( const lxVector3 pV );
 LUX_API float lxVector3Length( const lxVector3 pV );
-LUX_API float lxVector3LengthA( const lxVector3 pV );
 LUX_API float lxVector3SqLength( const lxVector3 pV );
 LUX_API float lxVector3Dot( const lxVector3 pV1, const lxVector3 pV2 );
 
@@ -40,8 +40,8 @@ LUX_API void lxVector3ScaledAdd( lxVector3 pOut, const lxVector3 pV, float s, co
 LUX_API void lxVector3MulAdd( lxVector3 pOut, const lxVector3 pV, const lxVector3 pV2, const lxVector3 pV3);
 LUX_API void lxVector3Lerp( lxVector3 pOut, const float t, const lxVector3 pV1, const lxVector3 pV2 );
 LUX_API void lxVector3CatmullRom(lxVector3 vout, const float t, const lxVector3 v0, const lxVector3 v1, const lxVector3 v2, const lxVector3 v3);
+LUX_API float lxVector3DistanceFast( const lxVector3 a, const lxVector3 b);
 LUX_API float lxVector3Distance( const lxVector3 a, const lxVector3 b);
-LUX_API float lxVector3DistanceA( const lxVector3 a, const lxVector3 b);
 LUX_API float lxVector3SqDistance(const lxVector3 a, const lxVector3 b);
 
 LUX_API float lxVector3GetRotateZcossin( const lxVector3 in, float *cosf, float *sinf);
@@ -49,12 +49,12 @@ LUX_API float lxVector3GetRotateZcossinNormalized( const lxVector3 in, float *co
 LUX_API void  lxVector3RotateZcossin( lxVector3 out, const lxVector3 in, float cosf, float sinf);
 
 // fast but not precise, dont use in accumulated / matrix ops
-LUX_API float lxVector3Normalized( lxVector3 pOut );
-LUX_API float lxVector3Normalize( lxVector3 pOut, const lxVector3 pV1 );
+LUX_API float lxVector3NormalizedFast( lxVector3 pOut );
+LUX_API float lxVector3NormalizeFast( lxVector3 pOut, const lxVector3 pV1 );
 
 // more accurate version
-LUX_API float lxVector3NormalizedA( lxVector3 pOut );
-LUX_API float lxVector3NormalizeA( lxVector3 pOut, const lxVector3 pV1 );
+LUX_API float lxVector3Normalized( lxVector3 pOut );
+LUX_API float lxVector3Normalize( lxVector3 pOut, const lxVector3 pV1 );
 
 LUX_API void lxVector3Negate( lxVector3 pOut, const lxVector3 pV1);
 LUX_API void lxVector3Negated( lxVector3 pOut);
@@ -76,8 +76,8 @@ LUX_API float lxVector3LineDistanceSq(const lxVector3 point,const lxVector3 line
 LUX_API float lxVector3LineDistanceSqFracc(const lxVector3 point,
                  const lxVector3 linestart, const lxVector3 linedir, float *ofracc);
 LUX_API void lxVector3Spread(lxVector3 out, lxVector3 in, const float radin, const float radout);
+LUX_API void lxVector3PerpendicularFast(lxVector3 out, lxVector3 in);
 LUX_API void lxVector3Perpendicular(lxVector3 out, lxVector3 in);
-LUX_API void lxVector3PerpendicularA(lxVector3 out, lxVector3 in);
 LUX_API void lxVector3MinMax(lxVector3 min, lxVector3 max, lxVector3 pos);
 
 // normalized conversions: float is [-1/0,1] and others are [-TYPEMAX/0,TYPEMAX]
@@ -119,7 +119,7 @@ LUX_INLINE void lxVector3Clear( lxVector3 pOut)
   pOut[2] = 0.0f;
 }
 
-LUX_INLINE float lxVector3LengthA( const lxVector3 pV )
+LUX_INLINE float lxVector3Length( const lxVector3 pV )
 {
 
 #ifdef __cplusplus
@@ -129,7 +129,7 @@ LUX_INLINE float lxVector3LengthA( const lxVector3 pV )
 #endif
 }
 
-LUX_INLINE float lxVector3Length( const lxVector3 pV )
+LUX_INLINE float lxVector3LengthFast( const lxVector3 pV )
 {
 
 #ifdef __cplusplus
@@ -156,9 +156,9 @@ LUX_INLINE void lxVector3Cross( lxVector3 pOut, const lxVector3 pV1, const lxVec
   pOut[2] = pV1[0] * pV2[1] - pV1[1] * pV2[0];
 }
 
-LUX_INLINE float lxVector3NormalizeA( lxVector3 pOut, const lxVector3 pV1 )
+LUX_INLINE float lxVector3Normalize( lxVector3 pOut, const lxVector3 pV1 )
 {
-  float length = lxVector3LengthA(pV1);
+  float length = lxVector3Length(pV1);
   float lengthdiv = (length < 0.0001f) ? 1.0f : 1.0f/length;
 
   pOut[0] = pV1[0] * lengthdiv;
@@ -168,9 +168,9 @@ LUX_INLINE float lxVector3NormalizeA( lxVector3 pOut, const lxVector3 pV1 )
   return length;
 }
 
-LUX_INLINE float lxVector3NormalizedA( lxVector3 pOut )
+LUX_INLINE float lxVector3Normalized( lxVector3 pOut )
 {
-  float length = lxVector3LengthA(pOut);
+  float length = lxVector3Length(pOut);
   float lengthdiv = (length < 0.0001f) ? 1.0f : 1.0f/length;
 
   pOut[0] = pOut[0] * lengthdiv;
@@ -180,7 +180,7 @@ LUX_INLINE float lxVector3NormalizedA( lxVector3 pOut )
   return length;
 }
 
-LUX_INLINE float lxVector3Normalize( lxVector3 pOut, const lxVector3 pV1 )
+LUX_INLINE float lxVector3NormalizeFast( lxVector3 pOut, const lxVector3 pV1 )
 {
   //float length = 1.0f / fastsqrt(Vector3SqLength(pV1));
   float length = lxFastSqrtRcp(lxVector3SqLength(pV1));
@@ -191,7 +191,7 @@ LUX_INLINE float lxVector3Normalize( lxVector3 pOut, const lxVector3 pV1 )
   return 1.0f/length;
 }
 
-LUX_INLINE float lxVector3Normalized( lxVector3 pOut )
+LUX_INLINE float lxVector3NormalizedFast( lxVector3 pOut )
 {
   //float length = 1.0f / fastsqrt(Vector3SqLength(pOut));
   float length = lxFastSqrtRcp(lxVector3SqLength(pOut));
@@ -290,9 +290,9 @@ LUX_INLINE void lxVector3Negated( lxVector3 pOut)
 
 LUX_INLINE void lxVector3Saturated( lxVector3 pOut)
 {
-  pOut[0] = (FP_GREATER_ONE(pOut[0])) ? 1.0f : (FP_LESS_ZERO(pOut[0])) ? 0.0f : pOut[0];
-  pOut[1] = (FP_GREATER_ONE(pOut[1])) ? 1.0f : (FP_LESS_ZERO(pOut[1])) ? 0.0f : pOut[1];
-  pOut[2] = (FP_GREATER_ONE(pOut[2])) ? 1.0f : (FP_LESS_ZERO(pOut[2])) ? 0.0f : pOut[2];
+  pOut[0] = (LUX_FP_GREATER_ONE(pOut[0])) ? 1.0f : (LUX_FP_LESS_ZERO(pOut[0])) ? 0.0f : pOut[0];
+  pOut[1] = (LUX_FP_GREATER_ONE(pOut[1])) ? 1.0f : (LUX_FP_LESS_ZERO(pOut[1])) ? 0.0f : pOut[1];
+  pOut[2] = (LUX_FP_GREATER_ONE(pOut[2])) ? 1.0f : (LUX_FP_LESS_ZERO(pOut[2])) ? 0.0f : pOut[2];
 }
 
 LUX_INLINE void lxVector3Random(lxVector3 out){
@@ -307,7 +307,7 @@ LUX_INLINE void lxVector3Random(lxVector3 out){
         zero = LUX_FALSE;
     }
   }
-  lxVector3Normalized(out);
+  lxVector3NormalizedFast(out);
 }
 
 // returns 0
@@ -380,20 +380,20 @@ LUX_INLINE void lxVector3CatmullRom(lxVector3 vout, const float t, const lxVecto
 }
 
 
+LUX_INLINE float lxVector3DistanceFast( const lxVector3 a, const lxVector3 b)
+{
+  lxVector3 temp;
+
+  lxVector3Sub(temp,a,b);
+  return lxVector3LengthFast(temp);
+}
+
 LUX_INLINE float lxVector3Distance( const lxVector3 a, const lxVector3 b)
 {
   lxVector3 temp;
 
   lxVector3Sub(temp,a,b);
   return lxVector3Length(temp);
-}
-
-LUX_INLINE float lxVector3DistanceA( const lxVector3 a, const lxVector3 b)
-{
-  lxVector3 temp;
-
-  lxVector3Sub(temp,a,b);
-  return lxVector3LengthA(temp);
 }
 
 LUX_INLINE float lxVector3SqDistance(const lxVector3 a, const lxVector3 b) 
@@ -497,9 +497,9 @@ LUX_INLINE void lxVector3float_FROM_ubyte( lxVector3 vec3, const uchar ub3[3])
 
 LUX_INLINE void lxVector3ubyte_FROM_float( uchar ub3[3], const lxVector3 vec3) 
 {
-  FP_NORM_TO_BYTE((ub3)[0],(vec3)[0]);
-  FP_NORM_TO_BYTE((ub3)[1],(vec3)[1]);
-  FP_NORM_TO_BYTE((ub3)[2],(vec3)[2]);
+  LUX_FP_NORM_TO_BYTE((ub3)[0],(vec3)[0]);
+  LUX_FP_NORM_TO_BYTE((ub3)[1],(vec3)[1]);
+  LUX_FP_NORM_TO_BYTE((ub3)[2],(vec3)[2]);
 }
 
 LUX_INLINE void lxVector3float_FROM_short( lxVector3 vec3, const short shrt3[3]) 

@@ -41,9 +41,9 @@ static int l_ScalarMax[LUX_SCALARS] = {
   127,
   255,
   LUX_SHORT_SIGNEDMAX,
-  LU_SHORT_UNSIGNEDMAX,
+  LUX_SHORT_UNSIGNEDMAX,
   LUX_SHORT_SIGNEDMAX,
-  LU_SHORT_UNSIGNEDMAX,
+  LUX_SHORT_UNSIGNEDMAX,
   1,
   1,
   0,
@@ -340,7 +340,7 @@ void lxScalarType_from32(lxScalarVector_t *pout, lxScalarType_t type, void *pin,
     {
       int32 *pint = (int32*)pin;
       for (uint i = 0; i < vectordim; i++){
-        pout->tuint16[i] =  LUX_CLAMP(pint[i],0,LU_SHORT_UNSIGNEDMAX);
+        pout->tuint16[i] =  LUX_CLAMP(pint[i],0,LUX_SHORT_UNSIGNEDMAX);
       }
     }
     break;
@@ -2542,7 +2542,7 @@ static float32  l_float32minmaxs[2] = {-1.0f,1.0f};
 static int8   l_tint8minmax[2] = {-127,127};
 static uint8  l_tuint8minmax[2] = {0,255};
 static int16  l_tint16minmax[2] = {LUX_SHORT_SIGNEDMAX,LUX_SHORT_SIGNEDMAX};
-static uint16 l_tuint16minmax[2] = {0,LU_SHORT_UNSIGNEDMAX};
+static uint16 l_tuint16minmax[2] = {0,LUX_SHORT_UNSIGNEDMAX};
 static int32  l_tint32minmax[2] = {INT_MIN,INT_MAX};
 static uint32 l_tuint32minmax[2] = {0,UINT_MAX};
 
@@ -3814,6 +3814,46 @@ struct FVectorTransformFull {
 struct FVectorNormalize {
   static void LUX_INLINE proc(FVector2 &avec, const FVector2 &bvec, lxMatrix44CPTR matrix44)
   {
+    lxVector2NormalizeFast(avec.data,bvec.data);
+  }
+  static void LUX_INLINE proc(FVector3 &avec, const FVector3 &bvec, lxMatrix44CPTR matrix44)
+  {
+    lxVector3NormalizeFast(avec.data,bvec.data);
+  }
+  static void LUX_INLINE proc(FVector4 &avec, const FVector4 &bvec, lxMatrix44CPTR matrix44)
+  {
+    lxVector4NormalizeFast(avec.data,bvec.data);
+  }
+#ifdef SCALAR_USE_XMM
+  static void LUX_INLINE proc(FVector4SSE &avec,  FVector4SSE &bvec, lxMatrix44CPTR matrix44)
+  {
+    lxVector4NormalizeFast(avec.data.m128_f32,bvec.data.m128_f32);
+  }
+#endif
+
+  static void LUX_INLINE proc(FVector2 &avec, lxMatrix44CPTR matrix44)
+  {
+    lxVector2NormalizedFast(avec.data);
+  }
+  static void LUX_INLINE proc(FVector3 &avec, lxMatrix44CPTR matrix44)
+  {
+    lxVector3NormalizedFast(avec.data);
+  }
+  static void LUX_INLINE proc(FVector4 &avec, lxMatrix44CPTR matrix44)
+  {
+    lxVector4NormalizedFast(avec.data);
+  }
+#ifdef SCALAR_USE_XMM
+  static void LUX_INLINE proc(FVector4SSE &avec, lxMatrix44CPTR matrix44)
+  {
+    lxVector4NormalizedFast(avec.data.m128_f32);
+  }
+#endif
+};
+
+struct FVectorNormalizeAcc {
+  static void LUX_INLINE proc(FVector2 &avec, const FVector2 &bvec, lxMatrix44CPTR matrix44)
+  {
     lxVector2Normalize(avec.data,bvec.data);
   }
   static void LUX_INLINE proc(FVector3 &avec, const FVector3 &bvec, lxMatrix44CPTR matrix44)
@@ -3847,46 +3887,6 @@ struct FVectorNormalize {
   static void LUX_INLINE proc(FVector4SSE &avec, lxMatrix44CPTR matrix44)
   {
     lxVector4Normalized(avec.data.m128_f32);
-  }
-#endif
-};
-
-struct FVectorNormalizeAcc {
-  static void LUX_INLINE proc(FVector2 &avec, const FVector2 &bvec, lxMatrix44CPTR matrix44)
-  {
-    lxVector2NormalizeA(avec.data,bvec.data);
-  }
-  static void LUX_INLINE proc(FVector3 &avec, const FVector3 &bvec, lxMatrix44CPTR matrix44)
-  {
-    lxVector3NormalizeA(avec.data,bvec.data);
-  }
-  static void LUX_INLINE proc(FVector4 &avec, const FVector4 &bvec, lxMatrix44CPTR matrix44)
-  {
-    lxVector4NormalizeA(avec.data,bvec.data);
-  }
-#ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec,  FVector4SSE &bvec, lxMatrix44CPTR matrix44)
-  {
-    lxVector4NormalizeA(avec.data.m128_f32,bvec.data.m128_f32);
-  }
-#endif
-
-  static void LUX_INLINE proc(FVector2 &avec, lxMatrix44CPTR matrix44)
-  {
-    lxVector2NormalizedA(avec.data);
-  }
-  static void LUX_INLINE proc(FVector3 &avec, lxMatrix44CPTR matrix44)
-  {
-    lxVector3NormalizedA(avec.data);
-  }
-  static void LUX_INLINE proc(FVector4 &avec, lxMatrix44CPTR matrix44)
-  {
-    lxVector4NormalizedA(avec.data);
-  }
-#ifdef SCALAR_USE_XMM
-  static void LUX_INLINE proc(FVector4SSE &avec, lxMatrix44CPTR matrix44)
-  {
-    lxVector4NormalizedA(avec.data.m128_f32);
   }
 #endif
 };

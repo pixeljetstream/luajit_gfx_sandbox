@@ -351,7 +351,7 @@ LUX_INLINE lxVector4SSE lxVector4SSE_perpendicularV3(lxVector4SSE vec3)
 
   float rdot = b.m128_f32[0];
   // ~25° tolerance
-  if (FP_ABS_BITS(rdot) < 0x3F666666){
+  if (LUX_FP_ABS_BITS(rdot) < 0x3F666666){
     vec3 = lxVector4SSE_crossV3(x,nin);
   }
   else{

@@ -38,13 +38,6 @@ LUX_API int   lxGetIntMaxOfN (const int *array, int n); // returns the max of n 
 
 //////////////////////////////////////////////////////////////////////////
 
-#define lxVector2Unpack     LUX_ARRAY2UNPACK
-#define lxVector3Unpack     LUX_ARRAY3UNPACK
-#define lxVector4Unpack     LUX_ARRAY4UNPACK
-#define lxVector3ToVar      LUX_ARRAY3TOVARS
-#define lxVector3Compare    LUX_ARRAY3COMPARE
-#define lxMatrix44UnpackTranslation(matrix) LUX_ARRAYUNPACK3(matrix,12)
-
 // perform linear interpolation between two vectors
 #define LUX_ARRAY3LERPTYPE(type, out,  t,  a,  b)  (\
   out[0] = (type)((float)((a)[0])+ ((float)((b)[0])- (float)((a)[0]))* (float)t),\
