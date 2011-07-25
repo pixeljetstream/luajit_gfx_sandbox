@@ -2,33 +2,31 @@
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
-#include "test.hpp"
+#include "../_project/project.hpp"
 #include <string>
 
 int main(int argc, const char** argv)
 {
-  Test* test = argc > 1 ? TestManager::Get().getTest(argv[1]) : NULL;
+  Project* test = argc > 1 ? ProjectManager::Get().getTest(argv[1]) : NULL;
   std::string caption = "lux backend test: " + std::string(test ? test->getName() : "no test specified");
 
 
   glfwInit();
   glfwOpenWindowHint(GLFW_DEPTH_BITS,24);
   glfwOpenWindowHint(GLFW_STENCIL_BITS,8);
-  GLFWwindow win = glfwOpenWindow(640,480,GLFW_WINDOWED,caption.c_str(),0);
+  GLFWwindow win = glfwOpenWindow(1024,768,GLFW_WINDOWED,caption.c_str(),0);
   glewInit();
 
   if (test)
     test->onInit(win,argc,argv);
 
-  const int TIMES = 16;
-  double times[TIMES];
-  int curtime = 0;
+  double begin = glfwGetTime();
+  double frames = 0;
 
   while( glfwIsWindow(win) && glfwGetKey(win,GLFW_KEY_ESCAPE) != GLFW_PRESS)
   {
     int width;
     int height;
-    double begin = glfwGetTime();
     glfwGetWindowSize(win, &width, &height);
     glViewport(0,0,width,height);
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -39,18 +37,17 @@ int main(int argc, const char** argv)
     glfwSwapBuffers();
     glFinish();
     glfwPollEvents();
-
-    times[(curtime++) % TIMES] = (glfwGetTime()-begin);
-    double dur = 0;
-    int cnt = std::min(curtime, TIMES);
-    for (int i = 0; i < cnt; i++){
-      dur += times[i];
+    frames++;
+   
+    double dur = glfwGetTime() - begin;
+    if (dur > 1.0){
+      dur /= frames;
+      char buffer[128];
+      sprintf_s(buffer,128," %.1f ms %5d fps", dur * 1000.0, (int)floor(1.0/dur));
+      glfwSetWindowTitle(win, (caption + std::string(buffer)).c_str());
+      frames = 0;
     }
-    dur /= double(TIMES);
 
-    char buffer[128];
-    sprintf_s(buffer,128," %.1f ms %5d fps", dur * 1000.0, (int)floor(1.0/dur));
-    glfwSetWindowTitle(win, (caption + std::string(buffer)).c_str());
   }
 
   if (glfwIsWindow(win)){

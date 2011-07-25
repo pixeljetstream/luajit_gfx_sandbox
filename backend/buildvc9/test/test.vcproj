@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="test"
 	ProjectGUID="{48D41885-CABF-4E9A-B019-D2163E9D893F}"
 	RootNamespace="test"
@@ -191,10 +191,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\test\main.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\test\mesh.cpp"
 				>
 			</File>
@@ -202,26 +198,24 @@
 				RelativePath="..\..\test\shader.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\..\test\test.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
-			Name="Header Files"
+			Name="project"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\test\test.hpp"
+				RelativePath="..\..\_project\main.cpp"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
+			<File
+				RelativePath="..\..\_project\project.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\_project\project.hpp"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

@@ -2,10 +2,10 @@
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
-#include "test.hpp"
+#include "../_project/project.hpp"
 #include <luxgfx/luxgfx.h>
 
-class GfxTexture : public Test
+class GfxTexture : public Project
 {
 private:
 
@@ -23,7 +23,7 @@ private:
 
 public:
   GfxTexture() 
-    : Test("gfxtexture")
+    : Project("gfxtexture")
   {
       m_keys.add(GLFW_KEY_SPACE);
   }

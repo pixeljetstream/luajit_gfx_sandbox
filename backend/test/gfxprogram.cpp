@@ -2,10 +2,10 @@
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
-#include "test.hpp"
+#include "../_project/project.hpp"
 #include <luxgfx/luxgfx.h>
 
-class GfxProgram : public Test
+class GfxProgram : public Project
 {
   static const int PARAMSETS = 4;
 
@@ -88,7 +88,7 @@ private:
 
 public:
   GfxProgram() 
-    : Test("gfxprogram")
+    : Project("gfxprogram")
   {
 
   }
@@ -116,8 +116,8 @@ public:
     lxgContext_init(&m_ctx);
 
     m_prog.init(&m_ctx);
-    m_prog.addStageProgram(LUXGFX_STAGE_VERTEX,RESFILENAME("gfxprogram.vert").c_str(),NULL);
-    m_prog.addStageProgram(LUXGFX_STAGE_FRAGMENT,RESFILENAME("gfxprogram.frag").c_str(),NULL);
+    m_prog.addStageProgram(LUXGFX_STAGE_VERTEX,PROJECTFILENAME("test/resources/gfxprogram.vert").c_str(),NULL);
+    m_prog.addStageProgram(LUXGFX_STAGE_FRAGMENT,PROJECTFILENAME("test/resources/gfxprogram.frag").c_str(),NULL);
     m_prog.finish();
 
     // TODO init parmasets

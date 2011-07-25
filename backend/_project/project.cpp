@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
-#include "test.hpp"
+#include "../_project/project.hpp"
 #include <luxmath/bounding.h>
 #include <luxbackend/meshbase.h>
 #include <string>
@@ -37,9 +37,9 @@ std::string ReadFile(const char* filename)
   return str;
 }
 
-std::string RESFILENAME( const char* name )
+std::string PROJECTFILENAME(const char* name )
 {
-  return std::string("../../backend/test/resources/") + std::string(name);
+  return std::string("../../backend/") + std::string(name);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -426,7 +426,7 @@ void GeometrySphere::update( int x, int y)
 
 //////////////////////////////////////////////////////////////////////////
 
-Test* TestManager::getTest(const char* name){
+Project* ProjectManager::getTest(const char* name){
   for (size_t i = 0; i < m_tests.size(); ++i){
     if (strcmp(name,m_tests[i]->getName())==0){
       return m_tests[i];

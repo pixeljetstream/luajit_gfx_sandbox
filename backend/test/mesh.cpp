@@ -2,9 +2,9 @@
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
-#include "test.hpp"
+#include "../_project/project.hpp"
 
-class MeshTest : public Test
+class MeshTest : public Project
 {
 private:
 
@@ -25,7 +25,7 @@ private:
 
 public:
   MeshTest() 
-    : Test("mesh")
+    : Project("mesh")
     , m_wire(0)
     , m_model(0)
   {

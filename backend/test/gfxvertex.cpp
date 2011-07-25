@@ -2,10 +2,10 @@
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
-#include "test.hpp"
+#include "../_project/project.hpp"
 #include <luxgfx/luxgfx.h>
 
-class GfxVertex : public Test
+class GfxVertex : public Project
 {
 private:
 
@@ -25,7 +25,7 @@ private:
 
 public:
   GfxVertex() 
-    : Test("gfxvertex")
+    : Project("gfxvertex")
   {
 
   }

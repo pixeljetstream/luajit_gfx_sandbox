@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // For conditions of distribution and use, see copyright notice in LICENSE.txt
 
-#ifndef __LUXTEST_TEST_H__
-#define __LUXTEST_TEST_H__
+#ifndef __LUXTEST_PROJECT_H__
+#define __LUXTEST_PROJECT_H__
 
 #include <GL/glew.h>
 #include <GL/glfw3.h>
@@ -240,31 +240,31 @@ private:
 
 //////////////////////////////////////////////////////////////////////////
 
-class Test;
-class TestManager {
+class Project;
+class ProjectManager {
 public:
-  static TestManager& Get(){
-    static TestManager mgr;
+  static ProjectManager& Get(){
+    static ProjectManager mgr;
     return mgr;
   }
 
-  void addTest(Test* test){
+  void addTest(Project* test){
     m_tests.push_back(test);
   }
 
-  Test* getTest(const char* name);
+  Project* getTest(const char* name);
 
 private:
-  std::vector<Test*>  m_tests;
+  std::vector<Project*>  m_tests;
 
 };
 
 
-class Test
+class Project
 {
 public:
-  Test(const char* name) : m_name(name){
-    TestManager::Get().addTest(this);
+  Project(const char* name) : m_name(name){
+    ProjectManager::Get().addTest(this);
   }
 
   const char* getName() const {
@@ -279,7 +279,7 @@ private:
 };
 
 std::string ReadFile(const char* filename);
-std::string RESFILENAME(const char* name);
+std::string PROJECTFILENAME(const char* name);
 
 //////////////////////////////////////////////////////////////////////////
 
