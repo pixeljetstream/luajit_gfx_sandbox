@@ -7,7 +7,7 @@
 
 int main(int argc, const char** argv)
 {
-  Project* test = argc > 1 ? ProjectManager::Get().getTest(argv[1]) : NULL;
+  Project* test = argc > 1 ? ProjectManager::Get().getTest(argv[1]) : ProjectManager::Get().getTest();
   std::string caption = "lux backend test: " + std::string(test ? test->getName() : "no test specified");
 
 
@@ -39,13 +39,15 @@ int main(int argc, const char** argv)
     glfwPollEvents();
     frames++;
    
-    double dur = glfwGetTime() - begin;
+    double current = glfwGetTime();
+    double dur = current - begin;
     if (dur > 1.0){
       dur /= frames;
       char buffer[128];
       sprintf_s(buffer,128," %.1f ms %5d fps", dur * 1000.0, (int)floor(1.0/dur));
       glfwSetWindowTitle(win, (caption + std::string(buffer)).c_str());
       frames = 0;
+      begin = current;
     }
 
   }

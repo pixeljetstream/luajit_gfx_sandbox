@@ -253,6 +253,7 @@ public:
   }
 
   Project* getTest(const char* name);
+  Project* getTest();
 
 private:
   std::vector<Project*>  m_tests;
@@ -263,12 +264,17 @@ private:
 class Project
 {
 public:
-  Project(const char* name) : m_name(name){
+  Project(const char* name, const char* dirname) : m_name(name), m_dirname(dirname){
     ProjectManager::Get().addTest(this);
   }
 
+  std::string FILENAME(const char* name);
+
   const char* getName() const {
     return m_name;
+  }
+    const char* getDirName() const {
+    return m_dirname;
   }
   virtual void onDraw(int width, int height) {}
   virtual void onInit(GLFWwindow window, int argc, const char** argv) {}
@@ -276,10 +282,10 @@ public:
 
 private:
   const char*   m_name;
+  const char*   m_dirname;
 };
 
 std::string ReadFile(const char* filename);
-std::string PROJECTFILENAME(const char* name);
 
 //////////////////////////////////////////////////////////////////////////
 

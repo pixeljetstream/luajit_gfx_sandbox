@@ -23,7 +23,7 @@ private:
 
 public:
   GfxTexture() 
-    : Project("gfxtexture")
+    : Project("gfxtexture","../../backend/test/")
   {
       m_keys.add(GLFW_KEY_SPACE);
   }

@@ -88,7 +88,7 @@ private:
 
 public:
   GfxProgram() 
-    : Project("gfxprogram")
+    : Project("gfxprogram","../../backend/test/")
   {
 
   }
@@ -116,8 +116,8 @@ public:
     lxgContext_init(&m_ctx);
 
     m_prog.init(&m_ctx);
-    m_prog.addStageProgram(LUXGFX_STAGE_VERTEX,PROJECTFILENAME("test/resources/gfxprogram.vert").c_str(),NULL);
-    m_prog.addStageProgram(LUXGFX_STAGE_FRAGMENT,PROJECTFILENAME("test/resources/gfxprogram.frag").c_str(),NULL);
+    m_prog.addStageProgram(LUXGFX_STAGE_VERTEX,FILENAME("resources/gfxprogram.vert").c_str(),NULL);
+    m_prog.addStageProgram(LUXGFX_STAGE_FRAGMENT,FILENAME("resources/gfxprogram.frag").c_str(),NULL);
     m_prog.finish();
 
     // TODO init parmasets

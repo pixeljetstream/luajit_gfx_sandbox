@@ -25,7 +25,7 @@ private:
 
 public:
   GfxVertex() 
-    : Project("gfxvertex")
+    : Project("gfxvertex","../../backend/test/")
   {
 
   }

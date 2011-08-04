@@ -37,10 +37,7 @@ std::string ReadFile(const char* filename)
   return str;
 }
 
-std::string PROJECTFILENAME(const char* name )
-{
-  return std::string("../../backend/") + std::string(name);
-}
+
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -433,6 +430,20 @@ Project* ProjectManager::getTest(const char* name){
     }
   }
   return NULL;
+}
+
+Project* ProjectManager::getTest(){
+  if (m_tests.size()){
+    return m_tests[0];
+  }
+
+  return NULL;
+}
+
+
+std::string Project::FILENAME(const char* name )
+{
+  return std::string(m_dirname) + std::string(name);
 }
 
 //////////////////////////////////////////////////////////////////////////

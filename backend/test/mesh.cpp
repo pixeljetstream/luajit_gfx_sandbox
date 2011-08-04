@@ -25,7 +25,7 @@ private:
 
 public:
   MeshTest() 
-    : Project("mesh")
+    : Project("mesh","../../backend/test/")
     , m_wire(0)
     , m_model(0)
   {
