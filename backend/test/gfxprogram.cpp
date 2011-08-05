@@ -21,7 +21,7 @@ class GfxProgram : public Project
   struct ParamSet{
 
     lxgProgramParameterPTR params[PARAMS];
-    void*               datas[PARAMS];
+    const void*            datas[PARAMS];
 
     lxCVector4          vecX;
     lxCVector4          vecY;

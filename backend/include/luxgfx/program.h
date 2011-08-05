@@ -115,7 +115,7 @@ extern "C"{
 
 
   LUX_API void  lxgContext_applyProgram( lxgContextPTR ctx,  lxgProgramCPTR prog);
-  LUX_API void  lxgContext_applyProgramParameters( lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, void **data);
+  LUX_API void  lxgContext_applyProgramParameters( lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, const void **data);
   LUX_API void  lxgContext_updateProgramSubroutines( lxgContextPTR ctx, lxgProgramCPTR prog);
 
   // GLSL

@@ -1707,7 +1707,7 @@ LUX_INLINE LUX_API void lxgContext_updateProgramSubroutines( lxgContextPTR ctx, 
   ctx->program.dirtySubroutines = 0;
 }
 
-LUX_API void lxgContext_applyProgramParameters(  lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, void **data )
+LUX_API void lxgContext_applyProgramParameters(  lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, const void **data )
 {
   uint i;
   LUX_DEBUGASSERT(ctx->program.current == prog);

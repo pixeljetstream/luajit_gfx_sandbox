@@ -123,6 +123,8 @@ void RenderHelper::updateProjection( int width, int height )
   else{
     lxMatrix44Perspective(m_projMatrix, m_fov, size / 4096.0f, size * 16.0f, (float)width / (float) height);
   }
+  m_screenSize[0] = width;
+  m_screenSize[1] = height;
 }
 
 void RenderHelper::setCameraGL()
@@ -545,3 +547,12 @@ lxgSubroutineKey RenderProgram::getSubRoutine( const char* name )
   }
   return NULL;
 }
+
+//////////////////////////////////////////////////////////////
+
+void ParameterContainer::add(lxgProgramParameterPTR param, const void *data)
+{
+  m_paramPtrs.push_back(param);
+  m_paramData.push_back(data);
+}
+

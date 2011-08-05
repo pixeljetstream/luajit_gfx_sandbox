@@ -193,7 +193,11 @@ public:
   inline size_t numParams() {
     return m_paramPtrs.size();
   }
-  inline const lxgProgramParameter_t* getParams(){
+
+  inline lxgProgramCPTR getProgram() const {
+    return &m_program;
+  }
+  inline const lxgProgramParameter_t* getParams() const{
     return &m_params[0];
   }
   inline char** getSubs() {
@@ -202,6 +206,23 @@ public:
   inline lxgProgramParameterPTR* getPtrs() {
     return &m_paramPtrs[0];
   }
+};
+
+class ParameterContainer{
+public:
+  ParameterContainer() : m_prog(0) {}
+
+  inline void setProgram(lxgProgramCPTR prog) {
+    m_prog = prog;
+  }
+  inline void apply(lxgContextPTR ctx){
+    lxgContext_applyProgramParameters(ctx, m_prog, m_paramPtrs.size(), &m_paramPtrs[0], &m_paramData[0]);
+  }
+  void add(lxgProgramParameterPTR param, const void* data);
+private:
+  lxgProgramCPTR                      m_prog;
+  std::vector<lxgProgramParameterPTR> m_paramPtrs;
+  std::vector<const void*>            m_paramData;
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -220,15 +241,18 @@ public:
   void updateCamera();
   void setCameraGL();
   void doArcBall(int width, int height);
+
+  lxCMatrix44 m_viewMatrix;
+  lxCMatrix44 m_projMatrix;
+  lxCMatrix44 m_viewprojMatrix;
+  int         m_screenSize[2];
+
 private:
 
   GLFWwindow  m_window;
 
   float       m_ortho;
   float       m_fov;
-  lxCMatrix44 m_viewMatrix;
-  lxCMatrix44 m_projMatrix;
-  lxCMatrix44 m_viewprojMatrix;
   lxCVector3  m_sceneCenter;
   lxCVector3  m_sceneSize;
 
