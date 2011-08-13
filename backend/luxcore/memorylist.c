@@ -20,7 +20,7 @@ static void lxMemoryList_addPage (lxMemoryListPTR self, uint size)
 {
   uint alignSize = self->alignSize;
   lxMemoryPage_t* oldchunk = (lxMemoryPage_t*)self->pagelist;
-  lxMemoryPage_t* newchunk = (lxMemoryPage_t*) (size+sizeof(lxMemoryPage_t)+self->alignSize);
+  lxMemoryPage_t* newchunk = (lxMemoryPage_t*)lxMemoryAllocator_malloc(self->allocator,size+sizeof(lxMemoryPage_t)+self->alignSize);
   LUX_DEBUGASSERT(newchunk);
 
   newchunk->next = oldchunk;
@@ -65,6 +65,7 @@ void lxMemoryList_init (lxMemoryListPTR self, lxMemoryAllocatorPTR allocator, ui
   uint cnt = numSizes;
   memset(self,0,sizeof(lxMemoryList_t));
   self->alignSize = alignSize;
+  self->allocator = allocator;
 
   LUX_ASSERT(self->cnt <= MEMORY_LIST_MAXSLOTS);
 

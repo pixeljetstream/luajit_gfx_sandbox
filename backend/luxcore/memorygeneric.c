@@ -445,7 +445,7 @@ static void lxMemoryGeneric_init(lxMemoryGenericPTR gen,lxMemoryGenericDescr_t d
   gen->allocator._mallocAligned = (lxMallocAligned_fn)lxMemoryGeneric_mallocAligned;
   gen->allocator._callocAligned = (lxCallocAligned_fn)lxMemoryGeneric_callocAligned;
   gen->allocator._reallocAligned = (lxReallocAligned_fn)lxMemoryGeneric_reallocAligned;
-  gen->allocator._freeAligned = (lxFreeAligned_fn)lxMemoryGeneric_free;
+  gen->allocator._freeAligned = (lxFreeAligned_fn)lxMemoryGeneric_freeAligned;
   gen->allocator.tracker = &gen->tracker;
   gen->tracker._malloc = (lxMallocStats_fn)lxMemoryGeneric_mallocStats;
   gen->tracker._calloc = (lxCallocStats_fn)lxMemoryGeneric_callocStats;
@@ -454,7 +454,7 @@ static void lxMemoryGeneric_init(lxMemoryGenericPTR gen,lxMemoryGenericDescr_t d
   gen->tracker._mallocAligned = (lxMallocAlignedStats_fn)lxMemoryGeneric_mallocAlignedStats;
   gen->tracker._callocAligned = (lxCallocAlignedStats_fn)lxMemoryGeneric_callocAlignedStats;
   gen->tracker._reallocAligned = (lxReallocAlignedStats_fn)lxMemoryGeneric_reallocAlignedStats;
-  gen->tracker._freeAligned = (lxFreeAlignedStats_fn)lxMemoryGeneric_freeStats;
+  gen->tracker._freeAligned = (lxFreeAlignedStats_fn)lxMemoryGeneric_freeAlignedStats;
 }
 
 LUX_API lxMemoryGenericPTR lxMemoryGeneric_new(lxMemoryGenericDescr_t  descr)
