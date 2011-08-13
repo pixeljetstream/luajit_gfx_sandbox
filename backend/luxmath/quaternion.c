@@ -155,7 +155,7 @@ LUX_API void lxQuatGetBarycentric(lxQuat q,float f, float g, const lxQuat q1, co
 }
 
 
-LUX_API void lxQuatFromRotationAxis(lxQuat q,const float angle, const lxVector3 a)
+LUX_API void lxQuatFromRotationAxisFast(lxQuat q,const float angle, const lxVector3 a)
 {
   /*
   // Reference:
@@ -166,7 +166,7 @@ LUX_API void lxQuatFromRotationAxis(lxQuat q,const float angle, const lxVector3 
   float len;
 
   theta = angle * 0.5f;
-  len = (float)sqrt(a[0]*a[0]+ a[1]*a[1]+ a[2]*a[2]); // grab length
+  len = (float)lxFastSqrt(a[0]*a[0]+ a[1]*a[1]+ a[2]*a[2]); // grab length
   if (len > LUX_FLOAT_EPSILON)
   {
     len = (float)lxFastSin(theta) / len;
@@ -199,7 +199,7 @@ LUX_API void lxQuatToRotationAxis(const lxQuat q,float *degrees, lxVector3 a)
   *degrees = LUX_RAD2DEG(2.0f* (float)acos(q[3]));
 }
 
-LUX_API void lxQuatFromEulerXYZ(lxQuat q, const lxVector3 vec)
+LUX_API void lxQuatFromEulerXYZFast(lxQuat q, const lxVector3 vec)
 {
   float sx, sy, sz, cx,cy,cz,cycz,sysz;
 
@@ -224,5 +224,5 @@ LUX_API void lxQuatFromEuler(lxQuat q, float x, float y, float z)
 {
   lxVector3 temp;
   lxVector3Set(temp,x,y,z);
-  lxQuatFromEulerXYZ(q,temp);
+  lxQuatFromEulerXYZFast(q,temp);
 }

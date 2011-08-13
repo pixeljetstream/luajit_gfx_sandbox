@@ -70,14 +70,17 @@ LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3CPTR forward,lxVector3
 LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, lxVector3CPTR from, lxVector3CPTR to, lxVector3CPTR up);
 
 LUX_API void lxMatrix44FromEulerZYX( lxMatrix44PTR mat, lxVector3CPTR angles );
+LUX_API void lxMatrix44FromEulerZYXFast( lxMatrix44PTR mat, lxVector3CPTR angles );
 LUX_API void lxMatrix44FromEulerZYXdeg( lxMatrix44PTR mat, lxVector3CPTR angles );
 LUX_API void lxMatrix44FromEulerXYZ(lxMatrix44PTR mat, lxVector3PTR angles);
-LUX_API void lxMatrix44FromAngleAxisFast(lxMatrix44PTR mat, lxVector3CPTR axis, 
+LUX_API void lxMatrix44FromEulerXYZFast(lxMatrix44PTR mat, lxVector3PTR angles);
+LUX_API void lxMatrix44FromAngleAxis(lxMatrix44PTR mat, lxVector3CPTR axis, 
                  float cos, float sin, float oneminuscos);
-LUX_API void lxMatrix44FromAngleAxis(lxMatrix44PTR mat, float anglerad, lxVector3CPTR axis);
+LUX_API void lxMatrix44FromAngleAxisFast(lxMatrix44PTR mat, float anglerad, lxVector3CPTR axis);
 LUX_API void lxMatrix44RotateAngle(lxMatrix44PTR mat, lxVector3PTR from, lxVector3PTR to);
-LUX_API void lxMatrix44RotateAroundVector(lxMatrix44PTR mat, lxVector3PTR axis, float angleRad);
-LUX_API void lxMatrix44RotateAroundPoint( lxMatrix44PTR mat,  lxVector3CPTR center, lxVector3CPTR angles);
+LUX_API void lxMatrix44RotateAroundVector(lxMatrix44PTR mat, lxVector3PTR axis, float cos, float sin, float oneminuscos);
+LUX_API void lxMatrix44RotateAroundVectorFast(lxMatrix44PTR mat, lxVector3PTR axis, float angleRad);
+LUX_API void lxMatrix44RotateAroundPointFast( lxMatrix44PTR mat,  lxVector3CPTR center, lxVector3CPTR angles);
 
 LUX_API void lxMatrix44ToEulerXYZ( lxMatrix44CPTR mat, lxVector3PTR angles);
 LUX_API void lxMatrix44ToEulerZYX( lxMatrix44CPTR mat, lxVector3PTR angles);
@@ -179,7 +182,7 @@ LUX_INLINE void lxMatrix44ClearTranslation(lxMatrix44PTR matrix)
   matrix[12] = matrix[13] = matrix[14] = 0.0f;
 }
 
-LUX_INLINE void lxMatrix44FromAngleAxisFast(lxMatrix44PTR mat, lxVector3CPTR axis, float c, float s, float oneminusc)
+LUX_INLINE void lxMatrix44FromAngleAxis(lxMatrix44PTR mat, lxVector3CPTR axis, float c, float s, float oneminusc)
 {
   float tmp1,tmp2;
 
@@ -213,13 +216,13 @@ LUX_INLINE void lxMatrix44Identity(lxMatrix44PTR m_mat)
   lxMatrix44Copy(m_mat,lxMatrix44GetIdentity());
 }
 
-LUX_INLINE void lxMatrix44FromAngleAxis(lxMatrix44PTR matrix, float anglerad, lxVector3CPTR axis)
+LUX_INLINE void lxMatrix44FromAngleAxisFast(lxMatrix44PTR matrix, float anglerad, lxVector3CPTR axis)
 {
   float c,s,oneminusc;
   c = lxFastCos(anglerad);
   s = lxFastSin(anglerad);
   oneminusc = 1.0f - c;
-  lxMatrix44FromAngleAxisFast(matrix,axis,c,s,oneminusc);
+  lxMatrix44FromAngleAxis(matrix,axis,c,s,oneminusc);
 }
 
 LUX_INLINE void lxMatrix44PlaneProjection(lxMatrix44PTR matrix, lxVector3CPTR planenormal)
@@ -629,10 +632,9 @@ LUX_INLINE void lxMatrix44AffineInvert(lxMatrix44PTR outmat, lxMatrix44CPTR mat)
   //Matrix44Copy(mat,outmat);
 }
 
-LUX_INLINE void lxMatrix44RotateAroundVector(lxMatrix44PTR mat, lxVector3PTR axis, float angleRad){
-  float c = lxFastCos(angleRad);
-  float s = lxFastSin(angleRad);
-  float t = 1.0f - c;
+
+LUX_INLINE void lxMatrix44RotateAroundVector(lxMatrix44PTR mat, lxVector3PTR axis, float c, float s, float t)
+{
   float u = axis[0];
   float v = axis[1];
   float w = axis[2];
@@ -669,7 +671,12 @@ LUX_INLINE void lxMatrix44RotateAroundVector(lxMatrix44PTR mat, lxVector3PTR axi
   */
 }
 
-
+LUX_INLINE void lxMatrix44RotateAroundVectorFast(lxMatrix44PTR mat, lxVector3PTR axis, float angleRad){
+  float c = lxFastCos(angleRad);
+  float s = lxFastSin(angleRad);
+  float t = 1.0f - c;
+  lxMatrix44RotateAroundVector(mat, axis, c, s, t);
+}
 
 
 // ugly fixes to get things into OpenGL coords

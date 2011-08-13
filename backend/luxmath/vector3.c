@@ -51,7 +51,7 @@ LUX_API float lxVector3LineDistanceSqFracc(const lxVector3 point,const lxVector3
   return lxVector3SqLength(topoint);
 }
 
-LUX_API void lxVector3Spread(lxVector3 out, lxVector3 in, const float radin, const float radout){
+LUX_API void lxVector3SpreadFast(lxVector3 out, lxVector3 in, const float radin, const float radout){
   lxVector3 forward;
   lxVector3 right;
   lxVector3 up;

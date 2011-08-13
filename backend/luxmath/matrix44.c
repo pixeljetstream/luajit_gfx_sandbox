@@ -15,7 +15,7 @@ const LUX_ALIGNSIMD_V(float lx_gMatrix44_ident[16]) =
   0.0f, 0.0f, 0.0f, 1.0f,
 };
 
-LUX_API void lxMatrix44FromEulerZYX( lxMatrix44PTR m_mat, lxVector3CPTR angles )
+LUX_API void lxMatrix44FromEulerZYXFast( lxMatrix44PTR m_mat, lxVector3CPTR angles )
 {
   float sxsy, cxsy;
 
@@ -42,7 +42,7 @@ LUX_API void lxMatrix44FromEulerZYX( lxMatrix44PTR m_mat, lxVector3CPTR angles )
   m_mat[10] = ( cx*cy );
 }
 
-LUX_API void lxMatrix44FromEulerXYZ(lxMatrix44PTR m_mat, lxVector3PTR angles)
+LUX_API void lxMatrix44FromEulerXYZFast(lxMatrix44PTR m_mat, lxVector3PTR angles)
 {
   float sxsy, cxsy;
 
@@ -52,6 +52,64 @@ LUX_API void lxMatrix44FromEulerXYZ(lxMatrix44PTR m_mat, lxVector3PTR angles)
   float sy = lxFastSin( angles[1] );
   float cz = lxFastCos( angles[2] );
   float sz = lxFastSin( angles[2] );
+
+  // rot =  cy*cz          -cy*sz           sy
+  //        cz*sx*sy+cx*sz  cx*cz-sx*sy*sz -cy*sx
+  //       -cx*cz*sy+sx*sz  cz*sx+cx*sy*sz  cx*cy
+
+  m_mat[0] = ( cy*cz );
+  m_mat[4] = ( -cy*sz );
+  m_mat[8] = ( sy );
+
+  sxsy = sx*sy;
+  cxsy = cx*sy;
+
+  m_mat[1] = ( sxsy*cz+cx*sz );
+  m_mat[5] = ( cx*cz-sxsy*sz );
+  m_mat[9] = ( -sx*cy );
+
+  m_mat[2] = ( -cxsy*cz+sx*sz );
+  m_mat[6] = ( sx*cz+cxsy*sz );
+  m_mat[10] = ( cx*cy );
+}
+
+LUX_API void lxMatrix44FromEulerZYX( lxMatrix44PTR m_mat, lxVector3CPTR angles )
+{
+  float sxsy, cxsy;
+
+  float cx = cosf( angles[0] );
+  float sx = sinf( angles[0] );
+  float cy = cosf( angles[1] );
+  float sy = sinf( angles[1] );
+  float cz = cosf( angles[2] );
+  float sz = sinf( angles[2] );
+
+  m_mat[0] = ( cy*cz );
+  m_mat[1] = ( cy*sz );
+  m_mat[2] = ( -sy );
+
+  sxsy = sx*sy;
+  cxsy = cx*sy;
+
+  m_mat[4] = ( sxsy*cz-cx*sz );
+  m_mat[5] = ( sxsy*sz+cx*cz );
+  m_mat[6] = ( sx*cy );
+
+  m_mat[8] = ( cxsy*cz+sx*sz );
+  m_mat[9] = ( cxsy*sz-sx*cz );
+  m_mat[10] = ( cx*cy );
+}
+
+LUX_API void lxMatrix44FromEulerXYZ(lxMatrix44PTR m_mat, lxVector3PTR angles)
+{
+  float sxsy, cxsy;
+
+  float cx = cosf( angles[0] );
+  float sx = sinf( angles[0] );
+  float cy = cosf( angles[1] );
+  float sy = sinf( angles[1] );
+  float cz = cosf( angles[2] );
+  float sz = sinf( angles[2] );
 
   // rot =  cy*cz          -cy*sz           sy
   //        cz*sx*sy+cx*sz  cx*cz-sx*sy*sz -cy*sx
@@ -156,11 +214,11 @@ LUX_API void lxMatrix44Perspective(lxMatrix44PTR mat, const float fov, const flo
   radians = fov / 2.0f * LUX_MUL_PI / 180.0f;
 
   deltaZ = back - front;
-  sine = lxFastSin(radians);
+  sine = sinf(radians);
   if ((deltaZ == 0.0f) || (sine == 0.0f) || (aspect == 0)) {
     return;
   }
-  cotangent = lxFastCos(radians) / sine;
+  cotangent = cosf(radians) / sine;
 
   lxMatrix44Identity(mat);
   mat[0] = cotangent / aspect;
@@ -176,11 +234,11 @@ LUX_API void lxMatrix44PerspectiveInf(lxMatrix44PTR mat, const float fov, const 
 
   radians = fov / 2.0f * LUX_MUL_PI / 180.0f;
 
-  sine = lxFastSin(radians);
+  sine = sinf(radians);
   if ((sine == 0.0f) || (aspect == 0.0f)) {
     return;
   }
-  cotangent = lxFastCos(radians) / sine;
+  cotangent = cosf(radians) / sine;
 
   lxMatrix44Identity(mat);
   mat[0] = cotangent / aspect;
@@ -492,7 +550,7 @@ matrix[2][2] =      rcos + w*w*(1-rcos);
 
 */
 
-LUX_API void lxMatrix44RotateAroundPoint( lxMatrix44PTR transforms,  lxVector3CPTR center, lxVector3CPTR angles)
+LUX_API void lxMatrix44RotateAroundPointFast( lxMatrix44PTR transforms,  lxVector3CPTR center, lxVector3CPTR angles)
 {
   lxMatrix44 rot;
 

@@ -35,9 +35,9 @@ LUX_API void lxQuatToMatrix(const lxQuat q,lxMatrix44PTR a_mat);
 LUX_API void lxQuatToMatrixIdentity(const lxQuat q,lxMatrix44PTR a_mat);
 LUX_API void lxQuatFromMatrix(lxQuat q1,lxMatrix44CPTR in_mat);
 LUX_API void lxQuatToRotationAxis(const lxQuat q,float *degrees, lxVector3 a);
-LUX_API void lxQuatFromRotationAxis(lxQuat q,const float angle, const lxVector3 a);
-LUX_API void lxQuatFromEuler(lxQuat q, float x, float y, float z);
-LUX_API void lxQuatFromEulerXYZ(lxQuat q, const lxVector3 vec);
+LUX_API void lxQuatFromRotationAxisFast(lxQuat q,const float angle, const lxVector3 a);
+LUX_API void lxQuatFromEulerFast(lxQuat q, float x, float y, float z);
+LUX_API void lxQuatFromEulerXYZFast(lxQuat q, const lxVector3 vec);
 
 LUX_API void lxQuatTransformVector(const lxQuat q, const lxVector3 v, lxVector3 out);
 

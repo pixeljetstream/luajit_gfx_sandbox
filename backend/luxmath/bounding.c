@@ -337,9 +337,9 @@ LUX_API void lxBoundingSphereCone_fromCamera(lxBoundingSpherePTR sphere, lxBound
   // apply to the cone
   lxVector3Copy(cone->axis,dir);
   lxVector3Copy(cone->top,pos);
-  cone->cosSqr = lxFastCos(fFov);
+  cone->cosSqr = cosf(fFov);
   cone->cosSqr *= cone->cosSqr;
-  cone->sinSqr = lxFastSin(fFov);
+  cone->sinSqr = sinf(fFov);
   cone->sinDiv = 1/cone->sinSqr;
   cone->sinSqr *= cone->sinSqr;
 }
@@ -409,9 +409,9 @@ LUX_API void lxBoundingCone_fromFrustumCorners(lxBoundingConePTR cone, const lxV
     lxVector3Add(cone->top,ctr,far);
     lxVector3Scale(cone->axis,ctr,-1.0f/rad);
     rad = (float)atan(radf/rad)*2.0f;
-    radf = lxFastCos(rad);
+    radf = cosf(rad);
     cone->cosSqr = radf*radf;
-    radf = lxFastSin(rad);
+    radf = sinf(rad);
     cone->sinSqr = radf*radf;
     cone->sinDiv = 1.0f/radf;
   }

@@ -75,7 +75,7 @@ LUX_API void lxVector3TransformRot1( lxVector3 v1, lxMatrix44CPTR mat ) ;
 LUX_API float lxVector3LineDistanceSq(const lxVector3 point,const lxVector3 linestart,const lxVector3 linedir);
 LUX_API float lxVector3LineDistanceSqFracc(const lxVector3 point,
                  const lxVector3 linestart, const lxVector3 linedir, float *ofracc);
-LUX_API void lxVector3Spread(lxVector3 out, lxVector3 in, const float radin, const float radout);
+LUX_API void lxVector3SpreadFast(lxVector3 out, lxVector3 in, const float radin, const float radout);
 LUX_API void lxVector3PerpendicularFast(lxVector3 out, lxVector3 in);
 LUX_API void lxVector3Perpendicular(lxVector3 out, lxVector3 in);
 LUX_API void lxVector3MinMax(lxVector3 min, lxVector3 max, lxVector3 pos);
