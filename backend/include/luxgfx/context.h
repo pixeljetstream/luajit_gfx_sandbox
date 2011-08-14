@@ -400,6 +400,21 @@ extern "C"{
     ctx->vertex.streamchange = 0;
   }
 
+  LUX_INLINE void lxgContext_applyProgramParameters(  lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, const void **data )
+  {
+    uint i;
+    LUX_DEBUGASSERT(ctx->program.current == prog);
+    for (i = 0; i < num; ++i){
+      LUX_DEBUGASSERT(params[i]);
+      LUX_DEBUGASSERT(params[i]->func);
+      params[i]->func(params[i],ctx,data[i]);
+      lxGLErrorCheck();
+    }
+    if (ctx->program.dirtySubroutines){
+      lxgContext_updateProgramSubroutines(ctx, prog);
+    }
+  }
+
 #ifdef __cplusplus
 }
 #endif

@@ -199,12 +199,12 @@ extern "C"{
   //////////////////////////////////////////////////////////////////////////
 
   typedef struct lxgTextureImage_s{
-    lxgTexturePTR     tex;
-    int               level;
-    booln             layered;
-    int               layer;
-    GLenum            glformat;
-    GLenum            glaccess;
+    lxgTexturePTR       tex;
+    int                 level;
+    booln               layered;
+    int                 layer;
+    lxGLAccessFormat_t  glformat;
+    lxGLAccessMode_t    glaccess;
   }lxgTextureImage_t;
 
   //////////////////////////////////////////////////////////////////////////

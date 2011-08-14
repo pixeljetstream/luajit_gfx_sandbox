@@ -83,6 +83,8 @@ struct VertexDefault{
 
 class Geometry {
 public:
+  static bool useGenericAttribs;
+
 
   Geometry() : vbo(0), ibo(0), dltris(0), dlline(0) {}
   ~Geometry();
@@ -302,7 +304,7 @@ public:
   }
   virtual void onDraw(int width, int height) {}
   virtual void onInit(GLFWwindow window, int argc, const char** argv) {}
-  virtual void onDeInit() {}
+  virtual void onDeinit() {}
 
 private:
   const char*   m_name;

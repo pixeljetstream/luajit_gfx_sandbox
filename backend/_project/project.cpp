@@ -276,14 +276,23 @@ void Geometry::updateBO()
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+bool Geometry::useGenericAttribs = false;
+
 void Geometry::drawVBO( booln outline, booln bind)
 {
-  VertexDefault*  ptr = (VertexDefault*)0;
   if (bind){
+    VertexDefault*  ptr = (VertexDefault*)0;
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glVertexPointer(3,GL_FLOAT, sizeof(VertexDefault), (void*)&ptr->pos);
-    glNormalPointer(GL_FLOAT, sizeof(VertexDefault), (void*)&ptr->normal);
-    glTexCoordPointer(2,GL_FLOAT, sizeof(VertexDefault), (void*)&ptr->uv);
+    if (useGenericAttribs){
+      glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE, sizeof(VertexDefault), (const void*)&ptr->pos);
+      glVertexAttribPointer(1,3,GL_FLOAT,GL_TRUE , sizeof(VertexDefault), (const void*)&ptr->normal);
+      glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE, sizeof(VertexDefault), (const void*)&ptr->uv);
+    }
+    else{
+      glVertexPointer(  3,GL_FLOAT, sizeof(VertexDefault), (const void*)&ptr->pos);
+      glNormalPointer(    GL_FLOAT, sizeof(VertexDefault), (const void*)&ptr->normal);
+      glTexCoordPointer(2,GL_FLOAT, sizeof(VertexDefault), (const void*)&ptr->uv);
+    }
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
   }
   if (!outline){
@@ -296,9 +305,17 @@ void Geometry::drawVBO( booln outline, booln bind)
 
 void Geometry::drawVA( booln outline )
 {
-  glVertexPointer(3,GL_FLOAT,0, &pos[0]);
-  glNormalPointer(GL_FLOAT,0, &normal[0]);
-  glTexCoordPointer(2,GL_FLOAT,0, &uv[0]);
+  if (useGenericAttribs){
+    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE, 0, (const void*)&pos[0]);
+    glVertexAttribPointer(1,3,GL_FLOAT,GL_TRUE , 0, (const void*)&normal[0]);
+    glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE, 0, (const void*)&uv[0]);
+  }
+  else{
+    glVertexPointer(3,GL_FLOAT,0, &pos[0]);
+    glNormalPointer(GL_FLOAT,0, &normal[0]);
+    glTexCoordPointer(2,GL_FLOAT,0, &uv[0]);
+
+  }
   if (!outline){
     glDrawElements(GL_TRIANGLES, indicesTris.size(), GL_UNSIGNED_INT, &indicesTris[0]);
   }
@@ -552,7 +569,9 @@ lxgSubroutineKey RenderProgram::getSubRoutine( const char* name )
 
 void ParameterContainer::add(lxgProgramParameterPTR param, const void *data)
 {
-  m_paramPtrs.push_back(param);
-  m_paramData.push_back(data);
+  if (param){
+    m_paramPtrs.push_back(param);
+    m_paramData.push_back(data);
+  }
 }
 

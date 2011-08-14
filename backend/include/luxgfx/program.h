@@ -165,6 +165,9 @@ extern "C"{
   LUX_API void  lxgProgram_deinitNV(lxgProgramPTR prog, lxgContextPTR ctx);
   LUX_API void  lxgProgram_setStageNV(lxgProgramPTR prog, lxgProgramStage_t type, lxgStageProgramPTR stage);
  
+  //////////////////////////////////////////////////////////////////////////
+
+
 
 
 #ifdef __cplusplus

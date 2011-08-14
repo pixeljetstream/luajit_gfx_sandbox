@@ -1609,35 +1609,17 @@ typedef enum lxgAccessFormat_e{
 }lxgAccessFormat_t;
 
 
-typedef enum lxGLAccessFormat_e{
-  LUXGL_ACCESSFORMAT_R8UI     = GL_R8UI,
-  LUXGL_ACCESSFORMAT_R8I      = GL_R8I,
 
-  LUXGL_ACCESSFORMAT_R16UI    = GL_R16UI,
-  LUXGL_ACCESSFORMAT_R16I     = GL_R16I,
-  
-  LUXGL_ACCESSFORMAT_R32UI    = GL_R32UI,
-  LUXGL_ACCESSFORMAT_R32I     = GL_R32I,
-  LUXGL_ACCESSFORMAT_R32F     = GL_R32F,
-
-  LUXGL_ACCESSFORMAT_RG32UI   = GL_RG32UI,
-  LUXGL_ACCESSFORMAT_RG32I    = GL_RG32I,
-  LUXGL_ACCESSFORMAT_RG32F    = GL_RG32F,
-  
-  LUXGL_ACCESSFORMAT_RGBA32UI = GL_RGBA32UI,
-  LUXGL_ACCESSFORMAT_RGBA32I  = GL_RGBA32I,
-  LUXGL_ACCESSFORMAT_RGBA32F  = GL_RGBA32F,
-}lxGLAccessFormat_t;
 
 LUX_API booln lxgTextureImage_init( lxgTextureImagePTR img, lxgContextPTR ctx, lxgTexturePTR tex, lxgAccessMode_t access, uint level, booln layered, int layer )
 {
-  static GLenum modes[] = {
-    GL_READ_ONLY,
-    GL_WRITE_ONLY,
-    GL_READ_WRITE,
+  static lxGLAccessMode_t modes[] = {
+    LUXGL_ACCESS_READ_ONLY,
+    LUXGL_ACCESS_WRITE_ONLY,
+    LUXGL_ACCESS_READ_WRITE,
 
-    GL_WRITE_ONLY,
-    GL_WRITE_ONLY,
+    LUXGL_ACCESS_WRITE_ONLY,
+    LUXGL_ACCESS_WRITE_ONLY,
   };
 
   static lxGLAccessFormat_t formats[] = {
@@ -1685,17 +1667,22 @@ LUX_API booln lxgTextureImage_init( lxgTextureImagePTR img, lxgContextPTR ctx, l
     return LUX_FALSE;
   }
 
-  switch(tex->componentsize * tex->components){
+  switch(tex->componentsize * tex->components * 8){
   case 8:
     base = LUXGFX_ACCESSFORMAT_R8UI;
+    break;
   case 16:
     base = LUXGFX_ACCESSFORMAT_R16UI;
+    break;
   case 32:
     base = LUXGFX_ACCESSFORMAT_R32UI;
+    break;
   case 64:
     base = LUXGFX_ACCESSFORMAT_RG32UI;
+    break;
   case 128:
     base = LUXGFX_ACCESSFORMAT_RGBA32UI;
+    break;
   default:
     LUX_DEBUGASSERT( 0 && "illegal texel size");
     return LUX_FALSE;

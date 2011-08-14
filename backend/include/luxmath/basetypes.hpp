@@ -24,8 +24,8 @@ public:
   LUX_INLINE lxCVector2() {};
   template <typename S>
   LUX_INLINE lxCVector2(S all) : x(float(all)),y(float(all)) {};
-  template <typename S>
-  LUX_INLINE lxCVector2(S x, S y) : x(float(x)),y(float(y)) {};
+  template <typename S0,typename S1>
+  LUX_INLINE lxCVector2(S0 x, S1 y) : x(float(x)),y(float(y)) {};
 
   LUX_INLINE operator float* () {
     return &x;
@@ -33,9 +33,10 @@ public:
   LUX_INLINE operator const float* () const {
     return &x;
   }
-  LUX_INLINE void Set(float nx, float ny){
-    x = x;
-    y = y;
+  template <typename S0,typename S1>
+  LUX_INLINE void Set(S0 nx, S1 ny){
+    x = float(nx);
+    y = float(ny);
   }
   LUX_INLINE float& operator[](int element) {
     LUX_ASSUME(element >= 0 && element < 4);
@@ -63,10 +64,10 @@ public:
   LUX_INLINE lxCVector3() {};
   template <typename S>
   LUX_INLINE lxCVector3(S all) : x(float(all)),y(float(all)),z(float(all)) {};
+  template <typename S0,typename S1, typename S2>
+  LUX_INLINE lxCVector3(S0 x, S1 y, S2 z) : x(float(x)),y(float(y)),z(float(z)) {};
   template <typename S>
-  LUX_INLINE lxCVector3(S x, S y, S z) : x(float(x)),y(float(y)),z(float(z)) {};
-  template <typename S>
-  LUX_INLINE lxCVector3(const lxCVector2 &vec, float z) : x(vec.x),y(vec.y),z(z) {};
+  LUX_INLINE lxCVector3(const lxCVector2 &vec, S z) : x(vec.x),y(vec.y),z(float(z)) {};
 
   LUX_INLINE operator float* () {
     return &x;
@@ -77,10 +78,11 @@ public:
   LUX_INLINE operator lxCVector2 () {
     return lxCVector2(x,y);
   }
-  LUX_INLINE void Set(float nx, float ny, float nz){
-    x = nx;
-    y = ny;
-    z = nz;
+  template <typename S0,typename S1, typename S2>
+  LUX_INLINE void Set(S0 nx, S1 ny, S2 nz){
+    x = float(nx);
+    y = float(ny);
+    z = float(nz);
   }
 
   LUX_INLINE float& operator[](int element) {
@@ -112,11 +114,12 @@ public:
   LUX_INLINE lxCVector4() {};
   template <typename S>
   LUX_INLINE lxCVector4(S all) : x(float(all)),y(float(all)),z(float(all)),w(float(all)) {};
+  template <typename S0,typename S1, typename S2>
+  LUX_INLINE lxCVector4(S0 x, S1 y, S2 z) : x(float(x)),y(float(y)),z(float(z)),w(1.0f) {};
+  template <typename S0,typename S1, typename S2, typename S3>
+  LUX_INLINE lxCVector4(S0 x, S1 y, S2 z, S3 w) : x(float(x)),y(float(y)),z(float(z)),w(float(w)) {};
   template <typename S>
-  LUX_INLINE lxCVector4(S x, S y, S z) : x(float(x)),y(float(y)),z(float(z)),w(1.0f) {};
-  template <typename S>
-  LUX_INLINE lxCVector4(S x, S y, S z, S w) : x(float(x)),y(float(y)),z(float(z)),w(float(w)) {};
-  LUX_INLINE lxCVector4(const lxCVector3 &vec, float w) : x(vec.x),y(vec.y),z(vec.z),w(w) {};
+  LUX_INLINE lxCVector4(const lxCVector3 &vec, S w) : x(vec.x),y(vec.y),z(vec.z),w(float(w)) {};
 
   LUX_INLINE operator float* () {
     return &x;
@@ -127,17 +130,19 @@ public:
   LUX_INLINE operator lxCVector3 () {
     return lxCVector3(x,y,z);
   }
-  LUX_INLINE void Set(float nx, float ny, float nz){
-    x = x;
-    y = y;
-    z = z;
+  template <typename S0,typename S1, typename S2>
+  LUX_INLINE void Set(S0 nx, S1 ny, S2 nz){
+    x = float(x);
+    y = float(y);
+    z = float(z);
     w = 1.0f;
   }
-  LUX_INLINE void Set(float nx, float ny, float nz, float nw){
-    x = nx;
-    y = ny;
-    z = nz;
-    w = nw;
+  template <typename S0,typename S1, typename S2, typename S3>
+  LUX_INLINE void Set(S0 nx, S1 ny, S2 nz, S3 nw){
+    x = float(nx);
+    y = float(ny);
+    z = float(nz);
+    w = float(nw);
   }
   LUX_INLINE float& operator[](int element) {
     LUX_ASSUME(element >= 0 && element < 4);

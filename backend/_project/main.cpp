@@ -49,12 +49,11 @@ int main(int argc, const char** argv)
       frames = 0;
       begin = current;
     }
-
   }
 
   if (glfwIsWindow(win)){
     if (test)
-      test->onDeInit();
+      test->onDeinit();
     glfwCloseWindow(win);
   }
 

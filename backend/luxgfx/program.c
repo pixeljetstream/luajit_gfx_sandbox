@@ -1490,7 +1490,7 @@ LUX_API void lxgProgram_initParameters( lxgProgramPTR prog, int numParams, lxgPr
       
       glGetProgramStageiv(prog->glid,gltype,GL_ACTIVE_SUBROUTINE_UNIFORMS, &num);
       prog->stagePrograms[s]->numSubroutines = num;
-      prog->hasSubroutines = LUX_TRUE;
+      prog->hasSubroutines |= num > 0;
       prog->numSubroutines[s] = num;
       for (i = 0 ; i < num; i++){
         GLint num;
@@ -1644,7 +1644,7 @@ static LUX_INLINE lxgProgram_stateNV(flags32 flags, flags32 changed, const lxgSt
 LUX_API void  lxgContext_applyProgram( lxgContextPTR ctx, lxgProgramCPTR prog)
 {
   lxgProgramType_t type = prog ? prog->type : LUXGFX_PROGRAM_NONE;
-  lxgProgramCPTR    oldprog = ctx->program.current;
+  lxgProgramCPTR   oldprog = ctx->program.current;
   lxgProgramType_t oldtype = oldprog ? oldprog->type : LUXGFX_PROGRAM_NONE;
   int i;
   if (type != oldtype){
@@ -1705,21 +1705,6 @@ LUX_INLINE LUX_API void lxgContext_updateProgramSubroutines( lxgContextPTR ctx, 
   }
   lxGLErrorCheck();
   ctx->program.dirtySubroutines = 0;
-}
-
-LUX_API void lxgContext_applyProgramParameters(  lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, const void **data )
-{
-  uint i;
-  LUX_DEBUGASSERT(ctx->program.current == prog);
-  for (i = 0; i < num; ++i){
-    LUX_DEBUGASSERT(params[i]);
-    LUX_DEBUGASSERT(params[i]->func);
-    params[i]->func(params[i],ctx,data[i]);
-    lxGLErrorCheck();
-  }
-  if (ctx->program.dirtySubroutines){
-    lxgContext_updateProgramSubroutines(ctx, prog);
-  }
 }
 
 LUX_API void lxgContext_clearProgramState( lxgContextPTR ctx )
