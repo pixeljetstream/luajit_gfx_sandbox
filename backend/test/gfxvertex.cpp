@@ -35,7 +35,7 @@ public:
     m_box.update(x,y,z);
   }
 
-  void onInit(GLFWwindow win, int argc, const char** argv) {
+  int onInit(GLFWwindow win, int argc, const char** argv) {
     m_window = win;
 
     // scene
@@ -100,8 +100,7 @@ public:
     m_stream.offset = 0;
     m_stream.len    = vsize;
 
-
-
+    return 0;
   }
 
   void logic(int width, int height)
@@ -110,7 +109,7 @@ public:
 
   }
 
-  void onDraw(int width, int height) {
+  int onDraw(int width, int height) {
     logic(width,height);
 
     lxCVector4 lightpos(0,0,0,1);
@@ -136,6 +135,8 @@ public:
 
     glDisable(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D,0);
+
+    return 0;
   }
 
 };

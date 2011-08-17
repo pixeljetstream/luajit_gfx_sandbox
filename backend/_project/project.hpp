@@ -302,8 +302,8 @@ public:
     const char* getDirName() const {
     return m_dirname;
   }
-  virtual void onDraw(int width, int height) {}
-  virtual void onInit(GLFWwindow window, int argc, const char** argv) {}
+  virtual int  onDraw(int width, int height) { return 0; }
+  virtual int  onInit(GLFWwindow window, int argc, const char** argv) { return 0; }
   virtual void onDeinit() {}
 
 private:

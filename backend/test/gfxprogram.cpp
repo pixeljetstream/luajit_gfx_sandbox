@@ -100,7 +100,7 @@ public:
 
 
 
-  void onInit(GLFWwindow win, int argc, const char** argv) {
+  int onInit(GLFWwindow win, int argc, const char** argv) {
     m_window = win;
 
     updateGeometry(4,4,4);
@@ -136,6 +136,8 @@ public:
       }
     }
     m_paramsets[0].shuffle = m_prog.getSubRoutine("shuffle_zyx");
+
+    return 0;
   }
 
   void logic(int width, int height)
@@ -144,7 +146,7 @@ public:
 
   }
 
-  void onDraw(int width, int height) {
+  int onDraw(int width, int height) {
     logic(width,height);
 
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -171,6 +173,8 @@ public:
       m_box.drawVA();
     }
     lxgContext_applyProgram(&m_ctx, NULL);
+
+    return 0;
   }
 
 };

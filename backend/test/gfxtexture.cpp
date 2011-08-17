@@ -33,7 +33,7 @@ public:
     m_box.update(x,y,z);
   }
 
-  void onInit(GLFWwindow win, int argc, const char** argv) {
+  int onInit(GLFWwindow win, int argc, const char** argv) {
     m_window = win;
 
     updateGeometry(4,4,4);
@@ -69,6 +69,7 @@ public:
     lxgSampler_update(&m_samplerTriLinear);
 
     m_sampler = &m_samplerNearest;
+    return 0;
   }
 
   void logic(int width, int height)
@@ -79,7 +80,7 @@ public:
     }
   }
 
-  void onDraw(int width, int height) {
+  int onDraw(int width, int height) {
     logic(width,height);
 
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -106,6 +107,8 @@ public:
     glDisable(GL_TEXTURE_2D);
     lxgContext_applyTexture( &m_ctx,NULL,0);
     lxgContext_applySampler( &m_ctx,NULL,0);
+
+    return 0;
   }
 
 };

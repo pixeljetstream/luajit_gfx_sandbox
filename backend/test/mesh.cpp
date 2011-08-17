@@ -48,7 +48,7 @@ public:
     m_sphere.update(x,y);
   }
 
-  void onInit(GLFWwindow win, int argc, const char** argv) {
+  int onInit(GLFWwindow win, int argc, const char** argv) {
     m_window = win;
 
     updateGeometry(4,2,1);
@@ -62,6 +62,8 @@ public:
     m_rh.cameraOrtho(&bbox);
 
     m_texture = RenderHelper::generateUVTexture(256,256);
+
+    return 0;
   }
 
   void logic(int width, int height)
@@ -80,7 +82,7 @@ public:
     }
   }
 
-  void onDraw(int width, int height) {
+  int onDraw(int width, int height) {
     logic(width,height);
 
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -102,6 +104,8 @@ public:
     glPolygonMode(GL_FRONT_AND_BACK,m_wire ? GL_LINE : GL_FILL);
     m_geometries[(m_model/2) % m_numGeometries]->drawVA(m_model % 2);
     glBindTexture(GL_TEXTURE_2D,0);
+
+    return 0;
   }
 
 };

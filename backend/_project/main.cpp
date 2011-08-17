@@ -9,7 +9,7 @@ int main(int argc, const char** argv)
 {
   Project* test = argc > 1 ? ProjectManager::Get().getTest(argv[1]) : ProjectManager::Get().getTest();
   std::string caption = "lux backend test: " + std::string(test ? test->getName() : "no test specified");
-
+  int status = 1;
 
   glfwInit();
   glfwOpenWindowHint(GLFW_DEPTH_BITS,24);
@@ -17,8 +17,12 @@ int main(int argc, const char** argv)
   GLFWwindow win = glfwOpenWindow(1024,768,GLFW_WINDOWED,caption.c_str(),0);
   glewInit();
 
-  if (test)
-    test->onInit(win,argc,argv);
+  if (test){
+    status = test->onInit(win,argc,argv);
+  }
+  if (status){
+    return 0;
+  }
 
   double begin = glfwGetTime();
   double frames = 0;
@@ -29,31 +33,32 @@ int main(int argc, const char** argv)
     int height;
     glfwGetWindowSize(win, &width, &height);
     glViewport(0,0,width,height);
-    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if (test)
-      test->onDraw(width, height);
+    status = test->onDraw(width, height);
 
-    glfwSwapBuffers();
+    if (!status){
+      glfwSwapBuffers();
+    }
     glFinish();
     glfwPollEvents();
-    frames++;
-   
-    double current = glfwGetTime();
-    double dur = current - begin;
-    if (dur > 1.0){
-      dur /= frames;
-      char buffer[128];
-      sprintf_s(buffer,128," %.1f ms %5d fps", dur * 1000.0, (int)floor(1.0/dur));
-      glfwSetWindowTitle(win, (caption + std::string(buffer)).c_str());
-      frames = 0;
-      begin = current;
+    if (!status){
+      frames++;
+     
+      double current = glfwGetTime();
+      double dur = current - begin;
+      if (dur > 1.0){
+        dur /= frames;
+        char buffer[128];
+        sprintf_s(buffer,128," %.1f ms %5d fps", dur * 1000.0, (int)floor(1.0/dur));
+        glfwSetWindowTitle(win, (caption + std::string(buffer)).c_str());
+        frames = 0;
+        begin = current;
+      }
     }
   }
 
   if (glfwIsWindow(win)){
-    if (test)
-      test->onDeinit();
+    test->onDeinit();
     glfwCloseWindow(win);
   }
 
