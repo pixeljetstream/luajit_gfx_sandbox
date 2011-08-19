@@ -112,6 +112,8 @@ public:
   int onDraw(int width, int height) {
     logic(width,height);
 
+    glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     lxCVector4 lightpos(0,0,0,1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();

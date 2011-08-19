@@ -26,5 +26,5 @@ A related project is the wxLua based EstrelaEditor
 http://www.luxinia.de/index.php/Estrela which will
 get tightly knit with luxinia2
 
-See LICENSE for details (New-BSD) and 3RDPARTY for
+See LICENSE for details (MIT) and 3RDPARTY for
 other libraries used in this project.
