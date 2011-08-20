@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/strmisc.h>
+#include <luxinia/luxcore/strmisc.h>
 #include <stdarg.h>
 #include <ctype.h>
 

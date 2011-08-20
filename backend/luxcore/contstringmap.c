@@ -2,14 +2,14 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/contstringmap.h>
-#include <luxcore/contmacrolinkedlist.h>
+#include <luxinia/luxcore/contstringmap.h>
+#include <luxinia/luxcore/contmacrolinkedlist.h>
 
 #include <string.h>
 
-#include <luxcore/conthash.h>
-#include <luxcore/memorylist.h>
-#include <luxcore/strmisc.h>
+#include <luxinia/luxcore/conthash.h>
+#include <luxinia/luxcore/memorylist.h>
+#include <luxinia/luxcore/strmisc.h>
 
 #include "cont_defs.h"
 

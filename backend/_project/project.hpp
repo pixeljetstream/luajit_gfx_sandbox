@@ -8,10 +8,10 @@
 #include <GL/glew.h>
 #include <GL/glfw3.h>
 
-#include <luxmath/luxmath.h>
-#include <luxmath/basetypes.hpp>
-#include <luxscene/meshbase.h>
-#include <luxgfx/luxgfx.h>
+#include <luxinia/luxmath/luxmath.h>
+#include <luxinia/luxmath/basetypes.hpp>
+#include <luxinia/luxscene/meshbase.h>
+#include <luxinia/luxgfx/luxgfx.h>
 
 #include <string.h>
 #include <string>

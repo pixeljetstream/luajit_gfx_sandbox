@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/sortradix.h>
+#include <luxinia/luxcore/sortradix.h>
 #include <string.h>
 
 //////////////////////////////////////////////////////////////////////////

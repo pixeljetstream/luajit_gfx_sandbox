@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/contvector.h>
+#include <luxinia/luxcore/contvector.h>
 #include <string.h>
 
 LUX_API void  lxContVector_reserve(lxContVectorPTR cv,uint n)

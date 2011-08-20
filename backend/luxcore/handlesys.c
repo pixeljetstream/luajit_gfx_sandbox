@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/handlesys.h>
-#include <luxplatform/debug.h>
+#include <luxinia/luxcore/handlesys.h>
+#include <luxinia/luxplatform/debug.h>
 
 LUX_API void lxHandleSys_init( HandleSysPTR sys )
 {

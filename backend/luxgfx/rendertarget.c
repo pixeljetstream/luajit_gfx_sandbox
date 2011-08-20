@@ -2,11 +2,11 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxgfx/texture.h>
-#include <luxgfx/luxgfx.h>
-#include <luxplatform/debug.h>
-#include <luxmath/misc.h>
-#include <luxcore/scalarmisc.h>
+#include <luxinia/luxgfx/texture.h>
+#include <luxinia/luxgfx/luxgfx.h>
+#include <luxinia/luxplatform/debug.h>
+#include <luxinia/luxmath/misc.h>
+#include <luxinia/luxcore/scalarmisc.h>
 
 #include "state_inl.h"
 

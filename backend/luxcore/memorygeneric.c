@@ -2,9 +2,9 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/memorygeneric.h>
-#include <luxplatform/debug.h>
-#include <luxcore/contmacrolinkedlist.h>
+#include <luxinia/luxcore/memorygeneric.h>
+#include <luxinia/luxplatform/debug.h>
+#include <luxinia/luxcore/contmacrolinkedlist.h>
 
 #include <malloc.h>
 #include <memory.h>

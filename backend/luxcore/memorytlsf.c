@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <luxcore/memorytlsf.h>
+#include <luxinia/luxcore/memorytlsf.h>
 #include "memorytlsfbits.h"
 
 /*

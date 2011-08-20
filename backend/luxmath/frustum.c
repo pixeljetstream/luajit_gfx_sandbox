@@ -4,10 +4,10 @@
 
 
 
-#include <luxmath/frustum.h>
-#include <luxmath/geometry.h>
-#include <luxmath/vector3.h>
-#include <luxmath/matrix44.h>
+#include <luxinia/luxmath/frustum.h>
+#include <luxinia/luxmath/geometry.h>
+#include <luxinia/luxmath/vector3.h>
+#include <luxinia/luxmath/matrix44.h>
 
 LUX_API void lxFrustum_update(lxFrustumPTR pFrustum,lxMatrix44CPTR viewproj)
 {

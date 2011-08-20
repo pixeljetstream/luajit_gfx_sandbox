@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/contmap.h>
+#include <luxinia/luxcore/contmap.h>
 
 LUX_API void lxContMap_init(lxContMapPTR cv, lxMemoryAllocatorPTR allocator, size_t keysize, size_t valsize)
 {

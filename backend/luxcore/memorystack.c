@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/memorystack.h>
-#include <luxplatform/debug.h>
+#include <luxinia/luxcore/memorystack.h>
+#include <luxinia/luxplatform/debug.h>
 
 #include <string.h>
 

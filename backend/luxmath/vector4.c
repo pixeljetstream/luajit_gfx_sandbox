@@ -2,4 +2,4 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxmath/vector4.h>
+#include <luxinia/luxmath/vector4.h>

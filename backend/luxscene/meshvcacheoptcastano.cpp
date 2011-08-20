@@ -3,7 +3,7 @@
   http://castano.ludicon.com/blog/2009/02/02/optimal-grid-rendering
 */
 
-#include <luxscene/meshvcacheopt.h>
+#include <luxinia/luxscene/meshvcacheopt.h>
 
 template<class VertexIndexType>
 VertexIndexType* TgridGen(VertexIndexType* pcurrent, VertexIndexType* pend, int x0, int x1, int y0, int y1, int width, int cacheSize)

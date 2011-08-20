@@ -2,9 +2,9 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxmath/matrix44.h>
-#include <luxmath/vector3.h>
-#include <luxmath/vector4.h>
+#include <luxinia/luxmath/matrix44.h>
+#include <luxinia/luxmath/vector3.h>
+#include <luxinia/luxmath/vector4.h>
 
 
 const LUX_ALIGNSIMD_V(float lx_gMatrix44_ident[16]) =

@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxmath/misc.h>
+#include <luxinia/luxmath/misc.h>
 
 
 LUX_API float lxGetAverageOfN (const float *array, int n)

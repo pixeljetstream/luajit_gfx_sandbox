@@ -5,7 +5,7 @@
 #ifndef __LUXCORE_CONTDEFS_H__
 #define __LUXCORE_CONTDEFS_H__
 
-#include <luxplatform/luxplatform.h>
+#include <luxinia/luxplatform/luxplatform.h>
 #include "memory_defs.h"
 
 #ifdef __cplusplus

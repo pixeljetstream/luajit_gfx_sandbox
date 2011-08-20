@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/arraymisc.h>
-#include <luxcore/contbitarray.h>
+#include <luxinia/luxcore/arraymisc.h>
+#include <luxinia/luxcore/contbitarray.h>
 
 template <class T>
 static LUX_INLINE int lxArrayFindOrAddT(T *data, int *inoutCnt, T value, int maxCnt)

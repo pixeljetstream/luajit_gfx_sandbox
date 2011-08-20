@@ -2,10 +2,10 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxgfx/state.h>
-#include <luxplatform/debug.h>
-#include <luxmath/basetypes.h>
-#include <luxmath/misc.h>
+#include <luxinia/luxgfx/state.h>
+#include <luxinia/luxplatform/debug.h>
+#include <luxinia/luxmath/basetypes.h>
+#include <luxinia/luxmath/misc.h>
 #include <string.h>
 #include "state_inl.h"
 

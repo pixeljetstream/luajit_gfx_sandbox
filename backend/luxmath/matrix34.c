@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxmath/matrix34.h>
+#include <luxinia/luxmath/matrix34.h>
 
 const LUX_ALIGNSIMD_V(float lx_gMatrix34_ident[12]) =
 {

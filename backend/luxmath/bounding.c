@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxmath/bounding.h>
-#include <luxmath/vector3.h>
+#include <luxinia/luxmath/bounding.h>
+#include <luxinia/luxmath/vector3.h>
 
 // Bounding Volumes
 // ----------------

@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxscene/shader.h>
-#include <luxplatform/debug.h>
+#include <luxinia/luxscene/shader.h>
+#include <luxinia/luxplatform/debug.h>
 
 
 //////////////////////////////////////////////////////////////////////////

@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/memorybase.h>
+#include <luxinia/luxcore/memorybase.h>
 
 
 

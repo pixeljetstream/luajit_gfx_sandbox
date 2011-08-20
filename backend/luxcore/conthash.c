@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/conthash.h>
-#include <luxcore/memorypool.h>
+#include <luxinia/luxcore/conthash.h>
+#include <luxinia/luxcore/memorypool.h>
 
 #include "cont_defs.h"
 

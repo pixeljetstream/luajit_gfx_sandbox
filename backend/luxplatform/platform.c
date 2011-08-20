@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxplatform/debug.h>
+#include <luxinia/luxplatform/debug.h>
 #include <stdarg.h>
 
 #ifdef LUX_PLATFORM_WINDOWS

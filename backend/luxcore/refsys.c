@@ -2,11 +2,11 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/refsys.h>
-#include <luxcore/contvector.h>
+#include <luxinia/luxcore/refsys.h>
+#include <luxinia/luxcore/contvector.h>
 
   // for refsys (only in case you want to create it statically)
-#include <luxcore/contvector.h>
+#include <luxinia/luxcore/contvector.h>
   typedef struct lxObjRefAllocSys_s{
     lxObjRef_t      *freerefs;
     struct lxObjRefPage_s *pagelist;

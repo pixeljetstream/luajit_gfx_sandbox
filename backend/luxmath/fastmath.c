@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxmath/fastmath.h>
-#include <luxmath/float16.h>
+#include <luxinia/luxmath/fastmath.h>
+#include <luxinia/luxmath/float16.h>
 
 lxFastMathCache_t*  lx_gFastMath;
 

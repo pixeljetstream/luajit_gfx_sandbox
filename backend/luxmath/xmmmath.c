@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxmath/xmmmath.h>
+#include <luxinia/luxmath/xmmmath.h>
 
 #ifdef LUX_SIMD_SSE
 

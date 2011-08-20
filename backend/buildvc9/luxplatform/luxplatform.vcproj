@@ -175,27 +175,27 @@
 			Name="include"
 			>
 			<File
-				RelativePath="..\..\include\luxplatform\debug.h"
+				RelativePath="..\..\include\luxinia\luxplatform\debug.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxplatform\endian.h"
+				RelativePath="..\..\include\luxinia\luxplatform\endian.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxplatform\file.h"
+				RelativePath="..\..\include\luxinia\luxplatform\file.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxplatform\luxconfig.h"
+				RelativePath="..\..\include\luxinia\luxplatform\luxconfig.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxplatform\luxplatform.h"
+				RelativePath="..\..\include\luxinia\luxplatform\luxplatform.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxplatform\luxtypes.h"
+				RelativePath="..\..\include\luxinia\luxplatform\luxtypes.h"
 				>
 			</File>
 		</Filter>

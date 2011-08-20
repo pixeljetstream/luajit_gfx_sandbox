@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxscene/meshbase.h>
-#include <luxmath/matrix44.h>
+#include <luxinia/luxscene/meshbase.h>
+#include <luxinia/luxmath/matrix44.h>
 
 
 

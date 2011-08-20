@@ -2,10 +2,10 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxmath/geometry.h>
-#include <luxmath/vector3.h>
-#include <luxmath/vector4.h>
-#include <luxmath/matrix44.h>
+#include <luxinia/luxmath/geometry.h>
+#include <luxinia/luxmath/vector3.h>
+#include <luxinia/luxmath/vector4.h>
+#include <luxinia/luxmath/matrix44.h>
 
 LUX_API void lxPlaneSet
 (lxPlanePTR plane, const lxVector3 a, const lxVector3 b, const lxVector3 c)

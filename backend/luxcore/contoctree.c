@@ -2,11 +2,11 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/contoctree.h>
-#include <luxcore/contmacrolinkedlist.h>
-#include <luxplatform/debug.h>
-#include <luxmath/vector3.h>
-#include <luxmath/vector4.h>
+#include <luxinia/luxcore/contoctree.h>
+#include <luxinia/luxcore/contmacrolinkedlist.h>
+#include <luxinia/luxplatform/debug.h>
+#include <luxinia/luxmath/vector3.h>
+#include <luxinia/luxmath/vector4.h>
 
 
 

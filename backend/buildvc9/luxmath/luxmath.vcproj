@@ -240,71 +240,71 @@
 			Filter="h;hpp;hxx;hm;inl"
 			>
 			<File
-				RelativePath="..\..\include\luxmath\basetypes.h"
+				RelativePath="..\..\include\luxinia\luxmath\basetypes.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\basetypes.hpp"
+				RelativePath="..\..\include\luxinia\luxmath\basetypes.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\bounding.h"
+				RelativePath="..\..\include\luxinia\luxmath\bounding.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\fastmath.h"
+				RelativePath="..\..\include\luxinia\luxmath\fastmath.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\float16.h"
+				RelativePath="..\..\include\luxinia\luxmath\float16.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\frustum.h"
+				RelativePath="..\..\include\luxinia\luxmath\frustum.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\geometry.h"
+				RelativePath="..\..\include\luxinia\luxmath\geometry.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\luxmath.h"
+				RelativePath="..\..\include\luxinia\luxmath\luxmath.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\matrix34.h"
+				RelativePath="..\..\include\luxinia\luxmath\matrix34.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\matrix44.h"
+				RelativePath="..\..\include\luxinia\luxmath\matrix44.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\misc.h"
+				RelativePath="..\..\include\luxinia\luxmath\misc.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\quaternion.h"
+				RelativePath="..\..\include\luxinia\luxmath\quaternion.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\simdmath.h"
+				RelativePath="..\..\include\luxinia\luxmath\simdmath.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\vector2.h"
+				RelativePath="..\..\include\luxinia\luxmath\vector2.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\vector3.h"
+				RelativePath="..\..\include\luxinia\luxmath\vector3.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\vector4.h"
+				RelativePath="..\..\include\luxinia\luxmath\vector4.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxmath\xmmmath.h"
+				RelativePath="..\..\include\luxinia\luxmath\xmmmath.h"
 				>
 			</File>
 		</Filter>

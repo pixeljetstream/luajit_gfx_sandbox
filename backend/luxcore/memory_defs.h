@@ -7,11 +7,11 @@
 #ifndef __LUXCORE_MEMDEFS_H__
 #define __LUXCORE_MEMDEFS_H__
 
-#include <luxplatform/luxplatform.h>
-#include <luxcore/memorybase.h>
-#include <luxcore/memorylist.h>
-#include <luxcore/memorypool.h>
-#include <luxplatform/debug.h>
+#include <luxinia/luxplatform/luxplatform.h>
+#include <luxinia/luxcore/memorybase.h>
+#include <luxinia/luxcore/memorylist.h>
+#include <luxinia/luxcore/memorypool.h>
+#include <luxinia/luxplatform/debug.h>
 
 
 #ifdef __cplusplus

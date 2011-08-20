@@ -15,7 +15,7 @@ comments, complaints, performance data, etc to dl@cs.oswego.edu
   ========================================================================
 */
 
-#include <luxcore/memorydlmalloc.h>
+#include <luxinia/luxcore/memorydlmalloc.h>
 
 /*------------------------------ internal #includes ---------------------- */
 

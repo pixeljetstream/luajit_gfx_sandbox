@@ -212,43 +212,43 @@
 			Name="include"
 			>
 			<File
-				RelativePath="..\..\include\luxgfx\buffer.h"
+				RelativePath="..\..\include\luxinia\luxgfx\buffer.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxgfx\context.h"
+				RelativePath="..\..\include\luxinia\luxgfx\context.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxgfx\gfxtypes.h"
+				RelativePath="..\..\include\luxinia\luxgfx\gfxtypes.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxgfx\glconfig.h"
+				RelativePath="..\..\include\luxinia\luxgfx\glconfig.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxgfx\luxgfx.h"
+				RelativePath="..\..\include\luxinia\luxgfx\luxgfx.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxgfx\program.h"
+				RelativePath="..\..\include\luxinia\luxgfx\program.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxgfx\rendertarget.h"
+				RelativePath="..\..\include\luxinia\luxgfx\rendertarget.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxgfx\state.h"
+				RelativePath="..\..\include\luxinia\luxgfx\state.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxgfx\texture.h"
+				RelativePath="..\..\include\luxinia\luxgfx\texture.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxgfx\vertex.h"
+				RelativePath="..\..\include\luxinia\luxgfx\vertex.h"
 				>
 			</File>
 		</Filter>

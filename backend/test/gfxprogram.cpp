@@ -3,7 +3,7 @@
 // See copyright notice in luxplatform.h
 
 #include "../_project/project.hpp"
-#include <luxgfx/luxgfx.h>
+#include <luxinia/luxgfx/luxgfx.h>
 
 class GfxProgram : public Project
 {

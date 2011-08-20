@@ -6,11 +6,11 @@
 extern "C"{
 #endif
 
-#include <luxcore/contscalararray.h>
-#include <luxplatform/debug.h>
-#include <luxmath/vector2.h>
-#include <luxmath/matrix44.h>
-#include <luxmath/simdmath.h>
+#include <luxinia/luxcore/contscalararray.h>
+#include <luxinia/luxplatform/debug.h>
+#include <luxinia/luxmath/vector2.h>
+#include <luxinia/luxmath/matrix44.h>
+#include <luxinia/luxmath/simdmath.h>
 #include <memory.h>
 
 #ifdef __cplusplus

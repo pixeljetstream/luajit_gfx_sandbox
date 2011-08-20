@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxmath/vector3.h>
-#include <luxmath/misc.h>
+#include <luxinia/luxmath/vector3.h>
+#include <luxinia/luxmath/misc.h>
 
 LUX_API float lxVector3LineDistanceSq(const lxVector3 point,const lxVector3 linestart,const lxVector3 linedir)
 {

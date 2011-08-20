@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxcore/memorylist.h>
-#include <luxplatform/debug.h>
+#include <luxinia/luxcore/memorylist.h>
+#include <luxinia/luxplatform/debug.h>
 
 #include "memory_defs.h"
 

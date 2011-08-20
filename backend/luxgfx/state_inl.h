@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxgfx/luxgfx.h>
-#include <luxcore/scalarmisc.h>
+#include <luxinia/luxgfx/luxgfx.h>
+#include <luxinia/luxcore/scalarmisc.h>
 
 static LUX_INLINE GLenum  lxScalarType_to(lxScalarType_t data)
 {

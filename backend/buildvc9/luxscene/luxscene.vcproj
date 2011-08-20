@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="luxscene"
 	ProjectGUID="{2C4C470D-11B6-152D-B813-1DBFA34B1508}"
 	RootNamespace="Library"
@@ -200,23 +200,27 @@
 			Name="include"
 			>
 			<File
-				RelativePath="..\..\include\luxscene\drawsystem.h"
+				RelativePath="..\..\include\luxinia\luxscene\drawsystem.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxscene\mesh.h"
+				RelativePath="..\..\include\luxinia\luxscene\luxscene.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxscene\meshbase.h"
+				RelativePath="..\..\include\luxinia\luxscene\mesh.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxscene\meshvcacheopt.h"
+				RelativePath="..\..\include\luxinia\luxscene\meshbase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxscene\shader.h"
+				RelativePath="..\..\include\luxinia\luxscene\meshvcacheopt.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\include\luxinia\luxscene\shader.h"
 				>
 			</File>
 		</Filter>

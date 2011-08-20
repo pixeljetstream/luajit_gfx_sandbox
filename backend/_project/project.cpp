@@ -3,8 +3,8 @@
 // See copyright notice in luxplatform.h
 
 #include "../_project/project.hpp"
-#include <luxmath/bounding.h>
-#include <luxscene/meshbase.h>
+#include <luxinia/luxmath/bounding.h>
+#include <luxinia/luxscene/meshbase.h>
 #include <string>
 #include <fstream>
 

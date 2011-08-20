@@ -29,7 +29,7 @@
   (this is the zlib license)
 */
 
-#include <luxplatform/luxplatform.h>
+#include <luxinia/luxplatform/luxplatform.h>
 #include <xmmintrin.h>
 
 extern "C"{

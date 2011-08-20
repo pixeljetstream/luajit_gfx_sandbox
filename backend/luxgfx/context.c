@@ -3,7 +3,7 @@
 // See copyright notice in luxplatform.h
 
 
-#include <luxgfx/context.h>
+#include <luxinia/luxgfx/context.h>
 
 //////////////////////////////////////////////////////////////////////////
 // lxgContext

@@ -257,111 +257,111 @@
 			Name="include"
 			>
 			<File
-				RelativePath="..\..\include\luxcore\arraymisc.h"
+				RelativePath="..\..\include\luxinia\luxcore\arraymisc.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\containers.h"
+				RelativePath="..\..\include\luxinia\luxcore\containers.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\contbitarray.h"
+				RelativePath="..\..\include\luxinia\luxcore\contbitarray.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\conthash.h"
+				RelativePath="..\..\include\luxinia\luxcore\conthash.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\contmacrolinkedlist.h"
+				RelativePath="..\..\include\luxinia\luxcore\contmacrolinkedlist.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\contmap.h"
+				RelativePath="..\..\include\luxinia\luxcore\contmap.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\contoctree.h"
+				RelativePath="..\..\include\luxinia\luxcore\contoctree.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\contscalararray.h"
+				RelativePath="..\..\include\luxinia\luxcore\contscalararray.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\contstringmap.h"
+				RelativePath="..\..\include\luxinia\luxcore\contstringmap.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\contstringmap.hpp"
+				RelativePath="..\..\include\luxinia\luxcore\contstringmap.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\contvector.h"
+				RelativePath="..\..\include\luxinia\luxcore\contvector.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\contvector.hpp"
+				RelativePath="..\..\include\luxinia\luxcore\contvector.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\handlesys.h"
+				RelativePath="..\..\include\luxinia\luxcore\handlesys.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\luxcore.h"
+				RelativePath="..\..\include\luxinia\luxcore\luxcore.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\memory.h"
+				RelativePath="..\..\include\luxinia\luxcore\memory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\memorybase.h"
+				RelativePath="..\..\include\luxinia\luxcore\memorybase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\memorydlmalloc.h"
+				RelativePath="..\..\include\luxinia\luxcore\memorydlmalloc.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\memorygeneric.h"
+				RelativePath="..\..\include\luxinia\luxcore\memorygeneric.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\memorylist.h"
+				RelativePath="..\..\include\luxinia\luxcore\memorylist.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\memorypool.h"
+				RelativePath="..\..\include\luxinia\luxcore\memorypool.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\memorypool.hpp"
+				RelativePath="..\..\include\luxinia\luxcore\memorypool.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\memorystack.h"
+				RelativePath="..\..\include\luxinia\luxcore\memorystack.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\refsys.h"
+				RelativePath="..\..\include\luxinia\luxcore\refsys.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\refsys.hpp"
+				RelativePath="..\..\include\luxinia\luxcore\refsys.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\scalarmisc.h"
+				RelativePath="..\..\include\luxinia\luxcore\scalarmisc.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\sortradix.h"
+				RelativePath="..\..\include\luxinia\luxcore\sortradix.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\include\luxcore\strmisc.h"
+				RelativePath="..\..\include\luxinia\luxcore\strmisc.h"
 				>
 			</File>
 		</Filter>

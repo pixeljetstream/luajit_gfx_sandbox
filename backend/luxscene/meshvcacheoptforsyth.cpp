@@ -31,7 +31,7 @@
   http://home.comcast.net/~tom_forsyth/papers/fast_vert_cache_opt.html
 */
 
-#include <luxscene/meshvcacheopt.h>
+#include <luxinia/luxscene/meshvcacheopt.h>
 
 #include <math.h>
 #include <string.h>
