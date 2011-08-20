@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#ifndef __LUXBACKEND_MESH_H__
-#define __LUXBACKEND_MESH_H__
+#ifndef __LUXSCENE_MESH_H__
+#define __LUXSCENE_MESH_H__
 
 #include "meshbase.h"
 #include "meshvcacheopt.h"

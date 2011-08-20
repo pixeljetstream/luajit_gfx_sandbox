@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxbackend/meshbase.h>
+#include <luxscene/meshbase.h>
 #include <luxmath/matrix44.h>
 
 

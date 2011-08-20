@@ -69,7 +69,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				UseLibraryDependencyInputs="true"
-				AdditionalDependencies="luxgfx.lib luxcore.lib luxplatform.lib luxmath.lib glewgl.lib"
+				AdditionalDependencies="luxgfx.lib luxcore.lib luxplatform.lib luxmath.lib luxscene.lib glewgl.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x86_debug\luxbackend.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug;..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 				GenerateDebugInformation="true"
@@ -159,7 +159,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				UseLibraryDependencyInputs="true"
-				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib luxplatform.lib glewgl.lib"
+				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib luxplatform.lib luxscene.lib glewgl.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x86\luxbackend.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 				ImportLibrary="..\..\..\depend\lib\Windows_x86\msvc9\$(TargetName).lib"
@@ -197,58 +197,10 @@
 				RelativePath="..\..\luxbackend\main.c"
 				>
 			</File>
-			<File
-				RelativePath="..\..\luxbackend\meshbase.c"
-				>
-			</File>
-			<File
-				RelativePath="..\..\luxbackend\meshvcacheoptcastano.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\luxbackend\meshvcacheoptforsyth.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\luxbackend\meshvcacheopttipsify.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\luxbackend\shader.c"
-				>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						AssemblerOutput="4"
-					/>
-				</FileConfiguration>
-			</File>
 		</Filter>
 		<Filter
 			Name="include"
 			>
-			<File
-				RelativePath="..\..\include\luxbackend\drawsystem.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\luxbackend\mesh.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\luxbackend\meshbase.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\luxbackend\meshvcacheopt.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\include\luxbackend\shader.h"
-				>
-			</File>
 		</Filter>
 	</Files>
 	<Globals>

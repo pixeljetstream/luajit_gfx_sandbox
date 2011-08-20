@@ -2,12 +2,12 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#ifndef __LUXBACKEND_DRAWSYS_H__
-#define __LUXBACKEND_DRAWSYS_H__
+#ifndef __LUXSCENE_DRAWSYS_H__
+#define __LUXSCENE_DRAWSYS_H__
 
 
-#include <luxbackend/shader.h>
-#include <luxbackend/meshbase.h>
+#include <luxscene/shader.h>
+#include <luxscene/meshbase.h>
 #include <luxmath/basetypes.h>
 
 #if defined(__cplusplus)

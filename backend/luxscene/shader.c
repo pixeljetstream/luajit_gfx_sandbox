@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include <luxbackend/shader.h>
+#include <luxscene/shader.h>
 #include <luxplatform/debug.h>
 
 

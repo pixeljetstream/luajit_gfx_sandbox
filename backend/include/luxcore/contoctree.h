@@ -91,7 +91,7 @@ typedef void (lxOcDrawBox_fn) (const float minb[3], const float maxb[3], const f
 // OcNode
 
   // calls listcollector once on the content of self and all children 
-void lxOcNode_getDeepLists(lxOcNode_t *self, lxOcListNodeTraverse_fn *listcollector, void *upvalue);
+LUX_API void lxOcNode_getDeepLists(lxOcNode_t *self, lxOcListNodeTraverse_fn *listcollector, void *upvalue);
 
 
 ////////////////////////////////////////////////////////////////////////////////

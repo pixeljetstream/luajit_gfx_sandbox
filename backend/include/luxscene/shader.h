@@ -2,8 +2,8 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#ifndef __LUXBACKEND_SHADER_H__
-#define __LUXBACKEND_SHADER_H__
+#ifndef __LUXSCENE_SHADER_H__
+#define __LUXSCENE_SHADER_H__
 
 #include <luxgfx/program.h>
 #include <luxcore/contstringmap.h>

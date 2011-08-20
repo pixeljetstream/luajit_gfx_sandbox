@@ -4,11 +4,11 @@
 //
 // Forwards to Code by Martin Storsjö, Ignacio Castanio, Tom Forsyth
 
-#ifndef __LUXBACKEND_MESHVCACHEOPT_H__
-#define __LUXBACKEND_MESHVCACHEOPT_H__
+#ifndef __LUXSCENE_MESHVCACHEOPT_H__
+#define __LUXSCENE_MESHVCACHEOPT_H__
 
 #include <luxplatform/luxplatform.h>
-#include <luxbackend/meshbase.h>
+#include <luxscene/meshbase.h>
 
 #if defined(__cplusplus)
 extern "C"

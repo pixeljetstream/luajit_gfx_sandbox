@@ -10,7 +10,7 @@
 
 #include <luxmath/luxmath.h>
 #include <luxmath/basetypes.hpp>
-#include <luxbackend/meshbase.h>
+#include <luxscene/meshbase.h>
 #include <luxgfx/luxgfx.h>
 
 #include <string.h>

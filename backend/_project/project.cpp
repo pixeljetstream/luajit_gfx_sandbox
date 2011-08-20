@@ -4,7 +4,7 @@
 
 #include "../_project/project.hpp"
 #include <luxmath/bounding.h>
-#include <luxbackend/meshbase.h>
+#include <luxscene/meshbase.h>
 #include <string>
 #include <fstream>
 

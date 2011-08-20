@@ -31,7 +31,7 @@
   http://www.cs.princeton.edu/gfx/pubs/Sander_2007_%3ETR/tipsy.pdf
 */
 
-#include <luxbackend/meshvcacheopt.h>
+#include <luxscene/meshvcacheopt.h>
 
 #include <stdlib.h>
 #include <string.h>
