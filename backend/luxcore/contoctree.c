@@ -582,7 +582,7 @@ static void OcNode_getLists_recursive(lxOcNode_t *self, lxOcListNodeTraverse_fn 
 }
 
 
-static void lxOcNode_getDeepLists(lxOcNode_t *self, lxOcListNodeTraverse_fn *listcollector, void *upvalue)
+LUX_API void lxOcNode_getDeepLists(lxOcNode_t *self, lxOcListNodeTraverse_fn *listcollector, void *upvalue)
 {
   void**        firstData = self->dataList-self->childListCount;
   lxOcContainerBox_t** first = self->list-self->childListCount;

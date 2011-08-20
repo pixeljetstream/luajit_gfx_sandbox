@@ -45,6 +45,15 @@ extern "C"{
   typedef const float* LUX_RESTRICT lxMatrix34CPTR;
   typedef const float* LUX_RESTRICT lxQuatCPTR;
 
+#ifdef LUX_COMPILER_MSC
+  typedef LUX_ALIGNSIMD_BEGIN lxMatrix44 lxMatrix44SIMD;
+  typedef LUX_ALIGNSIMD_BEGIN lxVector4 lxVector4SIMD;
+  typedef LUX_ALIGNSIMD_BEGIN lxVector4 lxVector3SIMD;
+#elif defined(LUX_COMPILER_GCC)
+  typedef lxMatrix44 lxMatrix44SIMD LUX_ALIGNSIMD_END;
+  typedef lxVector4 lxVector4SIMD LUX_ALIGNSIMD_END;
+  typedef lxVector4 lxVector3SIMD LUX_ALIGNSIMD_END;
+#endif
 
   typedef struct lxFrustumPlane_s* LUX_RESTRICT lxFrustumPlanePTR;
   typedef const struct lxFrustumPlane_s* LUX_RESTRICT lxFrustumPlaneCPTR;
@@ -54,6 +63,9 @@ extern "C"{
 
   typedef struct lxBoundingBox_s* LUX_RESTRICT lxBoundingBoxPTR;
   typedef const struct lxBoundingBox_s* LUX_RESTRICT lxBoundingBoxCPTR;
+
+  typedef struct lxBoundingBoxCenter_s* LUX_RESTRICT lxBoundingBoxCenterPTR;
+  typedef const struct lxBoundingBoxCenter_s* LUX_RESTRICT lxBoundingBoxCenterCPTR;
 
   typedef struct lxBoundingSphere_s* LUX_RESTRICT lxBoundingSpherePTR;
   typedef const struct lxBoundingSphere_s* LUX_RESTRICT lxBoundingSphereCPTR;
@@ -130,6 +142,12 @@ extern "C"{
     lxVector4 min;
     lxVector4 max;
   }lxBoundingBox_t;
+
+  typedef struct lxBoundingBoxCenter_s
+  {
+    lxVector4 center;
+    lxVector4 size;
+  }lxBoundingBoxCenter_t;
 
   typedef struct lxBoundingSphere_s
   {

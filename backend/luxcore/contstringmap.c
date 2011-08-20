@@ -159,7 +159,7 @@ LUX_INLINE size_t lxStrMap_sizeof(uint numBins)
 
 LUX_API lxStrMapPTR  lxStrMap_new(lxMemoryAllocatorPTR allocator, uint numBins, uint valueSize, lxStrDictPTR  dict)
 {
-  lxStrMapPTR self = lxMemoryAllocator_malloc(allocator,sizeof(lxStrMap_t));
+  lxStrMapPTR self = lxMemoryAllocator_malloc(allocator,lxStrMap_sizeof(numBins));
   lxContHash_init(&self->hashtable,allocator,numBins,valueSize);
   self->owndict = dict == NULL;
   self->dict = dict ? dict : lxStrDict_new(allocator,numBins);

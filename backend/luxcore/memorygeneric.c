@@ -50,17 +50,6 @@ static void lxMemoryGeneric_free(lxMemoryGenericPTR gen, void *ptr, size_t size)
   gen->descr._free(gen->descr.sys,ptr);
 }
 
-static void *lxMemoryGeneric_zalloc(lxMemoryGenericPTR gen, size_t size)
-{
-  gen->info.allocs++;
-  gen->info.mem += size;
-  {
-    void *ptr = gen->descr._calloc(gen->descr.sys,size,1);
-
-    return ptr;
-  }
-}
-
 static void *lxMemoryGeneric_calloc(lxMemoryGenericPTR gen, size_t num, size_t size)
 {
   gen->info.allocs++;
@@ -225,29 +214,7 @@ static void* lxMemoryGeneric_reallocStats(lxMemoryGenericPTR gen, void *ptr, siz
   return mem+sizeof(MemInfo_t);
 }
 
-static void *lxMemoryGeneric_zallocStats(lxMemoryGenericPTR gen, size_t size,const char *source,int line)
-{
-  char *mem;
-  MemInfo_t *info;
-
-
-  gen->info.mem += size;
-  gen->info.allocs++;
-
-  mem = (char*)gen->descr._calloc(gen->descr.sys,size+sizeof(MemInfo_t),1);
-
-  info = (MemInfo_t*)mem;
-  info->size = size;
-  info->line = line;
-  info->src = source;
-  lxListNode_init(info);
-  lxListNode_pushBack(gen->stats.List,info);
-
-
-  return mem+sizeof(MemInfo_t);
-}
-
-void *lxMemoryGeneric_callocStats(lxMemoryGenericPTR gen, size_t num, size_t size,const char *source,int line)
+static void *lxMemoryGeneric_callocStats(lxMemoryGenericPTR gen, size_t num, size_t size,const char *source,int line)
 {
   char *mem;
   MemInfo_t *info;
@@ -256,7 +223,7 @@ void *lxMemoryGeneric_callocStats(lxMemoryGenericPTR gen, size_t num, size_t siz
   gen->info.mem += size*num;
   gen->info.allocs++;
 
-  mem = (char*)gen->descr._calloc(gen->descr.sys,size+sizeof(MemInfo_t),num);
+  mem = (char*)gen->descr._calloc(gen->descr.sys,(size*num)+sizeof(MemInfo_t),1);
 
   info = (MemInfo_t*)mem;
   info->size = size*num;
@@ -291,25 +258,6 @@ static void *lxMemoryGeneric_mallocStats(lxMemoryGenericPTR gen, size_t size,con
   return mem+sizeof(MemInfo_t);
 }
 
-static void* lxMemoryGeneric_zallocAlignedStats(lxMemoryGenericPTR gen, size_t size, size_t alignsize,const char *source,int line)
-{
-  char *ptr = (char*)lxMemoryGeneric_zallocStats(gen,size + (sizeof(size_t)*3) + alignsize,source,line);
-  char *alptr = (char*)lxPointerAlign(ptr+sizeof(size_t)*3,alignsize);
-
-  {
-    size_t *ptr1 = ((size_t *)alptr) - 3;
-    size_t *ptr2 = ((size_t *)alptr) - 2;
-    size_t *ptr3 = ((size_t *)alptr) - 1;
-
-    *ptr1 = MEMORY_ALIGNED_MAGIC;
-    *ptr2 = (sizeof(size_t)*3) + alignsize;
-    *ptr3 = alptr-ptr;
-  }
-
-
-  return alptr;
-}
-
 static void* lxMemoryGeneric_mallocAlignedStats(lxMemoryGenericPTR gen, size_t size, size_t alignsize,const char *source,int line)
 {
   char *ptr = (char*)lxMemoryGeneric_mallocStats(gen,size + (sizeof(size_t)*3) + alignsize,source,line);
@@ -331,7 +279,21 @@ static void* lxMemoryGeneric_mallocAlignedStats(lxMemoryGenericPTR gen, size_t s
 
 static void* lxMemoryGeneric_callocAlignedStats(lxMemoryGenericPTR gen, size_t num, size_t size, size_t alignsize,const char *source,int line)
 {
-  return lxMemoryGeneric_zallocAlignedStats(gen, num*size,alignsize,source,line);
+  char *ptr = (char*)lxMemoryGeneric_callocStats(gen,size*num + (sizeof(size_t)*3) + alignsize,1,source,line);
+  char *alptr = (char*)lxPointerAlign(ptr+sizeof(size_t)*3,alignsize);
+
+  {
+    size_t *ptr1 = ((size_t *)alptr) - 3;
+    size_t *ptr2 = ((size_t *)alptr) - 2;
+    size_t *ptr3 = ((size_t *)alptr) - 1;
+
+    *ptr1 = MEMORY_ALIGNED_MAGIC;
+    *ptr2 = (sizeof(size_t)*3) + alignsize;
+    *ptr3 = alptr-ptr;
+  }
+
+
+  return alptr;
 }
 
 static void* lxMemoryGeneric_reallocAlignedStats(lxMemoryGenericPTR gen, void* ptr,size_t size,size_t alignsize,size_t oldsize,const char *source,int line)
