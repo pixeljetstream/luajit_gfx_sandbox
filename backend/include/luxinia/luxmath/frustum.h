@@ -23,12 +23,14 @@ LUX_API booln  lxFrustum_checkPoint(lxFrustumCPTR frustum, lxVector3CPTR vec);
 
 // returns FALSE if inside/intersect
 LUX_API booln  lxFrustum_checkSphere(lxFrustumCPTR frustum, lxBoundingSphereCPTR );
+LUX_API booln  lxFrustum_checkSphereCoherent(lxFrustumCPTR pFrustum, lxBoundingSphereCPTR sphere, int *plane);
 
 // returns FALSE if sphere is fully inside
 LUX_API booln  lxFrustum_checkSphereFull(lxFrustumCPTR frustum, lxBoundingSphereCPTR );
 
 // returns FALSE if inside/intersect
 LUX_API booln  lxFrustum_checkBoundingBox(lxFrustumCPTR frustum, lxBoundingBoxCPTR bbox);
+LUX_API booln  lxFrustum_checkBoundingBoxCoherent(lxFrustumCPTR pFrustum, lxBoundingBoxCPTR bbox, int *plane);
 
 // masking & temporal coherency
 // cullF can report outside even if extends of box are outside all planes
@@ -91,6 +93,41 @@ LUX_INLINE booln  lxFrustum_checkBoundingBox(lxFrustumCPTR pFrustum, lxBoundingB
   return LUX_FALSE;
 }
 
+LUX_INLINE booln lxFrustum_checkSphereCoherent(lxFrustumCPTR pFrustum, lxBoundingSphereCPTR sphere, int *plane)
+{
+  int i;
+  int offset = *plane;
+  for( i = 0; i < LUX_FRUSTUM_PLANES; i++ ){
+    int n = (i + offset) % LUX_FRUSTUM_PLANES;
+    lxFrustumPlaneCPTR sp = &pFrustum->fplanes[n];
+    if(sp->pvec[0] * sphere->center[0] + sp->pvec[1] * sphere->center[1] + sp->pvec[2] * sphere->center[2] + sp->pvec[3] <= -sphere->radius )
+    {
+      *plane = n;
+      return LUX_TRUE;
+    }
+  }
+  return LUX_FALSE;
+}
+
+
+LUX_INLINE booln  lxFrustum_checkBoundingBoxCoherent(lxFrustumCPTR pFrustum, lxBoundingBoxCPTR bbox, int *plane)
+{
+  int i;
+  int offset = *plane;
+  for (i = 0; i < LUX_FRUSTUM_PLANES; i++){
+    int n = (i + offset) % LUX_FRUSTUM_PLANES;
+    lxFrustumPlaneCPTR sp = &pFrustum->fplanes[n];
+    if ((sp->pvec[0] * bbox->min[sp->px]) + 
+      (sp->pvec[1] * bbox->min[sp->py]) + 
+      (sp->pvec[2] * bbox->min[sp->pz]) + sp->pvec[3] < 0)
+    {
+      *plane = n;
+      return LUX_TRUE;
+    }
+  }
+
+  return LUX_FALSE;
+}
 #ifdef __cplusplus
 }
 #endif

@@ -36,6 +36,20 @@ LUX_API booln lxBoundingBox_mergeChange(lxBoundingBoxPTR out, lxBoundingBoxCPTR 
   return change;
 }
 
+LUX_API void  lxBoundingBox_toCenterBox(lxBoundingBoxCPTR box, lxBoundingBoxCenterPTR ctr)
+{
+  lxVector3 temp;
+  lxVector3Sub(ctr->size,box->max, box->min);
+  lxVector3Add(temp,box->max, box->min);
+  lxVector3Scale(ctr->center,temp,0.5f);
+}
+
+LUX_API void  lxBoundingBox_fromCenterBox(lxBoundingBoxCPTR box, lxBoundingBoxCenterCPTR ctr)
+{
+  lxVector3ScaledAdd(box->min,ctr->center,-0.5f,ctr->size);
+  lxVector3ScaledAdd(box->max,ctr->center, 0.5f,ctr->size);
+}
+
 LUX_API booln lxBoundingSphere_mergeChange(lxBoundingSpherePTR out, lxBoundingSphereCPTR a, lxBoundingSphereCPTR b)
 {
   lxVector3 vec;
