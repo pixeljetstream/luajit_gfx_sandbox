@@ -41,7 +41,7 @@ LUX_API booln lxBoundingBox_mergeChange(lxBoundingBoxPTR out, lxBoundingBoxCPTR 
 LUX_API booln lxBoundingSphere_mergeChange(lxBoundingSpherePTR out, lxBoundingSphereCPTR a, lxBoundingSphereCPTR b);
 
 LUX_API void  lxBoundingBox_toCenterBox(lxBoundingBoxCPTR box, lxBoundingBoxCenterPTR ctr);
-LUX_API void  lxBoundingBox_fromCenterBox(lxBoundingBoxCPTR box, lxBoundingBoxCenterCPTR ctr);
+LUX_API void  lxBoundingBox_fromCenterBox(lxBoundingBoxPTR box, lxBoundingBoxCenterCPTR ctr);
 
 // converts a bounding box to a bounding sphere
 LUX_API lxBoundingSpherePTR lxBoundingBox_toSphere(lxBoundingBoxCPTR bbox, lxBoundingSpherePTR sphere);
@@ -105,9 +105,6 @@ LUX_INLINE booln lxBoundingBox_intersect(lxBoundingBoxCPTR a, lxBoundingBoxCPTR 
 LUX_INLINE void lxBoundingBox_toCenter(lxBoundingBoxCPTR bbox, lxVector3 center, lxVector3 size)
 {
   lxVector3Sub(size,bbox->max, bbox->min);
-  center[0] /= 2;
-  center[1] /= 2;
-  center[2] /= 2;
   lxVector3ScaledAdd(center, bbox->min, 0.5f, size);
 }
 

@@ -116,14 +116,18 @@ LUX_API void lxShaderProgram_initParameters( lxShaderProgram_t* shader, lxgProgr
   }
 }
 
-LUX_API void lxShaderProgram_useHash( lxShaderProgram_t* shader,lxContHashPTR hash )
+LUX_API lxContHashPTR lxShaderProgram_useHash( lxShaderProgram_t* shader,lxContHashPTR hash )
 {
   uint i;
-  for (i = 0; i < shader->numParams; i++){
-    lxContHash_set(hash, shader->params[i].namekey, (void*)i);
-  }
+  lxContHashPTR oldhash = shader->paramHash;
+  if (hash){
+    for (i = 0; i < shader->numParams; i++){
+      lxContHash_set(hash, shader->params[i].namekey, (void*)i);
+    }
+  }  
 
   shader->paramHash = hash;
+  return oldhash;
 }
 
 

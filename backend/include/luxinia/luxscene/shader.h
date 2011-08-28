@@ -16,7 +16,7 @@ extern "C"
 
   enum{
     LUX_SHADER_UPDATELEVELS = 4,
-    LUX_SHADER_ASSIGNLEVELS = 4,
+    LUX_SHADER_ASSIGNS = 4,
   };
 
   //////////////////////////////////////////////////////////////////////////
@@ -53,7 +53,9 @@ extern "C"
   LUX_API size_t  lxShaderProgram_getMemSize(lxShaderProgram_t* shader);
   LUX_API void    lxShaderProgram_initMem(lxShaderProgram_t* shader, size_t size, void* buffer);
   LUX_API void    lxShaderProgram_initParameters(lxShaderProgram_t* shader, lxgProgramParameter_t** optionalSort);
-  LUX_API void    lxShaderProgram_useHash(lxShaderProgram_t* shader,lxContHashPTR hash);
+
+    // returns previous hash
+  LUX_API lxContHashPTR  lxShaderProgram_useHash(lxShaderProgram_t* shader,lxContHashPTR hash);
   LUX_API lxShaderIndex  lxShaderProgram_getUpdateIndex(lxShaderProgram_t* shader, lxStrDictKey namekey, lxGLParameterType_t type );
 
   //////////////////////////////////////////////////////////////////////////
@@ -72,17 +74,18 @@ extern "C"
   typedef struct lxShaderLevel_s{
     uint32              numParams;
     void**              datas;
-    lxShaderAssign_t    assigns[LUX_SHADER_ASSIGNLEVELS];
+    lxShaderAssign_t    assigns[LUX_SHADER_ASSIGNS];
 
     uint32                          numContainers;
     lxShaderParameterContainer_t**  containers;
   }lxShaderLevel_t;
-
+/*
+  TODO 
   LUX_API void lxShaderLevel_addContainer();
   LUX_API void lxShaderLevel_remContainer();
   LUX_API void lxShaderLevel_updateContainers();
   LUX_API void lxShaderLevel_buildAssigns();
-
+*/
   //////////////////////////////////////////////////////////////////////////
 
   typedef struct lxShaderUpdate_s{
@@ -117,21 +120,6 @@ extern "C"
     // use with lxgProgram_applyParameters
   LUX_API uint lxShaderUpdate_buildProgramParams(lxShaderUpdate_t* update);
 
-  //////////////////////////////////////////////////////////////////////////
-
-  typedef struct lxShader_s{
-    uint32                numPrograms;
-    lxShaderProgram_t*    programs;
-    lxShaderLevel_t       level;
-    // states, passes?
-  }lxShader_t;
-
-  //////////////////////////////////////////////////////////////////////////
-
-  typedef struct lxMaterial_s{
-    uint32                shaderID;
-    lxShaderLevel_t       materialLevel;
-  }lxMaterial_t;
 
 
   //////////////////////////////////////////////////////////////////////////
