@@ -22,17 +22,17 @@ extern "C"{
     booln freecontent;
   }lxFSFile_t;
 
-  booln   lxFS_setCurrent(lxFSFile_t *file, void *data);
-  void*   lxFS_getCurrent(lxFSFile_t *file);
-  void*   lxFS_getContent(lxFSFile_t *file);
-  size_t  lxFS_getSize(lxFSFile_t *file);
+  LUX_API booln   lxFS_setCurrent(lxFSFile_t *file, void *data);
+  LUX_API void*   lxFS_getCurrent(lxFSFile_t *file);
+  LUX_API void*   lxFS_getContent(lxFSFile_t *file);
+  LUX_API size_t  lxFS_getSize(lxFSFile_t *file);
 
 
-  char*   lxFS_gets(char *buffer, size_t size, lxFSFile_t *file);
-  char    lxFS_eof(lxFSFile_t *file);
-  char    lxFS_getc(lxFSFile_t *file);
-  size_t  lxFS_read(void* target, size_t size, size_t count,lxFSFile_t *file);
-  size_t  lxFS_seek(lxFSFile_t* file, size_t offset, size_t origin);
+  LUX_API char*   lxFS_gets(char *buffer, size_t size, lxFSFile_t *file);
+  LUX_API char    lxFS_eof(lxFSFile_t *file);
+  LUX_API char    lxFS_getc(lxFSFile_t *file);
+  LUX_API size_t  lxFS_read(void* target, size_t size, size_t count,lxFSFile_t *file);
+  LUX_API size_t  lxFS_seek(lxFSFile_t* file, size_t offset, size_t origin);
 
 #ifdef __cplusplus
 }

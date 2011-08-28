@@ -16,8 +16,8 @@
 extern "C"{
 #endif
 
-void lxDebugAssertFailed( const char *file, int line, const char *expression );
-void lxDebugPrintf(const char* format, ...);
+LUX_API void lxDebugAssertFailed( const char *file, int line, const char *expression );
+LUX_API void lxDebugPrintf(const char* format, ...);
 
 
 //////////////////////////////////////////////////////////////////////////

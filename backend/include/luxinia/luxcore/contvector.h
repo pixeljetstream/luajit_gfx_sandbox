@@ -23,8 +23,6 @@ extern "C"{
   //  a simple vector implementation (continous memory)
   //  grows allocation as necessary
 
-  #define LUX_CONTVECTOR_SMALL  (8)
-
   typedef struct lxContVector_s{
     ushort    elemsize;
     ushort    alignsize;

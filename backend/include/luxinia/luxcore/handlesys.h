@@ -13,35 +13,39 @@ extern "C"{
 
 
   typedef uint32 lxHandleID;
-  typedef struct lxHandleSys_s* HandleSysPTR;
+  typedef struct lxHandleSys_s* lxHandleSysPTR;
 
-  LUX_API void  lxHandleSys_init(HandleSysPTR sys);
+  LUX_API void  lxHandleSys_init(lxHandleSysPTR sys);
 
   // type must be greater 0
-  LUX_API lxHandleID lxHandleSys_add(HandleSysPTR sys, uint32 type, void *data);
-  LUX_API booln lxHandleSys_rem(HandleSysPTR sys, lxHandleID id);
-  LUX_API booln lxHandleSys_replace(HandleSysPTR sys, lxHandleID id, void *data);
+  LUX_API lxHandleID lxHandleSys_add(lxHandleSysPTR sys, uint32 type, void *data);
+  LUX_API booln lxHandleSys_rem(lxHandleSysPTR sys, lxHandleID id);
+  LUX_API booln lxHandleSys_replace(lxHandleSysPTR sys, lxHandleID id, void *data);
 
-  LUX_API booln lxHandleSys_getSafe(HandleSysPTR sys, lxHandleID id, void **outval);
-  LUX_API void* lxHandleSys_getPtr(HandleSysPTR sys, lxHandleID id);
+  LUX_API booln lxHandleSys_getSafe(lxHandleSysPTR sys, lxHandleID id, void **outval);
+  LUX_API void* lxHandleSys_getPtr(lxHandleSysPTR sys, lxHandleID id);
+  LUX_API int   lxHandleSys_checkIdx(lxHandleSysPTR sys, lxHandleID id);
 
   //////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////
   // Inline & Details
 
-#define LUX_HANDLE_TYPE    (6)
-#define LUX_HANDLE_IDX     (12)
-#define LUX_HANDLE_COUNTER (32 - LUX_HANDLE_IDX - LUX_HANDLE_TYPE)
-#define LUX_HANDLESYS_MAX  (1<<LUX_HANDLE_IDX)
+  enum {
+    LUX_HANDLE_TYPE = 6,
+    LUX_HANDLE_IDX  = 12,
+    LUX_HANDLE_COUNTER = 32 - LUX_HANDLE_IDX - LUX_HANDLE_TYPE,
+    LUX_HANDLESYS_MAX = (1<<LUX_HANDLE_IDX),
+  };
 
-  typedef struct Handle_s{
+
+  typedef struct lxHandle_s{
     uint type : LUX_HANDLE_TYPE;
     uint counter : LUX_HANDLE_COUNTER;
     uint idx : LUX_HANDLE_IDX;
-  }Handle_t;
+  }lxHandle_t;
 
   typedef struct lxHandleEntry_s{
-    Handle_t      handle;
+    lxHandle_t    handle;
     union{
       void*       data;
       uint32      nextUnused;
@@ -54,16 +58,16 @@ extern "C"{
     lxHandleEntry_t entries[LUX_HANDLESYS_MAX];
   }lxHandleSys_t;
 
-  int LUX_INLINE lxHandleSys_checkIdx(HandleSysPTR sys, lxHandleID id)
+  LUX_INLINE int lxHandleSys_checkIdx(lxHandleSysPTR sys, lxHandleID id)
   {
-    const Handle_t* hdl = (const Handle_t*)&id;
+    const lxHandle_t* hdl = (const lxHandle_t*)&id;
     if (id && *(lxHandleID*)&sys->entries[hdl->idx].handle == id)
       return hdl->idx;
     else
       return -1;
   }
 
-  LUX_INLINE booln  lxHandleSys_getSafe(HandleSysPTR sys, lxHandleID id, void **outval)
+  LUX_INLINE booln  lxHandleSys_getSafe(lxHandleSysPTR sys, lxHandleID id, void **outval)
   {
     int idx = lxHandleSys_checkIdx(sys,id);
     if (idx > 0){
@@ -75,7 +79,7 @@ extern "C"{
     }
   }
 
-  LUX_INLINE void*  lxHandleSys_getPtr(HandleSysPTR sys, lxHandleID id)
+  LUX_INLINE void*  lxHandleSys_getPtr(lxHandleSysPTR sys, lxHandleID id)
   {
     int idx = lxHandleSys_checkIdx(sys,id);
     if (idx > 0){

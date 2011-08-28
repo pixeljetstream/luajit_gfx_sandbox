@@ -18,8 +18,6 @@ extern "C"{
   // The reference is kept alive as long as weak users exist
   // (object itself being one weak user)
 
-  // NOT THREADSAFE, uses MEMGENERIC
-
   //////////////////////////////////////////////////////////////////////////
 
   typedef struct lxObjRefSys_s* lxObjRefSysPTR;
@@ -35,15 +33,13 @@ extern "C"{
   typedef int32 lxObjRefType_t;
 
   typedef struct lxObjId_s{
-    void      *ptr;
-    lxObjRefType_t  type;
+    void*             ptr;
+    lxObjRefType_t    type;
   }lxObjId_t;
 
   typedef struct lxObjTypeInfo_s{
     lxObjRefDelete_fn*  fnDelete;
-#ifdef LUX_DEVBUILD
-    const char*   name;
-#endif
+    const char*         name;
   }lxObjTypeInfo_t;
 
 
@@ -70,7 +66,7 @@ extern "C"{
   LUX_API void lxObjRefSys_popNoDelete(lxObjRefSysPTR sys);
 
     // register a new type
-  lxObjTypeInfo_t lxObjTypeInfo_new(lxObjRefDelete_fn* fnDelete, const char*  name);
+  LUX_API lxObjTypeInfo_t lxObjTypeInfo_new(lxObjRefDelete_fn* fnDelete, const char*  name);
   LUX_API void lxObjRefSys_register(lxObjRefSysPTR sys, lxObjRefType_t type, lxObjTypeInfo_t info);
 
     // usecounter and weakcounter inited at 1
@@ -87,30 +83,30 @@ extern "C"{
   // ObjRef
 
     // returns ptr only if reference is still valid (wasn't deleted)
-  lxObjId_t*  lxObjRef_getId(lxObjRefPTR cref);
+  LUX_API lxObjId_t*  lxObjRef_getId(lxObjRefPTR cref);
 
     // returns ptr (is NULL when already deleted, ie weak refs must check this)
-  void*   lxObjRef_getPtr(lxObjRefPTR cref);
+  LUX_API void*   lxObjRef_getPtr(lxObjRefPTR cref);
 
     // if you allow creation of ObjRefs with NULL ptrs, than you must
     // use this instead of getPtr
-  booln   lxObjRef_getSafe(lxObjRefPTR cref, void **ptr);
+  LUX_API booln   lxObjRef_getSafe(lxObjRefPTR cref, void **ptr);
     
     // increments weak counter
-  void    lxObjRef_addWeak(lxObjRefPTR cref);
+  LUX_API void    lxObjRef_addWeak(lxObjRefPTR cref);
 
     // returns true on success (ref is valid)
-  booln   lxObjRef_addUser(lxObjRefPTR cref);
+  LUX_API booln   lxObjRef_addUser(lxObjRefPTR cref);
 
-  void    lxObjRef_releaseWeak(lxObjRefPTR cref);
+  LUX_API void    lxObjRef_releaseWeak(lxObjRefPTR cref);
 
     // returns true if ref remains valid
-  booln   lxObjRef_releaseUser(lxObjRefPTR cref);
+  LUX_API booln   lxObjRef_releaseUser(lxObjRefPTR cref);
 
     // set usecounter to 0 (only allowed when usecounter is 1)
     // useful if you want to return "newobjects", 
     // use with caution, will not call destructor nor change weakcounter.
-  booln   lxObjRef_makeVolatile(lxObjRefPTR cref);
+  LUX_API booln   lxObjRef_makeVolatile(lxObjRefPTR cref);
 
 
   //////////////////////////////////////////////////////////////////////////
@@ -128,14 +124,12 @@ extern "C"{
   // internals
   LUX_API void    lxObjRefSys_deleteRef(lxObjRefSysPTR sys, lxObjRefPTR cref);
   LUX_API void    lxObjRefSys_deleteAlloc(lxObjRefSysPTR sys, lxObjRefPTR cref);
-
+  
   LUX_INLINE lxObjTypeInfo_t lxObjTypeInfo_new(lxObjRefDelete_fn* fnDelete, const char* name)
   {
     lxObjTypeInfo_t info;
     info.fnDelete = fnDelete;
-#ifdef LUX_DEVBUILD
     info.name = name;
-#endif
     return info;
   }
 

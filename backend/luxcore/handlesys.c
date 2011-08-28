@@ -5,7 +5,7 @@
 #include <luxinia/luxcore/handlesys.h>
 #include <luxinia/luxplatform/debug.h>
 
-LUX_API void lxHandleSys_init( HandleSysPTR sys )
+LUX_API void lxHandleSys_init( lxHandleSysPTR sys )
 {
   int i;
   sys->numUsed = 0;
@@ -19,7 +19,7 @@ LUX_API void lxHandleSys_init( HandleSysPTR sys )
   }
 }
 
-LUX_API lxHandleID lxHandleSys_add( HandleSysPTR sys, uint32 type, void *data )
+LUX_API lxHandleID lxHandleSys_add( lxHandleSysPTR sys, uint32 type, void *data )
 {
   lxHandleEntry_t* entry = &sys->entries[sys->firstUnused];
   LUX_ASSERT(type >= 1);
@@ -33,7 +33,7 @@ LUX_API lxHandleID lxHandleSys_add( HandleSysPTR sys, uint32 type, void *data )
   return *((lxHandleID*)&entry->handle);
 }
 
-LUX_API booln lxHandleSys_rem( HandleSysPTR sys, lxHandleID id )
+LUX_API booln lxHandleSys_rem( lxHandleSysPTR sys, lxHandleID id )
 {
   int idx = lxHandleSys_checkIdx(sys,id);
   lxHandleEntry_t* entry = &sys->entries[idx];
@@ -46,7 +46,7 @@ LUX_API booln lxHandleSys_rem( HandleSysPTR sys, lxHandleID id )
   return LUX_TRUE;
 }
 
-LUX_API booln lxHandleSys_replace( HandleSysPTR sys, lxHandleID id, void *data )
+LUX_API booln lxHandleSys_replace( lxHandleSysPTR sys, lxHandleID id, void *data )
 {
   int idx = lxHandleSys_checkIdx(sys,id);
   lxHandleEntry_t* entry = &sys->entries[idx];

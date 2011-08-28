@@ -17,9 +17,11 @@
 extern "C"{
 #endif
 
-#define LUX_OCTREE_MAX_DEPTH    31
-#define LUX_OCTREE_MAX_STACKITEMS ((LUX_OCTREE_MAX_DEPTH+1)*8)
-#define LUX_OCTREE_NUMCHILDS    8
+  enum {
+    LUX_OCTREE_MAX_DEPTH = 31,
+    LUX_OCTREE_MAX_STACKITEMS = ((LUX_OCTREE_MAX_DEPTH+1)*8),
+    LUX_OCTREE_NUMCHILDS = 8,
+  };
 
 typedef struct lxOcBounds_s
 {

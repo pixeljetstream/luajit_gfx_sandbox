@@ -14,7 +14,7 @@
 //////////////////////////////////////////////////////////////////////////
 // Debug
 
-void lxDebugAssertFailed( const char *file, int line, const char *expression )
+LUX_API void lxDebugAssertFailed( const char *file, int line, const char *expression )
 {
   lxDebugPrintf("Assert Failed: %s,%d; expr: %s\n",file,line,expression);
 
@@ -42,7 +42,7 @@ void lxDebugAssertFailed( const char *file, int line, const char *expression )
 
 }
 
-void lxDebugPrintf(const char* fmt, ...)
+LUX_API void lxDebugPrintf(const char* fmt, ...)
 {
   // FIXME
   char    text[1024];
@@ -74,7 +74,7 @@ void lxDebugPrintf(const char* fmt, ...)
 //////////////////////////////////////////////////////////////////////////
 // Endianess
 
-booln lxEndian_isBig()
+LUX_API booln lxEndian_isBig()
 {
 #if defined(LUX_ENDIAN_BIG)
   booln state = LUX_TRUE;
@@ -122,7 +122,7 @@ typedef union{
   byte  b[4];
 }endconv_t;
 
-short PF_shortSwap(short  val){
+LUX_API short PF_shortSwap(short  val){
   endconv_t input;
   endconv_t output;
   input.s = 0;
@@ -132,10 +132,10 @@ short PF_shortSwap(short  val){
 
   return output.s;
 }
-short PF_shortPass(short  val){
+LUX_API short PF_shortPass(short  val){
   return val;
 }
-long  PF_longSwap(long  val)
+LUX_API long  PF_longSwap(long  val)
 {
   endconv_t input;
   endconv_t output;
@@ -147,11 +147,11 @@ long  PF_longSwap(long  val)
   output.b[3] = input.b[0];
   return output.l;
 }
-long  PF_longPass(long  val)
+LUX_API long  PF_longPass(long  val)
 {
   return val;
 }
-float PF_floatSwap(float  val)
+LUX_API float PF_floatSwap(float  val)
 {
   endconv_t input;
   endconv_t output;
@@ -163,7 +163,7 @@ float PF_floatSwap(float  val)
   output.b[3] = input.b[0];
   return output.f;
 }
-float PF_floatPass(float  val)
+LUX_API float PF_floatPass(float  val)
 {
   return val;
 }

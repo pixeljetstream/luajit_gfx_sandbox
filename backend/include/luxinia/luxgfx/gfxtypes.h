@@ -7,6 +7,10 @@
 
 #include <luxinia/luxplatform/luxplatform.h>
 
+#ifdef __cplusplus
+extern "C"{
+#endif
+
 typedef struct lxgContext_s* LUX_RESTRICT lxgContextPTR;
 
 typedef struct lxgBuffer_s* LUX_RESTRICT lxgBufferPTR;
@@ -81,6 +85,10 @@ typedef enum lxgAccessMode_e{
 
   LUXGFX_ACCESSES,
 }lxgAccessMode_t;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

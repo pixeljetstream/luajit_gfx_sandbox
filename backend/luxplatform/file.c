@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-char lxFS_getc(lxFSFile_t *file){
+LUX_API char lxFS_getc(lxFSFile_t *file){
   char c = file->contents[file->index];
   if (file->index >= file->size)
     return EOF;
@@ -14,7 +14,7 @@ char lxFS_getc(lxFSFile_t *file){
   return c;
 }
 
-size_t lxFS_read(void* target, size_t size, size_t count,lxFSFile_t *file){
+LUX_API size_t lxFS_read(void* target, size_t size, size_t count,lxFSFile_t *file){
   size_t read;
   // find out how many we can copy
   if (file->size <= file->index)
@@ -30,7 +30,7 @@ size_t lxFS_read(void* target, size_t size, size_t count,lxFSFile_t *file){
   return read;
 }
 
-size_t lxFS_seek(lxFSFile_t* file, size_t offset, size_t origin)
+LUX_API size_t lxFS_seek(lxFSFile_t* file, size_t offset, size_t origin)
 {
   long oldoffset = file->index;
 
@@ -61,7 +61,7 @@ size_t lxFS_seek(lxFSFile_t* file, size_t offset, size_t origin)
   return LUX_TRUE;
 }
 
-char * lxFS_gets(char *buffer, size_t size, lxFSFile_t *file)
+LUX_API char * lxFS_gets(char *buffer, size_t size, lxFSFile_t *file)
 {
   size_t i;
   char *string = (char*)&file->contents[file->index];
@@ -86,20 +86,20 @@ char * lxFS_gets(char *buffer, size_t size, lxFSFile_t *file)
     return buffer;
 }
 
-char lxFS_eof(lxFSFile_t *fsfile){
+LUX_API char lxFS_eof(lxFSFile_t *fsfile){
   if (!fsfile)
     return LUX_TRUE;
   return fsfile->index >= fsfile->size;
 }
 
-void* lxFS_getCurrent(lxFSFile_t *file)
+LUX_API void* lxFS_getCurrent(lxFSFile_t *file)
 {
   if(!file || file->index >= file->size) return NULL;
 
   return &file->contents[file->index];
 }
 
-booln lxFS_setCurrent(lxFSFile_t *file, void* cur)
+LUX_API booln lxFS_setCurrent(lxFSFile_t *file, void* cur)
 {
   byte *data = (byte*)cur;
   if (data < file->contents || data > file->contents+file->size)
@@ -110,7 +110,7 @@ booln lxFS_setCurrent(lxFSFile_t *file, void* cur)
   return LUX_TRUE;
 }
 
-void *lxFS_getContent(lxFSFile_t *file)
+LUX_API void *lxFS_getContent(lxFSFile_t *file)
 {
   if(!file) return NULL;
 
@@ -118,7 +118,7 @@ void *lxFS_getContent(lxFSFile_t *file)
 }
 
 
-size_t lxFS_getSize(lxFSFile_t *file)
+LUX_API size_t lxFS_getSize(lxFSFile_t *file)
 {
   if(!file) return 0;
 

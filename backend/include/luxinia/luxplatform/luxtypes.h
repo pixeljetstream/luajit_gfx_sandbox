@@ -5,6 +5,9 @@
 #ifndef __LUXTYPES_H__
 #define __LUXTYPES_H__
 
+#ifdef __cplusplus
+extern "C"{
+#endif
 
 //////////////////////////////////////////////////////////////////////////
 // Types
@@ -167,5 +170,9 @@ typedef enum lxScalarType_e{
   (dst)[10] = (src)[10], (dst)[11] = (src)[11], \
   (dst)[12] = (src)[12], (dst)[13] = (src)[13], \
   (dst)[14] = (src)[14], (dst)[15] = (src)[15])
+  
+#ifdef __cplusplus
+}
+#endif
 
 #endif

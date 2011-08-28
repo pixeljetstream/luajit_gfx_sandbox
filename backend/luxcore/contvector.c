@@ -5,6 +5,8 @@
 #include <luxinia/luxcore/contvector.h>
 #include <string.h>
 
+#define LUX_CONTVECTOR_SMALL  (8)
+
 LUX_API void  lxContVector_reserve(lxContVectorPTR cv,uint n)
 {
   const uint 

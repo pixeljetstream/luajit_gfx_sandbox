@@ -11,8 +11,6 @@
 
 #define LUXGFX_VALIDITY     1
 
-#if defined(LUX_RENDERBACKEND_OPENGL1) || defined(LUX_RENDERBACKEND_OPENGL3)
-
 #ifdef __cplusplus
 extern "C"{
 #endif
@@ -341,8 +339,5 @@ extern "C"{
 #ifdef __cplusplus
 }
 #endif
-
-#endif
-
 
 #endif
