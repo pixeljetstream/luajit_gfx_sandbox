@@ -19,8 +19,14 @@ std::string ReadFile(const char* filename)
 
   ifstream file (filename,ios::in|ios::end);
 
+  if (!file.is_open() && strstr(filename,"../") == filename){
+    filename +=3;
+    file.close();
+    file.open(filename,ios::in|ios::end);
+  }
+
   if (!file.is_open()){
-    printf("error: could not open file %s\n",filename);
+    printf("error: could not find file %s\n",filename);
     return str;
   }
 
@@ -78,83 +84,166 @@ void RenderHelper::init(GLFWwindow win, const lxCVector3& up)
   glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0);
 }
 
-void RenderHelper::cameraOrtho( lxBoundingBox_t* bbox )
+void RenderHelper::cameraOrtho( lxBoundingBox_t* bbox, const lxCVector3* delta )
 {
   lxBoundingBox_toCenter(bbox,m_sceneCenter,m_sceneSize);
   float length = lxVector3Length(m_sceneSize);
   m_ortho = length * 1.25f;
-  m_fov   = 0.0f;
   lxCVector3  offset(-1,1,-1);
   lxCVector3  campos;
+  if (delta) offset = *delta;
 
-  lxMatrix44Identity(m_viewMatrix);
+  lxMatrix44Identity(m_viewTM);
   //m_viewmatrix[14] = -length * 4.0f;
 
   lxVector3Normalized(offset);
   lxVector3ScaledAdd(campos,m_sceneCenter,length * 4.0f, offset);
-  lxMatrix44LookAt(m_viewMatrix,campos,m_sceneCenter,m_up);
+  lxMatrix44LookAt(m_viewTM,campos,m_sceneCenter,m_up);
+
+  m_orbitCenter = m_sceneCenter;
+  m_useOrtho = true;
 }
 
-void RenderHelper::cameraPerspective( lxBoundingBox_t* bbox, float fovdeg )
+void RenderHelper::cameraPerspective( lxBoundingBox_t* bbox, float fovdeg, const lxCVector3* delta )
 {
   lxBoundingBox_toCenter(bbox,m_sceneCenter,m_sceneSize);
   float length = lxVector3Length(m_sceneSize) * 0.5f;
   lxCVector3  offset(-0.33f,0.33f,-0.66f);
   lxCVector3  campos;
-  m_ortho = 0.0f;
+  if (delta) offset = *delta;
+
   m_fov   = fovdeg;
 
   // tan = opp/adj
   length = length / tanf(LUX_DEG2RAD(fovdeg) * 0.5f);
-  
-  lxMatrix44Identity(m_viewMatrix);
+
+  lxMatrix44Identity(m_viewTM);
 
   lxVector3Normalized(offset);
   lxVector3ScaledAdd(campos,m_sceneCenter,length, offset);
-  lxMatrix44LookAt(m_viewMatrix,campos,m_sceneCenter,m_up);
+  lxMatrix44LookAt(m_viewTM,campos,m_sceneCenter,m_up);
+
+  m_orbitCenter = m_sceneCenter;
+  m_useOrtho = true;
 }
 
 void RenderHelper::updateProjection( int width, int height )
 {
   float size = lxVector3Length(m_sceneSize);
-  if (m_ortho){
-    lxMatrix44Ortho(m_projMatrix, m_ortho, size / 4096.0f, size * 16.0f, (float)width / (float) height);
+  if (m_useOrtho){
+    lxMatrix44Ortho(m_projectionTM, m_ortho, size / 4096.0f, size * 16.0f, (float)width / (float) height);
   }
   else{
-    lxMatrix44Perspective(m_projMatrix, m_fov, size / 4096.0f, size * 16.0f, (float)width / (float) height);
+    lxMatrix44Perspective(m_projectionTM, m_fov, size / 4096.0f, size * 16.0f, (float)width / (float) height);
   }
-  m_screenSize[0] = width;
-  m_screenSize[1] = height;
+
+  lxMatrix44MultiplyFull(m_viewProjTM,m_projectionTM, m_viewTM);
+}
+
+
+void RenderHelper::doCameraControl()
+{
+  // Mouse Updates
+  for (int i = 0; i < 3; i++){
+    int button = glfwGetMouseButton(m_window,i);
+    m_buttonsToggle[i] = button != m_buttons[i];
+    m_buttons[i] = button;
+  }
+
+  m_panning  = m_buttons[0] == GLFW_PRESS;
+  m_zooming  = m_buttons[1] == GLFW_PRESS;
+  m_rotating = m_buttons[2] == GLFW_PRESS || (m_panning && m_zooming);
+  if (m_rotating){
+    m_panning = false;
+    m_zooming = false;
+  }
+
+  if (m_panning && m_buttonsToggle[0]){
+    // pan
+    m_panrotcam = m_viewTM;
+    m_panpos = m_mpos;
+  }
+  if (m_zooming && m_buttonsToggle[1]){
+    // zoom
+    m_zoompos = m_mpos;
+    m_zoomcam = m_ortho;
+  }
+  if (m_rotating && (m_buttonsToggle[2] || m_buttonsToggle[0] || m_buttonsToggle[1])){
+    // zoom
+    m_rotpos = m_mpos;
+    m_panrotcam = m_viewTM;
+  }
+
+  // FIXME doesn't have perspective logic yet
+
+  if (m_zooming){
+    lxCVector3 dot(1,1,0);
+    lxCVector3 sub;
+    lxVector3Sub(sub,m_mpos,m_zoompos);
+
+    float dist = lxVector3Dot(sub, dot) * m_zoomsense * getSceneDimension();
+    m_ortho = std::max(0.0001f,m_zoomcam - dist);
+  }
+
+  if (m_panning){
+    float aspect = float(m_winwidth)/float(m_winwidth);
+    lxCMatrix44 delta(1);
+    lxCVector3 sub;
+    lxCVector3 offset;
+    lxCVector3 winsize(m_winwidth, m_winwidth,1);
+    lxCVector3 ortho(m_ortho * aspect, m_ortho,1.0f);
+    lxVector3Sub(sub,m_mpos,m_panpos);
+    lxVector3Div(offset,sub,winsize);
+    lxVector3Mul(sub,offset,ortho);
+    sub.y *= -1.0;
+    lxMatrix44SetTranslation(delta,sub);
+    lxMatrix44Multiply(m_viewTM,delta,m_panrotcam);
+  }
+
+  if (m_rotating){
+    float aspect = float(m_winwidth)/float(m_winwidth);
+    lxCMatrix44 delta(1);
+    lxCMatrix44 rot(1);
+
+    lxCVector3 angles;
+    lxCVector3 center;
+    lxVector3Sub(angles,m_mpos,m_rotpos);
+    float tmp = angles.x;
+
+    angles.x = angles.y * m_rotsense;
+    angles.y =   tmp    * m_rotsense;
+    angles.z = 0.0;
+
+    lxVector3Transform(center,m_orbitCenter,m_panrotcam);
+
+    lxMatrix44FromEulerZYX(rot,angles);
+    lxMatrix44SetInvTranslation(delta,center);
+    lxMatrix44Multiply1(rot,delta);
+
+    lxMatrix44Identity(delta);
+    lxMatrix44SetTranslation(delta,center);
+
+    lxMatrix44Multiply1(delta,rot);
+    lxMatrix44Multiply(m_viewTM,delta,m_panrotcam);
+  }
 }
 
 void RenderHelper::setCameraGL()
 {
   glMatrixMode(GL_PROJECTION);
-  glLoadMatrixf(m_projMatrix);
+  glLoadMatrixf(m_projectionTM);
   glMatrixMode(GL_MODELVIEW);
-  glLoadMatrixf(m_viewMatrix);
+  glLoadMatrixf(m_viewTM);
 }
 
-void RenderHelper::doArcBall(int w, int h )
+void RenderHelper::update( int width, int height )
 {
-  int mb1 = glfwGetMouseButton(m_window,GLFW_MOUSE_BUTTON_1);
-  int mb2 = glfwGetMouseButton(m_window,GLFW_MOUSE_BUTTON_2);
-  if (!mb1 && !mb2) return;
+  m_winwidth = width;
+  m_winheight = height;
 
-  
-  if (mb1 && !mb2){
-    // rotate
-
-  }
-  else if(mb2 && !mb1){
-    // pan
-
-  }
-  else{
-    // zoom
-
-  }
-
+  int mx, my;
+  glfwGetMousePos(m_window,&mx,&my);
+  m_mpos.Set(float(mx),float(my),0);
 }
 
 void  RenderHelper::generateUVData( int w, int h, lxCVector3 *pixels)
@@ -195,7 +284,9 @@ GLuint RenderHelper::generateUVTexture( int w, int h )
 GLuint RenderHelper::loadShader(GLenum type, const char* filename, const char* prepend )
 {
   string content = ReadFile(filename);
-  content = string(prepend) + content;
+  if (prepend){
+    content = string(prepend) + content;
+  }
   GLuint obj = glCreateShader(type);
   const GLchar* strings[] = {
     content.c_str(),
@@ -209,7 +300,7 @@ GLuint RenderHelper::loadShader(GLenum type, const char* filename, const char* p
 
 void RenderHelper::updateCamera()
 {
-  lxMatrix44MultiplyFull(m_viewprojMatrix,m_projMatrix,m_viewMatrix);
+  lxMatrix44MultiplyFull(m_viewProjTM,m_projectionTM,m_viewTM);
 }
 
 

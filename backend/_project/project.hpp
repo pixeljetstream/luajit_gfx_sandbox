@@ -237,31 +237,64 @@ public:
   static GLuint loadShader(GLenum type, const char* filename, const char* prepend );
 
   void init(GLFWwindow win, const lxCVector3& up);
-  void cameraOrtho(lxBoundingBox_t* bbox);
-  void cameraPerspective(lxBoundingBox_t* bbox, float fovdeg);
+  void update(int width, int height);
+
+  void cameraOrtho(lxBoundingBox_t* bbox, const lxCVector3* delta=NULL);
+  void cameraPerspective(lxBoundingBox_t* bbox, float fovdeg, const lxCVector3* delta=NULL);
   void updateProjection(int width, int height);
   void updateCamera();
   void setCameraGL();
-  void doArcBall(int width, int height);
+  void doCameraControl();
 
-  lxCMatrix44 m_viewMatrix;
-  lxCMatrix44 m_projMatrix;
-  lxCMatrix44 m_viewprojMatrix;
+  inline float getSceneDimension() const {
+    return lxVector3Length(m_sceneSize);
+  }
+  inline bool getZooming() const {
+    return m_zooming;
+  }
+  inline bool getPanning() const {
+    return m_panning;
+  }
+  inline bool getRotating() const {
+    return m_rotating;
+  }
+
   int         m_screenSize[2];
+  lxCMatrix44 m_viewTM;
+  lxCMatrix44 m_projectionTM;
+  lxCMatrix44 m_viewProjTM;
+  float       m_ortho;
+  float       m_fov;
+  lxCVector3  m_mpos;
+  bool        m_useOrtho;
+  float       m_zoomsense;
+  float       m_rotsense;
+  float       m_pansense;
 
 private:
 
   GLFWwindow  m_window;
 
-  float       m_ortho;
-  float       m_fov;
+  int         m_winwidth;
+  int         m_winheight;
+
+  lxCVector3  m_orbitCenter;
   lxCVector3  m_sceneCenter;
   lxCVector3  m_sceneSize;
-
-  lxCVector3  m_lastmpos;
-  float       m_movespeed;
-  float       m_rotspeed;
+  lxCVector3  m_campos;
   lxCVector3  m_up;
+
+  bool            m_panning;
+  bool            m_zooming;
+  bool            m_rotating;
+
+  int             m_buttons[3];
+  int             m_buttonsToggle[3];
+  lxCVector3      m_panpos;
+  lxCVector3      m_zoompos;
+  lxCVector3      m_rotpos;
+  lxCMatrix44     m_panrotcam;
+  float           m_zoomcam;
 };
 
 //////////////////////////////////////////////////////////////////////////
