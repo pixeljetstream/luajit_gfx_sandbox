@@ -10,9 +10,8 @@
 #include <luxinia/luxscene/meshbase.h>
 #include <luxinia/luxmath/basetypes.h>
 
-#if defined(__cplusplus)
-extern "C"
-{
+#ifdef __cplusplus
+extern "C"{
 #endif
 
   typedef struct lxDrawBounding_s{
@@ -92,7 +91,7 @@ extern "C"
 
 
 
-#if defined(__cplusplus)
+#ifdef __cplusplus
 }
 #endif
 

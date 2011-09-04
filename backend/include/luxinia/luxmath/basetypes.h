@@ -11,13 +11,14 @@
 
 #include <luxinia/luxplatform/luxplatform.h>
 
+#include <math.h>
+#include <float.h>
+#include <string.h>
+
 #ifdef __cplusplus
 extern "C"{
 #endif
 
-#include <math.h>
-#include <float.h>
-#include <string.h>
 
   //////////////////////////////////////////////////////////////////////////
 

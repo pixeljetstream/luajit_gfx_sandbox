@@ -8,9 +8,8 @@
 #include <luxinia/luxplatform/luxplatform.h>
 #include <luxinia/luxmath/basetypes.h>
 
-#if defined(__cplusplus)
-extern "C"
-{
+#ifdef __cplusplus
+extern "C"{
 #endif
 
   typedef enum lxMeshIndexType_e{
@@ -45,7 +44,7 @@ extern "C"
   LUX_API void lxMeshCylinder_initOutline(int segs[3], uint32* indices);
 
 
-#if defined(__cplusplus)
+#ifdef __cplusplus
 }
 #endif
 

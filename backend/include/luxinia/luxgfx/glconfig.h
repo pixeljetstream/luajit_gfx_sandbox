@@ -8,6 +8,7 @@
 #include <luxinia/luxplatform/luxplatform.h>
 
 #include "gfxtypes.h"
+#include <gl/glew.h>
 
 #define LUXGFX_VALIDITY     1
 
@@ -24,8 +25,6 @@ extern "C"{
     LUXGFX_MAX_VERTEX_STREAMS  = 8,
     LUXGFX_MAX_STAGE_SUBROUTINES = 1024,
   };
-
-  #include <gl/glew.h>
 
   typedef enum lxGLCompareMode_e{
     LUXGL_COMPARE_NEVER = GL_NEVER,

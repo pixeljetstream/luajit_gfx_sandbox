@@ -9,9 +9,8 @@
 #include <luxinia/luxcore/contstringmap.h>
 #include <luxinia/luxcore/conthash.h>
 
-#if defined(__cplusplus)
-extern "C"
-{
+#ifdef __cplusplus
+extern "C"{
 #endif
 
   enum{
@@ -128,7 +127,7 @@ extern "C"
     return update->funcBuildProgramParams(update);
   }
 
-#if defined(__cplusplus)
+#ifdef __cplusplus
 }
 #endif
 

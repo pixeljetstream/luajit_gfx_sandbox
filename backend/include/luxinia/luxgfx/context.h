@@ -210,6 +210,7 @@ extern "C"{
       lxgContext_applyBlend(ctx, obj);
     }
   }
+
   LUX_INLINE void lxgContext_checkedDepth( lxgContextPTR ctx, lxgDepthCPTR obj)
   {
     if (ctx->raster.depthObj != obj)
@@ -217,6 +218,7 @@ extern "C"{
       lxgContext_applyDepth(ctx, obj);
     }
   }
+
   LUX_INLINE void lxgContext_checkedLogic( lxgContextPTR ctx, lxgLogicCPTR obj)
   {
     if (ctx->raster.logicObj != obj)
@@ -224,6 +226,7 @@ extern "C"{
       lxgContext_applyLogic(ctx, obj);
     }
   }
+
   LUX_INLINE void lxgContext_checkedColor( lxgContextPTR ctx, lxgColorCPTR obj)
   {
     if (ctx->raster.colorObj != obj)
@@ -231,6 +234,7 @@ extern "C"{
       lxgContext_applyColor(ctx, obj);
     }
   }
+
   LUX_INLINE void lxgContext_checkedRasterizer( lxgContextPTR ctx, lxgRasterizerCPTR obj)
   {
     if (ctx->raster.rasterizerObj != obj)
@@ -238,6 +242,7 @@ extern "C"{
       lxgContext_applyRasterizer(ctx, obj);
     }
   }
+
   LUX_INLINE void lxgContext_checkedStencil( lxgContextPTR ctx, lxgStencilCPTR obj)
   {
     if (ctx->raster.stencilObj != obj)
@@ -245,6 +250,7 @@ extern "C"{
       lxgContext_applyStencil(ctx, obj);
     }
   }
+
   LUX_INLINE void lxgContext_checkedTexture( lxgContextPTR ctx, lxgTexturePTR tex, uint imageunit )
   {
     LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
@@ -252,6 +258,7 @@ extern "C"{
       lxgContext_applyTexture(ctx, tex,imageunit);
     }
   }
+
   LUX_INLINE void lxgContext_checkedSampler( lxgContextPTR ctx, lxgSamplerCPTR sampler, uint imageunit )
   {
     LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
@@ -259,6 +266,7 @@ extern "C"{
       lxgContext_applySampler(ctx, sampler,imageunit);
     }
   }
+
   LUX_INLINE void lxgContext_checkedTextureImage( lxgContextPTR ctx, lxgTextureImageCPTR img, uint imageunit) 
   {
     LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
@@ -291,6 +299,7 @@ extern "C"{
     ctx->program.uniform[idx] = buffer;
     return res;
   }
+
   LUX_INLINE void lxgContext_checkedTextures( lxgContextPTR ctx, lxgTexturePTR *texs, uint start, uint num )
   {
     LUX_ASSUME(num >= 1 && num <= LUXGFX_MAX_TEXTURE_IMAGES);
@@ -299,6 +308,7 @@ extern "C"{
       lxgContext_applyTextures(ctx, texs,start,num);
     }
   }
+
   LUX_INLINE void lxgContext_checkedSamplers( lxgContextPTR ctx, lxgSamplerCPTR *samps, uint start, uint num )
   {
     LUX_ASSUME(num >= 1 && num <= LUXGFX_MAX_TEXTURE_IMAGES);

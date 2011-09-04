@@ -10,9 +10,8 @@
 #include <luxinia/luxplatform/luxplatform.h>
 #include <luxinia/luxscene/meshbase.h>
 
-#if defined(__cplusplus)
-extern "C"
-{
+#ifdef __cplusplus
+extern "C"{
 #endif
 
 //////////////////////////////////////////////////////////////////////////
@@ -56,7 +55,7 @@ LUX_API void* lxVertexCacheOptimize_grid_castano(
   lxMeshIndexType_t type,
   int *writtenTriangles);
 
-#if defined(__cplusplus)
+#ifdef __cplusplus
 }
 #endif
 

@@ -5,13 +5,15 @@
 #ifndef __LUXTYPES_H__
 #define __LUXTYPES_H__
 
+
+typedef unsigned char checkint64[sizeof( long long ) == 8];
+
 #ifdef __cplusplus
 extern "C"{
 #endif
 
 //////////////////////////////////////////////////////////////////////////
 // Types
-typedef unsigned char checkint64[sizeof( long long ) == 8];
 
 typedef unsigned char   uchar;
 typedef unsigned short  ushort;
@@ -126,6 +128,11 @@ typedef enum lxScalarType_e{
 #define LUX_MAX(a,b)     (((a) > (b)) ? (a) : (b))
 #define LUX_MIN(a,b)     (((a) < (b)) ? (a) : (b))
 
+typedef enum lxBoolean_e{
+  LUX_FALSE = 0,
+  LUX_TRUE = 1, 
+}lxBoolean_t;
+/*
 #ifndef LUX_TRUE
 #define LUX_TRUE  1
 #endif
@@ -133,7 +140,7 @@ typedef enum lxScalarType_e{
 #ifndef LUX_FALSE
 #define LUX_FALSE 0
 #endif
-
+*/
 #define LUX_IS_ALIGNED(ptr,align)  (((size_t)(ptr)) % (align) == 0)
 
 // generic type
