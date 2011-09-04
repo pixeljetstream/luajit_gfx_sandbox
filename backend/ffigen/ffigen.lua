@@ -43,7 +43,7 @@ function fgen:processFile(infile)
   end
 
   content = mj.preprocess(infile,content,self._defins) or ""
-  
+
   -- remove function definitions
   content = content:gsub("([^;{}]+%b()%s*%b{})","")
   
@@ -54,10 +54,16 @@ function fgen:processFile(infile)
       local rest,cnt = cap:gsub(prefix,"")
       if (cnt == 1) then
         return rest
+      elseif (cap:find("typedef ")) then
+        return cap
       else
         return ""
       end
     end)
+    
+  -- remove other prefixes
+  content = content:gsub(prefix,"")
+  
   
   return content
 end

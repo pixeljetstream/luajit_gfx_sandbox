@@ -225,7 +225,7 @@ float lxMatrix44CompareRot ( lxMatrix44PTR mat1 , lxMatrix44PTR mat2 ) ;
 void lxMatrix44Swizzle1 ( lxMatrix44PTR mat , uint axis [ 3 ] , lxVector3PTR dirs ) ;
 #pragma warning ( push )
 #pragma warning ( disable : 4028 )
-LUX_API extern const float lx_gMatrix44_ident [ 16 ] ;
+extern const float lx_gMatrix44_ident [ 16 ] ;
 #pragma warning ( pop )
 float16 lxFloat32To16 ( float fval ) ;
 float lxFloat16To32 ( float16 ival ) ;

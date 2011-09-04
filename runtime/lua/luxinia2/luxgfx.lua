@@ -565,6 +565,144 @@ booln lxgContext_applyViewPortRect ( lxgContextPTR ctx , lxRectangleiCPTR rect )
 booln lxgContext_applyViewPortScissorState ( lxgContextPTR ctx , booln state ) ;
 booln lxgContext_applyViewPort ( lxgContextPTR ctx , lxgViewPortPTR obj ) ;
 void lxgContext_applyViewPortMrt ( lxgContextPTR ctx , lxgViewPortMrtPTR obj ) ;
+typedef enum lxgProgramType_e
+{
+    LUXGFX_PROGRAM_NONE , LUXGFX_PROGRAM_GLSL , LUXGFX_PROGRAM_GLSLSEP , LUXGFX_PROGRAM_NV , }
+lxgProgramType_t ;
+typedef enum lxgProgramStage_e
+{
+    LUXGFX_STAGE_VERTEX , LUXGFX_STAGE_FRAGMENT , LUXGFX_STAGE_GEOMETRY , LUXGFX_STAGE_TESSCTRL , LUXGFX_STAGE_TESSEVAL , LUXGFX_STAGES , }
+lxgProgramStage_t ;
+typedef void ( * lxgParmeterUpdate_fn ) ( lxgProgramParameterPTR param , lxgContextPTR ctx , const void * data ) ;
+typedef uint32 lxgSubroutineKey ;
+typedef struct lxgProgramSubroutine_s
+{
+    GLuint glindex ;
+    lxgSubroutineKey namekey ;
+}
+lxgProgramSubroutine_t ;
+typedef struct lxgProgramParameter_s
+{
+    lxGLParameterType_t type ;
+    lxgParmeterUpdate_fn func ;
+    union
+    {
+        GLuint glid ;
+        GLenum gltarget ;
+        lxgProgramStage_t stage ;
+        uint32 userid ;
+    }
+    ;
+    GLuint gllocation ;
+    union
+    {
+        struct
+        {
+            uint32 unit ;
+            uint32 count ;
+            uint32 transpose ;
+        }
+        uniform ;
+        struct
+        {
+            uint32 unit ;
+            int32 size ;
+        }
+        buffer ;
+        struct
+        {
+            lxgProgramSubroutine_t last ;
+            ushort count ;
+            ushort numCompatible ;
+            lxgProgramSubroutine_t * compatible ;
+        }
+        subroutine ;
+        struct
+        {
+            uint32 userkey ;
+            void * userdata ;
+        }
+        user ;
+    }
+    ;
+    const char * name ;
+}
+lxgProgramParameter_t ;
+typedef struct lxgStageProgram_s
+{
+    union
+    {
+        lxGLShaderType_t gltype ;
+        lxGLProgramType_t gltarget ;
+    }
+    ;
+    GLuint glid ;
+    uint numSubroutines ;
+    lxgContextPTR ctx ;
+    lxgProgramType_t progtype ;
+}
+lxgStageProgram_t ;
+typedef struct lxgProgram_s
+{
+    GLuint glid ;
+    lxgProgramType_t type ;
+    flags16 usedProgs ;
+    bool8 isSeparable ;
+    bool8 hasSubroutines ;
+    union
+    {
+        lxgProgramPTR sepPrograms [ LUXGFX_STAGES ] ;
+        lxgStageProgramPTR stagePrograms [ LUXGFX_STAGES ] ;
+    }
+    ;
+    uint16 numSubroutines [ LUXGFX_STAGES ] ;
+    lxgContextPTR ctx ;
+}
+lxgProgram_t ;
+typedef struct lxgProgramState_s
+{
+    lxgProgramCPTR current ;
+    flags32 dirtySubroutines ;
+    uint numSubroutines [ LUXGFX_STAGES ] ;
+    GLenum typeSubroutines [ LUXGFX_STAGES ] ;
+    GLuint subroutines [ LUXGFX_STAGES ] [ LUXGFX_MAX_STAGE_SUBROUTINES ] ;
+    lxgBufferCPTR uniform [ LUXGFX_MAX_STAGE_BUFFERS * LUXGFX_STAGES ] ;
+}
+lxgProgramState_t ;
+booln lxGLParameterType_isValue ( lxGLParameterType_t type ) ;
+booln lxGLParameterType_isTexture ( lxGLParameterType_t type ) ;
+booln lxGLParameterType_isImage ( lxGLParameterType_t type ) ;
+void lxgContext_applyProgram ( lxgContextPTR ctx , lxgProgramCPTR prog ) ;
+void lxgContext_applyProgramParameters ( lxgContextPTR ctx , lxgProgramCPTR prog , uint num , lxgProgramParameterPTR * params , const void * * data ) ;
+void lxgContext_updateProgramSubroutines ( lxgContextPTR ctx , lxgProgramCPTR prog ) ;
+void lxgProgramParameter_initFunc ( lxgProgramParameterPTR param ) ;
+void lxgStageProgram_init ( lxgStageProgramPTR stage , lxgContextPTR ctx , lxgProgramStage_t type ) ;
+void lxgStageProgram_deinit ( lxgStageProgramPTR stage , lxgContextPTR ctx ) ;
+int lxgStageProgram_compile ( lxgStageProgramPTR stage , const char * src , int len ) ;
+const char * lxgStageProgram_error ( lxgStageProgramPTR stage , char * buffer , int len ) ;
+void lxgProgram_init ( lxgProgramPTR prog , lxgContextPTR ctx ) ;
+void lxgProgram_deinit ( lxgProgramPTR prog , lxgContextPTR ctx ) ;
+void lxgProgram_setStage ( lxgProgramPTR prog , lxgProgramStage_t type , lxgStageProgramPTR stage ) ;
+int lxgProgram_link ( lxgProgramPTR prog ) ;
+const char * lxgProgram_log ( lxgProgramPTR prog , char * buffer , int len ) ;
+int lxgProgram_getParameterCount ( lxgProgramPTR prog , int * namesSize , int * compatibleSubroutines ) ;
+void lxgProgram_initParameters ( lxgProgramPTR prog , int num , lxgProgramParameter_t * params , int namesSize , char * namesBuffer ) ;
+int lxgProgram_getSubroutineCount ( lxgProgramPTR prog , int * namesSize ) ;
+void lxgProgram_initSubroutineParameters ( lxgProgramPTR prog , int numParams , lxgProgramParameter_t * params , int namesSize , char * namesBuffer , char * * subroutineNames , int compatibles , lxgProgramSubroutine_t * compatibleData ) ;
+void lxgProgramParameter_initFuncSEP ( lxgProgramParameterPTR param , GLuint progid ) ;
+void lxgProgram_initForSEP ( lxgProgramPTR prog , lxgContextPTR ctx ) ;
+void lxgProgram_initSEP ( lxgProgramPTR prog , lxgContextPTR ctx ) ;
+void lxgProgram_deinitSEP ( lxgProgramPTR prog , lxgContextPTR ctx ) ;
+void lxgProgram_setSEP ( lxgProgramPTR prog , lxgProgramPTR stage ) ;
+const char * lxgProgram_logSEP ( lxgProgramPTR prog , char * buffer , int len ) ;
+void lxgProgramParameter_initFuncNV ( lxgProgramParameterPTR param , lxgProgramStage_t domain ) ;
+void lxgStageProgram_initNV ( lxgStageProgramPTR stage , lxgContextPTR ctx , lxgProgramStage_t type ) ;
+void lxgStageProgram_deinitNV ( lxgStageProgramPTR stage , lxgContextPTR ctx ) ;
+int lxgStageProgram_compileNV ( lxgStageProgramPTR stage , const char * src , int len ) ;
+const char * lxgStageProgram_errorNV ( lxgStageProgramPTR stage , char * buffer , int len ) ;
+void lxgProgram_initNV ( lxgProgramPTR prog , lxgContextPTR ctx ) ;
+void lxgProgram_deinitNV ( lxgProgramPTR prog , lxgContextPTR ctx ) ;
+void lxgProgram_setStageNV ( lxgProgramPTR prog , lxgProgramStage_t type , lxgStageProgramPTR stage ) ;
 enum lxgCapability_e
 {
     LUXGFX_CAP_POINTSPRITE = 1 << 0 , LUXGFX_CAP_STENCILWRAP = 1 << 1 , LUXGFX_CAP_BLENDSEP = 1 << 2 , LUXGFX_CAP_OCCQUERY = 1 << 3 , LUXGFX_CAP_FBO = 1 << 4 , LUXGFX_CAP_FBOMS = 1 << 5 , LUXGFX_CAP_DEPTHFLOAT = 1 << 6 , LUXGFX_CAP_VBO = 1 << 7 , LUXGFX_CAP_PBO = 1 << 8 , LUXGFX_CAP_UBO = 1 << 9 , LUXGFX_CAP_TEX3D = 1 << 10 , LUXGFX_CAP_TEXRECT = 1 << 11 , LUXGFX_CAP_TEXNP2 = 1 << 12 , LUXGFX_CAP_TEXCUBEARRAY = 1 << 13 , LUXGFX_CAP_TEXS3TC = 1 << 14 , LUXGFX_CAP_TEXRGTC = 1 << 15 , LUXGFX_CAP_TEXRW = 1 << 16 , LUXGFX_CAP_BUFMAPRANGE = 1 << 17 , LUXGFX_CAP_BUFCOPY = 1 << 18 , LUXGFX_CAP_DEPTHCLAMP = 1 << 19 , LUXGFX_CAP_SM0 = 1 << 20 , LUXGFX_CAP_SM1 = 1 << 21 , LUXGFX_CAP_SM2 = 1 << 22 , LUXGFX_CAP_SM2EXT = 1 << 23 , LUXGFX_CAP_SM3 = 1 << 24 , LUXGFX_CAP_SM4 = 1 << 25 , LUXGFX_CAP_SM5 = 1 << 26 , }

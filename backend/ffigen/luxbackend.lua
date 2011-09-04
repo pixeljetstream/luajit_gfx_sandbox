@@ -4,12 +4,12 @@ local gen = fgen:new()
 do
   gen:setApiPrefix("LUX_API%s+")
   gen:setContentPattern([[
-#ifdef __cplusplus
-extern "C"{
+#ifdef%s+__cplusplus%s*
+extern%s+"C"%s*{
 #endif
 (.*)
-#ifdef __cplusplus
-}
+#ifdef%s+__cplusplus%s*
+};?%s*
 #endif
 ]])
   gen:setPreProcessor({
@@ -125,7 +125,7 @@ if(luxcore) then
   content = append(content,"luxcore/sortradix.h")
   content = append(content,"luxcore/handlesys.h")
   content = append(content,"luxcore/refsys.h")
-  
+
   export(
     "lxc | Lux Core",
     content,

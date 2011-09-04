@@ -3,6 +3,48 @@ require "luxinia2.luxplatform"
 
 ffi.cdef [[
 // lxc | Lux Core
+typedef struct lxMemoryAllocator_s * lxMemoryAllocatorPTR ;
+typedef void * ( __cdecl * lxMalloc_fn ) ( lxMemoryAllocatorPTR , size_t sz ) ;
+typedef void * ( __cdecl * lxMallocAligned_fn ) ( lxMemoryAllocatorPTR , size_t , size_t align ) ;
+typedef void * ( __cdecl * lxCalloc_fn ) ( lxMemoryAllocatorPTR , size_t sz , size_t num ) ;
+typedef void * ( __cdecl * lxCallocAligned_fn ) ( lxMemoryAllocatorPTR , size_t sz , size_t num , size_t align ) ;
+typedef void * ( __cdecl * lxRealloc_fn ) ( lxMemoryAllocatorPTR , void * , size_t sz , size_t oldsz ) ;
+typedef void * ( __cdecl * lxReallocAligned_fn ) ( lxMemoryAllocatorPTR , void * , size_t sz , size_t oldsz , size_t align ) ;
+typedef void ( __cdecl * lxFree_fn ) ( lxMemoryAllocatorPTR , void * , size_t oldsz ) ;
+typedef void ( __cdecl * lxFreeAligned_fn ) ( lxMemoryAllocatorPTR , void * , size_t oldsz ) ;
+typedef void * ( __cdecl * lxMallocStats_fn ) ( lxMemoryAllocatorPTR , size_t sz , const char * file , int line ) ;
+typedef void * ( __cdecl * lxMallocAlignedStats_fn ) ( lxMemoryAllocatorPTR , size_t , size_t align , const char * file , int line ) ;
+typedef void * ( __cdecl * lxCallocStats_fn ) ( lxMemoryAllocatorPTR , size_t sz , size_t num , const char * file , int line ) ;
+typedef void * ( __cdecl * lxCallocAlignedStats_fn ) ( lxMemoryAllocatorPTR , size_t sz , size_t num , size_t align , const char * file , int line ) ;
+typedef void * ( __cdecl * lxReallocStats_fn ) ( lxMemoryAllocatorPTR , void * , size_t sz , size_t oldsz , const char * file , int line ) ;
+typedef void * ( __cdecl * lxReallocAlignedStats_fn ) ( lxMemoryAllocatorPTR , void * , size_t sz , size_t oldsz , size_t align , const char * file , int line ) ;
+typedef void ( __cdecl * lxFreeStats_fn ) ( lxMemoryAllocatorPTR , void * , size_t oldsz , const char * file , int line ) ;
+typedef void ( __cdecl * lxFreeAlignedStats_fn ) ( lxMemoryAllocatorPTR , void * , size_t oldsz , const char * file , int line ) ;
+typedef struct lxMemoryTracker_s
+{
+    lxMallocStats_fn _malloc ;
+    lxCallocStats_fn _calloc ;
+    lxReallocStats_fn _realloc ;
+    lxFreeStats_fn _free ;
+    lxMallocAlignedStats_fn _mallocAligned ;
+    lxCallocAlignedStats_fn _callocAligned ;
+    lxReallocAlignedStats_fn _reallocAligned ;
+    lxFreeAlignedStats_fn _freeAligned ;
+}
+lxMemoryTracker_t ;
+typedef struct lxMemoryAllocator_s
+{
+    lxMalloc_fn _malloc ;
+    lxCalloc_fn _calloc ;
+    lxRealloc_fn _realloc ;
+    lxFree_fn _free ;
+    lxMallocAligned_fn _mallocAligned ;
+    lxCallocAligned_fn _callocAligned ;
+    lxReallocAligned_fn _reallocAligned ;
+    lxFreeAligned_fn _freeAligned ;
+    lxMemoryTracker_t * tracker ;
+}
+lxMemoryAllocator_t ;
 typedef struct lxContVector_s
 {
     ushort elemsize ;
@@ -43,6 +85,18 @@ void lxContVector_shrink ( lxContVectorPTR cv ) ;
 void lxContVector_reserve ( lxContVectorPTR cv , uint cnt ) ;
 void lxContVector_resize ( lxContVectorPTR cv , uint cnt , const void * fill ) ;
 void lxContVector_prepGrowth ( lxContVectorPTR cv , uint delta ) ;
+typedef struct lxBitArray_s
+{
+    uint32 * bits ;
+    uint32 num32 ;
+}
+lxBitArray_t ;
+void lxBitArray_set ( lxBitArray_t * ba , uint bit , booln state ) ;
+booln lxBitArray_get ( const lxBitArray_t * ba , uint bit ) ;
+void lxBitArray_clear ( lxBitArray_t * ba ) ;
+void lxBitArray_all ( lxBitArray_t * ba ) ;
+booln lxBitArray_any ( const lxBitArray_t * ba ) ;
+int32 lxBitArray_getFirst ( const lxBitArray_t * ba , booln state ) ;
 typedef struct lxContHash_s * lxContHashPTR ;
 typedef const struct lxContHash_s * lxContHashCPTR ;
 lxContHashPTR lxContHash_new ( lxMemoryAllocatorPTR allocator , uint numBins , uint valueSize ) ;
@@ -96,6 +150,7 @@ lxStrDictKey lxStrDict_getKey ( lxStrDictCPTR dc , const char * str ) ;
 int lxStrDict_rem ( lxStrDictPTR dc , lxStrDictName str ) ;
 int lxStrDict_remKey ( lxStrDictPTR dc , lxStrDictKey key ) ;
 typedef struct lxStrMap_s * lxStrMapPTR ;
+typedef void * ( lxStrMap_Iterator_fn ) ( void * fnData , const char * , void * browseData ) ;
 lxStrMapPTR lxStrMap_new ( lxMemoryAllocatorPTR allocator , uint numBins , uint valueSize , lxStrDictPTR dc ) ;
 void lxStrMap_delete ( lxStrMapPTR self , void ( * fnFree ) ( void * ) ) ;
 booln lxStrMap_set ( lxStrMapPTR self , const char * key , void * value ) ;
@@ -145,6 +200,22 @@ uint lxMemoryPool_memAllocated ( lxMemoryPoolPTR mem ) ;
 float lxMemoryPool_memRatio ( lxMemoryPoolPTR mem ) ;
 uint lxMemoryPool_varSize ( lxMemoryPoolCPTR mem ) ;
 uint lxMemoryPool_alignSize ( lxMemoryPoolCPTR mem ) ;
+typedef struct lxMemoryStack_s * lxMemoryStackPTR ;
+lxMemoryStackPTR lxMemoryStack_new ( lxMemoryAllocatorPTR allocator , const char * name , size_t totalbytes ) ;
+void lxMemoryStack_delete ( lxMemoryStackPTR mem ) ;
+void * lxMemoryStack_zalloc ( lxMemoryStackPTR mem , size_t size ) ;
+void * lxMemoryStack_zallocAligned ( lxMemoryStackPTR mem , size_t size , size_t align ) ;
+void * lxMemoryStack_alloc ( lxMemoryStackPTR mem , size_t size ) ;
+void * lxMemoryStack_current ( lxMemoryStackPTR mem ) ;
+booln lxMemoryStack_initMin ( lxMemoryStackPTR mem , size_t totalbytes ) ;
+int lxMemoryStack_popResized ( lxMemoryStackPTR mem ) ;
+void lxMemoryStack_clear ( lxMemoryStackPTR mem ) ;
+void lxMemoryStack_deinit ( lxMemoryStackPTR mem ) ;
+booln lxMemoryStack_checkPtr ( lxMemoryStackPTR mem , void * ptr ) ;
+void lxMemoryStack_setBegin ( lxMemoryStackPTR mem , void * ptr ) ;
+size_t lxMemoryStack_bytesLeft ( lxMemoryStackPTR mem ) ;
+size_t lxMemoryStack_bytesUsed ( lxMemoryStackPTR mem ) ;
+size_t lxMemoryStack_bytesTotal ( lxMemoryStackPTR mem ) ;
 uint32 * lxSortRadixArrayInt ( const uint32 * data , uint size , booln sign , uint32 * indices1 , uint32 * indices2 ) ;
 uint32 * lxSortRadixArrayFloat ( const float * data , uint size , uint32 * indices1 , uint32 * indices2 ) ;
 typedef uint32 lxHandleID ;
@@ -187,6 +258,8 @@ typedef struct lxHandleSys_s
 lxHandleSys_t ;
 typedef struct lxObjRefSys_s * lxObjRefSysPTR ;
 typedef struct lxObjRef_s * lxObjRefPTR ;
+typedef void ( lxObjRefDelete_fn ) ( lxObjRefPTR r ) ;
+typedef booln ( lxObjRefCheckDelete_fn ) ( lxObjRefPTR r ) ;
 enum lxObjRefType_e
 {
     LUX_OBJREF_TYPE_DELETED = - 1 , LUX_OBJREF_TYPE_FREEALLOC = 0 , LUX_OBJREF_TYPE_USERSTART , }
