@@ -24,9 +24,8 @@ int main(int argc, const char** argv)
     return 0;
   }
 
-  double begin = glfwGetTime();
-  double frames = 0;
 
+  ProjectManager::Get().initTimer();
   while( glfwIsWindow(win) && glfwGetKey(win,GLFW_KEY_ESCAPE) != GLFW_PRESS)
   {
     int width;
@@ -42,17 +41,11 @@ int main(int argc, const char** argv)
     glFinish();
     glfwPollEvents();
     if (!status){
-      frames++;
-     
-      double current = glfwGetTime();
-      double dur = current - begin;
-      if (dur > 1.0){
-        dur /= frames;
+      if (ProjectManager::Get().updateTimer()){
         char buffer[128];
+        double dur = ProjectManager::Get().getLastTime();
         sprintf_s(buffer,128," %.1f ms %5d fps", dur * 1000.0, (int)floor(1.0/dur));
         glfwSetWindowTitle(win, (caption + std::string(buffer)).c_str());
-        frames = 0;
-        begin = current;
       }
     }
   }

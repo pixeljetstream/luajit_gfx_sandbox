@@ -82,6 +82,14 @@ void RenderHelper::init(GLFWwindow win, const lxCVector3& up)
   glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1);
   glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0);
   glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0);
+
+  m_panning = false;
+  m_zooming = false;
+  m_rotating = false;
+
+  m_buttons[0] = 0;
+  m_buttons[1] = 0;
+  m_buttons[2] = 0;
 }
 
 void RenderHelper::cameraOrtho( lxBoundingBox_t* bbox, const lxCVector3* delta )
@@ -375,9 +383,9 @@ void Geometry::drawVBO( booln outline, booln bind)
     VertexDefault*  ptr = (VertexDefault*)0;
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     if (useGenericAttribs){
-      glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE, sizeof(VertexDefault), (const void*)&ptr->pos);
-      glVertexAttribPointer(1,3,GL_FLOAT,GL_TRUE , sizeof(VertexDefault), (const void*)&ptr->normal);
-      glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE, sizeof(VertexDefault), (const void*)&ptr->uv);
+      glVertexAttribPointer(VERTEX_ATTRIB_POS,3,GL_FLOAT,GL_FALSE, sizeof(VertexDefault), (const void*)&ptr->pos);
+      glVertexAttribPointer(VERTEX_ATTRIB_NORMAL,3,GL_FLOAT,GL_TRUE , sizeof(VertexDefault), (const void*)&ptr->normal);
+      glVertexAttribPointer(VERTEX_ATTRIB_UV,2,GL_FLOAT,GL_FALSE, sizeof(VertexDefault), (const void*)&ptr->uv);
     }
     else{
       glVertexPointer(  3,GL_FLOAT, sizeof(VertexDefault), (const void*)&ptr->pos);
@@ -397,9 +405,9 @@ void Geometry::drawVBO( booln outline, booln bind)
 void Geometry::drawVA( booln outline )
 {
   if (useGenericAttribs){
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE, 0, (const void*)&pos[0]);
-    glVertexAttribPointer(1,3,GL_FLOAT,GL_TRUE , 0, (const void*)&normal[0]);
-    glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE, 0, (const void*)&uv[0]);
+    glVertexAttribPointer(VERTEX_ATTRIB_POS,3,GL_FLOAT,GL_FALSE, 0, (const void*)&pos[0]);
+    glVertexAttribPointer(VERTEX_ATTRIB_NORMAL,3,GL_FLOAT,GL_TRUE , 0, (const void*)&normal[0]);
+    glVertexAttribPointer(VERTEX_ATTRIB_UV,2,GL_FLOAT,GL_FALSE, 0, (const void*)&uv[0]);
   }
   else{
     glVertexPointer(3,GL_FLOAT,0, &pos[0]);
@@ -548,6 +556,29 @@ Project* ProjectManager::getTest(){
   }
 
   return NULL;
+}
+
+void ProjectManager::initTimer()
+{
+  m_begin = glfwGetTime();
+  m_frames = 0;
+  m_time = 0;
+  m_timeID = 0;
+}
+
+bool ProjectManager::updateTimer()
+{
+  double current  = glfwGetTime();
+  double duration = current - m_begin;
+  m_frames++;
+  if ( duration > 1.0){
+    m_begin = current;
+    m_time = duration / m_frames;
+    m_timeID++;
+    m_frames = 0;
+    return true;
+  }
+  return false;
 }
 
 

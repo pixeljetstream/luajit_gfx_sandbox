@@ -75,6 +75,12 @@ private:
 
 //////////////////////////////////////////////////////////////////////////
 
+enum VertexDefaultAttribs{
+  VERTEX_ATTRIB_POS,
+  VERTEX_ATTRIB_NORMAL,
+  VERTEX_ATTRIB_UV,
+};
+
 struct VertexDefault{
   lxCVector2  uv;
   lxCVector3  normal;
@@ -259,7 +265,13 @@ public:
     return m_rotating;
   }
 
-  int         m_screenSize[2];
+  union {
+    struct {
+      int     m_winwidth;
+      int     m_winheight;
+    };
+    int       m_screenSize[2];
+  };
   lxCMatrix44 m_viewTM;
   lxCMatrix44 m_projectionTM;
   lxCMatrix44 m_viewProjTM;
@@ -274,9 +286,6 @@ public:
 private:
 
   GLFWwindow  m_window;
-
-  int         m_winwidth;
-  int         m_winheight;
 
   lxCVector3  m_orbitCenter;
   lxCVector3  m_sceneCenter;
@@ -314,9 +323,21 @@ public:
   Project* getTest(const char* name);
   Project* getTest();
 
-private:
-  std::vector<Project*>  m_tests;
+  void    initTimer();
+  bool    updateTimer();
+  inline double  getLastTime() const {
+    return m_time;
+  }
+  inline uint32  getLastTimeID() const {
+    return m_timeID;
+  }
 
+private:
+  std::vector<Project*>   m_tests;
+  double                  m_frames;
+  double                  m_begin;
+  double                  m_time;
+  uint32                  m_timeID;
 };
 
 
