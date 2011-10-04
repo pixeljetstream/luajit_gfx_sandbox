@@ -34,7 +34,7 @@ LUX_API booln lxContMap_get(lxContMapCPTR cv, void *key, void**outval)
   int idx = lxContVector_find(&cv->keys,key);
   if (idx == -1) return LUX_FALSE;
 
-  *outval = lxContVector_at(&cv->values,idx);
+  *outval = lxContVector_at((lxContVectorPTR)&cv->values,idx);
   return LUX_TRUE;
 }
 
