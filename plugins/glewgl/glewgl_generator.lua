@@ -6,9 +6,8 @@ dofile("../_common/misc.lua")
 local function processHeader(name,idir,odir,onlybinding)
   print("processing...",name)
   local inheader = io.open(idir.."/include/GL/"..name,"rb")
-  local outheader = io.open(odir.."/include/GL/"..name,"wb")
+  local outheader = (not onlybinding) and io.open(odir.."/include/GL/"..name,"wb")
   if (onlybinding) then
-    outheader:close()
     outheader = {
       write = function() end,
     }
