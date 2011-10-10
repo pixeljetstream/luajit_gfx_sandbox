@@ -11413,2887 +11413,2555 @@ typedef void (GLAPIENTRY * PFNGLADDSWAPHINTRECTWINPROC) (GLint x, GLint y, GLsiz
 struct GLEWContextStruct
 {
 #endif /* GLEW_MX */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glAccum) (GLenum op, GLfloat value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glAlphaFunc) (GLenum func, GLclampf ref);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glAreTexturesResident) (GLsizei n, const GLuint *textures, GLboolean *residences);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glArrayElement) (GLint i);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBegin) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindTexture) (GLenum target, GLuint texture);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBitmap) (GLsizei width, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat xmove, GLfloat ymove, const GLubyte *bitmap);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendFunc) (GLenum sfactor, GLenum dfactor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCallList) (GLuint list);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCallLists) (GLsizei n, GLenum type, const GLvoid *lists);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClear) (GLbitfield mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearAccum) (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearColor) (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearDepth) (GLclampd depth);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearIndex) (GLfloat c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearStencil) (GLint s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClipPlane) (GLenum plane, const GLdouble *equation);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3b) (GLbyte red, GLbyte green, GLbyte blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3bv) (const GLbyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3d) (GLdouble red, GLdouble green, GLdouble blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3f) (GLfloat red, GLfloat green, GLfloat blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3i) (GLint red, GLint green, GLint blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3s) (GLshort red, GLshort green, GLshort blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3ub) (GLubyte red, GLubyte green, GLubyte blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3ubv) (const GLubyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3ui) (GLuint red, GLuint green, GLuint blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3uiv) (const GLuint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3us) (GLushort red, GLushort green, GLushort blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3usv) (const GLushort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4b) (GLbyte red, GLbyte green, GLbyte blue, GLbyte alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4bv) (const GLbyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4d) (GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4f) (GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4i) (GLint red, GLint green, GLint blue, GLint alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4s) (GLshort red, GLshort green, GLshort blue, GLshort alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4ub) (GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4ubv) (const GLubyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4ui) (GLuint red, GLuint green, GLuint blue, GLuint alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4uiv) (const GLuint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4us) (GLushort red, GLushort green, GLushort blue, GLushort alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4usv) (const GLushort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorMask) (GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorMaterial) (GLenum face, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorPointer) (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyPixels) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum type);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexImage1D) (GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLint border);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexImage2D) (GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexSubImage1D) (GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexSubImage2D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCullFace) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteLists) (GLuint list, GLsizei range);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteTextures) (GLsizei n, const GLuint *textures);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthFunc) (GLenum func);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthMask) (GLboolean flag);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthRange) (GLclampd zNear, GLclampd zFar);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisable) (GLenum cap);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableClientState) (GLenum array);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawArrays) (GLenum mode, GLint first, GLsizei count);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawBuffer) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElements) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawPixels) (GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEdgeFlag) (GLboolean flag);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEdgeFlagPointer) (GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEdgeFlagv) (const GLboolean *flag);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnable) (GLenum cap);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableClientState) (GLenum array);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnd) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndList) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalCoord1d) (GLdouble u);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalCoord1dv) (const GLdouble *u);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalCoord1f) (GLfloat u);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalCoord1fv) (const GLfloat *u);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalCoord2d) (GLdouble u, GLdouble v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalCoord2dv) (const GLdouble *u);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalCoord2f) (GLfloat u, GLfloat v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalCoord2fv) (const GLfloat *u);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalMesh1) (GLenum mode, GLint i1, GLint i2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalMesh2) (GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalPoint1) (GLint i);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalPoint2) (GLint i, GLint j);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFeedbackBuffer) (GLsizei size, GLenum type, GLfloat *buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFinish) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFlush) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogf) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogfv) (GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogi) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogiv) (GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFrontFace) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFrustum) (GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGenLists) (GLsizei range);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenTextures) (GLsizei n, GLuint *textures);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBooleanv) (GLenum pname, GLboolean *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetClipPlane) (GLenum plane, GLdouble *equation);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetDoublev) (GLenum pname, GLdouble *params);
-GLEW_FUN_EXPORT GLenum (GLAPIENTRY * glGetError) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFloatv) (GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetIntegerv) (GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetLightfv) (GLenum light, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetLightiv) (GLenum light, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMapdv) (GLenum target, GLenum query, GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMapfv) (GLenum target, GLenum query, GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMapiv) (GLenum target, GLenum query, GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMaterialfv) (GLenum face, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMaterialiv) (GLenum face, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPixelMapfv) (GLenum map, GLfloat *values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPixelMapuiv) (GLenum map, GLuint *values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPixelMapusv) (GLenum map, GLushort *values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPointerv) (GLenum pname, GLvoid* *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPolygonStipple) (GLubyte *mask);
-GLEW_FUN_EXPORT GLubyte* (GLAPIENTRY * glGetString) (GLenum s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexEnvfv) (GLenum target, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexEnviv) (GLenum target, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexGendv) (GLenum coord, GLenum pname, GLdouble *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexGenfv) (GLenum coord, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexGeniv) (GLenum coord, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexImage) (GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexLevelParameterfv) (GLenum target, GLint level, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexLevelParameteriv) (GLenum target, GLint level, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexParameterfv) (GLenum target, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexParameteriv) (GLenum target, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glHint) (GLenum target, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexMask) (GLuint mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexPointer) (GLenum type, GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexd) (GLdouble c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexdv) (const GLdouble *c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexf) (GLfloat c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexfv) (const GLfloat *c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexi) (GLint c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexiv) (const GLint *c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexs) (GLshort c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexsv) (const GLshort *c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexub) (GLubyte c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexubv) (const GLubyte *c);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glInitNames) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glInterleavedArrays) (GLenum format, GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsEnabled) (GLenum cap);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsList) (GLuint list);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsTexture) (GLuint texture);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLightModelf) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLightModelfv) (GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLightModeli) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLightModeliv) (GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLightf) (GLenum light, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLightfv) (GLenum light, GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLighti) (GLenum light, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLightiv) (GLenum light, GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLineStipple) (GLint factor, GLushort pattern);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLineWidth) (GLfloat width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glListBase) (GLuint base);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLoadIdentity) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLoadMatrixd) (const GLdouble *m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLoadMatrixf) (const GLfloat *m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLoadName) (GLuint name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLogicOp) (GLenum opcode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMap1d) (GLenum target, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMap1f) (GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMap2d) (GLenum target, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMap2f) (GLenum target, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapGrid1d) (GLint un, GLdouble u1, GLdouble u2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapGrid1f) (GLint un, GLfloat u1, GLfloat u2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapGrid2d) (GLint un, GLdouble u1, GLdouble u2, GLint vn, GLdouble v1, GLdouble v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapGrid2f) (GLint un, GLfloat u1, GLfloat u2, GLint vn, GLfloat v1, GLfloat v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMaterialf) (GLenum face, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMaterialfv) (GLenum face, GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMateriali) (GLenum face, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMaterialiv) (GLenum face, GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixMode) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultMatrixd) (const GLdouble *m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultMatrixf) (const GLfloat *m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNewList) (GLuint list, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3b) (GLbyte nx, GLbyte ny, GLbyte nz);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3bv) (const GLbyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3d) (GLdouble nx, GLdouble ny, GLdouble nz);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3f) (GLfloat nx, GLfloat ny, GLfloat nz);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3i) (GLint nx, GLint ny, GLint nz);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3s) (GLshort nx, GLshort ny, GLshort nz);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalPointer) (GLenum type, GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glOrtho) (GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPassThrough) (GLfloat token);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelMapfv) (GLenum map, GLsizei mapsize, const GLfloat *values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelMapuiv) (GLenum map, GLsizei mapsize, const GLuint *values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelMapusv) (GLenum map, GLsizei mapsize, const GLushort *values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelStoref) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelStorei) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelTransferf) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelTransferi) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelZoom) (GLfloat xfactor, GLfloat yfactor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointSize) (GLfloat size);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPolygonMode) (GLenum face, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPolygonOffset) (GLfloat factor, GLfloat units);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPolygonStipple) (const GLubyte *mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPopAttrib) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPopClientAttrib) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPopMatrix) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPopName) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPrioritizeTextures) (GLsizei n, const GLuint *textures, const GLclampf *priorities);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPushAttrib) (GLbitfield mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPushClientAttrib) (GLbitfield mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPushMatrix) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPushName) (GLuint name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos2d) (GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos2dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos2f) (GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos2fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos2i) (GLint x, GLint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos2iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos2s) (GLshort x, GLshort y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos2sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos3d) (GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos3dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos3f) (GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos3fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos3i) (GLint x, GLint y, GLint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos3iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos3s) (GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos3sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos4d) (GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos4dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos4f) (GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos4fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos4i) (GLint x, GLint y, GLint z, GLint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos4iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos4s) (GLshort x, GLshort y, GLshort z, GLshort w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRasterPos4sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReadBuffer) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReadPixels) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRectd) (GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRectdv) (const GLdouble *v1, const GLdouble *v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRectf) (GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRectfv) (const GLfloat *v1, const GLfloat *v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRecti) (GLint x1, GLint y1, GLint x2, GLint y2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRectiv) (const GLint *v1, const GLint *v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRects) (GLshort x1, GLshort y1, GLshort x2, GLshort y2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRectsv) (const GLshort *v1, const GLshort *v2);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glRenderMode) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRotated) (GLdouble angle, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRotatef) (GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glScaled) (GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glScalef) (GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glScissor) (GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSelectBuffer) (GLsizei size, GLuint *buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glShadeModel) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilFunc) (GLenum func, GLint ref, GLuint mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilMask) (GLuint mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilOp) (GLenum fail, GLenum zfail, GLenum zpass);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1d) (GLdouble s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1f) (GLfloat s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1i) (GLint s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1s) (GLshort s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2d) (GLdouble s, GLdouble t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2f) (GLfloat s, GLfloat t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2i) (GLint s, GLint t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2s) (GLshort s, GLshort t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3d) (GLdouble s, GLdouble t, GLdouble r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3f) (GLfloat s, GLfloat t, GLfloat r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3i) (GLint s, GLint t, GLint r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3s) (GLshort s, GLshort t, GLshort r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4d) (GLdouble s, GLdouble t, GLdouble r, GLdouble q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4f) (GLfloat s, GLfloat t, GLfloat r, GLfloat q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4i) (GLint s, GLint t, GLint r, GLint q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4s) (GLshort s, GLshort t, GLshort r, GLshort q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordPointer) (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexEnvf) (GLenum target, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexEnvfv) (GLenum target, GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexEnvi) (GLenum target, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexEnviv) (GLenum target, GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexGend) (GLenum coord, GLenum pname, GLdouble param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexGendv) (GLenum coord, GLenum pname, const GLdouble *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexGenf) (GLenum coord, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexGenfv) (GLenum coord, GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexGeni) (GLenum coord, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexGeniv) (GLenum coord, GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexImage1D) (GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexImage2D) (GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexParameterf) (GLenum target, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexParameterfv) (GLenum target, GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexParameteri) (GLenum target, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexParameteriv) (GLenum target, GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexSubImage1D) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexSubImage2D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTranslated) (GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTranslatef) (GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2d) (GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2f) (GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2i) (GLint x, GLint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2s) (GLshort x, GLshort y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3d) (GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3f) (GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3i) (GLint x, GLint y, GLint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3s) (GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4d) (GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4f) (GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4i) (GLint x, GLint y, GLint z, GLint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4s) (GLshort x, GLshort y, GLshort z, GLshort w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexPointer) (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glViewport) (GLint x, GLint y, GLsizei width, GLsizei height);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexSubImage3D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawRangeElements) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexImage3D) (GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexSubImage3D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glActiveTexture) (GLenum texture);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClientActiveTexture) (GLenum texture);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexImage1D) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexImage2D) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexImage3D) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexSubImage1D) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexSubImage2D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexSubImage3D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetCompressedTexImage) (GLenum target, GLint lod, GLvoid *img);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLoadTransposeMatrixd) (const GLdouble m[16]);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLoadTransposeMatrixf) (const GLfloat m[16]);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultTransposeMatrixd) (const GLdouble m[16]);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultTransposeMatrixf) (const GLfloat m[16]);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1d) (GLenum target, GLdouble s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1dv) (GLenum target, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1f) (GLenum target, GLfloat s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1fv) (GLenum target, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1i) (GLenum target, GLint s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1iv) (GLenum target, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1s) (GLenum target, GLshort s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1sv) (GLenum target, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2d) (GLenum target, GLdouble s, GLdouble t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2dv) (GLenum target, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2f) (GLenum target, GLfloat s, GLfloat t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2fv) (GLenum target, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2i) (GLenum target, GLint s, GLint t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2iv) (GLenum target, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2s) (GLenum target, GLshort s, GLshort t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2sv) (GLenum target, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3d) (GLenum target, GLdouble s, GLdouble t, GLdouble r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3dv) (GLenum target, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3f) (GLenum target, GLfloat s, GLfloat t, GLfloat r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3fv) (GLenum target, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3i) (GLenum target, GLint s, GLint t, GLint r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3iv) (GLenum target, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3s) (GLenum target, GLshort s, GLshort t, GLshort r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3sv) (GLenum target, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4d) (GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4dv) (GLenum target, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4f) (GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4fv) (GLenum target, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4i) (GLenum target, GLint s, GLint t, GLint r, GLint q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4iv) (GLenum target, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4s) (GLenum target, GLshort s, GLshort t, GLshort r, GLshort q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4sv) (GLenum target, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSampleCoverage) (GLclampf value, GLboolean invert);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendColor) (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquation) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendFuncSeparate) (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordPointer) (GLenum type, GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordd) (GLdouble coord);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoorddv) (const GLdouble *coord);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordf) (GLfloat coord);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordfv) (const GLfloat *coord);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiDrawArrays) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiDrawElements) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameterf) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameterfv) (GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameteri) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameteriv) (GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3b) (GLbyte red, GLbyte green, GLbyte blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3bv) (const GLbyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3d) (GLdouble red, GLdouble green, GLdouble blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3dv) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3f) (GLfloat red, GLfloat green, GLfloat blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3fv) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3i) (GLint red, GLint green, GLint blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3iv) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3s) (GLshort red, GLshort green, GLshort blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3sv) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3ub) (GLubyte red, GLubyte green, GLubyte blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3ubv) (const GLubyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3ui) (GLuint red, GLuint green, GLuint blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3uiv) (const GLuint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3us) (GLushort red, GLushort green, GLushort blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3usv) (const GLushort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColorPointer) (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2d) (GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2dv) (const GLdouble *p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2f) (GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2fv) (const GLfloat *p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2i) (GLint x, GLint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2iv) (const GLint *p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2s) (GLshort x, GLshort y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2sv) (const GLshort *p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3d) (GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3dv) (const GLdouble *p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3f) (GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3fv) (const GLfloat *p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3i) (GLint x, GLint y, GLint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3iv) (const GLint *p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3s) (GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3sv) (const GLshort *p);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginQuery) (GLenum target, GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBuffer) (GLenum target, GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBufferData) (GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBufferSubData) (GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteBuffers) (GLsizei n, const GLuint* buffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteQueries) (GLsizei n, const GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndQuery) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenBuffers) (GLsizei n, GLuint* buffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenQueries) (GLsizei n, GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBufferParameteriv) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBufferPointerv) (GLenum target, GLenum pname, GLvoid** params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBufferSubData) (GLenum target, GLintptr offset, GLsizeiptr size, GLvoid* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryObjectiv) (GLuint id, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryObjectuiv) (GLuint id, GLenum pname, GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryiv) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsBuffer) (GLuint buffer);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsQuery) (GLuint id);
-GLEW_FUN_EXPORT GLvoid* (GLAPIENTRY * glMapBuffer) (GLenum target, GLenum access);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glUnmapBuffer) (GLenum target);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glAttachShader) (GLuint program, GLuint shader);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindAttribLocation) (GLuint program, GLuint index, const GLchar* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquationSeparate) (GLenum, GLenum);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompileShader) (GLuint shader);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glCreateProgram) (void);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glCreateShader) (GLenum type);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteProgram) (GLuint program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteShader) (GLuint shader);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDetachShader) (GLuint program, GLuint shader);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableVertexAttribArray) (GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawBuffers) (GLsizei n, const GLenum* bufs);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableVertexAttribArray) (GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveAttrib) (GLuint program, GLuint index, GLsizei maxLength, GLsizei* length, GLint* size, GLenum* type, GLchar* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveUniform) (GLuint program, GLuint index, GLsizei maxLength, GLsizei* length, GLint* size, GLenum* type, GLchar* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetAttachedShaders) (GLuint program, GLsizei maxCount, GLsizei* count, GLuint* shaders);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetAttribLocation) (GLuint program, const GLchar* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramInfoLog) (GLuint program, GLsizei bufSize, GLsizei* length, GLchar* infoLog);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramiv) (GLuint program, GLenum pname, GLint* param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetShaderInfoLog) (GLuint shader, GLsizei bufSize, GLsizei* length, GLchar* infoLog);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetShaderSource) (GLuint obj, GLsizei maxLength, GLsizei* length, GLchar* source);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetShaderiv) (GLuint shader, GLenum pname, GLint* param);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetUniformLocation) (GLuint program, const GLchar* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformfv) (GLuint program, GLint location, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformiv) (GLuint program, GLint location, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribPointerv) (GLuint, GLenum, GLvoid**);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribdv) (GLuint, GLenum, GLdouble*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribfv) (GLuint, GLenum, GLfloat*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribiv) (GLuint, GLenum, GLint*);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsProgram) (GLuint program);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsShader) (GLuint shader);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLinkProgram) (GLuint program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glShaderSource) (GLuint shader, GLsizei count, const GLchar** strings, const GLint* lengths);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilFuncSeparate) (GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilMaskSeparate) (GLenum, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilOpSeparate) (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1f) (GLint location, GLfloat v0);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1fv) (GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1i) (GLint location, GLint v0);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1iv) (GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2f) (GLint location, GLfloat v0, GLfloat v1);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2fv) (GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2i) (GLint location, GLint v0, GLint v1);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2iv) (GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3f) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3fv) (GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3i) (GLint location, GLint v0, GLint v1, GLint v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3iv) (GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4f) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4fv) (GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4i) (GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4iv) (GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix2fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix3fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix4fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUseProgram) (GLuint program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glValidateProgram) (GLuint program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1d) (GLuint index, GLdouble x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1dv) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1f) (GLuint index, GLfloat x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1fv) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1s) (GLuint index, GLshort x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1sv) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2d) (GLuint index, GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2dv) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2f) (GLuint index, GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2fv) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2s) (GLuint index, GLshort x, GLshort y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2sv) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3d) (GLuint index, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3dv) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3f) (GLuint index, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3fv) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3s) (GLuint index, GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3sv) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4Nbv) (GLuint index, const GLbyte* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4Niv) (GLuint index, const GLint* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4Nsv) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4Nub) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4Nubv) (GLuint index, const GLubyte* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4Nuiv) (GLuint index, const GLuint* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4Nusv) (GLuint index, const GLushort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4bv) (GLuint index, const GLbyte* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4d) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4dv) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4f) (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4fv) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4iv) (GLuint index, const GLint* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4s) (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4sv) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4ubv) (GLuint index, const GLubyte* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4uiv) (GLuint index, const GLuint* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4usv) (GLuint index, const GLushort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribPointer) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix2x3fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix2x4fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix3x2fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix3x4fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix4x2fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix4x3fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginConditionalRender) (GLuint, GLenum);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginTransformFeedback) (GLenum);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindFragDataLocation) (GLuint, GLuint, const GLchar*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClampColor) (GLenum, GLenum);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearBufferfi) (GLenum, GLint, GLfloat, GLint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearBufferfv) (GLenum, GLint, const GLfloat*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearBufferiv) (GLenum, GLint, const GLint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearBufferuiv) (GLenum, GLint, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorMaski) (GLuint, GLboolean, GLboolean, GLboolean, GLboolean);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisablei) (GLenum, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnablei) (GLenum, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndConditionalRender) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndTransformFeedback) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBooleani_v) (GLenum, GLuint, GLboolean*);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetFragDataLocation) (GLuint, const GLchar*);
-GLEW_FUN_EXPORT const GLubyte* (GLAPIENTRY * glGetStringi) (GLenum, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexParameterIiv) (GLenum, GLenum, GLint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexParameterIuiv) (GLenum, GLenum, GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTransformFeedbackVarying) (GLuint, GLuint, GLsizei, GLsizei *, GLsizei *, GLenum *, GLchar *);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformuiv) (GLuint, GLint, GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribIiv) (GLuint, GLenum, GLint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribIuiv) (GLuint, GLenum, GLuint*);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsEnabledi) (GLenum, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexParameterIiv) (GLenum, GLenum, const GLint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexParameterIuiv) (GLenum, GLenum, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTransformFeedbackVaryings) (GLuint, GLsizei, const GLchar **, GLenum);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1ui) (GLint, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1uiv) (GLint, GLsizei, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2ui) (GLint, GLuint, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2uiv) (GLint, GLsizei, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3ui) (GLint, GLuint, GLuint, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3uiv) (GLint, GLsizei, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4ui) (GLint, GLuint, GLuint, GLuint, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4uiv) (GLint, GLsizei, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI1i) (GLuint, GLint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI1iv) (GLuint, const GLint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI1ui) (GLuint, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI1uiv) (GLuint, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI2i) (GLuint, GLint, GLint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI2iv) (GLuint, const GLint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI2ui) (GLuint, GLuint, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI2uiv) (GLuint, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI3i) (GLuint, GLint, GLint, GLint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI3iv) (GLuint, const GLint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI3ui) (GLuint, GLuint, GLuint, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI3uiv) (GLuint, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4bv) (GLuint, const GLbyte*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4i) (GLuint, GLint, GLint, GLint, GLint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4iv) (GLuint, const GLint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4sv) (GLuint, const GLshort*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4ubv) (GLuint, const GLubyte*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4ui) (GLuint, GLuint, GLuint, GLuint, GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4uiv) (GLuint, const GLuint*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4usv) (GLuint, const GLushort*);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribIPointer) (GLuint, GLint, GLenum, GLsizei, const GLvoid*);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawArraysInstanced) (GLenum, GLint, GLsizei, GLsizei);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementsInstanced) (GLenum, GLsizei, GLenum, const GLvoid*, GLsizei);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPrimitiveRestartIndex) (GLuint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexBuffer) (GLenum, GLenum, GLuint);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTexture) (GLenum, GLenum, GLuint, GLint);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBufferParameteri64v) (GLenum, GLenum, GLint64 *);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetInteger64i_v) (GLenum, GLuint, GLint64 *);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribDivisor) (GLuint index, GLuint divisor);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquationSeparatei) (GLuint buf, GLenum modeRGB, GLenum modeAlpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquationi) (GLuint buf, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendFuncSeparatei) (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendFunci) (GLuint buf, GLenum src, GLenum dst);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMinSampleShading) (GLclampf value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTbufferMask3DFX) (GLuint mask);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDebugMessageCallbackAMD) (GLDEBUGPROCAMD callback, void* userParam);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDebugMessageEnableAMD) (GLenum category, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDebugMessageInsertAMD) (GLenum category, GLenum severity, GLuint id, GLsizei length, const char* buf);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGetDebugMessageLogAMD) (GLuint count, GLsizei bufsize, GLenum* categories, GLuint* severities, GLuint* ids, GLsizei* lengths, char* message);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquationIndexedAMD) (GLuint buf, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquationSeparateIndexedAMD) (GLuint buf, GLenum modeRGB, GLenum modeAlpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendFuncIndexedAMD) (GLuint buf, GLenum src, GLenum dst);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendFuncSeparateIndexedAMD) (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiDrawArraysIndirectAMD) (GLenum mode, const void* indirect, GLsizei primcount, GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiDrawElementsIndirectAMD) (GLenum mode, GLenum type, const void* indirect, GLsizei primcount, GLsizei stride);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteNamesAMD) (GLenum identifier, GLuint num, const GLuint* names);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenNamesAMD) (GLenum identifier, GLuint num, GLuint* names);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsNameAMD) (GLenum identifier, GLuint name);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginPerfMonitorAMD) (GLuint monitor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeletePerfMonitorsAMD) (GLsizei n, GLuint* monitors);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndPerfMonitorAMD) (GLuint monitor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenPerfMonitorsAMD) (GLsizei n, GLuint* monitors);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPerfMonitorCounterDataAMD) (GLuint monitor, GLenum pname, GLsizei dataSize, GLuint* data, GLint *bytesWritten);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPerfMonitorCounterInfoAMD) (GLuint group, GLuint counter, GLenum pname, void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPerfMonitorCounterStringAMD) (GLuint group, GLuint counter, GLsizei bufSize, GLsizei* length, char *counterString);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPerfMonitorCountersAMD) (GLuint group, GLint* numCounters, GLint *maxActiveCounters, GLsizei countersSize, GLuint *counters);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPerfMonitorGroupStringAMD) (GLuint group, GLsizei bufSize, GLsizei* length, char *groupString);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPerfMonitorGroupsAMD) (GLint* numGroups, GLsizei groupsSize, GLuint *groups);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSelectPerfMonitorCountersAMD) (GLuint monitor, GLboolean enable, GLuint group, GLint numCounters, GLuint* counterList);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSetMultisamplefvAMD) (GLenum pname, GLuint index, const GLfloat* val);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTessellationFactorAMD) (GLfloat factor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTessellationModeAMD) (GLenum mode);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementArrayAPPLE) (GLenum mode, GLint first, GLsizei count);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawRangeElementArrayAPPLE) (GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glElementPointerAPPLE) (GLenum type, const void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiDrawElementArrayAPPLE) (GLenum mode, const GLint* first, const GLsizei *count, GLsizei primcount);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiDrawRangeElementArrayAPPLE) (GLenum mode, GLuint start, GLuint end, const GLint* first, const GLsizei *count, GLsizei primcount);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteFencesAPPLE) (GLsizei n, const GLuint* fences);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFinishFenceAPPLE) (GLuint fence);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFinishObjectAPPLE) (GLenum object, GLint name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenFencesAPPLE) (GLsizei n, GLuint* fences);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsFenceAPPLE) (GLuint fence);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSetFenceAPPLE) (GLuint fence);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glTestFenceAPPLE) (GLuint fence);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glTestObjectAPPLE) (GLenum object, GLuint name);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBufferParameteriAPPLE) (GLenum target, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFlushMappedBufferRangeAPPLE) (GLenum target, GLintptr offset, GLsizeiptr size);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetObjectParameterivAPPLE) (GLenum objectType, GLuint name, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLenum (GLAPIENTRY * glObjectPurgeableAPPLE) (GLenum objectType, GLuint name, GLenum option);
-GLEW_FUN_EXPORT GLenum (GLAPIENTRY * glObjectUnpurgeableAPPLE) (GLenum objectType, GLuint name, GLenum option);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexParameterPointervAPPLE) (GLenum target, GLenum pname, GLvoid **params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureRangeAPPLE) (GLenum target, GLsizei length, GLvoid *pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindVertexArrayAPPLE) (GLuint array);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteVertexArraysAPPLE) (GLsizei n, const GLuint* arrays);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenVertexArraysAPPLE) (GLsizei n, const GLuint* arrays);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsVertexArrayAPPLE) (GLuint array);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFlushVertexArrayRangeAPPLE) (GLsizei length, void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayParameteriAPPLE) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayRangeAPPLE) (GLsizei length, void* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableVertexAttribAPPLE) (GLuint index, GLenum pname);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableVertexAttribAPPLE) (GLuint index, GLenum pname);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsVertexAttribEnabledAPPLE) (GLuint index, GLenum pname);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapVertexAttrib1dAPPLE) (GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble* points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapVertexAttrib1fAPPLE) (GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat* points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapVertexAttrib2dAPPLE) (GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble* points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapVertexAttrib2fAPPLE) (GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat* points);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearDepthf) (GLclampf d);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthRangef) (GLclampf n, GLclampf f);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetShaderPrecisionFormat) (GLenum shadertype, GLenum precisiontype, GLint* range, GLint *precision);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReleaseShaderCompiler) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glShaderBinary) (GLsizei count, const GLuint* shaders, GLenum binaryformat, const GLvoid*binary, GLsizei length);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawArraysInstancedBaseInstance) (GLenum mode, GLint first, GLsizei count, GLsizei primcount, GLuint baseinstance);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementsInstancedBaseInstance) (GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount, GLuint baseinstance);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementsInstancedBaseVertexBaseInstance) (GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount, GLint basevertex, GLuint baseinstance);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindFragDataLocationIndexed) (GLuint program, GLuint colorNumber, GLuint index, const char * name);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetFragDataIndex) (GLuint program, const char * name);
-
-GLEW_FUN_EXPORT GLsync (GLAPIENTRY * glCreateSyncFromCLeventARB) (cl_context context, cl_event event, GLbitfield flags);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClampColorARB) (GLenum target, GLenum clamp);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyBufferSubData) (GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDebugMessageCallbackARB) (GLDEBUGPROCARB callback, void* userParam);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDebugMessageControlARB) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDebugMessageInsertARB) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const char* buf);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGetDebugMessageLogARB) (GLuint count, GLsizei bufsize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, char* messageLog);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawBuffersARB) (GLsizei n, const GLenum* bufs);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquationSeparateiARB) (GLuint buf, GLenum modeRGB, GLenum modeAlpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquationiARB) (GLuint buf, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendFuncSeparateiARB) (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendFunciARB) (GLuint buf, GLenum src, GLenum dst);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementsBaseVertex) (GLenum mode, GLsizei count, GLenum type, void* indices, GLint basevertex);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementsInstancedBaseVertex) (GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount, GLint basevertex);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawRangeElementsBaseVertex) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, void* indices, GLint basevertex);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiDrawElementsBaseVertex) (GLenum mode, GLsizei* count, GLenum type, GLvoid**indices, GLsizei primcount, GLint *basevertex);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawArraysIndirect) (GLenum mode, const void* indirect);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementsIndirect) (GLenum mode, GLenum type, const void* indirect);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindFramebuffer) (GLenum target, GLuint framebuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindRenderbuffer) (GLenum target, GLuint renderbuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlitFramebuffer) (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
-GLEW_FUN_EXPORT GLenum (GLAPIENTRY * glCheckFramebufferStatus) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteFramebuffers) (GLsizei n, const GLuint* framebuffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteRenderbuffers) (GLsizei n, const GLuint* renderbuffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferRenderbuffer) (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTexture1D) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTexture2D) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTexture3D) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint layer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTextureLayer) (GLenum target,GLenum attachment, GLuint texture,GLint level,GLint layer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenFramebuffers) (GLsizei n, GLuint* framebuffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenRenderbuffers) (GLsizei n, GLuint* renderbuffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenerateMipmap) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFramebufferAttachmentParameteriv) (GLenum target, GLenum attachment, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetRenderbufferParameteriv) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsFramebuffer) (GLuint framebuffer);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsRenderbuffer) (GLuint renderbuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRenderbufferStorage) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRenderbufferStorageMultisample) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTextureARB) (GLenum target, GLenum attachment, GLuint texture, GLint level);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTextureFaceARB) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTextureLayerARB) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramParameteriARB) (GLuint program, GLenum pname, GLint value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramBinary) (GLuint program, GLsizei bufSize, GLsizei* length, GLenum *binaryFormat, GLvoid*binary);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramBinary) (GLuint program, GLenum binaryFormat, const void* binary, GLsizei length);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramParameteri) (GLuint program, GLenum pname, GLint value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformdv) (GLuint program, GLint location, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1dEXT) (GLuint program, GLint location, GLdouble x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1dvEXT) (GLuint program, GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2dEXT) (GLuint program, GLint location, GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2dvEXT) (GLuint program, GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3dEXT) (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3dvEXT) (GLuint program, GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4dEXT) (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4dvEXT) (GLuint program, GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2dvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2x3dvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2x4dvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3dvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3x2dvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3x4dvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4dvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4x2dvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4x3dvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1d) (GLint location, GLdouble x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1dv) (GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2d) (GLint location, GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2dv) (GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3d) (GLint location, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3dv) (GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4d) (GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4dv) (GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix2dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix2x3dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix2x4dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix3dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix3x2dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix3x4dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix4dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix4x2dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix4x3dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorSubTable) (GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorTable) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorTableParameterfv) (GLenum target, GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorTableParameteriv) (GLenum target, GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionFilter1D) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionFilter2D) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionParameterf) (GLenum target, GLenum pname, GLfloat params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionParameterfv) (GLenum target, GLenum pname, const GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionParameteri) (GLenum target, GLenum pname, GLint params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionParameteriv) (GLenum target, GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyColorSubTable) (GLenum target, GLsizei start, GLint x, GLint y, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyColorTable) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyConvolutionFilter1D) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyConvolutionFilter2D) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetColorTable) (GLenum target, GLenum format, GLenum type, GLvoid *table);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetColorTableParameterfv) (GLenum target, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetColorTableParameteriv) (GLenum target, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetConvolutionFilter) (GLenum target, GLenum format, GLenum type, GLvoid *image);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetConvolutionParameterfv) (GLenum target, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetConvolutionParameteriv) (GLenum target, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetHistogram) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetHistogramParameterfv) (GLenum target, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetHistogramParameteriv) (GLenum target, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMinmax) (GLenum target, GLboolean reset, GLenum format, GLenum types, GLvoid *values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMinmaxParameterfv) (GLenum target, GLenum pname, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMinmaxParameteriv) (GLenum target, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetSeparableFilter) (GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glHistogram) (GLenum target, GLsizei width, GLenum internalformat, GLboolean sink);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMinmax) (GLenum target, GLenum internalformat, GLboolean sink);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glResetHistogram) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glResetMinmax) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSeparableFilter2D) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawArraysInstancedARB) (GLenum mode, GLint first, GLsizei count, GLsizei primcount);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementsInstancedARB) (GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribDivisorARB) (GLuint index, GLuint divisor);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetInternalformativ) (GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFlushMappedBufferRange) (GLenum target, GLintptr offset, GLsizeiptr length);
-GLEW_FUN_EXPORT GLvoid * (GLAPIENTRY * glMapBufferRange) (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCurrentPaletteMatrixARB) (GLint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixIndexPointerARB) (GLint size, GLenum type, GLsizei stride, GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixIndexubvARB) (GLint size, GLubyte *indices);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixIndexuivARB) (GLint size, GLuint *indices);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixIndexusvARB) (GLint size, GLushort *indices);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSampleCoverageARB) (GLclampf value, GLboolean invert);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glActiveTextureARB) (GLenum texture);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClientActiveTextureARB) (GLenum texture);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1dARB) (GLenum target, GLdouble s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1dvARB) (GLenum target, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1fARB) (GLenum target, GLfloat s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1fvARB) (GLenum target, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1iARB) (GLenum target, GLint s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1ivARB) (GLenum target, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1sARB) (GLenum target, GLshort s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1svARB) (GLenum target, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2dARB) (GLenum target, GLdouble s, GLdouble t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2dvARB) (GLenum target, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2fARB) (GLenum target, GLfloat s, GLfloat t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2fvARB) (GLenum target, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2iARB) (GLenum target, GLint s, GLint t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2ivARB) (GLenum target, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2sARB) (GLenum target, GLshort s, GLshort t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2svARB) (GLenum target, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3dARB) (GLenum target, GLdouble s, GLdouble t, GLdouble r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3dvARB) (GLenum target, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3fARB) (GLenum target, GLfloat s, GLfloat t, GLfloat r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3fvARB) (GLenum target, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3iARB) (GLenum target, GLint s, GLint t, GLint r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3ivARB) (GLenum target, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3sARB) (GLenum target, GLshort s, GLshort t, GLshort r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3svARB) (GLenum target, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4dARB) (GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4dvARB) (GLenum target, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4fARB) (GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4fvARB) (GLenum target, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4iARB) (GLenum target, GLint s, GLint t, GLint r, GLint q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4ivARB) (GLenum target, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4sARB) (GLenum target, GLshort s, GLshort t, GLshort r, GLshort q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4svARB) (GLenum target, const GLshort *v);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginQueryARB) (GLenum target, GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteQueriesARB) (GLsizei n, const GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndQueryARB) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenQueriesARB) (GLsizei n, GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryObjectivARB) (GLuint id, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryObjectuivARB) (GLuint id, GLenum pname, GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryivARB) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsQueryARB) (GLuint id);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameterfARB) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameterfvARB) (GLenum pname, const GLfloat* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProvokingVertex) (GLenum mode);
-
-GLEW_FUN_EXPORT GLenum (GLAPIENTRY * glGetGraphicsResetStatusARB) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnColorTableARB) (GLenum target, GLenum format, GLenum type, GLsizei bufSize, void* table);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnCompressedTexImageARB) (GLenum target, GLint lod, GLsizei bufSize, void* img);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnConvolutionFilterARB) (GLenum target, GLenum format, GLenum type, GLsizei bufSize, void* image);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnHistogramARB) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void* values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnMapdvARB) (GLenum target, GLenum query, GLsizei bufSize, GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnMapfvARB) (GLenum target, GLenum query, GLsizei bufSize, GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnMapivARB) (GLenum target, GLenum query, GLsizei bufSize, GLint* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnMinmaxARB) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void* values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnPixelMapfvARB) (GLenum map, GLsizei bufSize, GLfloat* values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnPixelMapuivARB) (GLenum map, GLsizei bufSize, GLuint* values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnPixelMapusvARB) (GLenum map, GLsizei bufSize, GLushort* values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnPolygonStippleARB) (GLsizei bufSize, GLubyte* pattern);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnSeparableFilterARB) (GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, void* row, GLsizei columnBufSize, GLvoid*column, GLvoid*span);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnTexImageARB) (GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void* img);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnUniformdvARB) (GLuint program, GLint location, GLsizei bufSize, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnUniformfvARB) (GLuint program, GLint location, GLsizei bufSize, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnUniformivARB) (GLuint program, GLint location, GLsizei bufSize, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetnUniformuivARB) (GLuint program, GLint location, GLsizei bufSize, GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReadnPixelsARB) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void* data);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMinSampleShadingARB) (GLclampf value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindSampler) (GLuint unit, GLuint sampler);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteSamplers) (GLsizei count, const GLuint * samplers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenSamplers) (GLsizei count, GLuint* samplers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetSamplerParameterIiv) (GLuint sampler, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetSamplerParameterIuiv) (GLuint sampler, GLenum pname, GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetSamplerParameterfv) (GLuint sampler, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetSamplerParameteriv) (GLuint sampler, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsSampler) (GLuint sampler);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSamplerParameterIiv) (GLuint sampler, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSamplerParameterIuiv) (GLuint sampler, GLenum pname, const GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSamplerParameterf) (GLuint sampler, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSamplerParameterfv) (GLuint sampler, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSamplerParameteri) (GLuint sampler, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSamplerParameteriv) (GLuint sampler, GLenum pname, const GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glActiveShaderProgram) (GLuint pipeline, GLuint program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindProgramPipeline) (GLuint pipeline);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glCreateShaderProgramv) (GLenum type, GLsizei count, const char ** strings);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteProgramPipelines) (GLsizei n, const GLuint* pipelines);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenProgramPipelines) (GLsizei n, GLuint* pipelines);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramPipelineInfoLog) (GLuint pipeline, GLsizei bufSize, GLsizei* length, char *infoLog);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramPipelineiv) (GLuint pipeline, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsProgramPipeline) (GLuint pipeline);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1d) (GLuint program, GLint location, GLdouble x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1dv) (GLuint program, GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1f) (GLuint program, GLint location, GLfloat x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1fv) (GLuint program, GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1i) (GLuint program, GLint location, GLint x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1iv) (GLuint program, GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1ui) (GLuint program, GLint location, GLuint x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1uiv) (GLuint program, GLint location, GLsizei count, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2d) (GLuint program, GLint location, GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2dv) (GLuint program, GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2f) (GLuint program, GLint location, GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2fv) (GLuint program, GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2i) (GLuint program, GLint location, GLint x, GLint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2iv) (GLuint program, GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2ui) (GLuint program, GLint location, GLuint x, GLuint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2uiv) (GLuint program, GLint location, GLsizei count, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3d) (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3dv) (GLuint program, GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3f) (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3fv) (GLuint program, GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3i) (GLuint program, GLint location, GLint x, GLint y, GLint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3iv) (GLuint program, GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3ui) (GLuint program, GLint location, GLuint x, GLuint y, GLuint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3uiv) (GLuint program, GLint location, GLsizei count, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4d) (GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4dv) (GLuint program, GLint location, GLsizei count, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4f) (GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4fv) (GLuint program, GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4i) (GLuint program, GLint location, GLint x, GLint y, GLint z, GLint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4iv) (GLuint program, GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4ui) (GLuint program, GLint location, GLuint x, GLuint y, GLuint z, GLuint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4uiv) (GLuint program, GLint location, GLsizei count, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2dv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2fv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2x3dv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2x3fv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2x4dv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2x4fv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3dv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3fv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3x2dv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3x2fv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3x4dv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3x4fv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4dv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4fv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4x2dv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4x2fv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4x3dv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4x3fv) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUseProgramStages) (GLuint pipeline, GLbitfield stages, GLuint program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glValidateProgramPipeline) (GLuint pipeline);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveAtomicCounterBufferiv) (GLuint program, GLuint bufferIndex, GLenum pname, GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindImageTexture) (GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMemoryBarrier) (GLbitfield barriers);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glAttachObjectARB) (GLhandleARB containerObj, GLhandleARB obj);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompileShaderARB) (GLhandleARB shaderObj);
-GLEW_FUN_EXPORT GLhandleARB (GLAPIENTRY * glCreateProgramObjectARB) (void);
-GLEW_FUN_EXPORT GLhandleARB (GLAPIENTRY * glCreateShaderObjectARB) (GLenum shaderType);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteObjectARB) (GLhandleARB obj);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDetachObjectARB) (GLhandleARB containerObj, GLhandleARB attachedObj);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveUniformARB) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei* length, GLint *size, GLenum *type, GLcharARB *name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetAttachedObjectsARB) (GLhandleARB containerObj, GLsizei maxCount, GLsizei* count, GLhandleARB *obj);
-GLEW_FUN_EXPORT GLhandleARB (GLAPIENTRY * glGetHandleARB) (GLenum pname);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetInfoLogARB) (GLhandleARB obj, GLsizei maxLength, GLsizei* length, GLcharARB *infoLog);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetObjectParameterfvARB) (GLhandleARB obj, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetObjectParameterivARB) (GLhandleARB obj, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetShaderSourceARB) (GLhandleARB obj, GLsizei maxLength, GLsizei* length, GLcharARB *source);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetUniformLocationARB) (GLhandleARB programObj, const GLcharARB* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformfvARB) (GLhandleARB programObj, GLint location, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformivARB) (GLhandleARB programObj, GLint location, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLinkProgramARB) (GLhandleARB programObj);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glShaderSourceARB) (GLhandleARB shaderObj, GLsizei count, const GLcharARB ** string, const GLint *length);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1fARB) (GLint location, GLfloat v0);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1fvARB) (GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1iARB) (GLint location, GLint v0);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1ivARB) (GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2fARB) (GLint location, GLfloat v0, GLfloat v1);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2fvARB) (GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2iARB) (GLint location, GLint v0, GLint v1);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2ivARB) (GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3fARB) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3fvARB) (GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3iARB) (GLint location, GLint v0, GLint v1, GLint v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3ivARB) (GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4fARB) (GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4fvARB) (GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4iARB) (GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4ivARB) (GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix2fvARB) (GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix3fvARB) (GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformMatrix4fvARB) (GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUseProgramObjectARB) (GLhandleARB programObj);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glValidateProgramARB) (GLhandleARB programObj);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveSubroutineName) (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei* length, char *name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveSubroutineUniformName) (GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei* length, char *name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveSubroutineUniformiv) (GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint* values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramStageiv) (GLuint program, GLenum shadertype, GLenum pname, GLint* values);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGetSubroutineIndex) (GLuint program, GLenum shadertype, const char* name);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetSubroutineUniformLocation) (GLuint program, GLenum shadertype, const char* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformSubroutineuiv) (GLenum shadertype, GLint location, GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformSubroutinesuiv) (GLenum shadertype, GLsizei count, const GLuint* indices);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompileShaderIncludeARB) (GLuint shader, GLsizei count, const char ** path, const GLint *length);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteNamedStringARB) (GLint namelen, const char* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedStringARB) (GLint namelen, const char* name, GLsizei bufSize, GLint *stringlen, char *string);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedStringivARB) (GLint namelen, const char* name, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsNamedStringARB) (GLint namelen, const char* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedStringARB) (GLenum type, GLint namelen, const char* name, GLint stringlen, const char *string);
-
-GLEW_FUN_EXPORT GLenum (GLAPIENTRY * glClientWaitSync) (GLsync GLsync,GLbitfield flags,GLuint64 timeout);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteSync) (GLsync GLsync);
-GLEW_FUN_EXPORT GLsync (GLAPIENTRY * glFenceSync) (GLenum condition,GLbitfield flags);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetInteger64v) (GLenum pname, GLint64* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetSynciv) (GLsync GLsync,GLenum pname,GLsizei bufSize,GLsizei* length, GLint *values);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsSync) (GLsync GLsync);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWaitSync) (GLsync GLsync,GLbitfield flags,GLuint64 timeout);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPatchParameterfv) (GLenum pname, const GLfloat* values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPatchParameteri) (GLenum pname, GLint value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexBufferARB) (GLenum target, GLenum internalformat, GLuint buffer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexImage1DARB) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexImage2DARB) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexImage3DARB) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexSubImage1DARB) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexSubImage2DARB) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTexSubImage3DARB) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetCompressedTexImageARB) (GLenum target, GLint lod, void* img);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultisamplefv) (GLenum pname, GLuint index, GLfloat* val);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSampleMaski) (GLuint index, GLbitfield mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexImage2DMultisample) (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexImage3DMultisample) (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexStorage1D) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexStorage2D) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexStorage3D) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureStorage1DEXT) (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureStorage2DEXT) (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureStorage3DEXT) (GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryObjecti64v) (GLuint id, GLenum pname, GLint64* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryObjectui64v) (GLuint id, GLenum pname, GLuint64* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glQueryCounter) (GLuint id, GLenum target);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindTransformFeedback) (GLenum target, GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteTransformFeedbacks) (GLsizei n, const GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawTransformFeedback) (GLenum mode, GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenTransformFeedbacks) (GLsizei n, GLuint* ids);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsTransformFeedback) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPauseTransformFeedback) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glResumeTransformFeedback) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginQueryIndexed) (GLenum target, GLuint index, GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawTransformFeedbackStream) (GLenum mode, GLuint id, GLuint stream);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndQueryIndexed) (GLenum target, GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryIndexediv) (GLenum target, GLuint index, GLenum pname, GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawTransformFeedbackInstanced) (GLenum mode, GLuint id, GLsizei primcount);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawTransformFeedbackStreamInstanced) (GLenum mode, GLuint id, GLuint stream, GLsizei primcount);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLoadTransposeMatrixdARB) (GLdouble m[16]);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLoadTransposeMatrixfARB) (GLfloat m[16]);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultTransposeMatrixdARB) (GLdouble m[16]);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultTransposeMatrixfARB) (GLfloat m[16]);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBufferBase) (GLenum target, GLuint index, GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBufferRange) (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveUniformBlockName) (GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei* length, char* uniformBlockName);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveUniformBlockiv) (GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveUniformName) (GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei* length, char* uniformName);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveUniformsiv) (GLuint program, GLsizei uniformCount, const GLuint* uniformIndices, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetIntegeri_v) (GLenum target, GLuint index, GLint* data);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGetUniformBlockIndex) (GLuint program, const char* uniformBlockName);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformIndices) (GLuint program, GLsizei uniformCount, const char** uniformNames, GLuint* uniformIndices);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformBlockBinding) (GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindVertexArray) (GLuint array);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteVertexArrays) (GLsizei n, const GLuint* arrays);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenVertexArrays) (GLsizei n, GLuint* arrays);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsVertexArray) (GLuint array);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribLdv) (GLuint index, GLenum pname, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL1d) (GLuint index, GLdouble x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL1dv) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL2d) (GLuint index, GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL2dv) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL3d) (GLuint index, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL3dv) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL4d) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL4dv) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribLPointer) (GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexBlendARB) (GLint count);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightPointerARB) (GLint size, GLenum type, GLsizei stride, GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightbvARB) (GLint size, GLbyte *weights);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightdvARB) (GLint size, GLdouble *weights);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightfvARB) (GLint size, GLfloat *weights);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightivARB) (GLint size, GLint *weights);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightsvARB) (GLint size, GLshort *weights);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightubvARB) (GLint size, GLubyte *weights);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightuivARB) (GLint size, GLuint *weights);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightusvARB) (GLint size, GLushort *weights);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBufferARB) (GLenum target, GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBufferDataARB) (GLenum target, GLsizeiptrARB size, const GLvoid* data, GLenum usage);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBufferSubDataARB) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, const GLvoid* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteBuffersARB) (GLsizei n, const GLuint* buffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenBuffersARB) (GLsizei n, GLuint* buffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBufferParameterivARB) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBufferPointervARB) (GLenum target, GLenum pname, GLvoid** params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBufferSubDataARB) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, GLvoid* data);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsBufferARB) (GLuint buffer);
-GLEW_FUN_EXPORT GLvoid * (GLAPIENTRY * glMapBufferARB) (GLenum target, GLenum access);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glUnmapBufferARB) (GLenum target);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindProgramARB) (GLenum target, GLuint program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteProgramsARB) (GLsizei n, const GLuint* programs);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableVertexAttribArrayARB) (GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableVertexAttribArrayARB) (GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenProgramsARB) (GLsizei n, GLuint* programs);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramEnvParameterdvARB) (GLenum target, GLuint index, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramEnvParameterfvARB) (GLenum target, GLuint index, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramLocalParameterdvARB) (GLenum target, GLuint index, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramLocalParameterfvARB) (GLenum target, GLuint index, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramStringARB) (GLenum target, GLenum pname, void* string);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramivARB) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribPointervARB) (GLuint index, GLenum pname, GLvoid** pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribdvARB) (GLuint index, GLenum pname, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribfvARB) (GLuint index, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribivARB) (GLuint index, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsProgramARB) (GLuint program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParameter4dARB) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParameter4dvARB) (GLenum target, GLuint index, const GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParameter4fARB) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParameter4fvARB) (GLenum target, GLuint index, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParameter4dARB) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParameter4dvARB) (GLenum target, GLuint index, const GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParameter4fARB) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParameter4fvARB) (GLenum target, GLuint index, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramStringARB) (GLenum target, GLenum format, GLsizei len, const void* string);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1dARB) (GLuint index, GLdouble x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1dvARB) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1fARB) (GLuint index, GLfloat x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1fvARB) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1sARB) (GLuint index, GLshort x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1svARB) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2dARB) (GLuint index, GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2dvARB) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2fARB) (GLuint index, GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2fvARB) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2sARB) (GLuint index, GLshort x, GLshort y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2svARB) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3dARB) (GLuint index, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3dvARB) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3fARB) (GLuint index, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3fvARB) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3sARB) (GLuint index, GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3svARB) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4NbvARB) (GLuint index, const GLbyte* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4NivARB) (GLuint index, const GLint* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4NsvARB) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4NubARB) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4NubvARB) (GLuint index, const GLubyte* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4NuivARB) (GLuint index, const GLuint* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4NusvARB) (GLuint index, const GLushort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4bvARB) (GLuint index, const GLbyte* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4dARB) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4dvARB) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4fARB) (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4fvARB) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4ivARB) (GLuint index, const GLint* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4sARB) (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4svARB) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4ubvARB) (GLuint index, const GLubyte* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4uivARB) (GLuint index, const GLuint* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4usvARB) (GLuint index, const GLushort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribPointerARB) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindAttribLocationARB) (GLhandleARB programObj, GLuint index, const GLcharARB* name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveAttribARB) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei* length, GLint *size, GLenum *type, GLcharARB *name);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetAttribLocationARB) (GLhandleARB programObj, const GLcharARB* name);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorP3ui) (GLenum type, GLuint color);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorP3uiv) (GLenum type, const GLuint* color);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorP4ui) (GLenum type, GLuint color);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorP4uiv) (GLenum type, const GLuint* color);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoordP1ui) (GLenum texture, GLenum type, GLuint coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoordP1uiv) (GLenum texture, GLenum type, const GLuint* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoordP2ui) (GLenum texture, GLenum type, GLuint coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoordP2uiv) (GLenum texture, GLenum type, const GLuint* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoordP3ui) (GLenum texture, GLenum type, GLuint coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoordP3uiv) (GLenum texture, GLenum type, const GLuint* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoordP4ui) (GLenum texture, GLenum type, GLuint coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoordP4uiv) (GLenum texture, GLenum type, const GLuint* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalP3ui) (GLenum type, GLuint coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalP3uiv) (GLenum type, const GLuint* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColorP3ui) (GLenum type, GLuint color);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColorP3uiv) (GLenum type, const GLuint* color);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordP1ui) (GLenum type, GLuint coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordP1uiv) (GLenum type, const GLuint* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordP2ui) (GLenum type, GLuint coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordP2uiv) (GLenum type, const GLuint* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordP3ui) (GLenum type, GLuint coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordP3uiv) (GLenum type, const GLuint* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordP4ui) (GLenum type, GLuint coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordP4uiv) (GLenum type, const GLuint* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribP1ui) (GLuint index, GLenum type, GLboolean normalized, GLuint value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribP1uiv) (GLuint index, GLenum type, GLboolean normalized, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribP2ui) (GLuint index, GLenum type, GLboolean normalized, GLuint value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribP2uiv) (GLuint index, GLenum type, GLboolean normalized, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribP3ui) (GLuint index, GLenum type, GLboolean normalized, GLuint value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribP3uiv) (GLuint index, GLenum type, GLboolean normalized, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribP4ui) (GLuint index, GLenum type, GLboolean normalized, GLuint value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribP4uiv) (GLuint index, GLenum type, GLboolean normalized, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexP2ui) (GLenum type, GLuint value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexP2uiv) (GLenum type, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexP3ui) (GLenum type, GLuint value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexP3uiv) (GLenum type, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexP4ui) (GLenum type, GLuint value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexP4uiv) (GLenum type, const GLuint* value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthRangeArrayv) (GLuint first, GLsizei count, const GLclampd * v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthRangeIndexed) (GLuint index, GLclampd n, GLclampd f);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetDoublei_v) (GLenum target, GLuint index, GLdouble* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFloati_v) (GLenum target, GLuint index, GLfloat* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glScissorArrayv) (GLuint first, GLsizei count, const GLint * v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glScissorIndexed) (GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glScissorIndexedv) (GLuint index, const GLint * v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glViewportArrayv) (GLuint first, GLsizei count, const GLfloat * v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glViewportIndexedf) (GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glViewportIndexedfv) (GLuint index, const GLfloat * v);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2dARB) (GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2dvARB) (const GLdouble* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2fARB) (GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2fvARB) (const GLfloat* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2iARB) (GLint x, GLint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2ivARB) (const GLint* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2sARB) (GLshort x, GLshort y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2svARB) (const GLshort* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3dARB) (GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3dvARB) (const GLdouble* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3fARB) (GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3fvARB) (const GLfloat* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3iARB) (GLint x, GLint y, GLint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3ivARB) (const GLint* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3sARB) (GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3svARB) (const GLshort* p);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawBuffersATI) (GLsizei n, const GLenum* bufs);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementArrayATI) (GLenum mode, GLsizei count);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawRangeElementArrayATI) (GLenum mode, GLuint start, GLuint end, GLsizei count);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glElementPointerATI) (GLenum type, const void* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexBumpParameterfvATI) (GLenum pname, GLfloat *param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexBumpParameterivATI) (GLenum pname, GLint *param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexBumpParameterfvATI) (GLenum pname, GLfloat *param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexBumpParameterivATI) (GLenum pname, GLint *param);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glAlphaFragmentOp1ATI) (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glAlphaFragmentOp2ATI) (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glAlphaFragmentOp3ATI) (GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginFragmentShaderATI) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindFragmentShaderATI) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorFragmentOp1ATI) (GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorFragmentOp2ATI) (GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorFragmentOp3ATI) (GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteFragmentShaderATI) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndFragmentShaderATI) (void);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGenFragmentShadersATI) (GLuint range);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPassTexCoordATI) (GLuint dst, GLuint coord, GLenum swizzle);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSampleMapATI) (GLuint dst, GLuint interp, GLenum swizzle);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSetFragmentShaderConstantATI) (GLuint dst, const GLfloat* value);
-
-GLEW_FUN_EXPORT void* (GLAPIENTRY * glMapObjectBufferATI) (GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUnmapObjectBufferATI) (GLuint buffer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPNTrianglesfATI) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPNTrianglesiATI) (GLenum pname, GLint param);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilFuncSeparateATI) (GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilOpSeparateATI) (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glArrayObjectATI) (GLenum array, GLint size, GLenum type, GLsizei stride, GLuint buffer, GLuint offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFreeObjectBufferATI) (GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetArrayObjectfvATI) (GLenum array, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetArrayObjectivATI) (GLenum array, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetObjectBufferfvATI) (GLuint buffer, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetObjectBufferivATI) (GLuint buffer, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVariantArrayObjectfvATI) (GLuint id, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVariantArrayObjectivATI) (GLuint id, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsObjectBufferATI) (GLuint buffer);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glNewObjectBufferATI) (GLsizei size, const void* pointer, GLenum usage);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUpdateObjectBufferATI) (GLuint buffer, GLuint offset, GLsizei size, const void* pointer, GLenum preserve);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantArrayObjectATI) (GLuint id, GLenum type, GLsizei stride, GLuint buffer, GLuint offset);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribArrayObjectfvATI) (GLuint index, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribArrayObjectivATI) (GLuint index, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribArrayObjectATI) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLuint buffer, GLuint offset);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClientActiveVertexStreamATI) (GLenum stream);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3bATI) (GLenum stream, GLbyte x, GLbyte y, GLbyte z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3bvATI) (GLenum stream, const GLbyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3dATI) (GLenum stream, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3dvATI) (GLenum stream, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3fATI) (GLenum stream, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3fvATI) (GLenum stream, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3iATI) (GLenum stream, GLint x, GLint y, GLint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3ivATI) (GLenum stream, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3sATI) (GLenum stream, GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalStream3svATI) (GLenum stream, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexBlendEnvfATI) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexBlendEnviATI) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream2dATI) (GLenum stream, GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream2dvATI) (GLenum stream, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream2fATI) (GLenum stream, GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream2fvATI) (GLenum stream, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream2iATI) (GLenum stream, GLint x, GLint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream2ivATI) (GLenum stream, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream2sATI) (GLenum stream, GLshort x, GLshort y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream2svATI) (GLenum stream, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream3dATI) (GLenum stream, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream3dvATI) (GLenum stream, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream3fATI) (GLenum stream, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream3fvATI) (GLenum stream, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream3iATI) (GLenum stream, GLint x, GLint y, GLint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream3ivATI) (GLenum stream, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream3sATI) (GLenum stream, GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream3svATI) (GLenum stream, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream4dATI) (GLenum stream, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream4dvATI) (GLenum stream, const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream4fATI) (GLenum stream, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream4fvATI) (GLenum stream, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream4iATI) (GLenum stream, GLint x, GLint y, GLint z, GLint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream4ivATI) (GLenum stream, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream4sATI) (GLenum stream, GLshort x, GLshort y, GLshort z, GLshort w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexStream4svATI) (GLenum stream, const GLshort *v);
-
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetUniformBufferSizeEXT) (GLuint program, GLint location);
-GLEW_FUN_EXPORT GLintptr (GLAPIENTRY * glGetUniformOffsetEXT) (GLuint program, GLint location);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformBufferEXT) (GLuint program, GLint location, GLuint buffer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendColorEXT) (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquationSeparateEXT) (GLenum modeRGB, GLenum modeAlpha);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendFuncSeparateEXT) (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlendEquationEXT) (GLenum mode);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorSubTableEXT) (GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyColorSubTableEXT) (GLenum target, GLsizei start, GLint x, GLint y, GLsizei width);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLockArraysEXT) (GLint first, GLsizei count);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUnlockArraysEXT) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionFilter1DEXT) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void* image);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionFilter2DEXT) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* image);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionParameterfEXT) (GLenum target, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionParameterfvEXT) (GLenum target, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionParameteriEXT) (GLenum target, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glConvolutionParameterivEXT) (GLenum target, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyConvolutionFilter1DEXT) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyConvolutionFilter2DEXT) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetConvolutionFilterEXT) (GLenum target, GLenum format, GLenum type, void* image);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetConvolutionParameterfvEXT) (GLenum target, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetConvolutionParameterivEXT) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetSeparableFilterEXT) (GLenum target, GLenum format, GLenum type, void* row, void* column, void* span);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSeparableFilter2DEXT) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* row, const void* column);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBinormalPointerEXT) (GLenum type, GLsizei stride, void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTangentPointerEXT) (GLenum type, GLsizei stride, void* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexImage1DEXT) (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexImage2DEXT) (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexSubImage1DEXT) (GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexSubImage2DEXT) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTexSubImage3DEXT) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCullParameterdvEXT) (GLenum pname, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCullParameterfvEXT) (GLenum pname, GLfloat* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthBoundsEXT) (GLclampd zmin, GLclampd zmax);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindMultiTextureEXT) (GLenum texunit, GLenum target, GLuint texture);
-GLEW_FUN_EXPORT GLenum (GLAPIENTRY * glCheckNamedFramebufferStatusEXT) (GLuint framebuffer, GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClientAttribDefaultEXT) (GLbitfield mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedMultiTexImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedMultiTexImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedMultiTexImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedMultiTexSubImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedMultiTexSubImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedMultiTexSubImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTextureImage1DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTextureImage2DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTextureImage3DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTextureSubImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTextureSubImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCompressedTextureSubImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyMultiTexImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyMultiTexImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyMultiTexSubImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyMultiTexSubImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyMultiTexSubImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTextureImage1DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTextureImage2DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTextureSubImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTextureSubImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyTextureSubImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableClientStateIndexedEXT) (GLenum array, GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableClientStateiEXT) (GLenum array, GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableVertexArrayAttribEXT) (GLuint vaobj, GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableVertexArrayEXT) (GLuint vaobj, GLenum array);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableClientStateIndexedEXT) (GLenum array, GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableClientStateiEXT) (GLenum array, GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableVertexArrayAttribEXT) (GLuint vaobj, GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableVertexArrayEXT) (GLuint vaobj, GLenum array);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFlushMappedNamedBufferRangeEXT) (GLuint buffer, GLintptr offset, GLsizeiptr length);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferDrawBufferEXT) (GLuint framebuffer, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferDrawBuffersEXT) (GLuint framebuffer, GLsizei n, const GLenum* bufs);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferReadBufferEXT) (GLuint framebuffer, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenerateMultiTexMipmapEXT) (GLenum texunit, GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenerateTextureMipmapEXT) (GLuint texture, GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetCompressedMultiTexImageEXT) (GLenum texunit, GLenum target, GLint level, void* img);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetCompressedTextureImageEXT) (GLuint texture, GLenum target, GLint level, void* img);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetDoubleIndexedvEXT) (GLenum target, GLuint index, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetDoublei_vEXT) (GLenum pname, GLuint index, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFloatIndexedvEXT) (GLenum target, GLuint index, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFloati_vEXT) (GLenum pname, GLuint index, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFramebufferParameterivEXT) (GLuint framebuffer, GLenum pname, GLint* param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexEnvfvEXT) (GLenum texunit, GLenum target, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexEnvivEXT) (GLenum texunit, GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexGendvEXT) (GLenum texunit, GLenum coord, GLenum pname, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexGenfvEXT) (GLenum texunit, GLenum coord, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexGenivEXT) (GLenum texunit, GLenum coord, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexImageEXT) (GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexLevelParameterfvEXT) (GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexLevelParameterivEXT) (GLenum texunit, GLenum target, GLint level, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexParameterIivEXT) (GLenum texunit, GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexParameterIuivEXT) (GLenum texunit, GLenum target, GLenum pname, GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexParameterfvEXT) (GLenum texunit, GLenum target, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultiTexParameterivEXT) (GLenum texunit, GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedBufferParameterivEXT) (GLuint buffer, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedBufferPointervEXT) (GLuint buffer, GLenum pname, void** params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedBufferSubDataEXT) (GLuint buffer, GLintptr offset, GLsizeiptr size, void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedFramebufferAttachmentParameterivEXT) (GLuint framebuffer, GLenum attachment, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedProgramLocalParameterIivEXT) (GLuint program, GLenum target, GLuint index, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedProgramLocalParameterIuivEXT) (GLuint program, GLenum target, GLuint index, GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedProgramLocalParameterdvEXT) (GLuint program, GLenum target, GLuint index, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedProgramLocalParameterfvEXT) (GLuint program, GLenum target, GLuint index, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedProgramStringEXT) (GLuint program, GLenum target, GLenum pname, void* string);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedProgramivEXT) (GLuint program, GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedRenderbufferParameterivEXT) (GLuint renderbuffer, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPointerIndexedvEXT) (GLenum target, GLuint index, GLvoid** params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPointeri_vEXT) (GLenum pname, GLuint index, GLvoid** params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTextureImageEXT) (GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTextureLevelParameterfvEXT) (GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTextureLevelParameterivEXT) (GLuint texture, GLenum target, GLint level, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTextureParameterIivEXT) (GLuint texture, GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTextureParameterIuivEXT) (GLuint texture, GLenum target, GLenum pname, GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTextureParameterfvEXT) (GLuint texture, GLenum target, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTextureParameterivEXT) (GLuint texture, GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexArrayIntegeri_vEXT) (GLuint vaobj, GLuint index, GLenum pname, GLint* param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexArrayIntegervEXT) (GLuint vaobj, GLenum pname, GLint* param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexArrayPointeri_vEXT) (GLuint vaobj, GLuint index, GLenum pname, GLvoid** param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexArrayPointervEXT) (GLuint vaobj, GLenum pname, GLvoid** param);
-GLEW_FUN_EXPORT GLvoid * (GLAPIENTRY * glMapNamedBufferEXT) (GLuint buffer, GLenum access);
-GLEW_FUN_EXPORT GLvoid * (GLAPIENTRY * glMapNamedBufferRangeEXT) (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixFrustumEXT) (GLenum matrixMode, GLdouble l, GLdouble r, GLdouble b, GLdouble t, GLdouble n, GLdouble f);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixLoadIdentityEXT) (GLenum matrixMode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixLoadTransposedEXT) (GLenum matrixMode, const GLdouble* m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixLoadTransposefEXT) (GLenum matrixMode, const GLfloat* m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixLoaddEXT) (GLenum matrixMode, const GLdouble* m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixLoadfEXT) (GLenum matrixMode, const GLfloat* m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixMultTransposedEXT) (GLenum matrixMode, const GLdouble* m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixMultTransposefEXT) (GLenum matrixMode, const GLfloat* m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixMultdEXT) (GLenum matrixMode, const GLdouble* m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixMultfEXT) (GLenum matrixMode, const GLfloat* m);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixOrthoEXT) (GLenum matrixMode, GLdouble l, GLdouble r, GLdouble b, GLdouble t, GLdouble n, GLdouble f);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixPopEXT) (GLenum matrixMode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixPushEXT) (GLenum matrixMode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixRotatedEXT) (GLenum matrixMode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixRotatefEXT) (GLenum matrixMode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixScaledEXT) (GLenum matrixMode, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixScalefEXT) (GLenum matrixMode, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixTranslatedEXT) (GLenum matrixMode, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMatrixTranslatefEXT) (GLenum matrixMode, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexBufferEXT) (GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoordPointerEXT) (GLenum texunit, GLint size, GLenum type, GLsizei stride, const void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexEnvfEXT) (GLenum texunit, GLenum target, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexEnvfvEXT) (GLenum texunit, GLenum target, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexEnviEXT) (GLenum texunit, GLenum target, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexEnvivEXT) (GLenum texunit, GLenum target, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexGendEXT) (GLenum texunit, GLenum coord, GLenum pname, GLdouble param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexGendvEXT) (GLenum texunit, GLenum coord, GLenum pname, const GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexGenfEXT) (GLenum texunit, GLenum coord, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexGenfvEXT) (GLenum texunit, GLenum coord, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexGeniEXT) (GLenum texunit, GLenum coord, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexGenivEXT) (GLenum texunit, GLenum coord, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexParameterIivEXT) (GLenum texunit, GLenum target, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexParameterIuivEXT) (GLenum texunit, GLenum target, GLenum pname, const GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexParameterfEXT) (GLenum texunit, GLenum target, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexParameterfvEXT) (GLenum texunit, GLenum target, GLenum pname, const GLfloat* param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexParameteriEXT) (GLenum texunit, GLenum target, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexParameterivEXT) (GLenum texunit, GLenum target, GLenum pname, const GLint* param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexRenderbufferEXT) (GLenum texunit, GLenum target, GLuint renderbuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexSubImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexSubImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexSubImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedBufferDataEXT) (GLuint buffer, GLsizeiptr size, const void* data, GLenum usage);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedBufferSubDataEXT) (GLuint buffer, GLintptr offset, GLsizeiptr size, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedCopyBufferSubDataEXT) (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedFramebufferRenderbufferEXT) (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedFramebufferTexture1DEXT) (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedFramebufferTexture2DEXT) (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedFramebufferTexture3DEXT) (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedFramebufferTextureEXT) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedFramebufferTextureFaceEXT) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedFramebufferTextureLayerEXT) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParameter4dEXT) (GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParameter4dvEXT) (GLuint program, GLenum target, GLuint index, const GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParameter4fEXT) (GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParameter4fvEXT) (GLuint program, GLenum target, GLuint index, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParameterI4iEXT) (GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParameterI4ivEXT) (GLuint program, GLenum target, GLuint index, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParameterI4uiEXT) (GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParameterI4uivEXT) (GLuint program, GLenum target, GLuint index, const GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParameters4fvEXT) (GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParametersI4ivEXT) (GLuint program, GLenum target, GLuint index, GLsizei count, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramLocalParametersI4uivEXT) (GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedProgramStringEXT) (GLuint program, GLenum target, GLenum format, GLsizei len, const void* string);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedRenderbufferStorageEXT) (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedRenderbufferStorageMultisampleCoverageEXT) (GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNamedRenderbufferStorageMultisampleEXT) (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1fEXT) (GLuint program, GLint location, GLfloat v0);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1fvEXT) (GLuint program, GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1iEXT) (GLuint program, GLint location, GLint v0);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1ivEXT) (GLuint program, GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1uiEXT) (GLuint program, GLint location, GLuint v0);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1uivEXT) (GLuint program, GLint location, GLsizei count, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2fEXT) (GLuint program, GLint location, GLfloat v0, GLfloat v1);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2fvEXT) (GLuint program, GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2iEXT) (GLuint program, GLint location, GLint v0, GLint v1);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2ivEXT) (GLuint program, GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2uiEXT) (GLuint program, GLint location, GLuint v0, GLuint v1);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2uivEXT) (GLuint program, GLint location, GLsizei count, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3fEXT) (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3fvEXT) (GLuint program, GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3iEXT) (GLuint program, GLint location, GLint v0, GLint v1, GLint v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3ivEXT) (GLuint program, GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3uiEXT) (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3uivEXT) (GLuint program, GLint location, GLsizei count, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4fEXT) (GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4fvEXT) (GLuint program, GLint location, GLsizei count, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4iEXT) (GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4ivEXT) (GLuint program, GLint location, GLsizei count, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4uiEXT) (GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4uivEXT) (GLuint program, GLint location, GLsizei count, const GLuint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2x3fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix2x4fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3x2fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix3x4fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4x2fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformMatrix4x3fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPushClientAttribDefaultEXT) (GLbitfield mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureBufferEXT) (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureParameterIivEXT) (GLuint texture, GLenum target, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureParameterIuivEXT) (GLuint texture, GLenum target, GLenum pname, const GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureParameterfEXT) (GLuint texture, GLenum target, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureParameterfvEXT) (GLuint texture, GLenum target, GLenum pname, const GLfloat* param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureParameteriEXT) (GLuint texture, GLenum target, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureParameterivEXT) (GLuint texture, GLenum target, GLenum pname, const GLint* param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureRenderbufferEXT) (GLuint texture, GLenum target, GLuint renderbuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureSubImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureSubImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureSubImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glUnmapNamedBufferEXT) (GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayColorOffsetEXT) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayEdgeFlagOffsetEXT) (GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayFogCoordOffsetEXT) (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayIndexOffsetEXT) (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayMultiTexCoordOffsetEXT) (GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayNormalOffsetEXT) (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArraySecondaryColorOffsetEXT) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayTexCoordOffsetEXT) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayVertexAttribIOffsetEXT) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayVertexAttribOffsetEXT) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayVertexOffsetEXT) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorMaskIndexedEXT) (GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableIndexedEXT) (GLenum target, GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableIndexedEXT) (GLenum target, GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBooleanIndexedvEXT) (GLenum value, GLuint index, GLboolean* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetIntegerIndexedvEXT) (GLenum value, GLuint index, GLint* data);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsEnabledIndexedEXT) (GLenum target, GLuint index);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawArraysInstancedEXT) (GLenum mode, GLint start, GLsizei count, GLsizei primcount);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawElementsInstancedEXT) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawRangeElementsEXT) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordPointerEXT) (GLenum type, GLsizei stride, const GLvoid *pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoorddEXT) (GLdouble coord);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoorddvEXT) (const GLdouble *coord);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordfEXT) (GLfloat coord);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordfvEXT) (const GLfloat *coord);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentColorMaterialEXT) (GLenum face, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightModelfEXT) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightModelfvEXT) (GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightModeliEXT) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightModelivEXT) (GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightfEXT) (GLenum light, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightfvEXT) (GLenum light, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightiEXT) (GLenum light, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightivEXT) (GLenum light, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentMaterialfEXT) (GLenum face, GLenum pname, const GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentMaterialfvEXT) (GLenum face, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentMaterialiEXT) (GLenum face, GLenum pname, const GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentMaterialivEXT) (GLenum face, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFragmentLightfvEXT) (GLenum light, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFragmentLightivEXT) (GLenum light, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFragmentMaterialfvEXT) (GLenum face, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFragmentMaterialivEXT) (GLenum face, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLightEnviEXT) (GLenum pname, GLint param);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBlitFramebufferEXT) (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRenderbufferStorageMultisampleEXT) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindFramebufferEXT) (GLenum target, GLuint framebuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindRenderbufferEXT) (GLenum target, GLuint renderbuffer);
-GLEW_FUN_EXPORT GLenum (GLAPIENTRY * glCheckFramebufferStatusEXT) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteFramebuffersEXT) (GLsizei n, const GLuint* framebuffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteRenderbuffersEXT) (GLsizei n, const GLuint* renderbuffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferRenderbufferEXT) (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTexture1DEXT) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTexture2DEXT) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTexture3DEXT) (GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenFramebuffersEXT) (GLsizei n, GLuint* framebuffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenRenderbuffersEXT) (GLsizei n, GLuint* renderbuffers);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenerateMipmapEXT) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFramebufferAttachmentParameterivEXT) (GLenum target, GLenum attachment, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetRenderbufferParameterivEXT) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsFramebufferEXT) (GLuint framebuffer);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsRenderbufferEXT) (GLuint renderbuffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRenderbufferStorageEXT) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTextureEXT) (GLenum target, GLenum attachment, GLuint texture, GLint level);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTextureFaceEXT) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramParameteriEXT) (GLuint program, GLenum pname, GLint value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParameters4fvEXT) (GLenum target, GLuint index, GLsizei count, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParameters4fvEXT) (GLenum target, GLuint index, GLsizei count, const GLfloat* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindFragDataLocationEXT) (GLuint program, GLuint color, const GLchar *name);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetFragDataLocationEXT) (GLuint program, const GLchar *name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformuivEXT) (GLuint program, GLint location, GLuint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribIivEXT) (GLuint index, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribIuivEXT) (GLuint index, GLenum pname, GLuint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1uiEXT) (GLint location, GLuint v0);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1uivEXT) (GLint location, GLsizei count, const GLuint *value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2uiEXT) (GLint location, GLuint v0, GLuint v1);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2uivEXT) (GLint location, GLsizei count, const GLuint *value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3uiEXT) (GLint location, GLuint v0, GLuint v1, GLuint v2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3uivEXT) (GLint location, GLsizei count, const GLuint *value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4uiEXT) (GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4uivEXT) (GLint location, GLsizei count, const GLuint *value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI1iEXT) (GLuint index, GLint x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI1ivEXT) (GLuint index, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI1uiEXT) (GLuint index, GLuint x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI1uivEXT) (GLuint index, const GLuint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI2iEXT) (GLuint index, GLint x, GLint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI2ivEXT) (GLuint index, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI2uiEXT) (GLuint index, GLuint x, GLuint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI2uivEXT) (GLuint index, const GLuint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI3iEXT) (GLuint index, GLint x, GLint y, GLint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI3ivEXT) (GLuint index, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI3uiEXT) (GLuint index, GLuint x, GLuint y, GLuint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI3uivEXT) (GLuint index, const GLuint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4bvEXT) (GLuint index, const GLbyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4iEXT) (GLuint index, GLint x, GLint y, GLint z, GLint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4ivEXT) (GLuint index, const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4svEXT) (GLuint index, const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4ubvEXT) (GLuint index, const GLubyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4uiEXT) (GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4uivEXT) (GLuint index, const GLuint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribI4usvEXT) (GLuint index, const GLushort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribIPointerEXT) (GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetHistogramEXT) (GLenum target, GLboolean reset, GLenum format, GLenum type, void* values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetHistogramParameterfvEXT) (GLenum target, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetHistogramParameterivEXT) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMinmaxEXT) (GLenum target, GLboolean reset, GLenum format, GLenum type, void* values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMinmaxParameterfvEXT) (GLenum target, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMinmaxParameterivEXT) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glHistogramEXT) (GLenum target, GLsizei width, GLenum internalformat, GLboolean sink);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMinmaxEXT) (GLenum target, GLenum internalformat, GLboolean sink);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glResetHistogramEXT) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glResetMinmaxEXT) (GLenum target);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexFuncEXT) (GLenum func, GLfloat ref);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexMaterialEXT) (GLenum face, GLenum mode);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glApplyTextureEXT) (GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureLightEXT) (GLenum pname);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureMaterialEXT) (GLenum face, GLenum mode);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiDrawArraysEXT) (GLenum mode, const GLint* first, const GLsizei *count, GLsizei primcount);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiDrawElementsEXT) (GLenum mode, GLsizei* count, GLenum type, const GLvoid **indices, GLsizei primcount);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSampleMaskEXT) (GLclampf value, GLboolean invert);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSamplePatternEXT) (GLenum pattern);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorTableEXT) (GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetColorTableEXT) (GLenum target, GLenum format, GLenum type, void* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetColorTableParameterfvEXT) (GLenum target, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetColorTableParameterivEXT) (GLenum target, GLenum pname, GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPixelTransformParameterfvEXT) (GLenum target, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPixelTransformParameterivEXT) (GLenum target, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelTransformParameterfEXT) (GLenum target, GLenum pname, const GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelTransformParameterfvEXT) (GLenum target, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelTransformParameteriEXT) (GLenum target, GLenum pname, const GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelTransformParameterivEXT) (GLenum target, GLenum pname, const GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameterfEXT) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameterfvEXT) (GLenum pname, const GLfloat* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPolygonOffsetEXT) (GLfloat factor, GLfloat bias);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProvokingVertexEXT) (GLenum mode);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginSceneEXT) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndSceneEXT) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3bEXT) (GLbyte red, GLbyte green, GLbyte blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3bvEXT) (const GLbyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3dEXT) (GLdouble red, GLdouble green, GLdouble blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3dvEXT) (const GLdouble *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3fEXT) (GLfloat red, GLfloat green, GLfloat blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3fvEXT) (const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3iEXT) (GLint red, GLint green, GLint blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3ivEXT) (const GLint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3sEXT) (GLshort red, GLshort green, GLshort blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3svEXT) (const GLshort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3ubEXT) (GLubyte red, GLubyte green, GLubyte blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3ubvEXT) (const GLubyte *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3uiEXT) (GLuint red, GLuint green, GLuint blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3uivEXT) (const GLuint *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3usEXT) (GLushort red, GLushort green, GLushort blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3usvEXT) (const GLushort *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColorPointerEXT) (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glActiveProgramEXT) (GLuint program);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glCreateShaderProgramEXT) (GLenum type, const char* string);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUseShaderProgramEXT) (GLenum type, GLuint program);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindImageTextureEXT) (GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMemoryBarrierEXT) (GLbitfield barriers);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glActiveStencilFaceEXT) (GLenum face);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexSubImage1DEXT) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexSubImage2DEXT) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexSubImage3DEXT) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexImage3DEXT) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFramebufferTextureLayerEXT) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexBufferEXT) (GLenum target, GLenum internalformat, GLuint buffer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearColorIiEXT) (GLint red, GLint green, GLint blue, GLint alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearColorIuiEXT) (GLuint red, GLuint green, GLuint blue, GLuint alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexParameterIivEXT) (GLenum target, GLenum pname, GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexParameterIuivEXT) (GLenum target, GLenum pname, GLuint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexParameterIivEXT) (GLenum target, GLenum pname, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexParameterIuivEXT) (GLenum target, GLenum pname, const GLuint *params);
-
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glAreTexturesResidentEXT) (GLsizei n, const GLuint* textures, GLboolean* residences);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindTextureEXT) (GLenum target, GLuint texture);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteTexturesEXT) (GLsizei n, const GLuint* textures);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenTexturesEXT) (GLsizei n, GLuint* textures);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsTextureEXT) (GLuint texture);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPrioritizeTexturesEXT) (GLsizei n, const GLuint* textures, const GLclampf* priorities);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureNormalEXT) (GLenum mode);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryObjecti64vEXT) (GLuint id, GLenum pname, GLint64EXT *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetQueryObjectui64vEXT) (GLuint id, GLenum pname, GLuint64EXT *params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginTransformFeedbackEXT) (GLenum primitiveMode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBufferBaseEXT) (GLenum target, GLuint index, GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBufferOffsetEXT) (GLenum target, GLuint index, GLuint buffer, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBufferRangeEXT) (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndTransformFeedbackEXT) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTransformFeedbackVaryingEXT) (GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLsizei *size, GLenum *type, char *name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTransformFeedbackVaryingsEXT) (GLuint program, GLsizei count, const char ** varyings, GLenum bufferMode);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glArrayElementEXT) (GLint i);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorPointerEXT) (GLint size, GLenum type, GLsizei stride, GLsizei count, const void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawArraysEXT) (GLenum mode, GLint first, GLsizei count);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEdgeFlagPointerEXT) (GLsizei stride, GLsizei count, const GLboolean* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexPointerEXT) (GLenum type, GLsizei stride, GLsizei count, const void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalPointerEXT) (GLenum type, GLsizei stride, GLsizei count, const void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordPointerEXT) (GLint size, GLenum type, GLsizei stride, GLsizei count, const void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexPointerEXT) (GLint size, GLenum type, GLsizei stride, GLsizei count, const void* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribLdvEXT) (GLuint index, GLenum pname, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayVertexAttribLOffsetEXT) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL1dEXT) (GLuint index, GLdouble x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL1dvEXT) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL2dEXT) (GLuint index, GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL2dvEXT) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL3dEXT) (GLuint index, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL3dvEXT) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL4dEXT) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL4dvEXT) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribLPointerEXT) (GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginVertexShaderEXT) (void);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glBindLightParameterEXT) (GLenum light, GLenum value);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glBindMaterialParameterEXT) (GLenum face, GLenum value);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glBindParameterEXT) (GLenum value);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glBindTexGenParameterEXT) (GLenum unit, GLenum coord, GLenum value);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glBindTextureUnitParameterEXT) (GLenum unit, GLenum value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindVertexShaderEXT) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteVertexShaderEXT) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDisableVariantClientStateEXT) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEnableVariantClientStateEXT) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndVertexShaderEXT) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glExtractComponentEXT) (GLuint res, GLuint src, GLuint num);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGenSymbolsEXT) (GLenum dataType, GLenum storageType, GLenum range, GLuint components);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGenVertexShadersEXT) (GLuint range);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetInvariantBooleanvEXT) (GLuint id, GLenum value, GLboolean *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetInvariantFloatvEXT) (GLuint id, GLenum value, GLfloat *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetInvariantIntegervEXT) (GLuint id, GLenum value, GLint *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetLocalConstantBooleanvEXT) (GLuint id, GLenum value, GLboolean *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetLocalConstantFloatvEXT) (GLuint id, GLenum value, GLfloat *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetLocalConstantIntegervEXT) (GLuint id, GLenum value, GLint *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVariantBooleanvEXT) (GLuint id, GLenum value, GLboolean *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVariantFloatvEXT) (GLuint id, GLenum value, GLfloat *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVariantIntegervEXT) (GLuint id, GLenum value, GLint *data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVariantPointervEXT) (GLuint id, GLenum value, GLvoid **data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glInsertComponentEXT) (GLuint res, GLuint src, GLuint num);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsVariantEnabledEXT) (GLuint id, GLenum cap);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSetInvariantEXT) (GLuint id, GLenum type, GLvoid *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSetLocalConstantEXT) (GLuint id, GLenum type, GLvoid *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glShaderOp1EXT) (GLenum op, GLuint res, GLuint arg1);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glShaderOp2EXT) (GLenum op, GLuint res, GLuint arg1, GLuint arg2);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glShaderOp3EXT) (GLenum op, GLuint res, GLuint arg1, GLuint arg2, GLuint arg3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSwizzleEXT) (GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantPointerEXT) (GLuint id, GLenum type, GLuint stride, GLvoid *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantbvEXT) (GLuint id, GLbyte *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantdvEXT) (GLuint id, GLdouble *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantfvEXT) (GLuint id, GLfloat *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantivEXT) (GLuint id, GLint *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantsvEXT) (GLuint id, GLshort *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantubvEXT) (GLuint id, GLubyte *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantuivEXT) (GLuint id, GLuint *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVariantusvEXT) (GLuint id, GLushort *addr);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWriteMaskEXT) (GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexWeightPointerEXT) (GLint size, GLenum type, GLsizei stride, void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexWeightfEXT) (GLfloat weight);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexWeightfvEXT) (GLfloat* weight);
-
-GLEW_FUN_EXPORT GLsync (GLAPIENTRY * glImportSyncEXT) (GLenum external_sync_type, GLintptr external_sync, GLbitfield flags);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFrameTerminatorGREMEDY) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStringMarkerGREMEDY) (GLsizei len, const void* string);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetImageTransformParameterfvHP) (GLenum target, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetImageTransformParameterivHP) (GLenum target, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glImageTransformParameterfHP) (GLenum target, GLenum pname, const GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glImageTransformParameterfvHP) (GLenum target, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glImageTransformParameteriHP) (GLenum target, GLenum pname, const GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glImageTransformParameterivHP) (GLenum target, GLenum pname, const GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiModeDrawArraysIBM) (const GLenum* mode, const GLint *first, const GLsizei *count, GLsizei primcount, GLint modestride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiModeDrawElementsIBM) (const GLenum* mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, GLint modestride);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorPointerListIBM) (GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEdgeFlagPointerListIBM) (GLint stride, const GLboolean ** pointer, GLint ptrstride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordPointerListIBM) (GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexPointerListIBM) (GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalPointerListIBM) (GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColorPointerListIBM) (GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordPointerListIBM) (GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexPointerListIBM) (GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorPointervINTEL) (GLint size, GLenum type, const void** pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalPointervINTEL) (GLenum type, const void** pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordPointervINTEL) (GLint size, GLenum type, const void** pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexPointervINTEL) (GLint size, GLenum type, const void** pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexScissorFuncINTEL) (GLenum target, GLenum lfunc, GLenum hfunc);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexScissorINTEL) (GLenum target, GLclampf tlow, GLclampf thigh);
-
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glBufferRegionEnabled) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteBufferRegion) (GLenum region);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawBufferRegion) (GLuint region, GLint x, GLint y, GLsizei width, GLsizei height, GLint xDest, GLint yDest);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glNewBufferRegion) (GLenum region);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReadBufferRegion) (GLuint region, GLint x, GLint y, GLsizei width, GLsizei height);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glResizeBuffersMESA) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2dMESA) (GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2dvMESA) (const GLdouble* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2fMESA) (GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2fvMESA) (const GLfloat* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2iMESA) (GLint x, GLint y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2ivMESA) (const GLint* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2sMESA) (GLshort x, GLshort y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos2svMESA) (const GLshort* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3dMESA) (GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3dvMESA) (const GLdouble* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3fMESA) (GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3fvMESA) (const GLfloat* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3iMESA) (GLint x, GLint y, GLint z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3ivMESA) (const GLint* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3sMESA) (GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos3svMESA) (const GLshort* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos4dMESA) (GLdouble x, GLdouble y, GLdouble z, GLdouble);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos4dvMESA) (const GLdouble* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos4fMESA) (GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos4fvMESA) (const GLfloat* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos4iMESA) (GLint x, GLint y, GLint z, GLint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos4ivMESA) (const GLint* p);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos4sMESA) (GLshort x, GLshort y, GLshort z, GLshort w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWindowPos4svMESA) (const GLshort* p);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginConditionalRenderNV) (GLuint id, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndConditionalRenderNV) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyImageSubDataNV) (GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearDepthdNV) (GLdouble depth);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthBoundsdNV) (GLdouble zmin, GLdouble zmax);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthRangedNV) (GLdouble zNear, GLdouble zFar);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEvalMapsNV) (GLenum target, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMapAttribParameterfvNV) (GLenum target, GLuint index, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMapAttribParameterivNV) (GLenum target, GLuint index, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMapControlPointsNV) (GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLboolean packed, void* points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMapParameterfvNV) (GLenum target, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMapParameterivNV) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapControlPointsNV) (GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLint uorder, GLint vorder, GLboolean packed, const void* points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapParameterfvNV) (GLenum target, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMapParameterivNV) (GLenum target, GLenum pname, const GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetMultisamplefvNV) (GLenum pname, GLuint index, GLfloat* val);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSampleMaskIndexedNV) (GLuint index, GLbitfield mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexRenderbufferNV) (GLenum target, GLuint renderbuffer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteFencesNV) (GLsizei n, const GLuint* fences);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFinishFenceNV) (GLuint fence);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenFencesNV) (GLsizei n, GLuint* fences);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFenceivNV) (GLuint fence, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsFenceNV) (GLuint fence);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSetFenceNV) (GLuint fence, GLenum condition);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glTestFenceNV) (GLuint fence);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramNamedParameterdvNV) (GLuint id, GLsizei len, const GLubyte* name, GLdouble *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramNamedParameterfvNV) (GLuint id, GLsizei len, const GLubyte* name, GLfloat *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramNamedParameter4dNV) (GLuint id, GLsizei len, const GLubyte* name, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramNamedParameter4dvNV) (GLuint id, GLsizei len, const GLubyte* name, const GLdouble v[]);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramNamedParameter4fNV) (GLuint id, GLsizei len, const GLubyte* name, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramNamedParameter4fvNV) (GLuint id, GLsizei len, const GLubyte* name, const GLfloat v[]);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRenderbufferStorageMultisampleCoverageNV) (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramVertexLimitNV) (GLenum target, GLint limit);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParameterI4iNV) (GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParameterI4ivNV) (GLenum target, GLuint index, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParameterI4uiNV) (GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParameterI4uivNV) (GLenum target, GLuint index, const GLuint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParametersI4ivNV) (GLenum target, GLuint index, GLsizei count, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramEnvParametersI4uivNV) (GLenum target, GLuint index, GLsizei count, const GLuint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParameterI4iNV) (GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParameterI4ivNV) (GLenum target, GLuint index, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParameterI4uiNV) (GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParameterI4uivNV) (GLenum target, GLuint index, const GLuint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParametersI4ivNV) (GLenum target, GLuint index, GLsizei count, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramLocalParametersI4uivNV) (GLenum target, GLuint index, GLsizei count, const GLuint *params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformi64vNV) (GLuint program, GLint location, GLint64EXT* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetUniformui64vNV) (GLuint program, GLint location, GLuint64EXT* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1i64NV) (GLuint program, GLint location, GLint64EXT x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1i64vNV) (GLuint program, GLint location, GLsizei count, const GLint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1ui64NV) (GLuint program, GLint location, GLuint64EXT x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform1ui64vNV) (GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2i64NV) (GLuint program, GLint location, GLint64EXT x, GLint64EXT y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2i64vNV) (GLuint program, GLint location, GLsizei count, const GLint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2ui64NV) (GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform2ui64vNV) (GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3i64NV) (GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3i64vNV) (GLuint program, GLint location, GLsizei count, const GLint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3ui64NV) (GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform3ui64vNV) (GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4i64NV) (GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4i64vNV) (GLuint program, GLint location, GLsizei count, const GLint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4ui64NV) (GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniform4ui64vNV) (GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1i64NV) (GLint location, GLint64EXT x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1i64vNV) (GLint location, GLsizei count, const GLint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1ui64NV) (GLint location, GLuint64EXT x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform1ui64vNV) (GLint location, GLsizei count, const GLuint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2i64NV) (GLint location, GLint64EXT x, GLint64EXT y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2i64vNV) (GLint location, GLsizei count, const GLint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2ui64NV) (GLint location, GLuint64EXT x, GLuint64EXT y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform2ui64vNV) (GLint location, GLsizei count, const GLuint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3i64NV) (GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3i64vNV) (GLint location, GLsizei count, const GLint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3ui64NV) (GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform3ui64vNV) (GLint location, GLsizei count, const GLuint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4i64NV) (GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4i64vNV) (GLint location, GLsizei count, const GLint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4ui64NV) (GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniform4ui64vNV) (GLint location, GLsizei count, const GLuint64EXT* value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3hNV) (GLhalf red, GLhalf green, GLhalf blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4hNV) (GLhalf red, GLhalf green, GLhalf blue, GLhalf alpha);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordhNV) (GLhalf fog);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordhvNV) (const GLhalf* fog);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1hNV) (GLenum target, GLhalf s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord1hvNV) (GLenum target, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2hNV) (GLenum target, GLhalf s, GLhalf t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord2hvNV) (GLenum target, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3hNV) (GLenum target, GLhalf s, GLhalf t, GLhalf r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord3hvNV) (GLenum target, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4hNV) (GLenum target, GLhalf s, GLhalf t, GLhalf r, GLhalf q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMultiTexCoord4hvNV) (GLenum target, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3hNV) (GLhalf nx, GLhalf ny, GLhalf nz);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3hNV) (GLhalf red, GLhalf green, GLhalf blue);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColor3hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1hNV) (GLhalf s);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord1hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2hNV) (GLhalf s, GLhalf t);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3hNV) (GLhalf s, GLhalf t, GLhalf r);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord3hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4hNV) (GLhalf s, GLhalf t, GLhalf r, GLhalf q);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2hNV) (GLhalf x, GLhalf y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex2hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3hNV) (GLhalf x, GLhalf y, GLhalf z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex3hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4hNV) (GLhalf x, GLhalf y, GLhalf z, GLhalf w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertex4hvNV) (const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1hNV) (GLuint index, GLhalf x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1hvNV) (GLuint index, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2hNV) (GLuint index, GLhalf x, GLhalf y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2hvNV) (GLuint index, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3hNV) (GLuint index, GLhalf x, GLhalf y, GLhalf z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3hvNV) (GLuint index, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4hNV) (GLuint index, GLhalf x, GLhalf y, GLhalf z, GLhalf w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4hvNV) (GLuint index, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs1hvNV) (GLuint index, GLsizei n, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs2hvNV) (GLuint index, GLsizei n, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs3hvNV) (GLuint index, GLsizei n, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs4hvNV) (GLuint index, GLsizei n, const GLhalf* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexWeighthNV) (GLhalf weight);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexWeighthvNV) (const GLhalf* weight);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginOcclusionQueryNV) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteOcclusionQueriesNV) (GLsizei n, const GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndOcclusionQueryNV) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenOcclusionQueriesNV) (GLsizei n, GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetOcclusionQueryivNV) (GLuint id, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetOcclusionQueryuivNV) (GLuint id, GLenum pname, GLuint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsOcclusionQueryNV) (GLuint id);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramBufferParametersIivNV) (GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramBufferParametersIuivNV) (GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLuint *params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramBufferParametersfvNV) (GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLfloat *params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyPathNV) (GLuint resultPath, GLuint srcPath);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCoverFillPathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCoverFillPathNV) (GLuint path, GLenum coverMode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCoverStrokePathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCoverStrokePathNV) (GLuint name, GLenum coverMode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeletePathsNV) (GLuint path, GLsizei range);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGenPathsNV) (GLsizei range);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathColorGenfvNV) (GLenum color, GLenum pname, GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathColorGenivNV) (GLenum color, GLenum pname, GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathCommandsNV) (GLuint name, GLubyte* commands);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathCoordsNV) (GLuint name, GLfloat* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathDashArrayNV) (GLuint name, GLfloat* dashArray);
-GLEW_FUN_EXPORT GLfloat (GLAPIENTRY * glGetPathLengthNV) (GLuint path, GLsizei startSegment, GLsizei numSegments);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathMetricRangeNV) (GLbitfield metricQueryMask, GLuint fistPathName, GLsizei numPaths, GLsizei stride, GLfloat* metrics);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathMetricsNV) (GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLsizei stride, GLfloat *metrics);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathParameterfvNV) (GLuint name, GLenum param, GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathParameterivNV) (GLuint name, GLenum param, GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathSpacingNV) (GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathTexGenfvNV) (GLenum texCoordSet, GLenum pname, GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetPathTexGenivNV) (GLenum texCoordSet, GLenum pname, GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glInterpolatePathsNV) (GLuint resultPath, GLuint pathA, GLuint pathB, GLfloat weight);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsPathNV) (GLuint path);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsPointInFillPathNV) (GLuint path, GLuint mask, GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsPointInStrokePathNV) (GLuint path, GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathColorGenNV) (GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat* coeffs);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathCommandsNV) (GLuint path, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const GLvoid*coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathCoordsNV) (GLuint path, GLsizei numCoords, GLenum coordType, const void* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathCoverDepthFuncNV) (GLenum zfunc);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathDashArrayNV) (GLuint path, GLsizei dashCount, const GLfloat* dashArray);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathFogGenNV) (GLenum genMode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathGlyphRangeNV) (GLuint firstPathName, GLenum fontTarget, const void* fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathGlyphsNV) (GLuint firstPathName, GLenum fontTarget, const void* fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const GLvoid*charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathParameterfNV) (GLuint path, GLenum pname, GLfloat value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathParameterfvNV) (GLuint path, GLenum pname, const GLfloat* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathParameteriNV) (GLuint path, GLenum pname, GLint value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathParameterivNV) (GLuint path, GLenum pname, const GLint* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathStencilDepthOffsetNV) (GLfloat factor, GLint units);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathStencilFuncNV) (GLenum func, GLint ref, GLuint mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathStringNV) (GLuint path, GLenum format, GLsizei length, const void* pathString);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathSubCommandsNV) (GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const GLvoid*coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathSubCoordsNV) (GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const void* coords);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPathTexGenNV) (GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat* coeffs);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glPointAlongPathNV) (GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat* x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilFillPathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilFillPathNV) (GLuint path, GLenum fillMode, GLuint mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilStrokePathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glStencilStrokePathNV) (GLuint path, GLint reference, GLuint mask);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTransformPathNV) (GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat* transformValues);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glWeightPathsNV) (GLuint resultPath, GLsizei numPaths, const GLuint paths[], const GLfloat weights[]);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFlushPixelDataRangeNV) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelDataRangeNV) (GLenum target, GLsizei length, void* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameteriNV) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPointParameterivNV) (GLenum pname, const GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVideoi64vNV) (GLuint video_slot, GLenum pname, GLint64EXT* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVideoivNV) (GLuint video_slot, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVideoui64vNV) (GLuint video_slot, GLenum pname, GLuint64EXT* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVideouivNV) (GLuint video_slot, GLenum pname, GLuint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPresentFrameDualFillNV) (GLuint video_slot, GLuint64EXT minPresentTime, GLuint beginPresentTimeId, GLuint presentDurationId, GLenum type, GLenum target0, GLuint fill0, GLenum target1, GLuint fill1, GLenum target2, GLuint fill2, GLenum target3, GLuint fill3);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPresentFrameKeyedNV) (GLuint video_slot, GLuint64EXT minPresentTime, GLuint beginPresentTimeId, GLuint presentDurationId, GLenum type, GLenum target0, GLuint fill0, GLuint key0, GLenum target1, GLuint fill1, GLuint key1);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPrimitiveRestartIndexNV) (GLuint index);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPrimitiveRestartNV) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCombinerInputNV) (GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCombinerOutputNV) (GLenum stage, GLenum portion, GLenum abOutput, GLenum cdOutput, GLenum sumOutput, GLenum scale, GLenum bias, GLboolean abDotProduct, GLboolean cdDotProduct, GLboolean muxSum);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCombinerParameterfNV) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCombinerParameterfvNV) (GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCombinerParameteriNV) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCombinerParameterivNV) (GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFinalCombinerInputNV) (GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetCombinerInputParameterfvNV) (GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetCombinerInputParameterivNV) (GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetCombinerOutputParameterfvNV) (GLenum stage, GLenum portion, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetCombinerOutputParameterivNV) (GLenum stage, GLenum portion, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFinalCombinerInputParameterfvNV) (GLenum variable, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFinalCombinerInputParameterivNV) (GLenum variable, GLenum pname, GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCombinerStageParameterfvNV) (GLenum stage, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetCombinerStageParameterfvNV) (GLenum stage, GLenum pname, GLfloat* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetBufferParameterui64vNV) (GLenum target, GLenum pname, GLuint64EXT* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetIntegerui64vNV) (GLenum value, GLuint64EXT* result);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetNamedBufferParameterui64vNV) (GLuint buffer, GLenum pname, GLuint64EXT* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsBufferResidentNV) (GLenum target);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsNamedBufferResidentNV) (GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMakeBufferNonResidentNV) (GLenum target);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMakeBufferResidentNV) (GLenum target, GLenum access);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMakeNamedBufferNonResidentNV) (GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glMakeNamedBufferResidentNV) (GLuint buffer, GLenum access);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformui64NV) (GLuint program, GLint location, GLuint64EXT value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramUniformui64vNV) (GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformui64NV) (GLint location, GLuint64EXT value);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glUniformui64vNV) (GLint location, GLsizei count, const GLuint64EXT* value);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureBarrierNV) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexImage2DMultisampleCoverageNV) (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexImage3DMultisampleCoverageNV) (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureImage2DMultisampleCoverageNV) (GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureImage2DMultisampleNV) (GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureImage3DMultisampleCoverageNV) (GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureImage3DMultisampleNV) (GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glActiveVaryingNV) (GLuint program, const GLchar *name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginTransformFeedbackNV) (GLenum primitiveMode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBufferBaseNV) (GLenum target, GLuint index, GLuint buffer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBufferOffsetNV) (GLenum target, GLuint index, GLuint buffer, GLintptr offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindBufferRangeNV) (GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndTransformFeedbackNV) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetActiveVaryingNV) (GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTransformFeedbackVaryingNV) (GLuint program, GLuint index, GLint *location);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glGetVaryingLocationNV) (GLuint program, const GLchar *name);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTransformFeedbackAttribsNV) (GLuint count, const GLint *attribs, GLenum bufferMode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTransformFeedbackVaryingsNV) (GLuint program, GLsizei count, const GLint *locations, GLenum bufferMode);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindTransformFeedbackNV) (GLenum target, GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteTransformFeedbacksNV) (GLsizei n, const GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDrawTransformFeedbackNV) (GLenum mode, GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenTransformFeedbacksNV) (GLsizei n, GLuint* ids);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsTransformFeedbackNV) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPauseTransformFeedbackNV) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glResumeTransformFeedbackNV) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVDPAUFiniNV) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVDPAUGetSurfaceivNV) (GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei* length, GLint *values);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVDPAUInitNV) (const void* vdpDevice, const GLvoid*getProcAddress);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVDPAUIsSurfaceNV) (GLvdpauSurfaceNV surface);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVDPAUMapSurfacesNV) (GLsizei numSurfaces, const GLvdpauSurfaceNV* surfaces);
-GLEW_FUN_EXPORT GLvdpauSurfaceNV (GLAPIENTRY * glVDPAURegisterOutputSurfaceNV) (const void* vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames);
-GLEW_FUN_EXPORT GLvdpauSurfaceNV (GLAPIENTRY * glVDPAURegisterVideoSurfaceNV) (const void* vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVDPAUSurfaceAccessNV) (GLvdpauSurfaceNV surface, GLenum access);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVDPAUUnmapSurfacesNV) (GLsizei numSurface, const GLvdpauSurfaceNV* surfaces);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVDPAUUnregisterSurfaceNV) (GLvdpauSurfaceNV surface);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFlushVertexArrayRangeNV) (void);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexArrayRangeNV) (GLsizei length, void* pointer);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribLi64vNV) (GLuint index, GLenum pname, GLint64EXT* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribLui64vNV) (GLuint index, GLenum pname, GLuint64EXT* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL1i64NV) (GLuint index, GLint64EXT x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL1i64vNV) (GLuint index, const GLint64EXT* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL1ui64NV) (GLuint index, GLuint64EXT x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL1ui64vNV) (GLuint index, const GLuint64EXT* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL2i64NV) (GLuint index, GLint64EXT x, GLint64EXT y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL2i64vNV) (GLuint index, const GLint64EXT* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL2ui64NV) (GLuint index, GLuint64EXT x, GLuint64EXT y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL2ui64vNV) (GLuint index, const GLuint64EXT* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL3i64NV) (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL3i64vNV) (GLuint index, const GLint64EXT* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL3ui64NV) (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL3ui64vNV) (GLuint index, const GLuint64EXT* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL4i64NV) (GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL4i64vNV) (GLuint index, const GLint64EXT* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL4ui64NV) (GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribL4ui64vNV) (GLuint index, const GLuint64EXT* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribLFormatNV) (GLuint index, GLint size, GLenum type, GLsizei stride);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBufferAddressRangeNV) (GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorFormatNV) (GLint size, GLenum type, GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEdgeFlagFormatNV) (GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogCoordFormatNV) (GLenum type, GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetIntegerui64i_vNV) (GLenum value, GLuint index, GLuint64EXT result[]);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glIndexFormatNV) (GLenum type, GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormalFormatNV) (GLenum type, GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSecondaryColorFormatNV) (GLint size, GLenum type, GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoordFormatNV) (GLint size, GLenum type, GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribFormatNV) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribIFormatNV) (GLuint index, GLint size, GLenum type, GLsizei stride);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexFormatNV) (GLint size, GLenum type, GLsizei stride);
-
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glAreProgramsResidentNV) (GLsizei n, const GLuint* ids, GLboolean *residences);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindProgramNV) (GLenum target, GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteProgramsNV) (GLsizei n, const GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glExecuteProgramNV) (GLenum target, GLuint id, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGenProgramsNV) (GLsizei n, GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramParameterdvNV) (GLenum target, GLuint index, GLenum pname, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramParameterfvNV) (GLenum target, GLuint index, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramStringNV) (GLuint id, GLenum pname, GLubyte* program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetProgramivNV) (GLuint id, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTrackMatrixivNV) (GLenum target, GLuint address, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribPointervNV) (GLuint index, GLenum pname, GLvoid** pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribdvNV) (GLuint index, GLenum pname, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribfvNV) (GLuint index, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVertexAttribivNV) (GLuint index, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsProgramNV) (GLuint id);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glLoadProgramNV) (GLenum target, GLuint id, GLsizei len, const GLubyte* program);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramParameter4dNV) (GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramParameter4dvNV) (GLenum target, GLuint index, const GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramParameter4fNV) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramParameter4fvNV) (GLenum target, GLuint index, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramParameters4dvNV) (GLenum target, GLuint index, GLsizei num, const GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glProgramParameters4fvNV) (GLenum target, GLuint index, GLsizei num, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glRequestResidentProgramsNV) (GLsizei n, GLuint* ids);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTrackMatrixNV) (GLenum target, GLuint address, GLenum matrix, GLenum transform);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1dNV) (GLuint index, GLdouble x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1dvNV) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1fNV) (GLuint index, GLfloat x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1fvNV) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1sNV) (GLuint index, GLshort x);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib1svNV) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2dNV) (GLuint index, GLdouble x, GLdouble y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2dvNV) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2fNV) (GLuint index, GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2fvNV) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2sNV) (GLuint index, GLshort x, GLshort y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib2svNV) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3dNV) (GLuint index, GLdouble x, GLdouble y, GLdouble z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3dvNV) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3fNV) (GLuint index, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3fvNV) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3sNV) (GLuint index, GLshort x, GLshort y, GLshort z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib3svNV) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4dNV) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4dvNV) (GLuint index, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4fNV) (GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4fvNV) (GLuint index, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4sNV) (GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4svNV) (GLuint index, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4ubNV) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttrib4ubvNV) (GLuint index, const GLubyte* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribPointerNV) (GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs1dvNV) (GLuint index, GLsizei n, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs1fvNV) (GLuint index, GLsizei n, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs1svNV) (GLuint index, GLsizei n, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs2dvNV) (GLuint index, GLsizei n, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs2fvNV) (GLuint index, GLsizei n, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs2svNV) (GLuint index, GLsizei n, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs3dvNV) (GLuint index, GLsizei n, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs3fvNV) (GLuint index, GLsizei n, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs3svNV) (GLuint index, GLsizei n, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs4dvNV) (GLuint index, GLsizei n, const GLdouble* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs4fvNV) (GLuint index, GLsizei n, const GLfloat* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs4svNV) (GLuint index, GLsizei n, const GLshort* v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVertexAttribs4ubvNV) (GLuint index, GLsizei n, const GLubyte* v);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBeginVideoCaptureNV) (GLuint video_capture_slot);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindVideoCaptureStreamBufferNV) (GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLintptrARB offset);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glBindVideoCaptureStreamTextureNV) (GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLenum target, GLuint texture);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glEndVideoCaptureNV) (GLuint video_capture_slot);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVideoCaptureStreamdvNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVideoCaptureStreamfvNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVideoCaptureStreamivNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetVideoCaptureivNV) (GLuint video_capture_slot, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT GLenum (GLAPIENTRY * glVideoCaptureNV) (GLuint video_capture_slot, GLuint* sequence_num, GLuint64EXT *capture_time);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVideoCaptureStreamParameterdvNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLdouble* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVideoCaptureStreamParameterfvNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glVideoCaptureStreamParameterivNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClearDepthfOES) (GLclampd depth);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glClipPlanefOES) (GLenum plane, const GLfloat* equation);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDepthRangefOES) (GLclampf n, GLclampf f);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFrustumfOES) (GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetClipPlanefOES) (GLenum plane, GLfloat* equation);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glOrthofOES) (GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDetailTexFuncSGIS) (GLenum target, GLsizei n, const GLfloat* points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetDetailTexFuncSGIS) (GLenum target, GLfloat* points);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFogFuncSGIS) (GLsizei n, const GLfloat* points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFogFuncSGIS) (GLfloat* points);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSampleMaskSGIS) (GLclampf value, GLboolean invert);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSamplePatternSGIS) (GLenum pattern);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetSharpenTexFuncSGIS) (GLenum target, GLfloat* points);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSharpenTexFuncSGIS) (GLenum target, GLsizei n, const GLfloat* points);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexImage4DSGIS) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLsizei extent, GLint border, GLenum format, GLenum type, const void* pixels);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexSubImage4DSGIS) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint woffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei extent, GLenum format, GLenum type, const void* pixels);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetTexFilterFuncSGIS) (GLenum target, GLenum filter, GLfloat* weights);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexFilterFuncSGIS) (GLenum target, GLenum filter, GLsizei n, const GLfloat* weights);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glAsyncMarkerSGIX) (GLuint marker);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glDeleteAsyncMarkersSGIX) (GLuint marker, GLsizei range);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glFinishAsyncSGIX) (GLuint* markerp);
-GLEW_FUN_EXPORT GLuint (GLAPIENTRY * glGenAsyncMarkersSGIX) (GLsizei range);
-GLEW_FUN_EXPORT GLboolean (GLAPIENTRY * glIsAsyncMarkerSGIX) (GLuint marker);
-GLEW_FUN_EXPORT GLint (GLAPIENTRY * glPollAsyncSGIX) (GLuint* markerp);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFlushRasterSGIX) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTextureFogSGIX) (GLenum pname);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentColorMaterialSGIX) (GLenum face, GLenum mode);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightModelfSGIX) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightModelfvSGIX) (GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightModeliSGIX) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightModelivSGIX) (GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightfSGIX) (GLenum light, GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightfvSGIX) (GLenum light, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightiSGIX) (GLenum light, GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentLightivSGIX) (GLenum light, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentMaterialfSGIX) (GLenum face, GLenum pname, const GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentMaterialfvSGIX) (GLenum face, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentMaterialiSGIX) (GLenum face, GLenum pname, const GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFragmentMaterialivSGIX) (GLenum face, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFragmentLightfvSGIX) (GLenum light, GLenum value, GLfloat* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFragmentLightivSGIX) (GLenum light, GLenum value, GLint* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFragmentMaterialfvSGIX) (GLenum face, GLenum pname, const GLfloat* data);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetFragmentMaterialivSGIX) (GLenum face, GLenum pname, const GLint* data);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFrameZoomSGIX) (GLint factor);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glPixelTexGenSGIX) (GLenum mode);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReferencePlaneSGIX) (const GLdouble* equation);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSpriteParameterfSGIX) (GLenum pname, GLfloat param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSpriteParameterfvSGIX) (GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSpriteParameteriSGIX) (GLenum pname, GLint param);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glSpriteParameterivSGIX) (GLenum pname, GLint* params);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTagSampleBufferSGIX) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorTableParameterfvSGI) (GLenum target, GLenum pname, const GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorTableParameterivSGI) (GLenum target, GLenum pname, const GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColorTableSGI) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void* table);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glCopyColorTableSGI) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetColorTableParameterfvSGI) (GLenum target, GLenum pname, GLfloat* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetColorTableParameterivSGI) (GLenum target, GLenum pname, GLint* params);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGetColorTableSGI) (GLenum target, GLenum format, GLenum type, void* table);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glFinishTextureSUNX) (void);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGlobalAlphaFactorbSUN) (GLbyte factor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGlobalAlphaFactordSUN) (GLdouble factor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGlobalAlphaFactorfSUN) (GLfloat factor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGlobalAlphaFactoriSUN) (GLint factor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGlobalAlphaFactorsSUN) (GLshort factor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGlobalAlphaFactorubSUN) (GLubyte factor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGlobalAlphaFactoruiSUN) (GLuint factor);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glGlobalAlphaFactorusSUN) (GLushort factor);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReadVideoPixelsSUN) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid* pixels);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodePointerSUN) (GLenum type, GLsizei stride, const void* pointer);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeubSUN) (GLubyte code);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeubvSUN) (const GLubyte* code);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiSUN) (GLuint code);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuivSUN) (const GLuint* code);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeusSUN) (GLushort code);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeusvSUN) (const GLushort* code);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3fVertex3fSUN) (GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor3fVertex3fvSUN) (const GLfloat* c, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4fNormal3fVertex3fSUN) (GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4fNormal3fVertex3fvSUN) (const GLfloat* c, const GLfloat *n, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4ubVertex2fSUN) (GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4ubVertex2fvSUN) (const GLubyte* c, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4ubVertex3fSUN) (GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glColor4ubVertex3fvSUN) (const GLubyte* c, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3fVertex3fSUN) (GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glNormal3fVertex3fvSUN) (const GLfloat* n, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiColor3fVertex3fSUN) (GLuint rc, GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiColor3fVertex3fvSUN) (const GLuint* rc, const GLfloat *c, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiColor4fNormal3fVertex3fSUN) (GLuint rc, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiColor4fNormal3fVertex3fvSUN) (const GLuint* rc, const GLfloat *c, const GLfloat *n, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiColor4ubVertex3fSUN) (GLuint rc, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiColor4ubVertex3fvSUN) (const GLuint* rc, const GLubyte *c, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiNormal3fVertex3fSUN) (GLuint rc, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiNormal3fVertex3fvSUN) (const GLuint* rc, const GLfloat *n, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN) (GLuint rc, GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN) (const GLuint* rc, const GLfloat *tc, const GLfloat *c, const GLfloat *n, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN) (GLuint rc, GLfloat s, GLfloat t, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN) (const GLuint* rc, const GLfloat *tc, const GLfloat *n, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiTexCoord2fVertex3fSUN) (GLuint rc, GLfloat s, GLfloat t, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiTexCoord2fVertex3fvSUN) (const GLuint* rc, const GLfloat *tc, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiVertex3fSUN) (GLuint rc, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glReplacementCodeuiVertex3fvSUN) (const GLuint* rc, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fColor3fVertex3fSUN) (GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fColor3fVertex3fvSUN) (const GLfloat* tc, const GLfloat *c, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fColor4fNormal3fVertex3fSUN) (GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fColor4fNormal3fVertex3fvSUN) (const GLfloat* tc, const GLfloat *c, const GLfloat *n, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fColor4ubVertex3fSUN) (GLfloat s, GLfloat t, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fColor4ubVertex3fvSUN) (const GLfloat* tc, const GLubyte *c, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fNormal3fVertex3fSUN) (GLfloat s, GLfloat t, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fNormal3fVertex3fvSUN) (const GLfloat* tc, const GLfloat *n, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fVertex3fSUN) (GLfloat s, GLfloat t, GLfloat x, GLfloat y, GLfloat z);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord2fVertex3fvSUN) (const GLfloat* tc, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4fColor4fNormal3fVertex4fSUN) (GLfloat s, GLfloat t, GLfloat p, GLfloat q, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4fColor4fNormal3fVertex4fvSUN) (const GLfloat* tc, const GLfloat *c, const GLfloat *n, const GLfloat *v);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4fVertex4fSUN) (GLfloat s, GLfloat t, GLfloat p, GLfloat q, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
-GLEW_FUN_EXPORT void (GLAPIENTRY * glTexCoord4fVertex4fvSUN) (const GLfloat* tc, const GLfloat *v);
-
-GLEW_FUN_EXPORT void (GLAPIENTRY * glAddSwapHintRectWIN) (GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glAccum(GLenum op, GLfloat value);
+GLEWAPI void glAlphaFunc(GLenum func, GLclampf ref);
+GLEWAPI GLboolean glAreTexturesResident(GLsizei n, const GLuint *textures, GLboolean *residences);
+GLEWAPI void glArrayElement(GLint i);
+GLEWAPI void glBegin(GLenum mode);
+GLEWAPI void glBindTexture(GLenum target, GLuint texture);
+GLEWAPI void glBitmap(GLsizei width, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat xmove, GLfloat ymove, const GLubyte *bitmap);
+GLEWAPI void glBlendFunc(GLenum sfactor, GLenum dfactor);
+GLEWAPI void glCallList(GLuint list);
+GLEWAPI void glCallLists(GLsizei n, GLenum type, const GLvoid *lists);
+GLEWAPI void glClear(GLbitfield mask);
+GLEWAPI void glClearAccum(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+GLEWAPI void glClearColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+GLEWAPI void glClearDepth(GLclampd depth);
+GLEWAPI void glClearIndex(GLfloat c);
+GLEWAPI void glClearStencil(GLint s);
+GLEWAPI void glClipPlane(GLenum plane, const GLdouble *equation);
+GLEWAPI void glColor3b(GLbyte red, GLbyte green, GLbyte blue);
+GLEWAPI void glColor3bv(const GLbyte *v);
+GLEWAPI void glColor3d(GLdouble red, GLdouble green, GLdouble blue);
+GLEWAPI void glColor3dv(const GLdouble *v);
+GLEWAPI void glColor3f(GLfloat red, GLfloat green, GLfloat blue);
+GLEWAPI void glColor3fv(const GLfloat *v);
+GLEWAPI void glColor3i(GLint red, GLint green, GLint blue);
+GLEWAPI void glColor3iv(const GLint *v);
+GLEWAPI void glColor3s(GLshort red, GLshort green, GLshort blue);
+GLEWAPI void glColor3sv(const GLshort *v);
+GLEWAPI void glColor3ub(GLubyte red, GLubyte green, GLubyte blue);
+GLEWAPI void glColor3ubv(const GLubyte *v);
+GLEWAPI void glColor3ui(GLuint red, GLuint green, GLuint blue);
+GLEWAPI void glColor3uiv(const GLuint *v);
+GLEWAPI void glColor3us(GLushort red, GLushort green, GLushort blue);
+GLEWAPI void glColor3usv(const GLushort *v);
+GLEWAPI void glColor4b(GLbyte red, GLbyte green, GLbyte blue, GLbyte alpha);
+GLEWAPI void glColor4bv(const GLbyte *v);
+GLEWAPI void glColor4d(GLdouble red, GLdouble green, GLdouble blue, GLdouble alpha);
+GLEWAPI void glColor4dv(const GLdouble *v);
+GLEWAPI void glColor4f(GLfloat red, GLfloat green, GLfloat blue, GLfloat alpha);
+GLEWAPI void glColor4fv(const GLfloat *v);
+GLEWAPI void glColor4i(GLint red, GLint green, GLint blue, GLint alpha);
+GLEWAPI void glColor4iv(const GLint *v);
+GLEWAPI void glColor4s(GLshort red, GLshort green, GLshort blue, GLshort alpha);
+GLEWAPI void glColor4sv(const GLshort *v);
+GLEWAPI void glColor4ub(GLubyte red, GLubyte green, GLubyte blue, GLubyte alpha);
+GLEWAPI void glColor4ubv(const GLubyte *v);
+GLEWAPI void glColor4ui(GLuint red, GLuint green, GLuint blue, GLuint alpha);
+GLEWAPI void glColor4uiv(const GLuint *v);
+GLEWAPI void glColor4us(GLushort red, GLushort green, GLushort blue, GLushort alpha);
+GLEWAPI void glColor4usv(const GLushort *v);
+GLEWAPI void glColorMask(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
+GLEWAPI void glColorMaterial(GLenum face, GLenum mode);
+GLEWAPI void glColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+GLEWAPI void glCopyPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum type);
+GLEWAPI void glCopyTexImage1D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLint border);
+GLEWAPI void glCopyTexImage2D(GLenum target, GLint level, GLenum internalFormat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
+GLEWAPI void glCopyTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
+GLEWAPI void glCopyTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glCullFace(GLenum mode);
+GLEWAPI void glDeleteLists(GLuint list, GLsizei range);
+GLEWAPI void glDeleteTextures(GLsizei n, const GLuint *textures);
+GLEWAPI void glDepthFunc(GLenum func);
+GLEWAPI void glDepthMask(GLboolean flag);
+GLEWAPI void glDepthRange(GLclampd zNear, GLclampd zFar);
+GLEWAPI void glDisable(GLenum cap);
+GLEWAPI void glDisableClientState(GLenum array);
+GLEWAPI void glDrawArrays(GLenum mode, GLint first, GLsizei count);
+GLEWAPI void glDrawBuffer(GLenum mode);
+GLEWAPI void glDrawElements(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices);
+GLEWAPI void glDrawPixels(GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels);
+GLEWAPI void glEdgeFlag(GLboolean flag);
+GLEWAPI void glEdgeFlagPointer(GLsizei stride, const GLvoid *pointer);
+GLEWAPI void glEdgeFlagv(const GLboolean *flag);
+GLEWAPI void glEnable(GLenum cap);
+GLEWAPI void glEnableClientState(GLenum array);
+GLEWAPI void glEnd(void);
+GLEWAPI void glEndList(void);
+GLEWAPI void glEvalCoord1d(GLdouble u);
+GLEWAPI void glEvalCoord1dv(const GLdouble *u);
+GLEWAPI void glEvalCoord1f(GLfloat u);
+GLEWAPI void glEvalCoord1fv(const GLfloat *u);
+GLEWAPI void glEvalCoord2d(GLdouble u, GLdouble v);
+GLEWAPI void glEvalCoord2dv(const GLdouble *u);
+GLEWAPI void glEvalCoord2f(GLfloat u, GLfloat v);
+GLEWAPI void glEvalCoord2fv(const GLfloat *u);
+GLEWAPI void glEvalMesh1(GLenum mode, GLint i1, GLint i2);
+GLEWAPI void glEvalMesh2(GLenum mode, GLint i1, GLint i2, GLint j1, GLint j2);
+GLEWAPI void glEvalPoint1(GLint i);
+GLEWAPI void glEvalPoint2(GLint i, GLint j);
+GLEWAPI void glFeedbackBuffer(GLsizei size, GLenum type, GLfloat *buffer);
+GLEWAPI void glFinish(void);
+GLEWAPI void glFlush(void);
+GLEWAPI void glFogf(GLenum pname, GLfloat param);
+GLEWAPI void glFogfv(GLenum pname, const GLfloat *params);
+GLEWAPI void glFogi(GLenum pname, GLint param);
+GLEWAPI void glFogiv(GLenum pname, const GLint *params);
+GLEWAPI void glFrontFace(GLenum mode);
+GLEWAPI void glFrustum(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
+GLEWAPI GLuint glGenLists(GLsizei range);
+GLEWAPI void glGenTextures(GLsizei n, GLuint *textures);
+GLEWAPI void glGetBooleanv(GLenum pname, GLboolean *params);
+GLEWAPI void glGetClipPlane(GLenum plane, GLdouble *equation);
+GLEWAPI void glGetDoublev(GLenum pname, GLdouble *params);
+GLEWAPI GLenum glGetError(void);
+GLEWAPI void glGetFloatv(GLenum pname, GLfloat *params);
+GLEWAPI void glGetIntegerv(GLenum pname, GLint *params);
+GLEWAPI void glGetLightfv(GLenum light, GLenum pname, GLfloat *params);
+GLEWAPI void glGetLightiv(GLenum light, GLenum pname, GLint *params);
+GLEWAPI void glGetMapdv(GLenum target, GLenum query, GLdouble *v);
+GLEWAPI void glGetMapfv(GLenum target, GLenum query, GLfloat *v);
+GLEWAPI void glGetMapiv(GLenum target, GLenum query, GLint *v);
+GLEWAPI void glGetMaterialfv(GLenum face, GLenum pname, GLfloat *params);
+GLEWAPI void glGetMaterialiv(GLenum face, GLenum pname, GLint *params);
+GLEWAPI void glGetPixelMapfv(GLenum map, GLfloat *values);
+GLEWAPI void glGetPixelMapuiv(GLenum map, GLuint *values);
+GLEWAPI void glGetPixelMapusv(GLenum map, GLushort *values);
+GLEWAPI void glGetPointerv(GLenum pname, GLvoid* *params);
+GLEWAPI void glGetPolygonStipple(GLubyte *mask);
+GLEWAPI GLubyte* glGetString(GLenum s);
+GLEWAPI void glGetTexEnvfv(GLenum target, GLenum pname, GLfloat *params);
+GLEWAPI void glGetTexEnviv(GLenum target, GLenum pname, GLint *params);
+GLEWAPI void glGetTexGendv(GLenum coord, GLenum pname, GLdouble *params);
+GLEWAPI void glGetTexGenfv(GLenum coord, GLenum pname, GLfloat *params);
+GLEWAPI void glGetTexGeniv(GLenum coord, GLenum pname, GLint *params);
+GLEWAPI void glGetTexImage(GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels);
+GLEWAPI void glGetTexLevelParameterfv(GLenum target, GLint level, GLenum pname, GLfloat *params);
+GLEWAPI void glGetTexLevelParameteriv(GLenum target, GLint level, GLenum pname, GLint *params);
+GLEWAPI void glGetTexParameterfv(GLenum target, GLenum pname, GLfloat *params);
+GLEWAPI void glGetTexParameteriv(GLenum target, GLenum pname, GLint *params);
+GLEWAPI void glHint(GLenum target, GLenum mode);
+GLEWAPI void glIndexMask(GLuint mask);
+GLEWAPI void glIndexPointer(GLenum type, GLsizei stride, const GLvoid *pointer);
+GLEWAPI void glIndexd(GLdouble c);
+GLEWAPI void glIndexdv(const GLdouble *c);
+GLEWAPI void glIndexf(GLfloat c);
+GLEWAPI void glIndexfv(const GLfloat *c);
+GLEWAPI void glIndexi(GLint c);
+GLEWAPI void glIndexiv(const GLint *c);
+GLEWAPI void glIndexs(GLshort c);
+GLEWAPI void glIndexsv(const GLshort *c);
+GLEWAPI void glIndexub(GLubyte c);
+GLEWAPI void glIndexubv(const GLubyte *c);
+GLEWAPI void glInitNames(void);
+GLEWAPI void glInterleavedArrays(GLenum format, GLsizei stride, const GLvoid *pointer);
+GLEWAPI GLboolean glIsEnabled(GLenum cap);
+GLEWAPI GLboolean glIsList(GLuint list);
+GLEWAPI GLboolean glIsTexture(GLuint texture);
+GLEWAPI void glLightModelf(GLenum pname, GLfloat param);
+GLEWAPI void glLightModelfv(GLenum pname, const GLfloat *params);
+GLEWAPI void glLightModeli(GLenum pname, GLint param);
+GLEWAPI void glLightModeliv(GLenum pname, const GLint *params);
+GLEWAPI void glLightf(GLenum light, GLenum pname, GLfloat param);
+GLEWAPI void glLightfv(GLenum light, GLenum pname, const GLfloat *params);
+GLEWAPI void glLighti(GLenum light, GLenum pname, GLint param);
+GLEWAPI void glLightiv(GLenum light, GLenum pname, const GLint *params);
+GLEWAPI void glLineStipple(GLint factor, GLushort pattern);
+GLEWAPI void glLineWidth(GLfloat width);
+GLEWAPI void glListBase(GLuint base);
+GLEWAPI void glLoadIdentity(void);
+GLEWAPI void glLoadMatrixd(const GLdouble *m);
+GLEWAPI void glLoadMatrixf(const GLfloat *m);
+GLEWAPI void glLoadName(GLuint name);
+GLEWAPI void glLogicOp(GLenum opcode);
+GLEWAPI void glMap1d(GLenum target, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble *points);
+GLEWAPI void glMap1f(GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points);
+GLEWAPI void glMap2d(GLenum target, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble *points);
+GLEWAPI void glMap2f(GLenum target, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat *points);
+GLEWAPI void glMapGrid1d(GLint un, GLdouble u1, GLdouble u2);
+GLEWAPI void glMapGrid1f(GLint un, GLfloat u1, GLfloat u2);
+GLEWAPI void glMapGrid2d(GLint un, GLdouble u1, GLdouble u2, GLint vn, GLdouble v1, GLdouble v2);
+GLEWAPI void glMapGrid2f(GLint un, GLfloat u1, GLfloat u2, GLint vn, GLfloat v1, GLfloat v2);
+GLEWAPI void glMaterialf(GLenum face, GLenum pname, GLfloat param);
+GLEWAPI void glMaterialfv(GLenum face, GLenum pname, const GLfloat *params);
+GLEWAPI void glMateriali(GLenum face, GLenum pname, GLint param);
+GLEWAPI void glMaterialiv(GLenum face, GLenum pname, const GLint *params);
+GLEWAPI void glMatrixMode(GLenum mode);
+GLEWAPI void glMultMatrixd(const GLdouble *m);
+GLEWAPI void glMultMatrixf(const GLfloat *m);
+GLEWAPI void glNewList(GLuint list, GLenum mode);
+GLEWAPI void glNormal3b(GLbyte nx, GLbyte ny, GLbyte nz);
+GLEWAPI void glNormal3bv(const GLbyte *v);
+GLEWAPI void glNormal3d(GLdouble nx, GLdouble ny, GLdouble nz);
+GLEWAPI void glNormal3dv(const GLdouble *v);
+GLEWAPI void glNormal3f(GLfloat nx, GLfloat ny, GLfloat nz);
+GLEWAPI void glNormal3fv(const GLfloat *v);
+GLEWAPI void glNormal3i(GLint nx, GLint ny, GLint nz);
+GLEWAPI void glNormal3iv(const GLint *v);
+GLEWAPI void glNormal3s(GLshort nx, GLshort ny, GLshort nz);
+GLEWAPI void glNormal3sv(const GLshort *v);
+GLEWAPI void glNormalPointer(GLenum type, GLsizei stride, const GLvoid *pointer);
+GLEWAPI void glOrtho(GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar);
+GLEWAPI void glPassThrough(GLfloat token);
+GLEWAPI void glPixelMapfv(GLenum map, GLsizei mapsize, const GLfloat *values);
+GLEWAPI void glPixelMapuiv(GLenum map, GLsizei mapsize, const GLuint *values);
+GLEWAPI void glPixelMapusv(GLenum map, GLsizei mapsize, const GLushort *values);
+GLEWAPI void glPixelStoref(GLenum pname, GLfloat param);
+GLEWAPI void glPixelStorei(GLenum pname, GLint param);
+GLEWAPI void glPixelTransferf(GLenum pname, GLfloat param);
+GLEWAPI void glPixelTransferi(GLenum pname, GLint param);
+GLEWAPI void glPixelZoom(GLfloat xfactor, GLfloat yfactor);
+GLEWAPI void glPointSize(GLfloat size);
+GLEWAPI void glPolygonMode(GLenum face, GLenum mode);
+GLEWAPI void glPolygonOffset(GLfloat factor, GLfloat units);
+GLEWAPI void glPolygonStipple(const GLubyte *mask);
+GLEWAPI void glPopAttrib(void);
+GLEWAPI void glPopClientAttrib(void);
+GLEWAPI void glPopMatrix(void);
+GLEWAPI void glPopName(void);
+GLEWAPI void glPrioritizeTextures(GLsizei n, const GLuint *textures, const GLclampf *priorities);
+GLEWAPI void glPushAttrib(GLbitfield mask);
+GLEWAPI void glPushClientAttrib(GLbitfield mask);
+GLEWAPI void glPushMatrix(void);
+GLEWAPI void glPushName(GLuint name);
+GLEWAPI void glRasterPos2d(GLdouble x, GLdouble y);
+GLEWAPI void glRasterPos2dv(const GLdouble *v);
+GLEWAPI void glRasterPos2f(GLfloat x, GLfloat y);
+GLEWAPI void glRasterPos2fv(const GLfloat *v);
+GLEWAPI void glRasterPos2i(GLint x, GLint y);
+GLEWAPI void glRasterPos2iv(const GLint *v);
+GLEWAPI void glRasterPos2s(GLshort x, GLshort y);
+GLEWAPI void glRasterPos2sv(const GLshort *v);
+GLEWAPI void glRasterPos3d(GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glRasterPos3dv(const GLdouble *v);
+GLEWAPI void glRasterPos3f(GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glRasterPos3fv(const GLfloat *v);
+GLEWAPI void glRasterPos3i(GLint x, GLint y, GLint z);
+GLEWAPI void glRasterPos3iv(const GLint *v);
+GLEWAPI void glRasterPos3s(GLshort x, GLshort y, GLshort z);
+GLEWAPI void glRasterPos3sv(const GLshort *v);
+GLEWAPI void glRasterPos4d(GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glRasterPos4dv(const GLdouble *v);
+GLEWAPI void glRasterPos4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glRasterPos4fv(const GLfloat *v);
+GLEWAPI void glRasterPos4i(GLint x, GLint y, GLint z, GLint w);
+GLEWAPI void glRasterPos4iv(const GLint *v);
+GLEWAPI void glRasterPos4s(GLshort x, GLshort y, GLshort z, GLshort w);
+GLEWAPI void glRasterPos4sv(const GLshort *v);
+GLEWAPI void glReadBuffer(GLenum mode);
+GLEWAPI void glReadPixels(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid *pixels);
+GLEWAPI void glRectd(GLdouble x1, GLdouble y1, GLdouble x2, GLdouble y2);
+GLEWAPI void glRectdv(const GLdouble *v1, const GLdouble *v2);
+GLEWAPI void glRectf(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2);
+GLEWAPI void glRectfv(const GLfloat *v1, const GLfloat *v2);
+GLEWAPI void glRecti(GLint x1, GLint y1, GLint x2, GLint y2);
+GLEWAPI void glRectiv(const GLint *v1, const GLint *v2);
+GLEWAPI void glRects(GLshort x1, GLshort y1, GLshort x2, GLshort y2);
+GLEWAPI void glRectsv(const GLshort *v1, const GLshort *v2);
+GLEWAPI GLint glRenderMode(GLenum mode);
+GLEWAPI void glRotated(GLdouble angle, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glRotatef(GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glScaled(GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glScalef(GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glScissor(GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glSelectBuffer(GLsizei size, GLuint *buffer);
+GLEWAPI void glShadeModel(GLenum mode);
+GLEWAPI void glStencilFunc(GLenum func, GLint ref, GLuint mask);
+GLEWAPI void glStencilMask(GLuint mask);
+GLEWAPI void glStencilOp(GLenum fail, GLenum zfail, GLenum zpass);
+GLEWAPI void glTexCoord1d(GLdouble s);
+GLEWAPI void glTexCoord1dv(const GLdouble *v);
+GLEWAPI void glTexCoord1f(GLfloat s);
+GLEWAPI void glTexCoord1fv(const GLfloat *v);
+GLEWAPI void glTexCoord1i(GLint s);
+GLEWAPI void glTexCoord1iv(const GLint *v);
+GLEWAPI void glTexCoord1s(GLshort s);
+GLEWAPI void glTexCoord1sv(const GLshort *v);
+GLEWAPI void glTexCoord2d(GLdouble s, GLdouble t);
+GLEWAPI void glTexCoord2dv(const GLdouble *v);
+GLEWAPI void glTexCoord2f(GLfloat s, GLfloat t);
+GLEWAPI void glTexCoord2fv(const GLfloat *v);
+GLEWAPI void glTexCoord2i(GLint s, GLint t);
+GLEWAPI void glTexCoord2iv(const GLint *v);
+GLEWAPI void glTexCoord2s(GLshort s, GLshort t);
+GLEWAPI void glTexCoord2sv(const GLshort *v);
+GLEWAPI void glTexCoord3d(GLdouble s, GLdouble t, GLdouble r);
+GLEWAPI void glTexCoord3dv(const GLdouble *v);
+GLEWAPI void glTexCoord3f(GLfloat s, GLfloat t, GLfloat r);
+GLEWAPI void glTexCoord3fv(const GLfloat *v);
+GLEWAPI void glTexCoord3i(GLint s, GLint t, GLint r);
+GLEWAPI void glTexCoord3iv(const GLint *v);
+GLEWAPI void glTexCoord3s(GLshort s, GLshort t, GLshort r);
+GLEWAPI void glTexCoord3sv(const GLshort *v);
+GLEWAPI void glTexCoord4d(GLdouble s, GLdouble t, GLdouble r, GLdouble q);
+GLEWAPI void glTexCoord4dv(const GLdouble *v);
+GLEWAPI void glTexCoord4f(GLfloat s, GLfloat t, GLfloat r, GLfloat q);
+GLEWAPI void glTexCoord4fv(const GLfloat *v);
+GLEWAPI void glTexCoord4i(GLint s, GLint t, GLint r, GLint q);
+GLEWAPI void glTexCoord4iv(const GLint *v);
+GLEWAPI void glTexCoord4s(GLshort s, GLshort t, GLshort r, GLshort q);
+GLEWAPI void glTexCoord4sv(const GLshort *v);
+GLEWAPI void glTexCoordPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+GLEWAPI void glTexEnvf(GLenum target, GLenum pname, GLfloat param);
+GLEWAPI void glTexEnvfv(GLenum target, GLenum pname, const GLfloat *params);
+GLEWAPI void glTexEnvi(GLenum target, GLenum pname, GLint param);
+GLEWAPI void glTexEnviv(GLenum target, GLenum pname, const GLint *params);
+GLEWAPI void glTexGend(GLenum coord, GLenum pname, GLdouble param);
+GLEWAPI void glTexGendv(GLenum coord, GLenum pname, const GLdouble *params);
+GLEWAPI void glTexGenf(GLenum coord, GLenum pname, GLfloat param);
+GLEWAPI void glTexGenfv(GLenum coord, GLenum pname, const GLfloat *params);
+GLEWAPI void glTexGeni(GLenum coord, GLenum pname, GLint param);
+GLEWAPI void glTexGeniv(GLenum coord, GLenum pname, const GLint *params);
+GLEWAPI void glTexImage1D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+GLEWAPI void glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+GLEWAPI void glTexParameterf(GLenum target, GLenum pname, GLfloat param);
+GLEWAPI void glTexParameterfv(GLenum target, GLenum pname, const GLfloat *params);
+GLEWAPI void glTexParameteri(GLenum target, GLenum pname, GLint param);
+GLEWAPI void glTexParameteriv(GLenum target, GLenum pname, const GLint *params);
+GLEWAPI void glTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels);
+GLEWAPI void glTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels);
+GLEWAPI void glTranslated(GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glTranslatef(GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glVertex2d(GLdouble x, GLdouble y);
+GLEWAPI void glVertex2dv(const GLdouble *v);
+GLEWAPI void glVertex2f(GLfloat x, GLfloat y);
+GLEWAPI void glVertex2fv(const GLfloat *v);
+GLEWAPI void glVertex2i(GLint x, GLint y);
+GLEWAPI void glVertex2iv(const GLint *v);
+GLEWAPI void glVertex2s(GLshort x, GLshort y);
+GLEWAPI void glVertex2sv(const GLshort *v);
+GLEWAPI void glVertex3d(GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glVertex3dv(const GLdouble *v);
+GLEWAPI void glVertex3f(GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glVertex3fv(const GLfloat *v);
+GLEWAPI void glVertex3i(GLint x, GLint y, GLint z);
+GLEWAPI void glVertex3iv(const GLint *v);
+GLEWAPI void glVertex3s(GLshort x, GLshort y, GLshort z);
+GLEWAPI void glVertex3sv(const GLshort *v);
+GLEWAPI void glVertex4d(GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glVertex4dv(const GLdouble *v);
+GLEWAPI void glVertex4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glVertex4fv(const GLfloat *v);
+GLEWAPI void glVertex4i(GLint x, GLint y, GLint z, GLint w);
+GLEWAPI void glVertex4iv(const GLint *v);
+GLEWAPI void glVertex4s(GLshort x, GLshort y, GLshort z, GLshort w);
+GLEWAPI void glVertex4sv(const GLshort *v);
+GLEWAPI void glVertexPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+GLEWAPI void glViewport(GLint x, GLint y, GLsizei width, GLsizei height);
+
+GLEWAPI void glCopyTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glDrawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices);
+GLEWAPI void glTexImage3D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels);
+GLEWAPI void glTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels);
+
+GLEWAPI void glActiveTexture(GLenum texture);
+GLEWAPI void glClientActiveTexture(GLenum texture);
+GLEWAPI void glCompressedTexImage1D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data);
+GLEWAPI void glCompressedTexImage2D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data);
+GLEWAPI void glCompressedTexImage3D(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data);
+GLEWAPI void glCompressedTexSubImage1D(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data);
+GLEWAPI void glCompressedTexSubImage2D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data);
+GLEWAPI void glCompressedTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data);
+GLEWAPI void glGetCompressedTexImage(GLenum target, GLint lod, GLvoid *img);
+GLEWAPI void glLoadTransposeMatrixd(const GLdouble m[16]);
+GLEWAPI void glLoadTransposeMatrixf(const GLfloat m[16]);
+GLEWAPI void glMultTransposeMatrixd(const GLdouble m[16]);
+GLEWAPI void glMultTransposeMatrixf(const GLfloat m[16]);
+GLEWAPI void glMultiTexCoord1d(GLenum target, GLdouble s);
+GLEWAPI void glMultiTexCoord1dv(GLenum target, const GLdouble *v);
+GLEWAPI void glMultiTexCoord1f(GLenum target, GLfloat s);
+GLEWAPI void glMultiTexCoord1fv(GLenum target, const GLfloat *v);
+GLEWAPI void glMultiTexCoord1i(GLenum target, GLint s);
+GLEWAPI void glMultiTexCoord1iv(GLenum target, const GLint *v);
+GLEWAPI void glMultiTexCoord1s(GLenum target, GLshort s);
+GLEWAPI void glMultiTexCoord1sv(GLenum target, const GLshort *v);
+GLEWAPI void glMultiTexCoord2d(GLenum target, GLdouble s, GLdouble t);
+GLEWAPI void glMultiTexCoord2dv(GLenum target, const GLdouble *v);
+GLEWAPI void glMultiTexCoord2f(GLenum target, GLfloat s, GLfloat t);
+GLEWAPI void glMultiTexCoord2fv(GLenum target, const GLfloat *v);
+GLEWAPI void glMultiTexCoord2i(GLenum target, GLint s, GLint t);
+GLEWAPI void glMultiTexCoord2iv(GLenum target, const GLint *v);
+GLEWAPI void glMultiTexCoord2s(GLenum target, GLshort s, GLshort t);
+GLEWAPI void glMultiTexCoord2sv(GLenum target, const GLshort *v);
+GLEWAPI void glMultiTexCoord3d(GLenum target, GLdouble s, GLdouble t, GLdouble r);
+GLEWAPI void glMultiTexCoord3dv(GLenum target, const GLdouble *v);
+GLEWAPI void glMultiTexCoord3f(GLenum target, GLfloat s, GLfloat t, GLfloat r);
+GLEWAPI void glMultiTexCoord3fv(GLenum target, const GLfloat *v);
+GLEWAPI void glMultiTexCoord3i(GLenum target, GLint s, GLint t, GLint r);
+GLEWAPI void glMultiTexCoord3iv(GLenum target, const GLint *v);
+GLEWAPI void glMultiTexCoord3s(GLenum target, GLshort s, GLshort t, GLshort r);
+GLEWAPI void glMultiTexCoord3sv(GLenum target, const GLshort *v);
+GLEWAPI void glMultiTexCoord4d(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q);
+GLEWAPI void glMultiTexCoord4dv(GLenum target, const GLdouble *v);
+GLEWAPI void glMultiTexCoord4f(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q);
+GLEWAPI void glMultiTexCoord4fv(GLenum target, const GLfloat *v);
+GLEWAPI void glMultiTexCoord4i(GLenum target, GLint s, GLint t, GLint r, GLint q);
+GLEWAPI void glMultiTexCoord4iv(GLenum target, const GLint *v);
+GLEWAPI void glMultiTexCoord4s(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q);
+GLEWAPI void glMultiTexCoord4sv(GLenum target, const GLshort *v);
+GLEWAPI void glSampleCoverage(GLclampf value, GLboolean invert);
+
+GLEWAPI void glBlendColor(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+GLEWAPI void glBlendEquation(GLenum mode);
+GLEWAPI void glBlendFuncSeparate(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
+GLEWAPI void glFogCoordPointer(GLenum type, GLsizei stride, const GLvoid *pointer);
+GLEWAPI void glFogCoordd(GLdouble coord);
+GLEWAPI void glFogCoorddv(const GLdouble *coord);
+GLEWAPI void glFogCoordf(GLfloat coord);
+GLEWAPI void glFogCoordfv(const GLfloat *coord);
+GLEWAPI void glMultiDrawArrays(GLenum mode, const GLint *first, const GLsizei *count, GLsizei primcount);
+GLEWAPI void glMultiDrawElements(GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei primcount);
+GLEWAPI void glPointParameterf(GLenum pname, GLfloat param);
+GLEWAPI void glPointParameterfv(GLenum pname, const GLfloat *params);
+GLEWAPI void glPointParameteri(GLenum pname, GLint param);
+GLEWAPI void glPointParameteriv(GLenum pname, const GLint *params);
+GLEWAPI void glSecondaryColor3b(GLbyte red, GLbyte green, GLbyte blue);
+GLEWAPI void glSecondaryColor3bv(const GLbyte *v);
+GLEWAPI void glSecondaryColor3d(GLdouble red, GLdouble green, GLdouble blue);
+GLEWAPI void glSecondaryColor3dv(const GLdouble *v);
+GLEWAPI void glSecondaryColor3f(GLfloat red, GLfloat green, GLfloat blue);
+GLEWAPI void glSecondaryColor3fv(const GLfloat *v);
+GLEWAPI void glSecondaryColor3i(GLint red, GLint green, GLint blue);
+GLEWAPI void glSecondaryColor3iv(const GLint *v);
+GLEWAPI void glSecondaryColor3s(GLshort red, GLshort green, GLshort blue);
+GLEWAPI void glSecondaryColor3sv(const GLshort *v);
+GLEWAPI void glSecondaryColor3ub(GLubyte red, GLubyte green, GLubyte blue);
+GLEWAPI void glSecondaryColor3ubv(const GLubyte *v);
+GLEWAPI void glSecondaryColor3ui(GLuint red, GLuint green, GLuint blue);
+GLEWAPI void glSecondaryColor3uiv(const GLuint *v);
+GLEWAPI void glSecondaryColor3us(GLushort red, GLushort green, GLushort blue);
+GLEWAPI void glSecondaryColor3usv(const GLushort *v);
+GLEWAPI void glSecondaryColorPointer(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+GLEWAPI void glWindowPos2d(GLdouble x, GLdouble y);
+GLEWAPI void glWindowPos2dv(const GLdouble *p);
+GLEWAPI void glWindowPos2f(GLfloat x, GLfloat y);
+GLEWAPI void glWindowPos2fv(const GLfloat *p);
+GLEWAPI void glWindowPos2i(GLint x, GLint y);
+GLEWAPI void glWindowPos2iv(const GLint *p);
+GLEWAPI void glWindowPos2s(GLshort x, GLshort y);
+GLEWAPI void glWindowPos2sv(const GLshort *p);
+GLEWAPI void glWindowPos3d(GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glWindowPos3dv(const GLdouble *p);
+GLEWAPI void glWindowPos3f(GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glWindowPos3fv(const GLfloat *p);
+GLEWAPI void glWindowPos3i(GLint x, GLint y, GLint z);
+GLEWAPI void glWindowPos3iv(const GLint *p);
+GLEWAPI void glWindowPos3s(GLshort x, GLshort y, GLshort z);
+GLEWAPI void glWindowPos3sv(const GLshort *p);
+
+GLEWAPI void glBeginQuery(GLenum target, GLuint id);
+GLEWAPI void glBindBuffer(GLenum target, GLuint buffer);
+GLEWAPI void glBufferData(GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage);
+GLEWAPI void glBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid* data);
+GLEWAPI void glDeleteBuffers(GLsizei n, const GLuint* buffers);
+GLEWAPI void glDeleteQueries(GLsizei n, const GLuint* ids);
+GLEWAPI void glEndQuery(GLenum target);
+GLEWAPI void glGenBuffers(GLsizei n, GLuint* buffers);
+GLEWAPI void glGenQueries(GLsizei n, GLuint* ids);
+GLEWAPI void glGetBufferParameteriv(GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetBufferPointerv(GLenum target, GLenum pname, GLvoid** params);
+GLEWAPI void glGetBufferSubData(GLenum target, GLintptr offset, GLsizeiptr size, GLvoid* data);
+GLEWAPI void glGetQueryObjectiv(GLuint id, GLenum pname, GLint* params);
+GLEWAPI void glGetQueryObjectuiv(GLuint id, GLenum pname, GLuint* params);
+GLEWAPI void glGetQueryiv(GLenum target, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsBuffer(GLuint buffer);
+GLEWAPI GLboolean glIsQuery(GLuint id);
+GLEWAPI GLvoid* glMapBuffer(GLenum target, GLenum access);
+GLEWAPI GLboolean glUnmapBuffer(GLenum target);
+
+GLEWAPI void glAttachShader(GLuint program, GLuint shader);
+GLEWAPI void glBindAttribLocation(GLuint program, GLuint index, const GLchar* name);
+GLEWAPI void glBlendEquationSeparate(GLenum, GLenum);
+GLEWAPI void glCompileShader(GLuint shader);
+GLEWAPI GLuint glCreateProgram(void);
+GLEWAPI GLuint glCreateShader(GLenum type);
+GLEWAPI void glDeleteProgram(GLuint program);
+GLEWAPI void glDeleteShader(GLuint shader);
+GLEWAPI void glDetachShader(GLuint program, GLuint shader);
+GLEWAPI void glDisableVertexAttribArray(GLuint);
+GLEWAPI void glDrawBuffers(GLsizei n, const GLenum* bufs);
+GLEWAPI void glEnableVertexAttribArray(GLuint);
+GLEWAPI void glGetActiveAttrib(GLuint program, GLuint index, GLsizei maxLength, GLsizei* length, GLint* size, GLenum* type, GLchar* name);
+GLEWAPI void glGetActiveUniform(GLuint program, GLuint index, GLsizei maxLength, GLsizei* length, GLint* size, GLenum* type, GLchar* name);
+GLEWAPI void glGetAttachedShaders(GLuint program, GLsizei maxCount, GLsizei* count, GLuint* shaders);
+GLEWAPI GLint glGetAttribLocation(GLuint program, const GLchar* name);
+GLEWAPI void glGetProgramInfoLog(GLuint program, GLsizei bufSize, GLsizei* length, GLchar* infoLog);
+GLEWAPI void glGetProgramiv(GLuint program, GLenum pname, GLint* param);
+GLEWAPI void glGetShaderInfoLog(GLuint shader, GLsizei bufSize, GLsizei* length, GLchar* infoLog);
+GLEWAPI void glGetShaderSource(GLuint obj, GLsizei maxLength, GLsizei* length, GLchar* source);
+GLEWAPI void glGetShaderiv(GLuint shader, GLenum pname, GLint* param);
+GLEWAPI GLint glGetUniformLocation(GLuint program, const GLchar* name);
+GLEWAPI void glGetUniformfv(GLuint program, GLint location, GLfloat* params);
+GLEWAPI void glGetUniformiv(GLuint program, GLint location, GLint* params);
+GLEWAPI void glGetVertexAttribPointerv(GLuint, GLenum, GLvoid**);
+GLEWAPI void glGetVertexAttribdv(GLuint, GLenum, GLdouble*);
+GLEWAPI void glGetVertexAttribfv(GLuint, GLenum, GLfloat*);
+GLEWAPI void glGetVertexAttribiv(GLuint, GLenum, GLint*);
+GLEWAPI GLboolean glIsProgram(GLuint program);
+GLEWAPI GLboolean glIsShader(GLuint shader);
+GLEWAPI void glLinkProgram(GLuint program);
+GLEWAPI void glShaderSource(GLuint shader, GLsizei count, const GLchar** strings, const GLint* lengths);
+GLEWAPI void glStencilFuncSeparate(GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
+GLEWAPI void glStencilMaskSeparate(GLenum, GLuint);
+GLEWAPI void glStencilOpSeparate(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
+GLEWAPI void glUniform1f(GLint location, GLfloat v0);
+GLEWAPI void glUniform1fv(GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glUniform1i(GLint location, GLint v0);
+GLEWAPI void glUniform1iv(GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glUniform2f(GLint location, GLfloat v0, GLfloat v1);
+GLEWAPI void glUniform2fv(GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glUniform2i(GLint location, GLint v0, GLint v1);
+GLEWAPI void glUniform2iv(GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glUniform3f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
+GLEWAPI void glUniform3fv(GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glUniform3i(GLint location, GLint v0, GLint v1, GLint v2);
+GLEWAPI void glUniform3iv(GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glUniform4f(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+GLEWAPI void glUniform4fv(GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glUniform4i(GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
+GLEWAPI void glUniform4iv(GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glUniformMatrix2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glUniformMatrix3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glUniformMatrix4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glUseProgram(GLuint program);
+GLEWAPI void glValidateProgram(GLuint program);
+GLEWAPI void glVertexAttrib1d(GLuint index, GLdouble x);
+GLEWAPI void glVertexAttrib1dv(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib1f(GLuint index, GLfloat x);
+GLEWAPI void glVertexAttrib1fv(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib1s(GLuint index, GLshort x);
+GLEWAPI void glVertexAttrib1sv(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib2d(GLuint index, GLdouble x, GLdouble y);
+GLEWAPI void glVertexAttrib2dv(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib2f(GLuint index, GLfloat x, GLfloat y);
+GLEWAPI void glVertexAttrib2fv(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib2s(GLuint index, GLshort x, GLshort y);
+GLEWAPI void glVertexAttrib2sv(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib3d(GLuint index, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glVertexAttrib3dv(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib3f(GLuint index, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glVertexAttrib3fv(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib3s(GLuint index, GLshort x, GLshort y, GLshort z);
+GLEWAPI void glVertexAttrib3sv(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib4Nbv(GLuint index, const GLbyte* v);
+GLEWAPI void glVertexAttrib4Niv(GLuint index, const GLint* v);
+GLEWAPI void glVertexAttrib4Nsv(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib4Nub(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
+GLEWAPI void glVertexAttrib4Nubv(GLuint index, const GLubyte* v);
+GLEWAPI void glVertexAttrib4Nuiv(GLuint index, const GLuint* v);
+GLEWAPI void glVertexAttrib4Nusv(GLuint index, const GLushort* v);
+GLEWAPI void glVertexAttrib4bv(GLuint index, const GLbyte* v);
+GLEWAPI void glVertexAttrib4d(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glVertexAttrib4dv(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib4f(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glVertexAttrib4fv(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib4iv(GLuint index, const GLint* v);
+GLEWAPI void glVertexAttrib4s(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
+GLEWAPI void glVertexAttrib4sv(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib4ubv(GLuint index, const GLubyte* v);
+GLEWAPI void glVertexAttrib4uiv(GLuint index, const GLuint* v);
+GLEWAPI void glVertexAttrib4usv(GLuint index, const GLushort* v);
+GLEWAPI void glVertexAttribPointer(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer);
+
+GLEWAPI void glUniformMatrix2x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+GLEWAPI void glUniformMatrix2x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+GLEWAPI void glUniformMatrix3x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+GLEWAPI void glUniformMatrix3x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+GLEWAPI void glUniformMatrix4x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+GLEWAPI void glUniformMatrix4x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value);
+
+GLEWAPI void glBeginConditionalRender(GLuint, GLenum);
+GLEWAPI void glBeginTransformFeedback(GLenum);
+GLEWAPI void glBindFragDataLocation(GLuint, GLuint, const GLchar*);
+GLEWAPI void glClampColor(GLenum, GLenum);
+GLEWAPI void glClearBufferfi(GLenum, GLint, GLfloat, GLint);
+GLEWAPI void glClearBufferfv(GLenum, GLint, const GLfloat*);
+GLEWAPI void glClearBufferiv(GLenum, GLint, const GLint*);
+GLEWAPI void glClearBufferuiv(GLenum, GLint, const GLuint*);
+GLEWAPI void glColorMaski(GLuint, GLboolean, GLboolean, GLboolean, GLboolean);
+GLEWAPI void glDisablei(GLenum, GLuint);
+GLEWAPI void glEnablei(GLenum, GLuint);
+GLEWAPI void glEndConditionalRender(void);
+GLEWAPI void glEndTransformFeedback(void);
+GLEWAPI void glGetBooleani_v(GLenum, GLuint, GLboolean*);
+GLEWAPI GLint glGetFragDataLocation(GLuint, const GLchar*);
+GLEWAPI const GLubyte* glGetStringi(GLenum, GLuint);
+GLEWAPI void glGetTexParameterIiv(GLenum, GLenum, GLint*);
+GLEWAPI void glGetTexParameterIuiv(GLenum, GLenum, GLuint*);
+GLEWAPI void glGetTransformFeedbackVarying(GLuint, GLuint, GLsizei, GLsizei *, GLsizei *, GLenum *, GLchar *);
+GLEWAPI void glGetUniformuiv(GLuint, GLint, GLuint*);
+GLEWAPI void glGetVertexAttribIiv(GLuint, GLenum, GLint*);
+GLEWAPI void glGetVertexAttribIuiv(GLuint, GLenum, GLuint*);
+GLEWAPI GLboolean glIsEnabledi(GLenum, GLuint);
+GLEWAPI void glTexParameterIiv(GLenum, GLenum, const GLint*);
+GLEWAPI void glTexParameterIuiv(GLenum, GLenum, const GLuint*);
+GLEWAPI void glTransformFeedbackVaryings(GLuint, GLsizei, const GLchar **, GLenum);
+GLEWAPI void glUniform1ui(GLint, GLuint);
+GLEWAPI void glUniform1uiv(GLint, GLsizei, const GLuint*);
+GLEWAPI void glUniform2ui(GLint, GLuint, GLuint);
+GLEWAPI void glUniform2uiv(GLint, GLsizei, const GLuint*);
+GLEWAPI void glUniform3ui(GLint, GLuint, GLuint, GLuint);
+GLEWAPI void glUniform3uiv(GLint, GLsizei, const GLuint*);
+GLEWAPI void glUniform4ui(GLint, GLuint, GLuint, GLuint, GLuint);
+GLEWAPI void glUniform4uiv(GLint, GLsizei, const GLuint*);
+GLEWAPI void glVertexAttribI1i(GLuint, GLint);
+GLEWAPI void glVertexAttribI1iv(GLuint, const GLint*);
+GLEWAPI void glVertexAttribI1ui(GLuint, GLuint);
+GLEWAPI void glVertexAttribI1uiv(GLuint, const GLuint*);
+GLEWAPI void glVertexAttribI2i(GLuint, GLint, GLint);
+GLEWAPI void glVertexAttribI2iv(GLuint, const GLint*);
+GLEWAPI void glVertexAttribI2ui(GLuint, GLuint, GLuint);
+GLEWAPI void glVertexAttribI2uiv(GLuint, const GLuint*);
+GLEWAPI void glVertexAttribI3i(GLuint, GLint, GLint, GLint);
+GLEWAPI void glVertexAttribI3iv(GLuint, const GLint*);
+GLEWAPI void glVertexAttribI3ui(GLuint, GLuint, GLuint, GLuint);
+GLEWAPI void glVertexAttribI3uiv(GLuint, const GLuint*);
+GLEWAPI void glVertexAttribI4bv(GLuint, const GLbyte*);
+GLEWAPI void glVertexAttribI4i(GLuint, GLint, GLint, GLint, GLint);
+GLEWAPI void glVertexAttribI4iv(GLuint, const GLint*);
+GLEWAPI void glVertexAttribI4sv(GLuint, const GLshort*);
+GLEWAPI void glVertexAttribI4ubv(GLuint, const GLubyte*);
+GLEWAPI void glVertexAttribI4ui(GLuint, GLuint, GLuint, GLuint, GLuint);
+GLEWAPI void glVertexAttribI4uiv(GLuint, const GLuint*);
+GLEWAPI void glVertexAttribI4usv(GLuint, const GLushort*);
+GLEWAPI void glVertexAttribIPointer(GLuint, GLint, GLenum, GLsizei, const GLvoid*);
+
+GLEWAPI void glDrawArraysInstanced(GLenum, GLint, GLsizei, GLsizei);
+GLEWAPI void glDrawElementsInstanced(GLenum, GLsizei, GLenum, const GLvoid*, GLsizei);
+GLEWAPI void glPrimitiveRestartIndex(GLuint);
+GLEWAPI void glTexBuffer(GLenum, GLenum, GLuint);
+
+GLEWAPI void glFramebufferTexture(GLenum, GLenum, GLuint, GLint);
+GLEWAPI void glGetBufferParameteri64v(GLenum, GLenum, GLint64 *);
+GLEWAPI void glGetInteger64i_v(GLenum, GLuint, GLint64 *);
+
+GLEWAPI void glVertexAttribDivisor(GLuint index, GLuint divisor);
+
+GLEWAPI void glBlendEquationSeparatei(GLuint buf, GLenum modeRGB, GLenum modeAlpha);
+GLEWAPI void glBlendEquationi(GLuint buf, GLenum mode);
+GLEWAPI void glBlendFuncSeparatei(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+GLEWAPI void glBlendFunci(GLuint buf, GLenum src, GLenum dst);
+GLEWAPI void glMinSampleShading(GLclampf value);
+
+GLEWAPI void glTbufferMask3DFX(GLuint mask);
+
+GLEWAPI void glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback, void* userParam);
+GLEWAPI void glDebugMessageEnableAMD(GLenum category, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
+GLEWAPI void glDebugMessageInsertAMD(GLenum category, GLenum severity, GLuint id, GLsizei length, const char* buf);
+GLEWAPI GLuint glGetDebugMessageLogAMD(GLuint count, GLsizei bufsize, GLenum* categories, GLuint* severities, GLuint* ids, GLsizei* lengths, char* message);
+
+GLEWAPI void glBlendEquationIndexedAMD(GLuint buf, GLenum mode);
+GLEWAPI void glBlendEquationSeparateIndexedAMD(GLuint buf, GLenum modeRGB, GLenum modeAlpha);
+GLEWAPI void glBlendFuncIndexedAMD(GLuint buf, GLenum src, GLenum dst);
+GLEWAPI void glBlendFuncSeparateIndexedAMD(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+
+GLEWAPI void glMultiDrawArraysIndirectAMD(GLenum mode, const void* indirect, GLsizei primcount, GLsizei stride);
+GLEWAPI void glMultiDrawElementsIndirectAMD(GLenum mode, GLenum type, const void* indirect, GLsizei primcount, GLsizei stride);
+
+GLEWAPI void glDeleteNamesAMD(GLenum identifier, GLuint num, const GLuint* names);
+GLEWAPI void glGenNamesAMD(GLenum identifier, GLuint num, GLuint* names);
+GLEWAPI GLboolean glIsNameAMD(GLenum identifier, GLuint name);
+
+GLEWAPI void glBeginPerfMonitorAMD(GLuint monitor);
+GLEWAPI void glDeletePerfMonitorsAMD(GLsizei n, GLuint* monitors);
+GLEWAPI void glEndPerfMonitorAMD(GLuint monitor);
+GLEWAPI void glGenPerfMonitorsAMD(GLsizei n, GLuint* monitors);
+GLEWAPI void glGetPerfMonitorCounterDataAMD(GLuint monitor, GLenum pname, GLsizei dataSize, GLuint* data, GLint *bytesWritten);
+GLEWAPI void glGetPerfMonitorCounterInfoAMD(GLuint group, GLuint counter, GLenum pname, void* data);
+GLEWAPI void glGetPerfMonitorCounterStringAMD(GLuint group, GLuint counter, GLsizei bufSize, GLsizei* length, char *counterString);
+GLEWAPI void glGetPerfMonitorCountersAMD(GLuint group, GLint* numCounters, GLint *maxActiveCounters, GLsizei countersSize, GLuint *counters);
+GLEWAPI void glGetPerfMonitorGroupStringAMD(GLuint group, GLsizei bufSize, GLsizei* length, char *groupString);
+GLEWAPI void glGetPerfMonitorGroupsAMD(GLint* numGroups, GLsizei groupsSize, GLuint *groups);
+GLEWAPI void glSelectPerfMonitorCountersAMD(GLuint monitor, GLboolean enable, GLuint group, GLint numCounters, GLuint* counterList);
+
+GLEWAPI void glSetMultisamplefvAMD(GLenum pname, GLuint index, const GLfloat* val);
+
+GLEWAPI void glTessellationFactorAMD(GLfloat factor);
+GLEWAPI void glTessellationModeAMD(GLenum mode);
+
+GLEWAPI void glDrawElementArrayAPPLE(GLenum mode, GLint first, GLsizei count);
+GLEWAPI void glDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count);
+GLEWAPI void glElementPointerAPPLE(GLenum type, const void* pointer);
+GLEWAPI void glMultiDrawElementArrayAPPLE(GLenum mode, const GLint* first, const GLsizei *count, GLsizei primcount);
+GLEWAPI void glMultiDrawRangeElementArrayAPPLE(GLenum mode, GLuint start, GLuint end, const GLint* first, const GLsizei *count, GLsizei primcount);
+
+GLEWAPI void glDeleteFencesAPPLE(GLsizei n, const GLuint* fences);
+GLEWAPI void glFinishFenceAPPLE(GLuint fence);
+GLEWAPI void glFinishObjectAPPLE(GLenum object, GLint name);
+GLEWAPI void glGenFencesAPPLE(GLsizei n, GLuint* fences);
+GLEWAPI GLboolean glIsFenceAPPLE(GLuint fence);
+GLEWAPI void glSetFenceAPPLE(GLuint fence);
+GLEWAPI GLboolean glTestFenceAPPLE(GLuint fence);
+GLEWAPI GLboolean glTestObjectAPPLE(GLenum object, GLuint name);
+
+GLEWAPI void glBufferParameteriAPPLE(GLenum target, GLenum pname, GLint param);
+GLEWAPI void glFlushMappedBufferRangeAPPLE(GLenum target, GLintptr offset, GLsizeiptr size);
+
+GLEWAPI void glGetObjectParameterivAPPLE(GLenum objectType, GLuint name, GLenum pname, GLint* params);
+GLEWAPI GLenum glObjectPurgeableAPPLE(GLenum objectType, GLuint name, GLenum option);
+GLEWAPI GLenum glObjectUnpurgeableAPPLE(GLenum objectType, GLuint name, GLenum option);
+
+GLEWAPI void glGetTexParameterPointervAPPLE(GLenum target, GLenum pname, GLvoid **params);
+GLEWAPI void glTextureRangeAPPLE(GLenum target, GLsizei length, GLvoid *pointer);
+
+GLEWAPI void glBindVertexArrayAPPLE(GLuint array);
+GLEWAPI void glDeleteVertexArraysAPPLE(GLsizei n, const GLuint* arrays);
+GLEWAPI void glGenVertexArraysAPPLE(GLsizei n, const GLuint* arrays);
+GLEWAPI GLboolean glIsVertexArrayAPPLE(GLuint array);
+
+GLEWAPI void glFlushVertexArrayRangeAPPLE(GLsizei length, void* pointer);
+GLEWAPI void glVertexArrayParameteriAPPLE(GLenum pname, GLint param);
+GLEWAPI void glVertexArrayRangeAPPLE(GLsizei length, void* pointer);
+
+GLEWAPI void glDisableVertexAttribAPPLE(GLuint index, GLenum pname);
+GLEWAPI void glEnableVertexAttribAPPLE(GLuint index, GLenum pname);
+GLEWAPI GLboolean glIsVertexAttribEnabledAPPLE(GLuint index, GLenum pname);
+GLEWAPI void glMapVertexAttrib1dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint stride, GLint order, const GLdouble* points);
+GLEWAPI void glMapVertexAttrib1fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat* points);
+GLEWAPI void glMapVertexAttrib2dAPPLE(GLuint index, GLuint size, GLdouble u1, GLdouble u2, GLint ustride, GLint uorder, GLdouble v1, GLdouble v2, GLint vstride, GLint vorder, const GLdouble* points);
+GLEWAPI void glMapVertexAttrib2fAPPLE(GLuint index, GLuint size, GLfloat u1, GLfloat u2, GLint ustride, GLint uorder, GLfloat v1, GLfloat v2, GLint vstride, GLint vorder, const GLfloat* points);
+
+GLEWAPI void glClearDepthf(GLclampf d);
+GLEWAPI void glDepthRangef(GLclampf n, GLclampf f);
+GLEWAPI void glGetShaderPrecisionFormat(GLenum shadertype, GLenum precisiontype, GLint* range, GLint *precision);
+GLEWAPI void glReleaseShaderCompiler(void);
+GLEWAPI void glShaderBinary(GLsizei count, const GLuint* shaders, GLenum binaryformat, const GLvoid*binary, GLsizei length);
+
+GLEWAPI void glDrawArraysInstancedBaseInstance(GLenum mode, GLint first, GLsizei count, GLsizei primcount, GLuint baseinstance);
+GLEWAPI void glDrawElementsInstancedBaseInstance(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount, GLuint baseinstance);
+GLEWAPI void glDrawElementsInstancedBaseVertexBaseInstance(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount, GLint basevertex, GLuint baseinstance);
+
+GLEWAPI void glBindFragDataLocationIndexed(GLuint program, GLuint colorNumber, GLuint index, const char * name);
+GLEWAPI GLint glGetFragDataIndex(GLuint program, const char * name);
+
+GLEWAPI GLsync glCreateSyncFromCLeventARB(cl_context context, cl_event event, GLbitfield flags);
+
+GLEWAPI void glClampColorARB(GLenum target, GLenum clamp);
+
+GLEWAPI void glCopyBufferSubData(GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size);
+
+GLEWAPI void glDebugMessageCallbackARB(GLDEBUGPROCARB callback, void* userParam);
+GLEWAPI void glDebugMessageControlARB(GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled);
+GLEWAPI void glDebugMessageInsertARB(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const char* buf);
+GLEWAPI GLuint glGetDebugMessageLogARB(GLuint count, GLsizei bufsize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, char* messageLog);
+
+GLEWAPI void glDrawBuffersARB(GLsizei n, const GLenum* bufs);
+
+GLEWAPI void glBlendEquationSeparateiARB(GLuint buf, GLenum modeRGB, GLenum modeAlpha);
+GLEWAPI void glBlendEquationiARB(GLuint buf, GLenum mode);
+GLEWAPI void glBlendFuncSeparateiARB(GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha);
+GLEWAPI void glBlendFunciARB(GLuint buf, GLenum src, GLenum dst);
+
+GLEWAPI void glDrawElementsBaseVertex(GLenum mode, GLsizei count, GLenum type, void* indices, GLint basevertex);
+GLEWAPI void glDrawElementsInstancedBaseVertex(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount, GLint basevertex);
+GLEWAPI void glDrawRangeElementsBaseVertex(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, void* indices, GLint basevertex);
+GLEWAPI void glMultiDrawElementsBaseVertex(GLenum mode, GLsizei* count, GLenum type, GLvoid**indices, GLsizei primcount, GLint *basevertex);
+
+GLEWAPI void glDrawArraysIndirect(GLenum mode, const void* indirect);
+GLEWAPI void glDrawElementsIndirect(GLenum mode, GLenum type, const void* indirect);
+
+GLEWAPI void glBindFramebuffer(GLenum target, GLuint framebuffer);
+GLEWAPI void glBindRenderbuffer(GLenum target, GLuint renderbuffer);
+GLEWAPI void glBlitFramebuffer(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
+GLEWAPI GLenum glCheckFramebufferStatus(GLenum target);
+GLEWAPI void glDeleteFramebuffers(GLsizei n, const GLuint* framebuffers);
+GLEWAPI void glDeleteRenderbuffers(GLsizei n, const GLuint* renderbuffers);
+GLEWAPI void glFramebufferRenderbuffer(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+GLEWAPI void glFramebufferTexture1D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+GLEWAPI void glFramebufferTexture2D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+GLEWAPI void glFramebufferTexture3D(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint layer);
+GLEWAPI void glFramebufferTextureLayer(GLenum target,GLenum attachment, GLuint texture,GLint level,GLint layer);
+GLEWAPI void glGenFramebuffers(GLsizei n, GLuint* framebuffers);
+GLEWAPI void glGenRenderbuffers(GLsizei n, GLuint* renderbuffers);
+GLEWAPI void glGenerateMipmap(GLenum target);
+GLEWAPI void glGetFramebufferAttachmentParameteriv(GLenum target, GLenum attachment, GLenum pname, GLint* params);
+GLEWAPI void glGetRenderbufferParameteriv(GLenum target, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsFramebuffer(GLuint framebuffer);
+GLEWAPI GLboolean glIsRenderbuffer(GLuint renderbuffer);
+GLEWAPI void glRenderbufferStorage(GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
+GLEWAPI void glRenderbufferStorageMultisample(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+
+GLEWAPI void glFramebufferTextureARB(GLenum target, GLenum attachment, GLuint texture, GLint level);
+GLEWAPI void glFramebufferTextureFaceARB(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
+GLEWAPI void glFramebufferTextureLayerARB(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
+GLEWAPI void glProgramParameteriARB(GLuint program, GLenum pname, GLint value);
+
+GLEWAPI void glGetProgramBinary(GLuint program, GLsizei bufSize, GLsizei* length, GLenum *binaryFormat, GLvoid*binary);
+GLEWAPI void glProgramBinary(GLuint program, GLenum binaryFormat, const void* binary, GLsizei length);
+GLEWAPI void glProgramParameteri(GLuint program, GLenum pname, GLint value);
+
+GLEWAPI void glGetUniformdv(GLuint program, GLint location, GLdouble* params);
+GLEWAPI void glProgramUniform1dEXT(GLuint program, GLint location, GLdouble x);
+GLEWAPI void glProgramUniform1dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glProgramUniform2dEXT(GLuint program, GLint location, GLdouble x, GLdouble y);
+GLEWAPI void glProgramUniform2dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glProgramUniform3dEXT(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glProgramUniform3dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glProgramUniform4dEXT(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glProgramUniform4dvEXT(GLuint program, GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix2dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix2x3dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix2x4dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix3dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix3x2dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix3x4dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix4dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix4x2dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix4x3dvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glUniform1d(GLint location, GLdouble x);
+GLEWAPI void glUniform1dv(GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glUniform2d(GLint location, GLdouble x, GLdouble y);
+GLEWAPI void glUniform2dv(GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glUniform3d(GLint location, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glUniform3dv(GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glUniform4d(GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glUniform4dv(GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glUniformMatrix2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glUniformMatrix2x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glUniformMatrix2x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glUniformMatrix3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glUniformMatrix3x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glUniformMatrix3x4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glUniformMatrix4dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glUniformMatrix4x2dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glUniformMatrix4x3dv(GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+
+GLEWAPI void glColorSubTable(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *data);
+GLEWAPI void glColorTable(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table);
+GLEWAPI void glColorTableParameterfv(GLenum target, GLenum pname, const GLfloat *params);
+GLEWAPI void glColorTableParameteriv(GLenum target, GLenum pname, const GLint *params);
+GLEWAPI void glConvolutionFilter1D(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image);
+GLEWAPI void glConvolutionFilter2D(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image);
+GLEWAPI void glConvolutionParameterf(GLenum target, GLenum pname, GLfloat params);
+GLEWAPI void glConvolutionParameterfv(GLenum target, GLenum pname, const GLfloat *params);
+GLEWAPI void glConvolutionParameteri(GLenum target, GLenum pname, GLint params);
+GLEWAPI void glConvolutionParameteriv(GLenum target, GLenum pname, const GLint *params);
+GLEWAPI void glCopyColorSubTable(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width);
+GLEWAPI void glCopyColorTable(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width);
+GLEWAPI void glCopyConvolutionFilter1D(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width);
+GLEWAPI void glCopyConvolutionFilter2D(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glGetColorTable(GLenum target, GLenum format, GLenum type, GLvoid *table);
+GLEWAPI void glGetColorTableParameterfv(GLenum target, GLenum pname, GLfloat *params);
+GLEWAPI void glGetColorTableParameteriv(GLenum target, GLenum pname, GLint *params);
+GLEWAPI void glGetConvolutionFilter(GLenum target, GLenum format, GLenum type, GLvoid *image);
+GLEWAPI void glGetConvolutionParameterfv(GLenum target, GLenum pname, GLfloat *params);
+GLEWAPI void glGetConvolutionParameteriv(GLenum target, GLenum pname, GLint *params);
+GLEWAPI void glGetHistogram(GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values);
+GLEWAPI void glGetHistogramParameterfv(GLenum target, GLenum pname, GLfloat *params);
+GLEWAPI void glGetHistogramParameteriv(GLenum target, GLenum pname, GLint *params);
+GLEWAPI void glGetMinmax(GLenum target, GLboolean reset, GLenum format, GLenum types, GLvoid *values);
+GLEWAPI void glGetMinmaxParameterfv(GLenum target, GLenum pname, GLfloat *params);
+GLEWAPI void glGetMinmaxParameteriv(GLenum target, GLenum pname, GLint *params);
+GLEWAPI void glGetSeparableFilter(GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span);
+GLEWAPI void glHistogram(GLenum target, GLsizei width, GLenum internalformat, GLboolean sink);
+GLEWAPI void glMinmax(GLenum target, GLenum internalformat, GLboolean sink);
+GLEWAPI void glResetHistogram(GLenum target);
+GLEWAPI void glResetMinmax(GLenum target);
+GLEWAPI void glSeparableFilter2D(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column);
+
+GLEWAPI void glDrawArraysInstancedARB(GLenum mode, GLint first, GLsizei count, GLsizei primcount);
+GLEWAPI void glDrawElementsInstancedARB(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount);
+GLEWAPI void glVertexAttribDivisorARB(GLuint index, GLuint divisor);
+
+GLEWAPI void glGetInternalformativ(GLenum target, GLenum internalformat, GLenum pname, GLsizei bufSize, GLint* params);
+
+GLEWAPI void glFlushMappedBufferRange(GLenum target, GLintptr offset, GLsizeiptr length);
+GLEWAPI GLvoid * glMapBufferRange(GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access);
+
+GLEWAPI void glCurrentPaletteMatrixARB(GLint index);
+GLEWAPI void glMatrixIndexPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer);
+GLEWAPI void glMatrixIndexubvARB(GLint size, GLubyte *indices);
+GLEWAPI void glMatrixIndexuivARB(GLint size, GLuint *indices);
+GLEWAPI void glMatrixIndexusvARB(GLint size, GLushort *indices);
+
+GLEWAPI void glSampleCoverageARB(GLclampf value, GLboolean invert);
+
+GLEWAPI void glActiveTextureARB(GLenum texture);
+GLEWAPI void glClientActiveTextureARB(GLenum texture);
+GLEWAPI void glMultiTexCoord1dARB(GLenum target, GLdouble s);
+GLEWAPI void glMultiTexCoord1dvARB(GLenum target, const GLdouble *v);
+GLEWAPI void glMultiTexCoord1fARB(GLenum target, GLfloat s);
+GLEWAPI void glMultiTexCoord1fvARB(GLenum target, const GLfloat *v);
+GLEWAPI void glMultiTexCoord1iARB(GLenum target, GLint s);
+GLEWAPI void glMultiTexCoord1ivARB(GLenum target, const GLint *v);
+GLEWAPI void glMultiTexCoord1sARB(GLenum target, GLshort s);
+GLEWAPI void glMultiTexCoord1svARB(GLenum target, const GLshort *v);
+GLEWAPI void glMultiTexCoord2dARB(GLenum target, GLdouble s, GLdouble t);
+GLEWAPI void glMultiTexCoord2dvARB(GLenum target, const GLdouble *v);
+GLEWAPI void glMultiTexCoord2fARB(GLenum target, GLfloat s, GLfloat t);
+GLEWAPI void glMultiTexCoord2fvARB(GLenum target, const GLfloat *v);
+GLEWAPI void glMultiTexCoord2iARB(GLenum target, GLint s, GLint t);
+GLEWAPI void glMultiTexCoord2ivARB(GLenum target, const GLint *v);
+GLEWAPI void glMultiTexCoord2sARB(GLenum target, GLshort s, GLshort t);
+GLEWAPI void glMultiTexCoord2svARB(GLenum target, const GLshort *v);
+GLEWAPI void glMultiTexCoord3dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r);
+GLEWAPI void glMultiTexCoord3dvARB(GLenum target, const GLdouble *v);
+GLEWAPI void glMultiTexCoord3fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r);
+GLEWAPI void glMultiTexCoord3fvARB(GLenum target, const GLfloat *v);
+GLEWAPI void glMultiTexCoord3iARB(GLenum target, GLint s, GLint t, GLint r);
+GLEWAPI void glMultiTexCoord3ivARB(GLenum target, const GLint *v);
+GLEWAPI void glMultiTexCoord3sARB(GLenum target, GLshort s, GLshort t, GLshort r);
+GLEWAPI void glMultiTexCoord3svARB(GLenum target, const GLshort *v);
+GLEWAPI void glMultiTexCoord4dARB(GLenum target, GLdouble s, GLdouble t, GLdouble r, GLdouble q);
+GLEWAPI void glMultiTexCoord4dvARB(GLenum target, const GLdouble *v);
+GLEWAPI void glMultiTexCoord4fARB(GLenum target, GLfloat s, GLfloat t, GLfloat r, GLfloat q);
+GLEWAPI void glMultiTexCoord4fvARB(GLenum target, const GLfloat *v);
+GLEWAPI void glMultiTexCoord4iARB(GLenum target, GLint s, GLint t, GLint r, GLint q);
+GLEWAPI void glMultiTexCoord4ivARB(GLenum target, const GLint *v);
+GLEWAPI void glMultiTexCoord4sARB(GLenum target, GLshort s, GLshort t, GLshort r, GLshort q);
+GLEWAPI void glMultiTexCoord4svARB(GLenum target, const GLshort *v);
+
+GLEWAPI void glBeginQueryARB(GLenum target, GLuint id);
+GLEWAPI void glDeleteQueriesARB(GLsizei n, const GLuint* ids);
+GLEWAPI void glEndQueryARB(GLenum target);
+GLEWAPI void glGenQueriesARB(GLsizei n, GLuint* ids);
+GLEWAPI void glGetQueryObjectivARB(GLuint id, GLenum pname, GLint* params);
+GLEWAPI void glGetQueryObjectuivARB(GLuint id, GLenum pname, GLuint* params);
+GLEWAPI void glGetQueryivARB(GLenum target, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsQueryARB(GLuint id);
+
+GLEWAPI void glPointParameterfARB(GLenum pname, GLfloat param);
+GLEWAPI void glPointParameterfvARB(GLenum pname, const GLfloat* params);
+
+GLEWAPI void glProvokingVertex(GLenum mode);
+
+GLEWAPI GLenum glGetGraphicsResetStatusARB(void);
+GLEWAPI void glGetnColorTableARB(GLenum target, GLenum format, GLenum type, GLsizei bufSize, void* table);
+GLEWAPI void glGetnCompressedTexImageARB(GLenum target, GLint lod, GLsizei bufSize, void* img);
+GLEWAPI void glGetnConvolutionFilterARB(GLenum target, GLenum format, GLenum type, GLsizei bufSize, void* image);
+GLEWAPI void glGetnHistogramARB(GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void* values);
+GLEWAPI void glGetnMapdvARB(GLenum target, GLenum query, GLsizei bufSize, GLdouble* v);
+GLEWAPI void glGetnMapfvARB(GLenum target, GLenum query, GLsizei bufSize, GLfloat* v);
+GLEWAPI void glGetnMapivARB(GLenum target, GLenum query, GLsizei bufSize, GLint* v);
+GLEWAPI void glGetnMinmaxARB(GLenum target, GLboolean reset, GLenum format, GLenum type, GLsizei bufSize, void* values);
+GLEWAPI void glGetnPixelMapfvARB(GLenum map, GLsizei bufSize, GLfloat* values);
+GLEWAPI void glGetnPixelMapuivARB(GLenum map, GLsizei bufSize, GLuint* values);
+GLEWAPI void glGetnPixelMapusvARB(GLenum map, GLsizei bufSize, GLushort* values);
+GLEWAPI void glGetnPolygonStippleARB(GLsizei bufSize, GLubyte* pattern);
+GLEWAPI void glGetnSeparableFilterARB(GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, void* row, GLsizei columnBufSize, GLvoid*column, GLvoid*span);
+GLEWAPI void glGetnTexImageARB(GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void* img);
+GLEWAPI void glGetnUniformdvARB(GLuint program, GLint location, GLsizei bufSize, GLdouble* params);
+GLEWAPI void glGetnUniformfvARB(GLuint program, GLint location, GLsizei bufSize, GLfloat* params);
+GLEWAPI void glGetnUniformivARB(GLuint program, GLint location, GLsizei bufSize, GLint* params);
+GLEWAPI void glGetnUniformuivARB(GLuint program, GLint location, GLsizei bufSize, GLuint* params);
+GLEWAPI void glReadnPixelsARB(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void* data);
+
+GLEWAPI void glMinSampleShadingARB(GLclampf value);
+
+GLEWAPI void glBindSampler(GLuint unit, GLuint sampler);
+GLEWAPI void glDeleteSamplers(GLsizei count, const GLuint * samplers);
+GLEWAPI void glGenSamplers(GLsizei count, GLuint* samplers);
+GLEWAPI void glGetSamplerParameterIiv(GLuint sampler, GLenum pname, GLint* params);
+GLEWAPI void glGetSamplerParameterIuiv(GLuint sampler, GLenum pname, GLuint* params);
+GLEWAPI void glGetSamplerParameterfv(GLuint sampler, GLenum pname, GLfloat* params);
+GLEWAPI void glGetSamplerParameteriv(GLuint sampler, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsSampler(GLuint sampler);
+GLEWAPI void glSamplerParameterIiv(GLuint sampler, GLenum pname, const GLint* params);
+GLEWAPI void glSamplerParameterIuiv(GLuint sampler, GLenum pname, const GLuint* params);
+GLEWAPI void glSamplerParameterf(GLuint sampler, GLenum pname, GLfloat param);
+GLEWAPI void glSamplerParameterfv(GLuint sampler, GLenum pname, const GLfloat* params);
+GLEWAPI void glSamplerParameteri(GLuint sampler, GLenum pname, GLint param);
+GLEWAPI void glSamplerParameteriv(GLuint sampler, GLenum pname, const GLint* params);
+
+GLEWAPI void glActiveShaderProgram(GLuint pipeline, GLuint program);
+GLEWAPI void glBindProgramPipeline(GLuint pipeline);
+GLEWAPI GLuint glCreateShaderProgramv(GLenum type, GLsizei count, const char ** strings);
+GLEWAPI void glDeleteProgramPipelines(GLsizei n, const GLuint* pipelines);
+GLEWAPI void glGenProgramPipelines(GLsizei n, GLuint* pipelines);
+GLEWAPI void glGetProgramPipelineInfoLog(GLuint pipeline, GLsizei bufSize, GLsizei* length, char *infoLog);
+GLEWAPI void glGetProgramPipelineiv(GLuint pipeline, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsProgramPipeline(GLuint pipeline);
+GLEWAPI void glProgramUniform1d(GLuint program, GLint location, GLdouble x);
+GLEWAPI void glProgramUniform1dv(GLuint program, GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glProgramUniform1f(GLuint program, GLint location, GLfloat x);
+GLEWAPI void glProgramUniform1fv(GLuint program, GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glProgramUniform1i(GLuint program, GLint location, GLint x);
+GLEWAPI void glProgramUniform1iv(GLuint program, GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glProgramUniform1ui(GLuint program, GLint location, GLuint x);
+GLEWAPI void glProgramUniform1uiv(GLuint program, GLint location, GLsizei count, const GLuint* value);
+GLEWAPI void glProgramUniform2d(GLuint program, GLint location, GLdouble x, GLdouble y);
+GLEWAPI void glProgramUniform2dv(GLuint program, GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glProgramUniform2f(GLuint program, GLint location, GLfloat x, GLfloat y);
+GLEWAPI void glProgramUniform2fv(GLuint program, GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glProgramUniform2i(GLuint program, GLint location, GLint x, GLint y);
+GLEWAPI void glProgramUniform2iv(GLuint program, GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glProgramUniform2ui(GLuint program, GLint location, GLuint x, GLuint y);
+GLEWAPI void glProgramUniform2uiv(GLuint program, GLint location, GLsizei count, const GLuint* value);
+GLEWAPI void glProgramUniform3d(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glProgramUniform3dv(GLuint program, GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glProgramUniform3f(GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glProgramUniform3fv(GLuint program, GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glProgramUniform3i(GLuint program, GLint location, GLint x, GLint y, GLint z);
+GLEWAPI void glProgramUniform3iv(GLuint program, GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glProgramUniform3ui(GLuint program, GLint location, GLuint x, GLuint y, GLuint z);
+GLEWAPI void glProgramUniform3uiv(GLuint program, GLint location, GLsizei count, const GLuint* value);
+GLEWAPI void glProgramUniform4d(GLuint program, GLint location, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glProgramUniform4dv(GLuint program, GLint location, GLsizei count, const GLdouble* value);
+GLEWAPI void glProgramUniform4f(GLuint program, GLint location, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glProgramUniform4fv(GLuint program, GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glProgramUniform4i(GLuint program, GLint location, GLint x, GLint y, GLint z, GLint w);
+GLEWAPI void glProgramUniform4iv(GLuint program, GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glProgramUniform4ui(GLuint program, GLint location, GLuint x, GLuint y, GLuint z, GLuint w);
+GLEWAPI void glProgramUniform4uiv(GLuint program, GLint location, GLsizei count, const GLuint* value);
+GLEWAPI void glProgramUniformMatrix2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix2x3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix2x3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix2x4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix2x4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix3x2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix3x2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix3x4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix3x4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix4dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix4fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix4x2dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix4x2fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix4x3dv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLdouble* value);
+GLEWAPI void glProgramUniformMatrix4x3fv(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glUseProgramStages(GLuint pipeline, GLbitfield stages, GLuint program);
+GLEWAPI void glValidateProgramPipeline(GLuint pipeline);
+
+GLEWAPI void glGetActiveAtomicCounterBufferiv(GLuint program, GLuint bufferIndex, GLenum pname, GLint* params);
+
+GLEWAPI void glBindImageTexture(GLuint unit, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLenum format);
+GLEWAPI void glMemoryBarrier(GLbitfield barriers);
+
+GLEWAPI void glAttachObjectARB(GLhandleARB containerObj, GLhandleARB obj);
+GLEWAPI void glCompileShaderARB(GLhandleARB shaderObj);
+GLEWAPI GLhandleARB glCreateProgramObjectARB(void);
+GLEWAPI GLhandleARB glCreateShaderObjectARB(GLenum shaderType);
+GLEWAPI void glDeleteObjectARB(GLhandleARB obj);
+GLEWAPI void glDetachObjectARB(GLhandleARB containerObj, GLhandleARB attachedObj);
+GLEWAPI void glGetActiveUniformARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei* length, GLint *size, GLenum *type, GLcharARB *name);
+GLEWAPI void glGetAttachedObjectsARB(GLhandleARB containerObj, GLsizei maxCount, GLsizei* count, GLhandleARB *obj);
+GLEWAPI GLhandleARB glGetHandleARB(GLenum pname);
+GLEWAPI void glGetInfoLogARB(GLhandleARB obj, GLsizei maxLength, GLsizei* length, GLcharARB *infoLog);
+GLEWAPI void glGetObjectParameterfvARB(GLhandleARB obj, GLenum pname, GLfloat* params);
+GLEWAPI void glGetObjectParameterivARB(GLhandleARB obj, GLenum pname, GLint* params);
+GLEWAPI void glGetShaderSourceARB(GLhandleARB obj, GLsizei maxLength, GLsizei* length, GLcharARB *source);
+GLEWAPI GLint glGetUniformLocationARB(GLhandleARB programObj, const GLcharARB* name);
+GLEWAPI void glGetUniformfvARB(GLhandleARB programObj, GLint location, GLfloat* params);
+GLEWAPI void glGetUniformivARB(GLhandleARB programObj, GLint location, GLint* params);
+GLEWAPI void glLinkProgramARB(GLhandleARB programObj);
+GLEWAPI void glShaderSourceARB(GLhandleARB shaderObj, GLsizei count, const GLcharARB ** string, const GLint *length);
+GLEWAPI void glUniform1fARB(GLint location, GLfloat v0);
+GLEWAPI void glUniform1fvARB(GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glUniform1iARB(GLint location, GLint v0);
+GLEWAPI void glUniform1ivARB(GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glUniform2fARB(GLint location, GLfloat v0, GLfloat v1);
+GLEWAPI void glUniform2fvARB(GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glUniform2iARB(GLint location, GLint v0, GLint v1);
+GLEWAPI void glUniform2ivARB(GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glUniform3fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
+GLEWAPI void glUniform3fvARB(GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glUniform3iARB(GLint location, GLint v0, GLint v1, GLint v2);
+GLEWAPI void glUniform3ivARB(GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glUniform4fARB(GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+GLEWAPI void glUniform4fvARB(GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glUniform4iARB(GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
+GLEWAPI void glUniform4ivARB(GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glUniformMatrix2fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glUniformMatrix3fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glUniformMatrix4fvARB(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glUseProgramObjectARB(GLhandleARB programObj);
+GLEWAPI void glValidateProgramARB(GLhandleARB programObj);
+
+GLEWAPI void glGetActiveSubroutineName(GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei* length, char *name);
+GLEWAPI void glGetActiveSubroutineUniformName(GLuint program, GLenum shadertype, GLuint index, GLsizei bufsize, GLsizei* length, char *name);
+GLEWAPI void glGetActiveSubroutineUniformiv(GLuint program, GLenum shadertype, GLuint index, GLenum pname, GLint* values);
+GLEWAPI void glGetProgramStageiv(GLuint program, GLenum shadertype, GLenum pname, GLint* values);
+GLEWAPI GLuint glGetSubroutineIndex(GLuint program, GLenum shadertype, const char* name);
+GLEWAPI GLint glGetSubroutineUniformLocation(GLuint program, GLenum shadertype, const char* name);
+GLEWAPI void glGetUniformSubroutineuiv(GLenum shadertype, GLint location, GLuint* params);
+GLEWAPI void glUniformSubroutinesuiv(GLenum shadertype, GLsizei count, const GLuint* indices);
+
+GLEWAPI void glCompileShaderIncludeARB(GLuint shader, GLsizei count, const char ** path, const GLint *length);
+GLEWAPI void glDeleteNamedStringARB(GLint namelen, const char* name);
+GLEWAPI void glGetNamedStringARB(GLint namelen, const char* name, GLsizei bufSize, GLint *stringlen, char *string);
+GLEWAPI void glGetNamedStringivARB(GLint namelen, const char* name, GLenum pname, GLint *params);
+GLEWAPI GLboolean glIsNamedStringARB(GLint namelen, const char* name);
+GLEWAPI void glNamedStringARB(GLenum type, GLint namelen, const char* name, GLint stringlen, const char *string);
+
+GLEWAPI GLenum glClientWaitSync(GLsync GLsync,GLbitfield flags,GLuint64 timeout);
+GLEWAPI void glDeleteSync(GLsync GLsync);
+GLEWAPI GLsync glFenceSync(GLenum condition,GLbitfield flags);
+GLEWAPI void glGetInteger64v(GLenum pname, GLint64* params);
+GLEWAPI void glGetSynciv(GLsync GLsync,GLenum pname,GLsizei bufSize,GLsizei* length, GLint *values);
+GLEWAPI GLboolean glIsSync(GLsync GLsync);
+GLEWAPI void glWaitSync(GLsync GLsync,GLbitfield flags,GLuint64 timeout);
+
+GLEWAPI void glPatchParameterfv(GLenum pname, const GLfloat* values);
+GLEWAPI void glPatchParameteri(GLenum pname, GLint value);
+
+GLEWAPI void glTexBufferARB(GLenum target, GLenum internalformat, GLuint buffer);
+
+GLEWAPI void glCompressedTexImage1DARB(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTexImage2DARB(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTexImage3DARB(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTexSubImage1DARB(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTexSubImage2DARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTexSubImage3DARB(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data);
+GLEWAPI void glGetCompressedTexImageARB(GLenum target, GLint lod, void* img);
+
+GLEWAPI void glGetMultisamplefv(GLenum pname, GLuint index, GLfloat* val);
+GLEWAPI void glSampleMaski(GLuint index, GLbitfield mask);
+GLEWAPI void glTexImage2DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations);
+GLEWAPI void glTexImage3DMultisample(GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations);
+
+GLEWAPI void glTexStorage1D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
+GLEWAPI void glTexStorage2D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
+GLEWAPI void glTexStorage3D(GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
+GLEWAPI void glTextureStorage1DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width);
+GLEWAPI void glTextureStorage2DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height);
+GLEWAPI void glTextureStorage3DEXT(GLuint texture, GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth);
+
+GLEWAPI void glGetQueryObjecti64v(GLuint id, GLenum pname, GLint64* params);
+GLEWAPI void glGetQueryObjectui64v(GLuint id, GLenum pname, GLuint64* params);
+GLEWAPI void glQueryCounter(GLuint id, GLenum target);
+
+GLEWAPI void glBindTransformFeedback(GLenum target, GLuint id);
+GLEWAPI void glDeleteTransformFeedbacks(GLsizei n, const GLuint* ids);
+GLEWAPI void glDrawTransformFeedback(GLenum mode, GLuint id);
+GLEWAPI void glGenTransformFeedbacks(GLsizei n, GLuint* ids);
+GLEWAPI GLboolean glIsTransformFeedback(GLuint id);
+GLEWAPI void glPauseTransformFeedback(void);
+GLEWAPI void glResumeTransformFeedback(void);
+
+GLEWAPI void glBeginQueryIndexed(GLenum target, GLuint index, GLuint id);
+GLEWAPI void glDrawTransformFeedbackStream(GLenum mode, GLuint id, GLuint stream);
+GLEWAPI void glEndQueryIndexed(GLenum target, GLuint index);
+GLEWAPI void glGetQueryIndexediv(GLenum target, GLuint index, GLenum pname, GLint* params);
+
+GLEWAPI void glDrawTransformFeedbackInstanced(GLenum mode, GLuint id, GLsizei primcount);
+GLEWAPI void glDrawTransformFeedbackStreamInstanced(GLenum mode, GLuint id, GLuint stream, GLsizei primcount);
+
+GLEWAPI void glLoadTransposeMatrixdARB(GLdouble m[16]);
+GLEWAPI void glLoadTransposeMatrixfARB(GLfloat m[16]);
+GLEWAPI void glMultTransposeMatrixdARB(GLdouble m[16]);
+GLEWAPI void glMultTransposeMatrixfARB(GLfloat m[16]);
+
+GLEWAPI void glBindBufferBase(GLenum target, GLuint index, GLuint buffer);
+GLEWAPI void glBindBufferRange(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
+GLEWAPI void glGetActiveUniformBlockName(GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei* length, char* uniformBlockName);
+GLEWAPI void glGetActiveUniformBlockiv(GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint* params);
+GLEWAPI void glGetActiveUniformName(GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei* length, char* uniformName);
+GLEWAPI void glGetActiveUniformsiv(GLuint program, GLsizei uniformCount, const GLuint* uniformIndices, GLenum pname, GLint* params);
+GLEWAPI void glGetIntegeri_v(GLenum target, GLuint index, GLint* data);
+GLEWAPI GLuint glGetUniformBlockIndex(GLuint program, const char* uniformBlockName);
+GLEWAPI void glGetUniformIndices(GLuint program, GLsizei uniformCount, const char** uniformNames, GLuint* uniformIndices);
+GLEWAPI void glUniformBlockBinding(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding);
+
+GLEWAPI void glBindVertexArray(GLuint array);
+GLEWAPI void glDeleteVertexArrays(GLsizei n, const GLuint* arrays);
+GLEWAPI void glGenVertexArrays(GLsizei n, GLuint* arrays);
+GLEWAPI GLboolean glIsVertexArray(GLuint array);
+
+GLEWAPI void glGetVertexAttribLdv(GLuint index, GLenum pname, GLdouble* params);
+GLEWAPI void glVertexAttribL1d(GLuint index, GLdouble x);
+GLEWAPI void glVertexAttribL1dv(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttribL2d(GLuint index, GLdouble x, GLdouble y);
+GLEWAPI void glVertexAttribL2dv(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttribL3d(GLuint index, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glVertexAttribL3dv(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttribL4d(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glVertexAttribL4dv(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttribLPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer);
+
+GLEWAPI void glVertexBlendARB(GLint count);
+GLEWAPI void glWeightPointerARB(GLint size, GLenum type, GLsizei stride, GLvoid *pointer);
+GLEWAPI void glWeightbvARB(GLint size, GLbyte *weights);
+GLEWAPI void glWeightdvARB(GLint size, GLdouble *weights);
+GLEWAPI void glWeightfvARB(GLint size, GLfloat *weights);
+GLEWAPI void glWeightivARB(GLint size, GLint *weights);
+GLEWAPI void glWeightsvARB(GLint size, GLshort *weights);
+GLEWAPI void glWeightubvARB(GLint size, GLubyte *weights);
+GLEWAPI void glWeightuivARB(GLint size, GLuint *weights);
+GLEWAPI void glWeightusvARB(GLint size, GLushort *weights);
+
+GLEWAPI void glBindBufferARB(GLenum target, GLuint buffer);
+GLEWAPI void glBufferDataARB(GLenum target, GLsizeiptrARB size, const GLvoid* data, GLenum usage);
+GLEWAPI void glBufferSubDataARB(GLenum target, GLintptrARB offset, GLsizeiptrARB size, const GLvoid* data);
+GLEWAPI void glDeleteBuffersARB(GLsizei n, const GLuint* buffers);
+GLEWAPI void glGenBuffersARB(GLsizei n, GLuint* buffers);
+GLEWAPI void glGetBufferParameterivARB(GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetBufferPointervARB(GLenum target, GLenum pname, GLvoid** params);
+GLEWAPI void glGetBufferSubDataARB(GLenum target, GLintptrARB offset, GLsizeiptrARB size, GLvoid* data);
+GLEWAPI GLboolean glIsBufferARB(GLuint buffer);
+GLEWAPI GLvoid * glMapBufferARB(GLenum target, GLenum access);
+GLEWAPI GLboolean glUnmapBufferARB(GLenum target);
+
+GLEWAPI void glBindProgramARB(GLenum target, GLuint program);
+GLEWAPI void glDeleteProgramsARB(GLsizei n, const GLuint* programs);
+GLEWAPI void glDisableVertexAttribArrayARB(GLuint index);
+GLEWAPI void glEnableVertexAttribArrayARB(GLuint index);
+GLEWAPI void glGenProgramsARB(GLsizei n, GLuint* programs);
+GLEWAPI void glGetProgramEnvParameterdvARB(GLenum target, GLuint index, GLdouble* params);
+GLEWAPI void glGetProgramEnvParameterfvARB(GLenum target, GLuint index, GLfloat* params);
+GLEWAPI void glGetProgramLocalParameterdvARB(GLenum target, GLuint index, GLdouble* params);
+GLEWAPI void glGetProgramLocalParameterfvARB(GLenum target, GLuint index, GLfloat* params);
+GLEWAPI void glGetProgramStringARB(GLenum target, GLenum pname, void* string);
+GLEWAPI void glGetProgramivARB(GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetVertexAttribPointervARB(GLuint index, GLenum pname, GLvoid** pointer);
+GLEWAPI void glGetVertexAttribdvARB(GLuint index, GLenum pname, GLdouble* params);
+GLEWAPI void glGetVertexAttribfvARB(GLuint index, GLenum pname, GLfloat* params);
+GLEWAPI void glGetVertexAttribivARB(GLuint index, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsProgramARB(GLuint program);
+GLEWAPI void glProgramEnvParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glProgramEnvParameter4dvARB(GLenum target, GLuint index, const GLdouble* params);
+GLEWAPI void glProgramEnvParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glProgramEnvParameter4fvARB(GLenum target, GLuint index, const GLfloat* params);
+GLEWAPI void glProgramLocalParameter4dARB(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glProgramLocalParameter4dvARB(GLenum target, GLuint index, const GLdouble* params);
+GLEWAPI void glProgramLocalParameter4fARB(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glProgramLocalParameter4fvARB(GLenum target, GLuint index, const GLfloat* params);
+GLEWAPI void glProgramStringARB(GLenum target, GLenum format, GLsizei len, const void* string);
+GLEWAPI void glVertexAttrib1dARB(GLuint index, GLdouble x);
+GLEWAPI void glVertexAttrib1dvARB(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib1fARB(GLuint index, GLfloat x);
+GLEWAPI void glVertexAttrib1fvARB(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib1sARB(GLuint index, GLshort x);
+GLEWAPI void glVertexAttrib1svARB(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib2dARB(GLuint index, GLdouble x, GLdouble y);
+GLEWAPI void glVertexAttrib2dvARB(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib2fARB(GLuint index, GLfloat x, GLfloat y);
+GLEWAPI void glVertexAttrib2fvARB(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib2sARB(GLuint index, GLshort x, GLshort y);
+GLEWAPI void glVertexAttrib2svARB(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib3dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glVertexAttrib3dvARB(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib3fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glVertexAttrib3fvARB(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib3sARB(GLuint index, GLshort x, GLshort y, GLshort z);
+GLEWAPI void glVertexAttrib3svARB(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib4NbvARB(GLuint index, const GLbyte* v);
+GLEWAPI void glVertexAttrib4NivARB(GLuint index, const GLint* v);
+GLEWAPI void glVertexAttrib4NsvARB(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib4NubARB(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
+GLEWAPI void glVertexAttrib4NubvARB(GLuint index, const GLubyte* v);
+GLEWAPI void glVertexAttrib4NuivARB(GLuint index, const GLuint* v);
+GLEWAPI void glVertexAttrib4NusvARB(GLuint index, const GLushort* v);
+GLEWAPI void glVertexAttrib4bvARB(GLuint index, const GLbyte* v);
+GLEWAPI void glVertexAttrib4dARB(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glVertexAttrib4dvARB(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib4fARB(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glVertexAttrib4fvARB(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib4ivARB(GLuint index, const GLint* v);
+GLEWAPI void glVertexAttrib4sARB(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
+GLEWAPI void glVertexAttrib4svARB(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib4ubvARB(GLuint index, const GLubyte* v);
+GLEWAPI void glVertexAttrib4uivARB(GLuint index, const GLuint* v);
+GLEWAPI void glVertexAttrib4usvARB(GLuint index, const GLushort* v);
+GLEWAPI void glVertexAttribPointerARB(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer);
+
+GLEWAPI void glBindAttribLocationARB(GLhandleARB programObj, GLuint index, const GLcharARB* name);
+GLEWAPI void glGetActiveAttribARB(GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei* length, GLint *size, GLenum *type, GLcharARB *name);
+GLEWAPI GLint glGetAttribLocationARB(GLhandleARB programObj, const GLcharARB* name);
+
+GLEWAPI void glColorP3ui(GLenum type, GLuint color);
+GLEWAPI void glColorP3uiv(GLenum type, const GLuint* color);
+GLEWAPI void glColorP4ui(GLenum type, GLuint color);
+GLEWAPI void glColorP4uiv(GLenum type, const GLuint* color);
+GLEWAPI void glMultiTexCoordP1ui(GLenum texture, GLenum type, GLuint coords);
+GLEWAPI void glMultiTexCoordP1uiv(GLenum texture, GLenum type, const GLuint* coords);
+GLEWAPI void glMultiTexCoordP2ui(GLenum texture, GLenum type, GLuint coords);
+GLEWAPI void glMultiTexCoordP2uiv(GLenum texture, GLenum type, const GLuint* coords);
+GLEWAPI void glMultiTexCoordP3ui(GLenum texture, GLenum type, GLuint coords);
+GLEWAPI void glMultiTexCoordP3uiv(GLenum texture, GLenum type, const GLuint* coords);
+GLEWAPI void glMultiTexCoordP4ui(GLenum texture, GLenum type, GLuint coords);
+GLEWAPI void glMultiTexCoordP4uiv(GLenum texture, GLenum type, const GLuint* coords);
+GLEWAPI void glNormalP3ui(GLenum type, GLuint coords);
+GLEWAPI void glNormalP3uiv(GLenum type, const GLuint* coords);
+GLEWAPI void glSecondaryColorP3ui(GLenum type, GLuint color);
+GLEWAPI void glSecondaryColorP3uiv(GLenum type, const GLuint* color);
+GLEWAPI void glTexCoordP1ui(GLenum type, GLuint coords);
+GLEWAPI void glTexCoordP1uiv(GLenum type, const GLuint* coords);
+GLEWAPI void glTexCoordP2ui(GLenum type, GLuint coords);
+GLEWAPI void glTexCoordP2uiv(GLenum type, const GLuint* coords);
+GLEWAPI void glTexCoordP3ui(GLenum type, GLuint coords);
+GLEWAPI void glTexCoordP3uiv(GLenum type, const GLuint* coords);
+GLEWAPI void glTexCoordP4ui(GLenum type, GLuint coords);
+GLEWAPI void glTexCoordP4uiv(GLenum type, const GLuint* coords);
+GLEWAPI void glVertexAttribP1ui(GLuint index, GLenum type, GLboolean normalized, GLuint value);
+GLEWAPI void glVertexAttribP1uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value);
+GLEWAPI void glVertexAttribP2ui(GLuint index, GLenum type, GLboolean normalized, GLuint value);
+GLEWAPI void glVertexAttribP2uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value);
+GLEWAPI void glVertexAttribP3ui(GLuint index, GLenum type, GLboolean normalized, GLuint value);
+GLEWAPI void glVertexAttribP3uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value);
+GLEWAPI void glVertexAttribP4ui(GLuint index, GLenum type, GLboolean normalized, GLuint value);
+GLEWAPI void glVertexAttribP4uiv(GLuint index, GLenum type, GLboolean normalized, const GLuint* value);
+GLEWAPI void glVertexP2ui(GLenum type, GLuint value);
+GLEWAPI void glVertexP2uiv(GLenum type, const GLuint* value);
+GLEWAPI void glVertexP3ui(GLenum type, GLuint value);
+GLEWAPI void glVertexP3uiv(GLenum type, const GLuint* value);
+GLEWAPI void glVertexP4ui(GLenum type, GLuint value);
+GLEWAPI void glVertexP4uiv(GLenum type, const GLuint* value);
+
+GLEWAPI void glDepthRangeArrayv(GLuint first, GLsizei count, const GLclampd * v);
+GLEWAPI void glDepthRangeIndexed(GLuint index, GLclampd n, GLclampd f);
+GLEWAPI void glGetDoublei_v(GLenum target, GLuint index, GLdouble* data);
+GLEWAPI void glGetFloati_v(GLenum target, GLuint index, GLfloat* data);
+GLEWAPI void glScissorArrayv(GLuint first, GLsizei count, const GLint * v);
+GLEWAPI void glScissorIndexed(GLuint index, GLint left, GLint bottom, GLsizei width, GLsizei height);
+GLEWAPI void glScissorIndexedv(GLuint index, const GLint * v);
+GLEWAPI void glViewportArrayv(GLuint first, GLsizei count, const GLfloat * v);
+GLEWAPI void glViewportIndexedf(GLuint index, GLfloat x, GLfloat y, GLfloat w, GLfloat h);
+GLEWAPI void glViewportIndexedfv(GLuint index, const GLfloat * v);
+
+GLEWAPI void glWindowPos2dARB(GLdouble x, GLdouble y);
+GLEWAPI void glWindowPos2dvARB(const GLdouble* p);
+GLEWAPI void glWindowPos2fARB(GLfloat x, GLfloat y);
+GLEWAPI void glWindowPos2fvARB(const GLfloat* p);
+GLEWAPI void glWindowPos2iARB(GLint x, GLint y);
+GLEWAPI void glWindowPos2ivARB(const GLint* p);
+GLEWAPI void glWindowPos2sARB(GLshort x, GLshort y);
+GLEWAPI void glWindowPos2svARB(const GLshort* p);
+GLEWAPI void glWindowPos3dARB(GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glWindowPos3dvARB(const GLdouble* p);
+GLEWAPI void glWindowPos3fARB(GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glWindowPos3fvARB(const GLfloat* p);
+GLEWAPI void glWindowPos3iARB(GLint x, GLint y, GLint z);
+GLEWAPI void glWindowPos3ivARB(const GLint* p);
+GLEWAPI void glWindowPos3sARB(GLshort x, GLshort y, GLshort z);
+GLEWAPI void glWindowPos3svARB(const GLshort* p);
+
+GLEWAPI void glDrawBuffersATI(GLsizei n, const GLenum* bufs);
+
+GLEWAPI void glDrawElementArrayATI(GLenum mode, GLsizei count);
+GLEWAPI void glDrawRangeElementArrayATI(GLenum mode, GLuint start, GLuint end, GLsizei count);
+GLEWAPI void glElementPointerATI(GLenum type, const void* pointer);
+
+GLEWAPI void glGetTexBumpParameterfvATI(GLenum pname, GLfloat *param);
+GLEWAPI void glGetTexBumpParameterivATI(GLenum pname, GLint *param);
+GLEWAPI void glTexBumpParameterfvATI(GLenum pname, GLfloat *param);
+GLEWAPI void glTexBumpParameterivATI(GLenum pname, GLint *param);
+
+GLEWAPI void glAlphaFragmentOp1ATI(GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
+GLEWAPI void glAlphaFragmentOp2ATI(GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
+GLEWAPI void glAlphaFragmentOp3ATI(GLenum op, GLuint dst, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
+GLEWAPI void glBeginFragmentShaderATI(void);
+GLEWAPI void glBindFragmentShaderATI(GLuint id);
+GLEWAPI void glColorFragmentOp1ATI(GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod);
+GLEWAPI void glColorFragmentOp2ATI(GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod);
+GLEWAPI void glColorFragmentOp3ATI(GLenum op, GLuint dst, GLuint dstMask, GLuint dstMod, GLuint arg1, GLuint arg1Rep, GLuint arg1Mod, GLuint arg2, GLuint arg2Rep, GLuint arg2Mod, GLuint arg3, GLuint arg3Rep, GLuint arg3Mod);
+GLEWAPI void glDeleteFragmentShaderATI(GLuint id);
+GLEWAPI void glEndFragmentShaderATI(void);
+GLEWAPI GLuint glGenFragmentShadersATI(GLuint range);
+GLEWAPI void glPassTexCoordATI(GLuint dst, GLuint coord, GLenum swizzle);
+GLEWAPI void glSampleMapATI(GLuint dst, GLuint interp, GLenum swizzle);
+GLEWAPI void glSetFragmentShaderConstantATI(GLuint dst, const GLfloat* value);
+
+GLEWAPI void* glMapObjectBufferATI(GLuint buffer);
+GLEWAPI void glUnmapObjectBufferATI(GLuint buffer);
+
+GLEWAPI void glPNTrianglesfATI(GLenum pname, GLfloat param);
+GLEWAPI void glPNTrianglesiATI(GLenum pname, GLint param);
+
+GLEWAPI void glStencilFuncSeparateATI(GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask);
+GLEWAPI void glStencilOpSeparateATI(GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass);
+
+GLEWAPI void glArrayObjectATI(GLenum array, GLint size, GLenum type, GLsizei stride, GLuint buffer, GLuint offset);
+GLEWAPI void glFreeObjectBufferATI(GLuint buffer);
+GLEWAPI void glGetArrayObjectfvATI(GLenum array, GLenum pname, GLfloat* params);
+GLEWAPI void glGetArrayObjectivATI(GLenum array, GLenum pname, GLint* params);
+GLEWAPI void glGetObjectBufferfvATI(GLuint buffer, GLenum pname, GLfloat* params);
+GLEWAPI void glGetObjectBufferivATI(GLuint buffer, GLenum pname, GLint* params);
+GLEWAPI void glGetVariantArrayObjectfvATI(GLuint id, GLenum pname, GLfloat* params);
+GLEWAPI void glGetVariantArrayObjectivATI(GLuint id, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsObjectBufferATI(GLuint buffer);
+GLEWAPI GLuint glNewObjectBufferATI(GLsizei size, const void* pointer, GLenum usage);
+GLEWAPI void glUpdateObjectBufferATI(GLuint buffer, GLuint offset, GLsizei size, const void* pointer, GLenum preserve);
+GLEWAPI void glVariantArrayObjectATI(GLuint id, GLenum type, GLsizei stride, GLuint buffer, GLuint offset);
+
+GLEWAPI void glGetVertexAttribArrayObjectfvATI(GLuint index, GLenum pname, GLfloat* params);
+GLEWAPI void glGetVertexAttribArrayObjectivATI(GLuint index, GLenum pname, GLint* params);
+GLEWAPI void glVertexAttribArrayObjectATI(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLuint buffer, GLuint offset);
+
+GLEWAPI void glClientActiveVertexStreamATI(GLenum stream);
+GLEWAPI void glNormalStream3bATI(GLenum stream, GLbyte x, GLbyte y, GLbyte z);
+GLEWAPI void glNormalStream3bvATI(GLenum stream, const GLbyte *v);
+GLEWAPI void glNormalStream3dATI(GLenum stream, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glNormalStream3dvATI(GLenum stream, const GLdouble *v);
+GLEWAPI void glNormalStream3fATI(GLenum stream, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glNormalStream3fvATI(GLenum stream, const GLfloat *v);
+GLEWAPI void glNormalStream3iATI(GLenum stream, GLint x, GLint y, GLint z);
+GLEWAPI void glNormalStream3ivATI(GLenum stream, const GLint *v);
+GLEWAPI void glNormalStream3sATI(GLenum stream, GLshort x, GLshort y, GLshort z);
+GLEWAPI void glNormalStream3svATI(GLenum stream, const GLshort *v);
+GLEWAPI void glVertexBlendEnvfATI(GLenum pname, GLfloat param);
+GLEWAPI void glVertexBlendEnviATI(GLenum pname, GLint param);
+GLEWAPI void glVertexStream2dATI(GLenum stream, GLdouble x, GLdouble y);
+GLEWAPI void glVertexStream2dvATI(GLenum stream, const GLdouble *v);
+GLEWAPI void glVertexStream2fATI(GLenum stream, GLfloat x, GLfloat y);
+GLEWAPI void glVertexStream2fvATI(GLenum stream, const GLfloat *v);
+GLEWAPI void glVertexStream2iATI(GLenum stream, GLint x, GLint y);
+GLEWAPI void glVertexStream2ivATI(GLenum stream, const GLint *v);
+GLEWAPI void glVertexStream2sATI(GLenum stream, GLshort x, GLshort y);
+GLEWAPI void glVertexStream2svATI(GLenum stream, const GLshort *v);
+GLEWAPI void glVertexStream3dATI(GLenum stream, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glVertexStream3dvATI(GLenum stream, const GLdouble *v);
+GLEWAPI void glVertexStream3fATI(GLenum stream, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glVertexStream3fvATI(GLenum stream, const GLfloat *v);
+GLEWAPI void glVertexStream3iATI(GLenum stream, GLint x, GLint y, GLint z);
+GLEWAPI void glVertexStream3ivATI(GLenum stream, const GLint *v);
+GLEWAPI void glVertexStream3sATI(GLenum stream, GLshort x, GLshort y, GLshort z);
+GLEWAPI void glVertexStream3svATI(GLenum stream, const GLshort *v);
+GLEWAPI void glVertexStream4dATI(GLenum stream, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glVertexStream4dvATI(GLenum stream, const GLdouble *v);
+GLEWAPI void glVertexStream4fATI(GLenum stream, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glVertexStream4fvATI(GLenum stream, const GLfloat *v);
+GLEWAPI void glVertexStream4iATI(GLenum stream, GLint x, GLint y, GLint z, GLint w);
+GLEWAPI void glVertexStream4ivATI(GLenum stream, const GLint *v);
+GLEWAPI void glVertexStream4sATI(GLenum stream, GLshort x, GLshort y, GLshort z, GLshort w);
+GLEWAPI void glVertexStream4svATI(GLenum stream, const GLshort *v);
+
+GLEWAPI GLint glGetUniformBufferSizeEXT(GLuint program, GLint location);
+GLEWAPI GLintptr glGetUniformOffsetEXT(GLuint program, GLint location);
+GLEWAPI void glUniformBufferEXT(GLuint program, GLint location, GLuint buffer);
+
+GLEWAPI void glBlendColorEXT(GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
+
+GLEWAPI void glBlendEquationSeparateEXT(GLenum modeRGB, GLenum modeAlpha);
+
+GLEWAPI void glBlendFuncSeparateEXT(GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha);
+
+GLEWAPI void glBlendEquationEXT(GLenum mode);
+
+GLEWAPI void glColorSubTableEXT(GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const void* data);
+GLEWAPI void glCopyColorSubTableEXT(GLenum target, GLsizei start, GLint x, GLint y, GLsizei width);
+
+GLEWAPI void glLockArraysEXT(GLint first, GLsizei count);
+GLEWAPI void glUnlockArraysEXT(void);
+
+GLEWAPI void glConvolutionFilter1DEXT(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void* image);
+GLEWAPI void glConvolutionFilter2DEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* image);
+GLEWAPI void glConvolutionParameterfEXT(GLenum target, GLenum pname, GLfloat param);
+GLEWAPI void glConvolutionParameterfvEXT(GLenum target, GLenum pname, const GLfloat* params);
+GLEWAPI void glConvolutionParameteriEXT(GLenum target, GLenum pname, GLint param);
+GLEWAPI void glConvolutionParameterivEXT(GLenum target, GLenum pname, const GLint* params);
+GLEWAPI void glCopyConvolutionFilter1DEXT(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width);
+GLEWAPI void glCopyConvolutionFilter2DEXT(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glGetConvolutionFilterEXT(GLenum target, GLenum format, GLenum type, void* image);
+GLEWAPI void glGetConvolutionParameterfvEXT(GLenum target, GLenum pname, GLfloat* params);
+GLEWAPI void glGetConvolutionParameterivEXT(GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetSeparableFilterEXT(GLenum target, GLenum format, GLenum type, void* row, void* column, void* span);
+GLEWAPI void glSeparableFilter2DEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* row, const void* column);
+
+GLEWAPI void glBinormalPointerEXT(GLenum type, GLsizei stride, void* pointer);
+GLEWAPI void glTangentPointerEXT(GLenum type, GLsizei stride, void* pointer);
+
+GLEWAPI void glCopyTexImage1DEXT(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border);
+GLEWAPI void glCopyTexImage2DEXT(GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
+GLEWAPI void glCopyTexSubImage1DEXT(GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
+GLEWAPI void glCopyTexSubImage2DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glCopyTexSubImage3DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+
+GLEWAPI void glCullParameterdvEXT(GLenum pname, GLdouble* params);
+GLEWAPI void glCullParameterfvEXT(GLenum pname, GLfloat* params);
+
+GLEWAPI void glDepthBoundsEXT(GLclampd zmin, GLclampd zmax);
+
+GLEWAPI void glBindMultiTextureEXT(GLenum texunit, GLenum target, GLuint texture);
+GLEWAPI GLenum glCheckNamedFramebufferStatusEXT(GLuint framebuffer, GLenum target);
+GLEWAPI void glClientAttribDefaultEXT(GLbitfield mask);
+GLEWAPI void glCompressedMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void* data);
+GLEWAPI void glCompressedTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void* data);
+GLEWAPI void glCopyMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border);
+GLEWAPI void glCopyMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
+GLEWAPI void glCopyMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
+GLEWAPI void glCopyMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glCopyMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glCopyTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border);
+GLEWAPI void glCopyTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border);
+GLEWAPI void glCopyTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width);
+GLEWAPI void glCopyTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glCopyTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height);
+GLEWAPI void glDisableClientStateIndexedEXT(GLenum array, GLuint index);
+GLEWAPI void glDisableClientStateiEXT(GLenum array, GLuint index);
+GLEWAPI void glDisableVertexArrayAttribEXT(GLuint vaobj, GLuint index);
+GLEWAPI void glDisableVertexArrayEXT(GLuint vaobj, GLenum array);
+GLEWAPI void glEnableClientStateIndexedEXT(GLenum array, GLuint index);
+GLEWAPI void glEnableClientStateiEXT(GLenum array, GLuint index);
+GLEWAPI void glEnableVertexArrayAttribEXT(GLuint vaobj, GLuint index);
+GLEWAPI void glEnableVertexArrayEXT(GLuint vaobj, GLenum array);
+GLEWAPI void glFlushMappedNamedBufferRangeEXT(GLuint buffer, GLintptr offset, GLsizeiptr length);
+GLEWAPI void glFramebufferDrawBufferEXT(GLuint framebuffer, GLenum mode);
+GLEWAPI void glFramebufferDrawBuffersEXT(GLuint framebuffer, GLsizei n, const GLenum* bufs);
+GLEWAPI void glFramebufferReadBufferEXT(GLuint framebuffer, GLenum mode);
+GLEWAPI void glGenerateMultiTexMipmapEXT(GLenum texunit, GLenum target);
+GLEWAPI void glGenerateTextureMipmapEXT(GLuint texture, GLenum target);
+GLEWAPI void glGetCompressedMultiTexImageEXT(GLenum texunit, GLenum target, GLint level, void* img);
+GLEWAPI void glGetCompressedTextureImageEXT(GLuint texture, GLenum target, GLint level, void* img);
+GLEWAPI void glGetDoubleIndexedvEXT(GLenum target, GLuint index, GLdouble* params);
+GLEWAPI void glGetDoublei_vEXT(GLenum pname, GLuint index, GLdouble* params);
+GLEWAPI void glGetFloatIndexedvEXT(GLenum target, GLuint index, GLfloat* params);
+GLEWAPI void glGetFloati_vEXT(GLenum pname, GLuint index, GLfloat* params);
+GLEWAPI void glGetFramebufferParameterivEXT(GLuint framebuffer, GLenum pname, GLint* param);
+GLEWAPI void glGetMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat* params);
+GLEWAPI void glGetMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum pname, GLdouble* params);
+GLEWAPI void glGetMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum pname, GLfloat* params);
+GLEWAPI void glGetMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum pname, GLint* params);
+GLEWAPI void glGetMultiTexImageEXT(GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void* pixels);
+GLEWAPI void glGetMultiTexLevelParameterfvEXT(GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat* params);
+GLEWAPI void glGetMultiTexLevelParameterivEXT(GLenum texunit, GLenum target, GLint level, GLenum pname, GLint* params);
+GLEWAPI void glGetMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum pname, GLuint* params);
+GLEWAPI void glGetMultiTexParameterfvEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat* params);
+GLEWAPI void glGetMultiTexParameterivEXT(GLenum texunit, GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetNamedBufferParameterivEXT(GLuint buffer, GLenum pname, GLint* params);
+GLEWAPI void glGetNamedBufferPointervEXT(GLuint buffer, GLenum pname, void** params);
+GLEWAPI void glGetNamedBufferSubDataEXT(GLuint buffer, GLintptr offset, GLsizeiptr size, void* data);
+GLEWAPI void glGetNamedFramebufferAttachmentParameterivEXT(GLuint framebuffer, GLenum attachment, GLenum pname, GLint* params);
+GLEWAPI void glGetNamedProgramLocalParameterIivEXT(GLuint program, GLenum target, GLuint index, GLint* params);
+GLEWAPI void glGetNamedProgramLocalParameterIuivEXT(GLuint program, GLenum target, GLuint index, GLuint* params);
+GLEWAPI void glGetNamedProgramLocalParameterdvEXT(GLuint program, GLenum target, GLuint index, GLdouble* params);
+GLEWAPI void glGetNamedProgramLocalParameterfvEXT(GLuint program, GLenum target, GLuint index, GLfloat* params);
+GLEWAPI void glGetNamedProgramStringEXT(GLuint program, GLenum target, GLenum pname, void* string);
+GLEWAPI void glGetNamedProgramivEXT(GLuint program, GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetNamedRenderbufferParameterivEXT(GLuint renderbuffer, GLenum pname, GLint* params);
+GLEWAPI void glGetPointerIndexedvEXT(GLenum target, GLuint index, GLvoid** params);
+GLEWAPI void glGetPointeri_vEXT(GLenum pname, GLuint index, GLvoid** params);
+GLEWAPI void glGetTextureImageEXT(GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void* pixels);
+GLEWAPI void glGetTextureLevelParameterfvEXT(GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat* params);
+GLEWAPI void glGetTextureLevelParameterivEXT(GLuint texture, GLenum target, GLint level, GLenum pname, GLint* params);
+GLEWAPI void glGetTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum pname, GLuint* params);
+GLEWAPI void glGetTextureParameterfvEXT(GLuint texture, GLenum target, GLenum pname, GLfloat* params);
+GLEWAPI void glGetTextureParameterivEXT(GLuint texture, GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetVertexArrayIntegeri_vEXT(GLuint vaobj, GLuint index, GLenum pname, GLint* param);
+GLEWAPI void glGetVertexArrayIntegervEXT(GLuint vaobj, GLenum pname, GLint* param);
+GLEWAPI void glGetVertexArrayPointeri_vEXT(GLuint vaobj, GLuint index, GLenum pname, GLvoid** param);
+GLEWAPI void glGetVertexArrayPointervEXT(GLuint vaobj, GLenum pname, GLvoid** param);
+GLEWAPI GLvoid * glMapNamedBufferEXT(GLuint buffer, GLenum access);
+GLEWAPI GLvoid * glMapNamedBufferRangeEXT(GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access);
+GLEWAPI void glMatrixFrustumEXT(GLenum matrixMode, GLdouble l, GLdouble r, GLdouble b, GLdouble t, GLdouble n, GLdouble f);
+GLEWAPI void glMatrixLoadIdentityEXT(GLenum matrixMode);
+GLEWAPI void glMatrixLoadTransposedEXT(GLenum matrixMode, const GLdouble* m);
+GLEWAPI void glMatrixLoadTransposefEXT(GLenum matrixMode, const GLfloat* m);
+GLEWAPI void glMatrixLoaddEXT(GLenum matrixMode, const GLdouble* m);
+GLEWAPI void glMatrixLoadfEXT(GLenum matrixMode, const GLfloat* m);
+GLEWAPI void glMatrixMultTransposedEXT(GLenum matrixMode, const GLdouble* m);
+GLEWAPI void glMatrixMultTransposefEXT(GLenum matrixMode, const GLfloat* m);
+GLEWAPI void glMatrixMultdEXT(GLenum matrixMode, const GLdouble* m);
+GLEWAPI void glMatrixMultfEXT(GLenum matrixMode, const GLfloat* m);
+GLEWAPI void glMatrixOrthoEXT(GLenum matrixMode, GLdouble l, GLdouble r, GLdouble b, GLdouble t, GLdouble n, GLdouble f);
+GLEWAPI void glMatrixPopEXT(GLenum matrixMode);
+GLEWAPI void glMatrixPushEXT(GLenum matrixMode);
+GLEWAPI void glMatrixRotatedEXT(GLenum matrixMode, GLdouble angle, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glMatrixRotatefEXT(GLenum matrixMode, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glMatrixScaledEXT(GLenum matrixMode, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glMatrixScalefEXT(GLenum matrixMode, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glMatrixTranslatedEXT(GLenum matrixMode, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glMatrixTranslatefEXT(GLenum matrixMode, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glMultiTexBufferEXT(GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer);
+GLEWAPI void glMultiTexCoordPointerEXT(GLenum texunit, GLint size, GLenum type, GLsizei stride, const void* pointer);
+GLEWAPI void glMultiTexEnvfEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat param);
+GLEWAPI void glMultiTexEnvfvEXT(GLenum texunit, GLenum target, GLenum pname, const GLfloat* params);
+GLEWAPI void glMultiTexEnviEXT(GLenum texunit, GLenum target, GLenum pname, GLint param);
+GLEWAPI void glMultiTexEnvivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint* params);
+GLEWAPI void glMultiTexGendEXT(GLenum texunit, GLenum coord, GLenum pname, GLdouble param);
+GLEWAPI void glMultiTexGendvEXT(GLenum texunit, GLenum coord, GLenum pname, const GLdouble* params);
+GLEWAPI void glMultiTexGenfEXT(GLenum texunit, GLenum coord, GLenum pname, GLfloat param);
+GLEWAPI void glMultiTexGenfvEXT(GLenum texunit, GLenum coord, GLenum pname, const GLfloat* params);
+GLEWAPI void glMultiTexGeniEXT(GLenum texunit, GLenum coord, GLenum pname, GLint param);
+GLEWAPI void glMultiTexGenivEXT(GLenum texunit, GLenum coord, GLenum pname, const GLint* params);
+GLEWAPI void glMultiTexImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glMultiTexImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glMultiTexImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glMultiTexParameterIivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint* params);
+GLEWAPI void glMultiTexParameterIuivEXT(GLenum texunit, GLenum target, GLenum pname, const GLuint* params);
+GLEWAPI void glMultiTexParameterfEXT(GLenum texunit, GLenum target, GLenum pname, GLfloat param);
+GLEWAPI void glMultiTexParameterfvEXT(GLenum texunit, GLenum target, GLenum pname, const GLfloat* param);
+GLEWAPI void glMultiTexParameteriEXT(GLenum texunit, GLenum target, GLenum pname, GLint param);
+GLEWAPI void glMultiTexParameterivEXT(GLenum texunit, GLenum target, GLenum pname, const GLint* param);
+GLEWAPI void glMultiTexRenderbufferEXT(GLenum texunit, GLenum target, GLuint renderbuffer);
+GLEWAPI void glMultiTexSubImage1DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glMultiTexSubImage2DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glMultiTexSubImage3DEXT(GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glNamedBufferDataEXT(GLuint buffer, GLsizeiptr size, const void* data, GLenum usage);
+GLEWAPI void glNamedBufferSubDataEXT(GLuint buffer, GLintptr offset, GLsizeiptr size, const void* data);
+GLEWAPI void glNamedCopyBufferSubDataEXT(GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size);
+GLEWAPI void glNamedFramebufferRenderbufferEXT(GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+GLEWAPI void glNamedFramebufferTexture1DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+GLEWAPI void glNamedFramebufferTexture2DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+GLEWAPI void glNamedFramebufferTexture3DEXT(GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset);
+GLEWAPI void glNamedFramebufferTextureEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level);
+GLEWAPI void glNamedFramebufferTextureFaceEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLenum face);
+GLEWAPI void glNamedFramebufferTextureLayerEXT(GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer);
+GLEWAPI void glNamedProgramLocalParameter4dEXT(GLuint program, GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glNamedProgramLocalParameter4dvEXT(GLuint program, GLenum target, GLuint index, const GLdouble* params);
+GLEWAPI void glNamedProgramLocalParameter4fEXT(GLuint program, GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glNamedProgramLocalParameter4fvEXT(GLuint program, GLenum target, GLuint index, const GLfloat* params);
+GLEWAPI void glNamedProgramLocalParameterI4iEXT(GLuint program, GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w);
+GLEWAPI void glNamedProgramLocalParameterI4ivEXT(GLuint program, GLenum target, GLuint index, const GLint* params);
+GLEWAPI void glNamedProgramLocalParameterI4uiEXT(GLuint program, GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
+GLEWAPI void glNamedProgramLocalParameterI4uivEXT(GLuint program, GLenum target, GLuint index, const GLuint* params);
+GLEWAPI void glNamedProgramLocalParameters4fvEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat* params);
+GLEWAPI void glNamedProgramLocalParametersI4ivEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLint* params);
+GLEWAPI void glNamedProgramLocalParametersI4uivEXT(GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint* params);
+GLEWAPI void glNamedProgramStringEXT(GLuint program, GLenum target, GLenum format, GLsizei len, const void* string);
+GLEWAPI void glNamedRenderbufferStorageEXT(GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height);
+GLEWAPI void glNamedRenderbufferStorageMultisampleCoverageEXT(GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height);
+GLEWAPI void glNamedRenderbufferStorageMultisampleEXT(GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+GLEWAPI void glProgramUniform1fEXT(GLuint program, GLint location, GLfloat v0);
+GLEWAPI void glProgramUniform1fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glProgramUniform1iEXT(GLuint program, GLint location, GLint v0);
+GLEWAPI void glProgramUniform1ivEXT(GLuint program, GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glProgramUniform1uiEXT(GLuint program, GLint location, GLuint v0);
+GLEWAPI void glProgramUniform1uivEXT(GLuint program, GLint location, GLsizei count, const GLuint* value);
+GLEWAPI void glProgramUniform2fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1);
+GLEWAPI void glProgramUniform2fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glProgramUniform2iEXT(GLuint program, GLint location, GLint v0, GLint v1);
+GLEWAPI void glProgramUniform2ivEXT(GLuint program, GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glProgramUniform2uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1);
+GLEWAPI void glProgramUniform2uivEXT(GLuint program, GLint location, GLsizei count, const GLuint* value);
+GLEWAPI void glProgramUniform3fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2);
+GLEWAPI void glProgramUniform3fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glProgramUniform3iEXT(GLuint program, GLint location, GLint v0, GLint v1, GLint v2);
+GLEWAPI void glProgramUniform3ivEXT(GLuint program, GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glProgramUniform3uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2);
+GLEWAPI void glProgramUniform3uivEXT(GLuint program, GLint location, GLsizei count, const GLuint* value);
+GLEWAPI void glProgramUniform4fEXT(GLuint program, GLint location, GLfloat v0, GLfloat v1, GLfloat v2, GLfloat v3);
+GLEWAPI void glProgramUniform4fvEXT(GLuint program, GLint location, GLsizei count, const GLfloat* value);
+GLEWAPI void glProgramUniform4iEXT(GLuint program, GLint location, GLint v0, GLint v1, GLint v2, GLint v3);
+GLEWAPI void glProgramUniform4ivEXT(GLuint program, GLint location, GLsizei count, const GLint* value);
+GLEWAPI void glProgramUniform4uiEXT(GLuint program, GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
+GLEWAPI void glProgramUniform4uivEXT(GLuint program, GLint location, GLsizei count, const GLuint* value);
+GLEWAPI void glProgramUniformMatrix2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix2x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix2x4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix3x2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix3x4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix4fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix4x2fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glProgramUniformMatrix4x3fvEXT(GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value);
+GLEWAPI void glPushClientAttribDefaultEXT(GLbitfield mask);
+GLEWAPI void glTextureBufferEXT(GLuint texture, GLenum target, GLenum internalformat, GLuint buffer);
+GLEWAPI void glTextureImage1DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glTextureImage2DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glTextureImage3DEXT(GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glTextureParameterIivEXT(GLuint texture, GLenum target, GLenum pname, const GLint* params);
+GLEWAPI void glTextureParameterIuivEXT(GLuint texture, GLenum target, GLenum pname, const GLuint* params);
+GLEWAPI void glTextureParameterfEXT(GLuint texture, GLenum target, GLenum pname, GLfloat param);
+GLEWAPI void glTextureParameterfvEXT(GLuint texture, GLenum target, GLenum pname, const GLfloat* param);
+GLEWAPI void glTextureParameteriEXT(GLuint texture, GLenum target, GLenum pname, GLint param);
+GLEWAPI void glTextureParameterivEXT(GLuint texture, GLenum target, GLenum pname, const GLint* param);
+GLEWAPI void glTextureRenderbufferEXT(GLuint texture, GLenum target, GLuint renderbuffer);
+GLEWAPI void glTextureSubImage1DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glTextureSubImage2DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glTextureSubImage3DEXT(GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels);
+GLEWAPI GLboolean glUnmapNamedBufferEXT(GLuint buffer);
+GLEWAPI void glVertexArrayColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArrayEdgeFlagOffsetEXT(GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArrayFogCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArrayIndexOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArrayMultiTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLenum texunit, GLint size, GLenum type, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArrayNormalOffsetEXT(GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArraySecondaryColorOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArrayTexCoordOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArrayVertexAttribIOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArrayVertexAttribOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexArrayVertexOffsetEXT(GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset);
+
+GLEWAPI void glColorMaskIndexedEXT(GLuint buf, GLboolean r, GLboolean g, GLboolean b, GLboolean a);
+GLEWAPI void glDisableIndexedEXT(GLenum target, GLuint index);
+GLEWAPI void glEnableIndexedEXT(GLenum target, GLuint index);
+GLEWAPI void glGetBooleanIndexedvEXT(GLenum value, GLuint index, GLboolean* data);
+GLEWAPI void glGetIntegerIndexedvEXT(GLenum value, GLuint index, GLint* data);
+GLEWAPI GLboolean glIsEnabledIndexedEXT(GLenum target, GLuint index);
+
+GLEWAPI void glDrawArraysInstancedEXT(GLenum mode, GLint start, GLsizei count, GLsizei primcount);
+GLEWAPI void glDrawElementsInstancedEXT(GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount);
+
+GLEWAPI void glDrawRangeElementsEXT(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices);
+
+GLEWAPI void glFogCoordPointerEXT(GLenum type, GLsizei stride, const GLvoid *pointer);
+GLEWAPI void glFogCoorddEXT(GLdouble coord);
+GLEWAPI void glFogCoorddvEXT(const GLdouble *coord);
+GLEWAPI void glFogCoordfEXT(GLfloat coord);
+GLEWAPI void glFogCoordfvEXT(const GLfloat *coord);
+
+GLEWAPI void glFragmentColorMaterialEXT(GLenum face, GLenum mode);
+GLEWAPI void glFragmentLightModelfEXT(GLenum pname, GLfloat param);
+GLEWAPI void glFragmentLightModelfvEXT(GLenum pname, GLfloat* params);
+GLEWAPI void glFragmentLightModeliEXT(GLenum pname, GLint param);
+GLEWAPI void glFragmentLightModelivEXT(GLenum pname, GLint* params);
+GLEWAPI void glFragmentLightfEXT(GLenum light, GLenum pname, GLfloat param);
+GLEWAPI void glFragmentLightfvEXT(GLenum light, GLenum pname, GLfloat* params);
+GLEWAPI void glFragmentLightiEXT(GLenum light, GLenum pname, GLint param);
+GLEWAPI void glFragmentLightivEXT(GLenum light, GLenum pname, GLint* params);
+GLEWAPI void glFragmentMaterialfEXT(GLenum face, GLenum pname, const GLfloat param);
+GLEWAPI void glFragmentMaterialfvEXT(GLenum face, GLenum pname, const GLfloat* params);
+GLEWAPI void glFragmentMaterialiEXT(GLenum face, GLenum pname, const GLint param);
+GLEWAPI void glFragmentMaterialivEXT(GLenum face, GLenum pname, const GLint* params);
+GLEWAPI void glGetFragmentLightfvEXT(GLenum light, GLenum pname, GLfloat* params);
+GLEWAPI void glGetFragmentLightivEXT(GLenum light, GLenum pname, GLint* params);
+GLEWAPI void glGetFragmentMaterialfvEXT(GLenum face, GLenum pname, const GLfloat* params);
+GLEWAPI void glGetFragmentMaterialivEXT(GLenum face, GLenum pname, const GLint* params);
+GLEWAPI void glLightEnviEXT(GLenum pname, GLint param);
+
+GLEWAPI void glBlitFramebufferEXT(GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);
+
+GLEWAPI void glRenderbufferStorageMultisampleEXT(GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height);
+
+GLEWAPI void glBindFramebufferEXT(GLenum target, GLuint framebuffer);
+GLEWAPI void glBindRenderbufferEXT(GLenum target, GLuint renderbuffer);
+GLEWAPI GLenum glCheckFramebufferStatusEXT(GLenum target);
+GLEWAPI void glDeleteFramebuffersEXT(GLsizei n, const GLuint* framebuffers);
+GLEWAPI void glDeleteRenderbuffersEXT(GLsizei n, const GLuint* renderbuffers);
+GLEWAPI void glFramebufferRenderbufferEXT(GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer);
+GLEWAPI void glFramebufferTexture1DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+GLEWAPI void glFramebufferTexture2DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level);
+GLEWAPI void glFramebufferTexture3DEXT(GLenum target, GLenum attachment, GLenum textarget, GLuint texture, GLint level, GLint zoffset);
+GLEWAPI void glGenFramebuffersEXT(GLsizei n, GLuint* framebuffers);
+GLEWAPI void glGenRenderbuffersEXT(GLsizei n, GLuint* renderbuffers);
+GLEWAPI void glGenerateMipmapEXT(GLenum target);
+GLEWAPI void glGetFramebufferAttachmentParameterivEXT(GLenum target, GLenum attachment, GLenum pname, GLint* params);
+GLEWAPI void glGetRenderbufferParameterivEXT(GLenum target, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsFramebufferEXT(GLuint framebuffer);
+GLEWAPI GLboolean glIsRenderbufferEXT(GLuint renderbuffer);
+GLEWAPI void glRenderbufferStorageEXT(GLenum target, GLenum internalformat, GLsizei width, GLsizei height);
+
+GLEWAPI void glFramebufferTextureEXT(GLenum target, GLenum attachment, GLuint texture, GLint level);
+GLEWAPI void glFramebufferTextureFaceEXT(GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face);
+GLEWAPI void glProgramParameteriEXT(GLuint program, GLenum pname, GLint value);
+
+GLEWAPI void glProgramEnvParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat* params);
+GLEWAPI void glProgramLocalParameters4fvEXT(GLenum target, GLuint index, GLsizei count, const GLfloat* params);
+
+GLEWAPI void glBindFragDataLocationEXT(GLuint program, GLuint color, const GLchar *name);
+GLEWAPI GLint glGetFragDataLocationEXT(GLuint program, const GLchar *name);
+GLEWAPI void glGetUniformuivEXT(GLuint program, GLint location, GLuint *params);
+GLEWAPI void glGetVertexAttribIivEXT(GLuint index, GLenum pname, GLint *params);
+GLEWAPI void glGetVertexAttribIuivEXT(GLuint index, GLenum pname, GLuint *params);
+GLEWAPI void glUniform1uiEXT(GLint location, GLuint v0);
+GLEWAPI void glUniform1uivEXT(GLint location, GLsizei count, const GLuint *value);
+GLEWAPI void glUniform2uiEXT(GLint location, GLuint v0, GLuint v1);
+GLEWAPI void glUniform2uivEXT(GLint location, GLsizei count, const GLuint *value);
+GLEWAPI void glUniform3uiEXT(GLint location, GLuint v0, GLuint v1, GLuint v2);
+GLEWAPI void glUniform3uivEXT(GLint location, GLsizei count, const GLuint *value);
+GLEWAPI void glUniform4uiEXT(GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3);
+GLEWAPI void glUniform4uivEXT(GLint location, GLsizei count, const GLuint *value);
+GLEWAPI void glVertexAttribI1iEXT(GLuint index, GLint x);
+GLEWAPI void glVertexAttribI1ivEXT(GLuint index, const GLint *v);
+GLEWAPI void glVertexAttribI1uiEXT(GLuint index, GLuint x);
+GLEWAPI void glVertexAttribI1uivEXT(GLuint index, const GLuint *v);
+GLEWAPI void glVertexAttribI2iEXT(GLuint index, GLint x, GLint y);
+GLEWAPI void glVertexAttribI2ivEXT(GLuint index, const GLint *v);
+GLEWAPI void glVertexAttribI2uiEXT(GLuint index, GLuint x, GLuint y);
+GLEWAPI void glVertexAttribI2uivEXT(GLuint index, const GLuint *v);
+GLEWAPI void glVertexAttribI3iEXT(GLuint index, GLint x, GLint y, GLint z);
+GLEWAPI void glVertexAttribI3ivEXT(GLuint index, const GLint *v);
+GLEWAPI void glVertexAttribI3uiEXT(GLuint index, GLuint x, GLuint y, GLuint z);
+GLEWAPI void glVertexAttribI3uivEXT(GLuint index, const GLuint *v);
+GLEWAPI void glVertexAttribI4bvEXT(GLuint index, const GLbyte *v);
+GLEWAPI void glVertexAttribI4iEXT(GLuint index, GLint x, GLint y, GLint z, GLint w);
+GLEWAPI void glVertexAttribI4ivEXT(GLuint index, const GLint *v);
+GLEWAPI void glVertexAttribI4svEXT(GLuint index, const GLshort *v);
+GLEWAPI void glVertexAttribI4ubvEXT(GLuint index, const GLubyte *v);
+GLEWAPI void glVertexAttribI4uiEXT(GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
+GLEWAPI void glVertexAttribI4uivEXT(GLuint index, const GLuint *v);
+GLEWAPI void glVertexAttribI4usvEXT(GLuint index, const GLushort *v);
+GLEWAPI void glVertexAttribIPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+
+GLEWAPI void glGetHistogramEXT(GLenum target, GLboolean reset, GLenum format, GLenum type, void* values);
+GLEWAPI void glGetHistogramParameterfvEXT(GLenum target, GLenum pname, GLfloat* params);
+GLEWAPI void glGetHistogramParameterivEXT(GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetMinmaxEXT(GLenum target, GLboolean reset, GLenum format, GLenum type, void* values);
+GLEWAPI void glGetMinmaxParameterfvEXT(GLenum target, GLenum pname, GLfloat* params);
+GLEWAPI void glGetMinmaxParameterivEXT(GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glHistogramEXT(GLenum target, GLsizei width, GLenum internalformat, GLboolean sink);
+GLEWAPI void glMinmaxEXT(GLenum target, GLenum internalformat, GLboolean sink);
+GLEWAPI void glResetHistogramEXT(GLenum target);
+GLEWAPI void glResetMinmaxEXT(GLenum target);
+
+GLEWAPI void glIndexFuncEXT(GLenum func, GLfloat ref);
+
+GLEWAPI void glIndexMaterialEXT(GLenum face, GLenum mode);
+
+GLEWAPI void glApplyTextureEXT(GLenum mode);
+GLEWAPI void glTextureLightEXT(GLenum pname);
+GLEWAPI void glTextureMaterialEXT(GLenum face, GLenum mode);
+
+GLEWAPI void glMultiDrawArraysEXT(GLenum mode, const GLint* first, const GLsizei *count, GLsizei primcount);
+GLEWAPI void glMultiDrawElementsEXT(GLenum mode, GLsizei* count, GLenum type, const GLvoid **indices, GLsizei primcount);
+
+GLEWAPI void glSampleMaskEXT(GLclampf value, GLboolean invert);
+GLEWAPI void glSamplePatternEXT(GLenum pattern);
+
+GLEWAPI void glColorTableEXT(GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const void* data);
+GLEWAPI void glGetColorTableEXT(GLenum target, GLenum format, GLenum type, void* data);
+GLEWAPI void glGetColorTableParameterfvEXT(GLenum target, GLenum pname, GLfloat* params);
+GLEWAPI void glGetColorTableParameterivEXT(GLenum target, GLenum pname, GLint* params);
+
+GLEWAPI void glGetPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat* params);
+GLEWAPI void glGetPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint* params);
+GLEWAPI void glPixelTransformParameterfEXT(GLenum target, GLenum pname, const GLfloat param);
+GLEWAPI void glPixelTransformParameterfvEXT(GLenum target, GLenum pname, const GLfloat* params);
+GLEWAPI void glPixelTransformParameteriEXT(GLenum target, GLenum pname, const GLint param);
+GLEWAPI void glPixelTransformParameterivEXT(GLenum target, GLenum pname, const GLint* params);
+
+GLEWAPI void glPointParameterfEXT(GLenum pname, GLfloat param);
+GLEWAPI void glPointParameterfvEXT(GLenum pname, const GLfloat* params);
+
+GLEWAPI void glPolygonOffsetEXT(GLfloat factor, GLfloat bias);
+
+GLEWAPI void glProvokingVertexEXT(GLenum mode);
+
+GLEWAPI void glBeginSceneEXT(void);
+GLEWAPI void glEndSceneEXT(void);
+
+GLEWAPI void glSecondaryColor3bEXT(GLbyte red, GLbyte green, GLbyte blue);
+GLEWAPI void glSecondaryColor3bvEXT(const GLbyte *v);
+GLEWAPI void glSecondaryColor3dEXT(GLdouble red, GLdouble green, GLdouble blue);
+GLEWAPI void glSecondaryColor3dvEXT(const GLdouble *v);
+GLEWAPI void glSecondaryColor3fEXT(GLfloat red, GLfloat green, GLfloat blue);
+GLEWAPI void glSecondaryColor3fvEXT(const GLfloat *v);
+GLEWAPI void glSecondaryColor3iEXT(GLint red, GLint green, GLint blue);
+GLEWAPI void glSecondaryColor3ivEXT(const GLint *v);
+GLEWAPI void glSecondaryColor3sEXT(GLshort red, GLshort green, GLshort blue);
+GLEWAPI void glSecondaryColor3svEXT(const GLshort *v);
+GLEWAPI void glSecondaryColor3ubEXT(GLubyte red, GLubyte green, GLubyte blue);
+GLEWAPI void glSecondaryColor3ubvEXT(const GLubyte *v);
+GLEWAPI void glSecondaryColor3uiEXT(GLuint red, GLuint green, GLuint blue);
+GLEWAPI void glSecondaryColor3uivEXT(const GLuint *v);
+GLEWAPI void glSecondaryColor3usEXT(GLushort red, GLushort green, GLushort blue);
+GLEWAPI void glSecondaryColor3usvEXT(const GLushort *v);
+GLEWAPI void glSecondaryColorPointerEXT(GLint size, GLenum type, GLsizei stride, const GLvoid *pointer);
+
+GLEWAPI void glActiveProgramEXT(GLuint program);
+GLEWAPI GLuint glCreateShaderProgramEXT(GLenum type, const char* string);
+GLEWAPI void glUseShaderProgramEXT(GLenum type, GLuint program);
+
+GLEWAPI void glBindImageTextureEXT(GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format);
+GLEWAPI void glMemoryBarrierEXT(GLbitfield barriers);
+
+GLEWAPI void glActiveStencilFaceEXT(GLenum face);
+
+GLEWAPI void glTexSubImage1DEXT(GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glTexSubImage2DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glTexSubImage3DEXT(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels);
+
+GLEWAPI void glTexImage3DEXT(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels);
+
+GLEWAPI void glFramebufferTextureLayerEXT(GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer);
+
+GLEWAPI void glTexBufferEXT(GLenum target, GLenum internalformat, GLuint buffer);
+
+GLEWAPI void glClearColorIiEXT(GLint red, GLint green, GLint blue, GLint alpha);
+GLEWAPI void glClearColorIuiEXT(GLuint red, GLuint green, GLuint blue, GLuint alpha);
+GLEWAPI void glGetTexParameterIivEXT(GLenum target, GLenum pname, GLint *params);
+GLEWAPI void glGetTexParameterIuivEXT(GLenum target, GLenum pname, GLuint *params);
+GLEWAPI void glTexParameterIivEXT(GLenum target, GLenum pname, const GLint *params);
+GLEWAPI void glTexParameterIuivEXT(GLenum target, GLenum pname, const GLuint *params);
+
+GLEWAPI GLboolean glAreTexturesResidentEXT(GLsizei n, const GLuint* textures, GLboolean* residences);
+GLEWAPI void glBindTextureEXT(GLenum target, GLuint texture);
+GLEWAPI void glDeleteTexturesEXT(GLsizei n, const GLuint* textures);
+GLEWAPI void glGenTexturesEXT(GLsizei n, GLuint* textures);
+GLEWAPI GLboolean glIsTextureEXT(GLuint texture);
+GLEWAPI void glPrioritizeTexturesEXT(GLsizei n, const GLuint* textures, const GLclampf* priorities);
+
+GLEWAPI void glTextureNormalEXT(GLenum mode);
+
+GLEWAPI void glGetQueryObjecti64vEXT(GLuint id, GLenum pname, GLint64EXT *params);
+GLEWAPI void glGetQueryObjectui64vEXT(GLuint id, GLenum pname, GLuint64EXT *params);
+
+GLEWAPI void glBeginTransformFeedbackEXT(GLenum primitiveMode);
+GLEWAPI void glBindBufferBaseEXT(GLenum target, GLuint index, GLuint buffer);
+GLEWAPI void glBindBufferOffsetEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset);
+GLEWAPI void glBindBufferRangeEXT(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
+GLEWAPI void glEndTransformFeedbackEXT(void);
+GLEWAPI void glGetTransformFeedbackVaryingEXT(GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLsizei *size, GLenum *type, char *name);
+GLEWAPI void glTransformFeedbackVaryingsEXT(GLuint program, GLsizei count, const char ** varyings, GLenum bufferMode);
+
+GLEWAPI void glArrayElementEXT(GLint i);
+GLEWAPI void glColorPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const void* pointer);
+GLEWAPI void glDrawArraysEXT(GLenum mode, GLint first, GLsizei count);
+GLEWAPI void glEdgeFlagPointerEXT(GLsizei stride, GLsizei count, const GLboolean* pointer);
+GLEWAPI void glIndexPointerEXT(GLenum type, GLsizei stride, GLsizei count, const void* pointer);
+GLEWAPI void glNormalPointerEXT(GLenum type, GLsizei stride, GLsizei count, const void* pointer);
+GLEWAPI void glTexCoordPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const void* pointer);
+GLEWAPI void glVertexPointerEXT(GLint size, GLenum type, GLsizei stride, GLsizei count, const void* pointer);
+
+GLEWAPI void glGetVertexAttribLdvEXT(GLuint index, GLenum pname, GLdouble* params);
+GLEWAPI void glVertexArrayVertexAttribLOffsetEXT(GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset);
+GLEWAPI void glVertexAttribL1dEXT(GLuint index, GLdouble x);
+GLEWAPI void glVertexAttribL1dvEXT(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttribL2dEXT(GLuint index, GLdouble x, GLdouble y);
+GLEWAPI void glVertexAttribL2dvEXT(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttribL3dEXT(GLuint index, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glVertexAttribL3dvEXT(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttribL4dEXT(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glVertexAttribL4dvEXT(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttribLPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer);
+
+GLEWAPI void glBeginVertexShaderEXT(void);
+GLEWAPI GLuint glBindLightParameterEXT(GLenum light, GLenum value);
+GLEWAPI GLuint glBindMaterialParameterEXT(GLenum face, GLenum value);
+GLEWAPI GLuint glBindParameterEXT(GLenum value);
+GLEWAPI GLuint glBindTexGenParameterEXT(GLenum unit, GLenum coord, GLenum value);
+GLEWAPI GLuint glBindTextureUnitParameterEXT(GLenum unit, GLenum value);
+GLEWAPI void glBindVertexShaderEXT(GLuint id);
+GLEWAPI void glDeleteVertexShaderEXT(GLuint id);
+GLEWAPI void glDisableVariantClientStateEXT(GLuint id);
+GLEWAPI void glEnableVariantClientStateEXT(GLuint id);
+GLEWAPI void glEndVertexShaderEXT(void);
+GLEWAPI void glExtractComponentEXT(GLuint res, GLuint src, GLuint num);
+GLEWAPI GLuint glGenSymbolsEXT(GLenum dataType, GLenum storageType, GLenum range, GLuint components);
+GLEWAPI GLuint glGenVertexShadersEXT(GLuint range);
+GLEWAPI void glGetInvariantBooleanvEXT(GLuint id, GLenum value, GLboolean *data);
+GLEWAPI void glGetInvariantFloatvEXT(GLuint id, GLenum value, GLfloat *data);
+GLEWAPI void glGetInvariantIntegervEXT(GLuint id, GLenum value, GLint *data);
+GLEWAPI void glGetLocalConstantBooleanvEXT(GLuint id, GLenum value, GLboolean *data);
+GLEWAPI void glGetLocalConstantFloatvEXT(GLuint id, GLenum value, GLfloat *data);
+GLEWAPI void glGetLocalConstantIntegervEXT(GLuint id, GLenum value, GLint *data);
+GLEWAPI void glGetVariantBooleanvEXT(GLuint id, GLenum value, GLboolean *data);
+GLEWAPI void glGetVariantFloatvEXT(GLuint id, GLenum value, GLfloat *data);
+GLEWAPI void glGetVariantIntegervEXT(GLuint id, GLenum value, GLint *data);
+GLEWAPI void glGetVariantPointervEXT(GLuint id, GLenum value, GLvoid **data);
+GLEWAPI void glInsertComponentEXT(GLuint res, GLuint src, GLuint num);
+GLEWAPI GLboolean glIsVariantEnabledEXT(GLuint id, GLenum cap);
+GLEWAPI void glSetInvariantEXT(GLuint id, GLenum type, GLvoid *addr);
+GLEWAPI void glSetLocalConstantEXT(GLuint id, GLenum type, GLvoid *addr);
+GLEWAPI void glShaderOp1EXT(GLenum op, GLuint res, GLuint arg1);
+GLEWAPI void glShaderOp2EXT(GLenum op, GLuint res, GLuint arg1, GLuint arg2);
+GLEWAPI void glShaderOp3EXT(GLenum op, GLuint res, GLuint arg1, GLuint arg2, GLuint arg3);
+GLEWAPI void glSwizzleEXT(GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW);
+GLEWAPI void glVariantPointerEXT(GLuint id, GLenum type, GLuint stride, GLvoid *addr);
+GLEWAPI void glVariantbvEXT(GLuint id, GLbyte *addr);
+GLEWAPI void glVariantdvEXT(GLuint id, GLdouble *addr);
+GLEWAPI void glVariantfvEXT(GLuint id, GLfloat *addr);
+GLEWAPI void glVariantivEXT(GLuint id, GLint *addr);
+GLEWAPI void glVariantsvEXT(GLuint id, GLshort *addr);
+GLEWAPI void glVariantubvEXT(GLuint id, GLubyte *addr);
+GLEWAPI void glVariantuivEXT(GLuint id, GLuint *addr);
+GLEWAPI void glVariantusvEXT(GLuint id, GLushort *addr);
+GLEWAPI void glWriteMaskEXT(GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW);
+
+GLEWAPI void glVertexWeightPointerEXT(GLint size, GLenum type, GLsizei stride, void* pointer);
+GLEWAPI void glVertexWeightfEXT(GLfloat weight);
+GLEWAPI void glVertexWeightfvEXT(GLfloat* weight);
+
+GLEWAPI GLsync glImportSyncEXT(GLenum external_sync_type, GLintptr external_sync, GLbitfield flags);
+
+GLEWAPI void glFrameTerminatorGREMEDY(void);
+
+GLEWAPI void glStringMarkerGREMEDY(GLsizei len, const void* string);
+
+GLEWAPI void glGetImageTransformParameterfvHP(GLenum target, GLenum pname, const GLfloat* params);
+GLEWAPI void glGetImageTransformParameterivHP(GLenum target, GLenum pname, const GLint* params);
+GLEWAPI void glImageTransformParameterfHP(GLenum target, GLenum pname, const GLfloat param);
+GLEWAPI void glImageTransformParameterfvHP(GLenum target, GLenum pname, const GLfloat* params);
+GLEWAPI void glImageTransformParameteriHP(GLenum target, GLenum pname, const GLint param);
+GLEWAPI void glImageTransformParameterivHP(GLenum target, GLenum pname, const GLint* params);
+
+GLEWAPI void glMultiModeDrawArraysIBM(const GLenum* mode, const GLint *first, const GLsizei *count, GLsizei primcount, GLint modestride);
+GLEWAPI void glMultiModeDrawElementsIBM(const GLenum* mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, GLint modestride);
+
+GLEWAPI void glColorPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
+GLEWAPI void glEdgeFlagPointerListIBM(GLint stride, const GLboolean ** pointer, GLint ptrstride);
+GLEWAPI void glFogCoordPointerListIBM(GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
+GLEWAPI void glIndexPointerListIBM(GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
+GLEWAPI void glNormalPointerListIBM(GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
+GLEWAPI void glSecondaryColorPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
+GLEWAPI void glTexCoordPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
+GLEWAPI void glVertexPointerListIBM(GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride);
+
+GLEWAPI void glColorPointervINTEL(GLint size, GLenum type, const void** pointer);
+GLEWAPI void glNormalPointervINTEL(GLenum type, const void** pointer);
+GLEWAPI void glTexCoordPointervINTEL(GLint size, GLenum type, const void** pointer);
+GLEWAPI void glVertexPointervINTEL(GLint size, GLenum type, const void** pointer);
+
+GLEWAPI void glTexScissorFuncINTEL(GLenum target, GLenum lfunc, GLenum hfunc);
+GLEWAPI void glTexScissorINTEL(GLenum target, GLclampf tlow, GLclampf thigh);
+
+GLEWAPI GLuint glBufferRegionEnabled(void);
+GLEWAPI void glDeleteBufferRegion(GLenum region);
+GLEWAPI void glDrawBufferRegion(GLuint region, GLint x, GLint y, GLsizei width, GLsizei height, GLint xDest, GLint yDest);
+GLEWAPI GLuint glNewBufferRegion(GLenum region);
+GLEWAPI void glReadBufferRegion(GLuint region, GLint x, GLint y, GLsizei width, GLsizei height);
+
+GLEWAPI void glResizeBuffersMESA(void);
+
+GLEWAPI void glWindowPos2dMESA(GLdouble x, GLdouble y);
+GLEWAPI void glWindowPos2dvMESA(const GLdouble* p);
+GLEWAPI void glWindowPos2fMESA(GLfloat x, GLfloat y);
+GLEWAPI void glWindowPos2fvMESA(const GLfloat* p);
+GLEWAPI void glWindowPos2iMESA(GLint x, GLint y);
+GLEWAPI void glWindowPos2ivMESA(const GLint* p);
+GLEWAPI void glWindowPos2sMESA(GLshort x, GLshort y);
+GLEWAPI void glWindowPos2svMESA(const GLshort* p);
+GLEWAPI void glWindowPos3dMESA(GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glWindowPos3dvMESA(const GLdouble* p);
+GLEWAPI void glWindowPos3fMESA(GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glWindowPos3fvMESA(const GLfloat* p);
+GLEWAPI void glWindowPos3iMESA(GLint x, GLint y, GLint z);
+GLEWAPI void glWindowPos3ivMESA(const GLint* p);
+GLEWAPI void glWindowPos3sMESA(GLshort x, GLshort y, GLshort z);
+GLEWAPI void glWindowPos3svMESA(const GLshort* p);
+GLEWAPI void glWindowPos4dMESA(GLdouble x, GLdouble y, GLdouble z, GLdouble);
+GLEWAPI void glWindowPos4dvMESA(const GLdouble* p);
+GLEWAPI void glWindowPos4fMESA(GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glWindowPos4fvMESA(const GLfloat* p);
+GLEWAPI void glWindowPos4iMESA(GLint x, GLint y, GLint z, GLint w);
+GLEWAPI void glWindowPos4ivMESA(const GLint* p);
+GLEWAPI void glWindowPos4sMESA(GLshort x, GLshort y, GLshort z, GLshort w);
+GLEWAPI void glWindowPos4svMESA(const GLshort* p);
+
+GLEWAPI void glBeginConditionalRenderNV(GLuint id, GLenum mode);
+GLEWAPI void glEndConditionalRenderNV(void);
+
+GLEWAPI void glCopyImageSubDataNV(GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth);
+
+GLEWAPI void glClearDepthdNV(GLdouble depth);
+GLEWAPI void glDepthBoundsdNV(GLdouble zmin, GLdouble zmax);
+GLEWAPI void glDepthRangedNV(GLdouble zNear, GLdouble zFar);
+
+GLEWAPI void glEvalMapsNV(GLenum target, GLenum mode);
+GLEWAPI void glGetMapAttribParameterfvNV(GLenum target, GLuint index, GLenum pname, GLfloat* params);
+GLEWAPI void glGetMapAttribParameterivNV(GLenum target, GLuint index, GLenum pname, GLint* params);
+GLEWAPI void glGetMapControlPointsNV(GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLboolean packed, void* points);
+GLEWAPI void glGetMapParameterfvNV(GLenum target, GLenum pname, GLfloat* params);
+GLEWAPI void glGetMapParameterivNV(GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glMapControlPointsNV(GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLint uorder, GLint vorder, GLboolean packed, const void* points);
+GLEWAPI void glMapParameterfvNV(GLenum target, GLenum pname, const GLfloat* params);
+GLEWAPI void glMapParameterivNV(GLenum target, GLenum pname, const GLint* params);
+
+GLEWAPI void glGetMultisamplefvNV(GLenum pname, GLuint index, GLfloat* val);
+GLEWAPI void glSampleMaskIndexedNV(GLuint index, GLbitfield mask);
+GLEWAPI void glTexRenderbufferNV(GLenum target, GLuint renderbuffer);
+
+GLEWAPI void glDeleteFencesNV(GLsizei n, const GLuint* fences);
+GLEWAPI void glFinishFenceNV(GLuint fence);
+GLEWAPI void glGenFencesNV(GLsizei n, GLuint* fences);
+GLEWAPI void glGetFenceivNV(GLuint fence, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsFenceNV(GLuint fence);
+GLEWAPI void glSetFenceNV(GLuint fence, GLenum condition);
+GLEWAPI GLboolean glTestFenceNV(GLuint fence);
+
+GLEWAPI void glGetProgramNamedParameterdvNV(GLuint id, GLsizei len, const GLubyte* name, GLdouble *params);
+GLEWAPI void glGetProgramNamedParameterfvNV(GLuint id, GLsizei len, const GLubyte* name, GLfloat *params);
+GLEWAPI void glProgramNamedParameter4dNV(GLuint id, GLsizei len, const GLubyte* name, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glProgramNamedParameter4dvNV(GLuint id, GLsizei len, const GLubyte* name, const GLdouble v[]);
+GLEWAPI void glProgramNamedParameter4fNV(GLuint id, GLsizei len, const GLubyte* name, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glProgramNamedParameter4fvNV(GLuint id, GLsizei len, const GLubyte* name, const GLfloat v[]);
+
+GLEWAPI void glRenderbufferStorageMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height);
+
+GLEWAPI void glProgramVertexLimitNV(GLenum target, GLint limit);
+
+GLEWAPI void glProgramEnvParameterI4iNV(GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w);
+GLEWAPI void glProgramEnvParameterI4ivNV(GLenum target, GLuint index, const GLint *params);
+GLEWAPI void glProgramEnvParameterI4uiNV(GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
+GLEWAPI void glProgramEnvParameterI4uivNV(GLenum target, GLuint index, const GLuint *params);
+GLEWAPI void glProgramEnvParametersI4ivNV(GLenum target, GLuint index, GLsizei count, const GLint *params);
+GLEWAPI void glProgramEnvParametersI4uivNV(GLenum target, GLuint index, GLsizei count, const GLuint *params);
+GLEWAPI void glProgramLocalParameterI4iNV(GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w);
+GLEWAPI void glProgramLocalParameterI4ivNV(GLenum target, GLuint index, const GLint *params);
+GLEWAPI void glProgramLocalParameterI4uiNV(GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w);
+GLEWAPI void glProgramLocalParameterI4uivNV(GLenum target, GLuint index, const GLuint *params);
+GLEWAPI void glProgramLocalParametersI4ivNV(GLenum target, GLuint index, GLsizei count, const GLint *params);
+GLEWAPI void glProgramLocalParametersI4uivNV(GLenum target, GLuint index, GLsizei count, const GLuint *params);
+
+GLEWAPI void glGetUniformi64vNV(GLuint program, GLint location, GLint64EXT* params);
+GLEWAPI void glGetUniformui64vNV(GLuint program, GLint location, GLuint64EXT* params);
+GLEWAPI void glProgramUniform1i64NV(GLuint program, GLint location, GLint64EXT x);
+GLEWAPI void glProgramUniform1i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT* value);
+GLEWAPI void glProgramUniform1ui64NV(GLuint program, GLint location, GLuint64EXT x);
+GLEWAPI void glProgramUniform1ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
+GLEWAPI void glProgramUniform2i64NV(GLuint program, GLint location, GLint64EXT x, GLint64EXT y);
+GLEWAPI void glProgramUniform2i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT* value);
+GLEWAPI void glProgramUniform2ui64NV(GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y);
+GLEWAPI void glProgramUniform2ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
+GLEWAPI void glProgramUniform3i64NV(GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z);
+GLEWAPI void glProgramUniform3i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT* value);
+GLEWAPI void glProgramUniform3ui64NV(GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
+GLEWAPI void glProgramUniform3ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
+GLEWAPI void glProgramUniform4i64NV(GLuint program, GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
+GLEWAPI void glProgramUniform4i64vNV(GLuint program, GLint location, GLsizei count, const GLint64EXT* value);
+GLEWAPI void glProgramUniform4ui64NV(GLuint program, GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
+GLEWAPI void glProgramUniform4ui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
+GLEWAPI void glUniform1i64NV(GLint location, GLint64EXT x);
+GLEWAPI void glUniform1i64vNV(GLint location, GLsizei count, const GLint64EXT* value);
+GLEWAPI void glUniform1ui64NV(GLint location, GLuint64EXT x);
+GLEWAPI void glUniform1ui64vNV(GLint location, GLsizei count, const GLuint64EXT* value);
+GLEWAPI void glUniform2i64NV(GLint location, GLint64EXT x, GLint64EXT y);
+GLEWAPI void glUniform2i64vNV(GLint location, GLsizei count, const GLint64EXT* value);
+GLEWAPI void glUniform2ui64NV(GLint location, GLuint64EXT x, GLuint64EXT y);
+GLEWAPI void glUniform2ui64vNV(GLint location, GLsizei count, const GLuint64EXT* value);
+GLEWAPI void glUniform3i64NV(GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z);
+GLEWAPI void glUniform3i64vNV(GLint location, GLsizei count, const GLint64EXT* value);
+GLEWAPI void glUniform3ui64NV(GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
+GLEWAPI void glUniform3ui64vNV(GLint location, GLsizei count, const GLuint64EXT* value);
+GLEWAPI void glUniform4i64NV(GLint location, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
+GLEWAPI void glUniform4i64vNV(GLint location, GLsizei count, const GLint64EXT* value);
+GLEWAPI void glUniform4ui64NV(GLint location, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
+GLEWAPI void glUniform4ui64vNV(GLint location, GLsizei count, const GLuint64EXT* value);
+
+GLEWAPI void glColor3hNV(GLhalf red, GLhalf green, GLhalf blue);
+GLEWAPI void glColor3hvNV(const GLhalf* v);
+GLEWAPI void glColor4hNV(GLhalf red, GLhalf green, GLhalf blue, GLhalf alpha);
+GLEWAPI void glColor4hvNV(const GLhalf* v);
+GLEWAPI void glFogCoordhNV(GLhalf fog);
+GLEWAPI void glFogCoordhvNV(const GLhalf* fog);
+GLEWAPI void glMultiTexCoord1hNV(GLenum target, GLhalf s);
+GLEWAPI void glMultiTexCoord1hvNV(GLenum target, const GLhalf* v);
+GLEWAPI void glMultiTexCoord2hNV(GLenum target, GLhalf s, GLhalf t);
+GLEWAPI void glMultiTexCoord2hvNV(GLenum target, const GLhalf* v);
+GLEWAPI void glMultiTexCoord3hNV(GLenum target, GLhalf s, GLhalf t, GLhalf r);
+GLEWAPI void glMultiTexCoord3hvNV(GLenum target, const GLhalf* v);
+GLEWAPI void glMultiTexCoord4hNV(GLenum target, GLhalf s, GLhalf t, GLhalf r, GLhalf q);
+GLEWAPI void glMultiTexCoord4hvNV(GLenum target, const GLhalf* v);
+GLEWAPI void glNormal3hNV(GLhalf nx, GLhalf ny, GLhalf nz);
+GLEWAPI void glNormal3hvNV(const GLhalf* v);
+GLEWAPI void glSecondaryColor3hNV(GLhalf red, GLhalf green, GLhalf blue);
+GLEWAPI void glSecondaryColor3hvNV(const GLhalf* v);
+GLEWAPI void glTexCoord1hNV(GLhalf s);
+GLEWAPI void glTexCoord1hvNV(const GLhalf* v);
+GLEWAPI void glTexCoord2hNV(GLhalf s, GLhalf t);
+GLEWAPI void glTexCoord2hvNV(const GLhalf* v);
+GLEWAPI void glTexCoord3hNV(GLhalf s, GLhalf t, GLhalf r);
+GLEWAPI void glTexCoord3hvNV(const GLhalf* v);
+GLEWAPI void glTexCoord4hNV(GLhalf s, GLhalf t, GLhalf r, GLhalf q);
+GLEWAPI void glTexCoord4hvNV(const GLhalf* v);
+GLEWAPI void glVertex2hNV(GLhalf x, GLhalf y);
+GLEWAPI void glVertex2hvNV(const GLhalf* v);
+GLEWAPI void glVertex3hNV(GLhalf x, GLhalf y, GLhalf z);
+GLEWAPI void glVertex3hvNV(const GLhalf* v);
+GLEWAPI void glVertex4hNV(GLhalf x, GLhalf y, GLhalf z, GLhalf w);
+GLEWAPI void glVertex4hvNV(const GLhalf* v);
+GLEWAPI void glVertexAttrib1hNV(GLuint index, GLhalf x);
+GLEWAPI void glVertexAttrib1hvNV(GLuint index, const GLhalf* v);
+GLEWAPI void glVertexAttrib2hNV(GLuint index, GLhalf x, GLhalf y);
+GLEWAPI void glVertexAttrib2hvNV(GLuint index, const GLhalf* v);
+GLEWAPI void glVertexAttrib3hNV(GLuint index, GLhalf x, GLhalf y, GLhalf z);
+GLEWAPI void glVertexAttrib3hvNV(GLuint index, const GLhalf* v);
+GLEWAPI void glVertexAttrib4hNV(GLuint index, GLhalf x, GLhalf y, GLhalf z, GLhalf w);
+GLEWAPI void glVertexAttrib4hvNV(GLuint index, const GLhalf* v);
+GLEWAPI void glVertexAttribs1hvNV(GLuint index, GLsizei n, const GLhalf* v);
+GLEWAPI void glVertexAttribs2hvNV(GLuint index, GLsizei n, const GLhalf* v);
+GLEWAPI void glVertexAttribs3hvNV(GLuint index, GLsizei n, const GLhalf* v);
+GLEWAPI void glVertexAttribs4hvNV(GLuint index, GLsizei n, const GLhalf* v);
+GLEWAPI void glVertexWeighthNV(GLhalf weight);
+GLEWAPI void glVertexWeighthvNV(const GLhalf* weight);
+
+GLEWAPI void glBeginOcclusionQueryNV(GLuint id);
+GLEWAPI void glDeleteOcclusionQueriesNV(GLsizei n, const GLuint* ids);
+GLEWAPI void glEndOcclusionQueryNV(void);
+GLEWAPI void glGenOcclusionQueriesNV(GLsizei n, GLuint* ids);
+GLEWAPI void glGetOcclusionQueryivNV(GLuint id, GLenum pname, GLint* params);
+GLEWAPI void glGetOcclusionQueryuivNV(GLuint id, GLenum pname, GLuint* params);
+GLEWAPI GLboolean glIsOcclusionQueryNV(GLuint id);
+
+GLEWAPI void glProgramBufferParametersIivNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLint *params);
+GLEWAPI void glProgramBufferParametersIuivNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLuint *params);
+GLEWAPI void glProgramBufferParametersfvNV(GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLfloat *params);
+
+GLEWAPI void glCopyPathNV(GLuint resultPath, GLuint srcPath);
+GLEWAPI void glCoverFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
+GLEWAPI void glCoverFillPathNV(GLuint path, GLenum coverMode);
+GLEWAPI void glCoverStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues);
+GLEWAPI void glCoverStrokePathNV(GLuint name, GLenum coverMode);
+GLEWAPI void glDeletePathsNV(GLuint path, GLsizei range);
+GLEWAPI GLuint glGenPathsNV(GLsizei range);
+GLEWAPI void glGetPathColorGenfvNV(GLenum color, GLenum pname, GLfloat* value);
+GLEWAPI void glGetPathColorGenivNV(GLenum color, GLenum pname, GLint* value);
+GLEWAPI void glGetPathCommandsNV(GLuint name, GLubyte* commands);
+GLEWAPI void glGetPathCoordsNV(GLuint name, GLfloat* coords);
+GLEWAPI void glGetPathDashArrayNV(GLuint name, GLfloat* dashArray);
+GLEWAPI GLfloat glGetPathLengthNV(GLuint path, GLsizei startSegment, GLsizei numSegments);
+GLEWAPI void glGetPathMetricRangeNV(GLbitfield metricQueryMask, GLuint fistPathName, GLsizei numPaths, GLsizei stride, GLfloat* metrics);
+GLEWAPI void glGetPathMetricsNV(GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLsizei stride, GLfloat *metrics);
+GLEWAPI void glGetPathParameterfvNV(GLuint name, GLenum param, GLfloat* value);
+GLEWAPI void glGetPathParameterivNV(GLuint name, GLenum param, GLint* value);
+GLEWAPI void glGetPathSpacingNV(GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing);
+GLEWAPI void glGetPathTexGenfvNV(GLenum texCoordSet, GLenum pname, GLfloat* value);
+GLEWAPI void glGetPathTexGenivNV(GLenum texCoordSet, GLenum pname, GLint* value);
+GLEWAPI void glInterpolatePathsNV(GLuint resultPath, GLuint pathA, GLuint pathB, GLfloat weight);
+GLEWAPI GLboolean glIsPathNV(GLuint path);
+GLEWAPI GLboolean glIsPointInFillPathNV(GLuint path, GLuint mask, GLfloat x, GLfloat y);
+GLEWAPI GLboolean glIsPointInStrokePathNV(GLuint path, GLfloat x, GLfloat y);
+GLEWAPI void glPathColorGenNV(GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat* coeffs);
+GLEWAPI void glPathCommandsNV(GLuint path, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const GLvoid*coords);
+GLEWAPI void glPathCoordsNV(GLuint path, GLsizei numCoords, GLenum coordType, const void* coords);
+GLEWAPI void glPathCoverDepthFuncNV(GLenum zfunc);
+GLEWAPI void glPathDashArrayNV(GLuint path, GLsizei dashCount, const GLfloat* dashArray);
+GLEWAPI void glPathFogGenNV(GLenum genMode);
+GLEWAPI void glPathGlyphRangeNV(GLuint firstPathName, GLenum fontTarget, const void* fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
+GLEWAPI void glPathGlyphsNV(GLuint firstPathName, GLenum fontTarget, const void* fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const GLvoid*charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale);
+GLEWAPI void glPathParameterfNV(GLuint path, GLenum pname, GLfloat value);
+GLEWAPI void glPathParameterfvNV(GLuint path, GLenum pname, const GLfloat* value);
+GLEWAPI void glPathParameteriNV(GLuint path, GLenum pname, GLint value);
+GLEWAPI void glPathParameterivNV(GLuint path, GLenum pname, const GLint* value);
+GLEWAPI void glPathStencilDepthOffsetNV(GLfloat factor, GLint units);
+GLEWAPI void glPathStencilFuncNV(GLenum func, GLint ref, GLuint mask);
+GLEWAPI void glPathStringNV(GLuint path, GLenum format, GLsizei length, const void* pathString);
+GLEWAPI void glPathSubCommandsNV(GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const GLvoid*coords);
+GLEWAPI void glPathSubCoordsNV(GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const void* coords);
+GLEWAPI void glPathTexGenNV(GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat* coeffs);
+GLEWAPI GLboolean glPointAlongPathNV(GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat* x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY);
+GLEWAPI void glStencilFillPathInstancedNV(GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues);
+GLEWAPI void glStencilFillPathNV(GLuint path, GLenum fillMode, GLuint mask);
+GLEWAPI void glStencilStrokePathInstancedNV(GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues);
+GLEWAPI void glStencilStrokePathNV(GLuint path, GLint reference, GLuint mask);
+GLEWAPI void glTransformPathNV(GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat* transformValues);
+GLEWAPI void glWeightPathsNV(GLuint resultPath, GLsizei numPaths, const GLuint paths[], const GLfloat weights[]);
+
+GLEWAPI void glFlushPixelDataRangeNV(GLenum target);
+GLEWAPI void glPixelDataRangeNV(GLenum target, GLsizei length, void* pointer);
+
+GLEWAPI void glPointParameteriNV(GLenum pname, GLint param);
+GLEWAPI void glPointParameterivNV(GLenum pname, const GLint* params);
+
+GLEWAPI void glGetVideoi64vNV(GLuint video_slot, GLenum pname, GLint64EXT* params);
+GLEWAPI void glGetVideoivNV(GLuint video_slot, GLenum pname, GLint* params);
+GLEWAPI void glGetVideoui64vNV(GLuint video_slot, GLenum pname, GLuint64EXT* params);
+GLEWAPI void glGetVideouivNV(GLuint video_slot, GLenum pname, GLuint* params);
+GLEWAPI void glPresentFrameDualFillNV(GLuint video_slot, GLuint64EXT minPresentTime, GLuint beginPresentTimeId, GLuint presentDurationId, GLenum type, GLenum target0, GLuint fill0, GLenum target1, GLuint fill1, GLenum target2, GLuint fill2, GLenum target3, GLuint fill3);
+GLEWAPI void glPresentFrameKeyedNV(GLuint video_slot, GLuint64EXT minPresentTime, GLuint beginPresentTimeId, GLuint presentDurationId, GLenum type, GLenum target0, GLuint fill0, GLuint key0, GLenum target1, GLuint fill1, GLuint key1);
+
+GLEWAPI void glPrimitiveRestartIndexNV(GLuint index);
+GLEWAPI void glPrimitiveRestartNV(void);
+
+GLEWAPI void glCombinerInputNV(GLenum stage, GLenum portion, GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage);
+GLEWAPI void glCombinerOutputNV(GLenum stage, GLenum portion, GLenum abOutput, GLenum cdOutput, GLenum sumOutput, GLenum scale, GLenum bias, GLboolean abDotProduct, GLboolean cdDotProduct, GLboolean muxSum);
+GLEWAPI void glCombinerParameterfNV(GLenum pname, GLfloat param);
+GLEWAPI void glCombinerParameterfvNV(GLenum pname, const GLfloat* params);
+GLEWAPI void glCombinerParameteriNV(GLenum pname, GLint param);
+GLEWAPI void glCombinerParameterivNV(GLenum pname, const GLint* params);
+GLEWAPI void glFinalCombinerInputNV(GLenum variable, GLenum input, GLenum mapping, GLenum componentUsage);
+GLEWAPI void glGetCombinerInputParameterfvNV(GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLfloat* params);
+GLEWAPI void glGetCombinerInputParameterivNV(GLenum stage, GLenum portion, GLenum variable, GLenum pname, GLint* params);
+GLEWAPI void glGetCombinerOutputParameterfvNV(GLenum stage, GLenum portion, GLenum pname, GLfloat* params);
+GLEWAPI void glGetCombinerOutputParameterivNV(GLenum stage, GLenum portion, GLenum pname, GLint* params);
+GLEWAPI void glGetFinalCombinerInputParameterfvNV(GLenum variable, GLenum pname, GLfloat* params);
+GLEWAPI void glGetFinalCombinerInputParameterivNV(GLenum variable, GLenum pname, GLint* params);
+
+GLEWAPI void glCombinerStageParameterfvNV(GLenum stage, GLenum pname, const GLfloat* params);
+GLEWAPI void glGetCombinerStageParameterfvNV(GLenum stage, GLenum pname, GLfloat* params);
+
+GLEWAPI void glGetBufferParameterui64vNV(GLenum target, GLenum pname, GLuint64EXT* params);
+GLEWAPI void glGetIntegerui64vNV(GLenum value, GLuint64EXT* result);
+GLEWAPI void glGetNamedBufferParameterui64vNV(GLuint buffer, GLenum pname, GLuint64EXT* params);
+GLEWAPI GLboolean glIsBufferResidentNV(GLenum target);
+GLEWAPI GLboolean glIsNamedBufferResidentNV(GLuint buffer);
+GLEWAPI void glMakeBufferNonResidentNV(GLenum target);
+GLEWAPI void glMakeBufferResidentNV(GLenum target, GLenum access);
+GLEWAPI void glMakeNamedBufferNonResidentNV(GLuint buffer);
+GLEWAPI void glMakeNamedBufferResidentNV(GLuint buffer, GLenum access);
+GLEWAPI void glProgramUniformui64NV(GLuint program, GLint location, GLuint64EXT value);
+GLEWAPI void glProgramUniformui64vNV(GLuint program, GLint location, GLsizei count, const GLuint64EXT* value);
+GLEWAPI void glUniformui64NV(GLint location, GLuint64EXT value);
+GLEWAPI void glUniformui64vNV(GLint location, GLsizei count, const GLuint64EXT* value);
+
+GLEWAPI void glTextureBarrierNV(void);
+
+GLEWAPI void glTexImage2DMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations);
+GLEWAPI void glTexImage3DMultisampleCoverageNV(GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations);
+GLEWAPI void glTextureImage2DMultisampleCoverageNV(GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations);
+GLEWAPI void glTextureImage2DMultisampleNV(GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLboolean fixedSampleLocations);
+GLEWAPI void glTextureImage3DMultisampleCoverageNV(GLuint texture, GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations);
+GLEWAPI void glTextureImage3DMultisampleNV(GLuint texture, GLenum target, GLsizei samples, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedSampleLocations);
+
+GLEWAPI void glActiveVaryingNV(GLuint program, const GLchar *name);
+GLEWAPI void glBeginTransformFeedbackNV(GLenum primitiveMode);
+GLEWAPI void glBindBufferBaseNV(GLenum target, GLuint index, GLuint buffer);
+GLEWAPI void glBindBufferOffsetNV(GLenum target, GLuint index, GLuint buffer, GLintptr offset);
+GLEWAPI void glBindBufferRangeNV(GLenum target, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size);
+GLEWAPI void glEndTransformFeedbackNV(void);
+GLEWAPI void glGetActiveVaryingNV(GLuint program, GLuint index, GLsizei bufSize, GLsizei *length, GLsizei *size, GLenum *type, GLchar *name);
+GLEWAPI void glGetTransformFeedbackVaryingNV(GLuint program, GLuint index, GLint *location);
+GLEWAPI GLint glGetVaryingLocationNV(GLuint program, const GLchar *name);
+GLEWAPI void glTransformFeedbackAttribsNV(GLuint count, const GLint *attribs, GLenum bufferMode);
+GLEWAPI void glTransformFeedbackVaryingsNV(GLuint program, GLsizei count, const GLint *locations, GLenum bufferMode);
+
+GLEWAPI void glBindTransformFeedbackNV(GLenum target, GLuint id);
+GLEWAPI void glDeleteTransformFeedbacksNV(GLsizei n, const GLuint* ids);
+GLEWAPI void glDrawTransformFeedbackNV(GLenum mode, GLuint id);
+GLEWAPI void glGenTransformFeedbacksNV(GLsizei n, GLuint* ids);
+GLEWAPI GLboolean glIsTransformFeedbackNV(GLuint id);
+GLEWAPI void glPauseTransformFeedbackNV(void);
+GLEWAPI void glResumeTransformFeedbackNV(void);
+
+GLEWAPI void glVDPAUFiniNV(void);
+GLEWAPI void glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei* length, GLint *values);
+GLEWAPI void glVDPAUInitNV(const void* vdpDevice, const GLvoid*getProcAddress);
+GLEWAPI void glVDPAUIsSurfaceNV(GLvdpauSurfaceNV surface);
+GLEWAPI void glVDPAUMapSurfacesNV(GLsizei numSurfaces, const GLvdpauSurfaceNV* surfaces);
+GLEWAPI GLvdpauSurfaceNV glVDPAURegisterOutputSurfaceNV(const void* vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames);
+GLEWAPI GLvdpauSurfaceNV glVDPAURegisterVideoSurfaceNV(const void* vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames);
+GLEWAPI void glVDPAUSurfaceAccessNV(GLvdpauSurfaceNV surface, GLenum access);
+GLEWAPI void glVDPAUUnmapSurfacesNV(GLsizei numSurface, const GLvdpauSurfaceNV* surfaces);
+GLEWAPI void glVDPAUUnregisterSurfaceNV(GLvdpauSurfaceNV surface);
+
+GLEWAPI void glFlushVertexArrayRangeNV(void);
+GLEWAPI void glVertexArrayRangeNV(GLsizei length, void* pointer);
+
+GLEWAPI void glGetVertexAttribLi64vNV(GLuint index, GLenum pname, GLint64EXT* params);
+GLEWAPI void glGetVertexAttribLui64vNV(GLuint index, GLenum pname, GLuint64EXT* params);
+GLEWAPI void glVertexAttribL1i64NV(GLuint index, GLint64EXT x);
+GLEWAPI void glVertexAttribL1i64vNV(GLuint index, const GLint64EXT* v);
+GLEWAPI void glVertexAttribL1ui64NV(GLuint index, GLuint64EXT x);
+GLEWAPI void glVertexAttribL1ui64vNV(GLuint index, const GLuint64EXT* v);
+GLEWAPI void glVertexAttribL2i64NV(GLuint index, GLint64EXT x, GLint64EXT y);
+GLEWAPI void glVertexAttribL2i64vNV(GLuint index, const GLint64EXT* v);
+GLEWAPI void glVertexAttribL2ui64NV(GLuint index, GLuint64EXT x, GLuint64EXT y);
+GLEWAPI void glVertexAttribL2ui64vNV(GLuint index, const GLuint64EXT* v);
+GLEWAPI void glVertexAttribL3i64NV(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z);
+GLEWAPI void glVertexAttribL3i64vNV(GLuint index, const GLint64EXT* v);
+GLEWAPI void glVertexAttribL3ui64NV(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z);
+GLEWAPI void glVertexAttribL3ui64vNV(GLuint index, const GLuint64EXT* v);
+GLEWAPI void glVertexAttribL4i64NV(GLuint index, GLint64EXT x, GLint64EXT y, GLint64EXT z, GLint64EXT w);
+GLEWAPI void glVertexAttribL4i64vNV(GLuint index, const GLint64EXT* v);
+GLEWAPI void glVertexAttribL4ui64NV(GLuint index, GLuint64EXT x, GLuint64EXT y, GLuint64EXT z, GLuint64EXT w);
+GLEWAPI void glVertexAttribL4ui64vNV(GLuint index, const GLuint64EXT* v);
+GLEWAPI void glVertexAttribLFormatNV(GLuint index, GLint size, GLenum type, GLsizei stride);
+
+GLEWAPI void glBufferAddressRangeNV(GLenum pname, GLuint index, GLuint64EXT address, GLsizeiptr length);
+GLEWAPI void glColorFormatNV(GLint size, GLenum type, GLsizei stride);
+GLEWAPI void glEdgeFlagFormatNV(GLsizei stride);
+GLEWAPI void glFogCoordFormatNV(GLenum type, GLsizei stride);
+GLEWAPI void glGetIntegerui64i_vNV(GLenum value, GLuint index, GLuint64EXT result[]);
+GLEWAPI void glIndexFormatNV(GLenum type, GLsizei stride);
+GLEWAPI void glNormalFormatNV(GLenum type, GLsizei stride);
+GLEWAPI void glSecondaryColorFormatNV(GLint size, GLenum type, GLsizei stride);
+GLEWAPI void glTexCoordFormatNV(GLint size, GLenum type, GLsizei stride);
+GLEWAPI void glVertexAttribFormatNV(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride);
+GLEWAPI void glVertexAttribIFormatNV(GLuint index, GLint size, GLenum type, GLsizei stride);
+GLEWAPI void glVertexFormatNV(GLint size, GLenum type, GLsizei stride);
+
+GLEWAPI GLboolean glAreProgramsResidentNV(GLsizei n, const GLuint* ids, GLboolean *residences);
+GLEWAPI void glBindProgramNV(GLenum target, GLuint id);
+GLEWAPI void glDeleteProgramsNV(GLsizei n, const GLuint* ids);
+GLEWAPI void glExecuteProgramNV(GLenum target, GLuint id, const GLfloat* params);
+GLEWAPI void glGenProgramsNV(GLsizei n, GLuint* ids);
+GLEWAPI void glGetProgramParameterdvNV(GLenum target, GLuint index, GLenum pname, GLdouble* params);
+GLEWAPI void glGetProgramParameterfvNV(GLenum target, GLuint index, GLenum pname, GLfloat* params);
+GLEWAPI void glGetProgramStringNV(GLuint id, GLenum pname, GLubyte* program);
+GLEWAPI void glGetProgramivNV(GLuint id, GLenum pname, GLint* params);
+GLEWAPI void glGetTrackMatrixivNV(GLenum target, GLuint address, GLenum pname, GLint* params);
+GLEWAPI void glGetVertexAttribPointervNV(GLuint index, GLenum pname, GLvoid** pointer);
+GLEWAPI void glGetVertexAttribdvNV(GLuint index, GLenum pname, GLdouble* params);
+GLEWAPI void glGetVertexAttribfvNV(GLuint index, GLenum pname, GLfloat* params);
+GLEWAPI void glGetVertexAttribivNV(GLuint index, GLenum pname, GLint* params);
+GLEWAPI GLboolean glIsProgramNV(GLuint id);
+GLEWAPI void glLoadProgramNV(GLenum target, GLuint id, GLsizei len, const GLubyte* program);
+GLEWAPI void glProgramParameter4dNV(GLenum target, GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glProgramParameter4dvNV(GLenum target, GLuint index, const GLdouble* params);
+GLEWAPI void glProgramParameter4fNV(GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glProgramParameter4fvNV(GLenum target, GLuint index, const GLfloat* params);
+GLEWAPI void glProgramParameters4dvNV(GLenum target, GLuint index, GLsizei num, const GLdouble* params);
+GLEWAPI void glProgramParameters4fvNV(GLenum target, GLuint index, GLsizei num, const GLfloat* params);
+GLEWAPI void glRequestResidentProgramsNV(GLsizei n, GLuint* ids);
+GLEWAPI void glTrackMatrixNV(GLenum target, GLuint address, GLenum matrix, GLenum transform);
+GLEWAPI void glVertexAttrib1dNV(GLuint index, GLdouble x);
+GLEWAPI void glVertexAttrib1dvNV(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib1fNV(GLuint index, GLfloat x);
+GLEWAPI void glVertexAttrib1fvNV(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib1sNV(GLuint index, GLshort x);
+GLEWAPI void glVertexAttrib1svNV(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib2dNV(GLuint index, GLdouble x, GLdouble y);
+GLEWAPI void glVertexAttrib2dvNV(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib2fNV(GLuint index, GLfloat x, GLfloat y);
+GLEWAPI void glVertexAttrib2fvNV(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib2sNV(GLuint index, GLshort x, GLshort y);
+GLEWAPI void glVertexAttrib2svNV(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib3dNV(GLuint index, GLdouble x, GLdouble y, GLdouble z);
+GLEWAPI void glVertexAttrib3dvNV(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib3fNV(GLuint index, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glVertexAttrib3fvNV(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib3sNV(GLuint index, GLshort x, GLshort y, GLshort z);
+GLEWAPI void glVertexAttrib3svNV(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib4dNV(GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w);
+GLEWAPI void glVertexAttrib4dvNV(GLuint index, const GLdouble* v);
+GLEWAPI void glVertexAttrib4fNV(GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glVertexAttrib4fvNV(GLuint index, const GLfloat* v);
+GLEWAPI void glVertexAttrib4sNV(GLuint index, GLshort x, GLshort y, GLshort z, GLshort w);
+GLEWAPI void glVertexAttrib4svNV(GLuint index, const GLshort* v);
+GLEWAPI void glVertexAttrib4ubNV(GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w);
+GLEWAPI void glVertexAttrib4ubvNV(GLuint index, const GLubyte* v);
+GLEWAPI void glVertexAttribPointerNV(GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer);
+GLEWAPI void glVertexAttribs1dvNV(GLuint index, GLsizei n, const GLdouble* v);
+GLEWAPI void glVertexAttribs1fvNV(GLuint index, GLsizei n, const GLfloat* v);
+GLEWAPI void glVertexAttribs1svNV(GLuint index, GLsizei n, const GLshort* v);
+GLEWAPI void glVertexAttribs2dvNV(GLuint index, GLsizei n, const GLdouble* v);
+GLEWAPI void glVertexAttribs2fvNV(GLuint index, GLsizei n, const GLfloat* v);
+GLEWAPI void glVertexAttribs2svNV(GLuint index, GLsizei n, const GLshort* v);
+GLEWAPI void glVertexAttribs3dvNV(GLuint index, GLsizei n, const GLdouble* v);
+GLEWAPI void glVertexAttribs3fvNV(GLuint index, GLsizei n, const GLfloat* v);
+GLEWAPI void glVertexAttribs3svNV(GLuint index, GLsizei n, const GLshort* v);
+GLEWAPI void glVertexAttribs4dvNV(GLuint index, GLsizei n, const GLdouble* v);
+GLEWAPI void glVertexAttribs4fvNV(GLuint index, GLsizei n, const GLfloat* v);
+GLEWAPI void glVertexAttribs4svNV(GLuint index, GLsizei n, const GLshort* v);
+GLEWAPI void glVertexAttribs4ubvNV(GLuint index, GLsizei n, const GLubyte* v);
+
+GLEWAPI void glBeginVideoCaptureNV(GLuint video_capture_slot);
+GLEWAPI void glBindVideoCaptureStreamBufferNV(GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLintptrARB offset);
+GLEWAPI void glBindVideoCaptureStreamTextureNV(GLuint video_capture_slot, GLuint stream, GLenum frame_region, GLenum target, GLuint texture);
+GLEWAPI void glEndVideoCaptureNV(GLuint video_capture_slot);
+GLEWAPI void glGetVideoCaptureStreamdvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, GLdouble* params);
+GLEWAPI void glGetVideoCaptureStreamfvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, GLfloat* params);
+GLEWAPI void glGetVideoCaptureStreamivNV(GLuint video_capture_slot, GLuint stream, GLenum pname, GLint* params);
+GLEWAPI void glGetVideoCaptureivNV(GLuint video_capture_slot, GLenum pname, GLint* params);
+GLEWAPI GLenum glVideoCaptureNV(GLuint video_capture_slot, GLuint* sequence_num, GLuint64EXT *capture_time);
+GLEWAPI void glVideoCaptureStreamParameterdvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLdouble* params);
+GLEWAPI void glVideoCaptureStreamParameterfvNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLfloat* params);
+GLEWAPI void glVideoCaptureStreamParameterivNV(GLuint video_capture_slot, GLuint stream, GLenum pname, const GLint* params);
+
+GLEWAPI void glClearDepthfOES(GLclampd depth);
+GLEWAPI void glClipPlanefOES(GLenum plane, const GLfloat* equation);
+GLEWAPI void glDepthRangefOES(GLclampf n, GLclampf f);
+GLEWAPI void glFrustumfOES(GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f);
+GLEWAPI void glGetClipPlanefOES(GLenum plane, GLfloat* equation);
+GLEWAPI void glOrthofOES(GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f);
+
+GLEWAPI void glDetailTexFuncSGIS(GLenum target, GLsizei n, const GLfloat* points);
+GLEWAPI void glGetDetailTexFuncSGIS(GLenum target, GLfloat* points);
+
+GLEWAPI void glFogFuncSGIS(GLsizei n, const GLfloat* points);
+GLEWAPI void glGetFogFuncSGIS(GLfloat* points);
+
+GLEWAPI void glSampleMaskSGIS(GLclampf value, GLboolean invert);
+GLEWAPI void glSamplePatternSGIS(GLenum pattern);
+
+GLEWAPI void glGetSharpenTexFuncSGIS(GLenum target, GLfloat* points);
+GLEWAPI void glSharpenTexFuncSGIS(GLenum target, GLsizei n, const GLfloat* points);
+
+GLEWAPI void glTexImage4DSGIS(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLsizei extent, GLint border, GLenum format, GLenum type, const void* pixels);
+GLEWAPI void glTexSubImage4DSGIS(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint woffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei extent, GLenum format, GLenum type, const void* pixels);
+
+GLEWAPI void glGetTexFilterFuncSGIS(GLenum target, GLenum filter, GLfloat* weights);
+GLEWAPI void glTexFilterFuncSGIS(GLenum target, GLenum filter, GLsizei n, const GLfloat* weights);
+
+GLEWAPI void glAsyncMarkerSGIX(GLuint marker);
+GLEWAPI void glDeleteAsyncMarkersSGIX(GLuint marker, GLsizei range);
+GLEWAPI GLint glFinishAsyncSGIX(GLuint* markerp);
+GLEWAPI GLuint glGenAsyncMarkersSGIX(GLsizei range);
+GLEWAPI GLboolean glIsAsyncMarkerSGIX(GLuint marker);
+GLEWAPI GLint glPollAsyncSGIX(GLuint* markerp);
+
+GLEWAPI void glFlushRasterSGIX(void);
+
+GLEWAPI void glTextureFogSGIX(GLenum pname);
+
+GLEWAPI void glFragmentColorMaterialSGIX(GLenum face, GLenum mode);
+GLEWAPI void glFragmentLightModelfSGIX(GLenum pname, GLfloat param);
+GLEWAPI void glFragmentLightModelfvSGIX(GLenum pname, GLfloat* params);
+GLEWAPI void glFragmentLightModeliSGIX(GLenum pname, GLint param);
+GLEWAPI void glFragmentLightModelivSGIX(GLenum pname, GLint* params);
+GLEWAPI void glFragmentLightfSGIX(GLenum light, GLenum pname, GLfloat param);
+GLEWAPI void glFragmentLightfvSGIX(GLenum light, GLenum pname, GLfloat* params);
+GLEWAPI void glFragmentLightiSGIX(GLenum light, GLenum pname, GLint param);
+GLEWAPI void glFragmentLightivSGIX(GLenum light, GLenum pname, GLint* params);
+GLEWAPI void glFragmentMaterialfSGIX(GLenum face, GLenum pname, const GLfloat param);
+GLEWAPI void glFragmentMaterialfvSGIX(GLenum face, GLenum pname, const GLfloat* params);
+GLEWAPI void glFragmentMaterialiSGIX(GLenum face, GLenum pname, const GLint param);
+GLEWAPI void glFragmentMaterialivSGIX(GLenum face, GLenum pname, const GLint* params);
+GLEWAPI void glGetFragmentLightfvSGIX(GLenum light, GLenum value, GLfloat* data);
+GLEWAPI void glGetFragmentLightivSGIX(GLenum light, GLenum value, GLint* data);
+GLEWAPI void glGetFragmentMaterialfvSGIX(GLenum face, GLenum pname, const GLfloat* data);
+GLEWAPI void glGetFragmentMaterialivSGIX(GLenum face, GLenum pname, const GLint* data);
+
+GLEWAPI void glFrameZoomSGIX(GLint factor);
+
+GLEWAPI void glPixelTexGenSGIX(GLenum mode);
+
+GLEWAPI void glReferencePlaneSGIX(const GLdouble* equation);
+
+GLEWAPI void glSpriteParameterfSGIX(GLenum pname, GLfloat param);
+GLEWAPI void glSpriteParameterfvSGIX(GLenum pname, GLfloat* params);
+GLEWAPI void glSpriteParameteriSGIX(GLenum pname, GLint param);
+GLEWAPI void glSpriteParameterivSGIX(GLenum pname, GLint* params);
+
+GLEWAPI void glTagSampleBufferSGIX(void);
+
+GLEWAPI void glColorTableParameterfvSGI(GLenum target, GLenum pname, const GLfloat* params);
+GLEWAPI void glColorTableParameterivSGI(GLenum target, GLenum pname, const GLint* params);
+GLEWAPI void glColorTableSGI(GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void* table);
+GLEWAPI void glCopyColorTableSGI(GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width);
+GLEWAPI void glGetColorTableParameterfvSGI(GLenum target, GLenum pname, GLfloat* params);
+GLEWAPI void glGetColorTableParameterivSGI(GLenum target, GLenum pname, GLint* params);
+GLEWAPI void glGetColorTableSGI(GLenum target, GLenum format, GLenum type, void* table);
+
+GLEWAPI void glFinishTextureSUNX(void);
+
+GLEWAPI void glGlobalAlphaFactorbSUN(GLbyte factor);
+GLEWAPI void glGlobalAlphaFactordSUN(GLdouble factor);
+GLEWAPI void glGlobalAlphaFactorfSUN(GLfloat factor);
+GLEWAPI void glGlobalAlphaFactoriSUN(GLint factor);
+GLEWAPI void glGlobalAlphaFactorsSUN(GLshort factor);
+GLEWAPI void glGlobalAlphaFactorubSUN(GLubyte factor);
+GLEWAPI void glGlobalAlphaFactoruiSUN(GLuint factor);
+GLEWAPI void glGlobalAlphaFactorusSUN(GLushort factor);
+
+GLEWAPI void glReadVideoPixelsSUN(GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid* pixels);
+
+GLEWAPI void glReplacementCodePointerSUN(GLenum type, GLsizei stride, const void* pointer);
+GLEWAPI void glReplacementCodeubSUN(GLubyte code);
+GLEWAPI void glReplacementCodeubvSUN(const GLubyte* code);
+GLEWAPI void glReplacementCodeuiSUN(GLuint code);
+GLEWAPI void glReplacementCodeuivSUN(const GLuint* code);
+GLEWAPI void glReplacementCodeusSUN(GLushort code);
+GLEWAPI void glReplacementCodeusvSUN(const GLushort* code);
+
+GLEWAPI void glColor3fVertex3fSUN(GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glColor3fVertex3fvSUN(const GLfloat* c, const GLfloat *v);
+GLEWAPI void glColor4fNormal3fVertex3fSUN(GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glColor4fNormal3fVertex3fvSUN(const GLfloat* c, const GLfloat *n, const GLfloat *v);
+GLEWAPI void glColor4ubVertex2fSUN(GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y);
+GLEWAPI void glColor4ubVertex2fvSUN(const GLubyte* c, const GLfloat *v);
+GLEWAPI void glColor4ubVertex3fSUN(GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glColor4ubVertex3fvSUN(const GLubyte* c, const GLfloat *v);
+GLEWAPI void glNormal3fVertex3fSUN(GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glNormal3fVertex3fvSUN(const GLfloat* n, const GLfloat *v);
+GLEWAPI void glReplacementCodeuiColor3fVertex3fSUN(GLuint rc, GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glReplacementCodeuiColor3fVertex3fvSUN(const GLuint* rc, const GLfloat *c, const GLfloat *v);
+GLEWAPI void glReplacementCodeuiColor4fNormal3fVertex3fSUN(GLuint rc, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glReplacementCodeuiColor4fNormal3fVertex3fvSUN(const GLuint* rc, const GLfloat *c, const GLfloat *n, const GLfloat *v);
+GLEWAPI void glReplacementCodeuiColor4ubVertex3fSUN(GLuint rc, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glReplacementCodeuiColor4ubVertex3fvSUN(const GLuint* rc, const GLubyte *c, const GLfloat *v);
+GLEWAPI void glReplacementCodeuiNormal3fVertex3fSUN(GLuint rc, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glReplacementCodeuiNormal3fVertex3fvSUN(const GLuint* rc, const GLfloat *n, const GLfloat *v);
+GLEWAPI void glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN(GLuint rc, GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN(const GLuint* rc, const GLfloat *tc, const GLfloat *c, const GLfloat *n, const GLfloat *v);
+GLEWAPI void glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN(GLuint rc, GLfloat s, GLfloat t, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN(const GLuint* rc, const GLfloat *tc, const GLfloat *n, const GLfloat *v);
+GLEWAPI void glReplacementCodeuiTexCoord2fVertex3fSUN(GLuint rc, GLfloat s, GLfloat t, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glReplacementCodeuiTexCoord2fVertex3fvSUN(const GLuint* rc, const GLfloat *tc, const GLfloat *v);
+GLEWAPI void glReplacementCodeuiVertex3fSUN(GLuint rc, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glReplacementCodeuiVertex3fvSUN(const GLuint* rc, const GLfloat *v);
+GLEWAPI void glTexCoord2fColor3fVertex3fSUN(GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glTexCoord2fColor3fVertex3fvSUN(const GLfloat* tc, const GLfloat *c, const GLfloat *v);
+GLEWAPI void glTexCoord2fColor4fNormal3fVertex3fSUN(GLfloat s, GLfloat t, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glTexCoord2fColor4fNormal3fVertex3fvSUN(const GLfloat* tc, const GLfloat *c, const GLfloat *n, const GLfloat *v);
+GLEWAPI void glTexCoord2fColor4ubVertex3fSUN(GLfloat s, GLfloat t, GLubyte r, GLubyte g, GLubyte b, GLubyte a, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glTexCoord2fColor4ubVertex3fvSUN(const GLfloat* tc, const GLubyte *c, const GLfloat *v);
+GLEWAPI void glTexCoord2fNormal3fVertex3fSUN(GLfloat s, GLfloat t, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glTexCoord2fNormal3fVertex3fvSUN(const GLfloat* tc, const GLfloat *n, const GLfloat *v);
+GLEWAPI void glTexCoord2fVertex3fSUN(GLfloat s, GLfloat t, GLfloat x, GLfloat y, GLfloat z);
+GLEWAPI void glTexCoord2fVertex3fvSUN(const GLfloat* tc, const GLfloat *v);
+GLEWAPI void glTexCoord4fColor4fNormal3fVertex4fSUN(GLfloat s, GLfloat t, GLfloat p, GLfloat q, GLfloat r, GLfloat g, GLfloat b, GLfloat a, GLfloat nx, GLfloat ny, GLfloat nz, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glTexCoord4fColor4fNormal3fVertex4fvSUN(const GLfloat* tc, const GLfloat *c, const GLfloat *n, const GLfloat *v);
+GLEWAPI void glTexCoord4fVertex4fSUN(GLfloat s, GLfloat t, GLfloat p, GLfloat q, GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+GLEWAPI void glTexCoord4fVertex4fvSUN(const GLfloat* tc, const GLfloat *v);
+
+GLEWAPI void glAddSwapHintRectWIN(GLint x, GLint y, GLsizei width, GLsizei height);
 
 #if defined(GLEW_MX) && !defined(_WIN32)
 struct GLEWContextStruct

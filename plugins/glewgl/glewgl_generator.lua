@@ -2,6 +2,7 @@
 -- and strip __glew names
 dofile("../_common/misc.lua")
 
+local WRAPPED = true
 
 local function processHeader(name,idir,odir,onlybinding)
   print("processing...",name)
@@ -18,14 +19,15 @@ local function processHeader(name,idir,odir,onlybinding)
   local funcs = {}
   local vars = {}
   local enums = {}
-  local lkfuncnames = {}
+  local lkproc2name = {}
+  local lkproc2func = {}
   
   local lktypes = {}
   local lkenumignore = {}
-  local lkfunctypes = {}
-  local lkfuncmangled = {}
+  local lkproc2type = {}
+  local lkmangled2name = {}
   local lkenumvalue = {}
-  local lkfuncused = {}
+  local lkprocused = {}
   
   local record = false
   local eol
@@ -48,7 +50,7 @@ local function processHeader(name,idir,odir,onlybinding)
       -- ignore "#define glAccum GLEW_GET_FUN(__glewAccum)"
       -- but track name
       local fn,mangled = l:match("#define ([_%w]+) GLEW_GET_FUN%(([_%w]+)%)")
-      lkfuncmangled[mangled] = fn
+      lkmangled2name[mangled] = fn
       
       output = ""
     elseif (l:match("#define GLEW[_%w]+ GLEW_GET_VAR")) then
@@ -57,18 +59,26 @@ local function processHeader(name,idir,odir,onlybinding)
       -- rename __glewFunc to glFunc
       -- and log function
       
-      local pfn,fn = l:match("GLEW_FUN_EXPORT ([_%w]+) ([_%w]+)")
-      fn = lkfuncmangled[fn]
+      local pfn,mangled = l:match("GLEW_FUN_EXPORT ([_%w]+) ([_%w]+)")
+      local fn = lkmangled2name[mangled]
 
-      if (pfn and lkfunctypes[pfn]) then
-        local typ = lkfunctypes[pfn]
-        lkfuncused[pfn] = true
-        lkfuncnames[pfn] = fn
-        local fndef = typ.str:sub(9,-1)
-        fndef = fndef:gsub(pfn,fn)
-        table.insert(funcs, {str=fndef, name = fn})
+      if (pfn and lkproc2type[pfn]) then
+        local typ = lkproc2type[pfn]
+        lkprocused[pfn] = true
+        lkproc2name[pfn] = fn
         
-        output = "GLEW_FUN_EXPORT "..(typ.orig:sub(9,-1):gsub(pfn,fn))
+        local fndef = typ.str:sub(#("typedef ")+1,-1)
+        if (WRAPPED) then
+          fndef = fndef:gsub(pfn,fn)
+          fndef = fndef:gsub("%(%s*%*%s*",""):gsub("%)%s*%(","(")
+          output = "GLEWAPI "..fndef..eol
+        else
+          fndef = fndef:gsub(pfn,fn)
+          output = "GLEW_FUN_EXPORT "..fndef..eol
+        end
+        local func = {str=fndef, name = fn, mangled=mangled}
+        lkproc2func[pfn] = func
+        table.insert(funcs, func)
       else
         output = "GLEW_FUN_EXPORT "..pfn.." "..fn..";"..eol
       end
@@ -103,7 +113,7 @@ local function processHeader(name,idir,odir,onlybinding)
       --  typedef void (GLAPIENTRY * PFNGLACCUMPROC) (GLenum op, GLfloat value);
       local api,pfn = l:match("^typedef [^%(]+ %(([%w]+)%s*%*%s*([_%w]+)%)")
       local fn  = l:match("(.+;)"):gsub(api,"")
-      lkfunctypes[pfn] = {str=fn, name=pfn, orig=l}
+      lkproc2type[pfn] = {str=fn, name=pfn, orig=l}
       
     elseif (record and l:match("typedef ")) then
       -- due to different platform types, let's use the last definition
@@ -118,8 +128,8 @@ local function processHeader(name,idir,odir,onlybinding)
     outheader:write(output)
   end
   
-  for pfn,def in pairs(lkfunctypes) do
-    if (not lkfuncused[pfn]) then
+  for pfn,def in pairs(lkproc2type) do
+    if (not lkprocused[pfn]) then
       table.insert(types,def)
     end
   end
@@ -149,7 +159,7 @@ local function processHeader(name,idir,odir,onlybinding)
     types = types, 
     enums = enums, 
     eol = eol, 
-    lkfuncnames = lkfuncnames, 
+    lkproc2func = lkproc2func,
     exts = exts
     }
 end
@@ -166,18 +176,56 @@ local function processSource(name,idir,odir,gl)
     
     local output = l
     if (l:match("[_%w]+PROC __[_%w]+ = NULL;")) then
-      local pfn,name = l:match("([_%w]+PROC) __[_%w]+ = NULL;")
-      local outname = gl.lkfuncnames[pfn]
-      if (outname) then
-        output = pfn.." "..outname.." = NULL;"..eol
+      local pfn,mangled = l:match("([_%w]+PROC) (__[_%w]+) = NULL;")
+      local func = gl.lkproc2func[pfn]
+      if (func) then
+        if (WRAPPED) then
+          output = "static "..output
+          local returns = func.str:match("^void%s*%w") ~= nil and "" or "return "
+          local args = func.str:match("(%b())")
+          local funcargs = {}
+          local callargs = {}
+          local cnt = 0
+          for arg in args:gmatch("[^,%(%)]+") do
+            local arg = arg:gsub("^%s*",""):gsub("%s*$",""):gsub("%s+"," ")
+            local var = arg:gsub("%b[]","")
+            var = var == "void" and "" or var
+            var = var:match("[_%w]+$")
+            
+            if (arg ~= "void" and (var == arg or not var)) then
+              var = " _a"..cnt
+              arg = arg..var
+            end
+            cnt = cnt + 1
+            table.insert(funcargs,arg)
+            table.insert(callargs,var)
+          end
+          
+          funcargs = "("..table.concat(funcargs,",")..")"
+          callargs = "("..table.concat(callargs,",")..")"
+          
+          local outfunc = func.str:gsub("(%b())",funcargs)
+          
+          output = output..outfunc:sub(1,-2).."{"..returns..mangled..callargs..";}"..eol
+        else
+          output = pfn.." "..outname.." = NULL;"..eol
+        end
       end
-    else
-      output = l:gsub("__glewGetString","glGetString")
+    elseif (WRAPPED and l:match("%(%([_%w]+ = %([_%w]+PROC%)")) then
+      --((glAccum = (PFNGLACCUMPROC)glewGetProcAddress
+      output = l:gsub("%(%(([_%w]+) = %(([_%w]+PROC)%)", 
+        function(fn,pfn)
+          local func = gl.lkproc2func[pfn]
+          if (func) then
+            return "(("..func.mangled.." = ("..pfn..")"
+          else
+            return "(("..fn.." = ("..pfn..")"
+          end
+        end)
     end
     
     outfile:write(output or "")
   end
-  
 end
 
 local function copyFile(name,idir,odir)
@@ -268,7 +316,7 @@ local function makebinding(name,idir,odir,filter,onlybinding)
   table.insert(gl.funcs,{str="GLenum glewInit ();", name = "glewInit"})
   table.insert(gl.funcs,{str="GLboolean glewIsSupported (const char* name);", name = "glewIsSupported"})
 
-  generateBinding(name..".lua",odir,gl,filter)
+  generateBinding(name..(filter and "_filtered" or "")..".lua",odir,gl,filter)
 end
 
 makebinding(
