@@ -365,7 +365,7 @@ private:
   const char*   m_dirname;
 };
 
-std::string ReadFile(const char* filename);
+std::string ReadFileContent(const char* filename);
 
 //////////////////////////////////////////////////////////////////////////
 

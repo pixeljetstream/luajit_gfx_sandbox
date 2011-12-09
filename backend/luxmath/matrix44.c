@@ -322,56 +322,58 @@ LUX_API void lxMatrix44ModifyProjectionClipplane(lxMatrix44PTR projmatrix,lxMatr
 }
 #undef sgn
 
-LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3CPTR forwardn, lxVector3CPTR upn, int axis)
+enum {
+  SIDE,
+  UP,
+  FORWARD,
+  DIRECTIONS,
+};
+LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3CPTR dirnormalized, lxVector3CPTR upn, int diraxis)
 {
-  lxVector3 side;
-  lxVector3 up;
-  lxVector3 forward;
-  lxVector3CPTR x;
-  lxVector3CPTR y;
-  lxVector3CPTR z;
+  // side, up, forward
+  lxVector3 vectors[DIRECTIONS];
+  int x, y, z;
 
-  lxVector3Copy(forward,forwardn);
+  lxVector3Copy(vectors[FORWARD],dirnormalized);
 
-  lxVector3Cross(side,upn,forward);
-  lxVector3Cross(up,forward,side);
+  lxVector3Cross(vectors[SIDE],vectors[FORWARD],upn);
+  lxVector3Cross(vectors[UP],vectors[SIDE],vectors[FORWARD]);
 
-  //Vector3Invert(forward);
-  lxVector3Normalized(side);
-  lxVector3Normalized(up);
+  lxVector3Normalized(vectors[SIDE]);
+  lxVector3Normalized(vectors[UP]);
 
-  switch(axis) {
+  switch(diraxis) {
   case 0:
-    x = forward;
-    y = up;
-    z = side;
+    x = FORWARD;
+    y = UP;
+    z = SIDE;
     break;
   case 1:
-    x = side;
-    y = forward;
-    z = up;
+    x = SIDE;
+    y = FORWARD;
+    z = UP;
     break;
   case 2:
-    x = side;
-    y = up;
-    z = forward;
-    lxVector3Negated(forward);
+    lxVector3Negated(vectors[SIDE]);
+    x = SIDE;
+    y = UP;
+    z = FORWARD;
     break;
   default:
     return;
   }
 
-  mat[0] = x[0];
-  mat[1] = x[1];
-  mat[2] = x[2];
+  mat[0] = vectors[x][0];
+  mat[1] = vectors[x][1];
+  mat[2] = vectors[x][2];
 
-  mat[4] = y[0];
-  mat[5] = y[1];
-  mat[6] = y[2];
+  mat[4] = vectors[y][0];
+  mat[5] = vectors[y][1];
+  mat[6] = vectors[y][2];
 
-  mat[8] = z[0];
-  mat[9] = z[1];
-  mat[10] = z[2];
+  mat[8]  = vectors[z][0];
+  mat[9]  = vectors[z][1];
+  mat[10] = vectors[z][2];
 
 }
 

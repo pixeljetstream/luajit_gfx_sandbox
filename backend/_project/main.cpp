@@ -2,7 +2,7 @@
 // This file is part of the "Luxinia Engine".
 // See copyright notice in luxplatform.h
 
-#include "../_project/project.hpp"
+#include "project.hpp"
 #include <string>
 
 int main(int argc, const char** argv)

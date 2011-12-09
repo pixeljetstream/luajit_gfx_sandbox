@@ -3,7 +3,7 @@ print "glfw-minimal-host"
 local glfw = require "glfw"
 local ffi  = require "ffi"
 local gl   = require "glewgl"
-local svPoll = LXG.svPoll
+local svPoll = LUXGLOBAL.svPoll
 
 local function main()
   assert( glfw.glfwInit() )

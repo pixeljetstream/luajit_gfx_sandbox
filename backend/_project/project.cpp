@@ -12,7 +12,7 @@ using namespace std;
 
 //////////////////////////////////////////////////////////////////////////
 
-std::string ReadFile(const char* filename)
+std::string ReadFileContent(const char* filename)
 {
   string str;
   size_t filesize;
@@ -90,6 +90,10 @@ void RenderHelper::init(GLFWwindow win, const lxCVector3& up)
   m_buttons[0] = 0;
   m_buttons[1] = 0;
   m_buttons[2] = 0;
+
+  m_pansense = 1.0f;
+  m_rotsense = 0.01f;
+  m_zoomsense = 0.01f;
 }
 
 void RenderHelper::cameraOrtho( lxBoundingBox_t* bbox, const lxCVector3* delta )
@@ -291,7 +295,7 @@ GLuint RenderHelper::generateUVTexture( int w, int h )
 
 GLuint RenderHelper::loadShader(GLenum type, const char* filename, const char* prepend )
 {
-  string content = ReadFile(filename);
+  string content = ReadFileContent(filename);
   if (prepend){
     content = string(prepend) + content;
   }
@@ -598,7 +602,7 @@ booln RenderProgram::addStageProgram(lxgProgramStage_t type, const char * filena
 {
   lxgStageProgram_t stage;
   lxgStageProgram_init(&stage, m_program.ctx, type);
-  std::string src = ReadFile(filename);
+  std::string src = ReadFileContent(filename);
   if (prepend){
     src = std::string(prepend) + src;
   }

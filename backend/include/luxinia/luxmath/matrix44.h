@@ -66,7 +66,7 @@ LUX_API void lxMatrix44Invert1(lxMatrix44PTR mat);
 LUX_API void lxMatrix44AffineInvert(lxMatrix44PTR dst, lxMatrix44CPTR src);
 
 // rotation
-LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3CPTR forward,lxVector3CPTR up, int axis);
+LUX_API void lxMatrix44Orient(lxMatrix44PTR mat, lxVector3CPTR dirnormalized, lxVector3CPTR up, int diraxis);
 LUX_API void lxMatrix44LookAt(lxMatrix44PTR mat, lxVector3CPTR from, lxVector3CPTR to, lxVector3CPTR up);
 
 LUX_API void lxMatrix44FromEulerZYX( lxMatrix44PTR mat, lxVector3CPTR angles );

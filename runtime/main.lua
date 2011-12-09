@@ -1,7 +1,7 @@
-if LXG then return end
+if LUXGLOBAL then return end
 
 do
-	LXG = LXG or {}
+	LUXGLOBAL = LUXGLOBAL or {}
 
 	local function luafilename(level)
 		level = level and level + 1 or 2
@@ -50,8 +50,8 @@ do
 	
 	-----------------------------
 	
-	LXG.relpath = relativeFilepath
-	LXG.relfile = relativeFilename
+	LUXGLOBAL.relpath = relativeFilepath
+	LUXGLOBAL.relfile = relativeFilename
 	
 	-----------------------------
 	
@@ -109,8 +109,8 @@ do
 		end
 	end
 	
-	LXG.sleep = sleep
-	LXG.svPoll = function() end
+	LUXGLOBAL.sleep = sleep
+	LUXGLOBAL.svPoll = function() end
 end
 
 local args = {...}
@@ -131,7 +131,7 @@ while (i <= argcnt) do
 	elseif (v == "-s" or v == "--server") then
 		local svInit = dofile("comserver/server.lua")
 		svPoll = svInit(svSetting)
-		LXG.svPoll = svPoll
+		LUXGLOBAL.svPoll = svPoll
 	elseif (v == "-e") then
 		i = i + 1
 		local file = args[i]
@@ -145,7 +145,7 @@ if (exec) then
 	dofile(exec,unpack(args))
 end
 if (svPoll) then
-	local sleep = LXG.sleep
+	local sleep = LUXGLOBAL.sleep
 	while(true) do
 		svPoll()
 		sleep(10)

@@ -24,7 +24,8 @@
     lxContVector_t    nodelvec;
   }lxObjRefSys_t;
 //////////////////////////////////////////////////////////////////////////
-#define OBJREFSYS_ALLOC_PERPAGE ((512-(sizeof(lxObjRef_t)))/(sizeof(lxObjRef_t)))
+#define OBJREFSYS_PAGESIZE        512
+#define OBJREFSYS_ALLOC_PERPAGE ((OBJREFSYS_PAGESIZE-(sizeof(lxObjRef_t)))/(sizeof(lxObjRef_t)))
 
 typedef struct lxObjRefPage_s{
   lxObjRef_t        next; // sacrifice one for pagelist and to keep alignment well
@@ -110,12 +111,17 @@ LUX_API void lxObjRefSys_deinit(lxObjRefSysPTR sys, lxObjRefCheckDelete_fn *func
       }
     }
 
-    lxMemoryAllocator_free(sys->allocator,page,512);
+    lxMemoryAllocator_free(sys->allocator,page,OBJREFSYS_PAGESIZE);
   }
 
   lxContVector_clear(&sys->typeinfovec);
   lxContVector_clear(&sys->nodelvec);
-  memset(sys,0,sizeof(lxObjRefSys_t));
+  {
+    lxMemoryAllocatorPTR allocator = sys->allocator;
+    memset(sys,0,sizeof(lxObjRefSys_t));
+    sys->allocator = allocator;
+  }
+  
 }
 
 LUX_API void lxObjRefSys_register(lxObjRefSysPTR sys, lxObjRefType_t type, lxObjTypeInfo_t infocpy)
@@ -156,8 +162,7 @@ static lxObjRef_t* lxObjRefSys_newAlloc(lxObjRefSysPTR sys){
   }
   else{
     if (allocator->lastinpage == OBJREFSYS_ALLOC_PERPAGE){
-      lxObjRefPage_t *page = (lxObjRefPage_t*)lxMemoryAllocator_malloc(sys->allocator,512);
-      LUX_ASSERT(sizeof(lxObjRefPage_t) <= 512);
+      lxObjRefPage_t *page = (lxObjRefPage_t*)lxMemoryAllocator_calloc(sys->allocator,OBJREFSYS_PAGESIZE,1);
       page->next.id.ptr = allocator->pagelist;      
       allocator->pagelist = page;
       allocator->lastinpage = 0;

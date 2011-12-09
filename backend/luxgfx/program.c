@@ -1692,7 +1692,7 @@ LUX_INLINE LUX_API void lxgContext_updateProgramSubroutines( lxgContextPTR ctx, 
   if (prog->type == LUXGFX_PROGRAM_NV){
     for (i = 0; i < LUXGFX_STAGES; i++){
       if (ctx->program.dirtySubroutines & lxgProgramStage_bit(i)){
-        glProgramSubroutineParametersuivNV(state->typeSubroutines[i],state->numSubroutines[i],state->subroutines[i]);
+        //glProgramSubroutineParametersuivNV(state->typeSubroutines[i],state->numSubroutines[i],state->subroutines[i]);
       }
     }
   }
