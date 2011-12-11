@@ -15,6 +15,9 @@ local function main()
 
   glfw.glfwEnable(window, glfw.GLFW_STICKY_KEYS);
   glfw.glfwSwapInterval(1);
+  gl.glClear(clearbits)
+  
+
   while glfw.glfwIsWindow(window) ~= 0 and glfw.glfwGetKey(window, glfw.GLFW_KEY_ESCAPE) ~= glfw.GLFW_PRESS 
   do
     local t = glfw.glfwGetTime()
