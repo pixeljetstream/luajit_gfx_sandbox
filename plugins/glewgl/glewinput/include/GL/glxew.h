@@ -1348,12 +1348,6 @@ typedef int ( * PFNGLXVIDEORESIZESUNPROC) (Display* display, GLXDrawable window,
 
 /* ------------------------------------------------------------------------- */
 
-#ifdef GLEW_MX
-#define GLXEW_EXPORT
-#else
-#define GLXEW_EXPORT extern
-#endif /* GLEW_MX */
-
 extern PFNGLXGETCURRENTDISPLAYPROC __glewXGetCurrentDisplay;
 
 extern PFNGLXCHOOSEFBCONFIGPROC __glewXChooseFBConfig;
@@ -1485,11 +1479,6 @@ extern PFNGLXGETTRANSPARENTINDEXSUNPROC __glewXGetTransparentIndexSUN;
 extern PFNGLXGETVIDEORESIZESUNPROC __glewXGetVideoResizeSUN;
 extern PFNGLXVIDEORESIZESUNPROC __glewXVideoResizeSUN;
 
-#if defined(GLEW_MX)
-struct GLXEWContextStruct
-{
-#endif /* GLEW_MX */
-
 GLXEW_EXPORT GLboolean __GLXEW_VERSION_1_0;
 GLXEW_EXPORT GLboolean __GLXEW_VERSION_1_1;
 GLXEW_EXPORT GLboolean __GLXEW_VERSION_1_2;
@@ -1551,9 +1540,6 @@ GLXEW_EXPORT GLboolean __GLXEW_SGI_video_sync;
 GLXEW_EXPORT GLboolean __GLXEW_SUN_get_transparent_index;
 GLXEW_EXPORT GLboolean __GLXEW_SUN_video_resize;
 
-#ifdef GLEW_MX
-}; /* GLXEWContextStruct */
-#endif /* GLEW_MX */
 
 /* ------------------------------------------------------------------------ */
 

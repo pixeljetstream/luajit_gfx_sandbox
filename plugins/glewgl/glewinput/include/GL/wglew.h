@@ -1119,16 +1119,7 @@ typedef BOOL (WINAPI * PFNWGLWAITFORSBCOMLPROC) (HDC hdc, INT64 target_sbc, INT6
 
 /* ------------------------------------------------------------------------- */
 
-#ifdef GLEW_MX
-#define WGLEW_EXPORT
-#else
 #define WGLEW_EXPORT GLEWAPI
-#endif /* GLEW_MX */
-
-#ifdef GLEW_MX
-struct WGLEWContextStruct
-{
-#endif /* GLEW_MX */
 
 WGLEW_EXPORT PFNWGLSETSTEREOEMITTERSTATE3DLPROC __wglewSetStereoEmitterState3DL;
 
@@ -1324,10 +1315,6 @@ WGLEW_EXPORT GLboolean __WGLEW_NV_vertex_array_range;
 WGLEW_EXPORT GLboolean __WGLEW_NV_video_capture;
 WGLEW_EXPORT GLboolean __WGLEW_NV_video_output;
 WGLEW_EXPORT GLboolean __WGLEW_OML_sync_control;
-
-#ifdef GLEW_MX
-}; /* WGLEWContextStruct */
-#endif /* GLEW_MX */
 
 /* ------------------------------------------------------------------------- */
 

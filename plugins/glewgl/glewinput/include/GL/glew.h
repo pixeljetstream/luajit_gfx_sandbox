@@ -13732,22 +13732,11 @@ typedef void (GLAPIENTRY * PFNGLADDSWAPHINTRECTWINPROC) (GLint x, GLint y, GLsiz
 
 /* ------------------------------------------------------------------------- */
 
-#if defined(GLEW_MX) && defined(_WIN32)
-#define GLEW_FUN_EXPORT
-#else
+#if defined(_WIN32)
 #define GLEW_FUN_EXPORT GLEWAPI
-#endif /* GLEW_MX */
-
-#if defined(GLEW_MX)
-#define GLEW_VAR_EXPORT
-#else
 #define GLEW_VAR_EXPORT GLEWAPI
 #endif /* GLEW_MX */
 
-#if defined(GLEW_MX) && defined(_WIN32)
-struct GLEWContextStruct
-{
-#endif /* GLEW_MX */
 GLEW_FUN_EXPORT PFNGLACCUMPROC __glewAccum;
 GLEW_FUN_EXPORT PFNGLALPHAFUNCPROC __glewAlphaFunc;
 GLEW_FUN_EXPORT PFNGLARETEXTURESRESIDENTPROC __glewAreTexturesResident;
@@ -16298,11 +16287,6 @@ GLEW_FUN_EXPORT PFNGLTEXCOORD4FVERTEX4FVSUNPROC __glewTexCoord4fVertex4fvSUN;
 
 GLEW_FUN_EXPORT PFNGLADDSWAPHINTRECTWINPROC __glewAddSwapHintRectWIN;
 
-#if defined(GLEW_MX) && !defined(_WIN32)
-struct GLEWContextStruct
-{
-#endif /* GLEW_MX */
-
 GLEW_VAR_EXPORT GLboolean __GLEW_VERSION_1_1;
 GLEW_VAR_EXPORT GLboolean __GLEW_VERSION_1_2;
 GLEW_VAR_EXPORT GLboolean __GLEW_VERSION_1_2_1;
@@ -16736,10 +16720,6 @@ GLEW_VAR_EXPORT GLboolean __GLEW_SUN_vertex;
 GLEW_VAR_EXPORT GLboolean __GLEW_WIN_phong_shading;
 GLEW_VAR_EXPORT GLboolean __GLEW_WIN_specular_fog;
 GLEW_VAR_EXPORT GLboolean __GLEW_WIN_swap_hint;
-
-#ifdef GLEW_MX
-}; /* GLEWContextStruct */
-#endif /* GLEW_MX */
 
 /* ------------------------------------------------------------------------- */
 
