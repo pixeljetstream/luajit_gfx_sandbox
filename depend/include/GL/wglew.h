@@ -1119,16 +1119,7 @@ typedef BOOL (WINAPI * PFNWGLWAITFORSBCOMLPROC) (HDC hdc, INT64 target_sbc, INT6
 
 /* ------------------------------------------------------------------------- */
 
-#ifdef GLEW_MX
-#define WGLEW_EXPORT
-#else
 #define WGLEW_EXPORT GLEWAPI
-#endif /* GLEW_MX */
-
-#ifdef GLEW_MX
-struct WGLEWContextStruct
-{
-#endif /* GLEW_MX */
 
 WGLEW_EXPORT PFNWGLSETSTEREOEMITTERSTATE3DLPROC __wglewSetStereoEmitterState3DL;
 
@@ -1325,32 +1316,12 @@ WGLEW_EXPORT GLboolean __WGLEW_NV_video_capture;
 WGLEW_EXPORT GLboolean __WGLEW_NV_video_output;
 WGLEW_EXPORT GLboolean __WGLEW_OML_sync_control;
 
-#ifdef GLEW_MX
-}; /* WGLEWContextStruct */
-#endif /* GLEW_MX */
-
 /* ------------------------------------------------------------------------- */
-
-#ifdef GLEW_MX
-
-typedef struct WGLEWContextStruct WGLEWContext;
-GLEWAPI GLenum wglewContextInit (WGLEWContext* ctx);
-GLEWAPI GLboolean wglewContextIsSupported (const WGLEWContext* ctx, const char* name);
-
-#define wglewInit() wglewContextInit(wglewGetContext())
-#define wglewIsSupported(x) wglewContextIsSupported(wglewGetContext(), x)
-
-#define WGLEW_GET_VAR(x) (*(const GLboolean*)&(wglewGetContext()->x))
-#define WGLEW_GET_FUN(x) wglewGetContext()->x
-
-#else /* GLEW_MX */
 
 #define WGLEW_GET_VAR(x) (*(const GLboolean*)&x)
 #define WGLEW_GET_FUN(x) x
 
 GLEWAPI GLboolean wglewIsSupported (const char* name);
-
-#endif /* GLEW_MX */
 
 GLEWAPI GLboolean wglewGetExtension (const char* name);
 

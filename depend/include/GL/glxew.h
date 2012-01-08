@@ -1348,11 +1348,7 @@ typedef int ( * PFNGLXVIDEORESIZESUNPROC) (Display* display, GLXDrawable window,
 
 /* ------------------------------------------------------------------------- */
 
-#ifdef GLEW_MX
-#define GLXEW_EXPORT
-#else
 #define GLXEW_EXPORT extern
-#endif /* GLEW_MX */
 
 extern PFNGLXGETCURRENTDISPLAYPROC __glewXGetCurrentDisplay;
 
@@ -1485,11 +1481,6 @@ extern PFNGLXGETTRANSPARENTINDEXSUNPROC __glewXGetTransparentIndexSUN;
 extern PFNGLXGETVIDEORESIZESUNPROC __glewXGetVideoResizeSUN;
 extern PFNGLXVIDEORESIZESUNPROC __glewXVideoResizeSUN;
 
-#if defined(GLEW_MX)
-struct GLXEWContextStruct
-{
-#endif /* GLEW_MX */
-
 GLXEW_EXPORT GLboolean __GLXEW_VERSION_1_0;
 GLXEW_EXPORT GLboolean __GLXEW_VERSION_1_1;
 GLXEW_EXPORT GLboolean __GLXEW_VERSION_1_2;
@@ -1551,32 +1542,13 @@ GLXEW_EXPORT GLboolean __GLXEW_SGI_video_sync;
 GLXEW_EXPORT GLboolean __GLXEW_SUN_get_transparent_index;
 GLXEW_EXPORT GLboolean __GLXEW_SUN_video_resize;
 
-#ifdef GLEW_MX
-}; /* GLXEWContextStruct */
-#endif /* GLEW_MX */
-
 /* ------------------------------------------------------------------------ */
 
-#ifdef GLEW_MX
-
-typedef struct GLXEWContextStruct GLXEWContext;
-extern GLenum glxewContextInit (GLXEWContext* ctx);
-extern GLboolean glxewContextIsSupported (const GLXEWContext* ctx, const char* name);
-
-#define glxewInit() glxewContextInit(glxewGetContext())
-#define glxewIsSupported(x) glxewContextIsSupported(glxewGetContext(), x)
-
-#define GLXEW_GET_VAR(x) (*(const GLboolean*)&(glxewGetContext()->x))
-#define GLXEW_GET_FUN(x) x
-
-#else /* GLEW_MX */
 
 #define GLXEW_GET_VAR(x) (*(const GLboolean*)&x)
 #define GLXEW_GET_FUN(x) x
 
 extern GLboolean glxewIsSupported (const char* name);
-
-#endif /* GLEW_MX */
 
 extern GLboolean glxewGetExtension (const char* name);
 
