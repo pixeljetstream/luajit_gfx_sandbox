@@ -47,9 +47,8 @@ std::string ReadFileContent(const char* filename)
 
 //////////////////////////////////////////////////////////////////////////
 
-void RenderHelper::init(GLFWwindow win, const lxCVector3& up)
+void RenderHelper::init(const lxCVector3& up)
 {
-  m_window = win;
   m_up = up;
 
   glDepthFunc(GL_LEQUAL);
@@ -157,7 +156,7 @@ void RenderHelper::doCameraControl()
 {
   // Mouse Updates
   for (int i = 0; i < 3; i++){
-    int button = glfwGetMouseButton(m_window,i);
+    int button = glfwGetMouseButton(i);
     m_buttonsToggle[i] = button != m_buttons[i];
     m_buttons[i] = button;
   }
@@ -254,7 +253,7 @@ void RenderHelper::update( int width, int height )
   m_winheight = height;
 
   int mx, my;
-  glfwGetMousePos(m_window,&mx,&my);
+  glfwGetMousePos(&mx,&my);
   m_mpos.Set(float(mx),float(my),0);
 }
 

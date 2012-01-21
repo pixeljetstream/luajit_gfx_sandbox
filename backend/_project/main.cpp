@@ -12,13 +12,15 @@ int main(int argc, const char** argv)
   int status = 1;
 
   glfwInit();
-  glfwOpenWindowHint(GLFW_DEPTH_BITS,24);
-  glfwOpenWindowHint(GLFW_STENCIL_BITS,8);
-  GLFWwindow win = glfwOpenWindow(1024,768,GLFW_WINDOWED,caption.c_str(),0);
+  glfwOpenWindow( 640, 480, 8,8,8,8,24,8, GLFW_WINDOW);
+  glfwSetWindowTitle(caption.c_str());
   glewInit();
 
+  glfwDisable(GLFW_AUTO_POLL_EVENTS);
+  glfwSwapInterval(1);
+
   if (test){
-    status = test->onInit(win,argc,argv);
+    status = test->onInit(argc,argv);
   }
   if (status){
     return 0;
@@ -26,11 +28,11 @@ int main(int argc, const char** argv)
 
 
   ProjectManager::Get().initTimer();
-  while( glfwIsWindow(win) && glfwGetKey(win,GLFW_KEY_ESCAPE) != GLFW_PRESS)
+  while( glfwGetWindowParam(GLFW_OPENED) && glfwGetKey(GLFW_KEY_ESC) != GLFW_PRESS)
   {
     int width;
     int height;
-    glfwGetWindowSize(win, &width, &height);
+    glfwGetWindowSize(&width, &height);
     glViewport(0,0,width,height);
 
     status = test->onDraw(width, height);
@@ -45,14 +47,14 @@ int main(int argc, const char** argv)
         char buffer[128];
         double dur = ProjectManager::Get().getLastTime();
         sprintf_s(buffer,128," %.1f ms %5d fps", dur * 1000.0, (int)floor(1.0/dur));
-        glfwSetWindowTitle(win, (caption + std::string(buffer)).c_str());
+        glfwSetWindowTitle((caption + std::string(buffer)).c_str());
       }
     }
   }
 
-  if (glfwIsWindow(win)){
+  if (glfwGetWindowParam(GLFW_OPENED)){
     test->onDeinit();
-    glfwCloseWindow(win);
+    glfwCloseWindow();
   }
 
   return 0;

@@ -13,7 +13,6 @@ private:
   GeometryBox       m_box;
 
   KeyTracker    m_keys;
-  GLFWwindow    m_window;
   
   lxgContext_t  m_ctx;
   lxgTexture_t  m_tex;
@@ -33,8 +32,7 @@ public:
     m_box.update(x,y,z);
   }
 
-  int onInit(GLFWwindow win, int argc, const char** argv) {
-    m_window = win;
+  int onInit(int argc, const char** argv) {
 
     updateGeometry(4,4,4);
 
@@ -42,7 +40,7 @@ public:
     lxVector3Set(bbox.min,-1,-1,-1);
     lxVector3Set(bbox.max, 1, 1, 1);
     lxCVector3 up(0,1,0);
-    m_rh.init(win,up);
+    m_rh.init(up);
     m_rh.cameraPerspective(&bbox, 30.0f);
     m_rh.cameraOrtho(&bbox);
 
@@ -74,7 +72,7 @@ public:
 
   void logic(int width, int height)
   {
-    m_keys.update(m_window);
+    m_keys.update();
     if (m_keys.onPress(GLFW_KEY_SPACE)){
       m_sampler = m_sampler == &m_samplerNearest ? &m_samplerTriLinear : &m_samplerNearest;
     }

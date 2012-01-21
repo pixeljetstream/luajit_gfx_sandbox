@@ -6,7 +6,8 @@
 #define __LUXTEST_PROJECT_H__
 
 #include <GL/glew.h>
-#include <GL/glfw3.h>
+#define GLFW_DLL
+#include <GL/glfw.h>
 
 #include <luxinia/luxmath/luxmath.h>
 #include <luxinia/luxmath/basetypes.hpp>
@@ -43,10 +44,10 @@ public:
   KeyTracker() {
     memset(m_states,0,sizeof(m_states));
   }
-  void update(GLFWwindow win){
+  void update(){
     for (size_t i = 0; i < m_tracked.size(); i++){
       int key = m_tracked[i];
-      int state = glfwGetKey(win,key);
+      int state = glfwGetKey(key);
       m_states[key].toggled = m_states[key].last != state;
       m_states[key].last = state;
     }
@@ -242,7 +243,7 @@ public:
   static void   generateUVData( int w, int h, lxCVector3 *pixels);
   static GLuint loadShader(GLenum type, const char* filename, const char* prepend );
 
-  void init(GLFWwindow win, const lxCVector3& up);
+  void init(const lxCVector3& up);
   void update(int width, int height);
 
   void cameraOrtho(lxBoundingBox_t* bbox, const lxCVector3* delta=NULL);
@@ -284,8 +285,6 @@ public:
   float       m_pansense;
 
 private:
-
-  GLFWwindow  m_window;
 
   lxCVector3  m_orbitCenter;
   lxCVector3  m_sceneCenter;
@@ -357,7 +356,7 @@ public:
     return m_dirname;
   }
   virtual int  onDraw(int width, int height) { return 0; }
-  virtual int  onInit(GLFWwindow window, int argc, const char** argv) { return 0; }
+  virtual int  onInit(int argc, const char** argv) { return 0; }
   virtual void onDeinit() {}
 
 private:

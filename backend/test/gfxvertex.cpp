@@ -13,7 +13,6 @@ private:
   GeometryBox       m_box;
 
   KeyTracker        m_keys;
-  GLFWwindow        m_window;
   GLuint            m_texture;
   
   lxgContext_t      m_ctx;
@@ -35,8 +34,7 @@ public:
     m_box.update(x,y,z);
   }
 
-  int onInit(GLFWwindow win, int argc, const char** argv) {
-    m_window = win;
+  int onInit(int argc, const char** argv) {
 
     // scene
     updateGeometry(4,4,4);
@@ -44,7 +42,7 @@ public:
     lxVector3Set(bbox.min,-1,-1,-1);
     lxVector3Set(bbox.max, 1, 1, 1);
     lxCVector3 up(0,1,0);
-    m_rh.init(win,up);
+    m_rh.init(up);
     m_rh.cameraPerspective(&bbox, 30.0f);
     m_rh.cameraOrtho(&bbox);
 
@@ -105,7 +103,7 @@ public:
 
   void logic(int width, int height)
   {
-    m_keys.update(m_window);
+    m_keys.update();
 
   }
 
