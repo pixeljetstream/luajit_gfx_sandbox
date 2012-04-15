@@ -12,6 +12,11 @@ int main(int argc, const char** argv)
   int status = 1;
 
   glfwInit();
+
+#ifdef _DEBUG
+  glfwOpenWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+#endif
+
   glfwOpenWindow( 640, 480, 8,8,8,8,24,8, GLFW_WINDOW);
   glfwSetWindowTitle(caption.c_str());
   glewInit();

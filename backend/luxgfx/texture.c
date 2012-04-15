@@ -960,6 +960,14 @@ LUX_API void lxgTexture_init(lxgTexturePTR tex, lxgContextPTR ctx)
   glGenTextures(1,&tex->glid);
 }
 
+LUX_API void lxgTexture_generateMipMaps( lxgTexturePTR tex )
+{
+  lxgTexture_bindDefault(tex);
+  glGenerateMipmap(tex->gltarget);
+  lxgTexture_unbindDefault(tex);
+  tex->mipsdefined = (1<<tex->miplevels)-1;
+}
+
 LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
   lxGLTextureTarget_t type, lxgTextureChannel_t format, lxgTextureDataType_t data,
   int w, int h, int d, int arraysize, flags32 flags)
@@ -1315,9 +1323,6 @@ LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSampler
 
   tex->lastSampler = sampler;
   tex->lastSamplerIncarnation = sampler->incarnation;
-  tex->sampler = *sampler;
-  tex->sampler.glid = 0;
-
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1325,65 +1330,9 @@ LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSampler
 
 LUX_API void lxgContext_clearTextureState(lxgContextPTR ctx)
 {
-  memset((void*)ctx->textures,0,sizeof(lxgTexturePTR)*LUXGFX_MAX_TEXTURE_IMAGES);
-  memset((void*)ctx->images,0,sizeof(lxgTextureImageCPTR)*LUXGFX_MAX_TEXTURE_IMAGES);
-  memset((void*)ctx->samplers,0,sizeof(lxgSamplerCPTR)*LUXGFX_MAX_TEXTURE_IMAGES);
-}
-
-LUX_API void lxgContext_setTextureCompare(lxgContextPTR ctx, uint imageunit, lxGLCompareMode_t cmp)
-{
-  lxgTexturePTR tex = ctx->textures[imageunit];
-  booln run = cmp != LUXGL_COMPARE_DONTEXECUTE;
-
-  LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
-  LUX_DEBUGASSERT(tex);
-
-  glActiveTexture(GL_TEXTURE0_ARB + imageunit);
-  glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_MODE_ARB,
-    run ? GL_COMPARE_R_TO_TEXTURE : GL_NONE);
-
-  glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_FUNC_ARB,run ? cmp : GL_LEQUAL);
-  tex->sampler.cmpfunc = cmp;
-  tex->sampler.incarnation++;
-  tex->lastSampler = &tex->sampler;
-  tex->lastSamplerIncarnation = tex->sampler.incarnation;
-}
-
-
-LUX_API void lxgContext_setTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what)
-{
-  lxgTexturePTR tex = ctx->textures[imageunit];
-  lxgSamplerCPTR sampler = ctx->samplers[imageunit];
-
-  LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
-  LUX_DEBUGASSERT(tex && sampler);
-
-  glActiveTexture(GL_TEXTURE0_ARB + imageunit);
-  lxgTexture_boundSetSampler(tex,sampler,what);
-}
-
-LUX_API void lxgContext_changedTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what){
-  lxgTexturePTR tex = ctx->textures[imageunit];
-  lxgSamplerCPTR sampler = ctx->samplers[imageunit];
-  flags32 change = 0;
-
-  LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
-  LUX_DEBUGASSERT(tex && sampler);
-
-  change |= LUXGFX_SAMPLERATTRIB_ANISO * !!(what & LUXGFX_SAMPLERATTRIB_ANISO && sampler->aniso != tex->sampler.aniso);
-  change |= LUXGFX_SAMPLERATTRIB_CMP * !!(what & LUXGFX_SAMPLERATTRIB_CMP && sampler->cmpfunc != tex->sampler.cmpfunc);
-  change |= LUXGFX_SAMPLERATTRIB_FILTER * !!(what & LUXGFX_SAMPLERATTRIB_FILTER && sampler->filter != tex->sampler.filter);
-  change |= LUXGFX_SAMPLERATTRIB_ADDRESS * !!((what & LUXGFX_SAMPLERATTRIB_ADDRESS && 
-    (sampler->addru != tex->sampler.addru || sampler->addrv != tex->sampler.addrv || sampler->addrw != tex->sampler.addrw)));
-  change |= LUXGFX_SAMPLERATTRIB_BORDER * !!(what & LUXGFX_SAMPLERATTRIB_BORDER && 
-    memcmp(tex->sampler.border,sampler->border,sizeof(sampler->border)) == 0);
-  change |= LUXGFX_SAMPLERATTRIB_LOD * !!(what & LUXGFX_SAMPLERATTRIB_LOD && 
-    memcmp(&tex->sampler.lod,&sampler->lod,sizeof(sampler->lod)) == 0);
-
-  if (change){
-    glActiveTexture(GL_TEXTURE0_ARB + imageunit);
-    lxgTexture_boundSetSampler(tex,sampler,change);
-  }
+  memset((void*)ctx->textures,0,sizeof(lxgTexturePTR)*      LUXGFX_MAX_TEXTURE_IMAGES);
+  memset((void*)ctx->images,  0,sizeof(lxgTextureImageCPTR)*LUXGFX_MAX_TEXTURE_IMAGES);
+  memset((void*)ctx->samplers,0,sizeof(lxgSamplerCPTR)*     LUXGFX_MAX_TEXTURE_IMAGES);
 }
 
 LUX_API void lxgTexture_getSampler( lxgTextureCPTR tex, lxgSamplerPTR sampler )
@@ -1723,5 +1672,7 @@ LUX_API booln lxgTextureImage_init( lxgTextureImagePTR img, lxgContextPTR ctx, l
 
   return !!(img->glformat);
 }
+
+
 
 

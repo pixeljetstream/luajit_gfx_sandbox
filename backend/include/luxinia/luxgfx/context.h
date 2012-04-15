@@ -143,8 +143,6 @@ extern "C"{
 
     // always apply samplers before textures
   LUX_API void  lxgContext_clearTextureState(lxgContextPTR ctx);
-  LUX_API void  lxgContext_setTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what);
-  LUX_API void  lxgContext_changedTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what);
   LUX_API void  lxgContext_applyTexture( lxgContextPTR ctx, lxgTexturePTR obj, uint imageunit);
   LUX_API void  lxgContext_applyTextures( lxgContextPTR ctx, lxgTexturePTR *texs, uint start, uint num);
   LUX_API void  lxgContext_applySampler( lxgContextPTR ctx, lxgSamplerCPTR obj, uint imageunit);
@@ -279,16 +277,6 @@ extern "C"{
   {
     if (ctx->program.current != prog){
       lxgContext_applyProgram(ctx, prog);
-    }
-  }
-
-  LUX_INLINE void lxgContext_checkedTextureSampler(lxgContextPTR ctx, uint imageunit)
-  {
-    lxgTexturePTR  tex = ctx->textures[imageunit];
-    lxgSamplerCPTR sampler = ctx->samplers[imageunit];
-    LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
-    if (tex && sampler && (tex->lastSampler != sampler || sampler->incarnation != tex->lastSamplerIncarnation)){
-      lxgContext_changedTextureSampler(ctx,imageunit,LUXGFX_SAMPLERATTRIB_ALL);
     }
   }
 

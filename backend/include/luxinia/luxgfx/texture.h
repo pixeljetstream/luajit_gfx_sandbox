@@ -211,8 +211,6 @@ extern "C"{
 
     // always apply samplers before textures
   LUX_API void  lxgContext_clearTextureState(lxgContextPTR ctx);
-  LUX_API void  lxgContext_setTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what);
-  LUX_API void  lxgContext_changedTextureSampler(lxgContextPTR ctx, uint imageunit, flags32 what);
   LUX_API void  lxgContext_applyTexture( lxgContextPTR ctx, lxgTexturePTR obj, uint imageunit);
   LUX_API void  lxgContext_applyTextures( lxgContextPTR ctx, lxgTexturePTR *texs, uint start, uint num);
   LUX_API void  lxgContext_applySampler( lxgContextPTR ctx, lxgSamplerCPTR obj, uint imageunit);
@@ -232,6 +230,8 @@ extern "C"{
   // lxgTexture
   LUX_API void  lxgTexture_init(lxgTexturePTR tex, lxgContextPTR ctx);
   LUX_API void  lxgTexture_deinit(lxgTexturePTR tex, lxgContextPTR ctx);
+
+  LUX_API void  lxgTexture_generateMipMaps(lxgTexturePTR tex);
 
    // for multisampled textures depth = samples
   LUX_API booln lxgTexture_setup(lxgTexturePTR tex, 

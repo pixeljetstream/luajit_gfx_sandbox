@@ -92,10 +92,13 @@ extern "C"{
   //////////////////////////////////////////////////////////////////////////
 
   typedef struct lxgRasterizer_s{
+    enum32          fill;
     bool8           cull;
     bool8           cullfront;
     bool8           ccw;
-    enum32          fill;
+    bool8           polyoffset;
+    float           polyoffsetFactor;
+    float           polyoffsetUnits;
   }lxgRasterizer_t;
 
   //////////////////////////////////////////////////////////////////////////

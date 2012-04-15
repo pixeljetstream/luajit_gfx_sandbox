@@ -47,17 +47,32 @@ extern "C"{
   }lxgRenderTargetType_t;
 
   typedef struct lxgRenderAssign_s{
-    lxgTexturePTR         tex;
-    lxgRenderBufferPTR    rbuf;
+    lxgTextureCPTR        tex;
+    lxgRenderBufferCPTR   rbuf;
     uint                  mip;
-    uint                  layer;
+    uint                  layer;  // if -1 then unlayered bind
   }lxgRenderAssign_t;
 
   typedef enum lxgRenderAssignType_e{
     LUXGFX_RENDERASSIGN_DEPTH,
     LUXGFX_RENDERASSIGN_STENCIL,
     LUXGFX_RENDERASSIGN_COLOR0,
-    LUXGFX_RENDERASSIGNS = LUXGFX_RENDERASSIGN_COLOR0 + LUXGFX_MAX_RENDERTARGETS,
+    LUXGFX_RENDERASSIGN_COLOR1,
+    LUXGFX_RENDERASSIGN_COLOR2,
+    LUXGFX_RENDERASSIGN_COLOR3,
+    LUXGFX_RENDERASSIGN_COLOR4,
+    LUXGFX_RENDERASSIGN_COLOR5,
+    LUXGFX_RENDERASSIGN_COLOR6,
+    LUXGFX_RENDERASSIGN_COLOR7,
+    LUXGFX_RENDERASSIGN_COLOR8,
+    LUXGFX_RENDERASSIGN_COLOR9,
+    LUXGFX_RENDERASSIGN_COLOR10,
+    LUXGFX_RENDERASSIGN_COLOR11,
+    LUXGFX_RENDERASSIGN_COLOR12,
+    LUXGFX_RENDERASSIGN_COLOR13,
+    LUXGFX_RENDERASSIGN_COLOR14,
+    LUXGFX_RENDERASSIGN_COLOR15,
+    LUXGFX_RENDERASSIGNS,
   }lxgRenderAssignType_t;
 
   typedef struct lxgRenderTarget_s{
@@ -83,12 +98,14 @@ extern "C"{
 
   //////////////////////////////////////////////////////////////////////////
 
+  LUX_API void lxgRenderAssign_set(lxgRenderAssignPTR rt, lxgTextureCPTR tex, lxgRenderBufferCPTR rb, uint mip, uint layer);
+
   LUX_API void lxgRenderTarget_init(lxgRenderTargetPTR rt, lxgContextPTR ctx);
   LUX_API void lxgRenderTarget_deinit(lxgRenderTargetPTR rt, lxgContextPTR ctx);
 
   LUX_API void lxgRenderTarget_applyAssigns(lxgRenderTargetPTR rt, lxgRenderTargetType_t mode);
 
-  LUX_API void  lxgRenderTarget_setAssign(lxgRenderTargetPTR rt, uint assigntype, lxgRenderAssignPTR assign);
+  LUX_API void  lxgRenderTarget_setAssign(lxgRenderTargetPTR rt, lxgRenderAssignType_t assigntype, lxgRenderAssignCPTR assign);
   LUX_API booln lxgRenderTarget_checkSize(lxgRenderTargetPTR rt);
   LUX_API lxgFrameBoundsCPTR lxgRenderTarget_getBounds(lxgRenderTargetPTR rt);
 
@@ -113,6 +130,7 @@ extern "C"{
   LUX_API void  lxgContext_applyViewPortMrt(lxgContextPTR ctx, lxgViewPortMrtPTR obj);
   
 
+  LUX_API void  lxgContext_setWindowBounds( lxgContextPTR ctx, int width, int height);
 
 
 #ifdef __cplusplus

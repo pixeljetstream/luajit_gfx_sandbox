@@ -16,6 +16,10 @@ LUX_API void  lxgRasterizer_init(lxgRasterizerPTR obj)
   obj->cullfront = LUX_FALSE;
   obj->cull = LUX_TRUE;
   obj->fill = GL_POLYGON;
+  obj->ccw  = LUX_TRUE;
+  obj->polyoffset = LUX_FALSE;
+  obj->polyoffsetFactor = 0.0f;
+  obj->polyoffsetUnits  = 0.0f;
 }
 
 LUX_API void  lxgRasterizer_sync(lxgRasterizerPTR obj, lxgContextPTR ctx)
@@ -25,10 +29,17 @@ LUX_API void  lxgRasterizer_sync(lxgRasterizerPTR obj, lxgContextPTR ctx)
   obj->cullfront = mode == GL_FRONT;
   obj->cull = glIsEnabled(GL_CULL_FACE);
   glGetIntegerv(GL_POLYGON_MODE, &obj->fill);
+  glGetFloatv(GL_POLYGON_OFFSET_FACTOR, &obj->polyoffsetFactor);
+  glGetFloatv(GL_POLYGON_OFFSET_UNITS,  &obj->polyoffsetUnits);
+  obj->polyoffset = glIsEnabled(GL_POLYGON_OFFSET_FILL);
+  glGetIntegerv(GL_FRONT_FACE, &mode);
+  obj->ccw = mode == GL_CCW;
 }
 
 LUX_API void lxgContext_applyRasterizer(lxgContextPTR ctx, lxgRasterizerCPTR obj)
 {
+  glFrontFace(obj->ccw ? GL_CCW : GL_CW);
+
   if (obj->cull){
     glEnable(GL_CULL_FACE);
     glCullFace(obj->cullfront ? GL_FRONT : GL_BACK);
@@ -36,7 +47,17 @@ LUX_API void lxgContext_applyRasterizer(lxgContextPTR ctx, lxgRasterizerCPTR obj
   else{
     glDisable(GL_CULL_FACE);
   }
-  glPolygonMode(GL_FRONT_AND_BACK,obj->fill);
+  if (obj->polyoffset){
+    glEnable(GL_POLYGON_OFFSET_FILL);
+    glPolygonMode(GL_FRONT_AND_BACK,obj->fill);
+    glPolygonOffset(obj->polyoffsetFactor,obj->polyoffsetUnits);
+  }
+  else{
+    glDisable(GL_POLYGON_OFFSET_FILL);
+  }
+
+  ctx->raster.rasterizer = *obj;
+  ctx->raster.rasterizerObj = obj;
 }
 
 
@@ -82,6 +103,9 @@ LUX_API void lxgContext_applyColor( lxgContextPTR ctx, lxgColorCPTR obj )
       glColorMaski(i,obj->write[i][0], obj->write[i][1], obj->write[i][2], obj->write[i][3]);
     }
   }
+
+  ctx->raster.color = *obj;
+  ctx->raster.colorObj = obj;
 }
 
 //////////////////////////////////////////////////////////////////////////

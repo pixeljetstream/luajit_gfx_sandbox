@@ -33,10 +33,10 @@ LUX_API void lxgRenderTarget_resetAssigns(lxgRenderTargetPTR rt)
 
 
 
-static void lxgRenderTarget_applyAssign(GLenum target, GLenum what,lxgRenderAssignPTR assign)
+static LUX_INLINE void lxgRenderTarget_applyAssign(GLenum target, GLenum what,lxgRenderAssignCPTR assign)
 {
   if (assign->tex){
-    lxgTexturePTR tex = assign->tex;
+    lxgTextureCPTR tex = assign->tex;
 	switch (tex->gltarget){
     case LUXGL_TEXTURE_1D:
       glFramebufferTexture1DEXT(target,what,GL_TEXTURE_1D,tex->glid,assign->mip);
@@ -46,10 +46,20 @@ static void lxgRenderTarget_applyAssign(GLenum target, GLenum what,lxgRenderAssi
       glFramebufferTexture2DEXT(target,what,tex->gltarget,tex->glid,assign->mip);
       return;
     case LUXGL_TEXTURE_3D:
-      glFramebufferTexture3DEXT(target,what,GL_TEXTURE_3D,tex->glid,assign->mip,assign->layer);
+      if (assign->layer == -1){
+        glFramebufferTextureEXT(target,what,tex->glid,assign->mip);
+      }
+      else{
+        glFramebufferTexture3DEXT(target,what,GL_TEXTURE_3D,tex->glid,assign->mip,assign->layer);
+      }
       return;
     case LUXGL_TEXTURE_CUBE:
-      glFramebufferTextureFaceEXT(target, what, tex->glid,assign->mip, GL_TEXTURE_CUBE_MAP_POSITIVE_X + assign->layer);
+      if (assign->layer == -1){
+        glFramebufferTextureEXT(target,what,tex->glid,assign->mip);
+      }
+      else{
+        glFramebufferTextureFaceEXT(target, what, tex->glid,assign->mip, GL_TEXTURE_CUBE_MAP_POSITIVE_X + assign->layer);
+      }
       return;
     case LUXGL_TEXTURE_2DMS:
       glFramebufferTexture2DEXT(target, what, tex->gltarget,tex->glid,assign->mip);
@@ -58,7 +68,12 @@ static void lxgRenderTarget_applyAssign(GLenum target, GLenum what,lxgRenderAssi
     case LUXGL_TEXTURE_2DARRAY:
     case LUXGL_TEXTURE_CUBEARRAY:
     case LUXGL_TEXTURE_2DMSARRAY:
-      glFramebufferTextureLayerEXT(target, what, tex->glid,assign->mip,assign->layer);
+      if (assign->layer == -1){
+        glFramebufferTextureEXT(target,what,tex->glid,assign->mip);
+      }
+      else{
+        glFramebufferTextureLayerEXT(target, what, tex->glid,assign->mip,assign->layer);
+      }
       return;
     }
   }
@@ -71,12 +86,12 @@ static void lxgRenderTarget_applyAssign(GLenum target, GLenum what,lxgRenderAssi
   }
 }
 
-static void lxgRenderTarget_applyNamedAssign(lxgRenderTargetPTR rt, GLenum what,lxgRenderAssignPTR assign)
+static LUX_INLINE void lxgRenderTarget_applyNamedAssign(lxgRenderTargetPTR rt, GLenum what,lxgRenderAssignCPTR assign)
 {
   GLuint target = rt->glid;
 
   if (assign->tex){
-    lxgTexturePTR tex = assign->tex;
+    lxgTextureCPTR tex = assign->tex;
     switch (tex->gltarget){
     case LUXGL_TEXTURE_1D:
       glNamedFramebufferTexture1DEXT(target,what,GL_TEXTURE_1D,tex->glid,assign->mip);
@@ -86,10 +101,20 @@ static void lxgRenderTarget_applyNamedAssign(lxgRenderTargetPTR rt, GLenum what,
       glNamedFramebufferTexture2DEXT(target,what,tex->gltarget,tex->glid,assign->mip);
       return;
     case LUXGL_TEXTURE_3D:
-      glNamedFramebufferTexture3DEXT(target,what,GL_TEXTURE_3D,tex->glid,assign->mip,assign->layer);
+      if (assign->layer == -1){
+        glNamedFramebufferTextureEXT(target,what,tex->glid,assign->mip);
+      }
+      else{
+        glNamedFramebufferTexture3DEXT(target,what,GL_TEXTURE_3D,tex->glid,assign->mip,assign->layer);
+      }
       return;
     case LUXGL_TEXTURE_CUBE:
-      glNamedFramebufferTextureFaceEXT(target, what, tex->glid,assign->mip, GL_TEXTURE_CUBE_MAP_POSITIVE_X + assign->layer);
+      if (assign->layer == -1){
+        glNamedFramebufferTextureEXT(target,what,tex->glid,assign->mip);
+      }
+      else{
+        glNamedFramebufferTextureFaceEXT(target, what, tex->glid,assign->mip, GL_TEXTURE_CUBE_MAP_POSITIVE_X + assign->layer);
+      }
       return;
     case LUXGL_TEXTURE_2DMS:
       glNamedFramebufferTexture2DEXT(target, what, tex->gltarget,tex->glid,assign->mip);
@@ -98,7 +123,12 @@ static void lxgRenderTarget_applyNamedAssign(lxgRenderTargetPTR rt, GLenum what,
     case LUXGL_TEXTURE_2DARRAY:
     case LUXGL_TEXTURE_CUBEARRAY:
     case LUXGL_TEXTURE_2DMSARRAY:
-      glNamedFramebufferTextureLayerEXT(target, what, tex->glid,assign->mip,assign->layer);
+      if (assign->layer == -1){
+        glNamedFramebufferTextureEXT(target,what,tex->glid,assign->mip);
+      }
+      else{
+        glNamedFramebufferTextureLayerEXT(target, what, tex->glid,assign->mip,assign->layer);
+      }
       return;
     }
   }
@@ -137,7 +167,7 @@ static const GLenum l_FBOAssigns[LUXGFX_RENDERASSIGNS]= {
   GL_COLOR_ATTACHMENT15_EXT,
 };
 
-LUX_API void lxgRenderTarget_applyAssigns(lxgRenderTargetPTR rt, lxgRenderTargetType_t mode)
+LUX_API LUX_INLINE void lxgRenderTarget_applyAssigns(lxgRenderTargetPTR rt, lxgRenderTargetType_t mode)
 {
   GLenum target = l_FBOmode[mode];
   uint i;
@@ -155,16 +185,7 @@ LUX_API void lxgRenderTarget_applyAssigns(lxgRenderTargetPTR rt, lxgRenderTarget
   rt->maxidx = 0;
 }
 
-LUX_API void  lxgContext_applyRenderTargetDraw( lxgContextPTR ctx, lxgRenderTargetPTR rt, booln setViewport)
-{
-  lxgContext_applyRenderTarget(ctx, rt,LUXGFX_RENDERTARGET_DRAW);
-  if (setViewport){
-    lxRectanglei_t rect = {0,0,ctx->framebounds.width,ctx->framebounds.height};
-    lxgContext_applyViewPortRect(ctx, &rect);
-  }
-}
-
-LUX_API void  lxgContext_applyRenderTarget( lxgContextPTR ctx, lxgRenderTargetPTR rt, lxgRenderTargetType_t mode )
+LUX_API LUX_INLINE void  lxgContext_applyRenderTarget( lxgContextPTR ctx, lxgRenderTargetPTR rt, lxgRenderTargetType_t mode )
 {
   GLenum target = l_FBOmode[mode];
   glBindFramebuffer(target,rt ? rt->glid : 0);
@@ -172,6 +193,18 @@ LUX_API void  lxgContext_applyRenderTarget( lxgContextPTR ctx, lxgRenderTargetPT
   ctx->rendertargets[mode] = rt;
   if (mode == LUXGFX_RENDERTARGET_DRAW){
     ctx->framebounds = rt ? rt->bounds : ctx->window;
+  }
+  if (rt && rt->dirty){
+    lxgRenderTarget_applyAssigns(rt,mode);
+  }
+}
+
+LUX_API void  lxgContext_applyRenderTargetDraw( lxgContextPTR ctx, lxgRenderTargetPTR rt, booln setViewport)
+{
+  lxgContext_applyRenderTarget(ctx, rt,LUXGFX_RENDERTARGET_DRAW);
+  if (setViewport){
+    lxRectanglei_t rect = {0,0,ctx->framebounds.width,ctx->framebounds.height};
+    lxgContext_applyViewPortRect(ctx, &rect);
   }
 }
 
@@ -184,13 +217,13 @@ LUX_API void lxgRenderTarget_applyBlit( lxgContextPTR ctx, lxgRenderTargetPTR to
     update->toStart.x,    update->toStart.y,    update->toEnd.x,    update->toEnd.y, mask, linearFilter ? GL_LINEAR : GL_NEAREST);
 }
 
-LUX_API void lxgRenderTarget_setAssign(lxgRenderTargetPTR rt, uint idx,lxgRenderAssignPTR assign)
+LUX_API void lxgRenderTarget_setAssign(lxgRenderTargetPTR rt, lxgRenderAssignType_t idx,lxgRenderAssignCPTR assign)
 {
   LUX_DEBUGASSERT(idx < LUXGFX_RENDERASSIGNS);
   if (memcmp(&rt->assigns[idx],assign,sizeof(lxgRenderAssign_t)) == 0) return;
   rt->assigns[idx] = *assign;
   rt->dirty |= (1<<idx);
-  rt->maxidx = LUX_MAX(rt->maxidx,idx);
+  rt->maxidx = LUX_MAX(rt->maxidx,(uint)idx);
 }
 
 LUX_API booln lxgRenderTarget_checkSize(lxgRenderTargetPTR rt)
@@ -336,4 +369,45 @@ LUX_API void  lxgViewPortMrt_sync(lxgViewPortMrtPTR objmrt, lxgContextPTR ctx)
     glGetDoublei_v(GL_DEPTH_RANGE,i,&objmrt->depths[i].near);
     objmrt->scissored |= glIsEnabledi(i,GL_SCISSOR_TEST) ? (1<<i) : 0;
   }
+}
+
+LUX_API void lxgRenderAssign_set( lxgRenderAssignPTR rt, lxgTextureCPTR tex, lxgRenderBufferCPTR rbuf, uint mip, uint layer )
+{
+  LUX_DEBUGASSERT( (!tex && !rbuf) || (rbuf && !tex) || (tex && !rbuf));
+  LUX_DEBUGASSERT( !rbuf || (mip == 0 && layer == 0 ));
+  LUX_DEBUGASSERT( !tex  || (tex->mipsdefined & (1<<mip)) );
+  if (tex){
+    switch (tex->gltarget){
+    case LUXGL_TEXTURE_1D:
+    case LUXGL_TEXTURE_2D:
+    case LUXGL_TEXTURE_RECT:
+    case LUXGL_TEXTURE_2DMS:
+      LUX_DEBUGASSERT(layer == 0);
+      break;
+    case LUXGL_TEXTURE_3D:
+      LUX_DEBUGASSERT(layer == -1 || layer < (uint)tex->depth);
+      break;
+    case LUXGL_TEXTURE_CUBE:
+      LUX_DEBUGASSERT(layer == -1 || layer < 6);
+      break;
+    case LUXGL_TEXTURE_1DARRAY:
+    case LUXGL_TEXTURE_2DARRAY:
+    case LUXGL_TEXTURE_CUBEARRAY:
+    case LUXGL_TEXTURE_2DMSARRAY:
+      LUX_DEBUGASSERT(layer == -1 || layer < (uint)tex->arraysize);
+      break;
+    }
+  }
+  
+  rt->tex   = tex;
+  rt->rbuf  = rbuf;
+  rt->mip   = mip;
+  rt->layer = layer;
+
+}
+
+LUX_API void lxgContext_setWindowBounds( lxgContextPTR ctx, int width, int height )
+{
+  ctx->window.width  = width;
+  ctx->window.height = height;
 }

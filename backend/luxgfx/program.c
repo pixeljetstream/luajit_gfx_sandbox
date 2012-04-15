@@ -71,6 +71,7 @@ LUX_API booln lxGLParameterType_isValue(lxGLParameterType_t type)
   case LUXGL_PARAM_MAT3x4 :
   case LUXGL_PARAM_MAT4x2 :
   case LUXGL_PARAM_MAT4x3 :
+  case LUXGL_PARAM_GPU_ADDRESS :
     return LUX_TRUE;
   default:
     return LUX_FALSE;

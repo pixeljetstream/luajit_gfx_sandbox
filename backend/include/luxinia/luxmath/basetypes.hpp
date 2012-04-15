@@ -22,6 +22,8 @@ public:
   float y;
 
   LUX_INLINE lxCVector2() {};
+  lxCVector2(const lxCVector3& vec);
+  lxCVector2(const lxCVector4& vec);
   template <typename S>
   LUX_INLINE lxCVector2(S all) : x(float(all)),y(float(all)) {};
   template <typename S0,typename S1>
@@ -63,16 +65,18 @@ public:
 
   LUX_INLINE lxCVector3() {};
   template <typename S>
+  LUX_INLINE lxCVector3(const lxCVector2 &vec, S z) : x(vec.x),y(vec.y),z(float(z)) {};
+  LUX_INLINE lxCVector3(const lxCVector2 &vec) : x(vec.x),y(vec.y),z(0.0f) {};
+  lxCVector3(const lxCVector4 &vec);
+  template <typename S>
   LUX_INLINE lxCVector3(S all) : x(float(all)),y(float(all)),z(float(all)) {};
   template <typename S0,typename S1, typename S2>
   LUX_INLINE lxCVector3(S0 x, S1 y, S2 z) : x(float(x)),y(float(y)),z(float(z)) {};
-  template <typename S>
-  LUX_INLINE lxCVector3(const lxCVector2 &vec, S z) : x(vec.x),y(vec.y),z(float(z)) {};
 
-  LUX_INLINE operator lxVector3PTR () {
+  LUX_INLINE operator float* () {
     return &x;
   }
-  LUX_INLINE operator lxVector3CPTR () const {
+  LUX_INLINE operator const float* () const {
     return &x;
   }
   LUX_INLINE operator lxCVector2 () {
@@ -112,19 +116,27 @@ public:
   float w;
 
   LUX_INLINE lxCVector4() {};
+  LUX_INLINE lxCVector4(const lxCVector2 &vec) : x(vec.x),y(vec.y),z(0.0f),w(1.0f) {};
+  LUX_INLINE lxCVector4(const lxCVector3 &vec) : x(vec.x),y(vec.y),z(vec.z),w(1.0f) {};
+
+  template <typename S0,typename S1>
+  LUX_INLINE lxCVector4(const lxCVector2 &vec, S0 z, S1 w) : x(vec.x),y(vec.y),z(float(z)),w(float(w)) {};
+  template <typename S0>
+  LUX_INLINE lxCVector4(const lxCVector2 &vec, S0 z) : x(vec.x),y(vec.y),z(float(z)),w(1.0f) {};
+  template <typename S>
+  LUX_INLINE lxCVector4(const lxCVector3 &vec, S w) : x(vec.x),y(vec.y),z(vec.z),w(float(w)) {};
   template <typename S>
   LUX_INLINE lxCVector4(S all) : x(float(all)),y(float(all)),z(float(all)),w(float(all)) {};
   template <typename S0,typename S1, typename S2>
   LUX_INLINE lxCVector4(S0 x, S1 y, S2 z) : x(float(x)),y(float(y)),z(float(z)),w(1.0f) {};
   template <typename S0,typename S1, typename S2, typename S3>
   LUX_INLINE lxCVector4(S0 x, S1 y, S2 z, S3 w) : x(float(x)),y(float(y)),z(float(z)),w(float(w)) {};
-  template <typename S>
-  LUX_INLINE lxCVector4(const lxCVector3 &vec, S w) : x(vec.x),y(vec.y),z(vec.z),w(float(w)) {};
 
-  LUX_INLINE operator lxVector4PTR () {
+
+  LUX_INLINE operator float* () {
     return &x;
   }
-  LUX_INLINE operator lxVector4CPTR () const {
+  LUX_INLINE operator const float* () const {
     return &x;
   }
   LUX_INLINE operator lxCVector3 () {
@@ -169,10 +181,10 @@ class lxCMatrix44 {
 public:
   lxCVector4  columns[4];
 
-  LUX_INLINE operator lxMatrix44PTR () {
+  LUX_INLINE operator float* () {
     return &columns[0].x;
   }
-  LUX_INLINE operator lxMatrix44CPTR () const {
+  LUX_INLINE operator const float* () const {
     return &columns[0].x;
   }
   LUX_INLINE float& operator[](int element) {
@@ -228,6 +240,10 @@ public:
 typedef LUX_ALIGNSIMD_BEGIN lxCMatrix44 lxCMatrix44SIMD LUX_ALIGNSIMD_END;
 typedef LUX_ALIGNSIMD_BEGIN lxCVector3 lxCVector3SIMD LUX_ALIGNSIMD_END;
 typedef LUX_ALIGNSIMD_BEGIN lxCVector4 lxCVector4SIMD LUX_ALIGNSIMD_END;
+
+LUX_INLINE lxCVector3::lxCVector3(const lxCVector4 &vec) : x(vec.x),y(vec.y),z(vec.z) {};
+LUX_INLINE lxCVector2::lxCVector2(const lxCVector3 &vec) : x(vec.x),y(vec.y) {};
+LUX_INLINE lxCVector2::lxCVector2(const lxCVector4 &vec) : x(vec.x),y(vec.y) {};
 
 
 #endif
