@@ -90,12 +90,6 @@ extern "C"{
   }lxgVertexState_t;
 
   typedef struct lxgFeedbackState_s{
-    lxGLPrimitiveType_t capture;
-    int                 active;
-    flags32             usedvalid;
-    flags32             streamvalid;
-    flags32             streamchange;
-    
     lxgStreamHost_t     streams[LUXGFX_MAX_VERTEX_STREAMS];
   }lxgFeedbackState_t;
 
@@ -124,12 +118,9 @@ extern "C"{
   LUX_API void lxgContext_applyVertexStateNV(lxgContextPTR ctx);
   LUX_API void lxgContext_applyVertexStateFIXEDNV(lxgContextPTR ctx);
 
-  LUX_API void lxgContext_clearFeedbackState(lxgContextPTR ctx);
-  LUX_API void lxgContext_applyFeedbackStreams(lxgContextPTR ctx);
-  LUX_API void lxgContext_setFeedbackStreams(lxgContextPTR ctx, lxgStreamHostCPTR hosts, int numStreams);
-  LUX_API void lxgContext_setFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host );
-  LUX_API void lxgContext_enableFeedback(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams);
-  LUX_API void lxgContext_disableFeedback(lxgContextPTR ctx);
+  LUX_API void lxgContext_applyFeedbackStreams(lxgContextPTR ctx, lxgStreamHostCPTR hosts, int numStreams);
+  LUX_API void lxgContext_applyFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host );
+  LUX_API void lxgContext_clearFeedbackState(lxgContextPTR ctx );
 
   //////////////////////////////////////////////////////////////////////////
 

@@ -471,87 +471,34 @@ LUX_API void lxgVertexAttrib_applyFloatFIXED(lxgVertexAttrib_t type, const float
   }
 }
 
-LUX_API void lxgContext_setFeedbackStreams(lxgContextPTR ctx, lxgStreamHostCPTR streams, int numStreams)
+LUX_INLINE LUX_API void lxgContext_applyFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host)
 {
   lxgFeedbackStatePTR xfb = &ctx->feedback;
-  flags32 changed = 0;
-  flags32 valid = 0;
-  int i;
 
-  for (i = 0; i < numStreams; i++){
-    LUX_DEBUGASSERT(lxgStreamHost_valid(&streams[i]));
+  LUX_DEBUGASSERT(idx <= LUXGFX_MAX_VERTEX_STREAMS);
+  LUX_DEBUGASSERT(lxgStreamHost_valid(host));
 
-    changed |= (lxgStreamHost_unequal(&xfb->streams[i],&streams[i])) << i;
-    xfb->streams[i] = streams[i];
-    valid |= 1 << i;
-  }
-  xfb->streamchange |= changed;
-  xfb->streamvalid  |= valid;
-}
-
-
-LUX_API void lxgContext_setFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host)
-{
-  lxgFeedbackStatePTR xfb = &ctx->feedback;
-  
-  if (!lxgStreamHost_valid(host)){
-    xfb->streamvalid &= ~(1 << idx);
-    return;
+  if (lxgStreamHost_unequal(&xfb->streams[idx],host)){
+    lxgBuffer_bindRanged(host->buffer,LUXGL_BUFFER_FEEDBACK,idx,(size_t)host->ptr,host->len);
   }
 
-  xfb->streamchange |= lxgStreamHost_unequal(&xfb->streams[idx],host) << idx;
-  xfb->streamvalid  |= (1 << idx);
   xfb->streams[idx] = *host;
 }
 
-LUX_API LUX_INLINE void lxgContext_applyFeedbackStreams(lxgContextPTR ctx)
+LUX_API void lxgContext_applyFeedbackStreams(lxgContextPTR ctx, lxgStreamHostCPTR streams, int numStreams)
 {
-  lxgFeedbackStatePTR xfb = &ctx->feedback;
-  flags32 streamchanged = xfb->streamchange;
+  int i;
 
-  LUX_DEBUGASSERT((xfb->usedvalid & xfb->streamvalid) == xfb->usedvalid);
-  if (streamchanged){
-    int i;
-    for (i = 0; i < xfb->active; i++){
-      const lxgStreamHostPTR    host = &xfb->streams[i];
-      if (streamchanged & (1<<i)){
-        lxgBuffer_bindRanged(host->buffer,LUXGL_BUFFER_FEEDBACK,i,(size_t)host->ptr,host->len);
-      }
-    }
+  for (i = 0; i < numStreams; i++){
+    lxgContext_applyFeedbackStream(ctx,i,&streams[i]);
   }
-
-  xfb->streamchange = 0;
 }
 
-LUX_API void lxgContext_clearFeedbackState(lxgContextPTR ctx)
+LUX_API void lxgContext_clearFeedbackState(lxgContextPTR ctx )
 {
-  ctx->feedback.streamvalid = 0;
-  ctx->feedback.streamchange = 0;
-  memset(ctx->feedback.streams,0,sizeof(ctx->feedback.streams));
+  memset(&ctx->feedback,0,sizeof(lxgFeedbackState_t));
 }
 
-LUX_API void lxgContext_enableFeedback(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams)
-{
-  lxgFeedbackStatePTR xfb = &ctx->feedback;
-
-  LUX_DEBUGASSERT(!xfb->active);
-
-  xfb->capture = type;
-  xfb->active = numStreams;
-  xfb->usedvalid = (1<<numStreams) - 1;
-
-  lxgContext_applyFeedbackStreams(ctx);
-  glBeginTransformFeedback(type);
-}
-
-LUX_API void lxgContext_disableFeedback(lxgContextPTR ctx)
-{
-  lxgFeedbackStatePTR xfb = &ctx->feedback;
-
-  LUX_DEBUGASSERT(xfb->active); 
-  glEndTransformFeedback();
-  xfb->active = 0;
-}
 
 
 

@@ -598,7 +598,7 @@ LUX_API LUX_INLINE void lxgContext_applyTexture( lxgContextPTR ctx,   lxgTexture
   lxGLErrorCheck();
   ctx->textures[imageunit] = tex;
   if (!(ctx->capbits & LUXGFX_CAP_SM3)){
-    lxgContext_checkedTextureSampler(ctx,imageunit);
+    lxgContext_checkedBoundTextureSampler(ctx,imageunit);
   }
 }
 
@@ -1254,6 +1254,11 @@ LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSampler
     LUXGL_SAMPLERADDRESS_BORDER,
   };
 
+  if (!sampler){
+    what    = LUXGFX_SAMPLERATTRIB_ALL;
+    sampler = &tex->sampler;
+  }
+
   if (what & LUXGFX_SAMPLERATTRIB_ADDRESS){
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_S,address[sampler->addru]);
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_T,address[sampler->addrv]);
@@ -1464,7 +1469,7 @@ LUX_API LUX_INLINE void lxgContext_applySampler( lxgContextPTR ctx, lxgSamplerCP
       glBindSampler(imageunit,sampler->glid);
     }
   }
-  else if (ctx->capbits & LUXGFX_CAP_SM4){
+  else if (ctx->capbits & LUXGFX_CAP_SM3){
     glBindSampler(imageunit,0);
   }
   lxGLErrorCheck();

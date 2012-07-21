@@ -129,13 +129,10 @@ extern "C"{
   LUX_API void lxgContext_setVertexStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host);
   LUX_API void lxgContext_invalidateVertexStreams(lxgContextPTR ctx);
 
-  LUX_API void lxgContext_clearFeedbackState(lxgContextPTR ctx);
-  LUX_API void lxgContext_applyFeedbackStreams(lxgContextPTR ctx);
-  LUX_API void lxgContext_setFeedbackStreams(lxgContextPTR ctx, lxgStreamHostCPTR hosts, int numStreams);
-  LUX_API void lxgContext_setFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host );
-  LUX_API void lxgContext_enableFeedback(lxgContextPTR ctx, lxGLPrimitiveType_t type, int numStreams);
-  LUX_API void lxgContext_disableFeedback(lxgContextPTR ctx);
-  
+  LUX_API void lxgContext_applyFeedbackStreams(lxgContextPTR ctx, lxgStreamHostCPTR hosts, int numStreams);
+  LUX_API void lxgContext_applyFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host );
+  LUX_API void lxgContext_clearFeedbackState(lxgContextPTR ctx );
+
   LUX_API void  lxgContext_clearProgramState(lxgContextPTR ctx);
   LUX_API void  lxgContext_applyProgram(  lxgContextPTR ctx, lxgProgramCPTR prog);
   LUX_API void  lxgContext_applyProgramParameters( lxgContextPTR ctx, lxgProgramCPTR prog, uint num, lxgProgramParameterPTR *params, const void **data);
@@ -195,8 +192,8 @@ extern "C"{
   LUX_API void lxgContext_checkedVertexFIXED(lxgContextPTR ctx);
   LUX_API void lxgContext_checkedVertexFIXEDNV(lxgContextPTR ctx);
 
-  LUX_API void  lxgContext_checkedViewPortScissor( lxgContextPTR ctx, lxRectangleiCPTR rect);
-  LUX_API void  lxgContext_checkedTextureSampler(lxgContextPTR ctx, uint imageunit);
+  //LUX_API void  lxgContext_checkedViewPortScissor( lxgContextPTR ctx, lxRectangleiCPTR rect);
+  LUX_API void  lxgContext_checkedBoundTextureSampler ( lxgContextPTR ctx, uint imageunit);
   LUX_API booln lxgContext_setProgramBuffer(lxgContextPTR ctx, uint idx, lxgBufferCPTR buffer);
 
   //////////////////////////////////////////////////////////////////////////
@@ -270,6 +267,16 @@ extern "C"{
     LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
     if (ctx->images[imageunit] != img){
       lxgContext_applyTextureImage(ctx, img,imageunit);
+    }
+  }
+
+  LUX_INLINE void  lxgContext_checkedBoundTextureSampler ( lxgContextPTR ctx, uint imageunit)
+  {
+    lxgTexturePTR tex      = ctx->textures[imageunit];
+    lxgSamplerCPTR sampler = ctx->samplers[imageunit];
+    LUX_DEBUGASSERT(imageunit < LUXGFX_MAX_TEXTURE_IMAGES);
+    if (tex && (tex->lastSampler != sampler || tex->lastSamplerIncarnation != sampler->incarnation) ){
+      lxgTexture_boundSetSampler(tex,sampler,LUXGFX_SAMPLERATTRIB_ALL);
     }
   }
 
