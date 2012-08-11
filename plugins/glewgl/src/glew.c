@@ -32,7 +32,7 @@
 #include <GL/glew.h>
 #if defined(_WIN32)
 #  include <GL/wglew.h>
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#elif !defined(__ANDROID__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX))
 #  include <GL/glxew.h>
 #endif
 
@@ -1236,9 +1236,9 @@ void glFogCoordf(GLfloat coord){__glewFogCoordf(coord);}
 static PFNGLFOGCOORDFVPROC __glewFogCoordfv = NULL;
 void glFogCoordfv(const GLfloat *coord){__glewFogCoordfv(coord);}
 static PFNGLMULTIDRAWARRAYSPROC __glewMultiDrawArrays = NULL;
-void glMultiDrawArrays(GLenum mode,const GLint *first,const GLsizei *count,GLsizei primcount){__glewMultiDrawArrays(mode,first,count,primcount);}
+void glMultiDrawArrays(GLenum mode,const GLint *first,const GLsizei *count,GLsizei drawcount){__glewMultiDrawArrays(mode,first,count,drawcount);}
 static PFNGLMULTIDRAWELEMENTSPROC __glewMultiDrawElements = NULL;
-void glMultiDrawElements(GLenum mode,const GLsizei *count,GLenum type,const GLvoid **indices,GLsizei primcount){__glewMultiDrawElements(mode,count,type,indices,primcount);}
+void glMultiDrawElements(GLenum mode,const GLsizei *count,GLenum type,const GLvoid **indices,GLsizei drawcount){__glewMultiDrawElements(mode,count,type,indices,drawcount);}
 static PFNGLPOINTPARAMETERFPROC __glewPointParameterf = NULL;
 void glPointParameterf(GLenum pname,GLfloat param){__glewPointParameterf(pname,param);}
 static PFNGLPOINTPARAMETERFVPROC __glewPointParameterfv = NULL;
@@ -1702,9 +1702,9 @@ void glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback,void* userParam){__glewDe
 static PFNGLDEBUGMESSAGEENABLEAMDPROC __glewDebugMessageEnableAMD = NULL;
 void glDebugMessageEnableAMD(GLenum category,GLenum severity,GLsizei count,const GLuint* ids,GLboolean enabled){__glewDebugMessageEnableAMD(category,severity,count,ids,enabled);}
 static PFNGLDEBUGMESSAGEINSERTAMDPROC __glewDebugMessageInsertAMD = NULL;
-void glDebugMessageInsertAMD(GLenum category,GLenum severity,GLuint id,GLsizei length,const char* buf){__glewDebugMessageInsertAMD(category,severity,id,length,buf);}
+void glDebugMessageInsertAMD(GLenum category,GLenum severity,GLuint id,GLsizei length,const GLchar* buf){__glewDebugMessageInsertAMD(category,severity,id,length,buf);}
 static PFNGLGETDEBUGMESSAGELOGAMDPROC __glewGetDebugMessageLogAMD = NULL;
-GLuint glGetDebugMessageLogAMD(GLuint count,GLsizei bufsize,GLenum* categories,GLuint* severities,GLuint* ids,GLsizei* lengths,char* message){return __glewGetDebugMessageLogAMD(count,bufsize,categories,severities,ids,lengths,message);}
+GLuint glGetDebugMessageLogAMD(GLuint count,GLsizei bufsize,GLenum* categories,GLuint* severities,GLuint* ids,GLsizei* lengths,GLchar* message){return __glewGetDebugMessageLogAMD(count,bufsize,categories,severities,ids,lengths,message);}
 
 static PFNGLBLENDEQUATIONINDEXEDAMDPROC __glewBlendEquationIndexedAMD = NULL;
 void glBlendEquationIndexedAMD(GLuint buf,GLenum mode){__glewBlendEquationIndexedAMD(buf,mode);}
@@ -1740,11 +1740,11 @@ void glGetPerfMonitorCounterDataAMD(GLuint monitor,GLenum pname,GLsizei dataSize
 static PFNGLGETPERFMONITORCOUNTERINFOAMDPROC __glewGetPerfMonitorCounterInfoAMD = NULL;
 void glGetPerfMonitorCounterInfoAMD(GLuint group,GLuint counter,GLenum pname,void* data){__glewGetPerfMonitorCounterInfoAMD(group,counter,pname,data);}
 static PFNGLGETPERFMONITORCOUNTERSTRINGAMDPROC __glewGetPerfMonitorCounterStringAMD = NULL;
-void glGetPerfMonitorCounterStringAMD(GLuint group,GLuint counter,GLsizei bufSize,GLsizei* length,char *counterString){__glewGetPerfMonitorCounterStringAMD(group,counter,bufSize,length,counterString);}
+void glGetPerfMonitorCounterStringAMD(GLuint group,GLuint counter,GLsizei bufSize,GLsizei* length,GLchar *counterString){__glewGetPerfMonitorCounterStringAMD(group,counter,bufSize,length,counterString);}
 static PFNGLGETPERFMONITORCOUNTERSAMDPROC __glewGetPerfMonitorCountersAMD = NULL;
 void glGetPerfMonitorCountersAMD(GLuint group,GLint* numCounters,GLint *maxActiveCounters,GLsizei countersSize,GLuint *counters){__glewGetPerfMonitorCountersAMD(group,numCounters,maxActiveCounters,countersSize,counters);}
 static PFNGLGETPERFMONITORGROUPSTRINGAMDPROC __glewGetPerfMonitorGroupStringAMD = NULL;
-void glGetPerfMonitorGroupStringAMD(GLuint group,GLsizei bufSize,GLsizei* length,char *groupString){__glewGetPerfMonitorGroupStringAMD(group,bufSize,length,groupString);}
+void glGetPerfMonitorGroupStringAMD(GLuint group,GLsizei bufSize,GLsizei* length,GLchar *groupString){__glewGetPerfMonitorGroupStringAMD(group,bufSize,length,groupString);}
 static PFNGLGETPERFMONITORGROUPSAMDPROC __glewGetPerfMonitorGroupsAMD = NULL;
 void glGetPerfMonitorGroupsAMD(GLint* numGroups,GLsizei groupsSize,GLuint *groups){__glewGetPerfMonitorGroupsAMD(numGroups,groupsSize,groups);}
 static PFNGLSELECTPERFMONITORCOUNTERSAMDPROC __glewSelectPerfMonitorCountersAMD = NULL;
@@ -1752,6 +1752,9 @@ void glSelectPerfMonitorCountersAMD(GLuint monitor,GLboolean enable,GLuint group
 
 static PFNGLSETMULTISAMPLEFVAMDPROC __glewSetMultisamplefvAMD = NULL;
 void glSetMultisamplefvAMD(GLenum pname,GLuint index,const GLfloat* val){__glewSetMultisamplefvAMD(pname,index,val);}
+
+static PFNGLSTENCILOPVALUEAMDPROC __glewStencilOpValueAMD = NULL;
+void glStencilOpValueAMD(GLenum face,GLuint value){__glewStencilOpValueAMD(face,value);}
 
 static PFNGLTESSELLATIONFACTORAMDPROC __glewTessellationFactorAMD = NULL;
 void glTessellationFactorAMD(GLfloat factor){__glewTessellationFactorAMD(factor);}
@@ -1853,27 +1856,44 @@ static PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC __glewDrawElementsIn
 void glDrawElementsInstancedBaseVertexBaseInstance(GLenum mode,GLsizei count,GLenum type,const void* indices,GLsizei primcount,GLint basevertex,GLuint baseinstance){__glewDrawElementsInstancedBaseVertexBaseInstance(mode,count,type,indices,primcount,basevertex,baseinstance);}
 
 static PFNGLBINDFRAGDATALOCATIONINDEXEDPROC __glewBindFragDataLocationIndexed = NULL;
-void glBindFragDataLocationIndexed(GLuint program,GLuint colorNumber,GLuint index,const char * name){__glewBindFragDataLocationIndexed(program,colorNumber,index,name);}
+void glBindFragDataLocationIndexed(GLuint program,GLuint colorNumber,GLuint index,const GLchar * name){__glewBindFragDataLocationIndexed(program,colorNumber,index,name);}
 static PFNGLGETFRAGDATAINDEXPROC __glewGetFragDataIndex = NULL;
-GLint glGetFragDataIndex(GLuint program,const char * name){return __glewGetFragDataIndex(program,name);}
+GLint glGetFragDataIndex(GLuint program,const GLchar * name){return __glewGetFragDataIndex(program,name);}
 
 static PFNGLCREATESYNCFROMCLEVENTARBPROC __glewCreateSyncFromCLeventARB = NULL;
 GLsync glCreateSyncFromCLeventARB(cl_context context,cl_event event,GLbitfield flags){return __glewCreateSyncFromCLeventARB(context,event,flags);}
 
+static PFNGLCLEARBUFFERDATAPROC __glewClearBufferData = NULL;
+void glClearBufferData(GLenum target,GLenum internalformat,GLenum format,GLenum type,const GLvoid* data){__glewClearBufferData(target,internalformat,format,type,data);}
+static PFNGLCLEARBUFFERSUBDATAPROC __glewClearBufferSubData = NULL;
+void glClearBufferSubData(GLenum target,GLenum internalformat,GLintptr offset,GLsizeiptr size,GLenum format,GLenum type,const GLvoid* data){__glewClearBufferSubData(target,internalformat,offset,size,format,type,data);}
+static PFNGLCLEARNAMEDBUFFERDATAEXTPROC __glewClearNamedBufferDataEXT = NULL;
+void glClearNamedBufferDataEXT(GLuint buffer,GLenum internalformat,GLenum format,GLenum type,const GLvoid* data){__glewClearNamedBufferDataEXT(buffer,internalformat,format,type,data);}
+static PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC __glewClearNamedBufferSubDataEXT = NULL;
+void glClearNamedBufferSubDataEXT(GLuint buffer,GLenum internalformat,GLintptr offset,GLsizeiptr size,GLenum format,GLenum type,const GLvoid* data){__glewClearNamedBufferSubDataEXT(buffer,internalformat,offset,size,format,type,data);}
+
 static PFNGLCLAMPCOLORARBPROC __glewClampColorARB = NULL;
 void glClampColorARB(GLenum target,GLenum clamp){__glewClampColorARB(target,clamp);}
 
+static PFNGLDISPATCHCOMPUTEPROC __glewDispatchCompute = NULL;
+void glDispatchCompute(GLuint num_groups_x,GLuint num_groups_y,GLuint num_groups_z){__glewDispatchCompute(num_groups_x,num_groups_y,num_groups_z);}
+static PFNGLDISPATCHCOMPUTEINDIRECTPROC __glewDispatchComputeIndirect = NULL;
+void glDispatchComputeIndirect(GLintptr indirect){__glewDispatchComputeIndirect(indirect);}
+
 static PFNGLCOPYBUFFERSUBDATAPROC __glewCopyBufferSubData = NULL;
 void glCopyBufferSubData(GLenum readtarget,GLenum writetarget,GLintptr readoffset,GLintptr writeoffset,GLsizeiptr size){__glewCopyBufferSubData(readtarget,writetarget,readoffset,writeoffset,size);}
+
+static PFNGLCOPYIMAGESUBDATAPROC __glewCopyImageSubData = NULL;
+void glCopyImageSubData(GLuint srcName,GLenum srcTarget,GLint srcLevel,GLint srcX,GLint srcY,GLint srcZ,GLuint dstName,GLenum dstTarget,GLint dstLevel,GLint dstX,GLint dstY,GLint dstZ,GLsizei srcWidth,GLsizei srcHeight,GLsizei srcDepth){__glewCopyImageSubData(srcName,srcTarget,srcLevel,srcX,srcY,srcZ,dstName,dstTarget,dstLevel,dstX,dstY,dstZ,srcWidth,srcHeight,srcDepth);}
 
 static PFNGLDEBUGMESSAGECALLBACKARBPROC __glewDebugMessageCallbackARB = NULL;
 void glDebugMessageCallbackARB(GLDEBUGPROCARB callback,void* userParam){__glewDebugMessageCallbackARB(callback,userParam);}
 static PFNGLDEBUGMESSAGECONTROLARBPROC __glewDebugMessageControlARB = NULL;
 void glDebugMessageControlARB(GLenum source,GLenum type,GLenum severity,GLsizei count,const GLuint* ids,GLboolean enabled){__glewDebugMessageControlARB(source,type,severity,count,ids,enabled);}
 static PFNGLDEBUGMESSAGEINSERTARBPROC __glewDebugMessageInsertARB = NULL;
-void glDebugMessageInsertARB(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const char* buf){__glewDebugMessageInsertARB(source,type,id,severity,length,buf);}
+void glDebugMessageInsertARB(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar* buf){__glewDebugMessageInsertARB(source,type,id,severity,length,buf);}
 static PFNGLGETDEBUGMESSAGELOGARBPROC __glewGetDebugMessageLogARB = NULL;
-GLuint glGetDebugMessageLogARB(GLuint count,GLsizei bufsize,GLenum* sources,GLenum* types,GLuint* ids,GLenum* severities,GLsizei* lengths,char* messageLog){return __glewGetDebugMessageLogARB(count,bufsize,sources,types,ids,severities,lengths,messageLog);}
+GLuint glGetDebugMessageLogARB(GLuint count,GLsizei bufsize,GLenum* sources,GLenum* types,GLuint* ids,GLenum* severities,GLsizei* lengths,GLchar* messageLog){return __glewGetDebugMessageLogARB(count,bufsize,sources,types,ids,severities,lengths,messageLog);}
 
 static PFNGLDRAWBUFFERSARBPROC __glewDrawBuffersARB = NULL;
 void glDrawBuffersARB(GLsizei n,const GLenum* bufs){__glewDrawBuffersARB(n,bufs);}
@@ -1900,6 +1920,15 @@ static PFNGLDRAWARRAYSINDIRECTPROC __glewDrawArraysIndirect = NULL;
 void glDrawArraysIndirect(GLenum mode,const void* indirect){__glewDrawArraysIndirect(mode,indirect);}
 static PFNGLDRAWELEMENTSINDIRECTPROC __glewDrawElementsIndirect = NULL;
 void glDrawElementsIndirect(GLenum mode,GLenum type,const void* indirect){__glewDrawElementsIndirect(mode,type,indirect);}
+
+static PFNGLFRAMEBUFFERPARAMETERIPROC __glewFramebufferParameteri = NULL;
+void glFramebufferParameteri(GLenum target,GLenum pname,GLint param){__glewFramebufferParameteri(target,pname,param);}
+static PFNGLGETFRAMEBUFFERPARAMETERIVPROC __glewGetFramebufferParameteriv = NULL;
+void glGetFramebufferParameteriv(GLenum target,GLenum pname,GLint* params){__glewGetFramebufferParameteriv(target,pname,params);}
+static PFNGLGETNAMEDFRAMEBUFFERPARAMETERIVEXTPROC __glewGetNamedFramebufferParameterivEXT = NULL;
+void glGetNamedFramebufferParameterivEXT(GLuint framebuffer,GLenum pname,GLint* params){__glewGetNamedFramebufferParameterivEXT(framebuffer,pname,params);}
+static PFNGLNAMEDFRAMEBUFFERPARAMETERIEXTPROC __glewNamedFramebufferParameteriEXT = NULL;
+void glNamedFramebufferParameteriEXT(GLuint framebuffer,GLenum pname,GLint param){__glewNamedFramebufferParameteriEXT(framebuffer,pname,param);}
 
 static PFNGLBINDFRAMEBUFFERPROC __glewBindFramebuffer = NULL;
 void glBindFramebuffer(GLenum target,GLuint framebuffer){__glewBindFramebuffer(target,framebuffer);}
@@ -1960,40 +1989,6 @@ void glProgramParameteri(GLuint program,GLenum pname,GLint value){__glewProgramP
 
 static PFNGLGETUNIFORMDVPROC __glewGetUniformdv = NULL;
 void glGetUniformdv(GLuint program,GLint location,GLdouble* params){__glewGetUniformdv(program,location,params);}
-static PFNGLPROGRAMUNIFORM1DEXTPROC __glewProgramUniform1dEXT = NULL;
-void glProgramUniform1dEXT(GLuint program,GLint location,GLdouble x){__glewProgramUniform1dEXT(program,location,x);}
-static PFNGLPROGRAMUNIFORM1DVEXTPROC __glewProgramUniform1dvEXT = NULL;
-void glProgramUniform1dvEXT(GLuint program,GLint location,GLsizei count,const GLdouble* value){__glewProgramUniform1dvEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2DEXTPROC __glewProgramUniform2dEXT = NULL;
-void glProgramUniform2dEXT(GLuint program,GLint location,GLdouble x,GLdouble y){__glewProgramUniform2dEXT(program,location,x,y);}
-static PFNGLPROGRAMUNIFORM2DVEXTPROC __glewProgramUniform2dvEXT = NULL;
-void glProgramUniform2dvEXT(GLuint program,GLint location,GLsizei count,const GLdouble* value){__glewProgramUniform2dvEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3DEXTPROC __glewProgramUniform3dEXT = NULL;
-void glProgramUniform3dEXT(GLuint program,GLint location,GLdouble x,GLdouble y,GLdouble z){__glewProgramUniform3dEXT(program,location,x,y,z);}
-static PFNGLPROGRAMUNIFORM3DVEXTPROC __glewProgramUniform3dvEXT = NULL;
-void glProgramUniform3dvEXT(GLuint program,GLint location,GLsizei count,const GLdouble* value){__glewProgramUniform3dvEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4DEXTPROC __glewProgramUniform4dEXT = NULL;
-void glProgramUniform4dEXT(GLuint program,GLint location,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewProgramUniform4dEXT(program,location,x,y,z,w);}
-static PFNGLPROGRAMUNIFORM4DVEXTPROC __glewProgramUniform4dvEXT = NULL;
-void glProgramUniform4dvEXT(GLuint program,GLint location,GLsizei count,const GLdouble* value){__glewProgramUniform4dvEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2DVEXTPROC __glewProgramUniformMatrix2dvEXT = NULL;
-void glProgramUniformMatrix2dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix2dvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2X3DVEXTPROC __glewProgramUniformMatrix2x3dvEXT = NULL;
-void glProgramUniformMatrix2x3dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix2x3dvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2X4DVEXTPROC __glewProgramUniformMatrix2x4dvEXT = NULL;
-void glProgramUniformMatrix2x4dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix2x4dvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3DVEXTPROC __glewProgramUniformMatrix3dvEXT = NULL;
-void glProgramUniformMatrix3dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix3dvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3X2DVEXTPROC __glewProgramUniformMatrix3x2dvEXT = NULL;
-void glProgramUniformMatrix3x2dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix3x2dvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3X4DVEXTPROC __glewProgramUniformMatrix3x4dvEXT = NULL;
-void glProgramUniformMatrix3x4dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix3x4dvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4DVEXTPROC __glewProgramUniformMatrix4dvEXT = NULL;
-void glProgramUniformMatrix4dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix4dvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4X2DVEXTPROC __glewProgramUniformMatrix4x2dvEXT = NULL;
-void glProgramUniformMatrix4x2dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix4x2dvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4X3DVEXTPROC __glewProgramUniformMatrix4x3dvEXT = NULL;
-void glProgramUniformMatrix4x3dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix4x3dvEXT(program,location,count,transpose,value);}
 static PFNGLUNIFORM1DPROC __glewUniform1d = NULL;
 void glUniform1d(GLint location,GLdouble x){__glewUniform1d(location,x);}
 static PFNGLUNIFORM1DVPROC __glewUniform1dv = NULL;
@@ -2104,6 +2099,22 @@ void glVertexAttribDivisorARB(GLuint index,GLuint divisor){__glewVertexAttribDiv
 static PFNGLGETINTERNALFORMATIVPROC __glewGetInternalformativ = NULL;
 void glGetInternalformativ(GLenum target,GLenum internalformat,GLenum pname,GLsizei bufSize,GLint* params){__glewGetInternalformativ(target,internalformat,pname,bufSize,params);}
 
+static PFNGLGETINTERNALFORMATI64VPROC __glewGetInternalformati64v = NULL;
+void glGetInternalformati64v(GLenum target,GLenum internalformat,GLenum pname,GLsizei bufSize,GLint64* params){__glewGetInternalformati64v(target,internalformat,pname,bufSize,params);}
+
+static PFNGLINVALIDATEBUFFERDATAPROC __glewInvalidateBufferData = NULL;
+void glInvalidateBufferData(GLuint buffer){__glewInvalidateBufferData(buffer);}
+static PFNGLINVALIDATEBUFFERSUBDATAPROC __glewInvalidateBufferSubData = NULL;
+void glInvalidateBufferSubData(GLuint buffer,GLintptr offset,GLsizeiptr length){__glewInvalidateBufferSubData(buffer,offset,length);}
+static PFNGLINVALIDATEFRAMEBUFFERPROC __glewInvalidateFramebuffer = NULL;
+void glInvalidateFramebuffer(GLenum target,GLsizei numAttachments,const GLenum* attachments){__glewInvalidateFramebuffer(target,numAttachments,attachments);}
+static PFNGLINVALIDATESUBFRAMEBUFFERPROC __glewInvalidateSubFramebuffer = NULL;
+void glInvalidateSubFramebuffer(GLenum target,GLsizei numAttachments,const GLenum* attachments,GLint x,GLint y,GLsizei width,GLsizei height){__glewInvalidateSubFramebuffer(target,numAttachments,attachments,x,y,width,height);}
+static PFNGLINVALIDATETEXIMAGEPROC __glewInvalidateTexImage = NULL;
+void glInvalidateTexImage(GLuint texture,GLint level){__glewInvalidateTexImage(texture,level);}
+static PFNGLINVALIDATETEXSUBIMAGEPROC __glewInvalidateTexSubImage = NULL;
+void glInvalidateTexSubImage(GLuint texture,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth){__glewInvalidateTexSubImage(texture,level,xoffset,yoffset,zoffset,width,height,depth);}
+
 static PFNGLFLUSHMAPPEDBUFFERRANGEPROC __glewFlushMappedBufferRange = NULL;
 void glFlushMappedBufferRange(GLenum target,GLintptr offset,GLsizeiptr length){__glewFlushMappedBufferRange(target,offset,length);}
 static PFNGLMAPBUFFERRANGEPROC __glewMapBufferRange = NULL;
@@ -2119,6 +2130,11 @@ static PFNGLMATRIXINDEXUIVARBPROC __glewMatrixIndexuivARB = NULL;
 void glMatrixIndexuivARB(GLint size,GLuint *indices){__glewMatrixIndexuivARB(size,indices);}
 static PFNGLMATRIXINDEXUSVARBPROC __glewMatrixIndexusvARB = NULL;
 void glMatrixIndexusvARB(GLint size,GLushort *indices){__glewMatrixIndexusvARB(size,indices);}
+
+static PFNGLMULTIDRAWARRAYSINDIRECTPROC __glewMultiDrawArraysIndirect = NULL;
+void glMultiDrawArraysIndirect(GLenum mode,const void* indirect,GLsizei primcount,GLsizei stride){__glewMultiDrawArraysIndirect(mode,indirect,primcount,stride);}
+static PFNGLMULTIDRAWELEMENTSINDIRECTPROC __glewMultiDrawElementsIndirect = NULL;
+void glMultiDrawElementsIndirect(GLenum mode,GLenum type,const void* indirect,GLsizei primcount,GLsizei stride){__glewMultiDrawElementsIndirect(mode,type,indirect,primcount,stride);}
 
 static PFNGLSAMPLECOVERAGEARBPROC __glewSampleCoverageARB = NULL;
 void glSampleCoverageARB(GLclampf value,GLboolean invert){__glewSampleCoverageARB(value,invert);}
@@ -2214,6 +2230,19 @@ void glPointParameterfARB(GLenum pname,GLfloat param){__glewPointParameterfARB(p
 static PFNGLPOINTPARAMETERFVARBPROC __glewPointParameterfvARB = NULL;
 void glPointParameterfvARB(GLenum pname,const GLfloat* params){__glewPointParameterfvARB(pname,params);}
 
+static PFNGLGETPROGRAMINTERFACEIVPROC __glewGetProgramInterfaceiv = NULL;
+void glGetProgramInterfaceiv(GLuint program,GLenum programInterface,GLenum pname,GLint* params){__glewGetProgramInterfaceiv(program,programInterface,pname,params);}
+static PFNGLGETPROGRAMRESOURCEINDEXPROC __glewGetProgramResourceIndex = NULL;
+GLuint glGetProgramResourceIndex(GLuint program,GLenum programInterface,const GLchar* name){return __glewGetProgramResourceIndex(program,programInterface,name);}
+static PFNGLGETPROGRAMRESOURCELOCATIONPROC __glewGetProgramResourceLocation = NULL;
+GLint glGetProgramResourceLocation(GLuint program,GLenum programInterface,const GLchar* name){return __glewGetProgramResourceLocation(program,programInterface,name);}
+static PFNGLGETPROGRAMRESOURCELOCATIONINDEXPROC __glewGetProgramResourceLocationIndex = NULL;
+GLint glGetProgramResourceLocationIndex(GLuint program,GLenum programInterface,const GLchar* name){return __glewGetProgramResourceLocationIndex(program,programInterface,name);}
+static PFNGLGETPROGRAMRESOURCENAMEPROC __glewGetProgramResourceName = NULL;
+void glGetProgramResourceName(GLuint program,GLenum programInterface,GLuint index,GLsizei bufSize,GLsizei* length,GLchar *name){__glewGetProgramResourceName(program,programInterface,index,bufSize,length,name);}
+static PFNGLGETPROGRAMRESOURCEIVPROC __glewGetProgramResourceiv = NULL;
+void glGetProgramResourceiv(GLuint program,GLenum programInterface,GLuint index,GLsizei propCount,const GLenum* props,GLsizei bufSize,GLsizei *length,GLint *params){__glewGetProgramResourceiv(program,programInterface,index,propCount,props,bufSize,length,params);}
+
 static PFNGLPROVOKINGVERTEXPROC __glewProvokingVertex = NULL;
 void glProvokingVertex(GLenum mode){__glewProvokingVertex(mode);}
 
@@ -2295,13 +2324,13 @@ void glActiveShaderProgram(GLuint pipeline,GLuint program){__glewActiveShaderPro
 static PFNGLBINDPROGRAMPIPELINEPROC __glewBindProgramPipeline = NULL;
 void glBindProgramPipeline(GLuint pipeline){__glewBindProgramPipeline(pipeline);}
 static PFNGLCREATESHADERPROGRAMVPROC __glewCreateShaderProgramv = NULL;
-GLuint glCreateShaderProgramv(GLenum type,GLsizei count,const char ** strings){return __glewCreateShaderProgramv(type,count,strings);}
+GLuint glCreateShaderProgramv(GLenum type,GLsizei count,const GLchar ** strings){return __glewCreateShaderProgramv(type,count,strings);}
 static PFNGLDELETEPROGRAMPIPELINESPROC __glewDeleteProgramPipelines = NULL;
 void glDeleteProgramPipelines(GLsizei n,const GLuint* pipelines){__glewDeleteProgramPipelines(n,pipelines);}
 static PFNGLGENPROGRAMPIPELINESPROC __glewGenProgramPipelines = NULL;
 void glGenProgramPipelines(GLsizei n,GLuint* pipelines){__glewGenProgramPipelines(n,pipelines);}
 static PFNGLGETPROGRAMPIPELINEINFOLOGPROC __glewGetProgramPipelineInfoLog = NULL;
-void glGetProgramPipelineInfoLog(GLuint pipeline,GLsizei bufSize,GLsizei* length,char *infoLog){__glewGetProgramPipelineInfoLog(pipeline,bufSize,length,infoLog);}
+void glGetProgramPipelineInfoLog(GLuint pipeline,GLsizei bufSize,GLsizei* length,GLchar *infoLog){__glewGetProgramPipelineInfoLog(pipeline,bufSize,length,infoLog);}
 static PFNGLGETPROGRAMPIPELINEIVPROC __glewGetProgramPipelineiv = NULL;
 void glGetProgramPipelineiv(GLuint pipeline,GLenum pname,GLint* params){__glewGetProgramPipelineiv(pipeline,pname,params);}
 static PFNGLISPROGRAMPIPELINEPROC __glewIsProgramPipeline = NULL;
@@ -2498,35 +2527,38 @@ void glUseProgramObjectARB(GLhandleARB programObj){__glewUseProgramObjectARB(pro
 static PFNGLVALIDATEPROGRAMARBPROC __glewValidateProgramARB = NULL;
 void glValidateProgramARB(GLhandleARB programObj){__glewValidateProgramARB(programObj);}
 
+static PFNGLSHADERSTORAGEBLOCKBINDINGPROC __glewShaderStorageBlockBinding = NULL;
+void glShaderStorageBlockBinding(GLuint program,GLuint storageBlockIndex,GLuint storageBlockBinding){__glewShaderStorageBlockBinding(program,storageBlockIndex,storageBlockBinding);}
+
 static PFNGLGETACTIVESUBROUTINENAMEPROC __glewGetActiveSubroutineName = NULL;
-void glGetActiveSubroutineName(GLuint program,GLenum shadertype,GLuint index,GLsizei bufsize,GLsizei* length,char *name){__glewGetActiveSubroutineName(program,shadertype,index,bufsize,length,name);}
+void glGetActiveSubroutineName(GLuint program,GLenum shadertype,GLuint index,GLsizei bufsize,GLsizei* length,GLchar *name){__glewGetActiveSubroutineName(program,shadertype,index,bufsize,length,name);}
 static PFNGLGETACTIVESUBROUTINEUNIFORMNAMEPROC __glewGetActiveSubroutineUniformName = NULL;
-void glGetActiveSubroutineUniformName(GLuint program,GLenum shadertype,GLuint index,GLsizei bufsize,GLsizei* length,char *name){__glewGetActiveSubroutineUniformName(program,shadertype,index,bufsize,length,name);}
+void glGetActiveSubroutineUniformName(GLuint program,GLenum shadertype,GLuint index,GLsizei bufsize,GLsizei* length,GLchar *name){__glewGetActiveSubroutineUniformName(program,shadertype,index,bufsize,length,name);}
 static PFNGLGETACTIVESUBROUTINEUNIFORMIVPROC __glewGetActiveSubroutineUniformiv = NULL;
 void glGetActiveSubroutineUniformiv(GLuint program,GLenum shadertype,GLuint index,GLenum pname,GLint* values){__glewGetActiveSubroutineUniformiv(program,shadertype,index,pname,values);}
 static PFNGLGETPROGRAMSTAGEIVPROC __glewGetProgramStageiv = NULL;
 void glGetProgramStageiv(GLuint program,GLenum shadertype,GLenum pname,GLint* values){__glewGetProgramStageiv(program,shadertype,pname,values);}
 static PFNGLGETSUBROUTINEINDEXPROC __glewGetSubroutineIndex = NULL;
-GLuint glGetSubroutineIndex(GLuint program,GLenum shadertype,const char* name){return __glewGetSubroutineIndex(program,shadertype,name);}
+GLuint glGetSubroutineIndex(GLuint program,GLenum shadertype,const GLchar* name){return __glewGetSubroutineIndex(program,shadertype,name);}
 static PFNGLGETSUBROUTINEUNIFORMLOCATIONPROC __glewGetSubroutineUniformLocation = NULL;
-GLint glGetSubroutineUniformLocation(GLuint program,GLenum shadertype,const char* name){return __glewGetSubroutineUniformLocation(program,shadertype,name);}
+GLint glGetSubroutineUniformLocation(GLuint program,GLenum shadertype,const GLchar* name){return __glewGetSubroutineUniformLocation(program,shadertype,name);}
 static PFNGLGETUNIFORMSUBROUTINEUIVPROC __glewGetUniformSubroutineuiv = NULL;
 void glGetUniformSubroutineuiv(GLenum shadertype,GLint location,GLuint* params){__glewGetUniformSubroutineuiv(shadertype,location,params);}
 static PFNGLUNIFORMSUBROUTINESUIVPROC __glewUniformSubroutinesuiv = NULL;
 void glUniformSubroutinesuiv(GLenum shadertype,GLsizei count,const GLuint* indices){__glewUniformSubroutinesuiv(shadertype,count,indices);}
 
 static PFNGLCOMPILESHADERINCLUDEARBPROC __glewCompileShaderIncludeARB = NULL;
-void glCompileShaderIncludeARB(GLuint shader,GLsizei count,const char ** path,const GLint *length){__glewCompileShaderIncludeARB(shader,count,path,length);}
+void glCompileShaderIncludeARB(GLuint shader,GLsizei count,const GLchar ** path,const GLint *length){__glewCompileShaderIncludeARB(shader,count,path,length);}
 static PFNGLDELETENAMEDSTRINGARBPROC __glewDeleteNamedStringARB = NULL;
-void glDeleteNamedStringARB(GLint namelen,const char* name){__glewDeleteNamedStringARB(namelen,name);}
+void glDeleteNamedStringARB(GLint namelen,const GLchar* name){__glewDeleteNamedStringARB(namelen,name);}
 static PFNGLGETNAMEDSTRINGARBPROC __glewGetNamedStringARB = NULL;
-void glGetNamedStringARB(GLint namelen,const char* name,GLsizei bufSize,GLint *stringlen,char *string){__glewGetNamedStringARB(namelen,name,bufSize,stringlen,string);}
+void glGetNamedStringARB(GLint namelen,const GLchar* name,GLsizei bufSize,GLint *stringlen,GLchar *string){__glewGetNamedStringARB(namelen,name,bufSize,stringlen,string);}
 static PFNGLGETNAMEDSTRINGIVARBPROC __glewGetNamedStringivARB = NULL;
-void glGetNamedStringivARB(GLint namelen,const char* name,GLenum pname,GLint *params){__glewGetNamedStringivARB(namelen,name,pname,params);}
+void glGetNamedStringivARB(GLint namelen,const GLchar* name,GLenum pname,GLint *params){__glewGetNamedStringivARB(namelen,name,pname,params);}
 static PFNGLISNAMEDSTRINGARBPROC __glewIsNamedStringARB = NULL;
-GLboolean glIsNamedStringARB(GLint namelen,const char* name){return __glewIsNamedStringARB(namelen,name);}
+GLboolean glIsNamedStringARB(GLint namelen,const GLchar* name){return __glewIsNamedStringARB(namelen,name);}
 static PFNGLNAMEDSTRINGARBPROC __glewNamedStringARB = NULL;
-void glNamedStringARB(GLenum type,GLint namelen,const char* name,GLint stringlen,const char *string){__glewNamedStringARB(type,namelen,name,stringlen,string);}
+void glNamedStringARB(GLenum type,GLint namelen,const GLchar* name,GLint stringlen,const GLchar *string){__glewNamedStringARB(type,namelen,name,stringlen,string);}
 
 static PFNGLCLIENTWAITSYNCPROC __glewClientWaitSync = NULL;
 GLenum glClientWaitSync(GLsync GLsync,GLbitfield flags,GLuint64 timeout){return __glewClientWaitSync(GLsync,flags,timeout);}
@@ -2550,6 +2582,11 @@ void glPatchParameteri(GLenum pname,GLint value){__glewPatchParameteri(pname,val
 
 static PFNGLTEXBUFFERARBPROC __glewTexBufferARB = NULL;
 void glTexBufferARB(GLenum target,GLenum internalformat,GLuint buffer){__glewTexBufferARB(target,internalformat,buffer);}
+
+static PFNGLTEXBUFFERRANGEPROC __glewTexBufferRange = NULL;
+void glTexBufferRange(GLenum target,GLenum internalformat,GLuint buffer,GLintptr offset,GLsizeiptr size){__glewTexBufferRange(target,internalformat,buffer,offset,size);}
+static PFNGLTEXTUREBUFFERRANGEEXTPROC __glewTextureBufferRangeEXT = NULL;
+void glTextureBufferRangeEXT(GLuint texture,GLenum target,GLenum internalformat,GLuint buffer,GLintptr offset,GLsizeiptr size){__glewTextureBufferRangeEXT(texture,target,internalformat,buffer,offset,size);}
 
 static PFNGLCOMPRESSEDTEXIMAGE1DARBPROC __glewCompressedTexImage1DARB = NULL;
 void glCompressedTexImage1DARB(GLenum target,GLint level,GLenum internalformat,GLsizei width,GLint border,GLsizei imageSize,const void* data){__glewCompressedTexImage1DARB(target,level,internalformat,width,border,imageSize,data);}
@@ -2587,6 +2624,18 @@ static PFNGLTEXTURESTORAGE2DEXTPROC __glewTextureStorage2DEXT = NULL;
 void glTextureStorage2DEXT(GLuint texture,GLenum target,GLsizei levels,GLenum internalformat,GLsizei width,GLsizei height){__glewTextureStorage2DEXT(texture,target,levels,internalformat,width,height);}
 static PFNGLTEXTURESTORAGE3DEXTPROC __glewTextureStorage3DEXT = NULL;
 void glTextureStorage3DEXT(GLuint texture,GLenum target,GLsizei levels,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth){__glewTextureStorage3DEXT(texture,target,levels,internalformat,width,height,depth);}
+
+static PFNGLTEXSTORAGE2DMULTISAMPLEPROC __glewTexStorage2DMultisample = NULL;
+void glTexStorage2DMultisample(GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height,GLboolean fixedsamplelocations){__glewTexStorage2DMultisample(target,samples,internalformat,width,height,fixedsamplelocations);}
+static PFNGLTEXSTORAGE3DMULTISAMPLEPROC __glewTexStorage3DMultisample = NULL;
+void glTexStorage3DMultisample(GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLboolean fixedsamplelocations){__glewTexStorage3DMultisample(target,samples,internalformat,width,height,depth,fixedsamplelocations);}
+static PFNGLTEXTURESTORAGE2DMULTISAMPLEEXTPROC __glewTextureStorage2DMultisampleEXT = NULL;
+void glTextureStorage2DMultisampleEXT(GLuint texture,GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height,GLboolean fixedsamplelocations){__glewTextureStorage2DMultisampleEXT(texture,target,samples,internalformat,width,height,fixedsamplelocations);}
+static PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC __glewTextureStorage3DMultisampleEXT = NULL;
+void glTextureStorage3DMultisampleEXT(GLuint texture,GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLboolean fixedsamplelocations){__glewTextureStorage3DMultisampleEXT(texture,target,samples,internalformat,width,height,depth,fixedsamplelocations);}
+
+static PFNGLTEXTUREVIEWPROC __glewTextureView = NULL;
+void glTextureView(GLuint texture,GLenum target,GLuint origtexture,GLenum internalformat,GLuint minlevel,GLuint numlevels,GLuint minlayer,GLuint numlayers){__glewTextureView(texture,target,origtexture,internalformat,minlevel,numlevels,minlayer,numlayers);}
 
 static PFNGLGETQUERYOBJECTI64VPROC __glewGetQueryObjecti64v = NULL;
 void glGetQueryObjecti64v(GLuint id,GLenum pname,GLint64* params){__glewGetQueryObjecti64v(id,pname,params);}
@@ -2638,19 +2687,19 @@ void glBindBufferBase(GLenum target,GLuint index,GLuint buffer){__glewBindBuffer
 static PFNGLBINDBUFFERRANGEPROC __glewBindBufferRange = NULL;
 void glBindBufferRange(GLenum target,GLuint index,GLuint buffer,GLintptr offset,GLsizeiptr size){__glewBindBufferRange(target,index,buffer,offset,size);}
 static PFNGLGETACTIVEUNIFORMBLOCKNAMEPROC __glewGetActiveUniformBlockName = NULL;
-void glGetActiveUniformBlockName(GLuint program,GLuint uniformBlockIndex,GLsizei bufSize,GLsizei* length,char* uniformBlockName){__glewGetActiveUniformBlockName(program,uniformBlockIndex,bufSize,length,uniformBlockName);}
+void glGetActiveUniformBlockName(GLuint program,GLuint uniformBlockIndex,GLsizei bufSize,GLsizei* length,GLchar* uniformBlockName){__glewGetActiveUniformBlockName(program,uniformBlockIndex,bufSize,length,uniformBlockName);}
 static PFNGLGETACTIVEUNIFORMBLOCKIVPROC __glewGetActiveUniformBlockiv = NULL;
 void glGetActiveUniformBlockiv(GLuint program,GLuint uniformBlockIndex,GLenum pname,GLint* params){__glewGetActiveUniformBlockiv(program,uniformBlockIndex,pname,params);}
 static PFNGLGETACTIVEUNIFORMNAMEPROC __glewGetActiveUniformName = NULL;
-void glGetActiveUniformName(GLuint program,GLuint uniformIndex,GLsizei bufSize,GLsizei* length,char* uniformName){__glewGetActiveUniformName(program,uniformIndex,bufSize,length,uniformName);}
+void glGetActiveUniformName(GLuint program,GLuint uniformIndex,GLsizei bufSize,GLsizei* length,GLchar* uniformName){__glewGetActiveUniformName(program,uniformIndex,bufSize,length,uniformName);}
 static PFNGLGETACTIVEUNIFORMSIVPROC __glewGetActiveUniformsiv = NULL;
 void glGetActiveUniformsiv(GLuint program,GLsizei uniformCount,const GLuint* uniformIndices,GLenum pname,GLint* params){__glewGetActiveUniformsiv(program,uniformCount,uniformIndices,pname,params);}
 static PFNGLGETINTEGERI_VPROC __glewGetIntegeri_v = NULL;
 void glGetIntegeri_v(GLenum target,GLuint index,GLint* data){__glewGetIntegeri_v(target,index,data);}
 static PFNGLGETUNIFORMBLOCKINDEXPROC __glewGetUniformBlockIndex = NULL;
-GLuint glGetUniformBlockIndex(GLuint program,const char* uniformBlockName){return __glewGetUniformBlockIndex(program,uniformBlockName);}
+GLuint glGetUniformBlockIndex(GLuint program,const GLchar* uniformBlockName){return __glewGetUniformBlockIndex(program,uniformBlockName);}
 static PFNGLGETUNIFORMINDICESPROC __glewGetUniformIndices = NULL;
-void glGetUniformIndices(GLuint program,GLsizei uniformCount,const char** uniformNames,GLuint* uniformIndices){__glewGetUniformIndices(program,uniformCount,uniformNames,uniformIndices);}
+void glGetUniformIndices(GLuint program,GLsizei uniformCount,const GLchar** uniformNames,GLuint* uniformIndices){__glewGetUniformIndices(program,uniformCount,uniformNames,uniformIndices);}
 static PFNGLUNIFORMBLOCKBINDINGPROC __glewUniformBlockBinding = NULL;
 void glUniformBlockBinding(GLuint program,GLuint uniformBlockIndex,GLuint uniformBlockBinding){__glewUniformBlockBinding(program,uniformBlockIndex,uniformBlockBinding);}
 
@@ -2683,6 +2732,19 @@ static PFNGLVERTEXATTRIBL4DVPROC __glewVertexAttribL4dv = NULL;
 void glVertexAttribL4dv(GLuint index,const GLdouble* v){__glewVertexAttribL4dv(index,v);}
 static PFNGLVERTEXATTRIBLPOINTERPROC __glewVertexAttribLPointer = NULL;
 void glVertexAttribLPointer(GLuint index,GLint size,GLenum type,GLsizei stride,const void* pointer){__glewVertexAttribLPointer(index,size,type,stride,pointer);}
+
+static PFNGLBINDVERTEXBUFFERPROC __glewBindVertexBuffer = NULL;
+void glBindVertexBuffer(GLuint bindingindex,GLuint buffer,GLintptr offset,GLsizei stride){__glewBindVertexBuffer(bindingindex,buffer,offset,stride);}
+static PFNGLVERTEXATTRIBBINDINGPROC __glewVertexAttribBinding = NULL;
+void glVertexAttribBinding(GLuint attribindex,GLuint bindingindex){__glewVertexAttribBinding(attribindex,bindingindex);}
+static PFNGLVERTEXATTRIBFORMATPROC __glewVertexAttribFormat = NULL;
+void glVertexAttribFormat(GLuint attribindex,GLint size,GLenum type,GLboolean normalized,GLuint relativeoffset){__glewVertexAttribFormat(attribindex,size,type,normalized,relativeoffset);}
+static PFNGLVERTEXATTRIBIFORMATPROC __glewVertexAttribIFormat = NULL;
+void glVertexAttribIFormat(GLuint attribindex,GLint size,GLenum type,GLuint relativeoffset){__glewVertexAttribIFormat(attribindex,size,type,relativeoffset);}
+static PFNGLVERTEXATTRIBLFORMATPROC __glewVertexAttribLFormat = NULL;
+void glVertexAttribLFormat(GLuint attribindex,GLint size,GLenum type,GLuint relativeoffset){__glewVertexAttribLFormat(attribindex,size,type,relativeoffset);}
+static PFNGLVERTEXBINDINGDIVISORPROC __glewVertexBindingDivisor = NULL;
+void glVertexBindingDivisor(GLuint bindingindex,GLuint divisor){__glewVertexBindingDivisor(bindingindex,divisor);}
 
 static PFNGLVERTEXBLENDARBPROC __glewVertexBlendARB = NULL;
 void glVertexBlendARB(GLint count){__glewVertexBlendARB(count);}
@@ -3040,7 +3102,7 @@ static PFNGLSETFRAGMENTSHADERCONSTANTATIPROC __glewSetFragmentShaderConstantATI 
 void glSetFragmentShaderConstantATI(GLuint dst,const GLfloat* value){__glewSetFragmentShaderConstantATI(dst,value);}
 
 static PFNGLMAPOBJECTBUFFERATIPROC __glewMapObjectBufferATI = NULL;
-void* glMapObjectBufferATI(GLuint buffer){return __glewMapObjectBufferATI(buffer);}
+GLvoid * glMapObjectBufferATI(GLuint buffer){return __glewMapObjectBufferATI(buffer);}
 static PFNGLUNMAPOBJECTBUFFERATIPROC __glewUnmapObjectBufferATI = NULL;
 void glUnmapObjectBufferATI(GLuint buffer){__glewUnmapObjectBufferATI(buffer);}
 
@@ -3091,75 +3153,91 @@ void glClientActiveVertexStreamATI(GLenum stream){__glewClientActiveVertexStream
 static PFNGLNORMALSTREAM3BATIPROC __glewNormalStream3bATI = NULL;
 void glNormalStream3bATI(GLenum stream,GLbyte x,GLbyte y,GLbyte z){__glewNormalStream3bATI(stream,x,y,z);}
 static PFNGLNORMALSTREAM3BVATIPROC __glewNormalStream3bvATI = NULL;
-void glNormalStream3bvATI(GLenum stream,const GLbyte *v){__glewNormalStream3bvATI(stream,v);}
+void glNormalStream3bvATI(GLenum stream,const GLbyte *coords){__glewNormalStream3bvATI(stream,coords);}
 static PFNGLNORMALSTREAM3DATIPROC __glewNormalStream3dATI = NULL;
 void glNormalStream3dATI(GLenum stream,GLdouble x,GLdouble y,GLdouble z){__glewNormalStream3dATI(stream,x,y,z);}
 static PFNGLNORMALSTREAM3DVATIPROC __glewNormalStream3dvATI = NULL;
-void glNormalStream3dvATI(GLenum stream,const GLdouble *v){__glewNormalStream3dvATI(stream,v);}
+void glNormalStream3dvATI(GLenum stream,const GLdouble *coords){__glewNormalStream3dvATI(stream,coords);}
 static PFNGLNORMALSTREAM3FATIPROC __glewNormalStream3fATI = NULL;
 void glNormalStream3fATI(GLenum stream,GLfloat x,GLfloat y,GLfloat z){__glewNormalStream3fATI(stream,x,y,z);}
 static PFNGLNORMALSTREAM3FVATIPROC __glewNormalStream3fvATI = NULL;
-void glNormalStream3fvATI(GLenum stream,const GLfloat *v){__glewNormalStream3fvATI(stream,v);}
+void glNormalStream3fvATI(GLenum stream,const GLfloat *coords){__glewNormalStream3fvATI(stream,coords);}
 static PFNGLNORMALSTREAM3IATIPROC __glewNormalStream3iATI = NULL;
 void glNormalStream3iATI(GLenum stream,GLint x,GLint y,GLint z){__glewNormalStream3iATI(stream,x,y,z);}
 static PFNGLNORMALSTREAM3IVATIPROC __glewNormalStream3ivATI = NULL;
-void glNormalStream3ivATI(GLenum stream,const GLint *v){__glewNormalStream3ivATI(stream,v);}
+void glNormalStream3ivATI(GLenum stream,const GLint *coords){__glewNormalStream3ivATI(stream,coords);}
 static PFNGLNORMALSTREAM3SATIPROC __glewNormalStream3sATI = NULL;
 void glNormalStream3sATI(GLenum stream,GLshort x,GLshort y,GLshort z){__glewNormalStream3sATI(stream,x,y,z);}
 static PFNGLNORMALSTREAM3SVATIPROC __glewNormalStream3svATI = NULL;
-void glNormalStream3svATI(GLenum stream,const GLshort *v){__glewNormalStream3svATI(stream,v);}
+void glNormalStream3svATI(GLenum stream,const GLshort *coords){__glewNormalStream3svATI(stream,coords);}
 static PFNGLVERTEXBLENDENVFATIPROC __glewVertexBlendEnvfATI = NULL;
 void glVertexBlendEnvfATI(GLenum pname,GLfloat param){__glewVertexBlendEnvfATI(pname,param);}
 static PFNGLVERTEXBLENDENVIATIPROC __glewVertexBlendEnviATI = NULL;
 void glVertexBlendEnviATI(GLenum pname,GLint param){__glewVertexBlendEnviATI(pname,param);}
+static PFNGLVERTEXSTREAM1DATIPROC __glewVertexStream1dATI = NULL;
+void glVertexStream1dATI(GLenum stream,GLdouble x){__glewVertexStream1dATI(stream,x);}
+static PFNGLVERTEXSTREAM1DVATIPROC __glewVertexStream1dvATI = NULL;
+void glVertexStream1dvATI(GLenum stream,const GLdouble *coords){__glewVertexStream1dvATI(stream,coords);}
+static PFNGLVERTEXSTREAM1FATIPROC __glewVertexStream1fATI = NULL;
+void glVertexStream1fATI(GLenum stream,GLfloat x){__glewVertexStream1fATI(stream,x);}
+static PFNGLVERTEXSTREAM1FVATIPROC __glewVertexStream1fvATI = NULL;
+void glVertexStream1fvATI(GLenum stream,const GLfloat *coords){__glewVertexStream1fvATI(stream,coords);}
+static PFNGLVERTEXSTREAM1IATIPROC __glewVertexStream1iATI = NULL;
+void glVertexStream1iATI(GLenum stream,GLint x){__glewVertexStream1iATI(stream,x);}
+static PFNGLVERTEXSTREAM1IVATIPROC __glewVertexStream1ivATI = NULL;
+void glVertexStream1ivATI(GLenum stream,const GLint *coords){__glewVertexStream1ivATI(stream,coords);}
+static PFNGLVERTEXSTREAM1SATIPROC __glewVertexStream1sATI = NULL;
+void glVertexStream1sATI(GLenum stream,GLshort x){__glewVertexStream1sATI(stream,x);}
+static PFNGLVERTEXSTREAM1SVATIPROC __glewVertexStream1svATI = NULL;
+void glVertexStream1svATI(GLenum stream,const GLshort *coords){__glewVertexStream1svATI(stream,coords);}
 static PFNGLVERTEXSTREAM2DATIPROC __glewVertexStream2dATI = NULL;
 void glVertexStream2dATI(GLenum stream,GLdouble x,GLdouble y){__glewVertexStream2dATI(stream,x,y);}
 static PFNGLVERTEXSTREAM2DVATIPROC __glewVertexStream2dvATI = NULL;
-void glVertexStream2dvATI(GLenum stream,const GLdouble *v){__glewVertexStream2dvATI(stream,v);}
+void glVertexStream2dvATI(GLenum stream,const GLdouble *coords){__glewVertexStream2dvATI(stream,coords);}
 static PFNGLVERTEXSTREAM2FATIPROC __glewVertexStream2fATI = NULL;
 void glVertexStream2fATI(GLenum stream,GLfloat x,GLfloat y){__glewVertexStream2fATI(stream,x,y);}
 static PFNGLVERTEXSTREAM2FVATIPROC __glewVertexStream2fvATI = NULL;
-void glVertexStream2fvATI(GLenum stream,const GLfloat *v){__glewVertexStream2fvATI(stream,v);}
+void glVertexStream2fvATI(GLenum stream,const GLfloat *coords){__glewVertexStream2fvATI(stream,coords);}
 static PFNGLVERTEXSTREAM2IATIPROC __glewVertexStream2iATI = NULL;
 void glVertexStream2iATI(GLenum stream,GLint x,GLint y){__glewVertexStream2iATI(stream,x,y);}
 static PFNGLVERTEXSTREAM2IVATIPROC __glewVertexStream2ivATI = NULL;
-void glVertexStream2ivATI(GLenum stream,const GLint *v){__glewVertexStream2ivATI(stream,v);}
+void glVertexStream2ivATI(GLenum stream,const GLint *coords){__glewVertexStream2ivATI(stream,coords);}
 static PFNGLVERTEXSTREAM2SATIPROC __glewVertexStream2sATI = NULL;
 void glVertexStream2sATI(GLenum stream,GLshort x,GLshort y){__glewVertexStream2sATI(stream,x,y);}
 static PFNGLVERTEXSTREAM2SVATIPROC __glewVertexStream2svATI = NULL;
-void glVertexStream2svATI(GLenum stream,const GLshort *v){__glewVertexStream2svATI(stream,v);}
+void glVertexStream2svATI(GLenum stream,const GLshort *coords){__glewVertexStream2svATI(stream,coords);}
 static PFNGLVERTEXSTREAM3DATIPROC __glewVertexStream3dATI = NULL;
 void glVertexStream3dATI(GLenum stream,GLdouble x,GLdouble y,GLdouble z){__glewVertexStream3dATI(stream,x,y,z);}
 static PFNGLVERTEXSTREAM3DVATIPROC __glewVertexStream3dvATI = NULL;
-void glVertexStream3dvATI(GLenum stream,const GLdouble *v){__glewVertexStream3dvATI(stream,v);}
+void glVertexStream3dvATI(GLenum stream,const GLdouble *coords){__glewVertexStream3dvATI(stream,coords);}
 static PFNGLVERTEXSTREAM3FATIPROC __glewVertexStream3fATI = NULL;
 void glVertexStream3fATI(GLenum stream,GLfloat x,GLfloat y,GLfloat z){__glewVertexStream3fATI(stream,x,y,z);}
 static PFNGLVERTEXSTREAM3FVATIPROC __glewVertexStream3fvATI = NULL;
-void glVertexStream3fvATI(GLenum stream,const GLfloat *v){__glewVertexStream3fvATI(stream,v);}
+void glVertexStream3fvATI(GLenum stream,const GLfloat *coords){__glewVertexStream3fvATI(stream,coords);}
 static PFNGLVERTEXSTREAM3IATIPROC __glewVertexStream3iATI = NULL;
 void glVertexStream3iATI(GLenum stream,GLint x,GLint y,GLint z){__glewVertexStream3iATI(stream,x,y,z);}
 static PFNGLVERTEXSTREAM3IVATIPROC __glewVertexStream3ivATI = NULL;
-void glVertexStream3ivATI(GLenum stream,const GLint *v){__glewVertexStream3ivATI(stream,v);}
+void glVertexStream3ivATI(GLenum stream,const GLint *coords){__glewVertexStream3ivATI(stream,coords);}
 static PFNGLVERTEXSTREAM3SATIPROC __glewVertexStream3sATI = NULL;
 void glVertexStream3sATI(GLenum stream,GLshort x,GLshort y,GLshort z){__glewVertexStream3sATI(stream,x,y,z);}
 static PFNGLVERTEXSTREAM3SVATIPROC __glewVertexStream3svATI = NULL;
-void glVertexStream3svATI(GLenum stream,const GLshort *v){__glewVertexStream3svATI(stream,v);}
+void glVertexStream3svATI(GLenum stream,const GLshort *coords){__glewVertexStream3svATI(stream,coords);}
 static PFNGLVERTEXSTREAM4DATIPROC __glewVertexStream4dATI = NULL;
 void glVertexStream4dATI(GLenum stream,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewVertexStream4dATI(stream,x,y,z,w);}
 static PFNGLVERTEXSTREAM4DVATIPROC __glewVertexStream4dvATI = NULL;
-void glVertexStream4dvATI(GLenum stream,const GLdouble *v){__glewVertexStream4dvATI(stream,v);}
+void glVertexStream4dvATI(GLenum stream,const GLdouble *coords){__glewVertexStream4dvATI(stream,coords);}
 static PFNGLVERTEXSTREAM4FATIPROC __glewVertexStream4fATI = NULL;
 void glVertexStream4fATI(GLenum stream,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewVertexStream4fATI(stream,x,y,z,w);}
 static PFNGLVERTEXSTREAM4FVATIPROC __glewVertexStream4fvATI = NULL;
-void glVertexStream4fvATI(GLenum stream,const GLfloat *v){__glewVertexStream4fvATI(stream,v);}
+void glVertexStream4fvATI(GLenum stream,const GLfloat *coords){__glewVertexStream4fvATI(stream,coords);}
 static PFNGLVERTEXSTREAM4IATIPROC __glewVertexStream4iATI = NULL;
 void glVertexStream4iATI(GLenum stream,GLint x,GLint y,GLint z,GLint w){__glewVertexStream4iATI(stream,x,y,z,w);}
 static PFNGLVERTEXSTREAM4IVATIPROC __glewVertexStream4ivATI = NULL;
-void glVertexStream4ivATI(GLenum stream,const GLint *v){__glewVertexStream4ivATI(stream,v);}
+void glVertexStream4ivATI(GLenum stream,const GLint *coords){__glewVertexStream4ivATI(stream,coords);}
 static PFNGLVERTEXSTREAM4SATIPROC __glewVertexStream4sATI = NULL;
 void glVertexStream4sATI(GLenum stream,GLshort x,GLshort y,GLshort z,GLshort w){__glewVertexStream4sATI(stream,x,y,z,w);}
 static PFNGLVERTEXSTREAM4SVATIPROC __glewVertexStream4svATI = NULL;
-void glVertexStream4svATI(GLenum stream,const GLshort *v){__glewVertexStream4svATI(stream,v);}
+void glVertexStream4svATI(GLenum stream,const GLshort *coords){__glewVertexStream4svATI(stream,coords);}
 
 static PFNGLGETUNIFORMBUFFERSIZEEXTPROC __glewGetUniformBufferSizeEXT = NULL;
 GLint glGetUniformBufferSizeEXT(GLuint program,GLint location){return __glewGetUniformBufferSizeEXT(program,location);}
@@ -3237,6 +3315,13 @@ static PFNGLCULLPARAMETERDVEXTPROC __glewCullParameterdvEXT = NULL;
 void glCullParameterdvEXT(GLenum pname,GLdouble* params){__glewCullParameterdvEXT(pname,params);}
 static PFNGLCULLPARAMETERFVEXTPROC __glewCullParameterfvEXT = NULL;
 void glCullParameterfvEXT(GLenum pname,GLfloat* params){__glewCullParameterfvEXT(pname,params);}
+
+static PFNGLINSERTEVENTMARKEREXTPROC __glewInsertEventMarkerEXT = NULL;
+void glInsertEventMarkerEXT(GLsizei length,const GLchar* marker){__glewInsertEventMarkerEXT(length,marker);}
+static PFNGLPOPGROUPMARKEREXTPROC __glewPopGroupMarkerEXT = NULL;
+void glPopGroupMarkerEXT(void){__glewPopGroupMarkerEXT();}
+static PFNGLPUSHGROUPMARKEREXTPROC __glewPushGroupMarkerEXT = NULL;
+void glPushGroupMarkerEXT(GLsizei length,const GLchar* marker){__glewPushGroupMarkerEXT(length,marker);}
 
 static PFNGLDEPTHBOUNDSEXTPROC __glewDepthBoundsEXT = NULL;
 void glDepthBoundsEXT(GLclampd zmin,GLclampd zmax){__glewDepthBoundsEXT(zmin,zmax);}
@@ -3547,6 +3632,10 @@ static PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLECOVERAGEEXTPROC __glewNamedRender
 void glNamedRenderbufferStorageMultisampleCoverageEXT(GLuint renderbuffer,GLsizei coverageSamples,GLsizei colorSamples,GLenum internalformat,GLsizei width,GLsizei height){__glewNamedRenderbufferStorageMultisampleCoverageEXT(renderbuffer,coverageSamples,colorSamples,internalformat,width,height);}
 static PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC __glewNamedRenderbufferStorageMultisampleEXT = NULL;
 void glNamedRenderbufferStorageMultisampleEXT(GLuint renderbuffer,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height){__glewNamedRenderbufferStorageMultisampleEXT(renderbuffer,samples,internalformat,width,height);}
+static PFNGLPROGRAMUNIFORM1DEXTPROC __glewProgramUniform1dEXT = NULL;
+void glProgramUniform1dEXT(GLuint program,GLint location,GLdouble x){__glewProgramUniform1dEXT(program,location,x);}
+static PFNGLPROGRAMUNIFORM1DVEXTPROC __glewProgramUniform1dvEXT = NULL;
+void glProgramUniform1dvEXT(GLuint program,GLint location,GLsizei count,const GLdouble *value){__glewProgramUniform1dvEXT(program,location,count,value);}
 static PFNGLPROGRAMUNIFORM1FEXTPROC __glewProgramUniform1fEXT = NULL;
 void glProgramUniform1fEXT(GLuint program,GLint location,GLfloat v0){__glewProgramUniform1fEXT(program,location,v0);}
 static PFNGLPROGRAMUNIFORM1FVEXTPROC __glewProgramUniform1fvEXT = NULL;
@@ -3559,6 +3648,10 @@ static PFNGLPROGRAMUNIFORM1UIEXTPROC __glewProgramUniform1uiEXT = NULL;
 void glProgramUniform1uiEXT(GLuint program,GLint location,GLuint v0){__glewProgramUniform1uiEXT(program,location,v0);}
 static PFNGLPROGRAMUNIFORM1UIVEXTPROC __glewProgramUniform1uivEXT = NULL;
 void glProgramUniform1uivEXT(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform1uivEXT(program,location,count,value);}
+static PFNGLPROGRAMUNIFORM2DEXTPROC __glewProgramUniform2dEXT = NULL;
+void glProgramUniform2dEXT(GLuint program,GLint location,GLdouble x,GLdouble y){__glewProgramUniform2dEXT(program,location,x,y);}
+static PFNGLPROGRAMUNIFORM2DVEXTPROC __glewProgramUniform2dvEXT = NULL;
+void glProgramUniform2dvEXT(GLuint program,GLint location,GLsizei count,const GLdouble *value){__glewProgramUniform2dvEXT(program,location,count,value);}
 static PFNGLPROGRAMUNIFORM2FEXTPROC __glewProgramUniform2fEXT = NULL;
 void glProgramUniform2fEXT(GLuint program,GLint location,GLfloat v0,GLfloat v1){__glewProgramUniform2fEXT(program,location,v0,v1);}
 static PFNGLPROGRAMUNIFORM2FVEXTPROC __glewProgramUniform2fvEXT = NULL;
@@ -3571,6 +3664,10 @@ static PFNGLPROGRAMUNIFORM2UIEXTPROC __glewProgramUniform2uiEXT = NULL;
 void glProgramUniform2uiEXT(GLuint program,GLint location,GLuint v0,GLuint v1){__glewProgramUniform2uiEXT(program,location,v0,v1);}
 static PFNGLPROGRAMUNIFORM2UIVEXTPROC __glewProgramUniform2uivEXT = NULL;
 void glProgramUniform2uivEXT(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform2uivEXT(program,location,count,value);}
+static PFNGLPROGRAMUNIFORM3DEXTPROC __glewProgramUniform3dEXT = NULL;
+void glProgramUniform3dEXT(GLuint program,GLint location,GLdouble x,GLdouble y,GLdouble z){__glewProgramUniform3dEXT(program,location,x,y,z);}
+static PFNGLPROGRAMUNIFORM3DVEXTPROC __glewProgramUniform3dvEXT = NULL;
+void glProgramUniform3dvEXT(GLuint program,GLint location,GLsizei count,const GLdouble *value){__glewProgramUniform3dvEXT(program,location,count,value);}
 static PFNGLPROGRAMUNIFORM3FEXTPROC __glewProgramUniform3fEXT = NULL;
 void glProgramUniform3fEXT(GLuint program,GLint location,GLfloat v0,GLfloat v1,GLfloat v2){__glewProgramUniform3fEXT(program,location,v0,v1,v2);}
 static PFNGLPROGRAMUNIFORM3FVEXTPROC __glewProgramUniform3fvEXT = NULL;
@@ -3583,6 +3680,10 @@ static PFNGLPROGRAMUNIFORM3UIEXTPROC __glewProgramUniform3uiEXT = NULL;
 void glProgramUniform3uiEXT(GLuint program,GLint location,GLuint v0,GLuint v1,GLuint v2){__glewProgramUniform3uiEXT(program,location,v0,v1,v2);}
 static PFNGLPROGRAMUNIFORM3UIVEXTPROC __glewProgramUniform3uivEXT = NULL;
 void glProgramUniform3uivEXT(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform3uivEXT(program,location,count,value);}
+static PFNGLPROGRAMUNIFORM4DEXTPROC __glewProgramUniform4dEXT = NULL;
+void glProgramUniform4dEXT(GLuint program,GLint location,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewProgramUniform4dEXT(program,location,x,y,z,w);}
+static PFNGLPROGRAMUNIFORM4DVEXTPROC __glewProgramUniform4dvEXT = NULL;
+void glProgramUniform4dvEXT(GLuint program,GLint location,GLsizei count,const GLdouble *value){__glewProgramUniform4dvEXT(program,location,count,value);}
 static PFNGLPROGRAMUNIFORM4FEXTPROC __glewProgramUniform4fEXT = NULL;
 void glProgramUniform4fEXT(GLuint program,GLint location,GLfloat v0,GLfloat v1,GLfloat v2,GLfloat v3){__glewProgramUniform4fEXT(program,location,v0,v1,v2,v3);}
 static PFNGLPROGRAMUNIFORM4FVEXTPROC __glewProgramUniform4fvEXT = NULL;
@@ -3595,22 +3696,40 @@ static PFNGLPROGRAMUNIFORM4UIEXTPROC __glewProgramUniform4uiEXT = NULL;
 void glProgramUniform4uiEXT(GLuint program,GLint location,GLuint v0,GLuint v1,GLuint v2,GLuint v3){__glewProgramUniform4uiEXT(program,location,v0,v1,v2,v3);}
 static PFNGLPROGRAMUNIFORM4UIVEXTPROC __glewProgramUniform4uivEXT = NULL;
 void glProgramUniform4uivEXT(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform4uivEXT(program,location,count,value);}
+static PFNGLPROGRAMUNIFORMMATRIX2DVEXTPROC __glewProgramUniformMatrix2dvEXT = NULL;
+void glProgramUniformMatrix2dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble *value){__glewProgramUniformMatrix2dvEXT(program,location,count,transpose,value);}
 static PFNGLPROGRAMUNIFORMMATRIX2FVEXTPROC __glewProgramUniformMatrix2fvEXT = NULL;
 void glProgramUniformMatrix2fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix2fvEXT(program,location,count,transpose,value);}
+static PFNGLPROGRAMUNIFORMMATRIX2X3DVEXTPROC __glewProgramUniformMatrix2x3dvEXT = NULL;
+void glProgramUniformMatrix2x3dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble *value){__glewProgramUniformMatrix2x3dvEXT(program,location,count,transpose,value);}
 static PFNGLPROGRAMUNIFORMMATRIX2X3FVEXTPROC __glewProgramUniformMatrix2x3fvEXT = NULL;
 void glProgramUniformMatrix2x3fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix2x3fvEXT(program,location,count,transpose,value);}
+static PFNGLPROGRAMUNIFORMMATRIX2X4DVEXTPROC __glewProgramUniformMatrix2x4dvEXT = NULL;
+void glProgramUniformMatrix2x4dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble *value){__glewProgramUniformMatrix2x4dvEXT(program,location,count,transpose,value);}
 static PFNGLPROGRAMUNIFORMMATRIX2X4FVEXTPROC __glewProgramUniformMatrix2x4fvEXT = NULL;
 void glProgramUniformMatrix2x4fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix2x4fvEXT(program,location,count,transpose,value);}
+static PFNGLPROGRAMUNIFORMMATRIX3DVEXTPROC __glewProgramUniformMatrix3dvEXT = NULL;
+void glProgramUniformMatrix3dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble *value){__glewProgramUniformMatrix3dvEXT(program,location,count,transpose,value);}
 static PFNGLPROGRAMUNIFORMMATRIX3FVEXTPROC __glewProgramUniformMatrix3fvEXT = NULL;
 void glProgramUniformMatrix3fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix3fvEXT(program,location,count,transpose,value);}
+static PFNGLPROGRAMUNIFORMMATRIX3X2DVEXTPROC __glewProgramUniformMatrix3x2dvEXT = NULL;
+void glProgramUniformMatrix3x2dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble *value){__glewProgramUniformMatrix3x2dvEXT(program,location,count,transpose,value);}
 static PFNGLPROGRAMUNIFORMMATRIX3X2FVEXTPROC __glewProgramUniformMatrix3x2fvEXT = NULL;
 void glProgramUniformMatrix3x2fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix3x2fvEXT(program,location,count,transpose,value);}
+static PFNGLPROGRAMUNIFORMMATRIX3X4DVEXTPROC __glewProgramUniformMatrix3x4dvEXT = NULL;
+void glProgramUniformMatrix3x4dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble *value){__glewProgramUniformMatrix3x4dvEXT(program,location,count,transpose,value);}
 static PFNGLPROGRAMUNIFORMMATRIX3X4FVEXTPROC __glewProgramUniformMatrix3x4fvEXT = NULL;
 void glProgramUniformMatrix3x4fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix3x4fvEXT(program,location,count,transpose,value);}
+static PFNGLPROGRAMUNIFORMMATRIX4DVEXTPROC __glewProgramUniformMatrix4dvEXT = NULL;
+void glProgramUniformMatrix4dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble *value){__glewProgramUniformMatrix4dvEXT(program,location,count,transpose,value);}
 static PFNGLPROGRAMUNIFORMMATRIX4FVEXTPROC __glewProgramUniformMatrix4fvEXT = NULL;
 void glProgramUniformMatrix4fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix4fvEXT(program,location,count,transpose,value);}
+static PFNGLPROGRAMUNIFORMMATRIX4X2DVEXTPROC __glewProgramUniformMatrix4x2dvEXT = NULL;
+void glProgramUniformMatrix4x2dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble *value){__glewProgramUniformMatrix4x2dvEXT(program,location,count,transpose,value);}
 static PFNGLPROGRAMUNIFORMMATRIX4X2FVEXTPROC __glewProgramUniformMatrix4x2fvEXT = NULL;
 void glProgramUniformMatrix4x2fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix4x2fvEXT(program,location,count,transpose,value);}
+static PFNGLPROGRAMUNIFORMMATRIX4X3DVEXTPROC __glewProgramUniformMatrix4x3dvEXT = NULL;
+void glProgramUniformMatrix4x3dvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble *value){__glewProgramUniformMatrix4x3dvEXT(program,location,count,transpose,value);}
 static PFNGLPROGRAMUNIFORMMATRIX4X3FVEXTPROC __glewProgramUniformMatrix4x3fvEXT = NULL;
 void glProgramUniformMatrix4x3fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix4x3fvEXT(program,location,count,transpose,value);}
 static PFNGLPUSHCLIENTATTRIBDEFAULTEXTPROC __glewPushClientAttribDefaultEXT = NULL;
@@ -3979,7 +4098,7 @@ void glSecondaryColorPointerEXT(GLint size,GLenum type,GLsizei stride,const GLvo
 static PFNGLACTIVEPROGRAMEXTPROC __glewActiveProgramEXT = NULL;
 void glActiveProgramEXT(GLuint program){__glewActiveProgramEXT(program);}
 static PFNGLCREATESHADERPROGRAMEXTPROC __glewCreateShaderProgramEXT = NULL;
-GLuint glCreateShaderProgramEXT(GLenum type,const char* string){return __glewCreateShaderProgramEXT(type,string);}
+GLuint glCreateShaderProgramEXT(GLenum type,const GLchar* string){return __glewCreateShaderProgramEXT(type,string);}
 static PFNGLUSESHADERPROGRAMEXTPROC __glewUseShaderProgramEXT = NULL;
 void glUseShaderProgramEXT(GLenum type,GLuint program){__glewUseShaderProgramEXT(type,program);}
 
@@ -4052,9 +4171,9 @@ void glBindBufferRangeEXT(GLenum target,GLuint index,GLuint buffer,GLintptr offs
 static PFNGLENDTRANSFORMFEEDBACKEXTPROC __glewEndTransformFeedbackEXT = NULL;
 void glEndTransformFeedbackEXT(void){__glewEndTransformFeedbackEXT();}
 static PFNGLGETTRANSFORMFEEDBACKVARYINGEXTPROC __glewGetTransformFeedbackVaryingEXT = NULL;
-void glGetTransformFeedbackVaryingEXT(GLuint program,GLuint index,GLsizei bufSize,GLsizei* length,GLsizei *size,GLenum *type,char *name){__glewGetTransformFeedbackVaryingEXT(program,index,bufSize,length,size,type,name);}
+void glGetTransformFeedbackVaryingEXT(GLuint program,GLuint index,GLsizei bufSize,GLsizei* length,GLsizei *size,GLenum *type,GLchar *name){__glewGetTransformFeedbackVaryingEXT(program,index,bufSize,length,size,type,name);}
 static PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC __glewTransformFeedbackVaryingsEXT = NULL;
-void glTransformFeedbackVaryingsEXT(GLuint program,GLsizei count,const char ** varyings,GLenum bufferMode){__glewTransformFeedbackVaryingsEXT(program,count,varyings,bufferMode);}
+void glTransformFeedbackVaryingsEXT(GLuint program,GLsizei count,const GLchar ** varyings,GLenum bufferMode){__glewTransformFeedbackVaryingsEXT(program,count,varyings,bufferMode);}
 
 static PFNGLARRAYELEMENTEXTPROC __glewArrayElementEXT = NULL;
 void glArrayElementEXT(GLint i){__glewArrayElementEXT(i);}
@@ -4246,6 +4365,25 @@ void glTexScissorFuncINTEL(GLenum target,GLenum lfunc,GLenum hfunc){__glewTexSci
 static PFNGLTEXSCISSORINTELPROC __glewTexScissorINTEL = NULL;
 void glTexScissorINTEL(GLenum target,GLclampf tlow,GLclampf thigh){__glewTexScissorINTEL(target,tlow,thigh);}
 
+static PFNGLDEBUGMESSAGECALLBACKPROC __glewDebugMessageCallback = NULL;
+void glDebugMessageCallback(GLDEBUGPROC callback,void* userParam){__glewDebugMessageCallback(callback,userParam);}
+static PFNGLDEBUGMESSAGECONTROLPROC __glewDebugMessageControl = NULL;
+void glDebugMessageControl(GLenum source,GLenum type,GLenum severity,GLsizei count,const GLuint* ids,GLboolean enabled){__glewDebugMessageControl(source,type,severity,count,ids,enabled);}
+static PFNGLDEBUGMESSAGEINSERTPROC __glewDebugMessageInsert = NULL;
+void glDebugMessageInsert(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar* buf){__glewDebugMessageInsert(source,type,id,severity,length,buf);}
+static PFNGLGETDEBUGMESSAGELOGPROC __glewGetDebugMessageLog = NULL;
+GLuint glGetDebugMessageLog(GLuint count,GLsizei bufsize,GLenum* sources,GLenum* types,GLuint* ids,GLenum* severities,GLsizei* lengths,GLchar* messageLog){return __glewGetDebugMessageLog(count,bufsize,sources,types,ids,severities,lengths,messageLog);}
+static PFNGLGETOBJECTLABELPROC __glewGetObjectLabel = NULL;
+void glGetObjectLabel(GLenum identifier,GLuint name,GLsizei bufSize,GLsizei* length,GLchar *label){__glewGetObjectLabel(identifier,name,bufSize,length,label);}
+static PFNGLGETOBJECTPTRLABELPROC __glewGetObjectPtrLabel = NULL;
+void glGetObjectPtrLabel(void* ptr,GLsizei bufSize,GLsizei* length,GLchar *label){__glewGetObjectPtrLabel(ptr,bufSize,length,label);}
+static PFNGLOBJECTLABELPROC __glewObjectLabel = NULL;
+void glObjectLabel(GLenum identifier,GLuint name,GLsizei length,const GLchar* label){__glewObjectLabel(identifier,name,length,label);}
+static PFNGLOBJECTPTRLABELPROC __glewObjectPtrLabel = NULL;
+void glObjectPtrLabel(void* ptr,GLsizei length,const GLchar* label){__glewObjectPtrLabel(ptr,length,label);}
+static PFNGLPUSHDEBUGGROUPPROC __glewPushDebugGroup = NULL;
+void glPushDebugGroup(GLenum source,GLuint id,GLsizei length,const GLchar * message){__glewPushDebugGroup(source,id,length,message);}
+
 static PFNGLBUFFERREGIONENABLEDPROC __glewBufferRegionEnabled = NULL;
 GLuint glBufferRegionEnabled(void){return __glewBufferRegionEnabled();}
 static PFNGLDELETEBUFFERREGIONPROC __glewDeleteBufferRegion = NULL;
@@ -4308,6 +4446,33 @@ static PFNGLWINDOWPOS4SMESAPROC __glewWindowPos4sMESA = NULL;
 void glWindowPos4sMESA(GLshort x,GLshort y,GLshort z,GLshort w){__glewWindowPos4sMESA(x,y,z,w);}
 static PFNGLWINDOWPOS4SVMESAPROC __glewWindowPos4svMESA = NULL;
 void glWindowPos4svMESA(const GLshort* p){__glewWindowPos4svMESA(p);}
+
+static PFNGLGETIMAGEHANDLENVPROC __glewGetImageHandleNV = NULL;
+GLuint64 glGetImageHandleNV(GLuint texture,GLint level,GLboolean layered,GLint layer,GLenum format){return __glewGetImageHandleNV(texture,level,layered,layer,format);}
+static PFNGLGETTEXTUREHANDLENVPROC __glewGetTextureHandleNV = NULL;
+GLuint64 glGetTextureHandleNV(GLuint texture){return __glewGetTextureHandleNV(texture);}
+static PFNGLGETTEXTURESAMPLERHANDLENVPROC __glewGetTextureSamplerHandleNV = NULL;
+GLuint64 glGetTextureSamplerHandleNV(GLuint texture,GLuint sampler){return __glewGetTextureSamplerHandleNV(texture,sampler);}
+static PFNGLISIMAGEHANDLERESIDENTNVPROC __glewIsImageHandleResidentNV = NULL;
+GLboolean glIsImageHandleResidentNV(GLuint64 handle){return __glewIsImageHandleResidentNV(handle);}
+static PFNGLISTEXTUREHANDLERESIDENTNVPROC __glewIsTextureHandleResidentNV = NULL;
+GLboolean glIsTextureHandleResidentNV(GLuint64 handle){return __glewIsTextureHandleResidentNV(handle);}
+static PFNGLMAKEIMAGEHANDLENONRESIDENTNVPROC __glewMakeImageHandleNonResidentNV = NULL;
+void glMakeImageHandleNonResidentNV(GLuint64 handle){__glewMakeImageHandleNonResidentNV(handle);}
+static PFNGLMAKEIMAGEHANDLERESIDENTNVPROC __glewMakeImageHandleResidentNV = NULL;
+void glMakeImageHandleResidentNV(GLuint64 handle,GLenum access){__glewMakeImageHandleResidentNV(handle,access);}
+static PFNGLMAKETEXTUREHANDLENONRESIDENTNVPROC __glewMakeTextureHandleNonResidentNV = NULL;
+void glMakeTextureHandleNonResidentNV(GLuint64 handle){__glewMakeTextureHandleNonResidentNV(handle);}
+static PFNGLMAKETEXTUREHANDLERESIDENTNVPROC __glewMakeTextureHandleResidentNV = NULL;
+void glMakeTextureHandleResidentNV(GLuint64 handle){__glewMakeTextureHandleResidentNV(handle);}
+static PFNGLPROGRAMUNIFORMHANDLEUI64NVPROC __glewProgramUniformHandleui64NV = NULL;
+void glProgramUniformHandleui64NV(GLuint program,GLint location,GLuint64 value){__glewProgramUniformHandleui64NV(program,location,value);}
+static PFNGLPROGRAMUNIFORMHANDLEUI64VNVPROC __glewProgramUniformHandleui64vNV = NULL;
+void glProgramUniformHandleui64vNV(GLuint program,GLint location,GLsizei count,const GLuint64* values){__glewProgramUniformHandleui64vNV(program,location,count,values);}
+static PFNGLUNIFORMHANDLEUI64NVPROC __glewUniformHandleui64NV = NULL;
+void glUniformHandleui64NV(GLint location,GLuint64 value){__glewUniformHandleui64NV(location,value);}
+static PFNGLUNIFORMHANDLEUI64VNVPROC __glewUniformHandleui64vNV = NULL;
+void glUniformHandleui64vNV(GLint location,GLsizei count,const GLuint64* value){__glewUniformHandleui64vNV(location,count,value);}
 
 static PFNGLBEGINCONDITIONALRENDERNVPROC __glewBeginConditionalRenderNV = NULL;
 void glBeginConditionalRenderNV(GLuint id,GLenum mode){__glewBeginConditionalRenderNV(id,mode);}
@@ -4666,7 +4831,7 @@ void glPathParameteriNV(GLuint path,GLenum pname,GLint value){__glewPathParamete
 static PFNGLPATHPARAMETERIVNVPROC __glewPathParameterivNV = NULL;
 void glPathParameterivNV(GLuint path,GLenum pname,const GLint* value){__glewPathParameterivNV(path,pname,value);}
 static PFNGLPATHSTENCILDEPTHOFFSETNVPROC __glewPathStencilDepthOffsetNV = NULL;
-void glPathStencilDepthOffsetNV(GLfloat factor,GLint units){__glewPathStencilDepthOffsetNV(factor,units);}
+void glPathStencilDepthOffsetNV(GLfloat factor,GLfloat units){__glewPathStencilDepthOffsetNV(factor,units);}
 static PFNGLPATHSTENCILFUNCNVPROC __glewPathStencilFuncNV = NULL;
 void glPathStencilFuncNV(GLenum func,GLint ref,GLuint mask){__glewPathStencilFuncNV(func,ref,mask);}
 static PFNGLPATHSTRINGNVPROC __glewPathStringNV = NULL;
@@ -5090,6 +5255,14 @@ void glGetClipPlanefOES(GLenum plane,GLfloat* equation){__glewGetClipPlanefOES(p
 static PFNGLORTHOFOESPROC __glewOrthofOES = NULL;
 void glOrthofOES(GLfloat l,GLfloat r,GLfloat b,GLfloat t,GLfloat n,GLfloat f){__glewOrthofOES(l,r,b,t,n,f);}
 
+static PFNGLERRORSTRINGREGALPROC __glewErrorStringREGAL = NULL;
+const GLchar* glErrorStringREGAL(GLenum error){return __glewErrorStringREGAL(error);}
+
+static PFNGLGETEXTENSIONREGALPROC __glewGetExtensionREGAL = NULL;
+GLboolean glGetExtensionREGAL(const GLchar* ext){return __glewGetExtensionREGAL(ext);}
+static PFNGLISSUPPORTEDREGALPROC __glewIsSupportedREGAL = NULL;
+GLboolean glIsSupportedREGAL(const GLchar* ext){return __glewIsSupportedREGAL(ext);}
+
 static PFNGLDETAILTEXFUNCSGISPROC __glewDetailTexFuncSGIS = NULL;
 void glDetailTexFuncSGIS(GLenum target,GLsizei n,const GLfloat* points){__glewDetailTexFuncSGIS(target,n,points);}
 static PFNGLGETDETAILTEXFUNCSGISPROC __glewGetDetailTexFuncSGIS = NULL;
@@ -5351,6 +5524,7 @@ GLboolean __GLEW_VERSION_3_3 = GL_FALSE;
 GLboolean __GLEW_VERSION_4_0 = GL_FALSE;
 GLboolean __GLEW_VERSION_4_1 = GL_FALSE;
 GLboolean __GLEW_VERSION_4_2 = GL_FALSE;
+GLboolean __GLEW_VERSION_4_3 = GL_FALSE;
 GLboolean __GLEW_3DFX_multisample = GL_FALSE;
 GLboolean __GLEW_3DFX_tbuffer = GL_FALSE;
 GLboolean __GLEW_3DFX_texture_compression_FXT1 = GL_FALSE;
@@ -5362,12 +5536,17 @@ GLboolean __GLEW_AMD_draw_buffers_blend = GL_FALSE;
 GLboolean __GLEW_AMD_multi_draw_indirect = GL_FALSE;
 GLboolean __GLEW_AMD_name_gen_delete = GL_FALSE;
 GLboolean __GLEW_AMD_performance_monitor = GL_FALSE;
+GLboolean __GLEW_AMD_pinned_memory = GL_FALSE;
+GLboolean __GLEW_AMD_query_buffer_object = GL_FALSE;
 GLboolean __GLEW_AMD_sample_positions = GL_FALSE;
 GLboolean __GLEW_AMD_seamless_cubemap_per_texture = GL_FALSE;
 GLboolean __GLEW_AMD_shader_stencil_export = GL_FALSE;
+GLboolean __GLEW_AMD_stencil_operation_extended = GL_FALSE;
 GLboolean __GLEW_AMD_texture_texture4 = GL_FALSE;
 GLboolean __GLEW_AMD_transform_feedback3_lines_triangles = GL_FALSE;
+GLboolean __GLEW_AMD_vertex_shader_layer = GL_FALSE;
 GLboolean __GLEW_AMD_vertex_shader_tessellator = GL_FALSE;
+GLboolean __GLEW_AMD_vertex_shader_viewport_index = GL_FALSE;
 GLboolean __GLEW_APPLE_aux_depth_stencil = GL_FALSE;
 GLboolean __GLEW_APPLE_client_storage = GL_FALSE;
 GLboolean __GLEW_APPLE_element_array = GL_FALSE;
@@ -5386,14 +5565,19 @@ GLboolean __GLEW_APPLE_vertex_array_range = GL_FALSE;
 GLboolean __GLEW_APPLE_vertex_program_evaluators = GL_FALSE;
 GLboolean __GLEW_APPLE_ycbcr_422 = GL_FALSE;
 GLboolean __GLEW_ARB_ES2_compatibility = GL_FALSE;
+GLboolean __GLEW_ARB_ES3_compatibility = GL_FALSE;
+GLboolean __GLEW_ARB_arrays_of_arrays = GL_FALSE;
 GLboolean __GLEW_ARB_base_instance = GL_FALSE;
 GLboolean __GLEW_ARB_blend_func_extended = GL_FALSE;
 GLboolean __GLEW_ARB_cl_event = GL_FALSE;
+GLboolean __GLEW_ARB_clear_buffer_object = GL_FALSE;
 GLboolean __GLEW_ARB_color_buffer_float = GL_FALSE;
 GLboolean __GLEW_ARB_compatibility = GL_FALSE;
 GLboolean __GLEW_ARB_compressed_texture_pixel_storage = GL_FALSE;
+GLboolean __GLEW_ARB_compute_shader = GL_FALSE;
 GLboolean __GLEW_ARB_conservative_depth = GL_FALSE;
 GLboolean __GLEW_ARB_copy_buffer = GL_FALSE;
+GLboolean __GLEW_ARB_copy_image = GL_FALSE;
 GLboolean __GLEW_ARB_debug_output = GL_FALSE;
 GLboolean __GLEW_ARB_depth_buffer_float = GL_FALSE;
 GLboolean __GLEW_ARB_depth_clamp = GL_FALSE;
@@ -5404,10 +5588,13 @@ GLboolean __GLEW_ARB_draw_elements_base_vertex = GL_FALSE;
 GLboolean __GLEW_ARB_draw_indirect = GL_FALSE;
 GLboolean __GLEW_ARB_draw_instanced = GL_FALSE;
 GLboolean __GLEW_ARB_explicit_attrib_location = GL_FALSE;
+GLboolean __GLEW_ARB_explicit_uniform_location = GL_FALSE;
 GLboolean __GLEW_ARB_fragment_coord_conventions = GL_FALSE;
+GLboolean __GLEW_ARB_fragment_layer_viewport = GL_FALSE;
 GLboolean __GLEW_ARB_fragment_program = GL_FALSE;
 GLboolean __GLEW_ARB_fragment_program_shadow = GL_FALSE;
 GLboolean __GLEW_ARB_fragment_shader = GL_FALSE;
+GLboolean __GLEW_ARB_framebuffer_no_attachments = GL_FALSE;
 GLboolean __GLEW_ARB_framebuffer_object = GL_FALSE;
 GLboolean __GLEW_ARB_framebuffer_sRGB = GL_FALSE;
 GLboolean __GLEW_ARB_geometry_shader4 = GL_FALSE;
@@ -5419,9 +5606,12 @@ GLboolean __GLEW_ARB_half_float_vertex = GL_FALSE;
 GLboolean __GLEW_ARB_imaging = GL_FALSE;
 GLboolean __GLEW_ARB_instanced_arrays = GL_FALSE;
 GLboolean __GLEW_ARB_internalformat_query = GL_FALSE;
+GLboolean __GLEW_ARB_internalformat_query2 = GL_FALSE;
+GLboolean __GLEW_ARB_invalidate_subdata = GL_FALSE;
 GLboolean __GLEW_ARB_map_buffer_alignment = GL_FALSE;
 GLboolean __GLEW_ARB_map_buffer_range = GL_FALSE;
 GLboolean __GLEW_ARB_matrix_palette = GL_FALSE;
+GLboolean __GLEW_ARB_multi_draw_indirect = GL_FALSE;
 GLboolean __GLEW_ARB_multisample = GL_FALSE;
 GLboolean __GLEW_ARB_multitexture = GL_FALSE;
 GLboolean __GLEW_ARB_occlusion_query = GL_FALSE;
@@ -5429,8 +5619,12 @@ GLboolean __GLEW_ARB_occlusion_query2 = GL_FALSE;
 GLboolean __GLEW_ARB_pixel_buffer_object = GL_FALSE;
 GLboolean __GLEW_ARB_point_parameters = GL_FALSE;
 GLboolean __GLEW_ARB_point_sprite = GL_FALSE;
+GLboolean __GLEW_ARB_program_interface_query = GL_FALSE;
 GLboolean __GLEW_ARB_provoking_vertex = GL_FALSE;
+GLboolean __GLEW_ARB_robust_buffer_access_behavior = GL_FALSE;
 GLboolean __GLEW_ARB_robustness = GL_FALSE;
+GLboolean __GLEW_ARB_robustness_application_isolation = GL_FALSE;
+GLboolean __GLEW_ARB_robustness_share_group_isolation = GL_FALSE;
 GLboolean __GLEW_ARB_sample_shading = GL_FALSE;
 GLboolean __GLEW_ARB_sampler_objects = GL_FALSE;
 GLboolean __GLEW_ARB_seamless_cube_map = GL_FALSE;
@@ -5438,9 +5632,11 @@ GLboolean __GLEW_ARB_separate_shader_objects = GL_FALSE;
 GLboolean __GLEW_ARB_shader_atomic_counters = GL_FALSE;
 GLboolean __GLEW_ARB_shader_bit_encoding = GL_FALSE;
 GLboolean __GLEW_ARB_shader_image_load_store = GL_FALSE;
+GLboolean __GLEW_ARB_shader_image_size = GL_FALSE;
 GLboolean __GLEW_ARB_shader_objects = GL_FALSE;
 GLboolean __GLEW_ARB_shader_precision = GL_FALSE;
 GLboolean __GLEW_ARB_shader_stencil_export = GL_FALSE;
+GLboolean __GLEW_ARB_shader_storage_buffer_object = GL_FALSE;
 GLboolean __GLEW_ARB_shader_subroutine = GL_FALSE;
 GLboolean __GLEW_ARB_shader_texture_lod = GL_FALSE;
 GLboolean __GLEW_ARB_shading_language_100 = GL_FALSE;
@@ -5449,11 +5645,13 @@ GLboolean __GLEW_ARB_shading_language_include = GL_FALSE;
 GLboolean __GLEW_ARB_shading_language_packing = GL_FALSE;
 GLboolean __GLEW_ARB_shadow = GL_FALSE;
 GLboolean __GLEW_ARB_shadow_ambient = GL_FALSE;
+GLboolean __GLEW_ARB_stencil_texturing = GL_FALSE;
 GLboolean __GLEW_ARB_sync = GL_FALSE;
 GLboolean __GLEW_ARB_tessellation_shader = GL_FALSE;
 GLboolean __GLEW_ARB_texture_border_clamp = GL_FALSE;
 GLboolean __GLEW_ARB_texture_buffer_object = GL_FALSE;
 GLboolean __GLEW_ARB_texture_buffer_object_rgb32 = GL_FALSE;
+GLboolean __GLEW_ARB_texture_buffer_range = GL_FALSE;
 GLboolean __GLEW_ARB_texture_compression = GL_FALSE;
 GLboolean __GLEW_ARB_texture_compression_bptc = GL_FALSE;
 GLboolean __GLEW_ARB_texture_compression_rgtc = GL_FALSE;
@@ -5468,12 +5666,15 @@ GLboolean __GLEW_ARB_texture_gather = GL_FALSE;
 GLboolean __GLEW_ARB_texture_mirrored_repeat = GL_FALSE;
 GLboolean __GLEW_ARB_texture_multisample = GL_FALSE;
 GLboolean __GLEW_ARB_texture_non_power_of_two = GL_FALSE;
+GLboolean __GLEW_ARB_texture_query_levels = GL_FALSE;
 GLboolean __GLEW_ARB_texture_query_lod = GL_FALSE;
 GLboolean __GLEW_ARB_texture_rectangle = GL_FALSE;
 GLboolean __GLEW_ARB_texture_rg = GL_FALSE;
 GLboolean __GLEW_ARB_texture_rgb10_a2ui = GL_FALSE;
 GLboolean __GLEW_ARB_texture_storage = GL_FALSE;
+GLboolean __GLEW_ARB_texture_storage_multisample = GL_FALSE;
 GLboolean __GLEW_ARB_texture_swizzle = GL_FALSE;
+GLboolean __GLEW_ARB_texture_view = GL_FALSE;
 GLboolean __GLEW_ARB_timer_query = GL_FALSE;
 GLboolean __GLEW_ARB_transform_feedback2 = GL_FALSE;
 GLboolean __GLEW_ARB_transform_feedback3 = GL_FALSE;
@@ -5483,6 +5684,7 @@ GLboolean __GLEW_ARB_uniform_buffer_object = GL_FALSE;
 GLboolean __GLEW_ARB_vertex_array_bgra = GL_FALSE;
 GLboolean __GLEW_ARB_vertex_array_object = GL_FALSE;
 GLboolean __GLEW_ARB_vertex_attrib_64bit = GL_FALSE;
+GLboolean __GLEW_ARB_vertex_attrib_binding = GL_FALSE;
 GLboolean __GLEW_ARB_vertex_blend = GL_FALSE;
 GLboolean __GLEW_ARB_vertex_buffer_object = GL_FALSE;
 GLboolean __GLEW_ARB_vertex_program = GL_FALSE;
@@ -5530,6 +5732,7 @@ GLboolean __GLEW_EXT_convolution = GL_FALSE;
 GLboolean __GLEW_EXT_coordinate_frame = GL_FALSE;
 GLboolean __GLEW_EXT_copy_texture = GL_FALSE;
 GLboolean __GLEW_EXT_cull_vertex = GL_FALSE;
+GLboolean __GLEW_EXT_debug_marker = GL_FALSE;
 GLboolean __GLEW_EXT_depth_bounds_test = GL_FALSE;
 GLboolean __GLEW_EXT_direct_state_access = GL_FALSE;
 GLboolean __GLEW_EXT_draw_buffers2 = GL_FALSE;
@@ -5626,6 +5829,8 @@ GLboolean __GLEW_INGR_color_clamp = GL_FALSE;
 GLboolean __GLEW_INGR_interlace_read = GL_FALSE;
 GLboolean __GLEW_INTEL_parallel_arrays = GL_FALSE;
 GLboolean __GLEW_INTEL_texture_scissor = GL_FALSE;
+GLboolean __GLEW_KHR_debug = GL_FALSE;
+GLboolean __GLEW_KHR_texture_compression_astc_ldr = GL_FALSE;
 GLboolean __GLEW_KTX_buffer_region = GL_FALSE;
 GLboolean __GLEW_MESAX_texture_stack = GL_FALSE;
 GLboolean __GLEW_MESA_pack_invert = GL_FALSE;
@@ -5633,6 +5838,7 @@ GLboolean __GLEW_MESA_resize_buffers = GL_FALSE;
 GLboolean __GLEW_MESA_window_pos = GL_FALSE;
 GLboolean __GLEW_MESA_ycbcr_texture = GL_FALSE;
 GLboolean __GLEW_NVX_gpu_memory_info = GL_FALSE;
+GLboolean __GLEW_NV_bindless_texture = GL_FALSE;
 GLboolean __GLEW_NV_blend_square = GL_FALSE;
 GLboolean __GLEW_NV_conditional_render = GL_FALSE;
 GLboolean __GLEW_NV_copy_depth_to_color = GL_FALSE;
@@ -5671,6 +5877,7 @@ GLboolean __GLEW_NV_present_video = GL_FALSE;
 GLboolean __GLEW_NV_primitive_restart = GL_FALSE;
 GLboolean __GLEW_NV_register_combiners = GL_FALSE;
 GLboolean __GLEW_NV_register_combiners2 = GL_FALSE;
+GLboolean __GLEW_NV_shader_atomic_float = GL_FALSE;
 GLboolean __GLEW_NV_shader_buffer_load = GL_FALSE;
 GLboolean __GLEW_NV_tessellation_program5 = GL_FALSE;
 GLboolean __GLEW_NV_texgen_emboss = GL_FALSE;
@@ -5707,6 +5914,9 @@ GLboolean __GLEW_OML_resample = GL_FALSE;
 GLboolean __GLEW_OML_subsample = GL_FALSE;
 GLboolean __GLEW_PGI_misc_hints = GL_FALSE;
 GLboolean __GLEW_PGI_vertex_hints = GL_FALSE;
+GLboolean __GLEW_REGAL_error_string = GL_FALSE;
+GLboolean __GLEW_REGAL_extension_query = GL_FALSE;
+GLboolean __GLEW_REGAL_log = GL_FALSE;
 GLboolean __GLEW_REND_screen_coordinates = GL_FALSE;
 GLboolean __GLEW_S3_s3tc = GL_FALSE;
 GLboolean __GLEW_SGIS_color_range = GL_FALSE;
@@ -6547,6 +6757,10 @@ static GLboolean _glewInit_GL_VERSION_4_0 (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_VERSION_4_2 */
 
+#ifdef GL_VERSION_4_3
+
+#endif /* GL_VERSION_4_3 */
+
 #ifdef GL_3DFX_multisample
 
 #endif /* GL_3DFX_multisample */
@@ -6664,6 +6878,14 @@ static GLboolean _glewInit_GL_AMD_performance_monitor (GLEW_CONTEXT_ARG_DEF_INIT
 
 #endif /* GL_AMD_performance_monitor */
 
+#ifdef GL_AMD_pinned_memory
+
+#endif /* GL_AMD_pinned_memory */
+
+#ifdef GL_AMD_query_buffer_object
+
+#endif /* GL_AMD_query_buffer_object */
+
 #ifdef GL_AMD_sample_positions
 
 static GLboolean _glewInit_GL_AMD_sample_positions (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -6685,6 +6907,19 @@ static GLboolean _glewInit_GL_AMD_sample_positions (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_AMD_shader_stencil_export */
 
+#ifdef GL_AMD_stencil_operation_extended
+
+static GLboolean _glewInit_GL_AMD_stencil_operation_extended (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewStencilOpValueAMD = (PFNGLSTENCILOPVALUEAMDPROC)glewGetProcAddress((const GLubyte*)"glStencilOpValueAMD")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_AMD_stencil_operation_extended */
+
 #ifdef GL_AMD_texture_texture4
 
 #endif /* GL_AMD_texture_texture4 */
@@ -6692,6 +6927,10 @@ static GLboolean _glewInit_GL_AMD_sample_positions (GLEW_CONTEXT_ARG_DEF_INIT)
 #ifdef GL_AMD_transform_feedback3_lines_triangles
 
 #endif /* GL_AMD_transform_feedback3_lines_triangles */
+
+#ifdef GL_AMD_vertex_shader_layer
+
+#endif /* GL_AMD_vertex_shader_layer */
 
 #ifdef GL_AMD_vertex_shader_tessellator
 
@@ -6706,6 +6945,10 @@ static GLboolean _glewInit_GL_AMD_vertex_shader_tessellator (GLEW_CONTEXT_ARG_DE
 }
 
 #endif /* GL_AMD_vertex_shader_tessellator */
+
+#ifdef GL_AMD_vertex_shader_viewport_index
+
+#endif /* GL_AMD_vertex_shader_viewport_index */
 
 #ifdef GL_APPLE_aux_depth_stencil
 
@@ -6890,6 +7133,14 @@ static GLboolean _glewInit_GL_ARB_ES2_compatibility (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_ARB_ES2_compatibility */
 
+#ifdef GL_ARB_ES3_compatibility
+
+#endif /* GL_ARB_ES3_compatibility */
+
+#ifdef GL_ARB_arrays_of_arrays
+
+#endif /* GL_ARB_arrays_of_arrays */
+
 #ifdef GL_ARB_base_instance
 
 static GLboolean _glewInit_GL_ARB_base_instance (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -6932,6 +7183,22 @@ static GLboolean _glewInit_GL_ARB_cl_event (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_ARB_cl_event */
 
+#ifdef GL_ARB_clear_buffer_object
+
+static GLboolean _glewInit_GL_ARB_clear_buffer_object (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewClearBufferData = (PFNGLCLEARBUFFERDATAPROC)glewGetProcAddress((const GLubyte*)"glClearBufferData")) == NULL) || r;
+  r = ((__glewClearBufferSubData = (PFNGLCLEARBUFFERSUBDATAPROC)glewGetProcAddress((const GLubyte*)"glClearBufferSubData")) == NULL) || r;
+  r = ((__glewClearNamedBufferDataEXT = (PFNGLCLEARNAMEDBUFFERDATAEXTPROC)glewGetProcAddress((const GLubyte*)"glClearNamedBufferDataEXT")) == NULL) || r;
+  r = ((__glewClearNamedBufferSubDataEXT = (PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC)glewGetProcAddress((const GLubyte*)"glClearNamedBufferSubDataEXT")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_clear_buffer_object */
+
 #ifdef GL_ARB_color_buffer_float
 
 static GLboolean _glewInit_GL_ARB_color_buffer_float (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -6953,6 +7220,20 @@ static GLboolean _glewInit_GL_ARB_color_buffer_float (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_ARB_compressed_texture_pixel_storage */
 
+#ifdef GL_ARB_compute_shader
+
+static GLboolean _glewInit_GL_ARB_compute_shader (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewDispatchCompute = (PFNGLDISPATCHCOMPUTEPROC)glewGetProcAddress((const GLubyte*)"glDispatchCompute")) == NULL) || r;
+  r = ((__glewDispatchComputeIndirect = (PFNGLDISPATCHCOMPUTEINDIRECTPROC)glewGetProcAddress((const GLubyte*)"glDispatchComputeIndirect")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_compute_shader */
+
 #ifdef GL_ARB_conservative_depth
 
 #endif /* GL_ARB_conservative_depth */
@@ -6969,6 +7250,19 @@ static GLboolean _glewInit_GL_ARB_copy_buffer (GLEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* GL_ARB_copy_buffer */
+
+#ifdef GL_ARB_copy_image
+
+static GLboolean _glewInit_GL_ARB_copy_image (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewCopyImageSubData = (PFNGLCOPYIMAGESUBDATAPROC)glewGetProcAddress((const GLubyte*)"glCopyImageSubData")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_copy_image */
 
 #ifdef GL_ARB_debug_output
 
@@ -7065,9 +7359,17 @@ static GLboolean _glewInit_GL_ARB_draw_indirect (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_ARB_explicit_attrib_location */
 
+#ifdef GL_ARB_explicit_uniform_location
+
+#endif /* GL_ARB_explicit_uniform_location */
+
 #ifdef GL_ARB_fragment_coord_conventions
 
 #endif /* GL_ARB_fragment_coord_conventions */
+
+#ifdef GL_ARB_fragment_layer_viewport
+
+#endif /* GL_ARB_fragment_layer_viewport */
 
 #ifdef GL_ARB_fragment_program
 
@@ -7080,6 +7382,22 @@ static GLboolean _glewInit_GL_ARB_draw_indirect (GLEW_CONTEXT_ARG_DEF_INIT)
 #ifdef GL_ARB_fragment_shader
 
 #endif /* GL_ARB_fragment_shader */
+
+#ifdef GL_ARB_framebuffer_no_attachments
+
+static GLboolean _glewInit_GL_ARB_framebuffer_no_attachments (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewFramebufferParameteri = (PFNGLFRAMEBUFFERPARAMETERIPROC)glewGetProcAddress((const GLubyte*)"glFramebufferParameteri")) == NULL) || r;
+  r = ((__glewGetFramebufferParameteriv = (PFNGLGETFRAMEBUFFERPARAMETERIVPROC)glewGetProcAddress((const GLubyte*)"glGetFramebufferParameteriv")) == NULL) || r;
+  r = ((__glewGetNamedFramebufferParameterivEXT = (PFNGLGETNAMEDFRAMEBUFFERPARAMETERIVEXTPROC)glewGetProcAddress((const GLubyte*)"glGetNamedFramebufferParameterivEXT")) == NULL) || r;
+  r = ((__glewNamedFramebufferParameteriEXT = (PFNGLNAMEDFRAMEBUFFERPARAMETERIEXTPROC)glewGetProcAddress((const GLubyte*)"glNamedFramebufferParameteriEXT")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_framebuffer_no_attachments */
 
 #ifdef GL_ARB_framebuffer_object
 
@@ -7159,23 +7477,6 @@ static GLboolean _glewInit_GL_ARB_gpu_shader_fp64 (GLEW_CONTEXT_ARG_DEF_INIT)
   GLboolean r = GL_FALSE;
 
   r = ((__glewGetUniformdv = (PFNGLGETUNIFORMDVPROC)glewGetProcAddress((const GLubyte*)"glGetUniformdv")) == NULL) || r;
-  r = ((__glewProgramUniform1dEXT = (PFNGLPROGRAMUNIFORM1DEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1dEXT")) == NULL) || r;
-  r = ((__glewProgramUniform1dvEXT = (PFNGLPROGRAMUNIFORM1DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniform2dEXT = (PFNGLPROGRAMUNIFORM2DEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2dEXT")) == NULL) || r;
-  r = ((__glewProgramUniform2dvEXT = (PFNGLPROGRAMUNIFORM2DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniform3dEXT = (PFNGLPROGRAMUNIFORM3DEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3dEXT")) == NULL) || r;
-  r = ((__glewProgramUniform3dvEXT = (PFNGLPROGRAMUNIFORM3DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniform4dEXT = (PFNGLPROGRAMUNIFORM4DEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4dEXT")) == NULL) || r;
-  r = ((__glewProgramUniform4dvEXT = (PFNGLPROGRAMUNIFORM4DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniformMatrix2dvEXT = (PFNGLPROGRAMUNIFORMMATRIX2DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix2dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniformMatrix2x3dvEXT = (PFNGLPROGRAMUNIFORMMATRIX2X3DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix2x3dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniformMatrix2x4dvEXT = (PFNGLPROGRAMUNIFORMMATRIX2X4DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix2x4dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniformMatrix3dvEXT = (PFNGLPROGRAMUNIFORMMATRIX3DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix3dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniformMatrix3x2dvEXT = (PFNGLPROGRAMUNIFORMMATRIX3X2DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix3x2dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniformMatrix3x4dvEXT = (PFNGLPROGRAMUNIFORMMATRIX3X4DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix3x4dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniformMatrix4dvEXT = (PFNGLPROGRAMUNIFORMMATRIX4DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix4dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniformMatrix4x2dvEXT = (PFNGLPROGRAMUNIFORMMATRIX4X2DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix4x2dvEXT")) == NULL) || r;
-  r = ((__glewProgramUniformMatrix4x3dvEXT = (PFNGLPROGRAMUNIFORMMATRIX4X3DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix4x3dvEXT")) == NULL) || r;
   r = ((__glewUniform1d = (PFNGLUNIFORM1DPROC)glewGetProcAddress((const GLubyte*)"glUniform1d")) == NULL) || r;
   r = ((__glewUniform1dv = (PFNGLUNIFORM1DVPROC)glewGetProcAddress((const GLubyte*)"glUniform1dv")) == NULL) || r;
   r = ((__glewUniform2d = (PFNGLUNIFORM2DPROC)glewGetProcAddress((const GLubyte*)"glUniform2d")) == NULL) || r;
@@ -7280,6 +7581,37 @@ static GLboolean _glewInit_GL_ARB_internalformat_query (GLEW_CONTEXT_ARG_DEF_INI
 
 #endif /* GL_ARB_internalformat_query */
 
+#ifdef GL_ARB_internalformat_query2
+
+static GLboolean _glewInit_GL_ARB_internalformat_query2 (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewGetInternalformati64v = (PFNGLGETINTERNALFORMATI64VPROC)glewGetProcAddress((const GLubyte*)"glGetInternalformati64v")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_internalformat_query2 */
+
+#ifdef GL_ARB_invalidate_subdata
+
+static GLboolean _glewInit_GL_ARB_invalidate_subdata (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewInvalidateBufferData = (PFNGLINVALIDATEBUFFERDATAPROC)glewGetProcAddress((const GLubyte*)"glInvalidateBufferData")) == NULL) || r;
+  r = ((__glewInvalidateBufferSubData = (PFNGLINVALIDATEBUFFERSUBDATAPROC)glewGetProcAddress((const GLubyte*)"glInvalidateBufferSubData")) == NULL) || r;
+  r = ((__glewInvalidateFramebuffer = (PFNGLINVALIDATEFRAMEBUFFERPROC)glewGetProcAddress((const GLubyte*)"glInvalidateFramebuffer")) == NULL) || r;
+  r = ((__glewInvalidateSubFramebuffer = (PFNGLINVALIDATESUBFRAMEBUFFERPROC)glewGetProcAddress((const GLubyte*)"glInvalidateSubFramebuffer")) == NULL) || r;
+  r = ((__glewInvalidateTexImage = (PFNGLINVALIDATETEXIMAGEPROC)glewGetProcAddress((const GLubyte*)"glInvalidateTexImage")) == NULL) || r;
+  r = ((__glewInvalidateTexSubImage = (PFNGLINVALIDATETEXSUBIMAGEPROC)glewGetProcAddress((const GLubyte*)"glInvalidateTexSubImage")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_invalidate_subdata */
+
 #ifdef GL_ARB_map_buffer_alignment
 
 #endif /* GL_ARB_map_buffer_alignment */
@@ -7314,6 +7646,20 @@ static GLboolean _glewInit_GL_ARB_matrix_palette (GLEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* GL_ARB_matrix_palette */
+
+#ifdef GL_ARB_multi_draw_indirect
+
+static GLboolean _glewInit_GL_ARB_multi_draw_indirect (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewMultiDrawArraysIndirect = (PFNGLMULTIDRAWARRAYSINDIRECTPROC)glewGetProcAddress((const GLubyte*)"glMultiDrawArraysIndirect")) == NULL) || r;
+  r = ((__glewMultiDrawElementsIndirect = (PFNGLMULTIDRAWELEMENTSINDIRECTPROC)glewGetProcAddress((const GLubyte*)"glMultiDrawElementsIndirect")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_multi_draw_indirect */
 
 #ifdef GL_ARB_multisample
 
@@ -7420,6 +7766,24 @@ static GLboolean _glewInit_GL_ARB_point_parameters (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_ARB_point_sprite */
 
+#ifdef GL_ARB_program_interface_query
+
+static GLboolean _glewInit_GL_ARB_program_interface_query (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewGetProgramInterfaceiv = (PFNGLGETPROGRAMINTERFACEIVPROC)glewGetProcAddress((const GLubyte*)"glGetProgramInterfaceiv")) == NULL) || r;
+  r = ((__glewGetProgramResourceIndex = (PFNGLGETPROGRAMRESOURCEINDEXPROC)glewGetProcAddress((const GLubyte*)"glGetProgramResourceIndex")) == NULL) || r;
+  r = ((__glewGetProgramResourceLocation = (PFNGLGETPROGRAMRESOURCELOCATIONPROC)glewGetProcAddress((const GLubyte*)"glGetProgramResourceLocation")) == NULL) || r;
+  r = ((__glewGetProgramResourceLocationIndex = (PFNGLGETPROGRAMRESOURCELOCATIONINDEXPROC)glewGetProcAddress((const GLubyte*)"glGetProgramResourceLocationIndex")) == NULL) || r;
+  r = ((__glewGetProgramResourceName = (PFNGLGETPROGRAMRESOURCENAMEPROC)glewGetProcAddress((const GLubyte*)"glGetProgramResourceName")) == NULL) || r;
+  r = ((__glewGetProgramResourceiv = (PFNGLGETPROGRAMRESOURCEIVPROC)glewGetProcAddress((const GLubyte*)"glGetProgramResourceiv")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_program_interface_query */
+
 #ifdef GL_ARB_provoking_vertex
 
 static GLboolean _glewInit_GL_ARB_provoking_vertex (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -7432,6 +7796,10 @@ static GLboolean _glewInit_GL_ARB_provoking_vertex (GLEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* GL_ARB_provoking_vertex */
+
+#ifdef GL_ARB_robust_buffer_access_behavior
+
+#endif /* GL_ARB_robust_buffer_access_behavior */
 
 #ifdef GL_ARB_robustness
 
@@ -7464,6 +7832,14 @@ static GLboolean _glewInit_GL_ARB_robustness (GLEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* GL_ARB_robustness */
+
+#ifdef GL_ARB_robustness_application_isolation
+
+#endif /* GL_ARB_robustness_application_isolation */
+
+#ifdef GL_ARB_robustness_share_group_isolation
+
+#endif /* GL_ARB_robustness_share_group_isolation */
 
 #ifdef GL_ARB_sample_shading
 
@@ -7611,6 +7987,10 @@ static GLboolean _glewInit_GL_ARB_shader_image_load_store (GLEW_CONTEXT_ARG_DEF_
 
 #endif /* GL_ARB_shader_image_load_store */
 
+#ifdef GL_ARB_shader_image_size
+
+#endif /* GL_ARB_shader_image_size */
+
 #ifdef GL_ARB_shader_objects
 
 static GLboolean _glewInit_GL_ARB_shader_objects (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -7669,6 +8049,19 @@ static GLboolean _glewInit_GL_ARB_shader_objects (GLEW_CONTEXT_ARG_DEF_INIT)
 #ifdef GL_ARB_shader_stencil_export
 
 #endif /* GL_ARB_shader_stencil_export */
+
+#ifdef GL_ARB_shader_storage_buffer_object
+
+static GLboolean _glewInit_GL_ARB_shader_storage_buffer_object (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewShaderStorageBlockBinding = (PFNGLSHADERSTORAGEBLOCKBINDINGPROC)glewGetProcAddress((const GLubyte*)"glShaderStorageBlockBinding")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_shader_storage_buffer_object */
 
 #ifdef GL_ARB_shader_subroutine
 
@@ -7732,6 +8125,10 @@ static GLboolean _glewInit_GL_ARB_shading_language_include (GLEW_CONTEXT_ARG_DEF
 
 #endif /* GL_ARB_shadow_ambient */
 
+#ifdef GL_ARB_stencil_texturing
+
+#endif /* GL_ARB_stencil_texturing */
+
 #ifdef GL_ARB_sync
 
 static GLboolean _glewInit_GL_ARB_sync (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -7785,6 +8182,20 @@ static GLboolean _glewInit_GL_ARB_texture_buffer_object (GLEW_CONTEXT_ARG_DEF_IN
 #ifdef GL_ARB_texture_buffer_object_rgb32
 
 #endif /* GL_ARB_texture_buffer_object_rgb32 */
+
+#ifdef GL_ARB_texture_buffer_range
+
+static GLboolean _glewInit_GL_ARB_texture_buffer_range (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewTexBufferRange = (PFNGLTEXBUFFERRANGEPROC)glewGetProcAddress((const GLubyte*)"glTexBufferRange")) == NULL) || r;
+  r = ((__glewTextureBufferRangeEXT = (PFNGLTEXTUREBUFFERRANGEEXTPROC)glewGetProcAddress((const GLubyte*)"glTextureBufferRangeEXT")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_texture_buffer_range */
 
 #ifdef GL_ARB_texture_compression
 
@@ -7869,6 +8280,10 @@ static GLboolean _glewInit_GL_ARB_texture_multisample (GLEW_CONTEXT_ARG_DEF_INIT
 
 #endif /* GL_ARB_texture_non_power_of_two */
 
+#ifdef GL_ARB_texture_query_levels
+
+#endif /* GL_ARB_texture_query_levels */
+
 #ifdef GL_ARB_texture_query_lod
 
 #endif /* GL_ARB_texture_query_lod */
@@ -7903,9 +8318,38 @@ static GLboolean _glewInit_GL_ARB_texture_storage (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_ARB_texture_storage */
 
+#ifdef GL_ARB_texture_storage_multisample
+
+static GLboolean _glewInit_GL_ARB_texture_storage_multisample (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewTexStorage2DMultisample = (PFNGLTEXSTORAGE2DMULTISAMPLEPROC)glewGetProcAddress((const GLubyte*)"glTexStorage2DMultisample")) == NULL) || r;
+  r = ((__glewTexStorage3DMultisample = (PFNGLTEXSTORAGE3DMULTISAMPLEPROC)glewGetProcAddress((const GLubyte*)"glTexStorage3DMultisample")) == NULL) || r;
+  r = ((__glewTextureStorage2DMultisampleEXT = (PFNGLTEXTURESTORAGE2DMULTISAMPLEEXTPROC)glewGetProcAddress((const GLubyte*)"glTextureStorage2DMultisampleEXT")) == NULL) || r;
+  r = ((__glewTextureStorage3DMultisampleEXT = (PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC)glewGetProcAddress((const GLubyte*)"glTextureStorage3DMultisampleEXT")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_texture_storage_multisample */
+
 #ifdef GL_ARB_texture_swizzle
 
 #endif /* GL_ARB_texture_swizzle */
+
+#ifdef GL_ARB_texture_view
+
+static GLboolean _glewInit_GL_ARB_texture_view (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewTextureView = (PFNGLTEXTUREVIEWPROC)glewGetProcAddress((const GLubyte*)"glTextureView")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_texture_view */
 
 #ifdef GL_ARB_timer_query
 
@@ -8050,6 +8494,24 @@ static GLboolean _glewInit_GL_ARB_vertex_attrib_64bit (GLEW_CONTEXT_ARG_DEF_INIT
 }
 
 #endif /* GL_ARB_vertex_attrib_64bit */
+
+#ifdef GL_ARB_vertex_attrib_binding
+
+static GLboolean _glewInit_GL_ARB_vertex_attrib_binding (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewBindVertexBuffer = (PFNGLBINDVERTEXBUFFERPROC)glewGetProcAddress((const GLubyte*)"glBindVertexBuffer")) == NULL) || r;
+  r = ((__glewVertexAttribBinding = (PFNGLVERTEXATTRIBBINDINGPROC)glewGetProcAddress((const GLubyte*)"glVertexAttribBinding")) == NULL) || r;
+  r = ((__glewVertexAttribFormat = (PFNGLVERTEXATTRIBFORMATPROC)glewGetProcAddress((const GLubyte*)"glVertexAttribFormat")) == NULL) || r;
+  r = ((__glewVertexAttribIFormat = (PFNGLVERTEXATTRIBIFORMATPROC)glewGetProcAddress((const GLubyte*)"glVertexAttribIFormat")) == NULL) || r;
+  r = ((__glewVertexAttribLFormat = (PFNGLVERTEXATTRIBLFORMATPROC)glewGetProcAddress((const GLubyte*)"glVertexAttribLFormat")) == NULL) || r;
+  r = ((__glewVertexBindingDivisor = (PFNGLVERTEXBINDINGDIVISORPROC)glewGetProcAddress((const GLubyte*)"glVertexBindingDivisor")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_ARB_vertex_attrib_binding */
 
 #ifdef GL_ARB_vertex_blend
 
@@ -8499,6 +8961,14 @@ static GLboolean _glewInit_GL_ATI_vertex_streams (GLEW_CONTEXT_ARG_DEF_INIT)
   r = ((__glewNormalStream3svATI = (PFNGLNORMALSTREAM3SVATIPROC)glewGetProcAddress((const GLubyte*)"glNormalStream3svATI")) == NULL) || r;
   r = ((__glewVertexBlendEnvfATI = (PFNGLVERTEXBLENDENVFATIPROC)glewGetProcAddress((const GLubyte*)"glVertexBlendEnvfATI")) == NULL) || r;
   r = ((__glewVertexBlendEnviATI = (PFNGLVERTEXBLENDENVIATIPROC)glewGetProcAddress((const GLubyte*)"glVertexBlendEnviATI")) == NULL) || r;
+  r = ((__glewVertexStream1dATI = (PFNGLVERTEXSTREAM1DATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream1dATI")) == NULL) || r;
+  r = ((__glewVertexStream1dvATI = (PFNGLVERTEXSTREAM1DVATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream1dvATI")) == NULL) || r;
+  r = ((__glewVertexStream1fATI = (PFNGLVERTEXSTREAM1FATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream1fATI")) == NULL) || r;
+  r = ((__glewVertexStream1fvATI = (PFNGLVERTEXSTREAM1FVATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream1fvATI")) == NULL) || r;
+  r = ((__glewVertexStream1iATI = (PFNGLVERTEXSTREAM1IATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream1iATI")) == NULL) || r;
+  r = ((__glewVertexStream1ivATI = (PFNGLVERTEXSTREAM1IVATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream1ivATI")) == NULL) || r;
+  r = ((__glewVertexStream1sATI = (PFNGLVERTEXSTREAM1SATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream1sATI")) == NULL) || r;
+  r = ((__glewVertexStream1svATI = (PFNGLVERTEXSTREAM1SVATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream1svATI")) == NULL) || r;
   r = ((__glewVertexStream2dATI = (PFNGLVERTEXSTREAM2DATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream2dATI")) == NULL) || r;
   r = ((__glewVertexStream2dvATI = (PFNGLVERTEXSTREAM2DVATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream2dvATI")) == NULL) || r;
   r = ((__glewVertexStream2fATI = (PFNGLVERTEXSTREAM2FATIPROC)glewGetProcAddress((const GLubyte*)"glVertexStream2fATI")) == NULL) || r;
@@ -8726,6 +9196,21 @@ static GLboolean _glewInit_GL_EXT_cull_vertex (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_EXT_cull_vertex */
 
+#ifdef GL_EXT_debug_marker
+
+static GLboolean _glewInit_GL_EXT_debug_marker (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewInsertEventMarkerEXT = (PFNGLINSERTEVENTMARKEREXTPROC)glewGetProcAddress((const GLubyte*)"glInsertEventMarkerEXT")) == NULL) || r;
+  r = ((__glewPopGroupMarkerEXT = (PFNGLPOPGROUPMARKEREXTPROC)glewGetProcAddress((const GLubyte*)"glPopGroupMarkerEXT")) == NULL) || r;
+  r = ((__glewPushGroupMarkerEXT = (PFNGLPUSHGROUPMARKEREXTPROC)glewGetProcAddress((const GLubyte*)"glPushGroupMarkerEXT")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_EXT_debug_marker */
+
 #ifdef GL_EXT_depth_bounds_test
 
 static GLboolean _glewInit_GL_EXT_depth_bounds_test (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -8898,38 +9383,55 @@ static GLboolean _glewInit_GL_EXT_direct_state_access (GLEW_CONTEXT_ARG_DEF_INIT
   r = ((__glewNamedRenderbufferStorageEXT = (PFNGLNAMEDRENDERBUFFERSTORAGEEXTPROC)glewGetProcAddress((const GLubyte*)"glNamedRenderbufferStorageEXT")) == NULL) || r;
   r = ((__glewNamedRenderbufferStorageMultisampleCoverageEXT = (PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLECOVERAGEEXTPROC)glewGetProcAddress((const GLubyte*)"glNamedRenderbufferStorageMultisampleCoverageEXT")) == NULL) || r;
   r = ((__glewNamedRenderbufferStorageMultisampleEXT = (PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC)glewGetProcAddress((const GLubyte*)"glNamedRenderbufferStorageMultisampleEXT")) == NULL) || r;
+  r = ((__glewProgramUniform1dEXT = (PFNGLPROGRAMUNIFORM1DEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1dEXT")) == NULL) || r;
+  r = ((__glewProgramUniform1dvEXT = (PFNGLPROGRAMUNIFORM1DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1dvEXT")) == NULL) || r;
   r = ((__glewProgramUniform1fEXT = (PFNGLPROGRAMUNIFORM1FEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1fEXT")) == NULL) || r;
   r = ((__glewProgramUniform1fvEXT = (PFNGLPROGRAMUNIFORM1FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1fvEXT")) == NULL) || r;
   r = ((__glewProgramUniform1iEXT = (PFNGLPROGRAMUNIFORM1IEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1iEXT")) == NULL) || r;
   r = ((__glewProgramUniform1ivEXT = (PFNGLPROGRAMUNIFORM1IVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1ivEXT")) == NULL) || r;
   r = ((__glewProgramUniform1uiEXT = (PFNGLPROGRAMUNIFORM1UIEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1uiEXT")) == NULL) || r;
   r = ((__glewProgramUniform1uivEXT = (PFNGLPROGRAMUNIFORM1UIVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform1uivEXT")) == NULL) || r;
+  r = ((__glewProgramUniform2dEXT = (PFNGLPROGRAMUNIFORM2DEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2dEXT")) == NULL) || r;
+  r = ((__glewProgramUniform2dvEXT = (PFNGLPROGRAMUNIFORM2DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2dvEXT")) == NULL) || r;
   r = ((__glewProgramUniform2fEXT = (PFNGLPROGRAMUNIFORM2FEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2fEXT")) == NULL) || r;
   r = ((__glewProgramUniform2fvEXT = (PFNGLPROGRAMUNIFORM2FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2fvEXT")) == NULL) || r;
   r = ((__glewProgramUniform2iEXT = (PFNGLPROGRAMUNIFORM2IEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2iEXT")) == NULL) || r;
   r = ((__glewProgramUniform2ivEXT = (PFNGLPROGRAMUNIFORM2IVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2ivEXT")) == NULL) || r;
   r = ((__glewProgramUniform2uiEXT = (PFNGLPROGRAMUNIFORM2UIEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2uiEXT")) == NULL) || r;
   r = ((__glewProgramUniform2uivEXT = (PFNGLPROGRAMUNIFORM2UIVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform2uivEXT")) == NULL) || r;
+  r = ((__glewProgramUniform3dEXT = (PFNGLPROGRAMUNIFORM3DEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3dEXT")) == NULL) || r;
+  r = ((__glewProgramUniform3dvEXT = (PFNGLPROGRAMUNIFORM3DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3dvEXT")) == NULL) || r;
   r = ((__glewProgramUniform3fEXT = (PFNGLPROGRAMUNIFORM3FEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3fEXT")) == NULL) || r;
   r = ((__glewProgramUniform3fvEXT = (PFNGLPROGRAMUNIFORM3FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3fvEXT")) == NULL) || r;
   r = ((__glewProgramUniform3iEXT = (PFNGLPROGRAMUNIFORM3IEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3iEXT")) == NULL) || r;
   r = ((__glewProgramUniform3ivEXT = (PFNGLPROGRAMUNIFORM3IVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3ivEXT")) == NULL) || r;
   r = ((__glewProgramUniform3uiEXT = (PFNGLPROGRAMUNIFORM3UIEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3uiEXT")) == NULL) || r;
   r = ((__glewProgramUniform3uivEXT = (PFNGLPROGRAMUNIFORM3UIVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform3uivEXT")) == NULL) || r;
+  r = ((__glewProgramUniform4dEXT = (PFNGLPROGRAMUNIFORM4DEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4dEXT")) == NULL) || r;
+  r = ((__glewProgramUniform4dvEXT = (PFNGLPROGRAMUNIFORM4DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4dvEXT")) == NULL) || r;
   r = ((__glewProgramUniform4fEXT = (PFNGLPROGRAMUNIFORM4FEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4fEXT")) == NULL) || r;
   r = ((__glewProgramUniform4fvEXT = (PFNGLPROGRAMUNIFORM4FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4fvEXT")) == NULL) || r;
   r = ((__glewProgramUniform4iEXT = (PFNGLPROGRAMUNIFORM4IEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4iEXT")) == NULL) || r;
   r = ((__glewProgramUniform4ivEXT = (PFNGLPROGRAMUNIFORM4IVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4ivEXT")) == NULL) || r;
   r = ((__glewProgramUniform4uiEXT = (PFNGLPROGRAMUNIFORM4UIEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4uiEXT")) == NULL) || r;
   r = ((__glewProgramUniform4uivEXT = (PFNGLPROGRAMUNIFORM4UIVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniform4uivEXT")) == NULL) || r;
+  r = ((__glewProgramUniformMatrix2dvEXT = (PFNGLPROGRAMUNIFORMMATRIX2DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix2dvEXT")) == NULL) || r;
   r = ((__glewProgramUniformMatrix2fvEXT = (PFNGLPROGRAMUNIFORMMATRIX2FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix2fvEXT")) == NULL) || r;
+  r = ((__glewProgramUniformMatrix2x3dvEXT = (PFNGLPROGRAMUNIFORMMATRIX2X3DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix2x3dvEXT")) == NULL) || r;
   r = ((__glewProgramUniformMatrix2x3fvEXT = (PFNGLPROGRAMUNIFORMMATRIX2X3FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix2x3fvEXT")) == NULL) || r;
+  r = ((__glewProgramUniformMatrix2x4dvEXT = (PFNGLPROGRAMUNIFORMMATRIX2X4DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix2x4dvEXT")) == NULL) || r;
   r = ((__glewProgramUniformMatrix2x4fvEXT = (PFNGLPROGRAMUNIFORMMATRIX2X4FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix2x4fvEXT")) == NULL) || r;
+  r = ((__glewProgramUniformMatrix3dvEXT = (PFNGLPROGRAMUNIFORMMATRIX3DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix3dvEXT")) == NULL) || r;
   r = ((__glewProgramUniformMatrix3fvEXT = (PFNGLPROGRAMUNIFORMMATRIX3FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix3fvEXT")) == NULL) || r;
+  r = ((__glewProgramUniformMatrix3x2dvEXT = (PFNGLPROGRAMUNIFORMMATRIX3X2DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix3x2dvEXT")) == NULL) || r;
   r = ((__glewProgramUniformMatrix3x2fvEXT = (PFNGLPROGRAMUNIFORMMATRIX3X2FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix3x2fvEXT")) == NULL) || r;
+  r = ((__glewProgramUniformMatrix3x4dvEXT = (PFNGLPROGRAMUNIFORMMATRIX3X4DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix3x4dvEXT")) == NULL) || r;
   r = ((__glewProgramUniformMatrix3x4fvEXT = (PFNGLPROGRAMUNIFORMMATRIX3X4FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix3x4fvEXT")) == NULL) || r;
+  r = ((__glewProgramUniformMatrix4dvEXT = (PFNGLPROGRAMUNIFORMMATRIX4DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix4dvEXT")) == NULL) || r;
   r = ((__glewProgramUniformMatrix4fvEXT = (PFNGLPROGRAMUNIFORMMATRIX4FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix4fvEXT")) == NULL) || r;
+  r = ((__glewProgramUniformMatrix4x2dvEXT = (PFNGLPROGRAMUNIFORMMATRIX4X2DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix4x2dvEXT")) == NULL) || r;
   r = ((__glewProgramUniformMatrix4x2fvEXT = (PFNGLPROGRAMUNIFORMMATRIX4X2FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix4x2fvEXT")) == NULL) || r;
+  r = ((__glewProgramUniformMatrix4x3dvEXT = (PFNGLPROGRAMUNIFORMMATRIX4X3DVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix4x3dvEXT")) == NULL) || r;
   r = ((__glewProgramUniformMatrix4x3fvEXT = (PFNGLPROGRAMUNIFORMMATRIX4X3FVEXTPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformMatrix4x3fvEXT")) == NULL) || r;
   r = ((__glewPushClientAttribDefaultEXT = (PFNGLPUSHCLIENTATTRIBDEFAULTEXTPROC)glewGetProcAddress((const GLubyte*)"glPushClientAttribDefaultEXT")) == NULL) || r;
   r = ((__glewTextureBufferEXT = (PFNGLTEXTUREBUFFEREXTPROC)glewGetProcAddress((const GLubyte*)"glTextureBufferEXT")) == NULL) || r;
@@ -9989,6 +10491,32 @@ static GLboolean _glewInit_GL_INTEL_texture_scissor (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_INTEL_texture_scissor */
 
+#ifdef GL_KHR_debug
+
+static GLboolean _glewInit_GL_KHR_debug (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewDebugMessageCallback = (PFNGLDEBUGMESSAGECALLBACKPROC)glewGetProcAddress((const GLubyte*)"glDebugMessageCallback")) == NULL) || r;
+  r = ((__glewDebugMessageControl = (PFNGLDEBUGMESSAGECONTROLPROC)glewGetProcAddress((const GLubyte*)"glDebugMessageControl")) == NULL) || r;
+  r = ((__glewDebugMessageInsert = (PFNGLDEBUGMESSAGEINSERTPROC)glewGetProcAddress((const GLubyte*)"glDebugMessageInsert")) == NULL) || r;
+  r = ((__glewGetDebugMessageLog = (PFNGLGETDEBUGMESSAGELOGPROC)glewGetProcAddress((const GLubyte*)"glGetDebugMessageLog")) == NULL) || r;
+  r = ((__glewGetObjectLabel = (PFNGLGETOBJECTLABELPROC)glewGetProcAddress((const GLubyte*)"glGetObjectLabel")) == NULL) || r;
+  r = ((__glewGetObjectPtrLabel = (PFNGLGETOBJECTPTRLABELPROC)glewGetProcAddress((const GLubyte*)"glGetObjectPtrLabel")) == NULL) || r;
+  r = ((__glewGetPointerv = (PFNGLGETPOINTERVPROC)glewGetProcAddress((const GLubyte*)"glGetPointerv")) == NULL) || r;
+  r = ((__glewObjectLabel = (PFNGLOBJECTLABELPROC)glewGetProcAddress((const GLubyte*)"glObjectLabel")) == NULL) || r;
+  r = ((__glewObjectPtrLabel = (PFNGLOBJECTPTRLABELPROC)glewGetProcAddress((const GLubyte*)"glObjectPtrLabel")) == NULL) || r;
+  r = ((__glewPushDebugGroup = (PFNGLPUSHDEBUGGROUPPROC)glewGetProcAddress((const GLubyte*)"glPushDebugGroup")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_KHR_debug */
+
+#ifdef GL_KHR_texture_compression_astc_ldr
+
+#endif /* GL_KHR_texture_compression_astc_ldr */
+
 #ifdef GL_KTX_buffer_region
 
 static GLboolean _glewInit_GL_KTX_buffer_region (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -10070,6 +10598,31 @@ static GLboolean _glewInit_GL_MESA_window_pos (GLEW_CONTEXT_ARG_DEF_INIT)
 #ifdef GL_NVX_gpu_memory_info
 
 #endif /* GL_NVX_gpu_memory_info */
+
+#ifdef GL_NV_bindless_texture
+
+static GLboolean _glewInit_GL_NV_bindless_texture (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewGetImageHandleNV = (PFNGLGETIMAGEHANDLENVPROC)glewGetProcAddress((const GLubyte*)"glGetImageHandleNV")) == NULL) || r;
+  r = ((__glewGetTextureHandleNV = (PFNGLGETTEXTUREHANDLENVPROC)glewGetProcAddress((const GLubyte*)"glGetTextureHandleNV")) == NULL) || r;
+  r = ((__glewGetTextureSamplerHandleNV = (PFNGLGETTEXTURESAMPLERHANDLENVPROC)glewGetProcAddress((const GLubyte*)"glGetTextureSamplerHandleNV")) == NULL) || r;
+  r = ((__glewIsImageHandleResidentNV = (PFNGLISIMAGEHANDLERESIDENTNVPROC)glewGetProcAddress((const GLubyte*)"glIsImageHandleResidentNV")) == NULL) || r;
+  r = ((__glewIsTextureHandleResidentNV = (PFNGLISTEXTUREHANDLERESIDENTNVPROC)glewGetProcAddress((const GLubyte*)"glIsTextureHandleResidentNV")) == NULL) || r;
+  r = ((__glewMakeImageHandleNonResidentNV = (PFNGLMAKEIMAGEHANDLENONRESIDENTNVPROC)glewGetProcAddress((const GLubyte*)"glMakeImageHandleNonResidentNV")) == NULL) || r;
+  r = ((__glewMakeImageHandleResidentNV = (PFNGLMAKEIMAGEHANDLERESIDENTNVPROC)glewGetProcAddress((const GLubyte*)"glMakeImageHandleResidentNV")) == NULL) || r;
+  r = ((__glewMakeTextureHandleNonResidentNV = (PFNGLMAKETEXTUREHANDLENONRESIDENTNVPROC)glewGetProcAddress((const GLubyte*)"glMakeTextureHandleNonResidentNV")) == NULL) || r;
+  r = ((__glewMakeTextureHandleResidentNV = (PFNGLMAKETEXTUREHANDLERESIDENTNVPROC)glewGetProcAddress((const GLubyte*)"glMakeTextureHandleResidentNV")) == NULL) || r;
+  r = ((__glewProgramUniformHandleui64NV = (PFNGLPROGRAMUNIFORMHANDLEUI64NVPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformHandleui64NV")) == NULL) || r;
+  r = ((__glewProgramUniformHandleui64vNV = (PFNGLPROGRAMUNIFORMHANDLEUI64VNVPROC)glewGetProcAddress((const GLubyte*)"glProgramUniformHandleui64vNV")) == NULL) || r;
+  r = ((__glewUniformHandleui64NV = (PFNGLUNIFORMHANDLEUI64NVPROC)glewGetProcAddress((const GLubyte*)"glUniformHandleui64NV")) == NULL) || r;
+  r = ((__glewUniformHandleui64vNV = (PFNGLUNIFORMHANDLEUI64VNVPROC)glewGetProcAddress((const GLubyte*)"glUniformHandleui64vNV")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_NV_bindless_texture */
 
 #ifdef GL_NV_blend_square
 
@@ -10602,6 +11155,10 @@ static GLboolean _glewInit_GL_NV_register_combiners2 (GLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GL_NV_register_combiners2 */
 
+#ifdef GL_NV_shader_atomic_float
+
+#endif /* GL_NV_shader_atomic_float */
+
 #ifdef GL_NV_shader_buffer_load
 
 static GLboolean _glewInit_GL_NV_shader_buffer_load (GLEW_CONTEXT_ARG_DEF_INIT)
@@ -11004,6 +11561,37 @@ static GLboolean _glewInit_GL_OES_single_precision (GLEW_CONTEXT_ARG_DEF_INIT)
 #ifdef GL_PGI_vertex_hints
 
 #endif /* GL_PGI_vertex_hints */
+
+#ifdef GL_REGAL_error_string
+
+static GLboolean _glewInit_GL_REGAL_error_string (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewErrorStringREGAL = (PFNGLERRORSTRINGREGALPROC)glewGetProcAddress((const GLubyte*)"glErrorStringREGAL")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_REGAL_error_string */
+
+#ifdef GL_REGAL_extension_query
+
+static GLboolean _glewInit_GL_REGAL_extension_query (GLEW_CONTEXT_ARG_DEF_INIT)
+{
+  GLboolean r = GL_FALSE;
+
+  r = ((__glewGetExtensionREGAL = (PFNGLGETEXTENSIONREGALPROC)glewGetProcAddress((const GLubyte*)"glGetExtensionREGAL")) == NULL) || r;
+  r = ((__glewIsSupportedREGAL = (PFNGLISSUPPORTEDREGALPROC)glewGetProcAddress((const GLubyte*)"glIsSupportedREGAL")) == NULL) || r;
+
+  return r;
+}
+
+#endif /* GL_REGAL_extension_query */
+
+#ifdef GL_REGAL_log
+
+#endif /* GL_REGAL_log */
 
 #ifdef GL_REND_screen_coordinates
 
@@ -11564,11 +12152,6 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   GLint major, minor;
   const GLubyte* extStart;
   const GLubyte* extEnd;
-
-
-
-
-
   /* Since we're still initializing, the `GetString' function pointer hasn't
    * been loaded yet. */
   __glewGetString = (PFNGLGETSTRINGPROC) glewGetProcAddress(
@@ -11595,7 +12178,8 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   }
   else
   {
-    CONST_CAST(GLEW_VERSION_4_2)   = ( major > 4 )                 || ( major == 4 && minor >= 2 ) ? GL_TRUE : GL_FALSE;
+    CONST_CAST(GLEW_VERSION_4_3)   = ( major > 4 )                 || ( major == 4 && minor >= 3 ) ? GL_TRUE : GL_FALSE;
+    CONST_CAST(GLEW_VERSION_4_2)   = GLEW_VERSION_4_3   == GL_TRUE || ( major == 4 && minor >= 2 ) ? GL_TRUE : GL_FALSE;
     CONST_CAST(GLEW_VERSION_4_1)   = GLEW_VERSION_4_2   == GL_TRUE || ( major == 4 && minor >= 1 ) ? GL_TRUE : GL_FALSE;
     CONST_CAST(GLEW_VERSION_4_0)   = GLEW_VERSION_4_1   == GL_TRUE || ( major == 4               ) ? GL_TRUE : GL_FALSE;
     CONST_CAST(GLEW_VERSION_3_3)   = GLEW_VERSION_4_0   == GL_TRUE || ( major == 3 && minor >= 3 ) ? GL_TRUE : GL_FALSE;
@@ -11661,6 +12245,8 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #endif /* GL_VERSION_4_1 */
 #ifdef GL_VERSION_4_2
 #endif /* GL_VERSION_4_2 */
+#ifdef GL_VERSION_4_3
+#endif /* GL_VERSION_4_3 */
 #ifdef GL_3DFX_multisample
   CONST_CAST(GLEW_3DFX_multisample) = _glewSearchExtension("GL_3DFX_multisample", extStart, extEnd);
 #endif /* GL_3DFX_multisample */
@@ -11700,6 +12286,12 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_AMD_performance_monitor) = _glewSearchExtension("GL_AMD_performance_monitor", extStart, extEnd);
   if (glewExperimental || GLEW_AMD_performance_monitor) CONST_CAST(GLEW_AMD_performance_monitor) = !_glewInit_GL_AMD_performance_monitor(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_AMD_performance_monitor */
+#ifdef GL_AMD_pinned_memory
+  CONST_CAST(GLEW_AMD_pinned_memory) = _glewSearchExtension("GL_AMD_pinned_memory", extStart, extEnd);
+#endif /* GL_AMD_pinned_memory */
+#ifdef GL_AMD_query_buffer_object
+  CONST_CAST(GLEW_AMD_query_buffer_object) = _glewSearchExtension("GL_AMD_query_buffer_object", extStart, extEnd);
+#endif /* GL_AMD_query_buffer_object */
 #ifdef GL_AMD_sample_positions
   CONST_CAST(GLEW_AMD_sample_positions) = _glewSearchExtension("GL_AMD_sample_positions", extStart, extEnd);
   if (glewExperimental || GLEW_AMD_sample_positions) CONST_CAST(GLEW_AMD_sample_positions) = !_glewInit_GL_AMD_sample_positions(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -11710,16 +12302,26 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_AMD_shader_stencil_export
   CONST_CAST(GLEW_AMD_shader_stencil_export) = _glewSearchExtension("GL_AMD_shader_stencil_export", extStart, extEnd);
 #endif /* GL_AMD_shader_stencil_export */
+#ifdef GL_AMD_stencil_operation_extended
+  CONST_CAST(GLEW_AMD_stencil_operation_extended) = _glewSearchExtension("GL_AMD_stencil_operation_extended", extStart, extEnd);
+  if (glewExperimental || GLEW_AMD_stencil_operation_extended) CONST_CAST(GLEW_AMD_stencil_operation_extended) = !_glewInit_GL_AMD_stencil_operation_extended(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_AMD_stencil_operation_extended */
 #ifdef GL_AMD_texture_texture4
   CONST_CAST(GLEW_AMD_texture_texture4) = _glewSearchExtension("GL_AMD_texture_texture4", extStart, extEnd);
 #endif /* GL_AMD_texture_texture4 */
 #ifdef GL_AMD_transform_feedback3_lines_triangles
   CONST_CAST(GLEW_AMD_transform_feedback3_lines_triangles) = _glewSearchExtension("GL_AMD_transform_feedback3_lines_triangles", extStart, extEnd);
 #endif /* GL_AMD_transform_feedback3_lines_triangles */
+#ifdef GL_AMD_vertex_shader_layer
+  CONST_CAST(GLEW_AMD_vertex_shader_layer) = _glewSearchExtension("GL_AMD_vertex_shader_layer", extStart, extEnd);
+#endif /* GL_AMD_vertex_shader_layer */
 #ifdef GL_AMD_vertex_shader_tessellator
   CONST_CAST(GLEW_AMD_vertex_shader_tessellator) = _glewSearchExtension("GL_AMD_vertex_shader_tessellator", extStart, extEnd);
   if (glewExperimental || GLEW_AMD_vertex_shader_tessellator) CONST_CAST(GLEW_AMD_vertex_shader_tessellator) = !_glewInit_GL_AMD_vertex_shader_tessellator(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_AMD_vertex_shader_tessellator */
+#ifdef GL_AMD_vertex_shader_viewport_index
+  CONST_CAST(GLEW_AMD_vertex_shader_viewport_index) = _glewSearchExtension("GL_AMD_vertex_shader_viewport_index", extStart, extEnd);
+#endif /* GL_AMD_vertex_shader_viewport_index */
 #ifdef GL_APPLE_aux_depth_stencil
   CONST_CAST(GLEW_APPLE_aux_depth_stencil) = _glewSearchExtension("GL_APPLE_aux_depth_stencil", extStart, extEnd);
 #endif /* GL_APPLE_aux_depth_stencil */
@@ -11783,6 +12385,12 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_ARB_ES2_compatibility) = _glewSearchExtension("GL_ARB_ES2_compatibility", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_ES2_compatibility) CONST_CAST(GLEW_ARB_ES2_compatibility) = !_glewInit_GL_ARB_ES2_compatibility(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_ES2_compatibility */
+#ifdef GL_ARB_ES3_compatibility
+  CONST_CAST(GLEW_ARB_ES3_compatibility) = _glewSearchExtension("GL_ARB_ES3_compatibility", extStart, extEnd);
+#endif /* GL_ARB_ES3_compatibility */
+#ifdef GL_ARB_arrays_of_arrays
+  CONST_CAST(GLEW_ARB_arrays_of_arrays) = _glewSearchExtension("GL_ARB_arrays_of_arrays", extStart, extEnd);
+#endif /* GL_ARB_arrays_of_arrays */
 #ifdef GL_ARB_base_instance
   CONST_CAST(GLEW_ARB_base_instance) = _glewSearchExtension("GL_ARB_base_instance", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_base_instance) CONST_CAST(GLEW_ARB_base_instance) = !_glewInit_GL_ARB_base_instance(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -11795,6 +12403,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_ARB_cl_event) = _glewSearchExtension("GL_ARB_cl_event", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_cl_event) CONST_CAST(GLEW_ARB_cl_event) = !_glewInit_GL_ARB_cl_event(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_cl_event */
+#ifdef GL_ARB_clear_buffer_object
+  CONST_CAST(GLEW_ARB_clear_buffer_object) = _glewSearchExtension("GL_ARB_clear_buffer_object", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_clear_buffer_object) CONST_CAST(GLEW_ARB_clear_buffer_object) = !_glewInit_GL_ARB_clear_buffer_object(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_clear_buffer_object */
 #ifdef GL_ARB_color_buffer_float
   CONST_CAST(GLEW_ARB_color_buffer_float) = _glewSearchExtension("GL_ARB_color_buffer_float", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_color_buffer_float) CONST_CAST(GLEW_ARB_color_buffer_float) = !_glewInit_GL_ARB_color_buffer_float(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -11805,6 +12417,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_ARB_compressed_texture_pixel_storage
   CONST_CAST(GLEW_ARB_compressed_texture_pixel_storage) = _glewSearchExtension("GL_ARB_compressed_texture_pixel_storage", extStart, extEnd);
 #endif /* GL_ARB_compressed_texture_pixel_storage */
+#ifdef GL_ARB_compute_shader
+  CONST_CAST(GLEW_ARB_compute_shader) = _glewSearchExtension("GL_ARB_compute_shader", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_compute_shader) CONST_CAST(GLEW_ARB_compute_shader) = !_glewInit_GL_ARB_compute_shader(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_compute_shader */
 #ifdef GL_ARB_conservative_depth
   CONST_CAST(GLEW_ARB_conservative_depth) = _glewSearchExtension("GL_ARB_conservative_depth", extStart, extEnd);
 #endif /* GL_ARB_conservative_depth */
@@ -11812,6 +12428,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_ARB_copy_buffer) = _glewSearchExtension("GL_ARB_copy_buffer", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_copy_buffer) CONST_CAST(GLEW_ARB_copy_buffer) = !_glewInit_GL_ARB_copy_buffer(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_copy_buffer */
+#ifdef GL_ARB_copy_image
+  CONST_CAST(GLEW_ARB_copy_image) = _glewSearchExtension("GL_ARB_copy_image", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_copy_image) CONST_CAST(GLEW_ARB_copy_image) = !_glewInit_GL_ARB_copy_image(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_copy_image */
 #ifdef GL_ARB_debug_output
   CONST_CAST(GLEW_ARB_debug_output) = _glewSearchExtension("GL_ARB_debug_output", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_debug_output) CONST_CAST(GLEW_ARB_debug_output) = !_glewInit_GL_ARB_debug_output(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -11847,9 +12467,15 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_ARB_explicit_attrib_location
   CONST_CAST(GLEW_ARB_explicit_attrib_location) = _glewSearchExtension("GL_ARB_explicit_attrib_location", extStart, extEnd);
 #endif /* GL_ARB_explicit_attrib_location */
+#ifdef GL_ARB_explicit_uniform_location
+  CONST_CAST(GLEW_ARB_explicit_uniform_location) = _glewSearchExtension("GL_ARB_explicit_uniform_location", extStart, extEnd);
+#endif /* GL_ARB_explicit_uniform_location */
 #ifdef GL_ARB_fragment_coord_conventions
   CONST_CAST(GLEW_ARB_fragment_coord_conventions) = _glewSearchExtension("GL_ARB_fragment_coord_conventions", extStart, extEnd);
 #endif /* GL_ARB_fragment_coord_conventions */
+#ifdef GL_ARB_fragment_layer_viewport
+  CONST_CAST(GLEW_ARB_fragment_layer_viewport) = _glewSearchExtension("GL_ARB_fragment_layer_viewport", extStart, extEnd);
+#endif /* GL_ARB_fragment_layer_viewport */
 #ifdef GL_ARB_fragment_program
   CONST_CAST(GLEW_ARB_fragment_program) = _glewSearchExtension("GL_ARB_fragment_program", extStart, extEnd);
 #endif /* GL_ARB_fragment_program */
@@ -11859,6 +12485,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_ARB_fragment_shader
   CONST_CAST(GLEW_ARB_fragment_shader) = _glewSearchExtension("GL_ARB_fragment_shader", extStart, extEnd);
 #endif /* GL_ARB_fragment_shader */
+#ifdef GL_ARB_framebuffer_no_attachments
+  CONST_CAST(GLEW_ARB_framebuffer_no_attachments) = _glewSearchExtension("GL_ARB_framebuffer_no_attachments", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_framebuffer_no_attachments) CONST_CAST(GLEW_ARB_framebuffer_no_attachments) = !_glewInit_GL_ARB_framebuffer_no_attachments(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_framebuffer_no_attachments */
 #ifdef GL_ARB_framebuffer_object
   CONST_CAST(GLEW_ARB_framebuffer_object) = _glewSearchExtension("GL_ARB_framebuffer_object", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_framebuffer_object) CONST_CAST(GLEW_ARB_framebuffer_object) = !_glewInit_GL_ARB_framebuffer_object(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -11899,6 +12529,14 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_ARB_internalformat_query) = _glewSearchExtension("GL_ARB_internalformat_query", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_internalformat_query) CONST_CAST(GLEW_ARB_internalformat_query) = !_glewInit_GL_ARB_internalformat_query(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_internalformat_query */
+#ifdef GL_ARB_internalformat_query2
+  CONST_CAST(GLEW_ARB_internalformat_query2) = _glewSearchExtension("GL_ARB_internalformat_query2", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_internalformat_query2) CONST_CAST(GLEW_ARB_internalformat_query2) = !_glewInit_GL_ARB_internalformat_query2(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_internalformat_query2 */
+#ifdef GL_ARB_invalidate_subdata
+  CONST_CAST(GLEW_ARB_invalidate_subdata) = _glewSearchExtension("GL_ARB_invalidate_subdata", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_invalidate_subdata) CONST_CAST(GLEW_ARB_invalidate_subdata) = !_glewInit_GL_ARB_invalidate_subdata(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_invalidate_subdata */
 #ifdef GL_ARB_map_buffer_alignment
   CONST_CAST(GLEW_ARB_map_buffer_alignment) = _glewSearchExtension("GL_ARB_map_buffer_alignment", extStart, extEnd);
 #endif /* GL_ARB_map_buffer_alignment */
@@ -11910,6 +12548,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_ARB_matrix_palette) = _glewSearchExtension("GL_ARB_matrix_palette", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_matrix_palette) CONST_CAST(GLEW_ARB_matrix_palette) = !_glewInit_GL_ARB_matrix_palette(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_matrix_palette */
+#ifdef GL_ARB_multi_draw_indirect
+  CONST_CAST(GLEW_ARB_multi_draw_indirect) = _glewSearchExtension("GL_ARB_multi_draw_indirect", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_multi_draw_indirect) CONST_CAST(GLEW_ARB_multi_draw_indirect) = !_glewInit_GL_ARB_multi_draw_indirect(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_multi_draw_indirect */
 #ifdef GL_ARB_multisample
   CONST_CAST(GLEW_ARB_multisample) = _glewSearchExtension("GL_ARB_multisample", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_multisample) CONST_CAST(GLEW_ARB_multisample) = !_glewInit_GL_ARB_multisample(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -11935,14 +12577,27 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_ARB_point_sprite
   CONST_CAST(GLEW_ARB_point_sprite) = _glewSearchExtension("GL_ARB_point_sprite", extStart, extEnd);
 #endif /* GL_ARB_point_sprite */
+#ifdef GL_ARB_program_interface_query
+  CONST_CAST(GLEW_ARB_program_interface_query) = _glewSearchExtension("GL_ARB_program_interface_query", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_program_interface_query) CONST_CAST(GLEW_ARB_program_interface_query) = !_glewInit_GL_ARB_program_interface_query(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_program_interface_query */
 #ifdef GL_ARB_provoking_vertex
   CONST_CAST(GLEW_ARB_provoking_vertex) = _glewSearchExtension("GL_ARB_provoking_vertex", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_provoking_vertex) CONST_CAST(GLEW_ARB_provoking_vertex) = !_glewInit_GL_ARB_provoking_vertex(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_provoking_vertex */
+#ifdef GL_ARB_robust_buffer_access_behavior
+  CONST_CAST(GLEW_ARB_robust_buffer_access_behavior) = _glewSearchExtension("GL_ARB_robust_buffer_access_behavior", extStart, extEnd);
+#endif /* GL_ARB_robust_buffer_access_behavior */
 #ifdef GL_ARB_robustness
   CONST_CAST(GLEW_ARB_robustness) = _glewSearchExtension("GL_ARB_robustness", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_robustness) CONST_CAST(GLEW_ARB_robustness) = !_glewInit_GL_ARB_robustness(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_robustness */
+#ifdef GL_ARB_robustness_application_isolation
+  CONST_CAST(GLEW_ARB_robustness_application_isolation) = _glewSearchExtension("GL_ARB_robustness_application_isolation", extStart, extEnd);
+#endif /* GL_ARB_robustness_application_isolation */
+#ifdef GL_ARB_robustness_share_group_isolation
+  CONST_CAST(GLEW_ARB_robustness_share_group_isolation) = _glewSearchExtension("GL_ARB_robustness_share_group_isolation", extStart, extEnd);
+#endif /* GL_ARB_robustness_share_group_isolation */
 #ifdef GL_ARB_sample_shading
   CONST_CAST(GLEW_ARB_sample_shading) = _glewSearchExtension("GL_ARB_sample_shading", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_sample_shading) CONST_CAST(GLEW_ARB_sample_shading) = !_glewInit_GL_ARB_sample_shading(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -11969,6 +12624,9 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_ARB_shader_image_load_store) = _glewSearchExtension("GL_ARB_shader_image_load_store", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_shader_image_load_store) CONST_CAST(GLEW_ARB_shader_image_load_store) = !_glewInit_GL_ARB_shader_image_load_store(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_shader_image_load_store */
+#ifdef GL_ARB_shader_image_size
+  CONST_CAST(GLEW_ARB_shader_image_size) = _glewSearchExtension("GL_ARB_shader_image_size", extStart, extEnd);
+#endif /* GL_ARB_shader_image_size */
 #ifdef GL_ARB_shader_objects
   CONST_CAST(GLEW_ARB_shader_objects) = _glewSearchExtension("GL_ARB_shader_objects", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_shader_objects) CONST_CAST(GLEW_ARB_shader_objects) = !_glewInit_GL_ARB_shader_objects(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -11979,6 +12637,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_ARB_shader_stencil_export
   CONST_CAST(GLEW_ARB_shader_stencil_export) = _glewSearchExtension("GL_ARB_shader_stencil_export", extStart, extEnd);
 #endif /* GL_ARB_shader_stencil_export */
+#ifdef GL_ARB_shader_storage_buffer_object
+  CONST_CAST(GLEW_ARB_shader_storage_buffer_object) = _glewSearchExtension("GL_ARB_shader_storage_buffer_object", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_shader_storage_buffer_object) CONST_CAST(GLEW_ARB_shader_storage_buffer_object) = !_glewInit_GL_ARB_shader_storage_buffer_object(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_shader_storage_buffer_object */
 #ifdef GL_ARB_shader_subroutine
   CONST_CAST(GLEW_ARB_shader_subroutine) = _glewSearchExtension("GL_ARB_shader_subroutine", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_shader_subroutine) CONST_CAST(GLEW_ARB_shader_subroutine) = !_glewInit_GL_ARB_shader_subroutine(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -12005,6 +12667,9 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_ARB_shadow_ambient
   CONST_CAST(GLEW_ARB_shadow_ambient) = _glewSearchExtension("GL_ARB_shadow_ambient", extStart, extEnd);
 #endif /* GL_ARB_shadow_ambient */
+#ifdef GL_ARB_stencil_texturing
+  CONST_CAST(GLEW_ARB_stencil_texturing) = _glewSearchExtension("GL_ARB_stencil_texturing", extStart, extEnd);
+#endif /* GL_ARB_stencil_texturing */
 #ifdef GL_ARB_sync
   CONST_CAST(GLEW_ARB_sync) = _glewSearchExtension("GL_ARB_sync", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_sync) CONST_CAST(GLEW_ARB_sync) = !_glewInit_GL_ARB_sync(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -12023,6 +12688,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_ARB_texture_buffer_object_rgb32
   CONST_CAST(GLEW_ARB_texture_buffer_object_rgb32) = _glewSearchExtension("GL_ARB_texture_buffer_object_rgb32", extStart, extEnd);
 #endif /* GL_ARB_texture_buffer_object_rgb32 */
+#ifdef GL_ARB_texture_buffer_range
+  CONST_CAST(GLEW_ARB_texture_buffer_range) = _glewSearchExtension("GL_ARB_texture_buffer_range", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_texture_buffer_range) CONST_CAST(GLEW_ARB_texture_buffer_range) = !_glewInit_GL_ARB_texture_buffer_range(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_texture_buffer_range */
 #ifdef GL_ARB_texture_compression
   CONST_CAST(GLEW_ARB_texture_compression) = _glewSearchExtension("GL_ARB_texture_compression", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_texture_compression) CONST_CAST(GLEW_ARB_texture_compression) = !_glewInit_GL_ARB_texture_compression(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -12067,6 +12736,9 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_ARB_texture_non_power_of_two
   CONST_CAST(GLEW_ARB_texture_non_power_of_two) = _glewSearchExtension("GL_ARB_texture_non_power_of_two", extStart, extEnd);
 #endif /* GL_ARB_texture_non_power_of_two */
+#ifdef GL_ARB_texture_query_levels
+  CONST_CAST(GLEW_ARB_texture_query_levels) = _glewSearchExtension("GL_ARB_texture_query_levels", extStart, extEnd);
+#endif /* GL_ARB_texture_query_levels */
 #ifdef GL_ARB_texture_query_lod
   CONST_CAST(GLEW_ARB_texture_query_lod) = _glewSearchExtension("GL_ARB_texture_query_lod", extStart, extEnd);
 #endif /* GL_ARB_texture_query_lod */
@@ -12083,9 +12755,17 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_ARB_texture_storage) = _glewSearchExtension("GL_ARB_texture_storage", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_texture_storage) CONST_CAST(GLEW_ARB_texture_storage) = !_glewInit_GL_ARB_texture_storage(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_texture_storage */
+#ifdef GL_ARB_texture_storage_multisample
+  CONST_CAST(GLEW_ARB_texture_storage_multisample) = _glewSearchExtension("GL_ARB_texture_storage_multisample", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_texture_storage_multisample) CONST_CAST(GLEW_ARB_texture_storage_multisample) = !_glewInit_GL_ARB_texture_storage_multisample(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_texture_storage_multisample */
 #ifdef GL_ARB_texture_swizzle
   CONST_CAST(GLEW_ARB_texture_swizzle) = _glewSearchExtension("GL_ARB_texture_swizzle", extStart, extEnd);
 #endif /* GL_ARB_texture_swizzle */
+#ifdef GL_ARB_texture_view
+  CONST_CAST(GLEW_ARB_texture_view) = _glewSearchExtension("GL_ARB_texture_view", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_texture_view) CONST_CAST(GLEW_ARB_texture_view) = !_glewInit_GL_ARB_texture_view(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_texture_view */
 #ifdef GL_ARB_timer_query
   CONST_CAST(GLEW_ARB_timer_query) = _glewSearchExtension("GL_ARB_timer_query", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_timer_query) CONST_CAST(GLEW_ARB_timer_query) = !_glewInit_GL_ARB_timer_query(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -12121,6 +12801,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_ARB_vertex_attrib_64bit) = _glewSearchExtension("GL_ARB_vertex_attrib_64bit", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_vertex_attrib_64bit) CONST_CAST(GLEW_ARB_vertex_attrib_64bit) = !_glewInit_GL_ARB_vertex_attrib_64bit(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_ARB_vertex_attrib_64bit */
+#ifdef GL_ARB_vertex_attrib_binding
+  CONST_CAST(GLEW_ARB_vertex_attrib_binding) = _glewSearchExtension("GL_ARB_vertex_attrib_binding", extStart, extEnd);
+  if (glewExperimental || GLEW_ARB_vertex_attrib_binding) CONST_CAST(GLEW_ARB_vertex_attrib_binding) = !_glewInit_GL_ARB_vertex_attrib_binding(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_ARB_vertex_attrib_binding */
 #ifdef GL_ARB_vertex_blend
   CONST_CAST(GLEW_ARB_vertex_blend) = _glewSearchExtension("GL_ARB_vertex_blend", extStart, extEnd);
   if (glewExperimental || GLEW_ARB_vertex_blend) CONST_CAST(GLEW_ARB_vertex_blend) = !_glewInit_GL_ARB_vertex_blend(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -12290,6 +12974,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_EXT_cull_vertex) = _glewSearchExtension("GL_EXT_cull_vertex", extStart, extEnd);
   if (glewExperimental || GLEW_EXT_cull_vertex) CONST_CAST(GLEW_EXT_cull_vertex) = !_glewInit_GL_EXT_cull_vertex(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_EXT_cull_vertex */
+#ifdef GL_EXT_debug_marker
+  CONST_CAST(GLEW_EXT_debug_marker) = _glewSearchExtension("GL_EXT_debug_marker", extStart, extEnd);
+  if (glewExperimental || GLEW_EXT_debug_marker) CONST_CAST(GLEW_EXT_debug_marker) = !_glewInit_GL_EXT_debug_marker(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_EXT_debug_marker */
 #ifdef GL_EXT_depth_bounds_test
   CONST_CAST(GLEW_EXT_depth_bounds_test) = _glewSearchExtension("GL_EXT_depth_bounds_test", extStart, extEnd);
   if (glewExperimental || GLEW_EXT_depth_bounds_test) CONST_CAST(GLEW_EXT_depth_bounds_test) = !_glewInit_GL_EXT_depth_bounds_test(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -12628,6 +13316,13 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_INTEL_texture_scissor) = _glewSearchExtension("GL_INTEL_texture_scissor", extStart, extEnd);
   if (glewExperimental || GLEW_INTEL_texture_scissor) CONST_CAST(GLEW_INTEL_texture_scissor) = !_glewInit_GL_INTEL_texture_scissor(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_INTEL_texture_scissor */
+#ifdef GL_KHR_debug
+  CONST_CAST(GLEW_KHR_debug) = _glewSearchExtension("GL_KHR_debug", extStart, extEnd);
+  if (glewExperimental || GLEW_KHR_debug) CONST_CAST(GLEW_KHR_debug) = !_glewInit_GL_KHR_debug(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_KHR_debug */
+#ifdef GL_KHR_texture_compression_astc_ldr
+  CONST_CAST(GLEW_KHR_texture_compression_astc_ldr) = _glewSearchExtension("GL_KHR_texture_compression_astc_ldr", extStart, extEnd);
+#endif /* GL_KHR_texture_compression_astc_ldr */
 #ifdef GL_KTX_buffer_region
   CONST_CAST(GLEW_KTX_buffer_region) = _glewSearchExtension("GL_KTX_buffer_region", extStart, extEnd);
   if (glewExperimental || GLEW_KTX_buffer_region) CONST_CAST(GLEW_KTX_buffer_region) = !_glewInit_GL_KTX_buffer_region(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -12652,6 +13347,10 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_NVX_gpu_memory_info
   CONST_CAST(GLEW_NVX_gpu_memory_info) = _glewSearchExtension("GL_NVX_gpu_memory_info", extStart, extEnd);
 #endif /* GL_NVX_gpu_memory_info */
+#ifdef GL_NV_bindless_texture
+  CONST_CAST(GLEW_NV_bindless_texture) = _glewSearchExtension("GL_NV_bindless_texture", extStart, extEnd);
+  if (glewExperimental || GLEW_NV_bindless_texture) CONST_CAST(GLEW_NV_bindless_texture) = !_glewInit_GL_NV_bindless_texture(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_NV_bindless_texture */
 #ifdef GL_NV_blend_square
   CONST_CAST(GLEW_NV_blend_square) = _glewSearchExtension("GL_NV_blend_square", extStart, extEnd);
 #endif /* GL_NV_blend_square */
@@ -12787,6 +13486,9 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLEW_NV_register_combiners2) = _glewSearchExtension("GL_NV_register_combiners2", extStart, extEnd);
   if (glewExperimental || GLEW_NV_register_combiners2) CONST_CAST(GLEW_NV_register_combiners2) = !_glewInit_GL_NV_register_combiners2(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GL_NV_register_combiners2 */
+#ifdef GL_NV_shader_atomic_float
+  CONST_CAST(GLEW_NV_shader_atomic_float) = _glewSearchExtension("GL_NV_shader_atomic_float", extStart, extEnd);
+#endif /* GL_NV_shader_atomic_float */
 #ifdef GL_NV_shader_buffer_load
   CONST_CAST(GLEW_NV_shader_buffer_load) = _glewSearchExtension("GL_NV_shader_buffer_load", extStart, extEnd);
   if (glewExperimental || GLEW_NV_shader_buffer_load) CONST_CAST(GLEW_NV_shader_buffer_load) = !_glewInit_GL_NV_shader_buffer_load(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -12907,6 +13609,17 @@ GLenum glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GL_PGI_vertex_hints
   CONST_CAST(GLEW_PGI_vertex_hints) = _glewSearchExtension("GL_PGI_vertex_hints", extStart, extEnd);
 #endif /* GL_PGI_vertex_hints */
+#ifdef GL_REGAL_error_string
+  CONST_CAST(GLEW_REGAL_error_string) = _glewSearchExtension("GL_REGAL_error_string", extStart, extEnd);
+  if (glewExperimental || GLEW_REGAL_error_string) CONST_CAST(GLEW_REGAL_error_string) = !_glewInit_GL_REGAL_error_string(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_REGAL_error_string */
+#ifdef GL_REGAL_extension_query
+  CONST_CAST(GLEW_REGAL_extension_query) = _glewSearchExtension("GL_REGAL_extension_query", extStart, extEnd);
+  if (glewExperimental || GLEW_REGAL_extension_query) CONST_CAST(GLEW_REGAL_extension_query) = !_glewInit_GL_REGAL_extension_query(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GL_REGAL_extension_query */
+#ifdef GL_REGAL_log
+  CONST_CAST(GLEW_REGAL_log) = _glewSearchExtension("GL_REGAL_log", extStart, extEnd);
+#endif /* GL_REGAL_log */
 #ifdef GL_REND_screen_coordinates
   CONST_CAST(GLEW_REND_screen_coordinates) = _glewSearchExtension("GL_REND_screen_coordinates", extStart, extEnd);
 #endif /* GL_REND_screen_coordinates */
@@ -13289,6 +14002,7 @@ GLboolean __WGLEW_ARB_render_texture = GL_FALSE;
 GLboolean __WGLEW_ATI_pixel_format_float = GL_FALSE;
 GLboolean __WGLEW_ATI_render_texture_rectangle = GL_FALSE;
 GLboolean __WGLEW_EXT_create_context_es2_profile = GL_FALSE;
+GLboolean __WGLEW_EXT_create_context_es_profile = GL_FALSE;
 GLboolean __WGLEW_EXT_depth_float = GL_FALSE;
 GLboolean __WGLEW_EXT_display_color_table = GL_FALSE;
 GLboolean __WGLEW_EXT_extensions_string = GL_FALSE;
@@ -13299,6 +14013,7 @@ GLboolean __WGLEW_EXT_pbuffer = GL_FALSE;
 GLboolean __WGLEW_EXT_pixel_format = GL_FALSE;
 GLboolean __WGLEW_EXT_pixel_format_packed_float = GL_FALSE;
 GLboolean __WGLEW_EXT_swap_control = GL_FALSE;
+GLboolean __WGLEW_EXT_swap_control_tear = GL_FALSE;
 GLboolean __WGLEW_I3D_digital_video_control = GL_FALSE;
 GLboolean __WGLEW_I3D_gamma = GL_FALSE;
 GLboolean __WGLEW_I3D_genlock = GL_FALSE;
@@ -13306,6 +14021,7 @@ GLboolean __WGLEW_I3D_image_buffer = GL_FALSE;
 GLboolean __WGLEW_I3D_swap_frame_lock = GL_FALSE;
 GLboolean __WGLEW_I3D_swap_frame_usage = GL_FALSE;
 GLboolean __WGLEW_NV_DX_interop = GL_FALSE;
+GLboolean __WGLEW_NV_DX_interop2 = GL_FALSE;
 GLboolean __WGLEW_NV_copy_image = GL_FALSE;
 GLboolean __WGLEW_NV_float_buffer = GL_FALSE;
 GLboolean __WGLEW_NV_gpu_affinity = GL_FALSE;
@@ -13494,6 +14210,10 @@ static GLboolean _glewInit_WGL_ARB_render_texture (WGLEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* WGL_EXT_create_context_es2_profile */
 
+#ifdef WGL_EXT_create_context_es_profile
+
+#endif /* WGL_EXT_create_context_es_profile */
+
 #ifdef WGL_EXT_depth_float
 
 #endif /* WGL_EXT_depth_float */
@@ -13598,6 +14318,10 @@ static GLboolean _glewInit_WGL_EXT_swap_control (WGLEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* WGL_EXT_swap_control */
+
+#ifdef WGL_EXT_swap_control_tear
+
+#endif /* WGL_EXT_swap_control_tear */
 
 #ifdef WGL_I3D_digital_video_control
 
@@ -13720,6 +14444,10 @@ static GLboolean _glewInit_WGL_NV_DX_interop (WGLEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* WGL_NV_DX_interop */
+
+#ifdef WGL_NV_DX_interop2
+
+#endif /* WGL_NV_DX_interop2 */
 
 #ifdef WGL_NV_copy_image
 
@@ -13971,6 +14699,9 @@ GLenum wglewContextInit (WGLEW_CONTEXT_ARG_DEF_LIST)
 #ifdef WGL_EXT_create_context_es2_profile
   CONST_CAST(WGLEW_EXT_create_context_es2_profile) = _glewSearchExtension("WGL_EXT_create_context_es2_profile", extStart, extEnd);
 #endif /* WGL_EXT_create_context_es2_profile */
+#ifdef WGL_EXT_create_context_es_profile
+  CONST_CAST(WGLEW_EXT_create_context_es_profile) = _glewSearchExtension("WGL_EXT_create_context_es_profile", extStart, extEnd);
+#endif /* WGL_EXT_create_context_es_profile */
 #ifdef WGL_EXT_depth_float
   CONST_CAST(WGLEW_EXT_depth_float) = _glewSearchExtension("WGL_EXT_depth_float", extStart, extEnd);
 #endif /* WGL_EXT_depth_float */
@@ -14007,6 +14738,9 @@ GLenum wglewContextInit (WGLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(WGLEW_EXT_swap_control) = _glewSearchExtension("WGL_EXT_swap_control", extStart, extEnd);
   if (glewExperimental || WGLEW_EXT_swap_control|| crippled) CONST_CAST(WGLEW_EXT_swap_control)= !_glewInit_WGL_EXT_swap_control(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* WGL_EXT_swap_control */
+#ifdef WGL_EXT_swap_control_tear
+  CONST_CAST(WGLEW_EXT_swap_control_tear) = _glewSearchExtension("WGL_EXT_swap_control_tear", extStart, extEnd);
+#endif /* WGL_EXT_swap_control_tear */
 #ifdef WGL_I3D_digital_video_control
   CONST_CAST(WGLEW_I3D_digital_video_control) = _glewSearchExtension("WGL_I3D_digital_video_control", extStart, extEnd);
   if (glewExperimental || WGLEW_I3D_digital_video_control|| crippled) CONST_CAST(WGLEW_I3D_digital_video_control)= !_glewInit_WGL_I3D_digital_video_control(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -14035,6 +14769,9 @@ GLenum wglewContextInit (WGLEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(WGLEW_NV_DX_interop) = _glewSearchExtension("WGL_NV_DX_interop", extStart, extEnd);
   if (glewExperimental || WGLEW_NV_DX_interop|| crippled) CONST_CAST(WGLEW_NV_DX_interop)= !_glewInit_WGL_NV_DX_interop(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* WGL_NV_DX_interop */
+#ifdef WGL_NV_DX_interop2
+  CONST_CAST(WGLEW_NV_DX_interop2) = _glewSearchExtension("WGL_NV_DX_interop2", extStart, extEnd);
+#endif /* WGL_NV_DX_interop2 */
 #ifdef WGL_NV_copy_image
   CONST_CAST(WGLEW_NV_copy_image) = _glewSearchExtension("WGL_NV_copy_image", extStart, extEnd);
   if (glewExperimental || WGLEW_NV_copy_image|| crippled) CONST_CAST(WGLEW_NV_copy_image)= !_glewInit_WGL_NV_copy_image(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -14083,7 +14820,7 @@ GLenum wglewContextInit (WGLEW_CONTEXT_ARG_DEF_LIST)
   return GLEW_OK;
 }
 
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#elif !defined(__ANDROID__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX))
 
 PFNGLXGETCURRENTDISPLAYPROC __glewXGetCurrentDisplay = NULL;
 
@@ -14232,15 +14969,19 @@ GLboolean __GLXEW_ARB_fbconfig_float = GL_FALSE;
 GLboolean __GLXEW_ARB_framebuffer_sRGB = GL_FALSE;
 GLboolean __GLXEW_ARB_get_proc_address = GL_FALSE;
 GLboolean __GLXEW_ARB_multisample = GL_FALSE;
+GLboolean __GLXEW_ARB_robustness_application_isolation = GL_FALSE;
+GLboolean __GLXEW_ARB_robustness_share_group_isolation = GL_FALSE;
 GLboolean __GLXEW_ARB_vertex_buffer_object = GL_FALSE;
 GLboolean __GLXEW_ATI_pixel_format_float = GL_FALSE;
 GLboolean __GLXEW_ATI_render_texture = GL_FALSE;
 GLboolean __GLXEW_EXT_create_context_es2_profile = GL_FALSE;
+GLboolean __GLXEW_EXT_create_context_es_profile = GL_FALSE;
 GLboolean __GLXEW_EXT_fbconfig_packed_float = GL_FALSE;
 GLboolean __GLXEW_EXT_framebuffer_sRGB = GL_FALSE;
 GLboolean __GLXEW_EXT_import_context = GL_FALSE;
 GLboolean __GLXEW_EXT_scene_marker = GL_FALSE;
 GLboolean __GLXEW_EXT_swap_control = GL_FALSE;
+GLboolean __GLXEW_EXT_swap_control_tear = GL_FALSE;
 GLboolean __GLXEW_EXT_texture_from_pixmap = GL_FALSE;
 GLboolean __GLXEW_EXT_visual_info = GL_FALSE;
 GLboolean __GLXEW_EXT_visual_rating = GL_FALSE;
@@ -14258,7 +14999,7 @@ GLboolean __GLXEW_NV_present_video = GL_FALSE;
 GLboolean __GLXEW_NV_swap_group = GL_FALSE;
 GLboolean __GLXEW_NV_vertex_array_range = GL_FALSE;
 GLboolean __GLXEW_NV_video_capture = GL_FALSE;
-GLboolean __GLXEW_NV_video_output = GL_FALSE;
+GLboolean __GLXEW_NV_video_out = GL_FALSE;
 GLboolean __GLXEW_OML_swap_method = GL_FALSE;
 GLboolean __GLXEW_OML_sync_control = GL_FALSE;
 GLboolean __GLXEW_SGIS_blended_overlay = GL_FALSE;
@@ -14372,6 +15113,14 @@ static GLboolean _glewInit_GLX_ARB_create_context (GLXEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GLX_ARB_multisample */
 
+#ifdef GLX_ARB_robustness_application_isolation
+
+#endif /* GLX_ARB_robustness_application_isolation */
+
+#ifdef GLX_ARB_robustness_share_group_isolation
+
+#endif /* GLX_ARB_robustness_share_group_isolation */
+
 #ifdef GLX_ARB_vertex_buffer_object
 
 #endif /* GLX_ARB_vertex_buffer_object */
@@ -14398,6 +15147,10 @@ static GLboolean _glewInit_GLX_ATI_render_texture (GLXEW_CONTEXT_ARG_DEF_INIT)
 #ifdef GLX_EXT_create_context_es2_profile
 
 #endif /* GLX_EXT_create_context_es2_profile */
+
+#ifdef GLX_EXT_create_context_es_profile
+
+#endif /* GLX_EXT_create_context_es_profile */
 
 #ifdef GLX_EXT_fbconfig_packed_float
 
@@ -14439,6 +15192,10 @@ static GLboolean _glewInit_GLX_EXT_swap_control (GLXEW_CONTEXT_ARG_DEF_INIT)
 }
 
 #endif /* GLX_EXT_swap_control */
+
+#ifdef GLX_EXT_swap_control_tear
+
+#endif /* GLX_EXT_swap_control_tear */
 
 #ifdef GLX_EXT_texture_from_pixmap
 
@@ -14629,9 +15386,9 @@ static GLboolean _glewInit_GLX_NV_video_capture (GLXEW_CONTEXT_ARG_DEF_INIT)
 
 #endif /* GLX_NV_video_capture */
 
-#ifdef GLX_NV_video_output
+#ifdef GLX_NV_video_out
 
-static GLboolean _glewInit_GLX_NV_video_output (GLXEW_CONTEXT_ARG_DEF_INIT)
+static GLboolean _glewInit_GLX_NV_video_out (GLXEW_CONTEXT_ARG_DEF_INIT)
 {
   GLboolean r = GL_FALSE;
 
@@ -14645,7 +15402,7 @@ static GLboolean _glewInit_GLX_NV_video_output (GLXEW_CONTEXT_ARG_DEF_INIT)
   return r;
 }
 
-#endif /* GLX_NV_video_output */
+#endif /* GLX_NV_video_out */
 
 #ifdef GLX_OML_swap_method
 
@@ -14961,6 +15718,12 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GLX_ARB_multisample
   CONST_CAST(GLXEW_ARB_multisample) = _glewSearchExtension("GLX_ARB_multisample", extStart, extEnd);
 #endif /* GLX_ARB_multisample */
+#ifdef GLX_ARB_robustness_application_isolation
+  CONST_CAST(GLXEW_ARB_robustness_application_isolation) = _glewSearchExtension("GLX_ARB_robustness_application_isolation", extStart, extEnd);
+#endif /* GLX_ARB_robustness_application_isolation */
+#ifdef GLX_ARB_robustness_share_group_isolation
+  CONST_CAST(GLXEW_ARB_robustness_share_group_isolation) = _glewSearchExtension("GLX_ARB_robustness_share_group_isolation", extStart, extEnd);
+#endif /* GLX_ARB_robustness_share_group_isolation */
 #ifdef GLX_ARB_vertex_buffer_object
   CONST_CAST(GLXEW_ARB_vertex_buffer_object) = _glewSearchExtension("GLX_ARB_vertex_buffer_object", extStart, extEnd);
 #endif /* GLX_ARB_vertex_buffer_object */
@@ -14974,6 +15737,9 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
 #ifdef GLX_EXT_create_context_es2_profile
   CONST_CAST(GLXEW_EXT_create_context_es2_profile) = _glewSearchExtension("GLX_EXT_create_context_es2_profile", extStart, extEnd);
 #endif /* GLX_EXT_create_context_es2_profile */
+#ifdef GLX_EXT_create_context_es_profile
+  CONST_CAST(GLXEW_EXT_create_context_es_profile) = _glewSearchExtension("GLX_EXT_create_context_es_profile", extStart, extEnd);
+#endif /* GLX_EXT_create_context_es_profile */
 #ifdef GLX_EXT_fbconfig_packed_float
   CONST_CAST(GLXEW_EXT_fbconfig_packed_float) = _glewSearchExtension("GLX_EXT_fbconfig_packed_float", extStart, extEnd);
 #endif /* GLX_EXT_fbconfig_packed_float */
@@ -14991,6 +15757,9 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLXEW_EXT_swap_control) = _glewSearchExtension("GLX_EXT_swap_control", extStart, extEnd);
   if (glewExperimental || GLXEW_EXT_swap_control) CONST_CAST(GLXEW_EXT_swap_control) = !_glewInit_GLX_EXT_swap_control(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GLX_EXT_swap_control */
+#ifdef GLX_EXT_swap_control_tear
+  CONST_CAST(GLXEW_EXT_swap_control_tear) = _glewSearchExtension("GLX_EXT_swap_control_tear", extStart, extEnd);
+#endif /* GLX_EXT_swap_control_tear */
 #ifdef GLX_EXT_texture_from_pixmap
   CONST_CAST(GLXEW_EXT_texture_from_pixmap) = _glewSearchExtension("GLX_EXT_texture_from_pixmap", extStart, extEnd);
   if (glewExperimental || GLXEW_EXT_texture_from_pixmap) CONST_CAST(GLXEW_EXT_texture_from_pixmap) = !_glewInit_GLX_EXT_texture_from_pixmap(GLEW_CONTEXT_ARG_VAR_INIT);
@@ -15054,10 +15823,10 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
   CONST_CAST(GLXEW_NV_video_capture) = _glewSearchExtension("GLX_NV_video_capture", extStart, extEnd);
   if (glewExperimental || GLXEW_NV_video_capture) CONST_CAST(GLXEW_NV_video_capture) = !_glewInit_GLX_NV_video_capture(GLEW_CONTEXT_ARG_VAR_INIT);
 #endif /* GLX_NV_video_capture */
-#ifdef GLX_NV_video_output
-  CONST_CAST(GLXEW_NV_video_output) = _glewSearchExtension("GLX_NV_video_output", extStart, extEnd);
-  if (glewExperimental || GLXEW_NV_video_output) CONST_CAST(GLXEW_NV_video_output) = !_glewInit_GLX_NV_video_output(GLEW_CONTEXT_ARG_VAR_INIT);
-#endif /* GLX_NV_video_output */
+#ifdef GLX_NV_video_out
+  CONST_CAST(GLXEW_NV_video_out) = _glewSearchExtension("GLX_NV_video_out", extStart, extEnd);
+  if (glewExperimental || GLXEW_NV_video_out) CONST_CAST(GLXEW_NV_video_out) = !_glewInit_GLX_NV_video_out(GLEW_CONTEXT_ARG_VAR_INIT);
+#endif /* GLX_NV_video_out */
 #ifdef GLX_OML_swap_method
   CONST_CAST(GLXEW_OML_swap_method) = _glewSearchExtension("GLX_OML_swap_method", extStart, extEnd);
 #endif /* GLX_OML_swap_method */
@@ -15132,11 +15901,11 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
   return GLEW_OK;
 }
 
-#endif /* !__APPLE__ || GLEW_APPLE_GLX */
+#endif /* !defined(__ANDROID__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX)) */
 
 /* ------------------------------------------------------------------------ */
 
-const GLubyte* glewGetErrorString (GLenum error)
+const GLubyte * glewGetErrorString (GLenum error)
 {
   static const GLubyte* _glewErrorString[] =
   {
@@ -15150,14 +15919,14 @@ const GLubyte* glewGetErrorString (GLenum error)
   return _glewErrorString[(int)error > max_error ? max_error : (int)error];
 }
 
-const GLubyte* glewGetString (GLenum name)
+const GLubyte * glewGetString (GLenum name)
 {
   static const GLubyte* _glewString[] =
   {
     (const GLubyte*)NULL,
-    (const GLubyte*)"1.7.0",
+    (const GLubyte*)"1.9.0",
     (const GLubyte*)"1",
-    (const GLubyte*)"7",
+    (const GLubyte*)"9",
     (const GLubyte*)"0"
   };
   const int max_string = sizeof(_glewString)/sizeof(*_glewString) - 1;
@@ -15172,11 +15941,11 @@ GLboolean glewExperimental = GL_FALSE;
 
 #if defined(_WIN32)
 extern GLenum wglewContextInit (void);
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX) /* _UNIX */
+#elif !defined(__ANDROID__) && (!defined(__APPLE__) || defined(GLEW_APPLE_GLX))
 extern GLenum glxewContextInit (void);
 #endif /* _WIN32 */
 
-GLenum glewInitLibrary (const char *name, enum GL_Library_Type lib_type,
+GLEWAPI GLenum glewInitLibrary (const char *name, enum GL_Library_Type lib_type,
                         enum GL_Name_Convention name_conv)
 {
   glew_gl_lib = name;
@@ -15185,7 +15954,7 @@ GLenum glewInitLibrary (const char *name, enum GL_Library_Type lib_type,
 
   return glewInit();
 }
-GLenum glewInit ()
+GLEWAPI GLenum glewInit ()
 {
   GLenum r;
 
@@ -15213,9 +15982,9 @@ GLenum glewInit ()
 
 #endif /* !GLEW_MX */
 #ifdef GLEW_MX
-GLboolean glewContextIsSupported (const GLEWContext* ctx, const char* name)
+GLEWAPI GLboolean glewContextIsSupported (const GLEWContext* ctx, const char* name)
 #else
-GLboolean glewIsSupported (const char* name)
+GLEWAPI GLboolean glewIsSupported (const char* name)
 #endif
 {
   GLubyte* pos = (GLubyte*)name;
@@ -15332,6 +16101,13 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_VERSION_4_3
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"4_3", 3))
+        {
+          ret = GLEW_VERSION_4_3;
+          continue;
+        }
+#endif
       }
       if (_glewStrSame2(&pos, &len, (const GLubyte*)"3DFX_", 5))
       {
@@ -15415,6 +16191,20 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_AMD_pinned_memory
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"pinned_memory", 13))
+        {
+          ret = GLEW_AMD_pinned_memory;
+          continue;
+        }
+#endif
+#ifdef GL_AMD_query_buffer_object
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"query_buffer_object", 19))
+        {
+          ret = GLEW_AMD_query_buffer_object;
+          continue;
+        }
+#endif
 #ifdef GL_AMD_sample_positions
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"sample_positions", 16))
         {
@@ -15436,6 +16226,13 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_AMD_stencil_operation_extended
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"stencil_operation_extended", 26))
+        {
+          ret = GLEW_AMD_stencil_operation_extended;
+          continue;
+        }
+#endif
 #ifdef GL_AMD_texture_texture4
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_texture4", 16))
         {
@@ -15450,10 +16247,24 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_AMD_vertex_shader_layer
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"vertex_shader_layer", 19))
+        {
+          ret = GLEW_AMD_vertex_shader_layer;
+          continue;
+        }
+#endif
 #ifdef GL_AMD_vertex_shader_tessellator
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"vertex_shader_tessellator", 25))
         {
           ret = GLEW_AMD_vertex_shader_tessellator;
+          continue;
+        }
+#endif
+#ifdef GL_AMD_vertex_shader_viewport_index
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"vertex_shader_viewport_index", 28))
+        {
+          ret = GLEW_AMD_vertex_shader_viewport_index;
           continue;
         }
 #endif
@@ -15589,6 +16400,20 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_ES3_compatibility
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"ES3_compatibility", 17))
+        {
+          ret = GLEW_ARB_ES3_compatibility;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_arrays_of_arrays
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"arrays_of_arrays", 16))
+        {
+          ret = GLEW_ARB_arrays_of_arrays;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_base_instance
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"base_instance", 13))
         {
@@ -15607,6 +16432,13 @@ GLboolean glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"cl_event", 8))
         {
           ret = GLEW_ARB_cl_event;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_clear_buffer_object
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"clear_buffer_object", 19))
+        {
+          ret = GLEW_ARB_clear_buffer_object;
           continue;
         }
 #endif
@@ -15631,6 +16463,13 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_compute_shader
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"compute_shader", 14))
+        {
+          ret = GLEW_ARB_compute_shader;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_conservative_depth
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"conservative_depth", 18))
         {
@@ -15642,6 +16481,13 @@ GLboolean glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"copy_buffer", 11))
         {
           ret = GLEW_ARB_copy_buffer;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_copy_image
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"copy_image", 10))
+        {
+          ret = GLEW_ARB_copy_image;
           continue;
         }
 #endif
@@ -15715,10 +16561,24 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_explicit_uniform_location
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"explicit_uniform_location", 25))
+        {
+          ret = GLEW_ARB_explicit_uniform_location;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_fragment_coord_conventions
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"fragment_coord_conventions", 26))
         {
           ret = GLEW_ARB_fragment_coord_conventions;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_fragment_layer_viewport
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"fragment_layer_viewport", 23))
+        {
+          ret = GLEW_ARB_fragment_layer_viewport;
           continue;
         }
 #endif
@@ -15740,6 +16600,13 @@ GLboolean glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"fragment_shader", 15))
         {
           ret = GLEW_ARB_fragment_shader;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_framebuffer_no_attachments
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"framebuffer_no_attachments", 26))
+        {
+          ret = GLEW_ARB_framebuffer_no_attachments;
           continue;
         }
 #endif
@@ -15820,6 +16687,20 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_internalformat_query2
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"internalformat_query2", 21))
+        {
+          ret = GLEW_ARB_internalformat_query2;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_invalidate_subdata
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"invalidate_subdata", 18))
+        {
+          ret = GLEW_ARB_invalidate_subdata;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_map_buffer_alignment
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"map_buffer_alignment", 20))
         {
@@ -15838,6 +16719,13 @@ GLboolean glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"matrix_palette", 14))
         {
           ret = GLEW_ARB_matrix_palette;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_multi_draw_indirect
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"multi_draw_indirect", 19))
+        {
+          ret = GLEW_ARB_multi_draw_indirect;
           continue;
         }
 #endif
@@ -15890,6 +16778,13 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_program_interface_query
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"program_interface_query", 23))
+        {
+          ret = GLEW_ARB_program_interface_query;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_provoking_vertex
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"provoking_vertex", 16))
         {
@@ -15897,10 +16792,31 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_robust_buffer_access_behavior
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"robust_buffer_access_behavior", 29))
+        {
+          ret = GLEW_ARB_robust_buffer_access_behavior;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_robustness
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"robustness", 10))
         {
           ret = GLEW_ARB_robustness;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_robustness_application_isolation
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"robustness_application_isolation", 32))
+        {
+          ret = GLEW_ARB_robustness_application_isolation;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_robustness_share_group_isolation
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"robustness_share_group_isolation", 32))
+        {
+          ret = GLEW_ARB_robustness_share_group_isolation;
           continue;
         }
 #endif
@@ -15953,6 +16869,13 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_shader_image_size
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_image_size", 17))
+        {
+          ret = GLEW_ARB_shader_image_size;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_shader_objects
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_objects", 14))
         {
@@ -15971,6 +16894,13 @@ GLboolean glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_stencil_export", 21))
         {
           ret = GLEW_ARB_shader_stencil_export;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_shader_storage_buffer_object
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_storage_buffer_object", 28))
+        {
+          ret = GLEW_ARB_shader_storage_buffer_object;
           continue;
         }
 #endif
@@ -16030,6 +16960,13 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_stencil_texturing
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"stencil_texturing", 17))
+        {
+          ret = GLEW_ARB_stencil_texturing;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_sync
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"sync", 4))
         {
@@ -16062,6 +16999,13 @@ GLboolean glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_buffer_object_rgb32", 27))
         {
           ret = GLEW_ARB_texture_buffer_object_rgb32;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_texture_buffer_range
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_buffer_range", 20))
+        {
+          ret = GLEW_ARB_texture_buffer_range;
           continue;
         }
 #endif
@@ -16163,6 +17107,13 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_texture_query_levels
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_query_levels", 20))
+        {
+          ret = GLEW_ARB_texture_query_levels;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_texture_query_lod
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_query_lod", 17))
         {
@@ -16198,10 +17149,24 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_ARB_texture_storage_multisample
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_storage_multisample", 27))
+        {
+          ret = GLEW_ARB_texture_storage_multisample;
+          continue;
+        }
+#endif
 #ifdef GL_ARB_texture_swizzle
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_swizzle", 15))
         {
           ret = GLEW_ARB_texture_swizzle;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_texture_view
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_view", 12))
+        {
+          ret = GLEW_ARB_texture_view;
           continue;
         }
 #endif
@@ -16265,6 +17230,13 @@ GLboolean glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"vertex_attrib_64bit", 19))
         {
           ret = GLEW_ARB_vertex_attrib_64bit;
+          continue;
+        }
+#endif
+#ifdef GL_ARB_vertex_attrib_binding
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"vertex_attrib_binding", 21))
+        {
+          ret = GLEW_ARB_vertex_attrib_binding;
           continue;
         }
 #endif
@@ -16603,6 +17575,13 @@ GLboolean glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"cull_vertex", 11))
         {
           ret = GLEW_EXT_cull_vertex;
+          continue;
+        }
+#endif
+#ifdef GL_EXT_debug_marker
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"debug_marker", 12))
+        {
+          ret = GLEW_EXT_debug_marker;
           continue;
         }
 #endif
@@ -17294,6 +18273,23 @@ GLboolean glewIsSupported (const char* name)
         }
 #endif
       }
+      if (_glewStrSame2(&pos, &len, (const GLubyte*)"KHR_", 4))
+      {
+#ifdef GL_KHR_debug
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"debug", 5))
+        {
+          ret = GLEW_KHR_debug;
+          continue;
+        }
+#endif
+#ifdef GL_KHR_texture_compression_astc_ldr
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"texture_compression_astc_ldr", 28))
+        {
+          ret = GLEW_KHR_texture_compression_astc_ldr;
+          continue;
+        }
+#endif
+      }
       if (_glewStrSame2(&pos, &len, (const GLubyte*)"KTX_", 4))
       {
 #ifdef GL_KTX_buffer_region
@@ -17357,6 +18353,13 @@ GLboolean glewIsSupported (const char* name)
       }
       if (_glewStrSame2(&pos, &len, (const GLubyte*)"NV_", 3))
       {
+#ifdef GL_NV_bindless_texture
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"bindless_texture", 16))
+        {
+          ret = GLEW_NV_bindless_texture;
+          continue;
+        }
+#endif
 #ifdef GL_NV_blend_square
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"blend_square", 12))
         {
@@ -17623,6 +18626,13 @@ GLboolean glewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GL_NV_shader_atomic_float
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_atomic_float", 19))
+        {
+          ret = GLEW_NV_shader_atomic_float;
+          continue;
+        }
+#endif
 #ifdef GL_NV_shader_buffer_load
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"shader_buffer_load", 18))
         {
@@ -17881,6 +18891,30 @@ GLboolean glewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"vertex_hints", 12))
         {
           ret = GLEW_PGI_vertex_hints;
+          continue;
+        }
+#endif
+      }
+      if (_glewStrSame2(&pos, &len, (const GLubyte*)"REGAL_", 6))
+      {
+#ifdef GL_REGAL_error_string
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"error_string", 12))
+        {
+          ret = GLEW_REGAL_error_string;
+          continue;
+        }
+#endif
+#ifdef GL_REGAL_extension_query
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"extension_query", 15))
+        {
+          ret = GLEW_REGAL_extension_query;
+          continue;
+        }
+#endif
+#ifdef GL_REGAL_log
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"log", 3))
+        {
+          ret = GLEW_REGAL_log;
           continue;
         }
 #endif
@@ -18360,6 +19394,7 @@ GLboolean wglewIsSupported (const char* name)
   GLubyte* pos = (GLubyte*)name;
   GLuint len = _glewStrLen(pos);
   GLboolean ret = GL_TRUE;
+
   while (ret && len > 0)
   {
     if (_glewStrSame1(&pos, &len, (const GLubyte*)"WGL_", 4))
@@ -18507,6 +19542,13 @@ GLboolean wglewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef WGL_EXT_create_context_es_profile
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"create_context_es_profile", 25))
+        {
+          ret = WGLEW_EXT_create_context_es_profile;
+          continue;
+        }
+#endif
 #ifdef WGL_EXT_depth_float
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"depth_float", 11))
         {
@@ -18577,6 +19619,13 @@ GLboolean wglewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef WGL_EXT_swap_control_tear
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"swap_control_tear", 17))
+        {
+          ret = WGLEW_EXT_swap_control_tear;
+          continue;
+        }
+#endif
       }
       if (_glewStrSame2(&pos, &len, (const GLubyte*)"I3D_", 4))
       {
@@ -18629,6 +19678,13 @@ GLboolean wglewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"DX_interop", 10))
         {
           ret = WGLEW_NV_DX_interop;
+          continue;
+        }
+#endif
+#ifdef WGL_NV_DX_interop2
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"DX_interop2", 11))
+        {
+          ret = WGLEW_NV_DX_interop2;
           continue;
         }
 #endif
@@ -18726,7 +19782,7 @@ GLboolean wglewIsSupported (const char* name)
   return ret;
 }
 
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#elif !defined(__ANDROID__) && !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
 
 #if defined(GLEW_MX)
 GLboolean glxewContextIsSupported (const GLXEWContext* ctx, const char* name)
@@ -18743,20 +19799,6 @@ GLboolean glxewIsSupported (const char* name)
     {
       if (_glewStrSame2(&pos, &len, (const GLubyte*)"VERSION_", 8))
       {
-#ifdef GLX_VERSION_1_0
-        if (_glewStrSame3(&pos, &len, (const GLubyte*)"1_0", 3))
-        {
-          ret = GLXEW_VERSION_1_0;
-          continue;
-        }
-#endif
-#ifdef GLX_VERSION_1_1
-        if (_glewStrSame3(&pos, &len, (const GLubyte*)"1_1", 3))
-        {
-          ret = GLXEW_VERSION_1_1;
-          continue;
-        }
-#endif
 #ifdef GLX_VERSION_1_2
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"1_2", 3))
         {
@@ -18850,6 +19892,20 @@ GLboolean glxewIsSupported (const char* name)
           continue;
         }
 #endif
+#ifdef GLX_ARB_robustness_application_isolation
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"robustness_application_isolation", 32))
+        {
+          ret = GLXEW_ARB_robustness_application_isolation;
+          continue;
+        }
+#endif
+#ifdef GLX_ARB_robustness_share_group_isolation
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"robustness_share_group_isolation", 32))
+        {
+          ret = GLXEW_ARB_robustness_share_group_isolation;
+          continue;
+        }
+#endif
 #ifdef GLX_ARB_vertex_buffer_object
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"vertex_buffer_object", 20))
         {
@@ -18881,6 +19937,13 @@ GLboolean glxewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"create_context_es2_profile", 26))
         {
           ret = GLXEW_EXT_create_context_es2_profile;
+          continue;
+        }
+#endif
+#ifdef GLX_EXT_create_context_es_profile
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"create_context_es_profile", 25))
+        {
+          ret = GLXEW_EXT_create_context_es_profile;
           continue;
         }
 #endif
@@ -18916,6 +19979,13 @@ GLboolean glxewIsSupported (const char* name)
         if (_glewStrSame3(&pos, &len, (const GLubyte*)"swap_control", 12))
         {
           ret = GLXEW_EXT_swap_control;
+          continue;
+        }
+#endif
+#ifdef GLX_EXT_swap_control_tear
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"swap_control_tear", 17))
+        {
+          ret = GLXEW_EXT_swap_control_tear;
           continue;
         }
 #endif
@@ -19047,10 +20117,10 @@ GLboolean glxewIsSupported (const char* name)
           continue;
         }
 #endif
-#ifdef GLX_NV_video_output
-        if (_glewStrSame3(&pos, &len, (const GLubyte*)"video_output", 12))
+#ifdef GLX_NV_video_out
+        if (_glewStrSame3(&pos, &len, (const GLubyte*)"video_out", 9))
         {
-          ret = GLXEW_NV_video_output;
+          ret = GLXEW_NV_video_out;
           continue;
         }
 #endif
