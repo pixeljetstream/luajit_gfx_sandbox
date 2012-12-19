@@ -15374,9 +15374,9 @@ GLEWAPI GLboolean GLEWAPIENTRY glewContextIsSupported (const GLEWContext *ctx, c
 
 #else /* GLEW_MX */
 
-GLEWAPI GLenum GLEWAPIENTRY  glewInitLibrary (const char *name, enum GL_Library_Type, enum GL_Name_Convention);
-GLEWAPI GLenum GLEWAPIENTRY  glewInit ();
-GLEWAPI GLboolean GLEWAPIENTRY  glewIsSupported (const char* name);
+GLEWAPI GLenum glewInitLibrary (const char *name, enum GL_Library_Type, enum GL_Name_Convention);
+GLEWAPI GLenum glewInit ();
+GLEWAPI GLboolean glewIsSupported (const char* name);
 #define glewIsExtensionSupported(x) glewIsSupported(x)
 
 #define GLEW_GET_VAR(x) (*(const GLboolean*)&x)
@@ -15385,9 +15385,9 @@ GLEWAPI GLboolean GLEWAPIENTRY  glewIsSupported (const char* name);
 #endif /* GLEW_MX */
 
 GLEWAPI GLboolean glewExperimental;
-GLEWAPI GLboolean GLEWAPIENTRY  glewGetExtension (const char* name);
-GLEWAPI const GLubyte* GLEWAPIENTRY glewGetErrorString (GLenum error);
-GLEWAPI const GLubyte* GLEWAPIENTRY glewGetString (GLenum name);
+GLEWAPI GLboolean glewGetExtension (const char* name);
+GLEWAPI const GLubyte* glewGetErrorString (GLenum error);
+GLEWAPI const GLubyte* glewGetString (GLenum name);
 
 #ifdef __cplusplus
 }

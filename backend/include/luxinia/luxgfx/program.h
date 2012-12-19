@@ -17,7 +17,6 @@ extern "C"{
     LUXGFX_PROGRAM_NONE,
     LUXGFX_PROGRAM_GLSL,
     LUXGFX_PROGRAM_GLSLSEP,
-    LUXGFX_PROGRAM_NV,
   }lxgProgramType_t;
 
   typedef enum lxgProgramStage_e{
@@ -26,6 +25,7 @@ extern "C"{
     LUXGFX_STAGE_GEOMETRY,
     LUXGFX_STAGE_TESSCTRL,
     LUXGFX_STAGE_TESSEVAL,
+    LUXGFX_STAGE_COMPUTE,
     LUXGFX_STAGES,
   }lxgProgramStage_t;
 
@@ -152,18 +152,6 @@ extern "C"{
   LUX_API void  lxgProgram_setSEP( lxgProgramPTR prog, lxgProgramPTR stage );
   LUX_API const char* lxgProgram_logSEP( lxgProgramPTR prog, char* buffer, int len);
 
-  // NV/ARB PROGRAM
-    // domain is always important
-  LUX_API void  lxgProgramParameter_initFuncNV(lxgProgramParameterPTR param, lxgProgramStage_t domain);
-
-  LUX_API void  lxgStageProgram_initNV(lxgStageProgramPTR stage, lxgContextPTR ctx, lxgProgramStage_t type);
-  LUX_API void  lxgStageProgram_deinitNV(lxgStageProgramPTR stage, lxgContextPTR ctx);
-  LUX_API int   lxgStageProgram_compileNV(lxgStageProgramPTR stage, const char *src, int len);
-  LUX_API const char* lxgStageProgram_errorNV(lxgStageProgramPTR stage, char *buffer, int len);
-
-  LUX_API void  lxgProgram_initNV(lxgProgramPTR prog, lxgContextPTR ctx);
-  LUX_API void  lxgProgram_deinitNV(lxgProgramPTR prog, lxgContextPTR ctx);
-  LUX_API void  lxgProgram_setStageNV(lxgProgramPTR prog, lxgProgramStage_t type, lxgStageProgramPTR stage);
  
   //////////////////////////////////////////////////////////////////////////
 

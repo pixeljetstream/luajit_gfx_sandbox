@@ -164,6 +164,7 @@ extern "C"{
     LUXGL_SHADER_GEOMETRY = GL_GEOMETRY_SHADER,
     LUXGL_SHADER_TESSCTRL = GL_TESS_CONTROL_SHADER,
     LUXGL_SHADER_TESSEVAL = GL_TESS_EVALUATION_SHADER,
+    LUXGL_SHADER_COMPUTE  = GL_COMPUTE_SHADER,
   }lxGLShaderType_t;
 
   typedef enum lxGLProgramType_e{
@@ -322,17 +323,6 @@ extern "C"{
     LUXGL_ERROR_FBOP = GL_INVALID_FRAMEBUFFER_OPERATION,
   }lxGLError_t;
 
-
-#ifdef _DEBUG
-  LUX_INLINE void lxGLErrorCheck(){
-    lxGLError_t err;
-    while (err = (lxGLError_t)glGetError()){
-      err = err;
-    }
-  }
-#else
-  #define lxGLErrorCheck  LUX_NOOP
-#endif
 
   
 #ifdef __cplusplus

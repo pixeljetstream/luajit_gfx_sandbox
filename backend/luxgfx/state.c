@@ -84,7 +84,7 @@ LUX_API void lxgColor_sync( lxgColorPTR obj, lxgContextPTR ctx )
   lxgColor_init(obj);
   glGetBooleanv(GL_COLOR_WRITEMASK,obj->write[0]);
 
-  if (ctx->capbits & LUXGFX_CAP_SM4){
+  if (ctx->capbits & LUXGFX_CAP_API3){
     int i;
     for (i = 0; i < ctx->capabilites.drawbuffers; i++){
       glGetBooleani_v(GL_COLOR_WRITEMASK,0,obj->write[i]);
@@ -304,12 +304,12 @@ LUX_API void  lxgBlend_sync( lxgBlendPTR obj, lxgContextPTR ctx )
   lxgBlend_init(obj);
   lxgBlendStage_sync(&obj->blends[0],ctx);
 
-  if (ctx->capbits & LUXGFX_CAP_SM4){
+  if (ctx->capbits & LUXGFX_CAP_API3){
     for (i = 0; i < ctx->capabilites.drawbuffers; i++){
       lxgBlendStage_t* blend = &obj->blends[i];
       blend->enabled = glIsEnabledi(GL_BLEND,i);
 
-      if (ctx->capbits & LUXGFX_CAP_SM4){
+      if (ctx->capbits & LUXGFX_CAP_API3){
         GLenum rgbsrc;
         GLenum rgbdst;
         GLenum rgbequ;

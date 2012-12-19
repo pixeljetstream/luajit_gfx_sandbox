@@ -60,20 +60,17 @@ extern "C"{
   LUX_INLINE void lxgBuffer_bind(lxgBufferCPTR buffer, lxGLBufferTarget_t type )
   {
     glBindBuffer(type,buffer ? buffer->glid : 0);
-    lxGLErrorCheck();
   }
 
   LUX_INLINE void  lxgBuffer_bindIndexed(lxgBufferCPTR buffer, lxGLBufferTarget_t type, uint idx )
   {
     glBindBufferBase(type,idx,buffer ? buffer->glid : 0);
-    lxGLErrorCheck();
   }
 
   LUX_INLINE void  lxgBuffer_bindRanged(lxgBufferCPTR buffer, lxGLBufferTarget_t type, uint idx, size_t offset, size_t size)
   {
     LUX_DEBUGASSERT(buffer ? (offset + size < buffer->size) : 1);
     glBindBufferRange(type,idx,buffer ? buffer->glid : 0, offset, size);
-    lxGLErrorCheck();
   }
 
 #ifdef __cplusplus

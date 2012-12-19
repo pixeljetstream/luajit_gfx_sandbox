@@ -1359,8 +1359,8 @@ WGLEW_VAR_EXPORT GLboolean __WGLEW_OML_sync_control;
 #ifdef GLEW_MX
 
 typedef struct WGLEWContextStruct WGLEWContext;
-GLEWAPI GLenum GLEWAPIENTRY wglewContextInit (WGLEWContext *ctx);
-GLEWAPI GLboolean GLEWAPIENTRY wglewContextIsSupported (const WGLEWContext *ctx, const char *name);
+GLEWAPI GLenum wglewContextInit (WGLEWContext *ctx);
+GLEWAPI GLboolean wglewContextIsSupported (const WGLEWContext *ctx, const char *name);
 
 #define wglewInit() wglewContextInit(wglewGetContext())
 #define wglewIsSupported(x) wglewContextIsSupported(wglewGetContext(), x)
@@ -1373,11 +1373,11 @@ GLEWAPI GLboolean GLEWAPIENTRY wglewContextIsSupported (const WGLEWContext *ctx,
 #define WGLEW_GET_VAR(x) (*(const GLboolean*)&x)
 #define WGLEW_GET_FUN(x) x
 
-GLEWAPI GLboolean GLEWAPIENTRY wglewIsSupported (const char *name);
+GLEWAPI GLboolean wglewIsSupported (const char *name);
 
 #endif /* GLEW_MX */
 
-GLEWAPI GLboolean GLEWAPIENTRY wglewGetExtension (const char *name);
+GLEWAPI GLboolean wglewGetExtension (const char *name);
 
 #ifdef __cplusplus
 }
