@@ -4,6 +4,38 @@ dofile("../_common/misc.lua")
 
 local WRAPPED = true
 
+local function funcwrapper(func,mangled,eol)
+  local output = ""
+  local returns = func.str:match("^void%s*%w") ~= nil and "" or "return "
+  local args = func.str:match("(%b())")
+  local funcargs = {}
+  local callargs = {}
+  local cnt = 0
+  for arg in args:gmatch("[^,%(%)]+") do
+    local arg = arg:gsub("^%s*",""):gsub("%s*$",""):gsub("%s+"," ")
+    local var = arg:gsub("%b[]","")
+    var = var == "void" and "" or var
+    var = var:match("[_%w]+$")
+    
+    if (arg ~= "void" and (var == arg or not var)) then
+      var = " _a"..cnt
+      arg = arg..var
+    end
+    cnt = cnt + 1
+    table.insert(funcargs,arg)
+    table.insert(callargs,var)
+  end
+  
+  funcargs = "("..table.concat(funcargs,",")..")"
+  callargs = "("..table.concat(callargs,",")..")"
+  
+  local outfunc = func.str:gsub("(%b())",funcargs)
+  
+  output = output..outfunc:sub(1,-2).."{"..returns..mangled..callargs..";}"..eol
+  
+  return output
+end
+
 local function processHeader(name,idir,odir,onlybinding)
   print("processing...",name)
   local inheader = io.open(idir.."/include/GL/"..name,"rb")
@@ -181,32 +213,7 @@ local function processSource(name,idir,odir,gl)
       if (func) then
         if (WRAPPED) then
           output = "static "..output
-          local returns = func.str:match("^void%s*%w") ~= nil and "" or "return "
-          local args = func.str:match("(%b())")
-          local funcargs = {}
-          local callargs = {}
-          local cnt = 0
-          for arg in args:gmatch("[^,%(%)]+") do
-            local arg = arg:gsub("^%s*",""):gsub("%s*$",""):gsub("%s+"," ")
-            local var = arg:gsub("%b[]","")
-            var = var == "void" and "" or var
-            var = var:match("[_%w]+$")
-            
-            if (arg ~= "void" and (var == arg or not var)) then
-              var = " _a"..cnt
-              arg = arg..var
-            end
-            cnt = cnt + 1
-            table.insert(funcargs,arg)
-            table.insert(callargs,var)
-          end
-          
-          funcargs = "("..table.concat(funcargs,",")..")"
-          callargs = "("..table.concat(callargs,",")..")"
-          
-          local outfunc = func.str:gsub("(%b())",funcargs)
-          
-          output = output..outfunc:sub(1,-2).."{"..returns..mangled..callargs..";}"..eol
+          output = output..funcwrapper(func,mangled,eol)
         else
           output = pfn.." "..outname.." = NULL;"..eol
         end

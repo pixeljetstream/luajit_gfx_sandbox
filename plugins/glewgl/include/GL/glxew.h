@@ -1538,8 +1538,8 @@ GLXEW_FUN_EXPORT PFNGLXVIDEORESIZESUNPROC __glewXVideoResizeSUN;
 #ifdef GLEW_MX
 
 typedef struct GLXEWContextStruct GLXEWContext;
-GLEWAPI GLenum GLEWAPIENTRY glxewContextInit (GLXEWContext *ctx);
-GLEWAPI GLboolean GLEWAPIENTRY glxewContextIsSupported (const GLXEWContext *ctx, const char *name);
+GLEWAPI GLenum glxewContextInit (GLXEWContext *ctx);
+GLEWAPI GLboolean glxewContextIsSupported (const GLXEWContext *ctx, const char *name);
 
 #define glxewInit() glxewContextInit(glxewGetContext())
 #define glxewIsSupported(x) glxewContextIsSupported(glxewGetContext(), x)
@@ -1552,11 +1552,11 @@ GLEWAPI GLboolean GLEWAPIENTRY glxewContextIsSupported (const GLXEWContext *ctx,
 #define GLXEW_GET_VAR(x) (*(const GLboolean*)&x)
 #define GLXEW_GET_FUN(x) x
 
-GLEWAPI GLboolean GLEWAPIENTRY glxewIsSupported (const char *name);
+GLEWAPI GLboolean glxewIsSupported (const char *name);
 
 #endif /* GLEW_MX */
 
-GLEWAPI GLboolean GLEWAPIENTRY glxewGetExtension (const char *name);
+GLEWAPI GLboolean glxewGetExtension (const char *name);
 
 #ifdef __cplusplus
 }
