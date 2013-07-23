@@ -46,7 +46,7 @@ extern "C"{
   LUX_API uint32  lxContHash_getNextKey(lxContHashCPTR cv, uint32 key);
 
   // iterator returns fnData for next call
-  LUX_API typedef void* (lxContHash_Iterator_fn)(void* fnData, uint32 key, void *val);
+  typedef void* (lxContHash_Iterator_fn)(void* fnData, uint32 key, void *val);
   // you may remove the current item during iteration
   LUX_API void  lxContHash_iterate(lxContHashPTR cv, lxContHash_Iterator_fn *itfunc, void *fnData);
 
@@ -76,7 +76,7 @@ extern "C"{
   LUX_API booln lxContPtrHash_isEmpty(lxContPtrHashCPTR cv);
 
   // iterator returns fnData for next call
-  LUX_API typedef void* (lxContPtrHash_Iterator_fn)(void* fnData, void* key, void *val);
+  typedef void* (lxContPtrHash_Iterator_fn)(void* fnData, void* key, void *val);
   // you may remove the current item during iteration
   LUX_API void  lxContPtrHash_iterate(lxContPtrHashPTR cv, lxContPtrHash_Iterator_fn *itfunc, void *fnData);
 

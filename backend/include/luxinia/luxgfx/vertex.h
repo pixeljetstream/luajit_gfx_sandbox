@@ -102,10 +102,8 @@ extern "C"{
 
   LUX_API void lxgVertexAttrib_applyFloat(lxgVertexAttrib_t attrib, const float* vec4);
   LUX_API void lxgVertexAttrib_applyInteger(lxgVertexAttrib_t attrib, const int* vec4);
-  LUX_API void lxgVertexAttrib_applyFloatFIXED(lxgVertexAttrib_t attrib, const float* vec4);
 
   LUX_API void lxgContext_applyVertexAttribs(lxgContextPTR ctx, flags32 attribs, flags32 changed);
-  LUX_API void lxgContext_applyVertexAttribsFIXED(lxgContextPTR ctx, flags32 attribs, flags32 changed);
 
   LUX_API void lxgContext_clearVertexState(lxgContextPTR ctx);
   LUX_API void lxgContext_setVertexDecl(lxgContextPTR ctx, lxgVertexDeclCPTR decl);
@@ -114,9 +112,7 @@ extern "C"{
   LUX_API void lxgContext_invalidateVertexStreams(lxgContextPTR ctx);
 
   LUX_API void lxgContext_applyVertexState(lxgContextPTR ctx);
-  LUX_API void lxgContext_applyVertexStateFIXED(lxgContextPTR ctx);
   LUX_API void lxgContext_applyVertexStateNV(lxgContextPTR ctx);
-  LUX_API void lxgContext_applyVertexStateFIXEDNV(lxgContextPTR ctx);
 
   LUX_API void lxgContext_applyFeedbackStreams(lxgContextPTR ctx, lxgStreamHostCPTR hosts, int numStreams);
   LUX_API void lxgContext_applyFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host );

@@ -162,7 +162,7 @@ LUX_API booln lxgBuffer_copy(lxgBufferPTR dst, uint dstoffset, lxgBufferPTR src,
     ))
     return LUX_FALSE;
 
-  if (dst->ctxcapbits & LUXGFX_CAP_BUFCOPY){
+  if (dst->ctxcapbits & LUXGFX_CAP_API3){
     lxgBuffer_bind(dst,LUXGL_BUFFER_CPYWRITE);
     lxgBuffer_bind(src,LUXGL_BUFFER_CPYREAD);
 
@@ -170,7 +170,7 @@ LUX_API booln lxgBuffer_copy(lxgBufferPTR dst, uint dstoffset, lxgBufferPTR src,
       srcoffset, dstoffset,
       size);
   }
-  else if ((dst->ctxcapbits & LUXGFX_CAP_BUFMAPRANGE) || src != dst){
+  else if ((dst->ctxcapbits & LUXGFX_CAP_API3) || src != dst){
     // temporarily map both
     void* psrc = lxgBuffer_mapRange(src,srcoffset,size,LUXGFX_ACCESS_READ,LUX_FALSE,LUX_FALSE,NULL);
     void* pdst = lxgBuffer_mapRange(dst,dstoffset,size,LUXGFX_ACCESS_WRITEDISCARD,LUX_FALSE,LUX_FALSE,NULL);
@@ -229,7 +229,7 @@ LUX_API void* lxgBuffer_mapRange(lxgBufferPTR buffer, uint from, uint length, lx
 
   lxgBuffer_bindDefault(buffer);
 
-  if ((buffer->ctxcapbits & LUXGFX_CAP_BUFMAPRANGE))
+  if ((buffer->ctxcapbits & LUXGFX_CAP_API3))
   {
     static const GLbitfield bitfieldsGL[LUXGFX_ACCESSES] = {
       GL_MAP_READ_BIT,

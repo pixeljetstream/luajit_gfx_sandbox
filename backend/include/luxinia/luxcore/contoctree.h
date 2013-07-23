@@ -25,8 +25,8 @@ extern "C"{
 
 typedef struct lxOcBounds_s
 {
-  float   min[3];     // keep order
-  float   max[3];
+  float   min[4];     // keep order
+  float   max[4];
 }lxOcBounds_t;
 
 typedef struct lxOcCenterBox_s

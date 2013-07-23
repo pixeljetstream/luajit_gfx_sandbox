@@ -19,23 +19,6 @@
 typedef void (lxGLVertexAttrib_fn)(const lxgVertexElement_t*, lxgVertexAttrib_t, void* ptr );
 typedef void (lxGLVertexAttribState_fn)(lxgVertexAttrib_t );
 
-static LUX_INLINE void lxGLVertexPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
-{
-  glVertexPointer(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
-}
-static LUX_INLINE void lxGLNormalPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
-{
-  glNormalPointer(VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
-}
-static LUX_INLINE void lxGLColorPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
-{
-  glColorPointer(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
-}
-static LUX_INLINE void lxGLTexCoordPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
-{
-  glClientActiveTexture(GL_TEXTURE0 + (attr - LUXGFX_VERTEX_ATTRIB_TEXCOORD0));
-  glTexCoordPointer(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
-}
 
 static LUX_INLINE void lxGLAttribPointer(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
@@ -45,50 +28,6 @@ static LUX_INLINE void lxGLAttribPointer(const lxgVertexElement_t* vpt, lxgVerte
   else{
     glVertexAttribIPointer((uint)attr,VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt),VERTEX_PTR(vpt));
   }
-}
-
-static LUX_INLINE void lxgVertexPointer_applyFIXED(const lxgVertexElement_t* elem, const lxgStreamHostPTR host, lxgVertexAttrib_t attr)
-{
-  static lxGLVertexAttrib_fn* funcs[] = {
-    lxGLVertexPointer,
-    lxGLAttribPointer,
-    lxGLNormalPointer,
-    lxGLColorPointer,
-    lxGLAttribPointer,
-    lxGLAttribPointer,
-    lxGLAttribPointer,
-    lxGLAttribPointer,
-    lxGLTexCoordPointer,
-    lxGLTexCoordPointer,
-    lxGLTexCoordPointer,
-    lxGLTexCoordPointer,
-    lxGLAttribPointer,
-    lxGLAttribPointer,
-    lxGLAttribPointer,
-    lxGLAttribPointer,
-  };
-  lxgBuffer_bind(host->buffer,LUXGL_BUFFER_VERTEX);
-  funcs[attr](elem,attr,host->ptr);
-}
-
-LUX_API void lxgContext_applyVertexStateFIXED(lxgContextPTR ctx)
-{
-  lxgVertexState_t* vtx = &ctx->vertex;
-  flags32 changed = vtx->declchange & vtx->declvalid;
-  flags32 streamchanged = vtx->streamchange;
-
-  int i;
-  for (i = 0; i < LUXGFX_VERTEX_ATTRIBS; i++){
-    const lxgVertexElement_t* elem = &vtx->setup.element[i];
-    uint stream = elem->stream;
-    const lxgStreamHostPTR    host = &vtx->setup.streams[stream];
-    if (changed & (1<<i) || streamchanged & (1<<stream)){
-      lxgVertexPointer_applyFIXED(elem,host,i);
-    }
-  }
-
-  vtx->declchange = 0;
-  vtx->streamchange = 0;
 }
 
 static LUX_INLINE void lxgVertexPointer_apply(const lxgVertexElement_t* elem, const lxgStreamHost_t* host, lxgVertexAttrib_t attr)
@@ -117,23 +56,6 @@ LUX_API void lxgContext_applyVertexState(lxgContextPTR ctx)
   vtx->streamchange = 0;
 }
 
-static LUX_INLINE void lxGLVertexPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
-{
-  glVertexFormatNV(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt));
-}
-static LUX_INLINE void lxGLNormalPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
-{
-  glNormalFormatNV(VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt));
-}
-static LUX_INLINE void lxGLColorPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
-{
-  glColorFormatNV(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt));
-}
-static LUX_INLINE void lxGLTexCoordPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
-{
-  glClientActiveTexture(GL_TEXTURE0 + (attr - LUXGFX_VERTEX_ATTRIB_TEXCOORD0));
-  glTexCoordFormatNV(VERTEX_CNT(vpt),VERTEX_TYPE(vpt),VERTEX_STRIDE(vpt));
-}
 
 static LUX_INLINE void lxGLAttribPointerNV(const lxgVertexElement_t* vpt, lxgVertexAttrib_t attr, void* ptr)
 {
@@ -145,63 +67,15 @@ static LUX_INLINE void lxGLAttribPointerNV(const lxgVertexElement_t* vpt, lxgVer
   }
 }
 
-static LUX_INLINE void lxgVertexPointer_applyFormatNV(const lxgVertexElement_t* elem, lxgVertexAttrib_t attr, booln fixed)
+static LUX_INLINE void lxgVertexPointer_applyFormatNV(const lxgVertexElement_t* elem, lxgVertexAttrib_t attr)
 {
-  static lxGLVertexAttrib_fn* funcs[] = {
-    lxGLVertexPointerNV,
-    lxGLAttribPointerNV,
-    lxGLNormalPointerNV,
-    lxGLColorPointerNV,
-    lxGLAttribPointerNV,
-    lxGLAttribPointerNV,
-    lxGLAttribPointerNV,
-    lxGLAttribPointerNV,
-    lxGLTexCoordPointerNV,
-    lxGLTexCoordPointerNV,
-    lxGLTexCoordPointerNV,
-    lxGLTexCoordPointerNV,
-    lxGLAttribPointerNV,
-    lxGLAttribPointerNV,
-    lxGLAttribPointerNV,
-    lxGLAttribPointerNV,
-  };
-  if (fixed){
-    funcs[attr](elem,attr,NULL);
-  }
-  else{
-    lxGLAttribPointerNV(elem,attr,NULL);
-  }
+  lxGLAttribPointerNV(elem,attr,NULL);
 }
 
-static LUX_INLINE void lxgVertexPointer_applyBufferNV(const lxgVertexElement_t* elem, const lxgStreamHost_t* host, lxgVertexAttrib_t attr, booln fixed)
+static LUX_INLINE void lxgVertexPointer_applyBufferNV(const lxgVertexElement_t* elem, const lxgStreamHost_t* host, lxgVertexAttrib_t attr)
 {
-  static GLenum bindless[] = {
-    GL_VERTEX_ARRAY_ADDRESS_NV,
-    GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
-    GL_NORMAL_ARRAY_ADDRESS_NV,
-    GL_COLOR_ARRAY_ADDRESS_NV,
-    GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
-    GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
-    GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
-    GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
-    GL_TEXTURE_COORD_ARRAY_ADDRESS_NV,
-    GL_TEXTURE_COORD_ARRAY_ADDRESS_NV,
-    GL_TEXTURE_COORD_ARRAY_ADDRESS_NV,
-    GL_TEXTURE_COORD_ARRAY_ADDRESS_NV,
-    GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
-    GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
-    GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
-    GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
-  };
-  static int indexcorr[] = {
-    0,0,0,0,0,0,0,0,
-    8,9,10,11,0,0,0,0,
-  };
 
-  int index = fixed ? indexcorr[attr] : 0;
-  int bind = fixed ? bindless[attr] : GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV;
-
-  glBufferAddressRangeNV(bind,(int)attr + index, host->buffer->address + ((GLuint64)host->ptr) + (GLuint64)elem->offset, host->len);
+  glBufferAddressRangeNV(GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,(int)attr, host->buffer->address + ((GLuint64)host->ptr) + (GLuint64)elem->offset, host->len);
 }
 
 LUX_API void lxgContext_applyVertexStateNV(lxgContextPTR ctx)
@@ -216,33 +90,10 @@ LUX_API void lxgContext_applyVertexStateNV(lxgContextPTR ctx)
     uint stream = elem->stream;
     const lxgStreamHost_t*    host = &vtx->setup.streams[stream];
     if (declchanged & (1<<i)){
-      lxgVertexPointer_applyFormatNV(elem,i,0);
+      lxgVertexPointer_applyFormatNV(elem,i);
     }
     if (streamchanged & (1<<stream)){
-      lxgVertexPointer_applyBufferNV(elem,host,i,0);
-    }
-  }
-
-  vtx->declchange = 0;
-  vtx->streamchange = 0;
-}
-
-LUX_API void lxgContext_applyVertexStateFIXEDNV(lxgContextPTR ctx)
-{
-  lxgVertexState_t* vtx = &ctx->vertex;
-  flags32 declchanged = vtx->declchange & vtx->declvalid;
-  flags32 streamchanged = vtx->streamchange;
-
-  int i;
-  for (i = 0; i < LUXGFX_VERTEX_ATTRIBS; i++){
-    const lxgVertexElement_t* elem = &vtx->setup.element[i];
-    uint stream = elem->stream;
-    const lxgStreamHostPTR    host = &vtx->setup.streams[stream];
-    if (declchanged & (1<<i)){
-      lxgVertexPointer_applyFormatNV(elem,i,1);
-    }
-    if (streamchanged & (1<<i)){
-      lxgVertexPointer_applyBufferNV(elem,host,i,1);
+      lxgVertexPointer_applyBufferNV(elem,host,i);
     }
   }
 
@@ -256,84 +107,6 @@ LUX_API void lxgContext_applyVertexStateFIXEDNV(lxgContextPTR ctx)
 #define CASE_END      }
 
 
-LUX_API void  lxgContext_applyVertexAttribsFIXED( lxgContextPTR ctx, flags32 attribs, flags32 changed)
-{
-
-#define ENABLE_VERTEX_TEX(i)    {glClientActiveTexture(GL_TEXTURE0+i); glEnableClientState(GL_TEXTURE_COORD_ARRAY);}
-#define DISABLE_VERTEX_TEX(i)   {glClientActiveTexture(GL_TEXTURE0+i); glDisableClientState(GL_TEXTURE_COORD_ARRAY);}
-
-  attribs &= ctx->vertex.declvalid;
-
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_POS) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_POS) & attribs)  glEnableClientState(GL_VERTEX_ARRAY);
-    else      glDisableClientState(GL_VERTEX_ARRAY);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_ATTR1) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_ATTR1) & attribs)  glEnableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR1);
-    else      glDisableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR1);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_NORMAL) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_NORMAL) & attribs) glEnableClientState(GL_NORMAL_ARRAY);
-    else      glDisableClientState(GL_NORMAL_ARRAY);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_COLOR) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_COLOR) & attribs)  glEnableClientState(GL_COLOR_ARRAY);
-    else      glDisableClientState(GL_COLOR_ARRAY);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_ATTR4) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_ATTR4) & attribs)  glEnableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR4);
-    else      glDisableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR4);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_ATTR5) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_ATTR5) & attribs)  glEnableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR5);
-    else      glDisableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR5);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_ATTR6) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_ATTR6) & attribs)  glEnableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR6);
-    else      glDisableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR6);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_ATTR7) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_ATTR7) & attribs)  glEnableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR7);
-    else      glDisableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR7);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_TEXCOORD0) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_TEXCOORD0) & attribs)  {ENABLE_VERTEX_TEX(0)}
-    else      {DISABLE_VERTEX_TEX(0)}
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_TEXCOORD1) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_TEXCOORD1) & attribs)  {ENABLE_VERTEX_TEX(1)}
-    else      {DISABLE_VERTEX_TEX(1)}
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_TEXCOORD2) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_TEXCOORD2) & attribs)  {ENABLE_VERTEX_TEX(2)}
-    else      {DISABLE_VERTEX_TEX(2)}
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_TEXCOORD3) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_TEXCOORD3) & attribs)  {ENABLE_VERTEX_TEX(3)}
-    else      {DISABLE_VERTEX_TEX(3)}
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_ATTR12) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_ATTR12) & attribs) glEnableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR12);
-    else      glDisableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR12);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_ATTR13) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_ATTR13) & attribs) glEnableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR13);
-    else      glDisableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR13);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_ATTR14) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_ATTR14) & attribs) glEnableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR14);
-    else      glDisableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR14);
-  CASE_END;
-  CASE_TEST( (1<<LUXGFX_VERTEX_ATTRIB_ATTR15) )
-    if ((1<<LUXGFX_VERTEX_ATTRIB_ATTR15) & attribs) glEnableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR15);
-    else      glDisableVertexAttribArray(LUXGFX_VERTEX_ATTRIB_ATTR15);
-  CASE_END;
-
-#undef ENABLE_VERTEX_TEX
-#undef DISABLE_VERTEX_TEX
-
-  ctx->vertex.active = attribs;
-}
 
 LUX_API void  lxgContext_applyVertexAttribs( lxgContextPTR ctx, flags32 attribs, flags32 changed)
 {
@@ -428,48 +201,6 @@ LUX_API void lxgVertexAttrib_applyInteger(lxgVertexAttrib_t type, const int* vec
   glVertexAttribI4iv(type, vec4);
 }
 
-LUX_API void lxgVertexAttrib_applyFloatFIXED(lxgVertexAttrib_t type, const float* vec4)
-{
-  switch (type){
-  case LUXGFX_VERTEX_ATTRIB_POS:
-    glVertex4fv(vec4);
-    return;
-  
-  case LUXGFX_VERTEX_ATTRIB_ATTR1:
-    glVertexAttrib4fv(1,vec4);
-    return;
-  
-  case LUXGFX_VERTEX_ATTRIB_NORMAL:
-    glNormal3fv(vec4);
-    return;
-
-  case LUXGFX_VERTEX_ATTRIB_COLOR:
-    glColor4fv(vec4);
-    return;
-
-  case LUXGFX_VERTEX_ATTRIB_ATTR4:
-  case LUXGFX_VERTEX_ATTRIB_ATTR5: 
-  case LUXGFX_VERTEX_ATTRIB_ATTR6:
-  case LUXGFX_VERTEX_ATTRIB_ATTR7:
-    glVertexAttrib4fv(type,vec4);
-    return;
-
-  case LUXGFX_VERTEX_ATTRIB_TEXCOORD0:
-  case LUXGFX_VERTEX_ATTRIB_TEXCOORD1:
-  case LUXGFX_VERTEX_ATTRIB_TEXCOORD2:
-  case LUXGFX_VERTEX_ATTRIB_TEXCOORD3:
-    glActiveTexture(GL_TEXTURE0 + type - LUXGFX_VERTEX_ATTRIB_TEXCOORD0);
-    glTexCoord4fv(vec4);
-    return;
-
-  case LUXGFX_VERTEX_ATTRIB_ATTR12:
-  case LUXGFX_VERTEX_ATTRIB_ATTR13:
-  case LUXGFX_VERTEX_ATTRIB_ATTR14:
-  case LUXGFX_VERTEX_ATTRIB_ATTR15:
-    glVertexAttrib4fv(type,vec4);
-    return;
-  }
-}
 
 LUX_INLINE LUX_API void lxgContext_applyFeedbackStream(lxgContextPTR ctx, uint idx, lxgStreamHostCPTR host)
 {

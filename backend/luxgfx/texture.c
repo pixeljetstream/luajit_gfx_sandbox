@@ -550,10 +550,10 @@ static booln lxGLTextureData_init(lxgContextPTR ctx, lxgTexturePTR tex,
   if (data == LUXGFX_TEXTUREDATA_CUSTOM){
     return LUX_TRUE;
   }
-  if ((data == LUXGFX_TEXTUREDATA_DEPTH32F && !(ctx->capbits & LUXGFX_CAP_DEPTHFLOAT ))||
-    (data >= LUXGFX_TEXTUREDATA_FLOAT16 && data <= LUXGFX_TEXTUREDATA_FLOAT32 && !(ctx->capbits & LUXGFX_CAP_SM2EXT ))||
-    (data >= LUXGFX_TEXTUREDATA_SINT8 && data <= LUXGFX_TEXTUREDATA_UINT32 && !(ctx->capbits & LUXGFX_CAP_SM4 ))||
-    (data >= LUXGFX_TEXTUREDATA_UNORM1010102 && data <= LUXGFX_TEXTUREDATA_EXP999 && !(ctx->capbits & LUXGFX_CAP_SM4 ))||
+  if ((data == LUXGFX_TEXTUREDATA_DEPTH32F && !(ctx->capbits & LUXGFX_CAP_API3 ))||
+    (data >= LUXGFX_TEXTUREDATA_FLOAT16 && data <= LUXGFX_TEXTUREDATA_FLOAT32 && !(ctx->capbits & LUXGFX_CAP_API3 ))||
+    (data >= LUXGFX_TEXTUREDATA_SINT8 && data <= LUXGFX_TEXTUREDATA_UINT32 && !(ctx->capbits & LUXGFX_CAP_API3 ))||
+    (data >= LUXGFX_TEXTUREDATA_UNORM1010102 && data <= LUXGFX_TEXTUREDATA_EXP999 && !(ctx->capbits & LUXGFX_CAP_API3 ))||
     (data >= LUXGFX_TEXTUREDATA_COMPRESSED_DXT1 && data <= LUXGFX_TEXTUREDATA_COMPRESSED_DXT5 && !GLEW_EXT_texture_compression_s3tc)||
     (data >= LUXGFX_TEXTUREDATA_COMPRESSED_UNORM_BPTC && data <= LUXGFX_TEXTUREDATA_COMPRESSED_SIGNED_FLOAT_BPTC && !GLEW_ARB_texture_compression_bptc)||
     (data >= LUXGFX_TEXTUREDATA_COMPRESSED_TC && data <= LUXGFX_TEXTUREDATA_COMPRESSED_SIGNED_TC && !GLEW_EXT_texture_compression_rgtc)
@@ -575,13 +575,11 @@ static booln lxGLTextureData_init(lxgContextPTR ctx, lxgTexturePTR tex,
 static LUX_INLINE void lxgTexture_bindDefault(lxgTexturePTR tex)
 {
   glBindTexture(tex->gltarget,tex->glid);
-  lxGLErrorCheck();
 }
 
 static LUX_INLINE void lxgTexture_unbindDefault(lxgTexturePTR tex)
 {
   glBindTexture(tex->gltarget,0);
-  lxGLErrorCheck();
 }
 
 LUX_API LUX_INLINE void lxgContext_applyTexture( lxgContextPTR ctx,   lxgTexturePTR tex, uint imageunit)
@@ -595,9 +593,8 @@ LUX_API LUX_INLINE void lxgContext_applyTexture( lxgContextPTR ctx,   lxgTexture
   else if (old){
     glBindTexture(old->gltarget,0);
   }
-  lxGLErrorCheck();
   ctx->textures[imageunit] = tex;
-  if (!(ctx->capbits & LUXGFX_CAP_SM3)){
+  if (!(ctx->capbits & LUXGFX_CAP_API4)){
     lxgContext_checkedBoundTextureSampler(ctx,imageunit);
   }
 }
@@ -613,12 +610,12 @@ LUX_API void  lxgContext_applyTextures( lxgContextPTR ctx, lxgTexturePTR *texs, 
 
 LUX_API booln lxgTextureTarget_valid(lxgContextPTR ctx, lxGLTextureTarget_t type)
 {
-  if (((type == LUXGL_TEXTURE_1DARRAY ||type == LUXGL_TEXTURE_2DARRAY ) && !(ctx->capbits & LUXGFX_CAP_SM4))||
-    (type == LUXGL_TEXTURE_CUBEARRAY && !(ctx->capbits & LUXGFX_CAP_TEXCUBEARRAY))||
-    (type == LUXGL_TEXTURE_3D && !(ctx->capbits & LUXGFX_CAP_TEX3D))||
-    (type == LUXGL_TEXTURE_RECT && !(ctx->capbits & LUXGFX_CAP_TEXRECT))||
-    ((type == LUXGL_TEXTURE_2DMS || type == LUXGL_TEXTURE_2DMSARRAY ) && !(ctx->capbits & LUXGFX_CAP_SM4))||
-    (type == LUXGL_TEXTURE_BUFFER && !(ctx->capbits & LUXGFX_CAP_SM4)))
+  if (((type == LUXGL_TEXTURE_1DARRAY ||type == LUXGL_TEXTURE_2DARRAY ) && !(ctx->capbits & LUXGFX_CAP_API3))||
+    (type == LUXGL_TEXTURE_CUBEARRAY && !(ctx->capbits & LUXGFX_CAP_API3))||
+    (type == LUXGL_TEXTURE_3D && !(ctx->capbits & LUXGFX_CAP_API3))||
+    (type == LUXGL_TEXTURE_RECT && !(ctx->capbits & LUXGFX_CAP_API3))||
+    ((type == LUXGL_TEXTURE_2DMS || type == LUXGL_TEXTURE_2DMSARRAY ) && !(ctx->capbits & LUXGFX_CAP_API3))||
+    (type == LUXGL_TEXTURE_BUFFER && !(ctx->capbits & LUXGFX_CAP_API3)))
   {
     return LUX_FALSE;
   }
@@ -627,8 +624,7 @@ LUX_API booln lxgTextureTarget_valid(lxgContextPTR ctx, lxGLTextureTarget_t type
 
 LUX_API booln lxgTextureChannel_valid(lxgContextPTR ctx, lxgTextureChannel_t channel)
 {
-  if ((channel == LUXGFX_TEXTURECHANNEL_DEPTHSTENCIL  && !(ctx->capbits & LUXGFX_CAP_FBO))||
-    ((channel == LUXGFX_TEXTURECHANNEL_SRGB || channel == LUXGFX_TEXTURECHANNEL_SRGBA ) && !(ctx->capbits & LUXGFX_CAP_SM4)))
+  if ((channel == LUXGFX_TEXTURECHANNEL_SRGB || channel == LUXGFX_TEXTURECHANNEL_SRGBA ) && !(ctx->capbits & LUXGFX_CAP_API3))
   {
     return LUX_FALSE;
   }
@@ -681,62 +677,50 @@ typedef void (*TexUpload_fn) (TexUpload_t* tu);
 static void TexUpload_1D(TexUpload_t*  tu)
 {
   glTexImage1D(tu->target,tu->level,tu->internal,tu->size.x,tu->border,tu->format,tu->type,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_1DCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage1DARB(tu->target,tu->level,tu->format,tu->size.x,tu->border,tu->compressedsize,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_2D(TexUpload_t*  tu)
 {
   glTexImage2D(tu->target,tu->level,tu->internal,tu->size.x,tu->size.y,tu->border,tu->format,tu->type,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_2DCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage2DARB(tu->target,tu->level,tu->format,tu->size.x,tu->size.y,tu->border,tu->compressedsize,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_3D(TexUpload_t*  tu)
 {
   glTexImage3D(tu->target,tu->level,tu->internal,tu->size.x,tu->size.y,tu->size.z,tu->border,tu->format,tu->type,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_3DCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage3DARB(tu->target,tu->level,tu->format,tu->size.x,tu->size.y,tu->size.z,tu->border,tu->compressedsize,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_1DARRAY(TexUpload_t*  tu)
 {
   glTexImage2D(tu->target,tu->level,tu->internal,tu->size.x,tu->arraysize,tu->border,tu->format,tu->type,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_1DARRAYCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage2DARB(tu->target,tu->level,tu->format,tu->size.x,tu->arraysize,tu->border,tu->compressedsize,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_2DARRAY(TexUpload_t*  tu)
 {
   glTexImage3D(tu->target,tu->level,tu->internal,tu->size.x,tu->size.y,tu->arraysize,tu->border,tu->format,tu->type,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_2DARRAYCompressed(TexUpload_t*  tu)
 {
   glCompressedTexImage3DARB(tu->target,tu->level,tu->format,tu->size.x,tu->size.y,tu->arraysize,tu->border,tu->compressedsize,NULL);
-  lxGLErrorCheck();
 }
 static void TexUpload_2DMS(TexUpload_t*  tu)
 {
   glTexImage2DMultisample(tu->target,tu->samples,tu->internal,tu->size.x,tu->size.y,tu->samplesfixed);
-  lxGLErrorCheck();
 }
 static void TexUpload_2DMSARRAY(TexUpload_t*  tu)
 {
   glTexImage3DMultisample(tu->target,tu->samples,tu->internal,tu->size.x,tu->size.y,tu->arraysize,tu->samplesfixed);
-  lxGLErrorCheck();
 }
 
 static TexUpload_fn l_uploadfuncs[] =
@@ -1003,7 +987,6 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
   lxgTexture_bindDefault(tex);
   if (flags & LUXGFX_TEXTUREFLAG_AUTOMIPMAP){
     glTexParameteri(lxGLTARGET(tex),GL_GENERATE_MIPMAP,GL_TRUE);
-    lxGLErrorCheck();
   }
 
 
@@ -1015,14 +998,13 @@ LUX_API booln lxgTexture_setup(lxgTexturePTR tex,
   lxgTexture_updateSizes(tex,w,h,d,arraysize,d);
 
   lxgTexture_bindDefault(tex);
-  tex->flags |= (ctx->capbits & LUXGFX_CAP_SM4) ? LUXGFX_TEXTUREFLAG_HASLOD : 0;
+  tex->flags |= (ctx->capbits & LUXGFX_CAP_API3) ? LUXGFX_TEXTUREFLAG_HASLOD : 0;
   lxgSampler_init(&tex->sampler,ctx);
   lxgSampler_deinit(&tex->sampler,ctx); // we actually don't want a gl-object for sampler state
   if (format == LUXGFX_TEXTURECHANNEL_DEPTH || format == LUXGFX_TEXTURECHANNEL_DEPTHSTENCIL){
     glTexParameteri(lxGLTARGET(tex),GL_DEPTH_TEXTURE_MODE,GL_LUMINANCE);
     tex->sampler.filter = (lxgSamplerFilter_t)((uint)tex->sampler.filter+4);
     tex->flags |= LUXGFX_TEXTUREFLAG_HASCOMPARE;
-    lxGLErrorCheck();
   }
   
   lxgTexture_boundSetSampler(tex,&tex->sampler,LUXGFX_SAMPLERATTRIB_ALL);
@@ -1060,7 +1042,6 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         return LUX_FALSE;
       }
       glCopyTexSubImage1D(target,mip,update->to.x,update->from.x,update->from.y,update->size.x);
-      lxGLErrorCheck();
       break;
     case LUXGL_TEXTURE_CUBE:
       target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + update->to.z;
@@ -1075,7 +1056,6 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         return LUX_FALSE;
       }
       glCopyTexSubImage2D(target,mip,update->to.x,update->to.y,update->from.x,update->from.y,update->size.x,update->size.y);
-      lxGLErrorCheck();
       break;
     case LUXGL_TEXTURE_1DARRAY:
       if (LUXGFX_VALIDITY && (mip >= tex->miplevels ||
@@ -1086,7 +1066,6 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         return LUX_FALSE;
       }
       glCopyTexSubImage2D(target,mip,update->to.x,update->to.y,update->from.x,update->from.y,update->size.x,update->size.y);
-      lxGLErrorCheck();
       break;
     case LUXGL_TEXTURE_CUBEARRAY:
     case LUXGL_TEXTURE_2DARRAY:
@@ -1101,7 +1080,6 @@ LUX_API booln lxgTexture_readFrame(lxgTexturePTR tex, lxgContextPTR ctx,
         return LUX_FALSE;
       }
       glCopyTexSubImage3D(target,mip,update->to.x,update->to.y,update->to.z,update->from.x,update->from.y,update->size.x,update->size.y);
-      lxGLErrorCheck();
       break;
   }
 
@@ -1141,7 +1119,6 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
       glTexSubImage1D(target,mip,update->to.x,update->size.x,dataformat,datatype,data);
     else
       glCompressedTexSubImage1D(target,mip,update->to.x,update->size.x,dataformat,nativesize,data);
-    lxGLErrorCheck();
     break;
   case LUXGL_TEXTURE_CUBE:
     target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + update->to.z;
@@ -1160,7 +1137,6 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
       glTexSubImage2D(target,mip,update->to.x,update->to.y,update->size.x,update->size.y,dataformat,datatype,data);
     else
       glCompressedTexSubImage2D(target,mip,update->to.x,update->to.y,update->size.x,update->size.y,dataformat,nativesize,data);
-    lxGLErrorCheck();
     break;
   case LUXGL_TEXTURE_CUBEARRAY:
   case LUXGL_TEXTURE_2DARRAY:
@@ -1178,7 +1154,6 @@ LUX_API booln lxgTexture_readData(lxgTexturePTR tex,
       glTexSubImage3D(target,mip,update->to.x,update->to.y,update->to.z,update->size.x,update->size.y,update->size.z,dataformat,datatype,data);
     else
       glCompressedTexSubImage3D(target,mip,update->to.x,update->to.y,update->to.z,update->size.x,update->size.y,update->size.z,dataformat,nativesize,data);
-    lxGLErrorCheck();
     break;
   }
 
@@ -1227,7 +1202,6 @@ LUX_API booln lxgTexture_writeData(lxgTexturePTR tex, uint side, booln ascompres
       glGetTexImage(target,mip,dataformat,datatype,buffer);
     else
       glGetCompressedTexImage(target,mip,buffer);
-    lxGLErrorCheck();
     break;
   }
 
@@ -1263,12 +1237,10 @@ LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSampler
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_S,address[sampler->addru]);
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_T,address[sampler->addrv]);
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_WRAP_R,address[sampler->addrw]);
-    lxGLErrorCheck();
   }
 
   if (what & LUXGFX_SAMPLERATTRIB_BORDER){
     glTexParameterfv(lxGLTARGET(tex),GL_TEXTURE_BORDER_COLOR,sampler->border);
-    lxGLErrorCheck();
   }
 
   if (what & (LUXGFX_SAMPLERATTRIB_CMP)){
@@ -1278,14 +1250,12 @@ LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSampler
         run ? GL_COMPARE_R_TO_TEXTURE : GL_NONE);
 
       glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_COMPARE_FUNC_ARB,run ? sampler->cmpfunc : GL_LEQUAL);
-      lxGLErrorCheck();
     }
   }
 
   if (what & LUXGFX_SAMPLERATTRIB_ANISO){
     if (sampler->aniso){
       glTexParameteri(lxGLTARGET(tex), GL_TEXTURE_MAX_ANISOTROPY_EXT, sampler->aniso);
-      lxGLErrorCheck();
     }
   }
 
@@ -1295,7 +1265,6 @@ LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSampler
       glTexParameterf(lxGLTARGET(tex),GL_TEXTURE_MAX_LOD,sampler->lod.max);
 
       glTexParameterf(lxGLTARGET(tex),GL_TEXTURE_LOD_BIAS_EXT,sampler->lod.bias);
-      lxGLErrorCheck();
     }
   }
 
@@ -1323,7 +1292,6 @@ LUX_API LUX_INLINE void lxgTexture_boundSetSampler(lxgTexturePTR tex, lxgSampler
 
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_MIN_FILTER,minfilter);
     glTexParameteri(lxGLTARGET(tex),GL_TEXTURE_MAG_FILTER,magfilter);
-    lxGLErrorCheck();
   }
 
   tex->lastSampler = sampler;
@@ -1368,7 +1336,7 @@ LUX_API void lxgSampler_init( lxgSamplerPTR self, lxgContextPTR ctx )
   self->lod.bias = 0.0f;
   self->cmpfunc = LUXGL_COMPARE_LEQUAL;
   LUX_ARRAY4SET(self->border,0,0,0,0);
-  if (ctx->capbits & LUXGFX_CAP_SM3){
+  if (ctx->capbits & LUXGFX_CAP_API4){
     glGenSamplers(1,&self->glid);
   }
 }
@@ -1409,7 +1377,6 @@ static void lxgSampler_updateHW(lxgSamplerPTR sampler)
   GLenum magfilter;
   booln runcmp = sampler->cmpfunc != LUXGL_COMPARE_DONTEXECUTE;
 
-  lxGLErrorCheck();
   glSamplerParameteri(glid,GL_TEXTURE_WRAP_S,address[sampler->addru]);
   glSamplerParameteri(glid,GL_TEXTURE_WRAP_T,address[sampler->addrv]);
   glSamplerParameteri(glid,GL_TEXTURE_WRAP_R,address[sampler->addrw]);
@@ -1447,7 +1414,6 @@ static void lxgSampler_updateHW(lxgSamplerPTR sampler)
 
   glSamplerParameteri(glid,GL_TEXTURE_MIN_FILTER,minfilter);
   glSamplerParameteri(glid,GL_TEXTURE_MAG_FILTER,magfilter);
-  lxGLErrorCheck();
 }
 
 LUX_API void lxgSampler_update(lxgSamplerPTR sampler)
@@ -1469,10 +1435,9 @@ LUX_API LUX_INLINE void lxgContext_applySampler( lxgContextPTR ctx, lxgSamplerCP
       glBindSampler(imageunit,sampler->glid);
     }
   }
-  else if (ctx->capbits & LUXGFX_CAP_SM3){
+  else if (ctx->capbits & LUXGFX_CAP_API4){
     glBindSampler(imageunit,0);
   }
-  lxGLErrorCheck();
 }
 
 LUX_API void  lxgContext_applySamplers( lxgContextPTR ctx, lxgSamplerCPTR *samps, uint start, uint num)
