@@ -10373,12 +10373,9 @@ GLenum  glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   GLint major, minor;
   /* Since we're still initializing, the `GetString' function pointer hasn't
    * been loaded yet. */
-  __glewGetString = (PFNGLGETSTRINGPROC) glewGetProcAddress(
-                      fqn_from_convention(glew_convention, "glGetString")
-                    );
-  __glewGetStringi = (PFNGLGETSTRINGIPROC) glewGetProcAddress(
-    fqn_from_convention(glew_convention, "glGetStringi")
-    );
+  __glewGetString = (PFNGLGETSTRINGPROC) glewGetProcAddress(fqn_from_convention(glew_convention, "glGetString"));
+  __glewGetStringi = (PFNGLGETSTRINGIPROC) glewGetProcAddress(fqn_from_convention(glew_convention, "glGetStringi"));
+  __glewGetIntegerv = (PFNGLGETINTEGERVPROC)glewGetProcAddress(fqn_from_convention(glew_convention, "glGetIntegerv"));
   /* query opengl version */
   s = __glewGetString(GL_VERSION);
   dot = _glewStrCLen(s, '.');
@@ -10418,12 +10415,6 @@ GLenum  glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
     CONST_CAST(GLEW_VERSION_1_2)   = GLEW_VERSION_1_2_1 == GL_TRUE || ( major == 1 && minor >= 2 ) ? GL_TRUE : GL_FALSE;
     CONST_CAST(GLEW_VERSION_1_1)   = GLEW_VERSION_1_2   == GL_TRUE || ( major == 1 && minor >= 1 ) ? GL_TRUE : GL_FALSE;
   }
-
-  /* query opengl extensions string */
-  extStart = __glewGetString(GL_EXTENSIONS);
-  if (extStart == 0)
-    extStart = (const GLubyte*)"";
-  extEnd = extStart + _glewStrLen(extStart);
 
   /* initialize extensions */
 #ifdef GL_VERSION_1_1
@@ -12989,7 +12980,7 @@ static GLboolean _glewInit_WGL_OML_sync_control (WGLEW_CONTEXT_ARG_DEF_INIT)
 static PFNWGLGETEXTENSIONSSTRINGARBPROC _wglewGetExtensionsStringARB = NULL;
 static PFNWGLGETEXTENSIONSSTRINGEXTPROC _wglewGetExtensionsStringEXT = NULL;
 
-GLboolean GLEWAPIENTRY wglewGetExtension (const char* name)
+GLboolean wglewGetExtension (const char* name)
 {    
   const GLubyte* start;
   const GLubyte* end;
@@ -13006,7 +12997,7 @@ GLboolean GLEWAPIENTRY wglewGetExtension (const char* name)
   return _glewSearchExtension(name, start, end);
 }
 
-GLenum GLEWAPIENTRY wglewContextInit (WGLEW_CONTEXT_ARG_DEF_LIST)
+GLenum wglewContextInit (WGLEW_CONTEXT_ARG_DEF_LIST)
 {
   GLboolean crippled;
   const GLubyte* extStart;
@@ -14327,7 +14318,7 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
 
 /* ------------------------------------------------------------------------ */
 
-const GLubyte * GLEWAPIENTRY glewGetErrorString (GLenum error)
+const GLubyte * glewGetErrorString (GLenum error)
 {
   static const GLubyte* _glewErrorString[] =
   {
@@ -14341,7 +14332,7 @@ const GLubyte * GLEWAPIENTRY glewGetErrorString (GLenum error)
   return _glewErrorString[(int)error > max_error ? max_error : (int)error];
 }
 
-const GLubyte * GLEWAPIENTRY glewGetString (GLenum name)
+const GLubyte * glewGetString (GLenum name)
 {
   static const GLubyte* _glewString[] =
   {
@@ -18126,9 +18117,9 @@ GLboolean glewIsSupported (const char* name)
 #if defined(_WIN32)
 
 #if defined(GLEW_MX)
-GLboolean GLEWAPIENTRY wglewContextIsSupported (const WGLEWContext* ctx, const char* name)
+GLboolean wglewContextIsSupported (const WGLEWContext* ctx, const char* name)
 #else
-GLboolean GLEWAPIENTRY wglewIsSupported (const char* name)
+GLboolean wglewIsSupported (const char* name)
 #endif
 {
   GLubyte* pos = (GLubyte*)name;

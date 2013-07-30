@@ -4,10 +4,10 @@ dofile("../_common/misc.lua")
 
 local WRAPPED = true
 
-local function funcwrapper(func,mangled,eol)
+local function funcwrapper(func,eol)
   local output = ""
-  local returns = func.str:match("^void%s*%w") ~= nil and "" or "return "
-  local args = func.str:match("(%b())")
+  local returns = func.def:match("^void%s*%w") ~= nil and "" or "return "
+  local args = func.def:match("(%b())")
   local funcargs = {}
   local callargs = {}
   local cnt = 0
@@ -29,9 +29,9 @@ local function funcwrapper(func,mangled,eol)
   funcargs = "("..table.concat(funcargs,",")..")"
   callargs = "("..table.concat(callargs,",")..")"
   
-  local outfunc = func.str:gsub("(%b())",funcargs)
+  local outfunc = func.def:gsub("(%b())",funcargs)
   
-  output = output..outfunc:sub(1,-2).."{"..returns..mangled..callargs..";}"..eol
+  output = output..outfunc:sub(1,-2).."{"..eol..returns..func.mangled..callargs..";}"..eol
   
   return output
 end
@@ -100,17 +100,20 @@ local function processHeader(name,idir,odir,onlybinding)
         lkproc2name[pfn] = fn
         
         local fndef = typ.str:sub(#("typedef ")+1,-1)
+        fndef = fndef:gsub(pfn,fn)
+        local def = fndef:gsub("%(%s*%*%s*",""):gsub("%)%s*%(","(")
         if (WRAPPED) then
-          fndef = fndef:gsub(pfn,fn)
-          fndef = fndef:gsub("%(%s*%*%s*",""):gsub("%)%s*%(","(")
-          output = "GLEWAPI "..fndef..eol
+          fndef = def
+          output = "GLEWAPI "..def..eol
         else
-          fndef = fndef:gsub(pfn,fn)
-          output = "GLEW_FUN_EXPORT "..fndef..eol
+          fndef = fndef:sub(1,-2)..' __asm__("'..mangled..'");'
         end
-        local func = {str=fndef, name = fn, mangled=mangled}
+        local func = {str=fndef, def=def, name = fn, mangled=mangled}
         lkproc2func[pfn] = func
         table.insert(funcs, func)
+        if (not WRAPPED) then
+          output = output.."__inline "..funcwrapper(func,eol)..eol
+        end
       else
         output = "GLEW_FUN_EXPORT "..pfn.." "..fn..";"..eol
       end
@@ -196,6 +199,16 @@ local function processHeader(name,idir,odir,onlybinding)
     }
 end
 
+local function copyFile(name,idir,odir)
+  print("copying...",name)
+  local infile = io.open(idir..name,"rb")
+  local outfile = io.open(odir..name,"wb")
+  
+  for l in FileLines(infile) do
+    outfile:write(l)
+  end
+end
+
 local function processSource(name,idir,odir,gl)
   print("processing...",name)
   local infile = io.open(idir.."/src/"..name,"rb")
@@ -213,12 +226,10 @@ local function processSource(name,idir,odir,gl)
       if (func) then
         if (WRAPPED) then
           output = "static "..output
-          output = output..funcwrapper(func,mangled,eol)
-        else
-          output = pfn.." "..outname.." = NULL;"..eol
+          output = output..funcwrapper(func,eol)
         end
       end
-    elseif (WRAPPED and l:match("%(%([_%w]+ = %([_%w]+PROC%)")) then
+    elseif (l:match("%(%([_%w]+ = %([_%w]+PROC%)")) then
       --((glAccum = (PFNGLACCUMPROC)glewGetProcAddress
       output = l:gsub("%(%(([_%w]+) = %(([_%w]+PROC)%)", 
         function(fn,pfn)
@@ -235,17 +246,9 @@ local function processSource(name,idir,odir,gl)
   end
 end
 
-local function copyFile(name,idir,odir)
-  print("copying...",name)
-  local infile = io.open(idir..name,"rb")
-  local outfile = io.open(odir..name,"wb")
-  
-  for l in FileLines(infile) do
-    outfile:write(l)
-  end
-end
 
-local function generateBinding(name,odir,gl,filter)
+
+local function generateBinding(name,odir,gl,filter,ffiraw)
   local ofile = io.open(odir..name, "wb")
   local eol = gl.eol
   
@@ -326,14 +329,23 @@ local function makebinding(name,idir,odir,filter,onlybinding)
   generateBinding(name..(filter and "_filtered" or "")..".lua",odir,gl,filter)
 end
 
+WRAPPED = true
 makebinding(
   "glewgl",
   RELPATH ("glewinput/"),
   RELPATH (""),
-  FILTER,
-  ONLYBINDING)
+  "ARB,NV,AMD,NVX",
+  true)
   
-if (not ONLYBINDING) then
+WRAPPED = false
+makebinding(
+  "glewgl",
+  RELPATH ("glewinput/"),
+  RELPATH (""),
+  nil,
+  nil)
+
+do
   copyFile("include/GL/glew.h",  RELPATH (""), RELPATH ("../../depend/"))
   copyFile("include/GL/wglew.h", RELPATH (""), RELPATH ("../../depend/"))
   copyFile("include/GL/glxew.h", RELPATH (""), RELPATH ("../../depend/"))

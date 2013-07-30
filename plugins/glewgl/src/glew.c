@@ -447,5271 +447,2765 @@ static GLboolean _glewSearchExtension (const char* name, const GLubyte *start, c
 #define _glewSearchExtension(name,start,end)  glewGetExtension(name)
 #endif
 
-
 #if !defined(_WIN32) || !defined(GLEW_MX)
 
-static PFNGLACCUMPROC __glewAccum = NULL;
-void glAccum(GLenum op,GLfloat value){__glewAccum(op,value);}
-static PFNGLALPHAFUNCPROC __glewAlphaFunc = NULL;
-void glAlphaFunc(GLenum func,GLclampf ref){__glewAlphaFunc(func,ref);}
-static PFNGLARETEXTURESRESIDENTPROC __glewAreTexturesResident = NULL;
-GLboolean glAreTexturesResident(GLsizei n,const GLuint *textures,GLboolean *residences){return __glewAreTexturesResident(n,textures,residences);}
-static PFNGLARRAYELEMENTPROC __glewArrayElement = NULL;
-void glArrayElement(GLint i){__glewArrayElement(i);}
-static PFNGLBEGINPROC __glewBegin = NULL;
-void glBegin(GLenum mode){__glewBegin(mode);}
-static PFNGLBINDTEXTUREPROC __glewBindTexture = NULL;
-void glBindTexture(GLenum target,GLuint texture){__glewBindTexture(target,texture);}
-static PFNGLBITMAPPROC __glewBitmap = NULL;
-void glBitmap(GLsizei width,GLsizei height,GLfloat xorig,GLfloat yorig,GLfloat xmove,GLfloat ymove,const GLubyte *bitmap){__glewBitmap(width,height,xorig,yorig,xmove,ymove,bitmap);}
-static PFNGLBLENDFUNCPROC __glewBlendFunc = NULL;
-void glBlendFunc(GLenum sfactor,GLenum dfactor){__glewBlendFunc(sfactor,dfactor);}
-static PFNGLCALLLISTPROC __glewCallList = NULL;
-void glCallList(GLuint list){__glewCallList(list);}
-static PFNGLCALLLISTSPROC __glewCallLists = NULL;
-void glCallLists(GLsizei n,GLenum type,const GLvoid *lists){__glewCallLists(n,type,lists);}
-static PFNGLCLEARPROC __glewClear = NULL;
-void glClear(GLbitfield mask){__glewClear(mask);}
-static PFNGLCLEARACCUMPROC __glewClearAccum = NULL;
-void glClearAccum(GLfloat red,GLfloat green,GLfloat blue,GLfloat alpha){__glewClearAccum(red,green,blue,alpha);}
-static PFNGLCLEARCOLORPROC __glewClearColor = NULL;
-void glClearColor(GLclampf red,GLclampf green,GLclampf blue,GLclampf alpha){__glewClearColor(red,green,blue,alpha);}
-static PFNGLCLEARDEPTHPROC __glewClearDepth = NULL;
-void glClearDepth(GLclampd depth){__glewClearDepth(depth);}
-static PFNGLCLEARINDEXPROC __glewClearIndex = NULL;
-void glClearIndex(GLfloat c){__glewClearIndex(c);}
-static PFNGLCLEARSTENCILPROC __glewClearStencil = NULL;
-void glClearStencil(GLint s){__glewClearStencil(s);}
-static PFNGLCLIPPLANEPROC __glewClipPlane = NULL;
-void glClipPlane(GLenum plane,const GLdouble *equation){__glewClipPlane(plane,equation);}
-static PFNGLCOLOR3BPROC __glewColor3b = NULL;
-void glColor3b(GLbyte red,GLbyte green,GLbyte blue){__glewColor3b(red,green,blue);}
-static PFNGLCOLOR3BVPROC __glewColor3bv = NULL;
-void glColor3bv(const GLbyte *v){__glewColor3bv(v);}
-static PFNGLCOLOR3DPROC __glewColor3d = NULL;
-void glColor3d(GLdouble red,GLdouble green,GLdouble blue){__glewColor3d(red,green,blue);}
-static PFNGLCOLOR3DVPROC __glewColor3dv = NULL;
-void glColor3dv(const GLdouble *v){__glewColor3dv(v);}
-static PFNGLCOLOR3FPROC __glewColor3f = NULL;
-void glColor3f(GLfloat red,GLfloat green,GLfloat blue){__glewColor3f(red,green,blue);}
-static PFNGLCOLOR3FVPROC __glewColor3fv = NULL;
-void glColor3fv(const GLfloat *v){__glewColor3fv(v);}
-static PFNGLCOLOR3IPROC __glewColor3i = NULL;
-void glColor3i(GLint red,GLint green,GLint blue){__glewColor3i(red,green,blue);}
-static PFNGLCOLOR3IVPROC __glewColor3iv = NULL;
-void glColor3iv(const GLint *v){__glewColor3iv(v);}
-static PFNGLCOLOR3SPROC __glewColor3s = NULL;
-void glColor3s(GLshort red,GLshort green,GLshort blue){__glewColor3s(red,green,blue);}
-static PFNGLCOLOR3SVPROC __glewColor3sv = NULL;
-void glColor3sv(const GLshort *v){__glewColor3sv(v);}
-static PFNGLCOLOR3UBPROC __glewColor3ub = NULL;
-void glColor3ub(GLubyte red,GLubyte green,GLubyte blue){__glewColor3ub(red,green,blue);}
-static PFNGLCOLOR3UBVPROC __glewColor3ubv = NULL;
-void glColor3ubv(const GLubyte *v){__glewColor3ubv(v);}
-static PFNGLCOLOR3UIPROC __glewColor3ui = NULL;
-void glColor3ui(GLuint red,GLuint green,GLuint blue){__glewColor3ui(red,green,blue);}
-static PFNGLCOLOR3UIVPROC __glewColor3uiv = NULL;
-void glColor3uiv(const GLuint *v){__glewColor3uiv(v);}
-static PFNGLCOLOR3USPROC __glewColor3us = NULL;
-void glColor3us(GLushort red,GLushort green,GLushort blue){__glewColor3us(red,green,blue);}
-static PFNGLCOLOR3USVPROC __glewColor3usv = NULL;
-void glColor3usv(const GLushort *v){__glewColor3usv(v);}
-static PFNGLCOLOR4BPROC __glewColor4b = NULL;
-void glColor4b(GLbyte red,GLbyte green,GLbyte blue,GLbyte alpha){__glewColor4b(red,green,blue,alpha);}
-static PFNGLCOLOR4BVPROC __glewColor4bv = NULL;
-void glColor4bv(const GLbyte *v){__glewColor4bv(v);}
-static PFNGLCOLOR4DPROC __glewColor4d = NULL;
-void glColor4d(GLdouble red,GLdouble green,GLdouble blue,GLdouble alpha){__glewColor4d(red,green,blue,alpha);}
-static PFNGLCOLOR4DVPROC __glewColor4dv = NULL;
-void glColor4dv(const GLdouble *v){__glewColor4dv(v);}
-static PFNGLCOLOR4FPROC __glewColor4f = NULL;
-void glColor4f(GLfloat red,GLfloat green,GLfloat blue,GLfloat alpha){__glewColor4f(red,green,blue,alpha);}
-static PFNGLCOLOR4FVPROC __glewColor4fv = NULL;
-void glColor4fv(const GLfloat *v){__glewColor4fv(v);}
-static PFNGLCOLOR4IPROC __glewColor4i = NULL;
-void glColor4i(GLint red,GLint green,GLint blue,GLint alpha){__glewColor4i(red,green,blue,alpha);}
-static PFNGLCOLOR4IVPROC __glewColor4iv = NULL;
-void glColor4iv(const GLint *v){__glewColor4iv(v);}
-static PFNGLCOLOR4SPROC __glewColor4s = NULL;
-void glColor4s(GLshort red,GLshort green,GLshort blue,GLshort alpha){__glewColor4s(red,green,blue,alpha);}
-static PFNGLCOLOR4SVPROC __glewColor4sv = NULL;
-void glColor4sv(const GLshort *v){__glewColor4sv(v);}
-static PFNGLCOLOR4UBPROC __glewColor4ub = NULL;
-void glColor4ub(GLubyte red,GLubyte green,GLubyte blue,GLubyte alpha){__glewColor4ub(red,green,blue,alpha);}
-static PFNGLCOLOR4UBVPROC __glewColor4ubv = NULL;
-void glColor4ubv(const GLubyte *v){__glewColor4ubv(v);}
-static PFNGLCOLOR4UIPROC __glewColor4ui = NULL;
-void glColor4ui(GLuint red,GLuint green,GLuint blue,GLuint alpha){__glewColor4ui(red,green,blue,alpha);}
-static PFNGLCOLOR4UIVPROC __glewColor4uiv = NULL;
-void glColor4uiv(const GLuint *v){__glewColor4uiv(v);}
-static PFNGLCOLOR4USPROC __glewColor4us = NULL;
-void glColor4us(GLushort red,GLushort green,GLushort blue,GLushort alpha){__glewColor4us(red,green,blue,alpha);}
-static PFNGLCOLOR4USVPROC __glewColor4usv = NULL;
-void glColor4usv(const GLushort *v){__glewColor4usv(v);}
-static PFNGLCOLORMASKPROC __glewColorMask = NULL;
-void glColorMask(GLboolean red,GLboolean green,GLboolean blue,GLboolean alpha){__glewColorMask(red,green,blue,alpha);}
-static PFNGLCOLORMATERIALPROC __glewColorMaterial = NULL;
-void glColorMaterial(GLenum face,GLenum mode){__glewColorMaterial(face,mode);}
-static PFNGLCOLORPOINTERPROC __glewColorPointer = NULL;
-void glColorPointer(GLint size,GLenum type,GLsizei stride,const GLvoid *pointer){__glewColorPointer(size,type,stride,pointer);}
-static PFNGLCOPYPIXELSPROC __glewCopyPixels = NULL;
-void glCopyPixels(GLint x,GLint y,GLsizei width,GLsizei height,GLenum type){__glewCopyPixels(x,y,width,height,type);}
-static PFNGLCOPYTEXIMAGE1DPROC __glewCopyTexImage1D = NULL;
-void glCopyTexImage1D(GLenum target,GLint level,GLenum internalFormat,GLint x,GLint y,GLsizei width,GLint border){__glewCopyTexImage1D(target,level,internalFormat,x,y,width,border);}
-static PFNGLCOPYTEXIMAGE2DPROC __glewCopyTexImage2D = NULL;
-void glCopyTexImage2D(GLenum target,GLint level,GLenum internalFormat,GLint x,GLint y,GLsizei width,GLsizei height,GLint border){__glewCopyTexImage2D(target,level,internalFormat,x,y,width,height,border);}
-static PFNGLCOPYTEXSUBIMAGE1DPROC __glewCopyTexSubImage1D = NULL;
-void glCopyTexSubImage1D(GLenum target,GLint level,GLint xoffset,GLint x,GLint y,GLsizei width){__glewCopyTexSubImage1D(target,level,xoffset,x,y,width);}
-static PFNGLCOPYTEXSUBIMAGE2DPROC __glewCopyTexSubImage2D = NULL;
-void glCopyTexSubImage2D(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyTexSubImage2D(target,level,xoffset,yoffset,x,y,width,height);}
-static PFNGLCULLFACEPROC __glewCullFace = NULL;
-void glCullFace(GLenum mode){__glewCullFace(mode);}
-static PFNGLDELETELISTSPROC __glewDeleteLists = NULL;
-void glDeleteLists(GLuint list,GLsizei range){__glewDeleteLists(list,range);}
-static PFNGLDELETETEXTURESPROC __glewDeleteTextures = NULL;
-void glDeleteTextures(GLsizei n,const GLuint *textures){__glewDeleteTextures(n,textures);}
-static PFNGLDEPTHFUNCPROC __glewDepthFunc = NULL;
-void glDepthFunc(GLenum func){__glewDepthFunc(func);}
-static PFNGLDEPTHMASKPROC __glewDepthMask = NULL;
-void glDepthMask(GLboolean flag){__glewDepthMask(flag);}
-static PFNGLDEPTHRANGEPROC __glewDepthRange = NULL;
-void glDepthRange(GLclampd zNear,GLclampd zFar){__glewDepthRange(zNear,zFar);}
-static PFNGLDISABLEPROC __glewDisable = NULL;
-void glDisable(GLenum cap){__glewDisable(cap);}
-static PFNGLDISABLECLIENTSTATEPROC __glewDisableClientState = NULL;
-void glDisableClientState(GLenum array){__glewDisableClientState(array);}
-static PFNGLDRAWARRAYSPROC __glewDrawArrays = NULL;
-void glDrawArrays(GLenum mode,GLint first,GLsizei count){__glewDrawArrays(mode,first,count);}
-static PFNGLDRAWBUFFERPROC __glewDrawBuffer = NULL;
-void glDrawBuffer(GLenum mode){__glewDrawBuffer(mode);}
-static PFNGLDRAWELEMENTSPROC __glewDrawElements = NULL;
-void glDrawElements(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices){__glewDrawElements(mode,count,type,indices);}
-static PFNGLDRAWPIXELSPROC __glewDrawPixels = NULL;
-void glDrawPixels(GLsizei width,GLsizei height,GLenum format,GLenum type,const GLvoid *pixels){__glewDrawPixels(width,height,format,type,pixels);}
-static PFNGLEDGEFLAGPROC __glewEdgeFlag = NULL;
-void glEdgeFlag(GLboolean flag){__glewEdgeFlag(flag);}
-static PFNGLEDGEFLAGPOINTERPROC __glewEdgeFlagPointer = NULL;
-void glEdgeFlagPointer(GLsizei stride,const GLvoid *pointer){__glewEdgeFlagPointer(stride,pointer);}
-static PFNGLEDGEFLAGVPROC __glewEdgeFlagv = NULL;
-void glEdgeFlagv(const GLboolean *flag){__glewEdgeFlagv(flag);}
-static PFNGLENABLEPROC __glewEnable = NULL;
-void glEnable(GLenum cap){__glewEnable(cap);}
-static PFNGLENABLECLIENTSTATEPROC __glewEnableClientState = NULL;
-void glEnableClientState(GLenum array){__glewEnableClientState(array);}
-static PFNGLENDPROC __glewEnd = NULL;
-void glEnd(void){__glewEnd();}
-static PFNGLENDLISTPROC __glewEndList = NULL;
-void glEndList(void){__glewEndList();}
-static PFNGLEVALCOORD1DPROC __glewEvalCoord1d = NULL;
-void glEvalCoord1d(GLdouble u){__glewEvalCoord1d(u);}
-static PFNGLEVALCOORD1DVPROC __glewEvalCoord1dv = NULL;
-void glEvalCoord1dv(const GLdouble *u){__glewEvalCoord1dv(u);}
-static PFNGLEVALCOORD1FPROC __glewEvalCoord1f = NULL;
-void glEvalCoord1f(GLfloat u){__glewEvalCoord1f(u);}
-static PFNGLEVALCOORD1FVPROC __glewEvalCoord1fv = NULL;
-void glEvalCoord1fv(const GLfloat *u){__glewEvalCoord1fv(u);}
-static PFNGLEVALCOORD2DPROC __glewEvalCoord2d = NULL;
-void glEvalCoord2d(GLdouble u,GLdouble v){__glewEvalCoord2d(u,v);}
-static PFNGLEVALCOORD2DVPROC __glewEvalCoord2dv = NULL;
-void glEvalCoord2dv(const GLdouble *u){__glewEvalCoord2dv(u);}
-static PFNGLEVALCOORD2FPROC __glewEvalCoord2f = NULL;
-void glEvalCoord2f(GLfloat u,GLfloat v){__glewEvalCoord2f(u,v);}
-static PFNGLEVALCOORD2FVPROC __glewEvalCoord2fv = NULL;
-void glEvalCoord2fv(const GLfloat *u){__glewEvalCoord2fv(u);}
-static PFNGLEVALMESH1PROC __glewEvalMesh1 = NULL;
-void glEvalMesh1(GLenum mode,GLint i1,GLint i2){__glewEvalMesh1(mode,i1,i2);}
-static PFNGLEVALMESH2PROC __glewEvalMesh2 = NULL;
-void glEvalMesh2(GLenum mode,GLint i1,GLint i2,GLint j1,GLint j2){__glewEvalMesh2(mode,i1,i2,j1,j2);}
-static PFNGLEVALPOINT1PROC __glewEvalPoint1 = NULL;
-void glEvalPoint1(GLint i){__glewEvalPoint1(i);}
-static PFNGLEVALPOINT2PROC __glewEvalPoint2 = NULL;
-void glEvalPoint2(GLint i,GLint j){__glewEvalPoint2(i,j);}
-static PFNGLFEEDBACKBUFFERPROC __glewFeedbackBuffer = NULL;
-void glFeedbackBuffer(GLsizei size,GLenum type,GLfloat *buffer){__glewFeedbackBuffer(size,type,buffer);}
-static PFNGLFINISHPROC __glewFinish = NULL;
-void glFinish(void){__glewFinish();}
-static PFNGLFLUSHPROC __glewFlush = NULL;
-void glFlush(void){__glewFlush();}
-static PFNGLFOGFPROC __glewFogf = NULL;
-void glFogf(GLenum pname,GLfloat param){__glewFogf(pname,param);}
-static PFNGLFOGFVPROC __glewFogfv = NULL;
-void glFogfv(GLenum pname,const GLfloat *params){__glewFogfv(pname,params);}
-static PFNGLFOGIPROC __glewFogi = NULL;
-void glFogi(GLenum pname,GLint param){__glewFogi(pname,param);}
-static PFNGLFOGIVPROC __glewFogiv = NULL;
-void glFogiv(GLenum pname,const GLint *params){__glewFogiv(pname,params);}
-static PFNGLFRONTFACEPROC __glewFrontFace = NULL;
-void glFrontFace(GLenum mode){__glewFrontFace(mode);}
-static PFNGLFRUSTUMPROC __glewFrustum = NULL;
-void glFrustum(GLdouble left,GLdouble right,GLdouble bottom,GLdouble top,GLdouble zNear,GLdouble zFar){__glewFrustum(left,right,bottom,top,zNear,zFar);}
-static PFNGLGENLISTSPROC __glewGenLists = NULL;
-GLuint glGenLists(GLsizei range){return __glewGenLists(range);}
-static PFNGLGENTEXTURESPROC __glewGenTextures = NULL;
-void glGenTextures(GLsizei n,GLuint *textures){__glewGenTextures(n,textures);}
-static PFNGLGETBOOLEANVPROC __glewGetBooleanv = NULL;
-void glGetBooleanv(GLenum pname,GLboolean *params){__glewGetBooleanv(pname,params);}
-static PFNGLGETCLIPPLANEPROC __glewGetClipPlane = NULL;
-void glGetClipPlane(GLenum plane,GLdouble *equation){__glewGetClipPlane(plane,equation);}
-static PFNGLGETDOUBLEVPROC __glewGetDoublev = NULL;
-void glGetDoublev(GLenum pname,GLdouble *params){__glewGetDoublev(pname,params);}
-static PFNGLGETERRORPROC __glewGetError = NULL;
-GLenum glGetError(void){return __glewGetError();}
-static PFNGLGETFLOATVPROC __glewGetFloatv = NULL;
-void glGetFloatv(GLenum pname,GLfloat *params){__glewGetFloatv(pname,params);}
-static PFNGLGETINTEGERVPROC __glewGetIntegerv = NULL;
-void glGetIntegerv(GLenum pname,GLint *params){__glewGetIntegerv(pname,params);}
-static PFNGLGETLIGHTFVPROC __glewGetLightfv = NULL;
-void glGetLightfv(GLenum light,GLenum pname,GLfloat *params){__glewGetLightfv(light,pname,params);}
-static PFNGLGETLIGHTIVPROC __glewGetLightiv = NULL;
-void glGetLightiv(GLenum light,GLenum pname,GLint *params){__glewGetLightiv(light,pname,params);}
-static PFNGLGETMAPDVPROC __glewGetMapdv = NULL;
-void glGetMapdv(GLenum target,GLenum query,GLdouble *v){__glewGetMapdv(target,query,v);}
-static PFNGLGETMAPFVPROC __glewGetMapfv = NULL;
-void glGetMapfv(GLenum target,GLenum query,GLfloat *v){__glewGetMapfv(target,query,v);}
-static PFNGLGETMAPIVPROC __glewGetMapiv = NULL;
-void glGetMapiv(GLenum target,GLenum query,GLint *v){__glewGetMapiv(target,query,v);}
-static PFNGLGETMATERIALFVPROC __glewGetMaterialfv = NULL;
-void glGetMaterialfv(GLenum face,GLenum pname,GLfloat *params){__glewGetMaterialfv(face,pname,params);}
-static PFNGLGETMATERIALIVPROC __glewGetMaterialiv = NULL;
-void glGetMaterialiv(GLenum face,GLenum pname,GLint *params){__glewGetMaterialiv(face,pname,params);}
-static PFNGLGETPIXELMAPFVPROC __glewGetPixelMapfv = NULL;
-void glGetPixelMapfv(GLenum map,GLfloat *values){__glewGetPixelMapfv(map,values);}
-static PFNGLGETPIXELMAPUIVPROC __glewGetPixelMapuiv = NULL;
-void glGetPixelMapuiv(GLenum map,GLuint *values){__glewGetPixelMapuiv(map,values);}
-static PFNGLGETPIXELMAPUSVPROC __glewGetPixelMapusv = NULL;
-void glGetPixelMapusv(GLenum map,GLushort *values){__glewGetPixelMapusv(map,values);}
-static PFNGLGETPOINTERVPROC __glewGetPointerv = NULL;
-void glGetPointerv(GLenum pname,GLvoid* *params){__glewGetPointerv(pname,params);}
-static PFNGLGETPOLYGONSTIPPLEPROC __glewGetPolygonStipple = NULL;
-void glGetPolygonStipple(GLubyte *mask){__glewGetPolygonStipple(mask);}
-static PFNGLGETSTRINGPROC __glewGetString = NULL;
-GLubyte* glGetString(GLenum s){return __glewGetString(s);}
-static PFNGLGETTEXENVFVPROC __glewGetTexEnvfv = NULL;
-void glGetTexEnvfv(GLenum target,GLenum pname,GLfloat *params){__glewGetTexEnvfv(target,pname,params);}
-static PFNGLGETTEXENVIVPROC __glewGetTexEnviv = NULL;
-void glGetTexEnviv(GLenum target,GLenum pname,GLint *params){__glewGetTexEnviv(target,pname,params);}
-static PFNGLGETTEXGENDVPROC __glewGetTexGendv = NULL;
-void glGetTexGendv(GLenum coord,GLenum pname,GLdouble *params){__glewGetTexGendv(coord,pname,params);}
-static PFNGLGETTEXGENFVPROC __glewGetTexGenfv = NULL;
-void glGetTexGenfv(GLenum coord,GLenum pname,GLfloat *params){__glewGetTexGenfv(coord,pname,params);}
-static PFNGLGETTEXGENIVPROC __glewGetTexGeniv = NULL;
-void glGetTexGeniv(GLenum coord,GLenum pname,GLint *params){__glewGetTexGeniv(coord,pname,params);}
-static PFNGLGETTEXIMAGEPROC __glewGetTexImage = NULL;
-void glGetTexImage(GLenum target,GLint level,GLenum format,GLenum type,GLvoid *pixels){__glewGetTexImage(target,level,format,type,pixels);}
-static PFNGLGETTEXLEVELPARAMETERFVPROC __glewGetTexLevelParameterfv = NULL;
-void glGetTexLevelParameterfv(GLenum target,GLint level,GLenum pname,GLfloat *params){__glewGetTexLevelParameterfv(target,level,pname,params);}
-static PFNGLGETTEXLEVELPARAMETERIVPROC __glewGetTexLevelParameteriv = NULL;
-void glGetTexLevelParameteriv(GLenum target,GLint level,GLenum pname,GLint *params){__glewGetTexLevelParameteriv(target,level,pname,params);}
-static PFNGLGETTEXPARAMETERFVPROC __glewGetTexParameterfv = NULL;
-void glGetTexParameterfv(GLenum target,GLenum pname,GLfloat *params){__glewGetTexParameterfv(target,pname,params);}
-static PFNGLGETTEXPARAMETERIVPROC __glewGetTexParameteriv = NULL;
-void glGetTexParameteriv(GLenum target,GLenum pname,GLint *params){__glewGetTexParameteriv(target,pname,params);}
-static PFNGLHINTPROC __glewHint = NULL;
-void glHint(GLenum target,GLenum mode){__glewHint(target,mode);}
-static PFNGLINDEXMASKPROC __glewIndexMask = NULL;
-void glIndexMask(GLuint mask){__glewIndexMask(mask);}
-static PFNGLINDEXPOINTERPROC __glewIndexPointer = NULL;
-void glIndexPointer(GLenum type,GLsizei stride,const GLvoid *pointer){__glewIndexPointer(type,stride,pointer);}
-static PFNGLINDEXDPROC __glewIndexd = NULL;
-void glIndexd(GLdouble c){__glewIndexd(c);}
-static PFNGLINDEXDVPROC __glewIndexdv = NULL;
-void glIndexdv(const GLdouble *c){__glewIndexdv(c);}
-static PFNGLINDEXFPROC __glewIndexf = NULL;
-void glIndexf(GLfloat c){__glewIndexf(c);}
-static PFNGLINDEXFVPROC __glewIndexfv = NULL;
-void glIndexfv(const GLfloat *c){__glewIndexfv(c);}
-static PFNGLINDEXIPROC __glewIndexi = NULL;
-void glIndexi(GLint c){__glewIndexi(c);}
-static PFNGLINDEXIVPROC __glewIndexiv = NULL;
-void glIndexiv(const GLint *c){__glewIndexiv(c);}
-static PFNGLINDEXSPROC __glewIndexs = NULL;
-void glIndexs(GLshort c){__glewIndexs(c);}
-static PFNGLINDEXSVPROC __glewIndexsv = NULL;
-void glIndexsv(const GLshort *c){__glewIndexsv(c);}
-static PFNGLINDEXUBPROC __glewIndexub = NULL;
-void glIndexub(GLubyte c){__glewIndexub(c);}
-static PFNGLINDEXUBVPROC __glewIndexubv = NULL;
-void glIndexubv(const GLubyte *c){__glewIndexubv(c);}
-static PFNGLINITNAMESPROC __glewInitNames = NULL;
-void glInitNames(void){__glewInitNames();}
-static PFNGLINTERLEAVEDARRAYSPROC __glewInterleavedArrays = NULL;
-void glInterleavedArrays(GLenum format,GLsizei stride,const GLvoid *pointer){__glewInterleavedArrays(format,stride,pointer);}
-static PFNGLISENABLEDPROC __glewIsEnabled = NULL;
-GLboolean glIsEnabled(GLenum cap){return __glewIsEnabled(cap);}
-static PFNGLISLISTPROC __glewIsList = NULL;
-GLboolean glIsList(GLuint list){return __glewIsList(list);}
-static PFNGLISTEXTUREPROC __glewIsTexture = NULL;
-GLboolean glIsTexture(GLuint texture){return __glewIsTexture(texture);}
-static PFNGLLIGHTMODELFPROC __glewLightModelf = NULL;
-void glLightModelf(GLenum pname,GLfloat param){__glewLightModelf(pname,param);}
-static PFNGLLIGHTMODELFVPROC __glewLightModelfv = NULL;
-void glLightModelfv(GLenum pname,const GLfloat *params){__glewLightModelfv(pname,params);}
-static PFNGLLIGHTMODELIPROC __glewLightModeli = NULL;
-void glLightModeli(GLenum pname,GLint param){__glewLightModeli(pname,param);}
-static PFNGLLIGHTMODELIVPROC __glewLightModeliv = NULL;
-void glLightModeliv(GLenum pname,const GLint *params){__glewLightModeliv(pname,params);}
-static PFNGLLIGHTFPROC __glewLightf = NULL;
-void glLightf(GLenum light,GLenum pname,GLfloat param){__glewLightf(light,pname,param);}
-static PFNGLLIGHTFVPROC __glewLightfv = NULL;
-void glLightfv(GLenum light,GLenum pname,const GLfloat *params){__glewLightfv(light,pname,params);}
-static PFNGLLIGHTIPROC __glewLighti = NULL;
-void glLighti(GLenum light,GLenum pname,GLint param){__glewLighti(light,pname,param);}
-static PFNGLLIGHTIVPROC __glewLightiv = NULL;
-void glLightiv(GLenum light,GLenum pname,const GLint *params){__glewLightiv(light,pname,params);}
-static PFNGLLINESTIPPLEPROC __glewLineStipple = NULL;
-void glLineStipple(GLint factor,GLushort pattern){__glewLineStipple(factor,pattern);}
-static PFNGLLINEWIDTHPROC __glewLineWidth = NULL;
-void glLineWidth(GLfloat width){__glewLineWidth(width);}
-static PFNGLLISTBASEPROC __glewListBase = NULL;
-void glListBase(GLuint base){__glewListBase(base);}
-static PFNGLLOADIDENTITYPROC __glewLoadIdentity = NULL;
-void glLoadIdentity(void){__glewLoadIdentity();}
-static PFNGLLOADMATRIXDPROC __glewLoadMatrixd = NULL;
-void glLoadMatrixd(const GLdouble *m){__glewLoadMatrixd(m);}
-static PFNGLLOADMATRIXFPROC __glewLoadMatrixf = NULL;
-void glLoadMatrixf(const GLfloat *m){__glewLoadMatrixf(m);}
-static PFNGLLOADNAMEPROC __glewLoadName = NULL;
-void glLoadName(GLuint name){__glewLoadName(name);}
-static PFNGLLOGICOPPROC __glewLogicOp = NULL;
-void glLogicOp(GLenum opcode){__glewLogicOp(opcode);}
-static PFNGLMAP1DPROC __glewMap1d = NULL;
-void glMap1d(GLenum target,GLdouble u1,GLdouble u2,GLint stride,GLint order,const GLdouble *points){__glewMap1d(target,u1,u2,stride,order,points);}
-static PFNGLMAP1FPROC __glewMap1f = NULL;
-void glMap1f(GLenum target,GLfloat u1,GLfloat u2,GLint stride,GLint order,const GLfloat *points){__glewMap1f(target,u1,u2,stride,order,points);}
-static PFNGLMAP2DPROC __glewMap2d = NULL;
-void glMap2d(GLenum target,GLdouble u1,GLdouble u2,GLint ustride,GLint uorder,GLdouble v1,GLdouble v2,GLint vstride,GLint vorder,const GLdouble *points){__glewMap2d(target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points);}
-static PFNGLMAP2FPROC __glewMap2f = NULL;
-void glMap2f(GLenum target,GLfloat u1,GLfloat u2,GLint ustride,GLint uorder,GLfloat v1,GLfloat v2,GLint vstride,GLint vorder,const GLfloat *points){__glewMap2f(target,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points);}
-static PFNGLMAPGRID1DPROC __glewMapGrid1d = NULL;
-void glMapGrid1d(GLint un,GLdouble u1,GLdouble u2){__glewMapGrid1d(un,u1,u2);}
-static PFNGLMAPGRID1FPROC __glewMapGrid1f = NULL;
-void glMapGrid1f(GLint un,GLfloat u1,GLfloat u2){__glewMapGrid1f(un,u1,u2);}
-static PFNGLMAPGRID2DPROC __glewMapGrid2d = NULL;
-void glMapGrid2d(GLint un,GLdouble u1,GLdouble u2,GLint vn,GLdouble v1,GLdouble v2){__glewMapGrid2d(un,u1,u2,vn,v1,v2);}
-static PFNGLMAPGRID2FPROC __glewMapGrid2f = NULL;
-void glMapGrid2f(GLint un,GLfloat u1,GLfloat u2,GLint vn,GLfloat v1,GLfloat v2){__glewMapGrid2f(un,u1,u2,vn,v1,v2);}
-static PFNGLMATERIALFPROC __glewMaterialf = NULL;
-void glMaterialf(GLenum face,GLenum pname,GLfloat param){__glewMaterialf(face,pname,param);}
-static PFNGLMATERIALFVPROC __glewMaterialfv = NULL;
-void glMaterialfv(GLenum face,GLenum pname,const GLfloat *params){__glewMaterialfv(face,pname,params);}
-static PFNGLMATERIALIPROC __glewMateriali = NULL;
-void glMateriali(GLenum face,GLenum pname,GLint param){__glewMateriali(face,pname,param);}
-static PFNGLMATERIALIVPROC __glewMaterialiv = NULL;
-void glMaterialiv(GLenum face,GLenum pname,const GLint *params){__glewMaterialiv(face,pname,params);}
-static PFNGLMATRIXMODEPROC __glewMatrixMode = NULL;
-void glMatrixMode(GLenum mode){__glewMatrixMode(mode);}
-static PFNGLMULTMATRIXDPROC __glewMultMatrixd = NULL;
-void glMultMatrixd(const GLdouble *m){__glewMultMatrixd(m);}
-static PFNGLMULTMATRIXFPROC __glewMultMatrixf = NULL;
-void glMultMatrixf(const GLfloat *m){__glewMultMatrixf(m);}
-static PFNGLNEWLISTPROC __glewNewList = NULL;
-void glNewList(GLuint list,GLenum mode){__glewNewList(list,mode);}
-static PFNGLNORMAL3BPROC __glewNormal3b = NULL;
-void glNormal3b(GLbyte nx,GLbyte ny,GLbyte nz){__glewNormal3b(nx,ny,nz);}
-static PFNGLNORMAL3BVPROC __glewNormal3bv = NULL;
-void glNormal3bv(const GLbyte *v){__glewNormal3bv(v);}
-static PFNGLNORMAL3DPROC __glewNormal3d = NULL;
-void glNormal3d(GLdouble nx,GLdouble ny,GLdouble nz){__glewNormal3d(nx,ny,nz);}
-static PFNGLNORMAL3DVPROC __glewNormal3dv = NULL;
-void glNormal3dv(const GLdouble *v){__glewNormal3dv(v);}
-static PFNGLNORMAL3FPROC __glewNormal3f = NULL;
-void glNormal3f(GLfloat nx,GLfloat ny,GLfloat nz){__glewNormal3f(nx,ny,nz);}
-static PFNGLNORMAL3FVPROC __glewNormal3fv = NULL;
-void glNormal3fv(const GLfloat *v){__glewNormal3fv(v);}
-static PFNGLNORMAL3IPROC __glewNormal3i = NULL;
-void glNormal3i(GLint nx,GLint ny,GLint nz){__glewNormal3i(nx,ny,nz);}
-static PFNGLNORMAL3IVPROC __glewNormal3iv = NULL;
-void glNormal3iv(const GLint *v){__glewNormal3iv(v);}
-static PFNGLNORMAL3SPROC __glewNormal3s = NULL;
-void glNormal3s(GLshort nx,GLshort ny,GLshort nz){__glewNormal3s(nx,ny,nz);}
-static PFNGLNORMAL3SVPROC __glewNormal3sv = NULL;
-void glNormal3sv(const GLshort *v){__glewNormal3sv(v);}
-static PFNGLNORMALPOINTERPROC __glewNormalPointer = NULL;
-void glNormalPointer(GLenum type,GLsizei stride,const GLvoid *pointer){__glewNormalPointer(type,stride,pointer);}
-static PFNGLORTHOPROC __glewOrtho = NULL;
-void glOrtho(GLdouble left,GLdouble right,GLdouble bottom,GLdouble top,GLdouble zNear,GLdouble zFar){__glewOrtho(left,right,bottom,top,zNear,zFar);}
-static PFNGLPASSTHROUGHPROC __glewPassThrough = NULL;
-void glPassThrough(GLfloat token){__glewPassThrough(token);}
-static PFNGLPIXELMAPFVPROC __glewPixelMapfv = NULL;
-void glPixelMapfv(GLenum map,GLsizei mapsize,const GLfloat *values){__glewPixelMapfv(map,mapsize,values);}
-static PFNGLPIXELMAPUIVPROC __glewPixelMapuiv = NULL;
-void glPixelMapuiv(GLenum map,GLsizei mapsize,const GLuint *values){__glewPixelMapuiv(map,mapsize,values);}
-static PFNGLPIXELMAPUSVPROC __glewPixelMapusv = NULL;
-void glPixelMapusv(GLenum map,GLsizei mapsize,const GLushort *values){__glewPixelMapusv(map,mapsize,values);}
-static PFNGLPIXELSTOREFPROC __glewPixelStoref = NULL;
-void glPixelStoref(GLenum pname,GLfloat param){__glewPixelStoref(pname,param);}
-static PFNGLPIXELSTOREIPROC __glewPixelStorei = NULL;
-void glPixelStorei(GLenum pname,GLint param){__glewPixelStorei(pname,param);}
-static PFNGLPIXELTRANSFERFPROC __glewPixelTransferf = NULL;
-void glPixelTransferf(GLenum pname,GLfloat param){__glewPixelTransferf(pname,param);}
-static PFNGLPIXELTRANSFERIPROC __glewPixelTransferi = NULL;
-void glPixelTransferi(GLenum pname,GLint param){__glewPixelTransferi(pname,param);}
-static PFNGLPIXELZOOMPROC __glewPixelZoom = NULL;
-void glPixelZoom(GLfloat xfactor,GLfloat yfactor){__glewPixelZoom(xfactor,yfactor);}
-static PFNGLPOINTSIZEPROC __glewPointSize = NULL;
-void glPointSize(GLfloat size){__glewPointSize(size);}
-static PFNGLPOLYGONMODEPROC __glewPolygonMode = NULL;
-void glPolygonMode(GLenum face,GLenum mode){__glewPolygonMode(face,mode);}
-static PFNGLPOLYGONOFFSETPROC __glewPolygonOffset = NULL;
-void glPolygonOffset(GLfloat factor,GLfloat units){__glewPolygonOffset(factor,units);}
-static PFNGLPOLYGONSTIPPLEPROC __glewPolygonStipple = NULL;
-void glPolygonStipple(const GLubyte *mask){__glewPolygonStipple(mask);}
-static PFNGLPOPATTRIBPROC __glewPopAttrib = NULL;
-void glPopAttrib(void){__glewPopAttrib();}
-static PFNGLPOPCLIENTATTRIBPROC __glewPopClientAttrib = NULL;
-void glPopClientAttrib(void){__glewPopClientAttrib();}
-static PFNGLPOPMATRIXPROC __glewPopMatrix = NULL;
-void glPopMatrix(void){__glewPopMatrix();}
-static PFNGLPOPNAMEPROC __glewPopName = NULL;
-void glPopName(void){__glewPopName();}
-static PFNGLPRIORITIZETEXTURESPROC __glewPrioritizeTextures = NULL;
-void glPrioritizeTextures(GLsizei n,const GLuint *textures,const GLclampf *priorities){__glewPrioritizeTextures(n,textures,priorities);}
-static PFNGLPUSHATTRIBPROC __glewPushAttrib = NULL;
-void glPushAttrib(GLbitfield mask){__glewPushAttrib(mask);}
-static PFNGLPUSHCLIENTATTRIBPROC __glewPushClientAttrib = NULL;
-void glPushClientAttrib(GLbitfield mask){__glewPushClientAttrib(mask);}
-static PFNGLPUSHMATRIXPROC __glewPushMatrix = NULL;
-void glPushMatrix(void){__glewPushMatrix();}
-static PFNGLPUSHNAMEPROC __glewPushName = NULL;
-void glPushName(GLuint name){__glewPushName(name);}
-static PFNGLRASTERPOS2DPROC __glewRasterPos2d = NULL;
-void glRasterPos2d(GLdouble x,GLdouble y){__glewRasterPos2d(x,y);}
-static PFNGLRASTERPOS2DVPROC __glewRasterPos2dv = NULL;
-void glRasterPos2dv(const GLdouble *v){__glewRasterPos2dv(v);}
-static PFNGLRASTERPOS2FPROC __glewRasterPos2f = NULL;
-void glRasterPos2f(GLfloat x,GLfloat y){__glewRasterPos2f(x,y);}
-static PFNGLRASTERPOS2FVPROC __glewRasterPos2fv = NULL;
-void glRasterPos2fv(const GLfloat *v){__glewRasterPos2fv(v);}
-static PFNGLRASTERPOS2IPROC __glewRasterPos2i = NULL;
-void glRasterPos2i(GLint x,GLint y){__glewRasterPos2i(x,y);}
-static PFNGLRASTERPOS2IVPROC __glewRasterPos2iv = NULL;
-void glRasterPos2iv(const GLint *v){__glewRasterPos2iv(v);}
-static PFNGLRASTERPOS2SPROC __glewRasterPos2s = NULL;
-void glRasterPos2s(GLshort x,GLshort y){__glewRasterPos2s(x,y);}
-static PFNGLRASTERPOS2SVPROC __glewRasterPos2sv = NULL;
-void glRasterPos2sv(const GLshort *v){__glewRasterPos2sv(v);}
-static PFNGLRASTERPOS3DPROC __glewRasterPos3d = NULL;
-void glRasterPos3d(GLdouble x,GLdouble y,GLdouble z){__glewRasterPos3d(x,y,z);}
-static PFNGLRASTERPOS3DVPROC __glewRasterPos3dv = NULL;
-void glRasterPos3dv(const GLdouble *v){__glewRasterPos3dv(v);}
-static PFNGLRASTERPOS3FPROC __glewRasterPos3f = NULL;
-void glRasterPos3f(GLfloat x,GLfloat y,GLfloat z){__glewRasterPos3f(x,y,z);}
-static PFNGLRASTERPOS3FVPROC __glewRasterPos3fv = NULL;
-void glRasterPos3fv(const GLfloat *v){__glewRasterPos3fv(v);}
-static PFNGLRASTERPOS3IPROC __glewRasterPos3i = NULL;
-void glRasterPos3i(GLint x,GLint y,GLint z){__glewRasterPos3i(x,y,z);}
-static PFNGLRASTERPOS3IVPROC __glewRasterPos3iv = NULL;
-void glRasterPos3iv(const GLint *v){__glewRasterPos3iv(v);}
-static PFNGLRASTERPOS3SPROC __glewRasterPos3s = NULL;
-void glRasterPos3s(GLshort x,GLshort y,GLshort z){__glewRasterPos3s(x,y,z);}
-static PFNGLRASTERPOS3SVPROC __glewRasterPos3sv = NULL;
-void glRasterPos3sv(const GLshort *v){__glewRasterPos3sv(v);}
-static PFNGLRASTERPOS4DPROC __glewRasterPos4d = NULL;
-void glRasterPos4d(GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewRasterPos4d(x,y,z,w);}
-static PFNGLRASTERPOS4DVPROC __glewRasterPos4dv = NULL;
-void glRasterPos4dv(const GLdouble *v){__glewRasterPos4dv(v);}
-static PFNGLRASTERPOS4FPROC __glewRasterPos4f = NULL;
-void glRasterPos4f(GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewRasterPos4f(x,y,z,w);}
-static PFNGLRASTERPOS4FVPROC __glewRasterPos4fv = NULL;
-void glRasterPos4fv(const GLfloat *v){__glewRasterPos4fv(v);}
-static PFNGLRASTERPOS4IPROC __glewRasterPos4i = NULL;
-void glRasterPos4i(GLint x,GLint y,GLint z,GLint w){__glewRasterPos4i(x,y,z,w);}
-static PFNGLRASTERPOS4IVPROC __glewRasterPos4iv = NULL;
-void glRasterPos4iv(const GLint *v){__glewRasterPos4iv(v);}
-static PFNGLRASTERPOS4SPROC __glewRasterPos4s = NULL;
-void glRasterPos4s(GLshort x,GLshort y,GLshort z,GLshort w){__glewRasterPos4s(x,y,z,w);}
-static PFNGLRASTERPOS4SVPROC __glewRasterPos4sv = NULL;
-void glRasterPos4sv(const GLshort *v){__glewRasterPos4sv(v);}
-static PFNGLREADBUFFERPROC __glewReadBuffer = NULL;
-void glReadBuffer(GLenum mode){__glewReadBuffer(mode);}
-static PFNGLREADPIXELSPROC __glewReadPixels = NULL;
-void glReadPixels(GLint x,GLint y,GLsizei width,GLsizei height,GLenum format,GLenum type,GLvoid *pixels){__glewReadPixels(x,y,width,height,format,type,pixels);}
-static PFNGLRECTDPROC __glewRectd = NULL;
-void glRectd(GLdouble x1,GLdouble y1,GLdouble x2,GLdouble y2){__glewRectd(x1,y1,x2,y2);}
-static PFNGLRECTDVPROC __glewRectdv = NULL;
-void glRectdv(const GLdouble *v1,const GLdouble *v2){__glewRectdv(v1,v2);}
-static PFNGLRECTFPROC __glewRectf = NULL;
-void glRectf(GLfloat x1,GLfloat y1,GLfloat x2,GLfloat y2){__glewRectf(x1,y1,x2,y2);}
-static PFNGLRECTFVPROC __glewRectfv = NULL;
-void glRectfv(const GLfloat *v1,const GLfloat *v2){__glewRectfv(v1,v2);}
-static PFNGLRECTIPROC __glewRecti = NULL;
-void glRecti(GLint x1,GLint y1,GLint x2,GLint y2){__glewRecti(x1,y1,x2,y2);}
-static PFNGLRECTIVPROC __glewRectiv = NULL;
-void glRectiv(const GLint *v1,const GLint *v2){__glewRectiv(v1,v2);}
-static PFNGLRECTSPROC __glewRects = NULL;
-void glRects(GLshort x1,GLshort y1,GLshort x2,GLshort y2){__glewRects(x1,y1,x2,y2);}
-static PFNGLRECTSVPROC __glewRectsv = NULL;
-void glRectsv(const GLshort *v1,const GLshort *v2){__glewRectsv(v1,v2);}
-static PFNGLRENDERMODEPROC __glewRenderMode = NULL;
-GLint glRenderMode(GLenum mode){return __glewRenderMode(mode);}
-static PFNGLROTATEDPROC __glewRotated = NULL;
-void glRotated(GLdouble angle,GLdouble x,GLdouble y,GLdouble z){__glewRotated(angle,x,y,z);}
-static PFNGLROTATEFPROC __glewRotatef = NULL;
-void glRotatef(GLfloat angle,GLfloat x,GLfloat y,GLfloat z){__glewRotatef(angle,x,y,z);}
-static PFNGLSCALEDPROC __glewScaled = NULL;
-void glScaled(GLdouble x,GLdouble y,GLdouble z){__glewScaled(x,y,z);}
-static PFNGLSCALEFPROC __glewScalef = NULL;
-void glScalef(GLfloat x,GLfloat y,GLfloat z){__glewScalef(x,y,z);}
-static PFNGLSCISSORPROC __glewScissor = NULL;
-void glScissor(GLint x,GLint y,GLsizei width,GLsizei height){__glewScissor(x,y,width,height);}
-static PFNGLSELECTBUFFERPROC __glewSelectBuffer = NULL;
-void glSelectBuffer(GLsizei size,GLuint *buffer){__glewSelectBuffer(size,buffer);}
-static PFNGLSHADEMODELPROC __glewShadeModel = NULL;
-void glShadeModel(GLenum mode){__glewShadeModel(mode);}
-static PFNGLSTENCILFUNCPROC __glewStencilFunc = NULL;
-void glStencilFunc(GLenum func,GLint ref,GLuint mask){__glewStencilFunc(func,ref,mask);}
-static PFNGLSTENCILMASKPROC __glewStencilMask = NULL;
-void glStencilMask(GLuint mask){__glewStencilMask(mask);}
-static PFNGLSTENCILOPPROC __glewStencilOp = NULL;
-void glStencilOp(GLenum fail,GLenum zfail,GLenum zpass){__glewStencilOp(fail,zfail,zpass);}
-static PFNGLTEXCOORD1DPROC __glewTexCoord1d = NULL;
-void glTexCoord1d(GLdouble s){__glewTexCoord1d(s);}
-static PFNGLTEXCOORD1DVPROC __glewTexCoord1dv = NULL;
-void glTexCoord1dv(const GLdouble *v){__glewTexCoord1dv(v);}
-static PFNGLTEXCOORD1FPROC __glewTexCoord1f = NULL;
-void glTexCoord1f(GLfloat s){__glewTexCoord1f(s);}
-static PFNGLTEXCOORD1FVPROC __glewTexCoord1fv = NULL;
-void glTexCoord1fv(const GLfloat *v){__glewTexCoord1fv(v);}
-static PFNGLTEXCOORD1IPROC __glewTexCoord1i = NULL;
-void glTexCoord1i(GLint s){__glewTexCoord1i(s);}
-static PFNGLTEXCOORD1IVPROC __glewTexCoord1iv = NULL;
-void glTexCoord1iv(const GLint *v){__glewTexCoord1iv(v);}
-static PFNGLTEXCOORD1SPROC __glewTexCoord1s = NULL;
-void glTexCoord1s(GLshort s){__glewTexCoord1s(s);}
-static PFNGLTEXCOORD1SVPROC __glewTexCoord1sv = NULL;
-void glTexCoord1sv(const GLshort *v){__glewTexCoord1sv(v);}
-static PFNGLTEXCOORD2DPROC __glewTexCoord2d = NULL;
-void glTexCoord2d(GLdouble s,GLdouble t){__glewTexCoord2d(s,t);}
-static PFNGLTEXCOORD2DVPROC __glewTexCoord2dv = NULL;
-void glTexCoord2dv(const GLdouble *v){__glewTexCoord2dv(v);}
-static PFNGLTEXCOORD2FPROC __glewTexCoord2f = NULL;
-void glTexCoord2f(GLfloat s,GLfloat t){__glewTexCoord2f(s,t);}
-static PFNGLTEXCOORD2FVPROC __glewTexCoord2fv = NULL;
-void glTexCoord2fv(const GLfloat *v){__glewTexCoord2fv(v);}
-static PFNGLTEXCOORD2IPROC __glewTexCoord2i = NULL;
-void glTexCoord2i(GLint s,GLint t){__glewTexCoord2i(s,t);}
-static PFNGLTEXCOORD2IVPROC __glewTexCoord2iv = NULL;
-void glTexCoord2iv(const GLint *v){__glewTexCoord2iv(v);}
-static PFNGLTEXCOORD2SPROC __glewTexCoord2s = NULL;
-void glTexCoord2s(GLshort s,GLshort t){__glewTexCoord2s(s,t);}
-static PFNGLTEXCOORD2SVPROC __glewTexCoord2sv = NULL;
-void glTexCoord2sv(const GLshort *v){__glewTexCoord2sv(v);}
-static PFNGLTEXCOORD3DPROC __glewTexCoord3d = NULL;
-void glTexCoord3d(GLdouble s,GLdouble t,GLdouble r){__glewTexCoord3d(s,t,r);}
-static PFNGLTEXCOORD3DVPROC __glewTexCoord3dv = NULL;
-void glTexCoord3dv(const GLdouble *v){__glewTexCoord3dv(v);}
-static PFNGLTEXCOORD3FPROC __glewTexCoord3f = NULL;
-void glTexCoord3f(GLfloat s,GLfloat t,GLfloat r){__glewTexCoord3f(s,t,r);}
-static PFNGLTEXCOORD3FVPROC __glewTexCoord3fv = NULL;
-void glTexCoord3fv(const GLfloat *v){__glewTexCoord3fv(v);}
-static PFNGLTEXCOORD3IPROC __glewTexCoord3i = NULL;
-void glTexCoord3i(GLint s,GLint t,GLint r){__glewTexCoord3i(s,t,r);}
-static PFNGLTEXCOORD3IVPROC __glewTexCoord3iv = NULL;
-void glTexCoord3iv(const GLint *v){__glewTexCoord3iv(v);}
-static PFNGLTEXCOORD3SPROC __glewTexCoord3s = NULL;
-void glTexCoord3s(GLshort s,GLshort t,GLshort r){__glewTexCoord3s(s,t,r);}
-static PFNGLTEXCOORD3SVPROC __glewTexCoord3sv = NULL;
-void glTexCoord3sv(const GLshort *v){__glewTexCoord3sv(v);}
-static PFNGLTEXCOORD4DPROC __glewTexCoord4d = NULL;
-void glTexCoord4d(GLdouble s,GLdouble t,GLdouble r,GLdouble q){__glewTexCoord4d(s,t,r,q);}
-static PFNGLTEXCOORD4DVPROC __glewTexCoord4dv = NULL;
-void glTexCoord4dv(const GLdouble *v){__glewTexCoord4dv(v);}
-static PFNGLTEXCOORD4FPROC __glewTexCoord4f = NULL;
-void glTexCoord4f(GLfloat s,GLfloat t,GLfloat r,GLfloat q){__glewTexCoord4f(s,t,r,q);}
-static PFNGLTEXCOORD4FVPROC __glewTexCoord4fv = NULL;
-void glTexCoord4fv(const GLfloat *v){__glewTexCoord4fv(v);}
-static PFNGLTEXCOORD4IPROC __glewTexCoord4i = NULL;
-void glTexCoord4i(GLint s,GLint t,GLint r,GLint q){__glewTexCoord4i(s,t,r,q);}
-static PFNGLTEXCOORD4IVPROC __glewTexCoord4iv = NULL;
-void glTexCoord4iv(const GLint *v){__glewTexCoord4iv(v);}
-static PFNGLTEXCOORD4SPROC __glewTexCoord4s = NULL;
-void glTexCoord4s(GLshort s,GLshort t,GLshort r,GLshort q){__glewTexCoord4s(s,t,r,q);}
-static PFNGLTEXCOORD4SVPROC __glewTexCoord4sv = NULL;
-void glTexCoord4sv(const GLshort *v){__glewTexCoord4sv(v);}
-static PFNGLTEXCOORDPOINTERPROC __glewTexCoordPointer = NULL;
-void glTexCoordPointer(GLint size,GLenum type,GLsizei stride,const GLvoid *pointer){__glewTexCoordPointer(size,type,stride,pointer);}
-static PFNGLTEXENVFPROC __glewTexEnvf = NULL;
-void glTexEnvf(GLenum target,GLenum pname,GLfloat param){__glewTexEnvf(target,pname,param);}
-static PFNGLTEXENVFVPROC __glewTexEnvfv = NULL;
-void glTexEnvfv(GLenum target,GLenum pname,const GLfloat *params){__glewTexEnvfv(target,pname,params);}
-static PFNGLTEXENVIPROC __glewTexEnvi = NULL;
-void glTexEnvi(GLenum target,GLenum pname,GLint param){__glewTexEnvi(target,pname,param);}
-static PFNGLTEXENVIVPROC __glewTexEnviv = NULL;
-void glTexEnviv(GLenum target,GLenum pname,const GLint *params){__glewTexEnviv(target,pname,params);}
-static PFNGLTEXGENDPROC __glewTexGend = NULL;
-void glTexGend(GLenum coord,GLenum pname,GLdouble param){__glewTexGend(coord,pname,param);}
-static PFNGLTEXGENDVPROC __glewTexGendv = NULL;
-void glTexGendv(GLenum coord,GLenum pname,const GLdouble *params){__glewTexGendv(coord,pname,params);}
-static PFNGLTEXGENFPROC __glewTexGenf = NULL;
-void glTexGenf(GLenum coord,GLenum pname,GLfloat param){__glewTexGenf(coord,pname,param);}
-static PFNGLTEXGENFVPROC __glewTexGenfv = NULL;
-void glTexGenfv(GLenum coord,GLenum pname,const GLfloat *params){__glewTexGenfv(coord,pname,params);}
-static PFNGLTEXGENIPROC __glewTexGeni = NULL;
-void glTexGeni(GLenum coord,GLenum pname,GLint param){__glewTexGeni(coord,pname,param);}
-static PFNGLTEXGENIVPROC __glewTexGeniv = NULL;
-void glTexGeniv(GLenum coord,GLenum pname,const GLint *params){__glewTexGeniv(coord,pname,params);}
-static PFNGLTEXIMAGE1DPROC __glewTexImage1D = NULL;
-void glTexImage1D(GLenum target,GLint level,GLint internalformat,GLsizei width,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewTexImage1D(target,level,internalformat,width,border,format,type,pixels);}
-static PFNGLTEXIMAGE2DPROC __glewTexImage2D = NULL;
-void glTexImage2D(GLenum target,GLint level,GLint internalformat,GLsizei width,GLsizei height,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewTexImage2D(target,level,internalformat,width,height,border,format,type,pixels);}
-static PFNGLTEXPARAMETERFPROC __glewTexParameterf = NULL;
-void glTexParameterf(GLenum target,GLenum pname,GLfloat param){__glewTexParameterf(target,pname,param);}
-static PFNGLTEXPARAMETERFVPROC __glewTexParameterfv = NULL;
-void glTexParameterfv(GLenum target,GLenum pname,const GLfloat *params){__glewTexParameterfv(target,pname,params);}
-static PFNGLTEXPARAMETERIPROC __glewTexParameteri = NULL;
-void glTexParameteri(GLenum target,GLenum pname,GLint param){__glewTexParameteri(target,pname,param);}
-static PFNGLTEXPARAMETERIVPROC __glewTexParameteriv = NULL;
-void glTexParameteriv(GLenum target,GLenum pname,const GLint *params){__glewTexParameteriv(target,pname,params);}
-static PFNGLTEXSUBIMAGE1DPROC __glewTexSubImage1D = NULL;
-void glTexSubImage1D(GLenum target,GLint level,GLint xoffset,GLsizei width,GLenum format,GLenum type,const GLvoid *pixels){__glewTexSubImage1D(target,level,xoffset,width,format,type,pixels);}
-static PFNGLTEXSUBIMAGE2DPROC __glewTexSubImage2D = NULL;
-void glTexSubImage2D(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLsizei width,GLsizei height,GLenum format,GLenum type,const GLvoid *pixels){__glewTexSubImage2D(target,level,xoffset,yoffset,width,height,format,type,pixels);}
-static PFNGLTRANSLATEDPROC __glewTranslated = NULL;
-void glTranslated(GLdouble x,GLdouble y,GLdouble z){__glewTranslated(x,y,z);}
-static PFNGLTRANSLATEFPROC __glewTranslatef = NULL;
-void glTranslatef(GLfloat x,GLfloat y,GLfloat z){__glewTranslatef(x,y,z);}
-static PFNGLVERTEX2DPROC __glewVertex2d = NULL;
-void glVertex2d(GLdouble x,GLdouble y){__glewVertex2d(x,y);}
-static PFNGLVERTEX2DVPROC __glewVertex2dv = NULL;
-void glVertex2dv(const GLdouble *v){__glewVertex2dv(v);}
-static PFNGLVERTEX2FPROC __glewVertex2f = NULL;
-void glVertex2f(GLfloat x,GLfloat y){__glewVertex2f(x,y);}
-static PFNGLVERTEX2FVPROC __glewVertex2fv = NULL;
-void glVertex2fv(const GLfloat *v){__glewVertex2fv(v);}
-static PFNGLVERTEX2IPROC __glewVertex2i = NULL;
-void glVertex2i(GLint x,GLint y){__glewVertex2i(x,y);}
-static PFNGLVERTEX2IVPROC __glewVertex2iv = NULL;
-void glVertex2iv(const GLint *v){__glewVertex2iv(v);}
-static PFNGLVERTEX2SPROC __glewVertex2s = NULL;
-void glVertex2s(GLshort x,GLshort y){__glewVertex2s(x,y);}
-static PFNGLVERTEX2SVPROC __glewVertex2sv = NULL;
-void glVertex2sv(const GLshort *v){__glewVertex2sv(v);}
-static PFNGLVERTEX3DPROC __glewVertex3d = NULL;
-void glVertex3d(GLdouble x,GLdouble y,GLdouble z){__glewVertex3d(x,y,z);}
-static PFNGLVERTEX3DVPROC __glewVertex3dv = NULL;
-void glVertex3dv(const GLdouble *v){__glewVertex3dv(v);}
-static PFNGLVERTEX3FPROC __glewVertex3f = NULL;
-void glVertex3f(GLfloat x,GLfloat y,GLfloat z){__glewVertex3f(x,y,z);}
-static PFNGLVERTEX3FVPROC __glewVertex3fv = NULL;
-void glVertex3fv(const GLfloat *v){__glewVertex3fv(v);}
-static PFNGLVERTEX3IPROC __glewVertex3i = NULL;
-void glVertex3i(GLint x,GLint y,GLint z){__glewVertex3i(x,y,z);}
-static PFNGLVERTEX3IVPROC __glewVertex3iv = NULL;
-void glVertex3iv(const GLint *v){__glewVertex3iv(v);}
-static PFNGLVERTEX3SPROC __glewVertex3s = NULL;
-void glVertex3s(GLshort x,GLshort y,GLshort z){__glewVertex3s(x,y,z);}
-static PFNGLVERTEX3SVPROC __glewVertex3sv = NULL;
-void glVertex3sv(const GLshort *v){__glewVertex3sv(v);}
-static PFNGLVERTEX4DPROC __glewVertex4d = NULL;
-void glVertex4d(GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewVertex4d(x,y,z,w);}
-static PFNGLVERTEX4DVPROC __glewVertex4dv = NULL;
-void glVertex4dv(const GLdouble *v){__glewVertex4dv(v);}
-static PFNGLVERTEX4FPROC __glewVertex4f = NULL;
-void glVertex4f(GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewVertex4f(x,y,z,w);}
-static PFNGLVERTEX4FVPROC __glewVertex4fv = NULL;
-void glVertex4fv(const GLfloat *v){__glewVertex4fv(v);}
-static PFNGLVERTEX4IPROC __glewVertex4i = NULL;
-void glVertex4i(GLint x,GLint y,GLint z,GLint w){__glewVertex4i(x,y,z,w);}
-static PFNGLVERTEX4IVPROC __glewVertex4iv = NULL;
-void glVertex4iv(const GLint *v){__glewVertex4iv(v);}
-static PFNGLVERTEX4SPROC __glewVertex4s = NULL;
-void glVertex4s(GLshort x,GLshort y,GLshort z,GLshort w){__glewVertex4s(x,y,z,w);}
-static PFNGLVERTEX4SVPROC __glewVertex4sv = NULL;
-void glVertex4sv(const GLshort *v){__glewVertex4sv(v);}
-static PFNGLVERTEXPOINTERPROC __glewVertexPointer = NULL;
-void glVertexPointer(GLint size,GLenum type,GLsizei stride,const GLvoid *pointer){__glewVertexPointer(size,type,stride,pointer);}
-static PFNGLVIEWPORTPROC __glewViewport = NULL;
-void glViewport(GLint x,GLint y,GLsizei width,GLsizei height){__glewViewport(x,y,width,height);}
-
-static PFNGLCOPYTEXSUBIMAGE3DPROC __glewCopyTexSubImage3D = NULL;
-void glCopyTexSubImage3D(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyTexSubImage3D(target,level,xoffset,yoffset,zoffset,x,y,width,height);}
-static PFNGLDRAWRANGEELEMENTSPROC __glewDrawRangeElements = NULL;
-void glDrawRangeElements(GLenum mode,GLuint start,GLuint end,GLsizei count,GLenum type,const GLvoid *indices){__glewDrawRangeElements(mode,start,end,count,type,indices);}
-static PFNGLTEXIMAGE3DPROC __glewTexImage3D = NULL;
-void glTexImage3D(GLenum target,GLint level,GLint internalFormat,GLsizei width,GLsizei height,GLsizei depth,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewTexImage3D(target,level,internalFormat,width,height,depth,border,format,type,pixels);}
-static PFNGLTEXSUBIMAGE3DPROC __glewTexSubImage3D = NULL;
-void glTexSubImage3D(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLenum format,GLenum type,const GLvoid *pixels){__glewTexSubImage3D(target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels);}
-
-static PFNGLACTIVETEXTUREPROC __glewActiveTexture = NULL;
-void glActiveTexture(GLenum texture){__glewActiveTexture(texture);}
-static PFNGLCLIENTACTIVETEXTUREPROC __glewClientActiveTexture = NULL;
-void glClientActiveTexture(GLenum texture){__glewClientActiveTexture(texture);}
-static PFNGLCOMPRESSEDTEXIMAGE1DPROC __glewCompressedTexImage1D = NULL;
-void glCompressedTexImage1D(GLenum target,GLint level,GLenum internalformat,GLsizei width,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedTexImage1D(target,level,internalformat,width,border,imageSize,data);}
-static PFNGLCOMPRESSEDTEXIMAGE2DPROC __glewCompressedTexImage2D = NULL;
-void glCompressedTexImage2D(GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedTexImage2D(target,level,internalformat,width,height,border,imageSize,data);}
-static PFNGLCOMPRESSEDTEXIMAGE3DPROC __glewCompressedTexImage3D = NULL;
-void glCompressedTexImage3D(GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedTexImage3D(target,level,internalformat,width,height,depth,border,imageSize,data);}
-static PFNGLCOMPRESSEDTEXSUBIMAGE1DPROC __glewCompressedTexSubImage1D = NULL;
-void glCompressedTexSubImage1D(GLenum target,GLint level,GLint xoffset,GLsizei width,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedTexSubImage1D(target,level,xoffset,width,format,imageSize,data);}
-static PFNGLCOMPRESSEDTEXSUBIMAGE2DPROC __glewCompressedTexSubImage2D = NULL;
-void glCompressedTexSubImage2D(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLsizei width,GLsizei height,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedTexSubImage2D(target,level,xoffset,yoffset,width,height,format,imageSize,data);}
-static PFNGLCOMPRESSEDTEXSUBIMAGE3DPROC __glewCompressedTexSubImage3D = NULL;
-void glCompressedTexSubImage3D(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedTexSubImage3D(target,level,xoffset,yoffset,zoffset,width,height,depth,format,imageSize,data);}
-static PFNGLGETCOMPRESSEDTEXIMAGEPROC __glewGetCompressedTexImage = NULL;
-void glGetCompressedTexImage(GLenum target,GLint lod,GLvoid *img){__glewGetCompressedTexImage(target,lod,img);}
-static PFNGLLOADTRANSPOSEMATRIXDPROC __glewLoadTransposeMatrixd = NULL;
-void glLoadTransposeMatrixd(const GLdouble m[16]){__glewLoadTransposeMatrixd(m);}
-static PFNGLLOADTRANSPOSEMATRIXFPROC __glewLoadTransposeMatrixf = NULL;
-void glLoadTransposeMatrixf(const GLfloat m[16]){__glewLoadTransposeMatrixf(m);}
-static PFNGLMULTTRANSPOSEMATRIXDPROC __glewMultTransposeMatrixd = NULL;
-void glMultTransposeMatrixd(const GLdouble m[16]){__glewMultTransposeMatrixd(m);}
-static PFNGLMULTTRANSPOSEMATRIXFPROC __glewMultTransposeMatrixf = NULL;
-void glMultTransposeMatrixf(const GLfloat m[16]){__glewMultTransposeMatrixf(m);}
-static PFNGLMULTITEXCOORD1DPROC __glewMultiTexCoord1d = NULL;
-void glMultiTexCoord1d(GLenum target,GLdouble s){__glewMultiTexCoord1d(target,s);}
-static PFNGLMULTITEXCOORD1DVPROC __glewMultiTexCoord1dv = NULL;
-void glMultiTexCoord1dv(GLenum target,const GLdouble *v){__glewMultiTexCoord1dv(target,v);}
-static PFNGLMULTITEXCOORD1FPROC __glewMultiTexCoord1f = NULL;
-void glMultiTexCoord1f(GLenum target,GLfloat s){__glewMultiTexCoord1f(target,s);}
-static PFNGLMULTITEXCOORD1FVPROC __glewMultiTexCoord1fv = NULL;
-void glMultiTexCoord1fv(GLenum target,const GLfloat *v){__glewMultiTexCoord1fv(target,v);}
-static PFNGLMULTITEXCOORD1IPROC __glewMultiTexCoord1i = NULL;
-void glMultiTexCoord1i(GLenum target,GLint s){__glewMultiTexCoord1i(target,s);}
-static PFNGLMULTITEXCOORD1IVPROC __glewMultiTexCoord1iv = NULL;
-void glMultiTexCoord1iv(GLenum target,const GLint *v){__glewMultiTexCoord1iv(target,v);}
-static PFNGLMULTITEXCOORD1SPROC __glewMultiTexCoord1s = NULL;
-void glMultiTexCoord1s(GLenum target,GLshort s){__glewMultiTexCoord1s(target,s);}
-static PFNGLMULTITEXCOORD1SVPROC __glewMultiTexCoord1sv = NULL;
-void glMultiTexCoord1sv(GLenum target,const GLshort *v){__glewMultiTexCoord1sv(target,v);}
-static PFNGLMULTITEXCOORD2DPROC __glewMultiTexCoord2d = NULL;
-void glMultiTexCoord2d(GLenum target,GLdouble s,GLdouble t){__glewMultiTexCoord2d(target,s,t);}
-static PFNGLMULTITEXCOORD2DVPROC __glewMultiTexCoord2dv = NULL;
-void glMultiTexCoord2dv(GLenum target,const GLdouble *v){__glewMultiTexCoord2dv(target,v);}
-static PFNGLMULTITEXCOORD2FPROC __glewMultiTexCoord2f = NULL;
-void glMultiTexCoord2f(GLenum target,GLfloat s,GLfloat t){__glewMultiTexCoord2f(target,s,t);}
-static PFNGLMULTITEXCOORD2FVPROC __glewMultiTexCoord2fv = NULL;
-void glMultiTexCoord2fv(GLenum target,const GLfloat *v){__glewMultiTexCoord2fv(target,v);}
-static PFNGLMULTITEXCOORD2IPROC __glewMultiTexCoord2i = NULL;
-void glMultiTexCoord2i(GLenum target,GLint s,GLint t){__glewMultiTexCoord2i(target,s,t);}
-static PFNGLMULTITEXCOORD2IVPROC __glewMultiTexCoord2iv = NULL;
-void glMultiTexCoord2iv(GLenum target,const GLint *v){__glewMultiTexCoord2iv(target,v);}
-static PFNGLMULTITEXCOORD2SPROC __glewMultiTexCoord2s = NULL;
-void glMultiTexCoord2s(GLenum target,GLshort s,GLshort t){__glewMultiTexCoord2s(target,s,t);}
-static PFNGLMULTITEXCOORD2SVPROC __glewMultiTexCoord2sv = NULL;
-void glMultiTexCoord2sv(GLenum target,const GLshort *v){__glewMultiTexCoord2sv(target,v);}
-static PFNGLMULTITEXCOORD3DPROC __glewMultiTexCoord3d = NULL;
-void glMultiTexCoord3d(GLenum target,GLdouble s,GLdouble t,GLdouble r){__glewMultiTexCoord3d(target,s,t,r);}
-static PFNGLMULTITEXCOORD3DVPROC __glewMultiTexCoord3dv = NULL;
-void glMultiTexCoord3dv(GLenum target,const GLdouble *v){__glewMultiTexCoord3dv(target,v);}
-static PFNGLMULTITEXCOORD3FPROC __glewMultiTexCoord3f = NULL;
-void glMultiTexCoord3f(GLenum target,GLfloat s,GLfloat t,GLfloat r){__glewMultiTexCoord3f(target,s,t,r);}
-static PFNGLMULTITEXCOORD3FVPROC __glewMultiTexCoord3fv = NULL;
-void glMultiTexCoord3fv(GLenum target,const GLfloat *v){__glewMultiTexCoord3fv(target,v);}
-static PFNGLMULTITEXCOORD3IPROC __glewMultiTexCoord3i = NULL;
-void glMultiTexCoord3i(GLenum target,GLint s,GLint t,GLint r){__glewMultiTexCoord3i(target,s,t,r);}
-static PFNGLMULTITEXCOORD3IVPROC __glewMultiTexCoord3iv = NULL;
-void glMultiTexCoord3iv(GLenum target,const GLint *v){__glewMultiTexCoord3iv(target,v);}
-static PFNGLMULTITEXCOORD3SPROC __glewMultiTexCoord3s = NULL;
-void glMultiTexCoord3s(GLenum target,GLshort s,GLshort t,GLshort r){__glewMultiTexCoord3s(target,s,t,r);}
-static PFNGLMULTITEXCOORD3SVPROC __glewMultiTexCoord3sv = NULL;
-void glMultiTexCoord3sv(GLenum target,const GLshort *v){__glewMultiTexCoord3sv(target,v);}
-static PFNGLMULTITEXCOORD4DPROC __glewMultiTexCoord4d = NULL;
-void glMultiTexCoord4d(GLenum target,GLdouble s,GLdouble t,GLdouble r,GLdouble q){__glewMultiTexCoord4d(target,s,t,r,q);}
-static PFNGLMULTITEXCOORD4DVPROC __glewMultiTexCoord4dv = NULL;
-void glMultiTexCoord4dv(GLenum target,const GLdouble *v){__glewMultiTexCoord4dv(target,v);}
-static PFNGLMULTITEXCOORD4FPROC __glewMultiTexCoord4f = NULL;
-void glMultiTexCoord4f(GLenum target,GLfloat s,GLfloat t,GLfloat r,GLfloat q){__glewMultiTexCoord4f(target,s,t,r,q);}
-static PFNGLMULTITEXCOORD4FVPROC __glewMultiTexCoord4fv = NULL;
-void glMultiTexCoord4fv(GLenum target,const GLfloat *v){__glewMultiTexCoord4fv(target,v);}
-static PFNGLMULTITEXCOORD4IPROC __glewMultiTexCoord4i = NULL;
-void glMultiTexCoord4i(GLenum target,GLint s,GLint t,GLint r,GLint q){__glewMultiTexCoord4i(target,s,t,r,q);}
-static PFNGLMULTITEXCOORD4IVPROC __glewMultiTexCoord4iv = NULL;
-void glMultiTexCoord4iv(GLenum target,const GLint *v){__glewMultiTexCoord4iv(target,v);}
-static PFNGLMULTITEXCOORD4SPROC __glewMultiTexCoord4s = NULL;
-void glMultiTexCoord4s(GLenum target,GLshort s,GLshort t,GLshort r,GLshort q){__glewMultiTexCoord4s(target,s,t,r,q);}
-static PFNGLMULTITEXCOORD4SVPROC __glewMultiTexCoord4sv = NULL;
-void glMultiTexCoord4sv(GLenum target,const GLshort *v){__glewMultiTexCoord4sv(target,v);}
-static PFNGLSAMPLECOVERAGEPROC __glewSampleCoverage = NULL;
-void glSampleCoverage(GLclampf value,GLboolean invert){__glewSampleCoverage(value,invert);}
-
-static PFNGLBLENDCOLORPROC __glewBlendColor = NULL;
-void glBlendColor(GLclampf red,GLclampf green,GLclampf blue,GLclampf alpha){__glewBlendColor(red,green,blue,alpha);}
-static PFNGLBLENDEQUATIONPROC __glewBlendEquation = NULL;
-void glBlendEquation(GLenum mode){__glewBlendEquation(mode);}
-static PFNGLBLENDFUNCSEPARATEPROC __glewBlendFuncSeparate = NULL;
-void glBlendFuncSeparate(GLenum sfactorRGB,GLenum dfactorRGB,GLenum sfactorAlpha,GLenum dfactorAlpha){__glewBlendFuncSeparate(sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha);}
-static PFNGLFOGCOORDPOINTERPROC __glewFogCoordPointer = NULL;
-void glFogCoordPointer(GLenum type,GLsizei stride,const GLvoid *pointer){__glewFogCoordPointer(type,stride,pointer);}
-static PFNGLFOGCOORDDPROC __glewFogCoordd = NULL;
-void glFogCoordd(GLdouble coord){__glewFogCoordd(coord);}
-static PFNGLFOGCOORDDVPROC __glewFogCoorddv = NULL;
-void glFogCoorddv(const GLdouble *coord){__glewFogCoorddv(coord);}
-static PFNGLFOGCOORDFPROC __glewFogCoordf = NULL;
-void glFogCoordf(GLfloat coord){__glewFogCoordf(coord);}
-static PFNGLFOGCOORDFVPROC __glewFogCoordfv = NULL;
-void glFogCoordfv(const GLfloat *coord){__glewFogCoordfv(coord);}
-static PFNGLMULTIDRAWARRAYSPROC __glewMultiDrawArrays = NULL;
-void glMultiDrawArrays(GLenum mode,const GLint *first,const GLsizei *count,GLsizei drawcount){__glewMultiDrawArrays(mode,first,count,drawcount);}
-static PFNGLMULTIDRAWELEMENTSPROC __glewMultiDrawElements = NULL;
-void glMultiDrawElements(GLenum mode,const GLsizei *count,GLenum type,const GLvoid **indices,GLsizei drawcount){__glewMultiDrawElements(mode,count,type,indices,drawcount);}
-static PFNGLPOINTPARAMETERFPROC __glewPointParameterf = NULL;
-void glPointParameterf(GLenum pname,GLfloat param){__glewPointParameterf(pname,param);}
-static PFNGLPOINTPARAMETERFVPROC __glewPointParameterfv = NULL;
-void glPointParameterfv(GLenum pname,const GLfloat *params){__glewPointParameterfv(pname,params);}
-static PFNGLPOINTPARAMETERIPROC __glewPointParameteri = NULL;
-void glPointParameteri(GLenum pname,GLint param){__glewPointParameteri(pname,param);}
-static PFNGLPOINTPARAMETERIVPROC __glewPointParameteriv = NULL;
-void glPointParameteriv(GLenum pname,const GLint *params){__glewPointParameteriv(pname,params);}
-static PFNGLSECONDARYCOLOR3BPROC __glewSecondaryColor3b = NULL;
-void glSecondaryColor3b(GLbyte red,GLbyte green,GLbyte blue){__glewSecondaryColor3b(red,green,blue);}
-static PFNGLSECONDARYCOLOR3BVPROC __glewSecondaryColor3bv = NULL;
-void glSecondaryColor3bv(const GLbyte *v){__glewSecondaryColor3bv(v);}
-static PFNGLSECONDARYCOLOR3DPROC __glewSecondaryColor3d = NULL;
-void glSecondaryColor3d(GLdouble red,GLdouble green,GLdouble blue){__glewSecondaryColor3d(red,green,blue);}
-static PFNGLSECONDARYCOLOR3DVPROC __glewSecondaryColor3dv = NULL;
-void glSecondaryColor3dv(const GLdouble *v){__glewSecondaryColor3dv(v);}
-static PFNGLSECONDARYCOLOR3FPROC __glewSecondaryColor3f = NULL;
-void glSecondaryColor3f(GLfloat red,GLfloat green,GLfloat blue){__glewSecondaryColor3f(red,green,blue);}
-static PFNGLSECONDARYCOLOR3FVPROC __glewSecondaryColor3fv = NULL;
-void glSecondaryColor3fv(const GLfloat *v){__glewSecondaryColor3fv(v);}
-static PFNGLSECONDARYCOLOR3IPROC __glewSecondaryColor3i = NULL;
-void glSecondaryColor3i(GLint red,GLint green,GLint blue){__glewSecondaryColor3i(red,green,blue);}
-static PFNGLSECONDARYCOLOR3IVPROC __glewSecondaryColor3iv = NULL;
-void glSecondaryColor3iv(const GLint *v){__glewSecondaryColor3iv(v);}
-static PFNGLSECONDARYCOLOR3SPROC __glewSecondaryColor3s = NULL;
-void glSecondaryColor3s(GLshort red,GLshort green,GLshort blue){__glewSecondaryColor3s(red,green,blue);}
-static PFNGLSECONDARYCOLOR3SVPROC __glewSecondaryColor3sv = NULL;
-void glSecondaryColor3sv(const GLshort *v){__glewSecondaryColor3sv(v);}
-static PFNGLSECONDARYCOLOR3UBPROC __glewSecondaryColor3ub = NULL;
-void glSecondaryColor3ub(GLubyte red,GLubyte green,GLubyte blue){__glewSecondaryColor3ub(red,green,blue);}
-static PFNGLSECONDARYCOLOR3UBVPROC __glewSecondaryColor3ubv = NULL;
-void glSecondaryColor3ubv(const GLubyte *v){__glewSecondaryColor3ubv(v);}
-static PFNGLSECONDARYCOLOR3UIPROC __glewSecondaryColor3ui = NULL;
-void glSecondaryColor3ui(GLuint red,GLuint green,GLuint blue){__glewSecondaryColor3ui(red,green,blue);}
-static PFNGLSECONDARYCOLOR3UIVPROC __glewSecondaryColor3uiv = NULL;
-void glSecondaryColor3uiv(const GLuint *v){__glewSecondaryColor3uiv(v);}
-static PFNGLSECONDARYCOLOR3USPROC __glewSecondaryColor3us = NULL;
-void glSecondaryColor3us(GLushort red,GLushort green,GLushort blue){__glewSecondaryColor3us(red,green,blue);}
-static PFNGLSECONDARYCOLOR3USVPROC __glewSecondaryColor3usv = NULL;
-void glSecondaryColor3usv(const GLushort *v){__glewSecondaryColor3usv(v);}
-static PFNGLSECONDARYCOLORPOINTERPROC __glewSecondaryColorPointer = NULL;
-void glSecondaryColorPointer(GLint size,GLenum type,GLsizei stride,const GLvoid *pointer){__glewSecondaryColorPointer(size,type,stride,pointer);}
-static PFNGLWINDOWPOS2DPROC __glewWindowPos2d = NULL;
-void glWindowPos2d(GLdouble x,GLdouble y){__glewWindowPos2d(x,y);}
-static PFNGLWINDOWPOS2DVPROC __glewWindowPos2dv = NULL;
-void glWindowPos2dv(const GLdouble *p){__glewWindowPos2dv(p);}
-static PFNGLWINDOWPOS2FPROC __glewWindowPos2f = NULL;
-void glWindowPos2f(GLfloat x,GLfloat y){__glewWindowPos2f(x,y);}
-static PFNGLWINDOWPOS2FVPROC __glewWindowPos2fv = NULL;
-void glWindowPos2fv(const GLfloat *p){__glewWindowPos2fv(p);}
-static PFNGLWINDOWPOS2IPROC __glewWindowPos2i = NULL;
-void glWindowPos2i(GLint x,GLint y){__glewWindowPos2i(x,y);}
-static PFNGLWINDOWPOS2IVPROC __glewWindowPos2iv = NULL;
-void glWindowPos2iv(const GLint *p){__glewWindowPos2iv(p);}
-static PFNGLWINDOWPOS2SPROC __glewWindowPos2s = NULL;
-void glWindowPos2s(GLshort x,GLshort y){__glewWindowPos2s(x,y);}
-static PFNGLWINDOWPOS2SVPROC __glewWindowPos2sv = NULL;
-void glWindowPos2sv(const GLshort *p){__glewWindowPos2sv(p);}
-static PFNGLWINDOWPOS3DPROC __glewWindowPos3d = NULL;
-void glWindowPos3d(GLdouble x,GLdouble y,GLdouble z){__glewWindowPos3d(x,y,z);}
-static PFNGLWINDOWPOS3DVPROC __glewWindowPos3dv = NULL;
-void glWindowPos3dv(const GLdouble *p){__glewWindowPos3dv(p);}
-static PFNGLWINDOWPOS3FPROC __glewWindowPos3f = NULL;
-void glWindowPos3f(GLfloat x,GLfloat y,GLfloat z){__glewWindowPos3f(x,y,z);}
-static PFNGLWINDOWPOS3FVPROC __glewWindowPos3fv = NULL;
-void glWindowPos3fv(const GLfloat *p){__glewWindowPos3fv(p);}
-static PFNGLWINDOWPOS3IPROC __glewWindowPos3i = NULL;
-void glWindowPos3i(GLint x,GLint y,GLint z){__glewWindowPos3i(x,y,z);}
-static PFNGLWINDOWPOS3IVPROC __glewWindowPos3iv = NULL;
-void glWindowPos3iv(const GLint *p){__glewWindowPos3iv(p);}
-static PFNGLWINDOWPOS3SPROC __glewWindowPos3s = NULL;
-void glWindowPos3s(GLshort x,GLshort y,GLshort z){__glewWindowPos3s(x,y,z);}
-static PFNGLWINDOWPOS3SVPROC __glewWindowPos3sv = NULL;
-void glWindowPos3sv(const GLshort *p){__glewWindowPos3sv(p);}
-
-static PFNGLBEGINQUERYPROC __glewBeginQuery = NULL;
-void glBeginQuery(GLenum target,GLuint id){__glewBeginQuery(target,id);}
-static PFNGLBINDBUFFERPROC __glewBindBuffer = NULL;
-void glBindBuffer(GLenum target,GLuint buffer){__glewBindBuffer(target,buffer);}
-static PFNGLBUFFERDATAPROC __glewBufferData = NULL;
-void glBufferData(GLenum target,GLsizeiptr size,const GLvoid* data,GLenum usage){__glewBufferData(target,size,data,usage);}
-static PFNGLBUFFERSUBDATAPROC __glewBufferSubData = NULL;
-void glBufferSubData(GLenum target,GLintptr offset,GLsizeiptr size,const GLvoid* data){__glewBufferSubData(target,offset,size,data);}
-static PFNGLDELETEBUFFERSPROC __glewDeleteBuffers = NULL;
-void glDeleteBuffers(GLsizei n,const GLuint* buffers){__glewDeleteBuffers(n,buffers);}
-static PFNGLDELETEQUERIESPROC __glewDeleteQueries = NULL;
-void glDeleteQueries(GLsizei n,const GLuint* ids){__glewDeleteQueries(n,ids);}
-static PFNGLENDQUERYPROC __glewEndQuery = NULL;
-void glEndQuery(GLenum target){__glewEndQuery(target);}
-static PFNGLGENBUFFERSPROC __glewGenBuffers = NULL;
-void glGenBuffers(GLsizei n,GLuint* buffers){__glewGenBuffers(n,buffers);}
-static PFNGLGENQUERIESPROC __glewGenQueries = NULL;
-void glGenQueries(GLsizei n,GLuint* ids){__glewGenQueries(n,ids);}
-static PFNGLGETBUFFERPARAMETERIVPROC __glewGetBufferParameteriv = NULL;
-void glGetBufferParameteriv(GLenum target,GLenum pname,GLint* params){__glewGetBufferParameteriv(target,pname,params);}
-static PFNGLGETBUFFERPOINTERVPROC __glewGetBufferPointerv = NULL;
-void glGetBufferPointerv(GLenum target,GLenum pname,GLvoid** params){__glewGetBufferPointerv(target,pname,params);}
-static PFNGLGETBUFFERSUBDATAPROC __glewGetBufferSubData = NULL;
-void glGetBufferSubData(GLenum target,GLintptr offset,GLsizeiptr size,GLvoid* data){__glewGetBufferSubData(target,offset,size,data);}
-static PFNGLGETQUERYOBJECTIVPROC __glewGetQueryObjectiv = NULL;
-void glGetQueryObjectiv(GLuint id,GLenum pname,GLint* params){__glewGetQueryObjectiv(id,pname,params);}
-static PFNGLGETQUERYOBJECTUIVPROC __glewGetQueryObjectuiv = NULL;
-void glGetQueryObjectuiv(GLuint id,GLenum pname,GLuint* params){__glewGetQueryObjectuiv(id,pname,params);}
-static PFNGLGETQUERYIVPROC __glewGetQueryiv = NULL;
-void glGetQueryiv(GLenum target,GLenum pname,GLint* params){__glewGetQueryiv(target,pname,params);}
-static PFNGLISBUFFERPROC __glewIsBuffer = NULL;
-GLboolean glIsBuffer(GLuint buffer){return __glewIsBuffer(buffer);}
-static PFNGLISQUERYPROC __glewIsQuery = NULL;
-GLboolean glIsQuery(GLuint id){return __glewIsQuery(id);}
-static PFNGLMAPBUFFERPROC __glewMapBuffer = NULL;
-GLvoid* glMapBuffer(GLenum target,GLenum access){return __glewMapBuffer(target,access);}
-static PFNGLUNMAPBUFFERPROC __glewUnmapBuffer = NULL;
-GLboolean glUnmapBuffer(GLenum target){return __glewUnmapBuffer(target);}
-
-static PFNGLATTACHSHADERPROC __glewAttachShader = NULL;
-void glAttachShader(GLuint program,GLuint shader){__glewAttachShader(program,shader);}
-static PFNGLBINDATTRIBLOCATIONPROC __glewBindAttribLocation = NULL;
-void glBindAttribLocation(GLuint program,GLuint index,const GLchar* name){__glewBindAttribLocation(program,index,name);}
-static PFNGLBLENDEQUATIONSEPARATEPROC __glewBlendEquationSeparate = NULL;
-void glBlendEquationSeparate(GLenum _a0,GLenum _a1){__glewBlendEquationSeparate( _a0, _a1);}
-static PFNGLCOMPILESHADERPROC __glewCompileShader = NULL;
-void glCompileShader(GLuint shader){__glewCompileShader(shader);}
-static PFNGLCREATEPROGRAMPROC __glewCreateProgram = NULL;
-GLuint glCreateProgram(void){return __glewCreateProgram();}
-static PFNGLCREATESHADERPROC __glewCreateShader = NULL;
-GLuint glCreateShader(GLenum type){return __glewCreateShader(type);}
-static PFNGLDELETEPROGRAMPROC __glewDeleteProgram = NULL;
-void glDeleteProgram(GLuint program){__glewDeleteProgram(program);}
-static PFNGLDELETESHADERPROC __glewDeleteShader = NULL;
-void glDeleteShader(GLuint shader){__glewDeleteShader(shader);}
-static PFNGLDETACHSHADERPROC __glewDetachShader = NULL;
-void glDetachShader(GLuint program,GLuint shader){__glewDetachShader(program,shader);}
-static PFNGLDISABLEVERTEXATTRIBARRAYPROC __glewDisableVertexAttribArray = NULL;
-void glDisableVertexAttribArray(GLuint _a0){__glewDisableVertexAttribArray( _a0);}
-static PFNGLDRAWBUFFERSPROC __glewDrawBuffers = NULL;
-void glDrawBuffers(GLsizei n,const GLenum* bufs){__glewDrawBuffers(n,bufs);}
-static PFNGLENABLEVERTEXATTRIBARRAYPROC __glewEnableVertexAttribArray = NULL;
-void glEnableVertexAttribArray(GLuint _a0){__glewEnableVertexAttribArray( _a0);}
-static PFNGLGETACTIVEATTRIBPROC __glewGetActiveAttrib = NULL;
-void glGetActiveAttrib(GLuint program,GLuint index,GLsizei maxLength,GLsizei* length,GLint* size,GLenum* type,GLchar* name){__glewGetActiveAttrib(program,index,maxLength,length,size,type,name);}
-static PFNGLGETACTIVEUNIFORMPROC __glewGetActiveUniform = NULL;
-void glGetActiveUniform(GLuint program,GLuint index,GLsizei maxLength,GLsizei* length,GLint* size,GLenum* type,GLchar* name){__glewGetActiveUniform(program,index,maxLength,length,size,type,name);}
-static PFNGLGETATTACHEDSHADERSPROC __glewGetAttachedShaders = NULL;
-void glGetAttachedShaders(GLuint program,GLsizei maxCount,GLsizei* count,GLuint* shaders){__glewGetAttachedShaders(program,maxCount,count,shaders);}
-static PFNGLGETATTRIBLOCATIONPROC __glewGetAttribLocation = NULL;
-GLint glGetAttribLocation(GLuint program,const GLchar* name){return __glewGetAttribLocation(program,name);}
-static PFNGLGETPROGRAMINFOLOGPROC __glewGetProgramInfoLog = NULL;
-void glGetProgramInfoLog(GLuint program,GLsizei bufSize,GLsizei* length,GLchar* infoLog){__glewGetProgramInfoLog(program,bufSize,length,infoLog);}
-static PFNGLGETPROGRAMIVPROC __glewGetProgramiv = NULL;
-void glGetProgramiv(GLuint program,GLenum pname,GLint* param){__glewGetProgramiv(program,pname,param);}
-static PFNGLGETSHADERINFOLOGPROC __glewGetShaderInfoLog = NULL;
-void glGetShaderInfoLog(GLuint shader,GLsizei bufSize,GLsizei* length,GLchar* infoLog){__glewGetShaderInfoLog(shader,bufSize,length,infoLog);}
-static PFNGLGETSHADERSOURCEPROC __glewGetShaderSource = NULL;
-void glGetShaderSource(GLuint obj,GLsizei maxLength,GLsizei* length,GLchar* source){__glewGetShaderSource(obj,maxLength,length,source);}
-static PFNGLGETSHADERIVPROC __glewGetShaderiv = NULL;
-void glGetShaderiv(GLuint shader,GLenum pname,GLint* param){__glewGetShaderiv(shader,pname,param);}
-static PFNGLGETUNIFORMLOCATIONPROC __glewGetUniformLocation = NULL;
-GLint glGetUniformLocation(GLuint program,const GLchar* name){return __glewGetUniformLocation(program,name);}
-static PFNGLGETUNIFORMFVPROC __glewGetUniformfv = NULL;
-void glGetUniformfv(GLuint program,GLint location,GLfloat* params){__glewGetUniformfv(program,location,params);}
-static PFNGLGETUNIFORMIVPROC __glewGetUniformiv = NULL;
-void glGetUniformiv(GLuint program,GLint location,GLint* params){__glewGetUniformiv(program,location,params);}
-static PFNGLGETVERTEXATTRIBPOINTERVPROC __glewGetVertexAttribPointerv = NULL;
-void glGetVertexAttribPointerv(GLuint _a0,GLenum _a1,GLvoid** _a2){__glewGetVertexAttribPointerv( _a0, _a1, _a2);}
-static PFNGLGETVERTEXATTRIBDVPROC __glewGetVertexAttribdv = NULL;
-void glGetVertexAttribdv(GLuint _a0,GLenum _a1,GLdouble* _a2){__glewGetVertexAttribdv( _a0, _a1, _a2);}
-static PFNGLGETVERTEXATTRIBFVPROC __glewGetVertexAttribfv = NULL;
-void glGetVertexAttribfv(GLuint _a0,GLenum _a1,GLfloat* _a2){__glewGetVertexAttribfv( _a0, _a1, _a2);}
-static PFNGLGETVERTEXATTRIBIVPROC __glewGetVertexAttribiv = NULL;
-void glGetVertexAttribiv(GLuint _a0,GLenum _a1,GLint* _a2){__glewGetVertexAttribiv( _a0, _a1, _a2);}
-static PFNGLISPROGRAMPROC __glewIsProgram = NULL;
-GLboolean glIsProgram(GLuint program){return __glewIsProgram(program);}
-static PFNGLISSHADERPROC __glewIsShader = NULL;
-GLboolean glIsShader(GLuint shader){return __glewIsShader(shader);}
-static PFNGLLINKPROGRAMPROC __glewLinkProgram = NULL;
-void glLinkProgram(GLuint program){__glewLinkProgram(program);}
-static PFNGLSHADERSOURCEPROC __glewShaderSource = NULL;
-void glShaderSource(GLuint shader,GLsizei count,const GLchar** strings,const GLint* lengths){__glewShaderSource(shader,count,strings,lengths);}
-static PFNGLSTENCILFUNCSEPARATEPROC __glewStencilFuncSeparate = NULL;
-void glStencilFuncSeparate(GLenum frontfunc,GLenum backfunc,GLint ref,GLuint mask){__glewStencilFuncSeparate(frontfunc,backfunc,ref,mask);}
-static PFNGLSTENCILMASKSEPARATEPROC __glewStencilMaskSeparate = NULL;
-void glStencilMaskSeparate(GLenum _a0,GLuint _a1){__glewStencilMaskSeparate( _a0, _a1);}
-static PFNGLSTENCILOPSEPARATEPROC __glewStencilOpSeparate = NULL;
-void glStencilOpSeparate(GLenum face,GLenum sfail,GLenum dpfail,GLenum dppass){__glewStencilOpSeparate(face,sfail,dpfail,dppass);}
-static PFNGLUNIFORM1FPROC __glewUniform1f = NULL;
-void glUniform1f(GLint location,GLfloat v0){__glewUniform1f(location,v0);}
-static PFNGLUNIFORM1FVPROC __glewUniform1fv = NULL;
-void glUniform1fv(GLint location,GLsizei count,const GLfloat* value){__glewUniform1fv(location,count,value);}
-static PFNGLUNIFORM1IPROC __glewUniform1i = NULL;
-void glUniform1i(GLint location,GLint v0){__glewUniform1i(location,v0);}
-static PFNGLUNIFORM1IVPROC __glewUniform1iv = NULL;
-void glUniform1iv(GLint location,GLsizei count,const GLint* value){__glewUniform1iv(location,count,value);}
-static PFNGLUNIFORM2FPROC __glewUniform2f = NULL;
-void glUniform2f(GLint location,GLfloat v0,GLfloat v1){__glewUniform2f(location,v0,v1);}
-static PFNGLUNIFORM2FVPROC __glewUniform2fv = NULL;
-void glUniform2fv(GLint location,GLsizei count,const GLfloat* value){__glewUniform2fv(location,count,value);}
-static PFNGLUNIFORM2IPROC __glewUniform2i = NULL;
-void glUniform2i(GLint location,GLint v0,GLint v1){__glewUniform2i(location,v0,v1);}
-static PFNGLUNIFORM2IVPROC __glewUniform2iv = NULL;
-void glUniform2iv(GLint location,GLsizei count,const GLint* value){__glewUniform2iv(location,count,value);}
-static PFNGLUNIFORM3FPROC __glewUniform3f = NULL;
-void glUniform3f(GLint location,GLfloat v0,GLfloat v1,GLfloat v2){__glewUniform3f(location,v0,v1,v2);}
-static PFNGLUNIFORM3FVPROC __glewUniform3fv = NULL;
-void glUniform3fv(GLint location,GLsizei count,const GLfloat* value){__glewUniform3fv(location,count,value);}
-static PFNGLUNIFORM3IPROC __glewUniform3i = NULL;
-void glUniform3i(GLint location,GLint v0,GLint v1,GLint v2){__glewUniform3i(location,v0,v1,v2);}
-static PFNGLUNIFORM3IVPROC __glewUniform3iv = NULL;
-void glUniform3iv(GLint location,GLsizei count,const GLint* value){__glewUniform3iv(location,count,value);}
-static PFNGLUNIFORM4FPROC __glewUniform4f = NULL;
-void glUniform4f(GLint location,GLfloat v0,GLfloat v1,GLfloat v2,GLfloat v3){__glewUniform4f(location,v0,v1,v2,v3);}
-static PFNGLUNIFORM4FVPROC __glewUniform4fv = NULL;
-void glUniform4fv(GLint location,GLsizei count,const GLfloat* value){__glewUniform4fv(location,count,value);}
-static PFNGLUNIFORM4IPROC __glewUniform4i = NULL;
-void glUniform4i(GLint location,GLint v0,GLint v1,GLint v2,GLint v3){__glewUniform4i(location,v0,v1,v2,v3);}
-static PFNGLUNIFORM4IVPROC __glewUniform4iv = NULL;
-void glUniform4iv(GLint location,GLsizei count,const GLint* value){__glewUniform4iv(location,count,value);}
-static PFNGLUNIFORMMATRIX2FVPROC __glewUniformMatrix2fv = NULL;
-void glUniformMatrix2fv(GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewUniformMatrix2fv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX3FVPROC __glewUniformMatrix3fv = NULL;
-void glUniformMatrix3fv(GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewUniformMatrix3fv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX4FVPROC __glewUniformMatrix4fv = NULL;
-void glUniformMatrix4fv(GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewUniformMatrix4fv(location,count,transpose,value);}
-static PFNGLUSEPROGRAMPROC __glewUseProgram = NULL;
-void glUseProgram(GLuint program){__glewUseProgram(program);}
-static PFNGLVALIDATEPROGRAMPROC __glewValidateProgram = NULL;
-void glValidateProgram(GLuint program){__glewValidateProgram(program);}
-static PFNGLVERTEXATTRIB1DPROC __glewVertexAttrib1d = NULL;
-void glVertexAttrib1d(GLuint index,GLdouble x){__glewVertexAttrib1d(index,x);}
-static PFNGLVERTEXATTRIB1DVPROC __glewVertexAttrib1dv = NULL;
-void glVertexAttrib1dv(GLuint index,const GLdouble* v){__glewVertexAttrib1dv(index,v);}
-static PFNGLVERTEXATTRIB1FPROC __glewVertexAttrib1f = NULL;
-void glVertexAttrib1f(GLuint index,GLfloat x){__glewVertexAttrib1f(index,x);}
-static PFNGLVERTEXATTRIB1FVPROC __glewVertexAttrib1fv = NULL;
-void glVertexAttrib1fv(GLuint index,const GLfloat* v){__glewVertexAttrib1fv(index,v);}
-static PFNGLVERTEXATTRIB1SPROC __glewVertexAttrib1s = NULL;
-void glVertexAttrib1s(GLuint index,GLshort x){__glewVertexAttrib1s(index,x);}
-static PFNGLVERTEXATTRIB1SVPROC __glewVertexAttrib1sv = NULL;
-void glVertexAttrib1sv(GLuint index,const GLshort* v){__glewVertexAttrib1sv(index,v);}
-static PFNGLVERTEXATTRIB2DPROC __glewVertexAttrib2d = NULL;
-void glVertexAttrib2d(GLuint index,GLdouble x,GLdouble y){__glewVertexAttrib2d(index,x,y);}
-static PFNGLVERTEXATTRIB2DVPROC __glewVertexAttrib2dv = NULL;
-void glVertexAttrib2dv(GLuint index,const GLdouble* v){__glewVertexAttrib2dv(index,v);}
-static PFNGLVERTEXATTRIB2FPROC __glewVertexAttrib2f = NULL;
-void glVertexAttrib2f(GLuint index,GLfloat x,GLfloat y){__glewVertexAttrib2f(index,x,y);}
-static PFNGLVERTEXATTRIB2FVPROC __glewVertexAttrib2fv = NULL;
-void glVertexAttrib2fv(GLuint index,const GLfloat* v){__glewVertexAttrib2fv(index,v);}
-static PFNGLVERTEXATTRIB2SPROC __glewVertexAttrib2s = NULL;
-void glVertexAttrib2s(GLuint index,GLshort x,GLshort y){__glewVertexAttrib2s(index,x,y);}
-static PFNGLVERTEXATTRIB2SVPROC __glewVertexAttrib2sv = NULL;
-void glVertexAttrib2sv(GLuint index,const GLshort* v){__glewVertexAttrib2sv(index,v);}
-static PFNGLVERTEXATTRIB3DPROC __glewVertexAttrib3d = NULL;
-void glVertexAttrib3d(GLuint index,GLdouble x,GLdouble y,GLdouble z){__glewVertexAttrib3d(index,x,y,z);}
-static PFNGLVERTEXATTRIB3DVPROC __glewVertexAttrib3dv = NULL;
-void glVertexAttrib3dv(GLuint index,const GLdouble* v){__glewVertexAttrib3dv(index,v);}
-static PFNGLVERTEXATTRIB3FPROC __glewVertexAttrib3f = NULL;
-void glVertexAttrib3f(GLuint index,GLfloat x,GLfloat y,GLfloat z){__glewVertexAttrib3f(index,x,y,z);}
-static PFNGLVERTEXATTRIB3FVPROC __glewVertexAttrib3fv = NULL;
-void glVertexAttrib3fv(GLuint index,const GLfloat* v){__glewVertexAttrib3fv(index,v);}
-static PFNGLVERTEXATTRIB3SPROC __glewVertexAttrib3s = NULL;
-void glVertexAttrib3s(GLuint index,GLshort x,GLshort y,GLshort z){__glewVertexAttrib3s(index,x,y,z);}
-static PFNGLVERTEXATTRIB3SVPROC __glewVertexAttrib3sv = NULL;
-void glVertexAttrib3sv(GLuint index,const GLshort* v){__glewVertexAttrib3sv(index,v);}
-static PFNGLVERTEXATTRIB4NBVPROC __glewVertexAttrib4Nbv = NULL;
-void glVertexAttrib4Nbv(GLuint index,const GLbyte* v){__glewVertexAttrib4Nbv(index,v);}
-static PFNGLVERTEXATTRIB4NIVPROC __glewVertexAttrib4Niv = NULL;
-void glVertexAttrib4Niv(GLuint index,const GLint* v){__glewVertexAttrib4Niv(index,v);}
-static PFNGLVERTEXATTRIB4NSVPROC __glewVertexAttrib4Nsv = NULL;
-void glVertexAttrib4Nsv(GLuint index,const GLshort* v){__glewVertexAttrib4Nsv(index,v);}
-static PFNGLVERTEXATTRIB4NUBPROC __glewVertexAttrib4Nub = NULL;
-void glVertexAttrib4Nub(GLuint index,GLubyte x,GLubyte y,GLubyte z,GLubyte w){__glewVertexAttrib4Nub(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4NUBVPROC __glewVertexAttrib4Nubv = NULL;
-void glVertexAttrib4Nubv(GLuint index,const GLubyte* v){__glewVertexAttrib4Nubv(index,v);}
-static PFNGLVERTEXATTRIB4NUIVPROC __glewVertexAttrib4Nuiv = NULL;
-void glVertexAttrib4Nuiv(GLuint index,const GLuint* v){__glewVertexAttrib4Nuiv(index,v);}
-static PFNGLVERTEXATTRIB4NUSVPROC __glewVertexAttrib4Nusv = NULL;
-void glVertexAttrib4Nusv(GLuint index,const GLushort* v){__glewVertexAttrib4Nusv(index,v);}
-static PFNGLVERTEXATTRIB4BVPROC __glewVertexAttrib4bv = NULL;
-void glVertexAttrib4bv(GLuint index,const GLbyte* v){__glewVertexAttrib4bv(index,v);}
-static PFNGLVERTEXATTRIB4DPROC __glewVertexAttrib4d = NULL;
-void glVertexAttrib4d(GLuint index,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewVertexAttrib4d(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4DVPROC __glewVertexAttrib4dv = NULL;
-void glVertexAttrib4dv(GLuint index,const GLdouble* v){__glewVertexAttrib4dv(index,v);}
-static PFNGLVERTEXATTRIB4FPROC __glewVertexAttrib4f = NULL;
-void glVertexAttrib4f(GLuint index,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewVertexAttrib4f(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4FVPROC __glewVertexAttrib4fv = NULL;
-void glVertexAttrib4fv(GLuint index,const GLfloat* v){__glewVertexAttrib4fv(index,v);}
-static PFNGLVERTEXATTRIB4IVPROC __glewVertexAttrib4iv = NULL;
-void glVertexAttrib4iv(GLuint index,const GLint* v){__glewVertexAttrib4iv(index,v);}
-static PFNGLVERTEXATTRIB4SPROC __glewVertexAttrib4s = NULL;
-void glVertexAttrib4s(GLuint index,GLshort x,GLshort y,GLshort z,GLshort w){__glewVertexAttrib4s(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4SVPROC __glewVertexAttrib4sv = NULL;
-void glVertexAttrib4sv(GLuint index,const GLshort* v){__glewVertexAttrib4sv(index,v);}
-static PFNGLVERTEXATTRIB4UBVPROC __glewVertexAttrib4ubv = NULL;
-void glVertexAttrib4ubv(GLuint index,const GLubyte* v){__glewVertexAttrib4ubv(index,v);}
-static PFNGLVERTEXATTRIB4UIVPROC __glewVertexAttrib4uiv = NULL;
-void glVertexAttrib4uiv(GLuint index,const GLuint* v){__glewVertexAttrib4uiv(index,v);}
-static PFNGLVERTEXATTRIB4USVPROC __glewVertexAttrib4usv = NULL;
-void glVertexAttrib4usv(GLuint index,const GLushort* v){__glewVertexAttrib4usv(index,v);}
-static PFNGLVERTEXATTRIBPOINTERPROC __glewVertexAttribPointer = NULL;
-void glVertexAttribPointer(GLuint index,GLint size,GLenum type,GLboolean normalized,GLsizei stride,const GLvoid* pointer){__glewVertexAttribPointer(index,size,type,normalized,stride,pointer);}
-
-static PFNGLUNIFORMMATRIX2X3FVPROC __glewUniformMatrix2x3fv = NULL;
-void glUniformMatrix2x3fv(GLint location,GLsizei count,GLboolean transpose,const GLfloat *value){__glewUniformMatrix2x3fv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX2X4FVPROC __glewUniformMatrix2x4fv = NULL;
-void glUniformMatrix2x4fv(GLint location,GLsizei count,GLboolean transpose,const GLfloat *value){__glewUniformMatrix2x4fv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX3X2FVPROC __glewUniformMatrix3x2fv = NULL;
-void glUniformMatrix3x2fv(GLint location,GLsizei count,GLboolean transpose,const GLfloat *value){__glewUniformMatrix3x2fv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX3X4FVPROC __glewUniformMatrix3x4fv = NULL;
-void glUniformMatrix3x4fv(GLint location,GLsizei count,GLboolean transpose,const GLfloat *value){__glewUniformMatrix3x4fv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX4X2FVPROC __glewUniformMatrix4x2fv = NULL;
-void glUniformMatrix4x2fv(GLint location,GLsizei count,GLboolean transpose,const GLfloat *value){__glewUniformMatrix4x2fv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX4X3FVPROC __glewUniformMatrix4x3fv = NULL;
-void glUniformMatrix4x3fv(GLint location,GLsizei count,GLboolean transpose,const GLfloat *value){__glewUniformMatrix4x3fv(location,count,transpose,value);}
-
-static PFNGLBEGINCONDITIONALRENDERPROC __glewBeginConditionalRender = NULL;
-void glBeginConditionalRender(GLuint _a0,GLenum _a1){__glewBeginConditionalRender( _a0, _a1);}
-static PFNGLBEGINTRANSFORMFEEDBACKPROC __glewBeginTransformFeedback = NULL;
-void glBeginTransformFeedback(GLenum _a0){__glewBeginTransformFeedback( _a0);}
-static PFNGLBINDFRAGDATALOCATIONPROC __glewBindFragDataLocation = NULL;
-void glBindFragDataLocation(GLuint _a0,GLuint _a1,const GLchar* _a2){__glewBindFragDataLocation( _a0, _a1, _a2);}
-static PFNGLCLAMPCOLORPROC __glewClampColor = NULL;
-void glClampColor(GLenum _a0,GLenum _a1){__glewClampColor( _a0, _a1);}
-static PFNGLCLEARBUFFERFIPROC __glewClearBufferfi = NULL;
-void glClearBufferfi(GLenum _a0,GLint _a1,GLfloat _a2,GLint _a3){__glewClearBufferfi( _a0, _a1, _a2, _a3);}
-static PFNGLCLEARBUFFERFVPROC __glewClearBufferfv = NULL;
-void glClearBufferfv(GLenum _a0,GLint _a1,const GLfloat* _a2){__glewClearBufferfv( _a0, _a1, _a2);}
-static PFNGLCLEARBUFFERIVPROC __glewClearBufferiv = NULL;
-void glClearBufferiv(GLenum _a0,GLint _a1,const GLint* _a2){__glewClearBufferiv( _a0, _a1, _a2);}
-static PFNGLCLEARBUFFERUIVPROC __glewClearBufferuiv = NULL;
-void glClearBufferuiv(GLenum _a0,GLint _a1,const GLuint* _a2){__glewClearBufferuiv( _a0, _a1, _a2);}
-static PFNGLCOLORMASKIPROC __glewColorMaski = NULL;
-void glColorMaski(GLuint _a0,GLboolean _a1,GLboolean _a2,GLboolean _a3,GLboolean _a4){__glewColorMaski( _a0, _a1, _a2, _a3, _a4);}
-static PFNGLDISABLEIPROC __glewDisablei = NULL;
-void glDisablei(GLenum _a0,GLuint _a1){__glewDisablei( _a0, _a1);}
-static PFNGLENABLEIPROC __glewEnablei = NULL;
-void glEnablei(GLenum _a0,GLuint _a1){__glewEnablei( _a0, _a1);}
-static PFNGLENDCONDITIONALRENDERPROC __glewEndConditionalRender = NULL;
-void glEndConditionalRender(void){__glewEndConditionalRender();}
-static PFNGLENDTRANSFORMFEEDBACKPROC __glewEndTransformFeedback = NULL;
-void glEndTransformFeedback(void){__glewEndTransformFeedback();}
-static PFNGLGETBOOLEANI_VPROC __glewGetBooleani_v = NULL;
-void glGetBooleani_v(GLenum _a0,GLuint _a1,GLboolean* _a2){__glewGetBooleani_v( _a0, _a1, _a2);}
-static PFNGLGETFRAGDATALOCATIONPROC __glewGetFragDataLocation = NULL;
-GLint glGetFragDataLocation(GLuint _a0,const GLchar* _a1){return __glewGetFragDataLocation( _a0, _a1);}
-static PFNGLGETSTRINGIPROC __glewGetStringi = NULL;
-const GLubyte* glGetStringi(GLenum _a0,GLuint _a1){return __glewGetStringi( _a0, _a1);}
-static PFNGLGETTEXPARAMETERIIVPROC __glewGetTexParameterIiv = NULL;
-void glGetTexParameterIiv(GLenum _a0,GLenum _a1,GLint* _a2){__glewGetTexParameterIiv( _a0, _a1, _a2);}
-static PFNGLGETTEXPARAMETERIUIVPROC __glewGetTexParameterIuiv = NULL;
-void glGetTexParameterIuiv(GLenum _a0,GLenum _a1,GLuint* _a2){__glewGetTexParameterIuiv( _a0, _a1, _a2);}
-static PFNGLGETTRANSFORMFEEDBACKVARYINGPROC __glewGetTransformFeedbackVarying = NULL;
-void glGetTransformFeedbackVarying(GLuint _a0,GLuint _a1,GLsizei _a2,GLsizei * _a3,GLsizei * _a4,GLenum * _a5,GLchar * _a6){__glewGetTransformFeedbackVarying( _a0, _a1, _a2, _a3, _a4, _a5, _a6);}
-static PFNGLGETUNIFORMUIVPROC __glewGetUniformuiv = NULL;
-void glGetUniformuiv(GLuint _a0,GLint _a1,GLuint* _a2){__glewGetUniformuiv( _a0, _a1, _a2);}
-static PFNGLGETVERTEXATTRIBIIVPROC __glewGetVertexAttribIiv = NULL;
-void glGetVertexAttribIiv(GLuint _a0,GLenum _a1,GLint* _a2){__glewGetVertexAttribIiv( _a0, _a1, _a2);}
-static PFNGLGETVERTEXATTRIBIUIVPROC __glewGetVertexAttribIuiv = NULL;
-void glGetVertexAttribIuiv(GLuint _a0,GLenum _a1,GLuint* _a2){__glewGetVertexAttribIuiv( _a0, _a1, _a2);}
-static PFNGLISENABLEDIPROC __glewIsEnabledi = NULL;
-GLboolean glIsEnabledi(GLenum _a0,GLuint _a1){return __glewIsEnabledi( _a0, _a1);}
-static PFNGLTEXPARAMETERIIVPROC __glewTexParameterIiv = NULL;
-void glTexParameterIiv(GLenum _a0,GLenum _a1,const GLint* _a2){__glewTexParameterIiv( _a0, _a1, _a2);}
-static PFNGLTEXPARAMETERIUIVPROC __glewTexParameterIuiv = NULL;
-void glTexParameterIuiv(GLenum _a0,GLenum _a1,const GLuint* _a2){__glewTexParameterIuiv( _a0, _a1, _a2);}
-static PFNGLTRANSFORMFEEDBACKVARYINGSPROC __glewTransformFeedbackVaryings = NULL;
-void glTransformFeedbackVaryings(GLuint _a0,GLsizei _a1,const GLchar ** _a2,GLenum _a3){__glewTransformFeedbackVaryings( _a0, _a1, _a2, _a3);}
-static PFNGLUNIFORM1UIPROC __glewUniform1ui = NULL;
-void glUniform1ui(GLint _a0,GLuint _a1){__glewUniform1ui( _a0, _a1);}
-static PFNGLUNIFORM1UIVPROC __glewUniform1uiv = NULL;
-void glUniform1uiv(GLint _a0,GLsizei _a1,const GLuint* _a2){__glewUniform1uiv( _a0, _a1, _a2);}
-static PFNGLUNIFORM2UIPROC __glewUniform2ui = NULL;
-void glUniform2ui(GLint _a0,GLuint _a1,GLuint _a2){__glewUniform2ui( _a0, _a1, _a2);}
-static PFNGLUNIFORM2UIVPROC __glewUniform2uiv = NULL;
-void glUniform2uiv(GLint _a0,GLsizei _a1,const GLuint* _a2){__glewUniform2uiv( _a0, _a1, _a2);}
-static PFNGLUNIFORM3UIPROC __glewUniform3ui = NULL;
-void glUniform3ui(GLint _a0,GLuint _a1,GLuint _a2,GLuint _a3){__glewUniform3ui( _a0, _a1, _a2, _a3);}
-static PFNGLUNIFORM3UIVPROC __glewUniform3uiv = NULL;
-void glUniform3uiv(GLint _a0,GLsizei _a1,const GLuint* _a2){__glewUniform3uiv( _a0, _a1, _a2);}
-static PFNGLUNIFORM4UIPROC __glewUniform4ui = NULL;
-void glUniform4ui(GLint _a0,GLuint _a1,GLuint _a2,GLuint _a3,GLuint _a4){__glewUniform4ui( _a0, _a1, _a2, _a3, _a4);}
-static PFNGLUNIFORM4UIVPROC __glewUniform4uiv = NULL;
-void glUniform4uiv(GLint _a0,GLsizei _a1,const GLuint* _a2){__glewUniform4uiv( _a0, _a1, _a2);}
-static PFNGLVERTEXATTRIBI1IPROC __glewVertexAttribI1i = NULL;
-void glVertexAttribI1i(GLuint _a0,GLint _a1){__glewVertexAttribI1i( _a0, _a1);}
-static PFNGLVERTEXATTRIBI1IVPROC __glewVertexAttribI1iv = NULL;
-void glVertexAttribI1iv(GLuint _a0,const GLint* _a1){__glewVertexAttribI1iv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI1UIPROC __glewVertexAttribI1ui = NULL;
-void glVertexAttribI1ui(GLuint _a0,GLuint _a1){__glewVertexAttribI1ui( _a0, _a1);}
-static PFNGLVERTEXATTRIBI1UIVPROC __glewVertexAttribI1uiv = NULL;
-void glVertexAttribI1uiv(GLuint _a0,const GLuint* _a1){__glewVertexAttribI1uiv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI2IPROC __glewVertexAttribI2i = NULL;
-void glVertexAttribI2i(GLuint _a0,GLint _a1,GLint _a2){__glewVertexAttribI2i( _a0, _a1, _a2);}
-static PFNGLVERTEXATTRIBI2IVPROC __glewVertexAttribI2iv = NULL;
-void glVertexAttribI2iv(GLuint _a0,const GLint* _a1){__glewVertexAttribI2iv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI2UIPROC __glewVertexAttribI2ui = NULL;
-void glVertexAttribI2ui(GLuint _a0,GLuint _a1,GLuint _a2){__glewVertexAttribI2ui( _a0, _a1, _a2);}
-static PFNGLVERTEXATTRIBI2UIVPROC __glewVertexAttribI2uiv = NULL;
-void glVertexAttribI2uiv(GLuint _a0,const GLuint* _a1){__glewVertexAttribI2uiv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI3IPROC __glewVertexAttribI3i = NULL;
-void glVertexAttribI3i(GLuint _a0,GLint _a1,GLint _a2,GLint _a3){__glewVertexAttribI3i( _a0, _a1, _a2, _a3);}
-static PFNGLVERTEXATTRIBI3IVPROC __glewVertexAttribI3iv = NULL;
-void glVertexAttribI3iv(GLuint _a0,const GLint* _a1){__glewVertexAttribI3iv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI3UIPROC __glewVertexAttribI3ui = NULL;
-void glVertexAttribI3ui(GLuint _a0,GLuint _a1,GLuint _a2,GLuint _a3){__glewVertexAttribI3ui( _a0, _a1, _a2, _a3);}
-static PFNGLVERTEXATTRIBI3UIVPROC __glewVertexAttribI3uiv = NULL;
-void glVertexAttribI3uiv(GLuint _a0,const GLuint* _a1){__glewVertexAttribI3uiv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI4BVPROC __glewVertexAttribI4bv = NULL;
-void glVertexAttribI4bv(GLuint _a0,const GLbyte* _a1){__glewVertexAttribI4bv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI4IPROC __glewVertexAttribI4i = NULL;
-void glVertexAttribI4i(GLuint _a0,GLint _a1,GLint _a2,GLint _a3,GLint _a4){__glewVertexAttribI4i( _a0, _a1, _a2, _a3, _a4);}
-static PFNGLVERTEXATTRIBI4IVPROC __glewVertexAttribI4iv = NULL;
-void glVertexAttribI4iv(GLuint _a0,const GLint* _a1){__glewVertexAttribI4iv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI4SVPROC __glewVertexAttribI4sv = NULL;
-void glVertexAttribI4sv(GLuint _a0,const GLshort* _a1){__glewVertexAttribI4sv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI4UBVPROC __glewVertexAttribI4ubv = NULL;
-void glVertexAttribI4ubv(GLuint _a0,const GLubyte* _a1){__glewVertexAttribI4ubv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI4UIPROC __glewVertexAttribI4ui = NULL;
-void glVertexAttribI4ui(GLuint _a0,GLuint _a1,GLuint _a2,GLuint _a3,GLuint _a4){__glewVertexAttribI4ui( _a0, _a1, _a2, _a3, _a4);}
-static PFNGLVERTEXATTRIBI4UIVPROC __glewVertexAttribI4uiv = NULL;
-void glVertexAttribI4uiv(GLuint _a0,const GLuint* _a1){__glewVertexAttribI4uiv( _a0, _a1);}
-static PFNGLVERTEXATTRIBI4USVPROC __glewVertexAttribI4usv = NULL;
-void glVertexAttribI4usv(GLuint _a0,const GLushort* _a1){__glewVertexAttribI4usv( _a0, _a1);}
-static PFNGLVERTEXATTRIBIPOINTERPROC __glewVertexAttribIPointer = NULL;
-void glVertexAttribIPointer(GLuint _a0,GLint _a1,GLenum _a2,GLsizei _a3,const GLvoid* _a4){__glewVertexAttribIPointer( _a0, _a1, _a2, _a3, _a4);}
-
-static PFNGLDRAWARRAYSINSTANCEDPROC __glewDrawArraysInstanced = NULL;
-void glDrawArraysInstanced(GLenum _a0,GLint _a1,GLsizei _a2,GLsizei _a3){__glewDrawArraysInstanced( _a0, _a1, _a2, _a3);}
-static PFNGLDRAWELEMENTSINSTANCEDPROC __glewDrawElementsInstanced = NULL;
-void glDrawElementsInstanced(GLenum _a0,GLsizei _a1,GLenum _a2,const GLvoid* _a3,GLsizei _a4){__glewDrawElementsInstanced( _a0, _a1, _a2, _a3, _a4);}
-static PFNGLPRIMITIVERESTARTINDEXPROC __glewPrimitiveRestartIndex = NULL;
-void glPrimitiveRestartIndex(GLuint _a0){__glewPrimitiveRestartIndex( _a0);}
-static PFNGLTEXBUFFERPROC __glewTexBuffer = NULL;
-void glTexBuffer(GLenum _a0,GLenum _a1,GLuint _a2){__glewTexBuffer( _a0, _a1, _a2);}
-
-static PFNGLFRAMEBUFFERTEXTUREPROC __glewFramebufferTexture = NULL;
-void glFramebufferTexture(GLenum _a0,GLenum _a1,GLuint _a2,GLint _a3){__glewFramebufferTexture( _a0, _a1, _a2, _a3);}
-static PFNGLGETBUFFERPARAMETERI64VPROC __glewGetBufferParameteri64v = NULL;
-void glGetBufferParameteri64v(GLenum _a0,GLenum _a1,GLint64 * _a2){__glewGetBufferParameteri64v( _a0, _a1, _a2);}
-static PFNGLGETINTEGER64I_VPROC __glewGetInteger64i_v = NULL;
-void glGetInteger64i_v(GLenum _a0,GLuint _a1,GLint64 * _a2){__glewGetInteger64i_v( _a0, _a1, _a2);}
-
-static PFNGLVERTEXATTRIBDIVISORPROC __glewVertexAttribDivisor = NULL;
-void glVertexAttribDivisor(GLuint index,GLuint divisor){__glewVertexAttribDivisor(index,divisor);}
-
-static PFNGLBLENDEQUATIONSEPARATEIPROC __glewBlendEquationSeparatei = NULL;
-void glBlendEquationSeparatei(GLuint buf,GLenum modeRGB,GLenum modeAlpha){__glewBlendEquationSeparatei(buf,modeRGB,modeAlpha);}
-static PFNGLBLENDEQUATIONIPROC __glewBlendEquationi = NULL;
-void glBlendEquationi(GLuint buf,GLenum mode){__glewBlendEquationi(buf,mode);}
-static PFNGLBLENDFUNCSEPARATEIPROC __glewBlendFuncSeparatei = NULL;
-void glBlendFuncSeparatei(GLuint buf,GLenum srcRGB,GLenum dstRGB,GLenum srcAlpha,GLenum dstAlpha){__glewBlendFuncSeparatei(buf,srcRGB,dstRGB,srcAlpha,dstAlpha);}
-static PFNGLBLENDFUNCIPROC __glewBlendFunci = NULL;
-void glBlendFunci(GLuint buf,GLenum src,GLenum dst){__glewBlendFunci(buf,src,dst);}
-static PFNGLMINSAMPLESHADINGPROC __glewMinSampleShading = NULL;
-void glMinSampleShading(GLclampf value){__glewMinSampleShading(value);}
-
-static PFNGLTBUFFERMASK3DFXPROC __glewTbufferMask3DFX = NULL;
-void glTbufferMask3DFX(GLuint mask){__glewTbufferMask3DFX(mask);}
-
-static PFNGLDEBUGMESSAGECALLBACKAMDPROC __glewDebugMessageCallbackAMD = NULL;
-void glDebugMessageCallbackAMD(GLDEBUGPROCAMD callback,void* userParam){__glewDebugMessageCallbackAMD(callback,userParam);}
-static PFNGLDEBUGMESSAGEENABLEAMDPROC __glewDebugMessageEnableAMD = NULL;
-void glDebugMessageEnableAMD(GLenum category,GLenum severity,GLsizei count,const GLuint* ids,GLboolean enabled){__glewDebugMessageEnableAMD(category,severity,count,ids,enabled);}
-static PFNGLDEBUGMESSAGEINSERTAMDPROC __glewDebugMessageInsertAMD = NULL;
-void glDebugMessageInsertAMD(GLenum category,GLenum severity,GLuint id,GLsizei length,const GLchar* buf){__glewDebugMessageInsertAMD(category,severity,id,length,buf);}
-static PFNGLGETDEBUGMESSAGELOGAMDPROC __glewGetDebugMessageLogAMD = NULL;
-GLuint glGetDebugMessageLogAMD(GLuint count,GLsizei bufsize,GLenum* categories,GLuint* severities,GLuint* ids,GLsizei* lengths,GLchar* message){return __glewGetDebugMessageLogAMD(count,bufsize,categories,severities,ids,lengths,message);}
-
-static PFNGLBLENDEQUATIONINDEXEDAMDPROC __glewBlendEquationIndexedAMD = NULL;
-void glBlendEquationIndexedAMD(GLuint buf,GLenum mode){__glewBlendEquationIndexedAMD(buf,mode);}
-static PFNGLBLENDEQUATIONSEPARATEINDEXEDAMDPROC __glewBlendEquationSeparateIndexedAMD = NULL;
-void glBlendEquationSeparateIndexedAMD(GLuint buf,GLenum modeRGB,GLenum modeAlpha){__glewBlendEquationSeparateIndexedAMD(buf,modeRGB,modeAlpha);}
-static PFNGLBLENDFUNCINDEXEDAMDPROC __glewBlendFuncIndexedAMD = NULL;
-void glBlendFuncIndexedAMD(GLuint buf,GLenum src,GLenum dst){__glewBlendFuncIndexedAMD(buf,src,dst);}
-static PFNGLBLENDFUNCSEPARATEINDEXEDAMDPROC __glewBlendFuncSeparateIndexedAMD = NULL;
-void glBlendFuncSeparateIndexedAMD(GLuint buf,GLenum srcRGB,GLenum dstRGB,GLenum srcAlpha,GLenum dstAlpha){__glewBlendFuncSeparateIndexedAMD(buf,srcRGB,dstRGB,srcAlpha,dstAlpha);}
-
-static PFNGLVERTEXATTRIBPARAMETERIAMDPROC __glewVertexAttribParameteriAMD = NULL;
-void glVertexAttribParameteriAMD(GLuint index,GLenum pname,GLint param){__glewVertexAttribParameteriAMD(index,pname,param);}
-
-static PFNGLMULTIDRAWARRAYSINDIRECTAMDPROC __glewMultiDrawArraysIndirectAMD = NULL;
-void glMultiDrawArraysIndirectAMD(GLenum mode,const void* indirect,GLsizei primcount,GLsizei stride){__glewMultiDrawArraysIndirectAMD(mode,indirect,primcount,stride);}
-static PFNGLMULTIDRAWELEMENTSINDIRECTAMDPROC __glewMultiDrawElementsIndirectAMD = NULL;
-void glMultiDrawElementsIndirectAMD(GLenum mode,GLenum type,const void* indirect,GLsizei primcount,GLsizei stride){__glewMultiDrawElementsIndirectAMD(mode,type,indirect,primcount,stride);}
-
-static PFNGLDELETENAMESAMDPROC __glewDeleteNamesAMD = NULL;
-void glDeleteNamesAMD(GLenum identifier,GLuint num,const GLuint* names){__glewDeleteNamesAMD(identifier,num,names);}
-static PFNGLGENNAMESAMDPROC __glewGenNamesAMD = NULL;
-void glGenNamesAMD(GLenum identifier,GLuint num,GLuint* names){__glewGenNamesAMD(identifier,num,names);}
-static PFNGLISNAMEAMDPROC __glewIsNameAMD = NULL;
-GLboolean glIsNameAMD(GLenum identifier,GLuint name){return __glewIsNameAMD(identifier,name);}
-
-static PFNGLBEGINPERFMONITORAMDPROC __glewBeginPerfMonitorAMD = NULL;
-void glBeginPerfMonitorAMD(GLuint monitor){__glewBeginPerfMonitorAMD(monitor);}
-static PFNGLDELETEPERFMONITORSAMDPROC __glewDeletePerfMonitorsAMD = NULL;
-void glDeletePerfMonitorsAMD(GLsizei n,GLuint* monitors){__glewDeletePerfMonitorsAMD(n,monitors);}
-static PFNGLENDPERFMONITORAMDPROC __glewEndPerfMonitorAMD = NULL;
-void glEndPerfMonitorAMD(GLuint monitor){__glewEndPerfMonitorAMD(monitor);}
-static PFNGLGENPERFMONITORSAMDPROC __glewGenPerfMonitorsAMD = NULL;
-void glGenPerfMonitorsAMD(GLsizei n,GLuint* monitors){__glewGenPerfMonitorsAMD(n,monitors);}
-static PFNGLGETPERFMONITORCOUNTERDATAAMDPROC __glewGetPerfMonitorCounterDataAMD = NULL;
-void glGetPerfMonitorCounterDataAMD(GLuint monitor,GLenum pname,GLsizei dataSize,GLuint* data,GLint *bytesWritten){__glewGetPerfMonitorCounterDataAMD(monitor,pname,dataSize,data,bytesWritten);}
-static PFNGLGETPERFMONITORCOUNTERINFOAMDPROC __glewGetPerfMonitorCounterInfoAMD = NULL;
-void glGetPerfMonitorCounterInfoAMD(GLuint group,GLuint counter,GLenum pname,void* data){__glewGetPerfMonitorCounterInfoAMD(group,counter,pname,data);}
-static PFNGLGETPERFMONITORCOUNTERSTRINGAMDPROC __glewGetPerfMonitorCounterStringAMD = NULL;
-void glGetPerfMonitorCounterStringAMD(GLuint group,GLuint counter,GLsizei bufSize,GLsizei* length,GLchar *counterString){__glewGetPerfMonitorCounterStringAMD(group,counter,bufSize,length,counterString);}
-static PFNGLGETPERFMONITORCOUNTERSAMDPROC __glewGetPerfMonitorCountersAMD = NULL;
-void glGetPerfMonitorCountersAMD(GLuint group,GLint* numCounters,GLint *maxActiveCounters,GLsizei countersSize,GLuint *counters){__glewGetPerfMonitorCountersAMD(group,numCounters,maxActiveCounters,countersSize,counters);}
-static PFNGLGETPERFMONITORGROUPSTRINGAMDPROC __glewGetPerfMonitorGroupStringAMD = NULL;
-void glGetPerfMonitorGroupStringAMD(GLuint group,GLsizei bufSize,GLsizei* length,GLchar *groupString){__glewGetPerfMonitorGroupStringAMD(group,bufSize,length,groupString);}
-static PFNGLGETPERFMONITORGROUPSAMDPROC __glewGetPerfMonitorGroupsAMD = NULL;
-void glGetPerfMonitorGroupsAMD(GLint* numGroups,GLsizei groupsSize,GLuint *groups){__glewGetPerfMonitorGroupsAMD(numGroups,groupsSize,groups);}
-static PFNGLSELECTPERFMONITORCOUNTERSAMDPROC __glewSelectPerfMonitorCountersAMD = NULL;
-void glSelectPerfMonitorCountersAMD(GLuint monitor,GLboolean enable,GLuint group,GLint numCounters,GLuint* counterList){__glewSelectPerfMonitorCountersAMD(monitor,enable,group,numCounters,counterList);}
-
-static PFNGLSETMULTISAMPLEFVAMDPROC __glewSetMultisamplefvAMD = NULL;
-void glSetMultisamplefvAMD(GLenum pname,GLuint index,const GLfloat* val){__glewSetMultisamplefvAMD(pname,index,val);}
-
-static PFNGLTEXSTORAGESPARSEAMDPROC __glewTexStorageSparseAMD = NULL;
-void glTexStorageSparseAMD(GLenum target,GLenum internalFormat,GLsizei width,GLsizei height,GLsizei depth,GLsizei layers,GLbitfield flags){__glewTexStorageSparseAMD(target,internalFormat,width,height,depth,layers,flags);}
-static PFNGLTEXTURESTORAGESPARSEAMDPROC __glewTextureStorageSparseAMD = NULL;
-void glTextureStorageSparseAMD(GLuint texture,GLenum target,GLenum internalFormat,GLsizei width,GLsizei height,GLsizei depth,GLsizei layers,GLbitfield flags){__glewTextureStorageSparseAMD(texture,target,internalFormat,width,height,depth,layers,flags);}
-
-static PFNGLSTENCILOPVALUEAMDPROC __glewStencilOpValueAMD = NULL;
-void glStencilOpValueAMD(GLenum face,GLuint value){__glewStencilOpValueAMD(face,value);}
-
-static PFNGLTESSELLATIONFACTORAMDPROC __glewTessellationFactorAMD = NULL;
-void glTessellationFactorAMD(GLfloat factor){__glewTessellationFactorAMD(factor);}
-static PFNGLTESSELLATIONMODEAMDPROC __glewTessellationModeAMD = NULL;
-void glTessellationModeAMD(GLenum mode){__glewTessellationModeAMD(mode);}
-
-static PFNGLBLITFRAMEBUFFERANGLEPROC __glewBlitFramebufferANGLE = NULL;
-void glBlitFramebufferANGLE(GLint srcX0,GLint srcY0,GLint srcX1,GLint srcY1,GLint dstX0,GLint dstY0,GLint dstX1,GLint dstY1,GLbitfield mask,GLenum filter){__glewBlitFramebufferANGLE(srcX0,srcY0,srcX1,srcY1,dstX0,dstY0,dstX1,dstY1,mask,filter);}
-
-static PFNGLRENDERBUFFERSTORAGEMULTISAMPLEANGLEPROC __glewRenderbufferStorageMultisampleANGLE = NULL;
-void glRenderbufferStorageMultisampleANGLE(GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height){__glewRenderbufferStorageMultisampleANGLE(target,samples,internalformat,width,height);}
-
-static PFNGLDRAWARRAYSINSTANCEDANGLEPROC __glewDrawArraysInstancedANGLE = NULL;
-void glDrawArraysInstancedANGLE(GLenum mode,GLint first,GLsizei count,GLsizei primcount){__glewDrawArraysInstancedANGLE(mode,first,count,primcount);}
-static PFNGLDRAWELEMENTSINSTANCEDANGLEPROC __glewDrawElementsInstancedANGLE = NULL;
-void glDrawElementsInstancedANGLE(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices,GLsizei primcount){__glewDrawElementsInstancedANGLE(mode,count,type,indices,primcount);}
-static PFNGLVERTEXATTRIBDIVISORANGLEPROC __glewVertexAttribDivisorANGLE = NULL;
-void glVertexAttribDivisorANGLE(GLuint index,GLuint divisor){__glewVertexAttribDivisorANGLE(index,divisor);}
-
-static PFNGLBEGINQUERYANGLEPROC __glewBeginQueryANGLE = NULL;
-void glBeginQueryANGLE(GLenum target,GLuint id){__glewBeginQueryANGLE(target,id);}
-static PFNGLDELETEQUERIESANGLEPROC __glewDeleteQueriesANGLE = NULL;
-void glDeleteQueriesANGLE(GLsizei n,const GLuint* ids){__glewDeleteQueriesANGLE(n,ids);}
-static PFNGLENDQUERYANGLEPROC __glewEndQueryANGLE = NULL;
-void glEndQueryANGLE(GLenum target){__glewEndQueryANGLE(target);}
-static PFNGLGENQUERIESANGLEPROC __glewGenQueriesANGLE = NULL;
-void glGenQueriesANGLE(GLsizei n,GLuint* ids){__glewGenQueriesANGLE(n,ids);}
-static PFNGLGETQUERYOBJECTI64VANGLEPROC __glewGetQueryObjecti64vANGLE = NULL;
-void glGetQueryObjecti64vANGLE(GLuint id,GLenum pname,GLint64* params){__glewGetQueryObjecti64vANGLE(id,pname,params);}
-static PFNGLGETQUERYOBJECTIVANGLEPROC __glewGetQueryObjectivANGLE = NULL;
-void glGetQueryObjectivANGLE(GLuint id,GLenum pname,GLint* params){__glewGetQueryObjectivANGLE(id,pname,params);}
-static PFNGLGETQUERYOBJECTUI64VANGLEPROC __glewGetQueryObjectui64vANGLE = NULL;
-void glGetQueryObjectui64vANGLE(GLuint id,GLenum pname,GLuint64* params){__glewGetQueryObjectui64vANGLE(id,pname,params);}
-static PFNGLGETQUERYOBJECTUIVANGLEPROC __glewGetQueryObjectuivANGLE = NULL;
-void glGetQueryObjectuivANGLE(GLuint id,GLenum pname,GLuint* params){__glewGetQueryObjectuivANGLE(id,pname,params);}
-static PFNGLGETQUERYIVANGLEPROC __glewGetQueryivANGLE = NULL;
-void glGetQueryivANGLE(GLenum target,GLenum pname,GLint* params){__glewGetQueryivANGLE(target,pname,params);}
-static PFNGLISQUERYANGLEPROC __glewIsQueryANGLE = NULL;
-GLboolean glIsQueryANGLE(GLuint id){return __glewIsQueryANGLE(id);}
-static PFNGLQUERYCOUNTERANGLEPROC __glewQueryCounterANGLE = NULL;
-void glQueryCounterANGLE(GLuint id,GLenum target){__glewQueryCounterANGLE(id,target);}
-
-static PFNGLGETTRANSLATEDSHADERSOURCEANGLEPROC __glewGetTranslatedShaderSourceANGLE = NULL;
-void glGetTranslatedShaderSourceANGLE(GLuint shader,GLsizei bufsize,GLsizei* length,GLchar* source){__glewGetTranslatedShaderSourceANGLE(shader,bufsize,length,source);}
-
-static PFNGLDRAWELEMENTARRAYAPPLEPROC __glewDrawElementArrayAPPLE = NULL;
-void glDrawElementArrayAPPLE(GLenum mode,GLint first,GLsizei count){__glewDrawElementArrayAPPLE(mode,first,count);}
-static PFNGLDRAWRANGEELEMENTARRAYAPPLEPROC __glewDrawRangeElementArrayAPPLE = NULL;
-void glDrawRangeElementArrayAPPLE(GLenum mode,GLuint start,GLuint end,GLint first,GLsizei count){__glewDrawRangeElementArrayAPPLE(mode,start,end,first,count);}
-static PFNGLELEMENTPOINTERAPPLEPROC __glewElementPointerAPPLE = NULL;
-void glElementPointerAPPLE(GLenum type,const GLvoid *pointer){__glewElementPointerAPPLE(type,pointer);}
-static PFNGLMULTIDRAWELEMENTARRAYAPPLEPROC __glewMultiDrawElementArrayAPPLE = NULL;
-void glMultiDrawElementArrayAPPLE(GLenum mode,const GLint* first,const GLsizei *count,GLsizei primcount){__glewMultiDrawElementArrayAPPLE(mode,first,count,primcount);}
-static PFNGLMULTIDRAWRANGEELEMENTARRAYAPPLEPROC __glewMultiDrawRangeElementArrayAPPLE = NULL;
-void glMultiDrawRangeElementArrayAPPLE(GLenum mode,GLuint start,GLuint end,const GLint* first,const GLsizei *count,GLsizei primcount){__glewMultiDrawRangeElementArrayAPPLE(mode,start,end,first,count,primcount);}
-
-static PFNGLDELETEFENCESAPPLEPROC __glewDeleteFencesAPPLE = NULL;
-void glDeleteFencesAPPLE(GLsizei n,const GLuint* fences){__glewDeleteFencesAPPLE(n,fences);}
-static PFNGLFINISHFENCEAPPLEPROC __glewFinishFenceAPPLE = NULL;
-void glFinishFenceAPPLE(GLuint fence){__glewFinishFenceAPPLE(fence);}
-static PFNGLFINISHOBJECTAPPLEPROC __glewFinishObjectAPPLE = NULL;
-void glFinishObjectAPPLE(GLenum object,GLint name){__glewFinishObjectAPPLE(object,name);}
-static PFNGLGENFENCESAPPLEPROC __glewGenFencesAPPLE = NULL;
-void glGenFencesAPPLE(GLsizei n,GLuint* fences){__glewGenFencesAPPLE(n,fences);}
-static PFNGLISFENCEAPPLEPROC __glewIsFenceAPPLE = NULL;
-GLboolean glIsFenceAPPLE(GLuint fence){return __glewIsFenceAPPLE(fence);}
-static PFNGLSETFENCEAPPLEPROC __glewSetFenceAPPLE = NULL;
-void glSetFenceAPPLE(GLuint fence){__glewSetFenceAPPLE(fence);}
-static PFNGLTESTFENCEAPPLEPROC __glewTestFenceAPPLE = NULL;
-GLboolean glTestFenceAPPLE(GLuint fence){return __glewTestFenceAPPLE(fence);}
-static PFNGLTESTOBJECTAPPLEPROC __glewTestObjectAPPLE = NULL;
-GLboolean glTestObjectAPPLE(GLenum object,GLuint name){return __glewTestObjectAPPLE(object,name);}
-
-static PFNGLBUFFERPARAMETERIAPPLEPROC __glewBufferParameteriAPPLE = NULL;
-void glBufferParameteriAPPLE(GLenum target,GLenum pname,GLint param){__glewBufferParameteriAPPLE(target,pname,param);}
-static PFNGLFLUSHMAPPEDBUFFERRANGEAPPLEPROC __glewFlushMappedBufferRangeAPPLE = NULL;
-void glFlushMappedBufferRangeAPPLE(GLenum target,GLintptr offset,GLsizeiptr size){__glewFlushMappedBufferRangeAPPLE(target,offset,size);}
-
-static PFNGLGETOBJECTPARAMETERIVAPPLEPROC __glewGetObjectParameterivAPPLE = NULL;
-void glGetObjectParameterivAPPLE(GLenum objectType,GLuint name,GLenum pname,GLint* params){__glewGetObjectParameterivAPPLE(objectType,name,pname,params);}
-static PFNGLOBJECTPURGEABLEAPPLEPROC __glewObjectPurgeableAPPLE = NULL;
-GLenum glObjectPurgeableAPPLE(GLenum objectType,GLuint name,GLenum option){return __glewObjectPurgeableAPPLE(objectType,name,option);}
-static PFNGLOBJECTUNPURGEABLEAPPLEPROC __glewObjectUnpurgeableAPPLE = NULL;
-GLenum glObjectUnpurgeableAPPLE(GLenum objectType,GLuint name,GLenum option){return __glewObjectUnpurgeableAPPLE(objectType,name,option);}
-
-static PFNGLGETTEXPARAMETERPOINTERVAPPLEPROC __glewGetTexParameterPointervAPPLE = NULL;
-void glGetTexParameterPointervAPPLE(GLenum target,GLenum pname,GLvoid **params){__glewGetTexParameterPointervAPPLE(target,pname,params);}
-static PFNGLTEXTURERANGEAPPLEPROC __glewTextureRangeAPPLE = NULL;
-void glTextureRangeAPPLE(GLenum target,GLsizei length,GLvoid *pointer){__glewTextureRangeAPPLE(target,length,pointer);}
-
-static PFNGLBINDVERTEXARRAYAPPLEPROC __glewBindVertexArrayAPPLE = NULL;
-void glBindVertexArrayAPPLE(GLuint array){__glewBindVertexArrayAPPLE(array);}
-static PFNGLDELETEVERTEXARRAYSAPPLEPROC __glewDeleteVertexArraysAPPLE = NULL;
-void glDeleteVertexArraysAPPLE(GLsizei n,const GLuint* arrays){__glewDeleteVertexArraysAPPLE(n,arrays);}
-static PFNGLGENVERTEXARRAYSAPPLEPROC __glewGenVertexArraysAPPLE = NULL;
-void glGenVertexArraysAPPLE(GLsizei n,const GLuint* arrays){__glewGenVertexArraysAPPLE(n,arrays);}
-static PFNGLISVERTEXARRAYAPPLEPROC __glewIsVertexArrayAPPLE = NULL;
-GLboolean glIsVertexArrayAPPLE(GLuint array){return __glewIsVertexArrayAPPLE(array);}
-
-static PFNGLFLUSHVERTEXARRAYRANGEAPPLEPROC __glewFlushVertexArrayRangeAPPLE = NULL;
-void glFlushVertexArrayRangeAPPLE(GLsizei length,GLvoid *pointer){__glewFlushVertexArrayRangeAPPLE(length,pointer);}
-static PFNGLVERTEXARRAYPARAMETERIAPPLEPROC __glewVertexArrayParameteriAPPLE = NULL;
-void glVertexArrayParameteriAPPLE(GLenum pname,GLint param){__glewVertexArrayParameteriAPPLE(pname,param);}
-static PFNGLVERTEXARRAYRANGEAPPLEPROC __glewVertexArrayRangeAPPLE = NULL;
-void glVertexArrayRangeAPPLE(GLsizei length,GLvoid *pointer){__glewVertexArrayRangeAPPLE(length,pointer);}
-
-static PFNGLDISABLEVERTEXATTRIBAPPLEPROC __glewDisableVertexAttribAPPLE = NULL;
-void glDisableVertexAttribAPPLE(GLuint index,GLenum pname){__glewDisableVertexAttribAPPLE(index,pname);}
-static PFNGLENABLEVERTEXATTRIBAPPLEPROC __glewEnableVertexAttribAPPLE = NULL;
-void glEnableVertexAttribAPPLE(GLuint index,GLenum pname){__glewEnableVertexAttribAPPLE(index,pname);}
-static PFNGLISVERTEXATTRIBENABLEDAPPLEPROC __glewIsVertexAttribEnabledAPPLE = NULL;
-GLboolean glIsVertexAttribEnabledAPPLE(GLuint index,GLenum pname){return __glewIsVertexAttribEnabledAPPLE(index,pname);}
-static PFNGLMAPVERTEXATTRIB1DAPPLEPROC __glewMapVertexAttrib1dAPPLE = NULL;
-void glMapVertexAttrib1dAPPLE(GLuint index,GLuint size,GLdouble u1,GLdouble u2,GLint stride,GLint order,const GLdouble* points){__glewMapVertexAttrib1dAPPLE(index,size,u1,u2,stride,order,points);}
-static PFNGLMAPVERTEXATTRIB1FAPPLEPROC __glewMapVertexAttrib1fAPPLE = NULL;
-void glMapVertexAttrib1fAPPLE(GLuint index,GLuint size,GLfloat u1,GLfloat u2,GLint stride,GLint order,const GLfloat* points){__glewMapVertexAttrib1fAPPLE(index,size,u1,u2,stride,order,points);}
-static PFNGLMAPVERTEXATTRIB2DAPPLEPROC __glewMapVertexAttrib2dAPPLE = NULL;
-void glMapVertexAttrib2dAPPLE(GLuint index,GLuint size,GLdouble u1,GLdouble u2,GLint ustride,GLint uorder,GLdouble v1,GLdouble v2,GLint vstride,GLint vorder,const GLdouble* points){__glewMapVertexAttrib2dAPPLE(index,size,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points);}
-static PFNGLMAPVERTEXATTRIB2FAPPLEPROC __glewMapVertexAttrib2fAPPLE = NULL;
-void glMapVertexAttrib2fAPPLE(GLuint index,GLuint size,GLfloat u1,GLfloat u2,GLint ustride,GLint uorder,GLfloat v1,GLfloat v2,GLint vstride,GLint vorder,const GLfloat* points){__glewMapVertexAttrib2fAPPLE(index,size,u1,u2,ustride,uorder,v1,v2,vstride,vorder,points);}
-
-static PFNGLCLEARDEPTHFPROC __glewClearDepthf = NULL;
-void glClearDepthf(GLclampf d){__glewClearDepthf(d);}
-static PFNGLDEPTHRANGEFPROC __glewDepthRangef = NULL;
-void glDepthRangef(GLclampf n,GLclampf f){__glewDepthRangef(n,f);}
-static PFNGLGETSHADERPRECISIONFORMATPROC __glewGetShaderPrecisionFormat = NULL;
-void glGetShaderPrecisionFormat(GLenum shadertype,GLenum precisiontype,GLint* range,GLint *precision){__glewGetShaderPrecisionFormat(shadertype,precisiontype,range,precision);}
-static PFNGLRELEASESHADERCOMPILERPROC __glewReleaseShaderCompiler = NULL;
-void glReleaseShaderCompiler(void){__glewReleaseShaderCompiler();}
-static PFNGLSHADERBINARYPROC __glewShaderBinary = NULL;
-void glShaderBinary(GLsizei count,const GLuint* shaders,GLenum binaryformat,const GLvoid*binary,GLsizei length){__glewShaderBinary(count,shaders,binaryformat,binary,length);}
-
-static PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEPROC __glewDrawArraysInstancedBaseInstance = NULL;
-void glDrawArraysInstancedBaseInstance(GLenum mode,GLint first,GLsizei count,GLsizei primcount,GLuint baseinstance){__glewDrawArraysInstancedBaseInstance(mode,first,count,primcount,baseinstance);}
-static PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC __glewDrawElementsInstancedBaseInstance = NULL;
-void glDrawElementsInstancedBaseInstance(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices,GLsizei primcount,GLuint baseinstance){__glewDrawElementsInstancedBaseInstance(mode,count,type,indices,primcount,baseinstance);}
-static PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC __glewDrawElementsInstancedBaseVertexBaseInstance = NULL;
-void glDrawElementsInstancedBaseVertexBaseInstance(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices,GLsizei primcount,GLint basevertex,GLuint baseinstance){__glewDrawElementsInstancedBaseVertexBaseInstance(mode,count,type,indices,primcount,basevertex,baseinstance);}
-
-static PFNGLGETIMAGEHANDLEARBPROC __glewGetImageHandleARB = NULL;
-GLuint64 glGetImageHandleARB(GLuint texture,GLint level,GLboolean layered,GLint layer,GLenum format){return __glewGetImageHandleARB(texture,level,layered,layer,format);}
-static PFNGLGETTEXTUREHANDLEARBPROC __glewGetTextureHandleARB = NULL;
-GLuint64 glGetTextureHandleARB(GLuint texture){return __glewGetTextureHandleARB(texture);}
-static PFNGLGETTEXTURESAMPLERHANDLEARBPROC __glewGetTextureSamplerHandleARB = NULL;
-GLuint64 glGetTextureSamplerHandleARB(GLuint texture,GLuint sampler){return __glewGetTextureSamplerHandleARB(texture,sampler);}
-static PFNGLGETVERTEXATTRIBLUI64VARBPROC __glewGetVertexAttribLui64vARB = NULL;
-void glGetVertexAttribLui64vARB(GLuint index,GLenum pname,GLuint64EXT* params){__glewGetVertexAttribLui64vARB(index,pname,params);}
-static PFNGLISIMAGEHANDLERESIDENTARBPROC __glewIsImageHandleResidentARB = NULL;
-GLboolean glIsImageHandleResidentARB(GLuint64 handle){return __glewIsImageHandleResidentARB(handle);}
-static PFNGLISTEXTUREHANDLERESIDENTARBPROC __glewIsTextureHandleResidentARB = NULL;
-GLboolean glIsTextureHandleResidentARB(GLuint64 handle){return __glewIsTextureHandleResidentARB(handle);}
-static PFNGLMAKEIMAGEHANDLENONRESIDENTARBPROC __glewMakeImageHandleNonResidentARB = NULL;
-void glMakeImageHandleNonResidentARB(GLuint64 handle){__glewMakeImageHandleNonResidentARB(handle);}
-static PFNGLMAKEIMAGEHANDLERESIDENTARBPROC __glewMakeImageHandleResidentARB = NULL;
-void glMakeImageHandleResidentARB(GLuint64 handle,GLenum access){__glewMakeImageHandleResidentARB(handle,access);}
-static PFNGLMAKETEXTUREHANDLENONRESIDENTARBPROC __glewMakeTextureHandleNonResidentARB = NULL;
-void glMakeTextureHandleNonResidentARB(GLuint64 handle){__glewMakeTextureHandleNonResidentARB(handle);}
-static PFNGLMAKETEXTUREHANDLERESIDENTARBPROC __glewMakeTextureHandleResidentARB = NULL;
-void glMakeTextureHandleResidentARB(GLuint64 handle){__glewMakeTextureHandleResidentARB(handle);}
-static PFNGLPROGRAMUNIFORMHANDLEUI64ARBPROC __glewProgramUniformHandleui64ARB = NULL;
-void glProgramUniformHandleui64ARB(GLuint program,GLint location,GLuint64 value){__glewProgramUniformHandleui64ARB(program,location,value);}
-static PFNGLPROGRAMUNIFORMHANDLEUI64VARBPROC __glewProgramUniformHandleui64vARB = NULL;
-void glProgramUniformHandleui64vARB(GLuint program,GLint location,GLsizei count,const GLuint64* values){__glewProgramUniformHandleui64vARB(program,location,count,values);}
-static PFNGLUNIFORMHANDLEUI64ARBPROC __glewUniformHandleui64ARB = NULL;
-void glUniformHandleui64ARB(GLint location,GLuint64 value){__glewUniformHandleui64ARB(location,value);}
-static PFNGLUNIFORMHANDLEUI64VARBPROC __glewUniformHandleui64vARB = NULL;
-void glUniformHandleui64vARB(GLint location,GLsizei count,const GLuint64* value){__glewUniformHandleui64vARB(location,count,value);}
-static PFNGLVERTEXATTRIBL1UI64ARBPROC __glewVertexAttribL1ui64ARB = NULL;
-void glVertexAttribL1ui64ARB(GLuint index,GLuint64EXT x){__glewVertexAttribL1ui64ARB(index,x);}
-static PFNGLVERTEXATTRIBL1UI64VARBPROC __glewVertexAttribL1ui64vARB = NULL;
-void glVertexAttribL1ui64vARB(GLuint index,const GLuint64EXT* v){__glewVertexAttribL1ui64vARB(index,v);}
-
-static PFNGLBINDFRAGDATALOCATIONINDEXEDPROC __glewBindFragDataLocationIndexed = NULL;
-void glBindFragDataLocationIndexed(GLuint program,GLuint colorNumber,GLuint index,const GLchar * name){__glewBindFragDataLocationIndexed(program,colorNumber,index,name);}
-static PFNGLGETFRAGDATAINDEXPROC __glewGetFragDataIndex = NULL;
-GLint glGetFragDataIndex(GLuint program,const GLchar * name){return __glewGetFragDataIndex(program,name);}
-
-static PFNGLBUFFERSTORAGEPROC __glewBufferStorage = NULL;
-void glBufferStorage(GLenum target,GLsizeiptr size,const GLvoid* data,GLbitfield flags){__glewBufferStorage(target,size,data,flags);}
-static PFNGLNAMEDBUFFERSTORAGEEXTPROC __glewNamedBufferStorageEXT = NULL;
-void glNamedBufferStorageEXT(GLuint buffer,GLsizeiptr size,const GLvoid* data,GLbitfield flags){__glewNamedBufferStorageEXT(buffer,size,data,flags);}
-
-static PFNGLCREATESYNCFROMCLEVENTARBPROC __glewCreateSyncFromCLeventARB = NULL;
-GLsync glCreateSyncFromCLeventARB(cl_context context,cl_event event,GLbitfield flags){return __glewCreateSyncFromCLeventARB(context,event,flags);}
-
-static PFNGLCLEARBUFFERDATAPROC __glewClearBufferData = NULL;
-void glClearBufferData(GLenum target,GLenum internalformat,GLenum format,GLenum type,const GLvoid* data){__glewClearBufferData(target,internalformat,format,type,data);}
-static PFNGLCLEARBUFFERSUBDATAPROC __glewClearBufferSubData = NULL;
-void glClearBufferSubData(GLenum target,GLenum internalformat,GLintptr offset,GLsizeiptr size,GLenum format,GLenum type,const GLvoid* data){__glewClearBufferSubData(target,internalformat,offset,size,format,type,data);}
-static PFNGLCLEARNAMEDBUFFERDATAEXTPROC __glewClearNamedBufferDataEXT = NULL;
-void glClearNamedBufferDataEXT(GLuint buffer,GLenum internalformat,GLenum format,GLenum type,const GLvoid* data){__glewClearNamedBufferDataEXT(buffer,internalformat,format,type,data);}
-static PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC __glewClearNamedBufferSubDataEXT = NULL;
-void glClearNamedBufferSubDataEXT(GLuint buffer,GLenum internalformat,GLintptr offset,GLsizeiptr size,GLenum format,GLenum type,const GLvoid* data){__glewClearNamedBufferSubDataEXT(buffer,internalformat,offset,size,format,type,data);}
-
-static PFNGLCLEARTEXIMAGEPROC __glewClearTexImage = NULL;
-void glClearTexImage(GLuint texture,GLint level,GLenum format,GLenum type,const GLvoid* data){__glewClearTexImage(texture,level,format,type,data);}
-static PFNGLCLEARTEXSUBIMAGEPROC __glewClearTexSubImage = NULL;
-void glClearTexSubImage(GLuint texture,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLenum format,GLenum type,const GLvoid* data){__glewClearTexSubImage(texture,level,xoffset,yoffset,zoffset,width,height,depth,format,type,data);}
-
-static PFNGLCLAMPCOLORARBPROC __glewClampColorARB = NULL;
-void glClampColorARB(GLenum target,GLenum clamp){__glewClampColorARB(target,clamp);}
-
-static PFNGLDISPATCHCOMPUTEPROC __glewDispatchCompute = NULL;
-void glDispatchCompute(GLuint num_groups_x,GLuint num_groups_y,GLuint num_groups_z){__glewDispatchCompute(num_groups_x,num_groups_y,num_groups_z);}
-static PFNGLDISPATCHCOMPUTEINDIRECTPROC __glewDispatchComputeIndirect = NULL;
-void glDispatchComputeIndirect(GLintptr indirect){__glewDispatchComputeIndirect(indirect);}
-
-static PFNGLDISPATCHCOMPUTEGROUPSIZEARBPROC __glewDispatchComputeGroupSizeARB = NULL;
-void glDispatchComputeGroupSizeARB(GLuint num_groups_x,GLuint num_groups_y,GLuint num_groups_z,GLuint group_size_x,GLuint group_size_y,GLuint group_size_z){__glewDispatchComputeGroupSizeARB(num_groups_x,num_groups_y,num_groups_z,group_size_x,group_size_y,group_size_z);}
-
-static PFNGLCOPYBUFFERSUBDATAPROC __glewCopyBufferSubData = NULL;
-void glCopyBufferSubData(GLenum readtarget,GLenum writetarget,GLintptr readoffset,GLintptr writeoffset,GLsizeiptr size){__glewCopyBufferSubData(readtarget,writetarget,readoffset,writeoffset,size);}
-
-static PFNGLCOPYIMAGESUBDATAPROC __glewCopyImageSubData = NULL;
-void glCopyImageSubData(GLuint srcName,GLenum srcTarget,GLint srcLevel,GLint srcX,GLint srcY,GLint srcZ,GLuint dstName,GLenum dstTarget,GLint dstLevel,GLint dstX,GLint dstY,GLint dstZ,GLsizei srcWidth,GLsizei srcHeight,GLsizei srcDepth){__glewCopyImageSubData(srcName,srcTarget,srcLevel,srcX,srcY,srcZ,dstName,dstTarget,dstLevel,dstX,dstY,dstZ,srcWidth,srcHeight,srcDepth);}
-
-static PFNGLDEBUGMESSAGECALLBACKARBPROC __glewDebugMessageCallbackARB = NULL;
-void glDebugMessageCallbackARB(GLDEBUGPROCARB callback,const GLvoid *userParam){__glewDebugMessageCallbackARB(callback,userParam);}
-static PFNGLDEBUGMESSAGECONTROLARBPROC __glewDebugMessageControlARB = NULL;
-void glDebugMessageControlARB(GLenum source,GLenum type,GLenum severity,GLsizei count,const GLuint* ids,GLboolean enabled){__glewDebugMessageControlARB(source,type,severity,count,ids,enabled);}
-static PFNGLDEBUGMESSAGEINSERTARBPROC __glewDebugMessageInsertARB = NULL;
-void glDebugMessageInsertARB(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar* buf){__glewDebugMessageInsertARB(source,type,id,severity,length,buf);}
-static PFNGLGETDEBUGMESSAGELOGARBPROC __glewGetDebugMessageLogARB = NULL;
-GLuint glGetDebugMessageLogARB(GLuint count,GLsizei bufsize,GLenum* sources,GLenum* types,GLuint* ids,GLenum* severities,GLsizei* lengths,GLchar* messageLog){return __glewGetDebugMessageLogARB(count,bufsize,sources,types,ids,severities,lengths,messageLog);}
-
-static PFNGLDRAWBUFFERSARBPROC __glewDrawBuffersARB = NULL;
-void glDrawBuffersARB(GLsizei n,const GLenum* bufs){__glewDrawBuffersARB(n,bufs);}
-
-static PFNGLBLENDEQUATIONSEPARATEIARBPROC __glewBlendEquationSeparateiARB = NULL;
-void glBlendEquationSeparateiARB(GLuint buf,GLenum modeRGB,GLenum modeAlpha){__glewBlendEquationSeparateiARB(buf,modeRGB,modeAlpha);}
-static PFNGLBLENDEQUATIONIARBPROC __glewBlendEquationiARB = NULL;
-void glBlendEquationiARB(GLuint buf,GLenum mode){__glewBlendEquationiARB(buf,mode);}
-static PFNGLBLENDFUNCSEPARATEIARBPROC __glewBlendFuncSeparateiARB = NULL;
-void glBlendFuncSeparateiARB(GLuint buf,GLenum srcRGB,GLenum dstRGB,GLenum srcAlpha,GLenum dstAlpha){__glewBlendFuncSeparateiARB(buf,srcRGB,dstRGB,srcAlpha,dstAlpha);}
-static PFNGLBLENDFUNCIARBPROC __glewBlendFunciARB = NULL;
-void glBlendFunciARB(GLuint buf,GLenum src,GLenum dst){__glewBlendFunciARB(buf,src,dst);}
-
-static PFNGLDRAWELEMENTSBASEVERTEXPROC __glewDrawElementsBaseVertex = NULL;
-void glDrawElementsBaseVertex(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices,GLint basevertex){__glewDrawElementsBaseVertex(mode,count,type,indices,basevertex);}
-static PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC __glewDrawElementsInstancedBaseVertex = NULL;
-void glDrawElementsInstancedBaseVertex(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices,GLsizei primcount,GLint basevertex){__glewDrawElementsInstancedBaseVertex(mode,count,type,indices,primcount,basevertex);}
-static PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC __glewDrawRangeElementsBaseVertex = NULL;
-void glDrawRangeElementsBaseVertex(GLenum mode,GLuint start,GLuint end,GLsizei count,GLenum type,const GLvoid *indices,GLint basevertex){__glewDrawRangeElementsBaseVertex(mode,start,end,count,type,indices,basevertex);}
-static PFNGLMULTIDRAWELEMENTSBASEVERTEXPROC __glewMultiDrawElementsBaseVertex = NULL;
-void glMultiDrawElementsBaseVertex(GLenum mode,const GLsizei* count,GLenum type,const GLvoid* const *indices,GLsizei primcount,const GLint *basevertex){__glewMultiDrawElementsBaseVertex(mode,count,type,indices,primcount,basevertex);}
-
-static PFNGLDRAWARRAYSINDIRECTPROC __glewDrawArraysIndirect = NULL;
-void glDrawArraysIndirect(GLenum mode,const GLvoid *indirect){__glewDrawArraysIndirect(mode,indirect);}
-static PFNGLDRAWELEMENTSINDIRECTPROC __glewDrawElementsIndirect = NULL;
-void glDrawElementsIndirect(GLenum mode,GLenum type,const GLvoid *indirect){__glewDrawElementsIndirect(mode,type,indirect);}
-
-static PFNGLFRAMEBUFFERPARAMETERIPROC __glewFramebufferParameteri = NULL;
-void glFramebufferParameteri(GLenum target,GLenum pname,GLint param){__glewFramebufferParameteri(target,pname,param);}
-static PFNGLGETFRAMEBUFFERPARAMETERIVPROC __glewGetFramebufferParameteriv = NULL;
-void glGetFramebufferParameteriv(GLenum target,GLenum pname,GLint* params){__glewGetFramebufferParameteriv(target,pname,params);}
-static PFNGLGETNAMEDFRAMEBUFFERPARAMETERIVEXTPROC __glewGetNamedFramebufferParameterivEXT = NULL;
-void glGetNamedFramebufferParameterivEXT(GLuint framebuffer,GLenum pname,GLint* params){__glewGetNamedFramebufferParameterivEXT(framebuffer,pname,params);}
-static PFNGLNAMEDFRAMEBUFFERPARAMETERIEXTPROC __glewNamedFramebufferParameteriEXT = NULL;
-void glNamedFramebufferParameteriEXT(GLuint framebuffer,GLenum pname,GLint param){__glewNamedFramebufferParameteriEXT(framebuffer,pname,param);}
-
-static PFNGLBINDFRAMEBUFFERPROC __glewBindFramebuffer = NULL;
-void glBindFramebuffer(GLenum target,GLuint framebuffer){__glewBindFramebuffer(target,framebuffer);}
-static PFNGLBINDRENDERBUFFERPROC __glewBindRenderbuffer = NULL;
-void glBindRenderbuffer(GLenum target,GLuint renderbuffer){__glewBindRenderbuffer(target,renderbuffer);}
-static PFNGLBLITFRAMEBUFFERPROC __glewBlitFramebuffer = NULL;
-void glBlitFramebuffer(GLint srcX0,GLint srcY0,GLint srcX1,GLint srcY1,GLint dstX0,GLint dstY0,GLint dstX1,GLint dstY1,GLbitfield mask,GLenum filter){__glewBlitFramebuffer(srcX0,srcY0,srcX1,srcY1,dstX0,dstY0,dstX1,dstY1,mask,filter);}
-static PFNGLCHECKFRAMEBUFFERSTATUSPROC __glewCheckFramebufferStatus = NULL;
-GLenum glCheckFramebufferStatus(GLenum target){return __glewCheckFramebufferStatus(target);}
-static PFNGLDELETEFRAMEBUFFERSPROC __glewDeleteFramebuffers = NULL;
-void glDeleteFramebuffers(GLsizei n,const GLuint* framebuffers){__glewDeleteFramebuffers(n,framebuffers);}
-static PFNGLDELETERENDERBUFFERSPROC __glewDeleteRenderbuffers = NULL;
-void glDeleteRenderbuffers(GLsizei n,const GLuint* renderbuffers){__glewDeleteRenderbuffers(n,renderbuffers);}
-static PFNGLFRAMEBUFFERRENDERBUFFERPROC __glewFramebufferRenderbuffer = NULL;
-void glFramebufferRenderbuffer(GLenum target,GLenum attachment,GLenum renderbuffertarget,GLuint renderbuffer){__glewFramebufferRenderbuffer(target,attachment,renderbuffertarget,renderbuffer);}
-static PFNGLFRAMEBUFFERTEXTURE1DPROC __glewFramebufferTexture1D = NULL;
-void glFramebufferTexture1D(GLenum target,GLenum attachment,GLenum textarget,GLuint texture,GLint level){__glewFramebufferTexture1D(target,attachment,textarget,texture,level);}
-static PFNGLFRAMEBUFFERTEXTURE2DPROC __glewFramebufferTexture2D = NULL;
-void glFramebufferTexture2D(GLenum target,GLenum attachment,GLenum textarget,GLuint texture,GLint level){__glewFramebufferTexture2D(target,attachment,textarget,texture,level);}
-static PFNGLFRAMEBUFFERTEXTURE3DPROC __glewFramebufferTexture3D = NULL;
-void glFramebufferTexture3D(GLenum target,GLenum attachment,GLenum textarget,GLuint texture,GLint level,GLint layer){__glewFramebufferTexture3D(target,attachment,textarget,texture,level,layer);}
-static PFNGLFRAMEBUFFERTEXTURELAYERPROC __glewFramebufferTextureLayer = NULL;
-void glFramebufferTextureLayer(GLenum target,GLenum attachment,GLuint texture,GLint level,GLint layer){__glewFramebufferTextureLayer(target,attachment,texture,level,layer);}
-static PFNGLGENFRAMEBUFFERSPROC __glewGenFramebuffers = NULL;
-void glGenFramebuffers(GLsizei n,GLuint* framebuffers){__glewGenFramebuffers(n,framebuffers);}
-static PFNGLGENRENDERBUFFERSPROC __glewGenRenderbuffers = NULL;
-void glGenRenderbuffers(GLsizei n,GLuint* renderbuffers){__glewGenRenderbuffers(n,renderbuffers);}
-static PFNGLGENERATEMIPMAPPROC __glewGenerateMipmap = NULL;
-void glGenerateMipmap(GLenum target){__glewGenerateMipmap(target);}
-static PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC __glewGetFramebufferAttachmentParameteriv = NULL;
-void glGetFramebufferAttachmentParameteriv(GLenum target,GLenum attachment,GLenum pname,GLint* params){__glewGetFramebufferAttachmentParameteriv(target,attachment,pname,params);}
-static PFNGLGETRENDERBUFFERPARAMETERIVPROC __glewGetRenderbufferParameteriv = NULL;
-void glGetRenderbufferParameteriv(GLenum target,GLenum pname,GLint* params){__glewGetRenderbufferParameteriv(target,pname,params);}
-static PFNGLISFRAMEBUFFERPROC __glewIsFramebuffer = NULL;
-GLboolean glIsFramebuffer(GLuint framebuffer){return __glewIsFramebuffer(framebuffer);}
-static PFNGLISRENDERBUFFERPROC __glewIsRenderbuffer = NULL;
-GLboolean glIsRenderbuffer(GLuint renderbuffer){return __glewIsRenderbuffer(renderbuffer);}
-static PFNGLRENDERBUFFERSTORAGEPROC __glewRenderbufferStorage = NULL;
-void glRenderbufferStorage(GLenum target,GLenum internalformat,GLsizei width,GLsizei height){__glewRenderbufferStorage(target,internalformat,width,height);}
-static PFNGLRENDERBUFFERSTORAGEMULTISAMPLEPROC __glewRenderbufferStorageMultisample = NULL;
-void glRenderbufferStorageMultisample(GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height){__glewRenderbufferStorageMultisample(target,samples,internalformat,width,height);}
-
-static PFNGLFRAMEBUFFERTEXTUREARBPROC __glewFramebufferTextureARB = NULL;
-void glFramebufferTextureARB(GLenum target,GLenum attachment,GLuint texture,GLint level){__glewFramebufferTextureARB(target,attachment,texture,level);}
-static PFNGLFRAMEBUFFERTEXTUREFACEARBPROC __glewFramebufferTextureFaceARB = NULL;
-void glFramebufferTextureFaceARB(GLenum target,GLenum attachment,GLuint texture,GLint level,GLenum face){__glewFramebufferTextureFaceARB(target,attachment,texture,level,face);}
-static PFNGLFRAMEBUFFERTEXTURELAYERARBPROC __glewFramebufferTextureLayerARB = NULL;
-void glFramebufferTextureLayerARB(GLenum target,GLenum attachment,GLuint texture,GLint level,GLint layer){__glewFramebufferTextureLayerARB(target,attachment,texture,level,layer);}
-static PFNGLPROGRAMPARAMETERIARBPROC __glewProgramParameteriARB = NULL;
-void glProgramParameteriARB(GLuint program,GLenum pname,GLint value){__glewProgramParameteriARB(program,pname,value);}
-
-static PFNGLGETPROGRAMBINARYPROC __glewGetProgramBinary = NULL;
-void glGetProgramBinary(GLuint program,GLsizei bufSize,GLsizei* length,GLenum *binaryFormat,GLvoid*binary){__glewGetProgramBinary(program,bufSize,length,binaryFormat,binary);}
-static PFNGLPROGRAMBINARYPROC __glewProgramBinary = NULL;
-void glProgramBinary(GLuint program,GLenum binaryFormat,const GLvoid *binary,GLsizei length){__glewProgramBinary(program,binaryFormat,binary,length);}
-static PFNGLPROGRAMPARAMETERIPROC __glewProgramParameteri = NULL;
-void glProgramParameteri(GLuint program,GLenum pname,GLint value){__glewProgramParameteri(program,pname,value);}
-
-static PFNGLGETUNIFORMDVPROC __glewGetUniformdv = NULL;
-void glGetUniformdv(GLuint program,GLint location,GLdouble* params){__glewGetUniformdv(program,location,params);}
-static PFNGLUNIFORM1DPROC __glewUniform1d = NULL;
-void glUniform1d(GLint location,GLdouble x){__glewUniform1d(location,x);}
-static PFNGLUNIFORM1DVPROC __glewUniform1dv = NULL;
-void glUniform1dv(GLint location,GLsizei count,const GLdouble* value){__glewUniform1dv(location,count,value);}
-static PFNGLUNIFORM2DPROC __glewUniform2d = NULL;
-void glUniform2d(GLint location,GLdouble x,GLdouble y){__glewUniform2d(location,x,y);}
-static PFNGLUNIFORM2DVPROC __glewUniform2dv = NULL;
-void glUniform2dv(GLint location,GLsizei count,const GLdouble* value){__glewUniform2dv(location,count,value);}
-static PFNGLUNIFORM3DPROC __glewUniform3d = NULL;
-void glUniform3d(GLint location,GLdouble x,GLdouble y,GLdouble z){__glewUniform3d(location,x,y,z);}
-static PFNGLUNIFORM3DVPROC __glewUniform3dv = NULL;
-void glUniform3dv(GLint location,GLsizei count,const GLdouble* value){__glewUniform3dv(location,count,value);}
-static PFNGLUNIFORM4DPROC __glewUniform4d = NULL;
-void glUniform4d(GLint location,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewUniform4d(location,x,y,z,w);}
-static PFNGLUNIFORM4DVPROC __glewUniform4dv = NULL;
-void glUniform4dv(GLint location,GLsizei count,const GLdouble* value){__glewUniform4dv(location,count,value);}
-static PFNGLUNIFORMMATRIX2DVPROC __glewUniformMatrix2dv = NULL;
-void glUniformMatrix2dv(GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewUniformMatrix2dv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX2X3DVPROC __glewUniformMatrix2x3dv = NULL;
-void glUniformMatrix2x3dv(GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewUniformMatrix2x3dv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX2X4DVPROC __glewUniformMatrix2x4dv = NULL;
-void glUniformMatrix2x4dv(GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewUniformMatrix2x4dv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX3DVPROC __glewUniformMatrix3dv = NULL;
-void glUniformMatrix3dv(GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewUniformMatrix3dv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX3X2DVPROC __glewUniformMatrix3x2dv = NULL;
-void glUniformMatrix3x2dv(GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewUniformMatrix3x2dv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX3X4DVPROC __glewUniformMatrix3x4dv = NULL;
-void glUniformMatrix3x4dv(GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewUniformMatrix3x4dv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX4DVPROC __glewUniformMatrix4dv = NULL;
-void glUniformMatrix4dv(GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewUniformMatrix4dv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX4X2DVPROC __glewUniformMatrix4x2dv = NULL;
-void glUniformMatrix4x2dv(GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewUniformMatrix4x2dv(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX4X3DVPROC __glewUniformMatrix4x3dv = NULL;
-void glUniformMatrix4x3dv(GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewUniformMatrix4x3dv(location,count,transpose,value);}
-
-static PFNGLCOLORSUBTABLEPROC __glewColorSubTable = NULL;
-void glColorSubTable(GLenum target,GLsizei start,GLsizei count,GLenum format,GLenum type,const GLvoid *data){__glewColorSubTable(target,start,count,format,type,data);}
-static PFNGLCOLORTABLEPROC __glewColorTable = NULL;
-void glColorTable(GLenum target,GLenum internalformat,GLsizei width,GLenum format,GLenum type,const GLvoid *table){__glewColorTable(target,internalformat,width,format,type,table);}
-static PFNGLCOLORTABLEPARAMETERFVPROC __glewColorTableParameterfv = NULL;
-void glColorTableParameterfv(GLenum target,GLenum pname,const GLfloat *params){__glewColorTableParameterfv(target,pname,params);}
-static PFNGLCOLORTABLEPARAMETERIVPROC __glewColorTableParameteriv = NULL;
-void glColorTableParameteriv(GLenum target,GLenum pname,const GLint *params){__glewColorTableParameteriv(target,pname,params);}
-static PFNGLCONVOLUTIONFILTER1DPROC __glewConvolutionFilter1D = NULL;
-void glConvolutionFilter1D(GLenum target,GLenum internalformat,GLsizei width,GLenum format,GLenum type,const GLvoid *image){__glewConvolutionFilter1D(target,internalformat,width,format,type,image);}
-static PFNGLCONVOLUTIONFILTER2DPROC __glewConvolutionFilter2D = NULL;
-void glConvolutionFilter2D(GLenum target,GLenum internalformat,GLsizei width,GLsizei height,GLenum format,GLenum type,const GLvoid *image){__glewConvolutionFilter2D(target,internalformat,width,height,format,type,image);}
-static PFNGLCONVOLUTIONPARAMETERFPROC __glewConvolutionParameterf = NULL;
-void glConvolutionParameterf(GLenum target,GLenum pname,GLfloat params){__glewConvolutionParameterf(target,pname,params);}
-static PFNGLCONVOLUTIONPARAMETERFVPROC __glewConvolutionParameterfv = NULL;
-void glConvolutionParameterfv(GLenum target,GLenum pname,const GLfloat *params){__glewConvolutionParameterfv(target,pname,params);}
-static PFNGLCONVOLUTIONPARAMETERIPROC __glewConvolutionParameteri = NULL;
-void glConvolutionParameteri(GLenum target,GLenum pname,GLint params){__glewConvolutionParameteri(target,pname,params);}
-static PFNGLCONVOLUTIONPARAMETERIVPROC __glewConvolutionParameteriv = NULL;
-void glConvolutionParameteriv(GLenum target,GLenum pname,const GLint *params){__glewConvolutionParameteriv(target,pname,params);}
-static PFNGLCOPYCOLORSUBTABLEPROC __glewCopyColorSubTable = NULL;
-void glCopyColorSubTable(GLenum target,GLsizei start,GLint x,GLint y,GLsizei width){__glewCopyColorSubTable(target,start,x,y,width);}
-static PFNGLCOPYCOLORTABLEPROC __glewCopyColorTable = NULL;
-void glCopyColorTable(GLenum target,GLenum internalformat,GLint x,GLint y,GLsizei width){__glewCopyColorTable(target,internalformat,x,y,width);}
-static PFNGLCOPYCONVOLUTIONFILTER1DPROC __glewCopyConvolutionFilter1D = NULL;
-void glCopyConvolutionFilter1D(GLenum target,GLenum internalformat,GLint x,GLint y,GLsizei width){__glewCopyConvolutionFilter1D(target,internalformat,x,y,width);}
-static PFNGLCOPYCONVOLUTIONFILTER2DPROC __glewCopyConvolutionFilter2D = NULL;
-void glCopyConvolutionFilter2D(GLenum target,GLenum internalformat,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyConvolutionFilter2D(target,internalformat,x,y,width,height);}
-static PFNGLGETCOLORTABLEPROC __glewGetColorTable = NULL;
-void glGetColorTable(GLenum target,GLenum format,GLenum type,GLvoid *table){__glewGetColorTable(target,format,type,table);}
-static PFNGLGETCOLORTABLEPARAMETERFVPROC __glewGetColorTableParameterfv = NULL;
-void glGetColorTableParameterfv(GLenum target,GLenum pname,GLfloat *params){__glewGetColorTableParameterfv(target,pname,params);}
-static PFNGLGETCOLORTABLEPARAMETERIVPROC __glewGetColorTableParameteriv = NULL;
-void glGetColorTableParameteriv(GLenum target,GLenum pname,GLint *params){__glewGetColorTableParameteriv(target,pname,params);}
-static PFNGLGETCONVOLUTIONFILTERPROC __glewGetConvolutionFilter = NULL;
-void glGetConvolutionFilter(GLenum target,GLenum format,GLenum type,GLvoid *image){__glewGetConvolutionFilter(target,format,type,image);}
-static PFNGLGETCONVOLUTIONPARAMETERFVPROC __glewGetConvolutionParameterfv = NULL;
-void glGetConvolutionParameterfv(GLenum target,GLenum pname,GLfloat *params){__glewGetConvolutionParameterfv(target,pname,params);}
-static PFNGLGETCONVOLUTIONPARAMETERIVPROC __glewGetConvolutionParameteriv = NULL;
-void glGetConvolutionParameteriv(GLenum target,GLenum pname,GLint *params){__glewGetConvolutionParameteriv(target,pname,params);}
-static PFNGLGETHISTOGRAMPROC __glewGetHistogram = NULL;
-void glGetHistogram(GLenum target,GLboolean reset,GLenum format,GLenum type,GLvoid *values){__glewGetHistogram(target,reset,format,type,values);}
-static PFNGLGETHISTOGRAMPARAMETERFVPROC __glewGetHistogramParameterfv = NULL;
-void glGetHistogramParameterfv(GLenum target,GLenum pname,GLfloat *params){__glewGetHistogramParameterfv(target,pname,params);}
-static PFNGLGETHISTOGRAMPARAMETERIVPROC __glewGetHistogramParameteriv = NULL;
-void glGetHistogramParameteriv(GLenum target,GLenum pname,GLint *params){__glewGetHistogramParameteriv(target,pname,params);}
-static PFNGLGETMINMAXPROC __glewGetMinmax = NULL;
-void glGetMinmax(GLenum target,GLboolean reset,GLenum format,GLenum types,GLvoid *values){__glewGetMinmax(target,reset,format,types,values);}
-static PFNGLGETMINMAXPARAMETERFVPROC __glewGetMinmaxParameterfv = NULL;
-void glGetMinmaxParameterfv(GLenum target,GLenum pname,GLfloat *params){__glewGetMinmaxParameterfv(target,pname,params);}
-static PFNGLGETMINMAXPARAMETERIVPROC __glewGetMinmaxParameteriv = NULL;
-void glGetMinmaxParameteriv(GLenum target,GLenum pname,GLint *params){__glewGetMinmaxParameteriv(target,pname,params);}
-static PFNGLGETSEPARABLEFILTERPROC __glewGetSeparableFilter = NULL;
-void glGetSeparableFilter(GLenum target,GLenum format,GLenum type,GLvoid *row,GLvoid *column,GLvoid *span){__glewGetSeparableFilter(target,format,type,row,column,span);}
-static PFNGLHISTOGRAMPROC __glewHistogram = NULL;
-void glHistogram(GLenum target,GLsizei width,GLenum internalformat,GLboolean sink){__glewHistogram(target,width,internalformat,sink);}
-static PFNGLMINMAXPROC __glewMinmax = NULL;
-void glMinmax(GLenum target,GLenum internalformat,GLboolean sink){__glewMinmax(target,internalformat,sink);}
-static PFNGLRESETHISTOGRAMPROC __glewResetHistogram = NULL;
-void glResetHistogram(GLenum target){__glewResetHistogram(target);}
-static PFNGLRESETMINMAXPROC __glewResetMinmax = NULL;
-void glResetMinmax(GLenum target){__glewResetMinmax(target);}
-static PFNGLSEPARABLEFILTER2DPROC __glewSeparableFilter2D = NULL;
-void glSeparableFilter2D(GLenum target,GLenum internalformat,GLsizei width,GLsizei height,GLenum format,GLenum type,const GLvoid *row,const GLvoid *column){__glewSeparableFilter2D(target,internalformat,width,height,format,type,row,column);}
-
-static PFNGLMULTIDRAWARRAYSINDIRECTCOUNTARBPROC __glewMultiDrawArraysIndirectCountARB = NULL;
-void glMultiDrawArraysIndirectCountARB(GLenum mode,const GLvoid *indirect,GLintptr drawcount,GLsizei maxdrawcount,GLsizei stride){__glewMultiDrawArraysIndirectCountARB(mode,indirect,drawcount,maxdrawcount,stride);}
-static PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTARBPROC __glewMultiDrawElementsIndirectCountARB = NULL;
-void glMultiDrawElementsIndirectCountARB(GLenum mode,GLenum type,const GLvoid *indirect,GLintptr drawcount,GLsizei maxdrawcount,GLsizei stride){__glewMultiDrawElementsIndirectCountARB(mode,type,indirect,drawcount,maxdrawcount,stride);}
-
-static PFNGLDRAWARRAYSINSTANCEDARBPROC __glewDrawArraysInstancedARB = NULL;
-void glDrawArraysInstancedARB(GLenum mode,GLint first,GLsizei count,GLsizei primcount){__glewDrawArraysInstancedARB(mode,first,count,primcount);}
-static PFNGLDRAWELEMENTSINSTANCEDARBPROC __glewDrawElementsInstancedARB = NULL;
-void glDrawElementsInstancedARB(GLenum mode,GLsizei count,GLenum type,const void* indices,GLsizei primcount){__glewDrawElementsInstancedARB(mode,count,type,indices,primcount);}
-static PFNGLVERTEXATTRIBDIVISORARBPROC __glewVertexAttribDivisorARB = NULL;
-void glVertexAttribDivisorARB(GLuint index,GLuint divisor){__glewVertexAttribDivisorARB(index,divisor);}
-
-static PFNGLGETINTERNALFORMATIVPROC __glewGetInternalformativ = NULL;
-void glGetInternalformativ(GLenum target,GLenum internalformat,GLenum pname,GLsizei bufSize,GLint* params){__glewGetInternalformativ(target,internalformat,pname,bufSize,params);}
-
-static PFNGLGETINTERNALFORMATI64VPROC __glewGetInternalformati64v = NULL;
-void glGetInternalformati64v(GLenum target,GLenum internalformat,GLenum pname,GLsizei bufSize,GLint64* params){__glewGetInternalformati64v(target,internalformat,pname,bufSize,params);}
-
-static PFNGLINVALIDATEBUFFERDATAPROC __glewInvalidateBufferData = NULL;
-void glInvalidateBufferData(GLuint buffer){__glewInvalidateBufferData(buffer);}
-static PFNGLINVALIDATEBUFFERSUBDATAPROC __glewInvalidateBufferSubData = NULL;
-void glInvalidateBufferSubData(GLuint buffer,GLintptr offset,GLsizeiptr length){__glewInvalidateBufferSubData(buffer,offset,length);}
-static PFNGLINVALIDATEFRAMEBUFFERPROC __glewInvalidateFramebuffer = NULL;
-void glInvalidateFramebuffer(GLenum target,GLsizei numAttachments,const GLenum* attachments){__glewInvalidateFramebuffer(target,numAttachments,attachments);}
-static PFNGLINVALIDATESUBFRAMEBUFFERPROC __glewInvalidateSubFramebuffer = NULL;
-void glInvalidateSubFramebuffer(GLenum target,GLsizei numAttachments,const GLenum* attachments,GLint x,GLint y,GLsizei width,GLsizei height){__glewInvalidateSubFramebuffer(target,numAttachments,attachments,x,y,width,height);}
-static PFNGLINVALIDATETEXIMAGEPROC __glewInvalidateTexImage = NULL;
-void glInvalidateTexImage(GLuint texture,GLint level){__glewInvalidateTexImage(texture,level);}
-static PFNGLINVALIDATETEXSUBIMAGEPROC __glewInvalidateTexSubImage = NULL;
-void glInvalidateTexSubImage(GLuint texture,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth){__glewInvalidateTexSubImage(texture,level,xoffset,yoffset,zoffset,width,height,depth);}
-
-static PFNGLFLUSHMAPPEDBUFFERRANGEPROC __glewFlushMappedBufferRange = NULL;
-void glFlushMappedBufferRange(GLenum target,GLintptr offset,GLsizeiptr length){__glewFlushMappedBufferRange(target,offset,length);}
-static PFNGLMAPBUFFERRANGEPROC __glewMapBufferRange = NULL;
-GLvoid * glMapBufferRange(GLenum target,GLintptr offset,GLsizeiptr length,GLbitfield access){return __glewMapBufferRange(target,offset,length,access);}
-
-static PFNGLCURRENTPALETTEMATRIXARBPROC __glewCurrentPaletteMatrixARB = NULL;
-void glCurrentPaletteMatrixARB(GLint index){__glewCurrentPaletteMatrixARB(index);}
-static PFNGLMATRIXINDEXPOINTERARBPROC __glewMatrixIndexPointerARB = NULL;
-void glMatrixIndexPointerARB(GLint size,GLenum type,GLsizei stride,GLvoid *pointer){__glewMatrixIndexPointerARB(size,type,stride,pointer);}
-static PFNGLMATRIXINDEXUBVARBPROC __glewMatrixIndexubvARB = NULL;
-void glMatrixIndexubvARB(GLint size,GLubyte *indices){__glewMatrixIndexubvARB(size,indices);}
-static PFNGLMATRIXINDEXUIVARBPROC __glewMatrixIndexuivARB = NULL;
-void glMatrixIndexuivARB(GLint size,GLuint *indices){__glewMatrixIndexuivARB(size,indices);}
-static PFNGLMATRIXINDEXUSVARBPROC __glewMatrixIndexusvARB = NULL;
-void glMatrixIndexusvARB(GLint size,GLushort *indices){__glewMatrixIndexusvARB(size,indices);}
-
-static PFNGLBINDBUFFERSBASEPROC __glewBindBuffersBase = NULL;
-void glBindBuffersBase(GLenum target,GLuint first,GLsizei count,const GLuint* buffers){__glewBindBuffersBase(target,first,count,buffers);}
-static PFNGLBINDBUFFERSRANGEPROC __glewBindBuffersRange = NULL;
-void glBindBuffersRange(GLenum target,GLuint first,GLsizei count,const GLuint* buffers,const GLintptr *offsets,const GLsizeiptr *sizes){__glewBindBuffersRange(target,first,count,buffers,offsets,sizes);}
-static PFNGLBINDIMAGETEXTURESPROC __glewBindImageTextures = NULL;
-void glBindImageTextures(GLuint first,GLsizei count,const GLuint* textures){__glewBindImageTextures(first,count,textures);}
-static PFNGLBINDSAMPLERSPROC __glewBindSamplers = NULL;
-void glBindSamplers(GLuint first,GLsizei count,const GLuint* samplers){__glewBindSamplers(first,count,samplers);}
-static PFNGLBINDTEXTURESPROC __glewBindTextures = NULL;
-void glBindTextures(GLuint first,GLsizei count,const GLuint* textures){__glewBindTextures(first,count,textures);}
-static PFNGLBINDVERTEXBUFFERSPROC __glewBindVertexBuffers = NULL;
-void glBindVertexBuffers(GLuint first,GLsizei count,const GLuint* buffers,const GLintptr *offsets,const GLsizei *strides){__glewBindVertexBuffers(first,count,buffers,offsets,strides);}
-
-static PFNGLMULTIDRAWARRAYSINDIRECTPROC __glewMultiDrawArraysIndirect = NULL;
-void glMultiDrawArraysIndirect(GLenum mode,const GLvoid *indirect,GLsizei primcount,GLsizei stride){__glewMultiDrawArraysIndirect(mode,indirect,primcount,stride);}
-static PFNGLMULTIDRAWELEMENTSINDIRECTPROC __glewMultiDrawElementsIndirect = NULL;
-void glMultiDrawElementsIndirect(GLenum mode,GLenum type,const GLvoid *indirect,GLsizei primcount,GLsizei stride){__glewMultiDrawElementsIndirect(mode,type,indirect,primcount,stride);}
-
-static PFNGLSAMPLECOVERAGEARBPROC __glewSampleCoverageARB = NULL;
-void glSampleCoverageARB(GLclampf value,GLboolean invert){__glewSampleCoverageARB(value,invert);}
-
-static PFNGLACTIVETEXTUREARBPROC __glewActiveTextureARB = NULL;
-void glActiveTextureARB(GLenum texture){__glewActiveTextureARB(texture);}
-static PFNGLCLIENTACTIVETEXTUREARBPROC __glewClientActiveTextureARB = NULL;
-void glClientActiveTextureARB(GLenum texture){__glewClientActiveTextureARB(texture);}
-static PFNGLMULTITEXCOORD1DARBPROC __glewMultiTexCoord1dARB = NULL;
-void glMultiTexCoord1dARB(GLenum target,GLdouble s){__glewMultiTexCoord1dARB(target,s);}
-static PFNGLMULTITEXCOORD1DVARBPROC __glewMultiTexCoord1dvARB = NULL;
-void glMultiTexCoord1dvARB(GLenum target,const GLdouble *v){__glewMultiTexCoord1dvARB(target,v);}
-static PFNGLMULTITEXCOORD1FARBPROC __glewMultiTexCoord1fARB = NULL;
-void glMultiTexCoord1fARB(GLenum target,GLfloat s){__glewMultiTexCoord1fARB(target,s);}
-static PFNGLMULTITEXCOORD1FVARBPROC __glewMultiTexCoord1fvARB = NULL;
-void glMultiTexCoord1fvARB(GLenum target,const GLfloat *v){__glewMultiTexCoord1fvARB(target,v);}
-static PFNGLMULTITEXCOORD1IARBPROC __glewMultiTexCoord1iARB = NULL;
-void glMultiTexCoord1iARB(GLenum target,GLint s){__glewMultiTexCoord1iARB(target,s);}
-static PFNGLMULTITEXCOORD1IVARBPROC __glewMultiTexCoord1ivARB = NULL;
-void glMultiTexCoord1ivARB(GLenum target,const GLint *v){__glewMultiTexCoord1ivARB(target,v);}
-static PFNGLMULTITEXCOORD1SARBPROC __glewMultiTexCoord1sARB = NULL;
-void glMultiTexCoord1sARB(GLenum target,GLshort s){__glewMultiTexCoord1sARB(target,s);}
-static PFNGLMULTITEXCOORD1SVARBPROC __glewMultiTexCoord1svARB = NULL;
-void glMultiTexCoord1svARB(GLenum target,const GLshort *v){__glewMultiTexCoord1svARB(target,v);}
-static PFNGLMULTITEXCOORD2DARBPROC __glewMultiTexCoord2dARB = NULL;
-void glMultiTexCoord2dARB(GLenum target,GLdouble s,GLdouble t){__glewMultiTexCoord2dARB(target,s,t);}
-static PFNGLMULTITEXCOORD2DVARBPROC __glewMultiTexCoord2dvARB = NULL;
-void glMultiTexCoord2dvARB(GLenum target,const GLdouble *v){__glewMultiTexCoord2dvARB(target,v);}
-static PFNGLMULTITEXCOORD2FARBPROC __glewMultiTexCoord2fARB = NULL;
-void glMultiTexCoord2fARB(GLenum target,GLfloat s,GLfloat t){__glewMultiTexCoord2fARB(target,s,t);}
-static PFNGLMULTITEXCOORD2FVARBPROC __glewMultiTexCoord2fvARB = NULL;
-void glMultiTexCoord2fvARB(GLenum target,const GLfloat *v){__glewMultiTexCoord2fvARB(target,v);}
-static PFNGLMULTITEXCOORD2IARBPROC __glewMultiTexCoord2iARB = NULL;
-void glMultiTexCoord2iARB(GLenum target,GLint s,GLint t){__glewMultiTexCoord2iARB(target,s,t);}
-static PFNGLMULTITEXCOORD2IVARBPROC __glewMultiTexCoord2ivARB = NULL;
-void glMultiTexCoord2ivARB(GLenum target,const GLint *v){__glewMultiTexCoord2ivARB(target,v);}
-static PFNGLMULTITEXCOORD2SARBPROC __glewMultiTexCoord2sARB = NULL;
-void glMultiTexCoord2sARB(GLenum target,GLshort s,GLshort t){__glewMultiTexCoord2sARB(target,s,t);}
-static PFNGLMULTITEXCOORD2SVARBPROC __glewMultiTexCoord2svARB = NULL;
-void glMultiTexCoord2svARB(GLenum target,const GLshort *v){__glewMultiTexCoord2svARB(target,v);}
-static PFNGLMULTITEXCOORD3DARBPROC __glewMultiTexCoord3dARB = NULL;
-void glMultiTexCoord3dARB(GLenum target,GLdouble s,GLdouble t,GLdouble r){__glewMultiTexCoord3dARB(target,s,t,r);}
-static PFNGLMULTITEXCOORD3DVARBPROC __glewMultiTexCoord3dvARB = NULL;
-void glMultiTexCoord3dvARB(GLenum target,const GLdouble *v){__glewMultiTexCoord3dvARB(target,v);}
-static PFNGLMULTITEXCOORD3FARBPROC __glewMultiTexCoord3fARB = NULL;
-void glMultiTexCoord3fARB(GLenum target,GLfloat s,GLfloat t,GLfloat r){__glewMultiTexCoord3fARB(target,s,t,r);}
-static PFNGLMULTITEXCOORD3FVARBPROC __glewMultiTexCoord3fvARB = NULL;
-void glMultiTexCoord3fvARB(GLenum target,const GLfloat *v){__glewMultiTexCoord3fvARB(target,v);}
-static PFNGLMULTITEXCOORD3IARBPROC __glewMultiTexCoord3iARB = NULL;
-void glMultiTexCoord3iARB(GLenum target,GLint s,GLint t,GLint r){__glewMultiTexCoord3iARB(target,s,t,r);}
-static PFNGLMULTITEXCOORD3IVARBPROC __glewMultiTexCoord3ivARB = NULL;
-void glMultiTexCoord3ivARB(GLenum target,const GLint *v){__glewMultiTexCoord3ivARB(target,v);}
-static PFNGLMULTITEXCOORD3SARBPROC __glewMultiTexCoord3sARB = NULL;
-void glMultiTexCoord3sARB(GLenum target,GLshort s,GLshort t,GLshort r){__glewMultiTexCoord3sARB(target,s,t,r);}
-static PFNGLMULTITEXCOORD3SVARBPROC __glewMultiTexCoord3svARB = NULL;
-void glMultiTexCoord3svARB(GLenum target,const GLshort *v){__glewMultiTexCoord3svARB(target,v);}
-static PFNGLMULTITEXCOORD4DARBPROC __glewMultiTexCoord4dARB = NULL;
-void glMultiTexCoord4dARB(GLenum target,GLdouble s,GLdouble t,GLdouble r,GLdouble q){__glewMultiTexCoord4dARB(target,s,t,r,q);}
-static PFNGLMULTITEXCOORD4DVARBPROC __glewMultiTexCoord4dvARB = NULL;
-void glMultiTexCoord4dvARB(GLenum target,const GLdouble *v){__glewMultiTexCoord4dvARB(target,v);}
-static PFNGLMULTITEXCOORD4FARBPROC __glewMultiTexCoord4fARB = NULL;
-void glMultiTexCoord4fARB(GLenum target,GLfloat s,GLfloat t,GLfloat r,GLfloat q){__glewMultiTexCoord4fARB(target,s,t,r,q);}
-static PFNGLMULTITEXCOORD4FVARBPROC __glewMultiTexCoord4fvARB = NULL;
-void glMultiTexCoord4fvARB(GLenum target,const GLfloat *v){__glewMultiTexCoord4fvARB(target,v);}
-static PFNGLMULTITEXCOORD4IARBPROC __glewMultiTexCoord4iARB = NULL;
-void glMultiTexCoord4iARB(GLenum target,GLint s,GLint t,GLint r,GLint q){__glewMultiTexCoord4iARB(target,s,t,r,q);}
-static PFNGLMULTITEXCOORD4IVARBPROC __glewMultiTexCoord4ivARB = NULL;
-void glMultiTexCoord4ivARB(GLenum target,const GLint *v){__glewMultiTexCoord4ivARB(target,v);}
-static PFNGLMULTITEXCOORD4SARBPROC __glewMultiTexCoord4sARB = NULL;
-void glMultiTexCoord4sARB(GLenum target,GLshort s,GLshort t,GLshort r,GLshort q){__glewMultiTexCoord4sARB(target,s,t,r,q);}
-static PFNGLMULTITEXCOORD4SVARBPROC __glewMultiTexCoord4svARB = NULL;
-void glMultiTexCoord4svARB(GLenum target,const GLshort *v){__glewMultiTexCoord4svARB(target,v);}
-
-static PFNGLBEGINQUERYARBPROC __glewBeginQueryARB = NULL;
-void glBeginQueryARB(GLenum target,GLuint id){__glewBeginQueryARB(target,id);}
-static PFNGLDELETEQUERIESARBPROC __glewDeleteQueriesARB = NULL;
-void glDeleteQueriesARB(GLsizei n,const GLuint* ids){__glewDeleteQueriesARB(n,ids);}
-static PFNGLENDQUERYARBPROC __glewEndQueryARB = NULL;
-void glEndQueryARB(GLenum target){__glewEndQueryARB(target);}
-static PFNGLGENQUERIESARBPROC __glewGenQueriesARB = NULL;
-void glGenQueriesARB(GLsizei n,GLuint* ids){__glewGenQueriesARB(n,ids);}
-static PFNGLGETQUERYOBJECTIVARBPROC __glewGetQueryObjectivARB = NULL;
-void glGetQueryObjectivARB(GLuint id,GLenum pname,GLint* params){__glewGetQueryObjectivARB(id,pname,params);}
-static PFNGLGETQUERYOBJECTUIVARBPROC __glewGetQueryObjectuivARB = NULL;
-void glGetQueryObjectuivARB(GLuint id,GLenum pname,GLuint* params){__glewGetQueryObjectuivARB(id,pname,params);}
-static PFNGLGETQUERYIVARBPROC __glewGetQueryivARB = NULL;
-void glGetQueryivARB(GLenum target,GLenum pname,GLint* params){__glewGetQueryivARB(target,pname,params);}
-static PFNGLISQUERYARBPROC __glewIsQueryARB = NULL;
-GLboolean glIsQueryARB(GLuint id){return __glewIsQueryARB(id);}
-
-static PFNGLPOINTPARAMETERFARBPROC __glewPointParameterfARB = NULL;
-void glPointParameterfARB(GLenum pname,GLfloat param){__glewPointParameterfARB(pname,param);}
-static PFNGLPOINTPARAMETERFVARBPROC __glewPointParameterfvARB = NULL;
-void glPointParameterfvARB(GLenum pname,const GLfloat* params){__glewPointParameterfvARB(pname,params);}
-
-static PFNGLGETPROGRAMINTERFACEIVPROC __glewGetProgramInterfaceiv = NULL;
-void glGetProgramInterfaceiv(GLuint program,GLenum programInterface,GLenum pname,GLint* params){__glewGetProgramInterfaceiv(program,programInterface,pname,params);}
-static PFNGLGETPROGRAMRESOURCEINDEXPROC __glewGetProgramResourceIndex = NULL;
-GLuint glGetProgramResourceIndex(GLuint program,GLenum programInterface,const GLchar* name){return __glewGetProgramResourceIndex(program,programInterface,name);}
-static PFNGLGETPROGRAMRESOURCELOCATIONPROC __glewGetProgramResourceLocation = NULL;
-GLint glGetProgramResourceLocation(GLuint program,GLenum programInterface,const GLchar* name){return __glewGetProgramResourceLocation(program,programInterface,name);}
-static PFNGLGETPROGRAMRESOURCELOCATIONINDEXPROC __glewGetProgramResourceLocationIndex = NULL;
-GLint glGetProgramResourceLocationIndex(GLuint program,GLenum programInterface,const GLchar* name){return __glewGetProgramResourceLocationIndex(program,programInterface,name);}
-static PFNGLGETPROGRAMRESOURCENAMEPROC __glewGetProgramResourceName = NULL;
-void glGetProgramResourceName(GLuint program,GLenum programInterface,GLuint index,GLsizei bufSize,GLsizei* length,GLchar *name){__glewGetProgramResourceName(program,programInterface,index,bufSize,length,name);}
-static PFNGLGETPROGRAMRESOURCEIVPROC __glewGetProgramResourceiv = NULL;
-void glGetProgramResourceiv(GLuint program,GLenum programInterface,GLuint index,GLsizei propCount,const GLenum* props,GLsizei bufSize,GLsizei *length,GLint *params){__glewGetProgramResourceiv(program,programInterface,index,propCount,props,bufSize,length,params);}
-
-static PFNGLPROVOKINGVERTEXPROC __glewProvokingVertex = NULL;
-void glProvokingVertex(GLenum mode){__glewProvokingVertex(mode);}
-
-static PFNGLGETGRAPHICSRESETSTATUSARBPROC __glewGetGraphicsResetStatusARB = NULL;
-GLenum glGetGraphicsResetStatusARB(void){return __glewGetGraphicsResetStatusARB();}
-static PFNGLGETNCOLORTABLEARBPROC __glewGetnColorTableARB = NULL;
-void glGetnColorTableARB(GLenum target,GLenum format,GLenum type,GLsizei bufSize,void* table){__glewGetnColorTableARB(target,format,type,bufSize,table);}
-static PFNGLGETNCOMPRESSEDTEXIMAGEARBPROC __glewGetnCompressedTexImageARB = NULL;
-void glGetnCompressedTexImageARB(GLenum target,GLint lod,GLsizei bufSize,void* img){__glewGetnCompressedTexImageARB(target,lod,bufSize,img);}
-static PFNGLGETNCONVOLUTIONFILTERARBPROC __glewGetnConvolutionFilterARB = NULL;
-void glGetnConvolutionFilterARB(GLenum target,GLenum format,GLenum type,GLsizei bufSize,void* image){__glewGetnConvolutionFilterARB(target,format,type,bufSize,image);}
-static PFNGLGETNHISTOGRAMARBPROC __glewGetnHistogramARB = NULL;
-void glGetnHistogramARB(GLenum target,GLboolean reset,GLenum format,GLenum type,GLsizei bufSize,void* values){__glewGetnHistogramARB(target,reset,format,type,bufSize,values);}
-static PFNGLGETNMAPDVARBPROC __glewGetnMapdvARB = NULL;
-void glGetnMapdvARB(GLenum target,GLenum query,GLsizei bufSize,GLdouble* v){__glewGetnMapdvARB(target,query,bufSize,v);}
-static PFNGLGETNMAPFVARBPROC __glewGetnMapfvARB = NULL;
-void glGetnMapfvARB(GLenum target,GLenum query,GLsizei bufSize,GLfloat* v){__glewGetnMapfvARB(target,query,bufSize,v);}
-static PFNGLGETNMAPIVARBPROC __glewGetnMapivARB = NULL;
-void glGetnMapivARB(GLenum target,GLenum query,GLsizei bufSize,GLint* v){__glewGetnMapivARB(target,query,bufSize,v);}
-static PFNGLGETNMINMAXARBPROC __glewGetnMinmaxARB = NULL;
-void glGetnMinmaxARB(GLenum target,GLboolean reset,GLenum format,GLenum type,GLsizei bufSize,void* values){__glewGetnMinmaxARB(target,reset,format,type,bufSize,values);}
-static PFNGLGETNPIXELMAPFVARBPROC __glewGetnPixelMapfvARB = NULL;
-void glGetnPixelMapfvARB(GLenum map,GLsizei bufSize,GLfloat* values){__glewGetnPixelMapfvARB(map,bufSize,values);}
-static PFNGLGETNPIXELMAPUIVARBPROC __glewGetnPixelMapuivARB = NULL;
-void glGetnPixelMapuivARB(GLenum map,GLsizei bufSize,GLuint* values){__glewGetnPixelMapuivARB(map,bufSize,values);}
-static PFNGLGETNPIXELMAPUSVARBPROC __glewGetnPixelMapusvARB = NULL;
-void glGetnPixelMapusvARB(GLenum map,GLsizei bufSize,GLushort* values){__glewGetnPixelMapusvARB(map,bufSize,values);}
-static PFNGLGETNPOLYGONSTIPPLEARBPROC __glewGetnPolygonStippleARB = NULL;
-void glGetnPolygonStippleARB(GLsizei bufSize,GLubyte* pattern){__glewGetnPolygonStippleARB(bufSize,pattern);}
-static PFNGLGETNSEPARABLEFILTERARBPROC __glewGetnSeparableFilterARB = NULL;
-void glGetnSeparableFilterARB(GLenum target,GLenum format,GLenum type,GLsizei rowBufSize,void* row,GLsizei columnBufSize,GLvoid*column,GLvoid*span){__glewGetnSeparableFilterARB(target,format,type,rowBufSize,row,columnBufSize,column,span);}
-static PFNGLGETNTEXIMAGEARBPROC __glewGetnTexImageARB = NULL;
-void glGetnTexImageARB(GLenum target,GLint level,GLenum format,GLenum type,GLsizei bufSize,void* img){__glewGetnTexImageARB(target,level,format,type,bufSize,img);}
-static PFNGLGETNUNIFORMDVARBPROC __glewGetnUniformdvARB = NULL;
-void glGetnUniformdvARB(GLuint program,GLint location,GLsizei bufSize,GLdouble* params){__glewGetnUniformdvARB(program,location,bufSize,params);}
-static PFNGLGETNUNIFORMFVARBPROC __glewGetnUniformfvARB = NULL;
-void glGetnUniformfvARB(GLuint program,GLint location,GLsizei bufSize,GLfloat* params){__glewGetnUniformfvARB(program,location,bufSize,params);}
-static PFNGLGETNUNIFORMIVARBPROC __glewGetnUniformivARB = NULL;
-void glGetnUniformivARB(GLuint program,GLint location,GLsizei bufSize,GLint* params){__glewGetnUniformivARB(program,location,bufSize,params);}
-static PFNGLGETNUNIFORMUIVARBPROC __glewGetnUniformuivARB = NULL;
-void glGetnUniformuivARB(GLuint program,GLint location,GLsizei bufSize,GLuint* params){__glewGetnUniformuivARB(program,location,bufSize,params);}
-static PFNGLREADNPIXELSARBPROC __glewReadnPixelsARB = NULL;
-void glReadnPixelsARB(GLint x,GLint y,GLsizei width,GLsizei height,GLenum format,GLenum type,GLsizei bufSize,void* data){__glewReadnPixelsARB(x,y,width,height,format,type,bufSize,data);}
-
-static PFNGLMINSAMPLESHADINGARBPROC __glewMinSampleShadingARB = NULL;
-void glMinSampleShadingARB(GLclampf value){__glewMinSampleShadingARB(value);}
-
-static PFNGLBINDSAMPLERPROC __glewBindSampler = NULL;
-void glBindSampler(GLuint unit,GLuint sampler){__glewBindSampler(unit,sampler);}
-static PFNGLDELETESAMPLERSPROC __glewDeleteSamplers = NULL;
-void glDeleteSamplers(GLsizei count,const GLuint * samplers){__glewDeleteSamplers(count,samplers);}
-static PFNGLGENSAMPLERSPROC __glewGenSamplers = NULL;
-void glGenSamplers(GLsizei count,GLuint* samplers){__glewGenSamplers(count,samplers);}
-static PFNGLGETSAMPLERPARAMETERIIVPROC __glewGetSamplerParameterIiv = NULL;
-void glGetSamplerParameterIiv(GLuint sampler,GLenum pname,GLint* params){__glewGetSamplerParameterIiv(sampler,pname,params);}
-static PFNGLGETSAMPLERPARAMETERIUIVPROC __glewGetSamplerParameterIuiv = NULL;
-void glGetSamplerParameterIuiv(GLuint sampler,GLenum pname,GLuint* params){__glewGetSamplerParameterIuiv(sampler,pname,params);}
-static PFNGLGETSAMPLERPARAMETERFVPROC __glewGetSamplerParameterfv = NULL;
-void glGetSamplerParameterfv(GLuint sampler,GLenum pname,GLfloat* params){__glewGetSamplerParameterfv(sampler,pname,params);}
-static PFNGLGETSAMPLERPARAMETERIVPROC __glewGetSamplerParameteriv = NULL;
-void glGetSamplerParameteriv(GLuint sampler,GLenum pname,GLint* params){__glewGetSamplerParameteriv(sampler,pname,params);}
-static PFNGLISSAMPLERPROC __glewIsSampler = NULL;
-GLboolean glIsSampler(GLuint sampler){return __glewIsSampler(sampler);}
-static PFNGLSAMPLERPARAMETERIIVPROC __glewSamplerParameterIiv = NULL;
-void glSamplerParameterIiv(GLuint sampler,GLenum pname,const GLint* params){__glewSamplerParameterIiv(sampler,pname,params);}
-static PFNGLSAMPLERPARAMETERIUIVPROC __glewSamplerParameterIuiv = NULL;
-void glSamplerParameterIuiv(GLuint sampler,GLenum pname,const GLuint* params){__glewSamplerParameterIuiv(sampler,pname,params);}
-static PFNGLSAMPLERPARAMETERFPROC __glewSamplerParameterf = NULL;
-void glSamplerParameterf(GLuint sampler,GLenum pname,GLfloat param){__glewSamplerParameterf(sampler,pname,param);}
-static PFNGLSAMPLERPARAMETERFVPROC __glewSamplerParameterfv = NULL;
-void glSamplerParameterfv(GLuint sampler,GLenum pname,const GLfloat* params){__glewSamplerParameterfv(sampler,pname,params);}
-static PFNGLSAMPLERPARAMETERIPROC __glewSamplerParameteri = NULL;
-void glSamplerParameteri(GLuint sampler,GLenum pname,GLint param){__glewSamplerParameteri(sampler,pname,param);}
-static PFNGLSAMPLERPARAMETERIVPROC __glewSamplerParameteriv = NULL;
-void glSamplerParameteriv(GLuint sampler,GLenum pname,const GLint* params){__glewSamplerParameteriv(sampler,pname,params);}
-
-static PFNGLACTIVESHADERPROGRAMPROC __glewActiveShaderProgram = NULL;
-void glActiveShaderProgram(GLuint pipeline,GLuint program){__glewActiveShaderProgram(pipeline,program);}
-static PFNGLBINDPROGRAMPIPELINEPROC __glewBindProgramPipeline = NULL;
-void glBindProgramPipeline(GLuint pipeline){__glewBindProgramPipeline(pipeline);}
-static PFNGLCREATESHADERPROGRAMVPROC __glewCreateShaderProgramv = NULL;
-GLuint glCreateShaderProgramv(GLenum type,GLsizei count,const GLchar ** strings){return __glewCreateShaderProgramv(type,count,strings);}
-static PFNGLDELETEPROGRAMPIPELINESPROC __glewDeleteProgramPipelines = NULL;
-void glDeleteProgramPipelines(GLsizei n,const GLuint* pipelines){__glewDeleteProgramPipelines(n,pipelines);}
-static PFNGLGENPROGRAMPIPELINESPROC __glewGenProgramPipelines = NULL;
-void glGenProgramPipelines(GLsizei n,GLuint* pipelines){__glewGenProgramPipelines(n,pipelines);}
-static PFNGLGETPROGRAMPIPELINEINFOLOGPROC __glewGetProgramPipelineInfoLog = NULL;
-void glGetProgramPipelineInfoLog(GLuint pipeline,GLsizei bufSize,GLsizei* length,GLchar *infoLog){__glewGetProgramPipelineInfoLog(pipeline,bufSize,length,infoLog);}
-static PFNGLGETPROGRAMPIPELINEIVPROC __glewGetProgramPipelineiv = NULL;
-void glGetProgramPipelineiv(GLuint pipeline,GLenum pname,GLint* params){__glewGetProgramPipelineiv(pipeline,pname,params);}
-static PFNGLISPROGRAMPIPELINEPROC __glewIsProgramPipeline = NULL;
-GLboolean glIsProgramPipeline(GLuint pipeline){return __glewIsProgramPipeline(pipeline);}
-static PFNGLPROGRAMUNIFORM1DPROC __glewProgramUniform1d = NULL;
-void glProgramUniform1d(GLuint program,GLint location,GLdouble x){__glewProgramUniform1d(program,location,x);}
-static PFNGLPROGRAMUNIFORM1DVPROC __glewProgramUniform1dv = NULL;
-void glProgramUniform1dv(GLuint program,GLint location,GLsizei count,const GLdouble* value){__glewProgramUniform1dv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM1FPROC __glewProgramUniform1f = NULL;
-void glProgramUniform1f(GLuint program,GLint location,GLfloat x){__glewProgramUniform1f(program,location,x);}
-static PFNGLPROGRAMUNIFORM1FVPROC __glewProgramUniform1fv = NULL;
-void glProgramUniform1fv(GLuint program,GLint location,GLsizei count,const GLfloat* value){__glewProgramUniform1fv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM1IPROC __glewProgramUniform1i = NULL;
-void glProgramUniform1i(GLuint program,GLint location,GLint x){__glewProgramUniform1i(program,location,x);}
-static PFNGLPROGRAMUNIFORM1IVPROC __glewProgramUniform1iv = NULL;
-void glProgramUniform1iv(GLuint program,GLint location,GLsizei count,const GLint* value){__glewProgramUniform1iv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM1UIPROC __glewProgramUniform1ui = NULL;
-void glProgramUniform1ui(GLuint program,GLint location,GLuint x){__glewProgramUniform1ui(program,location,x);}
-static PFNGLPROGRAMUNIFORM1UIVPROC __glewProgramUniform1uiv = NULL;
-void glProgramUniform1uiv(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform1uiv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2DPROC __glewProgramUniform2d = NULL;
-void glProgramUniform2d(GLuint program,GLint location,GLdouble x,GLdouble y){__glewProgramUniform2d(program,location,x,y);}
-static PFNGLPROGRAMUNIFORM2DVPROC __glewProgramUniform2dv = NULL;
-void glProgramUniform2dv(GLuint program,GLint location,GLsizei count,const GLdouble* value){__glewProgramUniform2dv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2FPROC __glewProgramUniform2f = NULL;
-void glProgramUniform2f(GLuint program,GLint location,GLfloat x,GLfloat y){__glewProgramUniform2f(program,location,x,y);}
-static PFNGLPROGRAMUNIFORM2FVPROC __glewProgramUniform2fv = NULL;
-void glProgramUniform2fv(GLuint program,GLint location,GLsizei count,const GLfloat* value){__glewProgramUniform2fv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2IPROC __glewProgramUniform2i = NULL;
-void glProgramUniform2i(GLuint program,GLint location,GLint x,GLint y){__glewProgramUniform2i(program,location,x,y);}
-static PFNGLPROGRAMUNIFORM2IVPROC __glewProgramUniform2iv = NULL;
-void glProgramUniform2iv(GLuint program,GLint location,GLsizei count,const GLint* value){__glewProgramUniform2iv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2UIPROC __glewProgramUniform2ui = NULL;
-void glProgramUniform2ui(GLuint program,GLint location,GLuint x,GLuint y){__glewProgramUniform2ui(program,location,x,y);}
-static PFNGLPROGRAMUNIFORM2UIVPROC __glewProgramUniform2uiv = NULL;
-void glProgramUniform2uiv(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform2uiv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3DPROC __glewProgramUniform3d = NULL;
-void glProgramUniform3d(GLuint program,GLint location,GLdouble x,GLdouble y,GLdouble z){__glewProgramUniform3d(program,location,x,y,z);}
-static PFNGLPROGRAMUNIFORM3DVPROC __glewProgramUniform3dv = NULL;
-void glProgramUniform3dv(GLuint program,GLint location,GLsizei count,const GLdouble* value){__glewProgramUniform3dv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3FPROC __glewProgramUniform3f = NULL;
-void glProgramUniform3f(GLuint program,GLint location,GLfloat x,GLfloat y,GLfloat z){__glewProgramUniform3f(program,location,x,y,z);}
-static PFNGLPROGRAMUNIFORM3FVPROC __glewProgramUniform3fv = NULL;
-void glProgramUniform3fv(GLuint program,GLint location,GLsizei count,const GLfloat* value){__glewProgramUniform3fv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3IPROC __glewProgramUniform3i = NULL;
-void glProgramUniform3i(GLuint program,GLint location,GLint x,GLint y,GLint z){__glewProgramUniform3i(program,location,x,y,z);}
-static PFNGLPROGRAMUNIFORM3IVPROC __glewProgramUniform3iv = NULL;
-void glProgramUniform3iv(GLuint program,GLint location,GLsizei count,const GLint* value){__glewProgramUniform3iv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3UIPROC __glewProgramUniform3ui = NULL;
-void glProgramUniform3ui(GLuint program,GLint location,GLuint x,GLuint y,GLuint z){__glewProgramUniform3ui(program,location,x,y,z);}
-static PFNGLPROGRAMUNIFORM3UIVPROC __glewProgramUniform3uiv = NULL;
-void glProgramUniform3uiv(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform3uiv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4DPROC __glewProgramUniform4d = NULL;
-void glProgramUniform4d(GLuint program,GLint location,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewProgramUniform4d(program,location,x,y,z,w);}
-static PFNGLPROGRAMUNIFORM4DVPROC __glewProgramUniform4dv = NULL;
-void glProgramUniform4dv(GLuint program,GLint location,GLsizei count,const GLdouble* value){__glewProgramUniform4dv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4FPROC __glewProgramUniform4f = NULL;
-void glProgramUniform4f(GLuint program,GLint location,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewProgramUniform4f(program,location,x,y,z,w);}
-static PFNGLPROGRAMUNIFORM4FVPROC __glewProgramUniform4fv = NULL;
-void glProgramUniform4fv(GLuint program,GLint location,GLsizei count,const GLfloat* value){__glewProgramUniform4fv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4IPROC __glewProgramUniform4i = NULL;
-void glProgramUniform4i(GLuint program,GLint location,GLint x,GLint y,GLint z,GLint w){__glewProgramUniform4i(program,location,x,y,z,w);}
-static PFNGLPROGRAMUNIFORM4IVPROC __glewProgramUniform4iv = NULL;
-void glProgramUniform4iv(GLuint program,GLint location,GLsizei count,const GLint* value){__glewProgramUniform4iv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4UIPROC __glewProgramUniform4ui = NULL;
-void glProgramUniform4ui(GLuint program,GLint location,GLuint x,GLuint y,GLuint z,GLuint w){__glewProgramUniform4ui(program,location,x,y,z,w);}
-static PFNGLPROGRAMUNIFORM4UIVPROC __glewProgramUniform4uiv = NULL;
-void glProgramUniform4uiv(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform4uiv(program,location,count,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2DVPROC __glewProgramUniformMatrix2dv = NULL;
-void glProgramUniformMatrix2dv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix2dv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2FVPROC __glewProgramUniformMatrix2fv = NULL;
-void glProgramUniformMatrix2fv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix2fv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2X3DVPROC __glewProgramUniformMatrix2x3dv = NULL;
-void glProgramUniformMatrix2x3dv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix2x3dv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2X3FVPROC __glewProgramUniformMatrix2x3fv = NULL;
-void glProgramUniformMatrix2x3fv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix2x3fv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2X4DVPROC __glewProgramUniformMatrix2x4dv = NULL;
-void glProgramUniformMatrix2x4dv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix2x4dv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2X4FVPROC __glewProgramUniformMatrix2x4fv = NULL;
-void glProgramUniformMatrix2x4fv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix2x4fv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3DVPROC __glewProgramUniformMatrix3dv = NULL;
-void glProgramUniformMatrix3dv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix3dv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3FVPROC __glewProgramUniformMatrix3fv = NULL;
-void glProgramUniformMatrix3fv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix3fv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3X2DVPROC __glewProgramUniformMatrix3x2dv = NULL;
-void glProgramUniformMatrix3x2dv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix3x2dv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3X2FVPROC __glewProgramUniformMatrix3x2fv = NULL;
-void glProgramUniformMatrix3x2fv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix3x2fv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3X4DVPROC __glewProgramUniformMatrix3x4dv = NULL;
-void glProgramUniformMatrix3x4dv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix3x4dv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3X4FVPROC __glewProgramUniformMatrix3x4fv = NULL;
-void glProgramUniformMatrix3x4fv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix3x4fv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4DVPROC __glewProgramUniformMatrix4dv = NULL;
-void glProgramUniformMatrix4dv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix4dv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4FVPROC __glewProgramUniformMatrix4fv = NULL;
-void glProgramUniformMatrix4fv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix4fv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4X2DVPROC __glewProgramUniformMatrix4x2dv = NULL;
-void glProgramUniformMatrix4x2dv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix4x2dv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4X2FVPROC __glewProgramUniformMatrix4x2fv = NULL;
-void glProgramUniformMatrix4x2fv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix4x2fv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4X3DVPROC __glewProgramUniformMatrix4x3dv = NULL;
-void glProgramUniformMatrix4x3dv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLdouble* value){__glewProgramUniformMatrix4x3dv(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4X3FVPROC __glewProgramUniformMatrix4x3fv = NULL;
-void glProgramUniformMatrix4x3fv(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix4x3fv(program,location,count,transpose,value);}
-static PFNGLUSEPROGRAMSTAGESPROC __glewUseProgramStages = NULL;
-void glUseProgramStages(GLuint pipeline,GLbitfield stages,GLuint program){__glewUseProgramStages(pipeline,stages,program);}
-static PFNGLVALIDATEPROGRAMPIPELINEPROC __glewValidateProgramPipeline = NULL;
-void glValidateProgramPipeline(GLuint pipeline){__glewValidateProgramPipeline(pipeline);}
-
-static PFNGLGETACTIVEATOMICCOUNTERBUFFERIVPROC __glewGetActiveAtomicCounterBufferiv = NULL;
-void glGetActiveAtomicCounterBufferiv(GLuint program,GLuint bufferIndex,GLenum pname,GLint* params){__glewGetActiveAtomicCounterBufferiv(program,bufferIndex,pname,params);}
-
-static PFNGLBINDIMAGETEXTUREPROC __glewBindImageTexture = NULL;
-void glBindImageTexture(GLuint unit,GLuint texture,GLint level,GLboolean layered,GLint layer,GLenum access,GLenum format){__glewBindImageTexture(unit,texture,level,layered,layer,access,format);}
-static PFNGLMEMORYBARRIERPROC __glewMemoryBarrier = NULL;
-void glMemoryBarrier(GLbitfield barriers){__glewMemoryBarrier(barriers);}
-
-static PFNGLATTACHOBJECTARBPROC __glewAttachObjectARB = NULL;
-void glAttachObjectARB(GLhandleARB containerObj,GLhandleARB obj){__glewAttachObjectARB(containerObj,obj);}
-static PFNGLCOMPILESHADERARBPROC __glewCompileShaderARB = NULL;
-void glCompileShaderARB(GLhandleARB shaderObj){__glewCompileShaderARB(shaderObj);}
-static PFNGLCREATEPROGRAMOBJECTARBPROC __glewCreateProgramObjectARB = NULL;
-GLhandleARB glCreateProgramObjectARB(void){return __glewCreateProgramObjectARB();}
-static PFNGLCREATESHADEROBJECTARBPROC __glewCreateShaderObjectARB = NULL;
-GLhandleARB glCreateShaderObjectARB(GLenum shaderType){return __glewCreateShaderObjectARB(shaderType);}
-static PFNGLDELETEOBJECTARBPROC __glewDeleteObjectARB = NULL;
-void glDeleteObjectARB(GLhandleARB obj){__glewDeleteObjectARB(obj);}
-static PFNGLDETACHOBJECTARBPROC __glewDetachObjectARB = NULL;
-void glDetachObjectARB(GLhandleARB containerObj,GLhandleARB attachedObj){__glewDetachObjectARB(containerObj,attachedObj);}
-static PFNGLGETACTIVEUNIFORMARBPROC __glewGetActiveUniformARB = NULL;
-void glGetActiveUniformARB(GLhandleARB programObj,GLuint index,GLsizei maxLength,GLsizei* length,GLint *size,GLenum *type,GLcharARB *name){__glewGetActiveUniformARB(programObj,index,maxLength,length,size,type,name);}
-static PFNGLGETATTACHEDOBJECTSARBPROC __glewGetAttachedObjectsARB = NULL;
-void glGetAttachedObjectsARB(GLhandleARB containerObj,GLsizei maxCount,GLsizei* count,GLhandleARB *obj){__glewGetAttachedObjectsARB(containerObj,maxCount,count,obj);}
-static PFNGLGETHANDLEARBPROC __glewGetHandleARB = NULL;
-GLhandleARB glGetHandleARB(GLenum pname){return __glewGetHandleARB(pname);}
-static PFNGLGETINFOLOGARBPROC __glewGetInfoLogARB = NULL;
-void glGetInfoLogARB(GLhandleARB obj,GLsizei maxLength,GLsizei* length,GLcharARB *infoLog){__glewGetInfoLogARB(obj,maxLength,length,infoLog);}
-static PFNGLGETOBJECTPARAMETERFVARBPROC __glewGetObjectParameterfvARB = NULL;
-void glGetObjectParameterfvARB(GLhandleARB obj,GLenum pname,GLfloat* params){__glewGetObjectParameterfvARB(obj,pname,params);}
-static PFNGLGETOBJECTPARAMETERIVARBPROC __glewGetObjectParameterivARB = NULL;
-void glGetObjectParameterivARB(GLhandleARB obj,GLenum pname,GLint* params){__glewGetObjectParameterivARB(obj,pname,params);}
-static PFNGLGETSHADERSOURCEARBPROC __glewGetShaderSourceARB = NULL;
-void glGetShaderSourceARB(GLhandleARB obj,GLsizei maxLength,GLsizei* length,GLcharARB *source){__glewGetShaderSourceARB(obj,maxLength,length,source);}
-static PFNGLGETUNIFORMLOCATIONARBPROC __glewGetUniformLocationARB = NULL;
-GLint glGetUniformLocationARB(GLhandleARB programObj,const GLcharARB* name){return __glewGetUniformLocationARB(programObj,name);}
-static PFNGLGETUNIFORMFVARBPROC __glewGetUniformfvARB = NULL;
-void glGetUniformfvARB(GLhandleARB programObj,GLint location,GLfloat* params){__glewGetUniformfvARB(programObj,location,params);}
-static PFNGLGETUNIFORMIVARBPROC __glewGetUniformivARB = NULL;
-void glGetUniformivARB(GLhandleARB programObj,GLint location,GLint* params){__glewGetUniformivARB(programObj,location,params);}
-static PFNGLLINKPROGRAMARBPROC __glewLinkProgramARB = NULL;
-void glLinkProgramARB(GLhandleARB programObj){__glewLinkProgramARB(programObj);}
-static PFNGLSHADERSOURCEARBPROC __glewShaderSourceARB = NULL;
-void glShaderSourceARB(GLhandleARB shaderObj,GLsizei count,const GLcharARB ** string,const GLint *length){__glewShaderSourceARB(shaderObj,count,string,length);}
-static PFNGLUNIFORM1FARBPROC __glewUniform1fARB = NULL;
-void glUniform1fARB(GLint location,GLfloat v0){__glewUniform1fARB(location,v0);}
-static PFNGLUNIFORM1FVARBPROC __glewUniform1fvARB = NULL;
-void glUniform1fvARB(GLint location,GLsizei count,const GLfloat* value){__glewUniform1fvARB(location,count,value);}
-static PFNGLUNIFORM1IARBPROC __glewUniform1iARB = NULL;
-void glUniform1iARB(GLint location,GLint v0){__glewUniform1iARB(location,v0);}
-static PFNGLUNIFORM1IVARBPROC __glewUniform1ivARB = NULL;
-void glUniform1ivARB(GLint location,GLsizei count,const GLint* value){__glewUniform1ivARB(location,count,value);}
-static PFNGLUNIFORM2FARBPROC __glewUniform2fARB = NULL;
-void glUniform2fARB(GLint location,GLfloat v0,GLfloat v1){__glewUniform2fARB(location,v0,v1);}
-static PFNGLUNIFORM2FVARBPROC __glewUniform2fvARB = NULL;
-void glUniform2fvARB(GLint location,GLsizei count,const GLfloat* value){__glewUniform2fvARB(location,count,value);}
-static PFNGLUNIFORM2IARBPROC __glewUniform2iARB = NULL;
-void glUniform2iARB(GLint location,GLint v0,GLint v1){__glewUniform2iARB(location,v0,v1);}
-static PFNGLUNIFORM2IVARBPROC __glewUniform2ivARB = NULL;
-void glUniform2ivARB(GLint location,GLsizei count,const GLint* value){__glewUniform2ivARB(location,count,value);}
-static PFNGLUNIFORM3FARBPROC __glewUniform3fARB = NULL;
-void glUniform3fARB(GLint location,GLfloat v0,GLfloat v1,GLfloat v2){__glewUniform3fARB(location,v0,v1,v2);}
-static PFNGLUNIFORM3FVARBPROC __glewUniform3fvARB = NULL;
-void glUniform3fvARB(GLint location,GLsizei count,const GLfloat* value){__glewUniform3fvARB(location,count,value);}
-static PFNGLUNIFORM3IARBPROC __glewUniform3iARB = NULL;
-void glUniform3iARB(GLint location,GLint v0,GLint v1,GLint v2){__glewUniform3iARB(location,v0,v1,v2);}
-static PFNGLUNIFORM3IVARBPROC __glewUniform3ivARB = NULL;
-void glUniform3ivARB(GLint location,GLsizei count,const GLint* value){__glewUniform3ivARB(location,count,value);}
-static PFNGLUNIFORM4FARBPROC __glewUniform4fARB = NULL;
-void glUniform4fARB(GLint location,GLfloat v0,GLfloat v1,GLfloat v2,GLfloat v3){__glewUniform4fARB(location,v0,v1,v2,v3);}
-static PFNGLUNIFORM4FVARBPROC __glewUniform4fvARB = NULL;
-void glUniform4fvARB(GLint location,GLsizei count,const GLfloat* value){__glewUniform4fvARB(location,count,value);}
-static PFNGLUNIFORM4IARBPROC __glewUniform4iARB = NULL;
-void glUniform4iARB(GLint location,GLint v0,GLint v1,GLint v2,GLint v3){__glewUniform4iARB(location,v0,v1,v2,v3);}
-static PFNGLUNIFORM4IVARBPROC __glewUniform4ivARB = NULL;
-void glUniform4ivARB(GLint location,GLsizei count,const GLint* value){__glewUniform4ivARB(location,count,value);}
-static PFNGLUNIFORMMATRIX2FVARBPROC __glewUniformMatrix2fvARB = NULL;
-void glUniformMatrix2fvARB(GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewUniformMatrix2fvARB(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX3FVARBPROC __glewUniformMatrix3fvARB = NULL;
-void glUniformMatrix3fvARB(GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewUniformMatrix3fvARB(location,count,transpose,value);}
-static PFNGLUNIFORMMATRIX4FVARBPROC __glewUniformMatrix4fvARB = NULL;
-void glUniformMatrix4fvARB(GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewUniformMatrix4fvARB(location,count,transpose,value);}
-static PFNGLUSEPROGRAMOBJECTARBPROC __glewUseProgramObjectARB = NULL;
-void glUseProgramObjectARB(GLhandleARB programObj){__glewUseProgramObjectARB(programObj);}
-static PFNGLVALIDATEPROGRAMARBPROC __glewValidateProgramARB = NULL;
-void glValidateProgramARB(GLhandleARB programObj){__glewValidateProgramARB(programObj);}
-
-static PFNGLSHADERSTORAGEBLOCKBINDINGPROC __glewShaderStorageBlockBinding = NULL;
-void glShaderStorageBlockBinding(GLuint program,GLuint storageBlockIndex,GLuint storageBlockBinding){__glewShaderStorageBlockBinding(program,storageBlockIndex,storageBlockBinding);}
-
-static PFNGLGETACTIVESUBROUTINENAMEPROC __glewGetActiveSubroutineName = NULL;
-void glGetActiveSubroutineName(GLuint program,GLenum shadertype,GLuint index,GLsizei bufsize,GLsizei* length,GLchar *name){__glewGetActiveSubroutineName(program,shadertype,index,bufsize,length,name);}
-static PFNGLGETACTIVESUBROUTINEUNIFORMNAMEPROC __glewGetActiveSubroutineUniformName = NULL;
-void glGetActiveSubroutineUniformName(GLuint program,GLenum shadertype,GLuint index,GLsizei bufsize,GLsizei* length,GLchar *name){__glewGetActiveSubroutineUniformName(program,shadertype,index,bufsize,length,name);}
-static PFNGLGETACTIVESUBROUTINEUNIFORMIVPROC __glewGetActiveSubroutineUniformiv = NULL;
-void glGetActiveSubroutineUniformiv(GLuint program,GLenum shadertype,GLuint index,GLenum pname,GLint* values){__glewGetActiveSubroutineUniformiv(program,shadertype,index,pname,values);}
-static PFNGLGETPROGRAMSTAGEIVPROC __glewGetProgramStageiv = NULL;
-void glGetProgramStageiv(GLuint program,GLenum shadertype,GLenum pname,GLint* values){__glewGetProgramStageiv(program,shadertype,pname,values);}
-static PFNGLGETSUBROUTINEINDEXPROC __glewGetSubroutineIndex = NULL;
-GLuint glGetSubroutineIndex(GLuint program,GLenum shadertype,const GLchar* name){return __glewGetSubroutineIndex(program,shadertype,name);}
-static PFNGLGETSUBROUTINEUNIFORMLOCATIONPROC __glewGetSubroutineUniformLocation = NULL;
-GLint glGetSubroutineUniformLocation(GLuint program,GLenum shadertype,const GLchar* name){return __glewGetSubroutineUniformLocation(program,shadertype,name);}
-static PFNGLGETUNIFORMSUBROUTINEUIVPROC __glewGetUniformSubroutineuiv = NULL;
-void glGetUniformSubroutineuiv(GLenum shadertype,GLint location,GLuint* params){__glewGetUniformSubroutineuiv(shadertype,location,params);}
-static PFNGLUNIFORMSUBROUTINESUIVPROC __glewUniformSubroutinesuiv = NULL;
-void glUniformSubroutinesuiv(GLenum shadertype,GLsizei count,const GLuint* indices){__glewUniformSubroutinesuiv(shadertype,count,indices);}
-
-static PFNGLCOMPILESHADERINCLUDEARBPROC __glewCompileShaderIncludeARB = NULL;
-void glCompileShaderIncludeARB(GLuint shader,GLsizei count,const GLchar* const *path,const GLint *length){__glewCompileShaderIncludeARB(shader,count,path,length);}
-static PFNGLDELETENAMEDSTRINGARBPROC __glewDeleteNamedStringARB = NULL;
-void glDeleteNamedStringARB(GLint namelen,const GLchar* name){__glewDeleteNamedStringARB(namelen,name);}
-static PFNGLGETNAMEDSTRINGARBPROC __glewGetNamedStringARB = NULL;
-void glGetNamedStringARB(GLint namelen,const GLchar* name,GLsizei bufSize,GLint *stringlen,GLchar *string){__glewGetNamedStringARB(namelen,name,bufSize,stringlen,string);}
-static PFNGLGETNAMEDSTRINGIVARBPROC __glewGetNamedStringivARB = NULL;
-void glGetNamedStringivARB(GLint namelen,const GLchar* name,GLenum pname,GLint *params){__glewGetNamedStringivARB(namelen,name,pname,params);}
-static PFNGLISNAMEDSTRINGARBPROC __glewIsNamedStringARB = NULL;
-GLboolean glIsNamedStringARB(GLint namelen,const GLchar* name){return __glewIsNamedStringARB(namelen,name);}
-static PFNGLNAMEDSTRINGARBPROC __glewNamedStringARB = NULL;
-void glNamedStringARB(GLenum type,GLint namelen,const GLchar* name,GLint stringlen,const GLchar *string){__glewNamedStringARB(type,namelen,name,stringlen,string);}
-
-static PFNGLTEXPAGECOMMITMENTARBPROC __glewTexPageCommitmentARB = NULL;
-void glTexPageCommitmentARB(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLboolean commit){__glewTexPageCommitmentARB(target,level,xoffset,yoffset,zoffset,width,height,depth,commit);}
-static PFNGLTEXTUREPAGECOMMITMENTEXTPROC __glewTexturePageCommitmentEXT = NULL;
-void glTexturePageCommitmentEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLboolean commit){__glewTexturePageCommitmentEXT(texture,target,level,xoffset,yoffset,zoffset,width,height,depth,commit);}
-
-static PFNGLCLIENTWAITSYNCPROC __glewClientWaitSync = NULL;
-GLenum glClientWaitSync(GLsync GLsync,GLbitfield flags,GLuint64 timeout){return __glewClientWaitSync(GLsync,flags,timeout);}
-static PFNGLDELETESYNCPROC __glewDeleteSync = NULL;
-void glDeleteSync(GLsync GLsync){__glewDeleteSync(GLsync);}
-static PFNGLFENCESYNCPROC __glewFenceSync = NULL;
-GLsync glFenceSync(GLenum condition,GLbitfield flags){return __glewFenceSync(condition,flags);}
-static PFNGLGETINTEGER64VPROC __glewGetInteger64v = NULL;
-void glGetInteger64v(GLenum pname,GLint64* params){__glewGetInteger64v(pname,params);}
-static PFNGLGETSYNCIVPROC __glewGetSynciv = NULL;
-void glGetSynciv(GLsync GLsync,GLenum pname,GLsizei bufSize,GLsizei* length,GLint *values){__glewGetSynciv(GLsync,pname,bufSize,length,values);}
-static PFNGLISSYNCPROC __glewIsSync = NULL;
-GLboolean glIsSync(GLsync GLsync){return __glewIsSync(GLsync);}
-static PFNGLWAITSYNCPROC __glewWaitSync = NULL;
-void glWaitSync(GLsync GLsync,GLbitfield flags,GLuint64 timeout){__glewWaitSync(GLsync,flags,timeout);}
-
-static PFNGLPATCHPARAMETERFVPROC __glewPatchParameterfv = NULL;
-void glPatchParameterfv(GLenum pname,const GLfloat* values){__glewPatchParameterfv(pname,values);}
-static PFNGLPATCHPARAMETERIPROC __glewPatchParameteri = NULL;
-void glPatchParameteri(GLenum pname,GLint value){__glewPatchParameteri(pname,value);}
-
-static PFNGLTEXBUFFERARBPROC __glewTexBufferARB = NULL;
-void glTexBufferARB(GLenum target,GLenum internalformat,GLuint buffer){__glewTexBufferARB(target,internalformat,buffer);}
-
-static PFNGLTEXBUFFERRANGEPROC __glewTexBufferRange = NULL;
-void glTexBufferRange(GLenum target,GLenum internalformat,GLuint buffer,GLintptr offset,GLsizeiptr size){__glewTexBufferRange(target,internalformat,buffer,offset,size);}
-static PFNGLTEXTUREBUFFERRANGEEXTPROC __glewTextureBufferRangeEXT = NULL;
-void glTextureBufferRangeEXT(GLuint texture,GLenum target,GLenum internalformat,GLuint buffer,GLintptr offset,GLsizeiptr size){__glewTextureBufferRangeEXT(texture,target,internalformat,buffer,offset,size);}
-
-static PFNGLCOMPRESSEDTEXIMAGE1DARBPROC __glewCompressedTexImage1DARB = NULL;
-void glCompressedTexImage1DARB(GLenum target,GLint level,GLenum internalformat,GLsizei width,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedTexImage1DARB(target,level,internalformat,width,border,imageSize,data);}
-static PFNGLCOMPRESSEDTEXIMAGE2DARBPROC __glewCompressedTexImage2DARB = NULL;
-void glCompressedTexImage2DARB(GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedTexImage2DARB(target,level,internalformat,width,height,border,imageSize,data);}
-static PFNGLCOMPRESSEDTEXIMAGE3DARBPROC __glewCompressedTexImage3DARB = NULL;
-void glCompressedTexImage3DARB(GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedTexImage3DARB(target,level,internalformat,width,height,depth,border,imageSize,data);}
-static PFNGLCOMPRESSEDTEXSUBIMAGE1DARBPROC __glewCompressedTexSubImage1DARB = NULL;
-void glCompressedTexSubImage1DARB(GLenum target,GLint level,GLint xoffset,GLsizei width,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedTexSubImage1DARB(target,level,xoffset,width,format,imageSize,data);}
-static PFNGLCOMPRESSEDTEXSUBIMAGE2DARBPROC __glewCompressedTexSubImage2DARB = NULL;
-void glCompressedTexSubImage2DARB(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLsizei width,GLsizei height,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedTexSubImage2DARB(target,level,xoffset,yoffset,width,height,format,imageSize,data);}
-static PFNGLCOMPRESSEDTEXSUBIMAGE3DARBPROC __glewCompressedTexSubImage3DARB = NULL;
-void glCompressedTexSubImage3DARB(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedTexSubImage3DARB(target,level,xoffset,yoffset,zoffset,width,height,depth,format,imageSize,data);}
-static PFNGLGETCOMPRESSEDTEXIMAGEARBPROC __glewGetCompressedTexImageARB = NULL;
-void glGetCompressedTexImageARB(GLenum target,GLint lod,GLvoid *img){__glewGetCompressedTexImageARB(target,lod,img);}
-
-static PFNGLGETMULTISAMPLEFVPROC __glewGetMultisamplefv = NULL;
-void glGetMultisamplefv(GLenum pname,GLuint index,GLfloat* val){__glewGetMultisamplefv(pname,index,val);}
-static PFNGLSAMPLEMASKIPROC __glewSampleMaski = NULL;
-void glSampleMaski(GLuint index,GLbitfield mask){__glewSampleMaski(index,mask);}
-static PFNGLTEXIMAGE2DMULTISAMPLEPROC __glewTexImage2DMultisample = NULL;
-void glTexImage2DMultisample(GLenum target,GLsizei samples,GLint internalformat,GLsizei width,GLsizei height,GLboolean fixedsamplelocations){__glewTexImage2DMultisample(target,samples,internalformat,width,height,fixedsamplelocations);}
-static PFNGLTEXIMAGE3DMULTISAMPLEPROC __glewTexImage3DMultisample = NULL;
-void glTexImage3DMultisample(GLenum target,GLsizei samples,GLint internalformat,GLsizei width,GLsizei height,GLsizei depth,GLboolean fixedsamplelocations){__glewTexImage3DMultisample(target,samples,internalformat,width,height,depth,fixedsamplelocations);}
-
-static PFNGLTEXSTORAGE1DPROC __glewTexStorage1D = NULL;
-void glTexStorage1D(GLenum target,GLsizei levels,GLenum internalformat,GLsizei width){__glewTexStorage1D(target,levels,internalformat,width);}
-static PFNGLTEXSTORAGE2DPROC __glewTexStorage2D = NULL;
-void glTexStorage2D(GLenum target,GLsizei levels,GLenum internalformat,GLsizei width,GLsizei height){__glewTexStorage2D(target,levels,internalformat,width,height);}
-static PFNGLTEXSTORAGE3DPROC __glewTexStorage3D = NULL;
-void glTexStorage3D(GLenum target,GLsizei levels,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth){__glewTexStorage3D(target,levels,internalformat,width,height,depth);}
-static PFNGLTEXTURESTORAGE1DEXTPROC __glewTextureStorage1DEXT = NULL;
-void glTextureStorage1DEXT(GLuint texture,GLenum target,GLsizei levels,GLenum internalformat,GLsizei width){__glewTextureStorage1DEXT(texture,target,levels,internalformat,width);}
-static PFNGLTEXTURESTORAGE2DEXTPROC __glewTextureStorage2DEXT = NULL;
-void glTextureStorage2DEXT(GLuint texture,GLenum target,GLsizei levels,GLenum internalformat,GLsizei width,GLsizei height){__glewTextureStorage2DEXT(texture,target,levels,internalformat,width,height);}
-static PFNGLTEXTURESTORAGE3DEXTPROC __glewTextureStorage3DEXT = NULL;
-void glTextureStorage3DEXT(GLuint texture,GLenum target,GLsizei levels,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth){__glewTextureStorage3DEXT(texture,target,levels,internalformat,width,height,depth);}
-
-static PFNGLTEXSTORAGE2DMULTISAMPLEPROC __glewTexStorage2DMultisample = NULL;
-void glTexStorage2DMultisample(GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height,GLboolean fixedsamplelocations){__glewTexStorage2DMultisample(target,samples,internalformat,width,height,fixedsamplelocations);}
-static PFNGLTEXSTORAGE3DMULTISAMPLEPROC __glewTexStorage3DMultisample = NULL;
-void glTexStorage3DMultisample(GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLboolean fixedsamplelocations){__glewTexStorage3DMultisample(target,samples,internalformat,width,height,depth,fixedsamplelocations);}
-static PFNGLTEXTURESTORAGE2DMULTISAMPLEEXTPROC __glewTextureStorage2DMultisampleEXT = NULL;
-void glTextureStorage2DMultisampleEXT(GLuint texture,GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height,GLboolean fixedsamplelocations){__glewTextureStorage2DMultisampleEXT(texture,target,samples,internalformat,width,height,fixedsamplelocations);}
-static PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC __glewTextureStorage3DMultisampleEXT = NULL;
-void glTextureStorage3DMultisampleEXT(GLuint texture,GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLboolean fixedsamplelocations){__glewTextureStorage3DMultisampleEXT(texture,target,samples,internalformat,width,height,depth,fixedsamplelocations);}
-
-static PFNGLTEXTUREVIEWPROC __glewTextureView = NULL;
-void glTextureView(GLuint texture,GLenum target,GLuint origtexture,GLenum internalformat,GLuint minlevel,GLuint numlevels,GLuint minlayer,GLuint numlayers){__glewTextureView(texture,target,origtexture,internalformat,minlevel,numlevels,minlayer,numlayers);}
-
-static PFNGLGETQUERYOBJECTI64VPROC __glewGetQueryObjecti64v = NULL;
-void glGetQueryObjecti64v(GLuint id,GLenum pname,GLint64* params){__glewGetQueryObjecti64v(id,pname,params);}
-static PFNGLGETQUERYOBJECTUI64VPROC __glewGetQueryObjectui64v = NULL;
-void glGetQueryObjectui64v(GLuint id,GLenum pname,GLuint64* params){__glewGetQueryObjectui64v(id,pname,params);}
-static PFNGLQUERYCOUNTERPROC __glewQueryCounter = NULL;
-void glQueryCounter(GLuint id,GLenum target){__glewQueryCounter(id,target);}
-
-static PFNGLBINDTRANSFORMFEEDBACKPROC __glewBindTransformFeedback = NULL;
-void glBindTransformFeedback(GLenum target,GLuint id){__glewBindTransformFeedback(target,id);}
-static PFNGLDELETETRANSFORMFEEDBACKSPROC __glewDeleteTransformFeedbacks = NULL;
-void glDeleteTransformFeedbacks(GLsizei n,const GLuint* ids){__glewDeleteTransformFeedbacks(n,ids);}
-static PFNGLDRAWTRANSFORMFEEDBACKPROC __glewDrawTransformFeedback = NULL;
-void glDrawTransformFeedback(GLenum mode,GLuint id){__glewDrawTransformFeedback(mode,id);}
-static PFNGLGENTRANSFORMFEEDBACKSPROC __glewGenTransformFeedbacks = NULL;
-void glGenTransformFeedbacks(GLsizei n,GLuint* ids){__glewGenTransformFeedbacks(n,ids);}
-static PFNGLISTRANSFORMFEEDBACKPROC __glewIsTransformFeedback = NULL;
-GLboolean glIsTransformFeedback(GLuint id){return __glewIsTransformFeedback(id);}
-static PFNGLPAUSETRANSFORMFEEDBACKPROC __glewPauseTransformFeedback = NULL;
-void glPauseTransformFeedback(void){__glewPauseTransformFeedback();}
-static PFNGLRESUMETRANSFORMFEEDBACKPROC __glewResumeTransformFeedback = NULL;
-void glResumeTransformFeedback(void){__glewResumeTransformFeedback();}
-
-static PFNGLBEGINQUERYINDEXEDPROC __glewBeginQueryIndexed = NULL;
-void glBeginQueryIndexed(GLenum target,GLuint index,GLuint id){__glewBeginQueryIndexed(target,index,id);}
-static PFNGLDRAWTRANSFORMFEEDBACKSTREAMPROC __glewDrawTransformFeedbackStream = NULL;
-void glDrawTransformFeedbackStream(GLenum mode,GLuint id,GLuint stream){__glewDrawTransformFeedbackStream(mode,id,stream);}
-static PFNGLENDQUERYINDEXEDPROC __glewEndQueryIndexed = NULL;
-void glEndQueryIndexed(GLenum target,GLuint index){__glewEndQueryIndexed(target,index);}
-static PFNGLGETQUERYINDEXEDIVPROC __glewGetQueryIndexediv = NULL;
-void glGetQueryIndexediv(GLenum target,GLuint index,GLenum pname,GLint* params){__glewGetQueryIndexediv(target,index,pname,params);}
-
-static PFNGLDRAWTRANSFORMFEEDBACKINSTANCEDPROC __glewDrawTransformFeedbackInstanced = NULL;
-void glDrawTransformFeedbackInstanced(GLenum mode,GLuint id,GLsizei primcount){__glewDrawTransformFeedbackInstanced(mode,id,primcount);}
-static PFNGLDRAWTRANSFORMFEEDBACKSTREAMINSTANCEDPROC __glewDrawTransformFeedbackStreamInstanced = NULL;
-void glDrawTransformFeedbackStreamInstanced(GLenum mode,GLuint id,GLuint stream,GLsizei primcount){__glewDrawTransformFeedbackStreamInstanced(mode,id,stream,primcount);}
-
-static PFNGLLOADTRANSPOSEMATRIXDARBPROC __glewLoadTransposeMatrixdARB = NULL;
-void glLoadTransposeMatrixdARB(GLdouble m[16]){__glewLoadTransposeMatrixdARB(m);}
-static PFNGLLOADTRANSPOSEMATRIXFARBPROC __glewLoadTransposeMatrixfARB = NULL;
-void glLoadTransposeMatrixfARB(GLfloat m[16]){__glewLoadTransposeMatrixfARB(m);}
-static PFNGLMULTTRANSPOSEMATRIXDARBPROC __glewMultTransposeMatrixdARB = NULL;
-void glMultTransposeMatrixdARB(GLdouble m[16]){__glewMultTransposeMatrixdARB(m);}
-static PFNGLMULTTRANSPOSEMATRIXFARBPROC __glewMultTransposeMatrixfARB = NULL;
-void glMultTransposeMatrixfARB(GLfloat m[16]){__glewMultTransposeMatrixfARB(m);}
-
-static PFNGLBINDBUFFERBASEPROC __glewBindBufferBase = NULL;
-void glBindBufferBase(GLenum target,GLuint index,GLuint buffer){__glewBindBufferBase(target,index,buffer);}
-static PFNGLBINDBUFFERRANGEPROC __glewBindBufferRange = NULL;
-void glBindBufferRange(GLenum target,GLuint index,GLuint buffer,GLintptr offset,GLsizeiptr size){__glewBindBufferRange(target,index,buffer,offset,size);}
-static PFNGLGETACTIVEUNIFORMBLOCKNAMEPROC __glewGetActiveUniformBlockName = NULL;
-void glGetActiveUniformBlockName(GLuint program,GLuint uniformBlockIndex,GLsizei bufSize,GLsizei* length,GLchar* uniformBlockName){__glewGetActiveUniformBlockName(program,uniformBlockIndex,bufSize,length,uniformBlockName);}
-static PFNGLGETACTIVEUNIFORMBLOCKIVPROC __glewGetActiveUniformBlockiv = NULL;
-void glGetActiveUniformBlockiv(GLuint program,GLuint uniformBlockIndex,GLenum pname,GLint* params){__glewGetActiveUniformBlockiv(program,uniformBlockIndex,pname,params);}
-static PFNGLGETACTIVEUNIFORMNAMEPROC __glewGetActiveUniformName = NULL;
-void glGetActiveUniformName(GLuint program,GLuint uniformIndex,GLsizei bufSize,GLsizei* length,GLchar* uniformName){__glewGetActiveUniformName(program,uniformIndex,bufSize,length,uniformName);}
-static PFNGLGETACTIVEUNIFORMSIVPROC __glewGetActiveUniformsiv = NULL;
-void glGetActiveUniformsiv(GLuint program,GLsizei uniformCount,const GLuint* uniformIndices,GLenum pname,GLint* params){__glewGetActiveUniformsiv(program,uniformCount,uniformIndices,pname,params);}
-static PFNGLGETINTEGERI_VPROC __glewGetIntegeri_v = NULL;
-void glGetIntegeri_v(GLenum target,GLuint index,GLint* data){__glewGetIntegeri_v(target,index,data);}
-static PFNGLGETUNIFORMBLOCKINDEXPROC __glewGetUniformBlockIndex = NULL;
-GLuint glGetUniformBlockIndex(GLuint program,const GLchar* uniformBlockName){return __glewGetUniformBlockIndex(program,uniformBlockName);}
-static PFNGLGETUNIFORMINDICESPROC __glewGetUniformIndices = NULL;
-void glGetUniformIndices(GLuint program,GLsizei uniformCount,const GLchar** uniformNames,GLuint* uniformIndices){__glewGetUniformIndices(program,uniformCount,uniformNames,uniformIndices);}
-static PFNGLUNIFORMBLOCKBINDINGPROC __glewUniformBlockBinding = NULL;
-void glUniformBlockBinding(GLuint program,GLuint uniformBlockIndex,GLuint uniformBlockBinding){__glewUniformBlockBinding(program,uniformBlockIndex,uniformBlockBinding);}
-
-static PFNGLBINDVERTEXARRAYPROC __glewBindVertexArray = NULL;
-void glBindVertexArray(GLuint array){__glewBindVertexArray(array);}
-static PFNGLDELETEVERTEXARRAYSPROC __glewDeleteVertexArrays = NULL;
-void glDeleteVertexArrays(GLsizei n,const GLuint* arrays){__glewDeleteVertexArrays(n,arrays);}
-static PFNGLGENVERTEXARRAYSPROC __glewGenVertexArrays = NULL;
-void glGenVertexArrays(GLsizei n,GLuint* arrays){__glewGenVertexArrays(n,arrays);}
-static PFNGLISVERTEXARRAYPROC __glewIsVertexArray = NULL;
-GLboolean glIsVertexArray(GLuint array){return __glewIsVertexArray(array);}
-
-static PFNGLGETVERTEXATTRIBLDVPROC __glewGetVertexAttribLdv = NULL;
-void glGetVertexAttribLdv(GLuint index,GLenum pname,GLdouble* params){__glewGetVertexAttribLdv(index,pname,params);}
-static PFNGLVERTEXATTRIBL1DPROC __glewVertexAttribL1d = NULL;
-void glVertexAttribL1d(GLuint index,GLdouble x){__glewVertexAttribL1d(index,x);}
-static PFNGLVERTEXATTRIBL1DVPROC __glewVertexAttribL1dv = NULL;
-void glVertexAttribL1dv(GLuint index,const GLdouble* v){__glewVertexAttribL1dv(index,v);}
-static PFNGLVERTEXATTRIBL2DPROC __glewVertexAttribL2d = NULL;
-void glVertexAttribL2d(GLuint index,GLdouble x,GLdouble y){__glewVertexAttribL2d(index,x,y);}
-static PFNGLVERTEXATTRIBL2DVPROC __glewVertexAttribL2dv = NULL;
-void glVertexAttribL2dv(GLuint index,const GLdouble* v){__glewVertexAttribL2dv(index,v);}
-static PFNGLVERTEXATTRIBL3DPROC __glewVertexAttribL3d = NULL;
-void glVertexAttribL3d(GLuint index,GLdouble x,GLdouble y,GLdouble z){__glewVertexAttribL3d(index,x,y,z);}
-static PFNGLVERTEXATTRIBL3DVPROC __glewVertexAttribL3dv = NULL;
-void glVertexAttribL3dv(GLuint index,const GLdouble* v){__glewVertexAttribL3dv(index,v);}
-static PFNGLVERTEXATTRIBL4DPROC __glewVertexAttribL4d = NULL;
-void glVertexAttribL4d(GLuint index,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewVertexAttribL4d(index,x,y,z,w);}
-static PFNGLVERTEXATTRIBL4DVPROC __glewVertexAttribL4dv = NULL;
-void glVertexAttribL4dv(GLuint index,const GLdouble* v){__glewVertexAttribL4dv(index,v);}
-static PFNGLVERTEXATTRIBLPOINTERPROC __glewVertexAttribLPointer = NULL;
-void glVertexAttribLPointer(GLuint index,GLint size,GLenum type,GLsizei stride,const void* pointer){__glewVertexAttribLPointer(index,size,type,stride,pointer);}
-
-static PFNGLBINDVERTEXBUFFERPROC __glewBindVertexBuffer = NULL;
-void glBindVertexBuffer(GLuint bindingindex,GLuint buffer,GLintptr offset,GLsizei stride){__glewBindVertexBuffer(bindingindex,buffer,offset,stride);}
-static PFNGLVERTEXATTRIBBINDINGPROC __glewVertexAttribBinding = NULL;
-void glVertexAttribBinding(GLuint attribindex,GLuint bindingindex){__glewVertexAttribBinding(attribindex,bindingindex);}
-static PFNGLVERTEXATTRIBFORMATPROC __glewVertexAttribFormat = NULL;
-void glVertexAttribFormat(GLuint attribindex,GLint size,GLenum type,GLboolean normalized,GLuint relativeoffset){__glewVertexAttribFormat(attribindex,size,type,normalized,relativeoffset);}
-static PFNGLVERTEXATTRIBIFORMATPROC __glewVertexAttribIFormat = NULL;
-void glVertexAttribIFormat(GLuint attribindex,GLint size,GLenum type,GLuint relativeoffset){__glewVertexAttribIFormat(attribindex,size,type,relativeoffset);}
-static PFNGLVERTEXATTRIBLFORMATPROC __glewVertexAttribLFormat = NULL;
-void glVertexAttribLFormat(GLuint attribindex,GLint size,GLenum type,GLuint relativeoffset){__glewVertexAttribLFormat(attribindex,size,type,relativeoffset);}
-static PFNGLVERTEXBINDINGDIVISORPROC __glewVertexBindingDivisor = NULL;
-void glVertexBindingDivisor(GLuint bindingindex,GLuint divisor){__glewVertexBindingDivisor(bindingindex,divisor);}
-
-static PFNGLVERTEXBLENDARBPROC __glewVertexBlendARB = NULL;
-void glVertexBlendARB(GLint count){__glewVertexBlendARB(count);}
-static PFNGLWEIGHTPOINTERARBPROC __glewWeightPointerARB = NULL;
-void glWeightPointerARB(GLint size,GLenum type,GLsizei stride,GLvoid *pointer){__glewWeightPointerARB(size,type,stride,pointer);}
-static PFNGLWEIGHTBVARBPROC __glewWeightbvARB = NULL;
-void glWeightbvARB(GLint size,GLbyte *weights){__glewWeightbvARB(size,weights);}
-static PFNGLWEIGHTDVARBPROC __glewWeightdvARB = NULL;
-void glWeightdvARB(GLint size,GLdouble *weights){__glewWeightdvARB(size,weights);}
-static PFNGLWEIGHTFVARBPROC __glewWeightfvARB = NULL;
-void glWeightfvARB(GLint size,GLfloat *weights){__glewWeightfvARB(size,weights);}
-static PFNGLWEIGHTIVARBPROC __glewWeightivARB = NULL;
-void glWeightivARB(GLint size,GLint *weights){__glewWeightivARB(size,weights);}
-static PFNGLWEIGHTSVARBPROC __glewWeightsvARB = NULL;
-void glWeightsvARB(GLint size,GLshort *weights){__glewWeightsvARB(size,weights);}
-static PFNGLWEIGHTUBVARBPROC __glewWeightubvARB = NULL;
-void glWeightubvARB(GLint size,GLubyte *weights){__glewWeightubvARB(size,weights);}
-static PFNGLWEIGHTUIVARBPROC __glewWeightuivARB = NULL;
-void glWeightuivARB(GLint size,GLuint *weights){__glewWeightuivARB(size,weights);}
-static PFNGLWEIGHTUSVARBPROC __glewWeightusvARB = NULL;
-void glWeightusvARB(GLint size,GLushort *weights){__glewWeightusvARB(size,weights);}
-
-static PFNGLBINDBUFFERARBPROC __glewBindBufferARB = NULL;
-void glBindBufferARB(GLenum target,GLuint buffer){__glewBindBufferARB(target,buffer);}
-static PFNGLBUFFERDATAARBPROC __glewBufferDataARB = NULL;
-void glBufferDataARB(GLenum target,GLsizeiptrARB size,const GLvoid *data,GLenum usage){__glewBufferDataARB(target,size,data,usage);}
-static PFNGLBUFFERSUBDATAARBPROC __glewBufferSubDataARB = NULL;
-void glBufferSubDataARB(GLenum target,GLintptrARB offset,GLsizeiptrARB size,const GLvoid *data){__glewBufferSubDataARB(target,offset,size,data);}
-static PFNGLDELETEBUFFERSARBPROC __glewDeleteBuffersARB = NULL;
-void glDeleteBuffersARB(GLsizei n,const GLuint* buffers){__glewDeleteBuffersARB(n,buffers);}
-static PFNGLGENBUFFERSARBPROC __glewGenBuffersARB = NULL;
-void glGenBuffersARB(GLsizei n,GLuint* buffers){__glewGenBuffersARB(n,buffers);}
-static PFNGLGETBUFFERPARAMETERIVARBPROC __glewGetBufferParameterivARB = NULL;
-void glGetBufferParameterivARB(GLenum target,GLenum pname,GLint* params){__glewGetBufferParameterivARB(target,pname,params);}
-static PFNGLGETBUFFERPOINTERVARBPROC __glewGetBufferPointervARB = NULL;
-void glGetBufferPointervARB(GLenum target,GLenum pname,GLvoid** params){__glewGetBufferPointervARB(target,pname,params);}
-static PFNGLGETBUFFERSUBDATAARBPROC __glewGetBufferSubDataARB = NULL;
-void glGetBufferSubDataARB(GLenum target,GLintptrARB offset,GLsizeiptrARB size,GLvoid *data){__glewGetBufferSubDataARB(target,offset,size,data);}
-static PFNGLISBUFFERARBPROC __glewIsBufferARB = NULL;
-GLboolean glIsBufferARB(GLuint buffer){return __glewIsBufferARB(buffer);}
-static PFNGLMAPBUFFERARBPROC __glewMapBufferARB = NULL;
-GLvoid * glMapBufferARB(GLenum target,GLenum access){return __glewMapBufferARB(target,access);}
-static PFNGLUNMAPBUFFERARBPROC __glewUnmapBufferARB = NULL;
-GLboolean glUnmapBufferARB(GLenum target){return __glewUnmapBufferARB(target);}
-
-static PFNGLBINDPROGRAMARBPROC __glewBindProgramARB = NULL;
-void glBindProgramARB(GLenum target,GLuint program){__glewBindProgramARB(target,program);}
-static PFNGLDELETEPROGRAMSARBPROC __glewDeleteProgramsARB = NULL;
-void glDeleteProgramsARB(GLsizei n,const GLuint* programs){__glewDeleteProgramsARB(n,programs);}
-static PFNGLDISABLEVERTEXATTRIBARRAYARBPROC __glewDisableVertexAttribArrayARB = NULL;
-void glDisableVertexAttribArrayARB(GLuint index){__glewDisableVertexAttribArrayARB(index);}
-static PFNGLENABLEVERTEXATTRIBARRAYARBPROC __glewEnableVertexAttribArrayARB = NULL;
-void glEnableVertexAttribArrayARB(GLuint index){__glewEnableVertexAttribArrayARB(index);}
-static PFNGLGENPROGRAMSARBPROC __glewGenProgramsARB = NULL;
-void glGenProgramsARB(GLsizei n,GLuint* programs){__glewGenProgramsARB(n,programs);}
-static PFNGLGETPROGRAMENVPARAMETERDVARBPROC __glewGetProgramEnvParameterdvARB = NULL;
-void glGetProgramEnvParameterdvARB(GLenum target,GLuint index,GLdouble* params){__glewGetProgramEnvParameterdvARB(target,index,params);}
-static PFNGLGETPROGRAMENVPARAMETERFVARBPROC __glewGetProgramEnvParameterfvARB = NULL;
-void glGetProgramEnvParameterfvARB(GLenum target,GLuint index,GLfloat* params){__glewGetProgramEnvParameterfvARB(target,index,params);}
-static PFNGLGETPROGRAMLOCALPARAMETERDVARBPROC __glewGetProgramLocalParameterdvARB = NULL;
-void glGetProgramLocalParameterdvARB(GLenum target,GLuint index,GLdouble* params){__glewGetProgramLocalParameterdvARB(target,index,params);}
-static PFNGLGETPROGRAMLOCALPARAMETERFVARBPROC __glewGetProgramLocalParameterfvARB = NULL;
-void glGetProgramLocalParameterfvARB(GLenum target,GLuint index,GLfloat* params){__glewGetProgramLocalParameterfvARB(target,index,params);}
-static PFNGLGETPROGRAMSTRINGARBPROC __glewGetProgramStringARB = NULL;
-void glGetProgramStringARB(GLenum target,GLenum pname,GLvoid *string){__glewGetProgramStringARB(target,pname,string);}
-static PFNGLGETPROGRAMIVARBPROC __glewGetProgramivARB = NULL;
-void glGetProgramivARB(GLenum target,GLenum pname,GLint* params){__glewGetProgramivARB(target,pname,params);}
-static PFNGLGETVERTEXATTRIBPOINTERVARBPROC __glewGetVertexAttribPointervARB = NULL;
-void glGetVertexAttribPointervARB(GLuint index,GLenum pname,GLvoid** pointer){__glewGetVertexAttribPointervARB(index,pname,pointer);}
-static PFNGLGETVERTEXATTRIBDVARBPROC __glewGetVertexAttribdvARB = NULL;
-void glGetVertexAttribdvARB(GLuint index,GLenum pname,GLdouble* params){__glewGetVertexAttribdvARB(index,pname,params);}
-static PFNGLGETVERTEXATTRIBFVARBPROC __glewGetVertexAttribfvARB = NULL;
-void glGetVertexAttribfvARB(GLuint index,GLenum pname,GLfloat* params){__glewGetVertexAttribfvARB(index,pname,params);}
-static PFNGLGETVERTEXATTRIBIVARBPROC __glewGetVertexAttribivARB = NULL;
-void glGetVertexAttribivARB(GLuint index,GLenum pname,GLint* params){__glewGetVertexAttribivARB(index,pname,params);}
-static PFNGLISPROGRAMARBPROC __glewIsProgramARB = NULL;
-GLboolean glIsProgramARB(GLuint program){return __glewIsProgramARB(program);}
-static PFNGLPROGRAMENVPARAMETER4DARBPROC __glewProgramEnvParameter4dARB = NULL;
-void glProgramEnvParameter4dARB(GLenum target,GLuint index,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewProgramEnvParameter4dARB(target,index,x,y,z,w);}
-static PFNGLPROGRAMENVPARAMETER4DVARBPROC __glewProgramEnvParameter4dvARB = NULL;
-void glProgramEnvParameter4dvARB(GLenum target,GLuint index,const GLdouble* params){__glewProgramEnvParameter4dvARB(target,index,params);}
-static PFNGLPROGRAMENVPARAMETER4FARBPROC __glewProgramEnvParameter4fARB = NULL;
-void glProgramEnvParameter4fARB(GLenum target,GLuint index,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewProgramEnvParameter4fARB(target,index,x,y,z,w);}
-static PFNGLPROGRAMENVPARAMETER4FVARBPROC __glewProgramEnvParameter4fvARB = NULL;
-void glProgramEnvParameter4fvARB(GLenum target,GLuint index,const GLfloat* params){__glewProgramEnvParameter4fvARB(target,index,params);}
-static PFNGLPROGRAMLOCALPARAMETER4DARBPROC __glewProgramLocalParameter4dARB = NULL;
-void glProgramLocalParameter4dARB(GLenum target,GLuint index,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewProgramLocalParameter4dARB(target,index,x,y,z,w);}
-static PFNGLPROGRAMLOCALPARAMETER4DVARBPROC __glewProgramLocalParameter4dvARB = NULL;
-void glProgramLocalParameter4dvARB(GLenum target,GLuint index,const GLdouble* params){__glewProgramLocalParameter4dvARB(target,index,params);}
-static PFNGLPROGRAMLOCALPARAMETER4FARBPROC __glewProgramLocalParameter4fARB = NULL;
-void glProgramLocalParameter4fARB(GLenum target,GLuint index,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewProgramLocalParameter4fARB(target,index,x,y,z,w);}
-static PFNGLPROGRAMLOCALPARAMETER4FVARBPROC __glewProgramLocalParameter4fvARB = NULL;
-void glProgramLocalParameter4fvARB(GLenum target,GLuint index,const GLfloat* params){__glewProgramLocalParameter4fvARB(target,index,params);}
-static PFNGLPROGRAMSTRINGARBPROC __glewProgramStringARB = NULL;
-void glProgramStringARB(GLenum target,GLenum format,GLsizei len,const GLvoid *string){__glewProgramStringARB(target,format,len,string);}
-static PFNGLVERTEXATTRIB1DARBPROC __glewVertexAttrib1dARB = NULL;
-void glVertexAttrib1dARB(GLuint index,GLdouble x){__glewVertexAttrib1dARB(index,x);}
-static PFNGLVERTEXATTRIB1DVARBPROC __glewVertexAttrib1dvARB = NULL;
-void glVertexAttrib1dvARB(GLuint index,const GLdouble* v){__glewVertexAttrib1dvARB(index,v);}
-static PFNGLVERTEXATTRIB1FARBPROC __glewVertexAttrib1fARB = NULL;
-void glVertexAttrib1fARB(GLuint index,GLfloat x){__glewVertexAttrib1fARB(index,x);}
-static PFNGLVERTEXATTRIB1FVARBPROC __glewVertexAttrib1fvARB = NULL;
-void glVertexAttrib1fvARB(GLuint index,const GLfloat* v){__glewVertexAttrib1fvARB(index,v);}
-static PFNGLVERTEXATTRIB1SARBPROC __glewVertexAttrib1sARB = NULL;
-void glVertexAttrib1sARB(GLuint index,GLshort x){__glewVertexAttrib1sARB(index,x);}
-static PFNGLVERTEXATTRIB1SVARBPROC __glewVertexAttrib1svARB = NULL;
-void glVertexAttrib1svARB(GLuint index,const GLshort* v){__glewVertexAttrib1svARB(index,v);}
-static PFNGLVERTEXATTRIB2DARBPROC __glewVertexAttrib2dARB = NULL;
-void glVertexAttrib2dARB(GLuint index,GLdouble x,GLdouble y){__glewVertexAttrib2dARB(index,x,y);}
-static PFNGLVERTEXATTRIB2DVARBPROC __glewVertexAttrib2dvARB = NULL;
-void glVertexAttrib2dvARB(GLuint index,const GLdouble* v){__glewVertexAttrib2dvARB(index,v);}
-static PFNGLVERTEXATTRIB2FARBPROC __glewVertexAttrib2fARB = NULL;
-void glVertexAttrib2fARB(GLuint index,GLfloat x,GLfloat y){__glewVertexAttrib2fARB(index,x,y);}
-static PFNGLVERTEXATTRIB2FVARBPROC __glewVertexAttrib2fvARB = NULL;
-void glVertexAttrib2fvARB(GLuint index,const GLfloat* v){__glewVertexAttrib2fvARB(index,v);}
-static PFNGLVERTEXATTRIB2SARBPROC __glewVertexAttrib2sARB = NULL;
-void glVertexAttrib2sARB(GLuint index,GLshort x,GLshort y){__glewVertexAttrib2sARB(index,x,y);}
-static PFNGLVERTEXATTRIB2SVARBPROC __glewVertexAttrib2svARB = NULL;
-void glVertexAttrib2svARB(GLuint index,const GLshort* v){__glewVertexAttrib2svARB(index,v);}
-static PFNGLVERTEXATTRIB3DARBPROC __glewVertexAttrib3dARB = NULL;
-void glVertexAttrib3dARB(GLuint index,GLdouble x,GLdouble y,GLdouble z){__glewVertexAttrib3dARB(index,x,y,z);}
-static PFNGLVERTEXATTRIB3DVARBPROC __glewVertexAttrib3dvARB = NULL;
-void glVertexAttrib3dvARB(GLuint index,const GLdouble* v){__glewVertexAttrib3dvARB(index,v);}
-static PFNGLVERTEXATTRIB3FARBPROC __glewVertexAttrib3fARB = NULL;
-void glVertexAttrib3fARB(GLuint index,GLfloat x,GLfloat y,GLfloat z){__glewVertexAttrib3fARB(index,x,y,z);}
-static PFNGLVERTEXATTRIB3FVARBPROC __glewVertexAttrib3fvARB = NULL;
-void glVertexAttrib3fvARB(GLuint index,const GLfloat* v){__glewVertexAttrib3fvARB(index,v);}
-static PFNGLVERTEXATTRIB3SARBPROC __glewVertexAttrib3sARB = NULL;
-void glVertexAttrib3sARB(GLuint index,GLshort x,GLshort y,GLshort z){__glewVertexAttrib3sARB(index,x,y,z);}
-static PFNGLVERTEXATTRIB3SVARBPROC __glewVertexAttrib3svARB = NULL;
-void glVertexAttrib3svARB(GLuint index,const GLshort* v){__glewVertexAttrib3svARB(index,v);}
-static PFNGLVERTEXATTRIB4NBVARBPROC __glewVertexAttrib4NbvARB = NULL;
-void glVertexAttrib4NbvARB(GLuint index,const GLbyte* v){__glewVertexAttrib4NbvARB(index,v);}
-static PFNGLVERTEXATTRIB4NIVARBPROC __glewVertexAttrib4NivARB = NULL;
-void glVertexAttrib4NivARB(GLuint index,const GLint* v){__glewVertexAttrib4NivARB(index,v);}
-static PFNGLVERTEXATTRIB4NSVARBPROC __glewVertexAttrib4NsvARB = NULL;
-void glVertexAttrib4NsvARB(GLuint index,const GLshort* v){__glewVertexAttrib4NsvARB(index,v);}
-static PFNGLVERTEXATTRIB4NUBARBPROC __glewVertexAttrib4NubARB = NULL;
-void glVertexAttrib4NubARB(GLuint index,GLubyte x,GLubyte y,GLubyte z,GLubyte w){__glewVertexAttrib4NubARB(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4NUBVARBPROC __glewVertexAttrib4NubvARB = NULL;
-void glVertexAttrib4NubvARB(GLuint index,const GLubyte* v){__glewVertexAttrib4NubvARB(index,v);}
-static PFNGLVERTEXATTRIB4NUIVARBPROC __glewVertexAttrib4NuivARB = NULL;
-void glVertexAttrib4NuivARB(GLuint index,const GLuint* v){__glewVertexAttrib4NuivARB(index,v);}
-static PFNGLVERTEXATTRIB4NUSVARBPROC __glewVertexAttrib4NusvARB = NULL;
-void glVertexAttrib4NusvARB(GLuint index,const GLushort* v){__glewVertexAttrib4NusvARB(index,v);}
-static PFNGLVERTEXATTRIB4BVARBPROC __glewVertexAttrib4bvARB = NULL;
-void glVertexAttrib4bvARB(GLuint index,const GLbyte* v){__glewVertexAttrib4bvARB(index,v);}
-static PFNGLVERTEXATTRIB4DARBPROC __glewVertexAttrib4dARB = NULL;
-void glVertexAttrib4dARB(GLuint index,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewVertexAttrib4dARB(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4DVARBPROC __glewVertexAttrib4dvARB = NULL;
-void glVertexAttrib4dvARB(GLuint index,const GLdouble* v){__glewVertexAttrib4dvARB(index,v);}
-static PFNGLVERTEXATTRIB4FARBPROC __glewVertexAttrib4fARB = NULL;
-void glVertexAttrib4fARB(GLuint index,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewVertexAttrib4fARB(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4FVARBPROC __glewVertexAttrib4fvARB = NULL;
-void glVertexAttrib4fvARB(GLuint index,const GLfloat* v){__glewVertexAttrib4fvARB(index,v);}
-static PFNGLVERTEXATTRIB4IVARBPROC __glewVertexAttrib4ivARB = NULL;
-void glVertexAttrib4ivARB(GLuint index,const GLint* v){__glewVertexAttrib4ivARB(index,v);}
-static PFNGLVERTEXATTRIB4SARBPROC __glewVertexAttrib4sARB = NULL;
-void glVertexAttrib4sARB(GLuint index,GLshort x,GLshort y,GLshort z,GLshort w){__glewVertexAttrib4sARB(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4SVARBPROC __glewVertexAttrib4svARB = NULL;
-void glVertexAttrib4svARB(GLuint index,const GLshort* v){__glewVertexAttrib4svARB(index,v);}
-static PFNGLVERTEXATTRIB4UBVARBPROC __glewVertexAttrib4ubvARB = NULL;
-void glVertexAttrib4ubvARB(GLuint index,const GLubyte* v){__glewVertexAttrib4ubvARB(index,v);}
-static PFNGLVERTEXATTRIB4UIVARBPROC __glewVertexAttrib4uivARB = NULL;
-void glVertexAttrib4uivARB(GLuint index,const GLuint* v){__glewVertexAttrib4uivARB(index,v);}
-static PFNGLVERTEXATTRIB4USVARBPROC __glewVertexAttrib4usvARB = NULL;
-void glVertexAttrib4usvARB(GLuint index,const GLushort* v){__glewVertexAttrib4usvARB(index,v);}
-static PFNGLVERTEXATTRIBPOINTERARBPROC __glewVertexAttribPointerARB = NULL;
-void glVertexAttribPointerARB(GLuint index,GLint size,GLenum type,GLboolean normalized,GLsizei stride,const GLvoid *pointer){__glewVertexAttribPointerARB(index,size,type,normalized,stride,pointer);}
-
-static PFNGLBINDATTRIBLOCATIONARBPROC __glewBindAttribLocationARB = NULL;
-void glBindAttribLocationARB(GLhandleARB programObj,GLuint index,const GLcharARB* name){__glewBindAttribLocationARB(programObj,index,name);}
-static PFNGLGETACTIVEATTRIBARBPROC __glewGetActiveAttribARB = NULL;
-void glGetActiveAttribARB(GLhandleARB programObj,GLuint index,GLsizei maxLength,GLsizei* length,GLint *size,GLenum *type,GLcharARB *name){__glewGetActiveAttribARB(programObj,index,maxLength,length,size,type,name);}
-static PFNGLGETATTRIBLOCATIONARBPROC __glewGetAttribLocationARB = NULL;
-GLint glGetAttribLocationARB(GLhandleARB programObj,const GLcharARB* name){return __glewGetAttribLocationARB(programObj,name);}
-
-static PFNGLCOLORP3UIPROC __glewColorP3ui = NULL;
-void glColorP3ui(GLenum type,GLuint color){__glewColorP3ui(type,color);}
-static PFNGLCOLORP3UIVPROC __glewColorP3uiv = NULL;
-void glColorP3uiv(GLenum type,const GLuint* color){__glewColorP3uiv(type,color);}
-static PFNGLCOLORP4UIPROC __glewColorP4ui = NULL;
-void glColorP4ui(GLenum type,GLuint color){__glewColorP4ui(type,color);}
-static PFNGLCOLORP4UIVPROC __glewColorP4uiv = NULL;
-void glColorP4uiv(GLenum type,const GLuint* color){__glewColorP4uiv(type,color);}
-static PFNGLMULTITEXCOORDP1UIPROC __glewMultiTexCoordP1ui = NULL;
-void glMultiTexCoordP1ui(GLenum texture,GLenum type,GLuint coords){__glewMultiTexCoordP1ui(texture,type,coords);}
-static PFNGLMULTITEXCOORDP1UIVPROC __glewMultiTexCoordP1uiv = NULL;
-void glMultiTexCoordP1uiv(GLenum texture,GLenum type,const GLuint* coords){__glewMultiTexCoordP1uiv(texture,type,coords);}
-static PFNGLMULTITEXCOORDP2UIPROC __glewMultiTexCoordP2ui = NULL;
-void glMultiTexCoordP2ui(GLenum texture,GLenum type,GLuint coords){__glewMultiTexCoordP2ui(texture,type,coords);}
-static PFNGLMULTITEXCOORDP2UIVPROC __glewMultiTexCoordP2uiv = NULL;
-void glMultiTexCoordP2uiv(GLenum texture,GLenum type,const GLuint* coords){__glewMultiTexCoordP2uiv(texture,type,coords);}
-static PFNGLMULTITEXCOORDP3UIPROC __glewMultiTexCoordP3ui = NULL;
-void glMultiTexCoordP3ui(GLenum texture,GLenum type,GLuint coords){__glewMultiTexCoordP3ui(texture,type,coords);}
-static PFNGLMULTITEXCOORDP3UIVPROC __glewMultiTexCoordP3uiv = NULL;
-void glMultiTexCoordP3uiv(GLenum texture,GLenum type,const GLuint* coords){__glewMultiTexCoordP3uiv(texture,type,coords);}
-static PFNGLMULTITEXCOORDP4UIPROC __glewMultiTexCoordP4ui = NULL;
-void glMultiTexCoordP4ui(GLenum texture,GLenum type,GLuint coords){__glewMultiTexCoordP4ui(texture,type,coords);}
-static PFNGLMULTITEXCOORDP4UIVPROC __glewMultiTexCoordP4uiv = NULL;
-void glMultiTexCoordP4uiv(GLenum texture,GLenum type,const GLuint* coords){__glewMultiTexCoordP4uiv(texture,type,coords);}
-static PFNGLNORMALP3UIPROC __glewNormalP3ui = NULL;
-void glNormalP3ui(GLenum type,GLuint coords){__glewNormalP3ui(type,coords);}
-static PFNGLNORMALP3UIVPROC __glewNormalP3uiv = NULL;
-void glNormalP3uiv(GLenum type,const GLuint* coords){__glewNormalP3uiv(type,coords);}
-static PFNGLSECONDARYCOLORP3UIPROC __glewSecondaryColorP3ui = NULL;
-void glSecondaryColorP3ui(GLenum type,GLuint color){__glewSecondaryColorP3ui(type,color);}
-static PFNGLSECONDARYCOLORP3UIVPROC __glewSecondaryColorP3uiv = NULL;
-void glSecondaryColorP3uiv(GLenum type,const GLuint* color){__glewSecondaryColorP3uiv(type,color);}
-static PFNGLTEXCOORDP1UIPROC __glewTexCoordP1ui = NULL;
-void glTexCoordP1ui(GLenum type,GLuint coords){__glewTexCoordP1ui(type,coords);}
-static PFNGLTEXCOORDP1UIVPROC __glewTexCoordP1uiv = NULL;
-void glTexCoordP1uiv(GLenum type,const GLuint* coords){__glewTexCoordP1uiv(type,coords);}
-static PFNGLTEXCOORDP2UIPROC __glewTexCoordP2ui = NULL;
-void glTexCoordP2ui(GLenum type,GLuint coords){__glewTexCoordP2ui(type,coords);}
-static PFNGLTEXCOORDP2UIVPROC __glewTexCoordP2uiv = NULL;
-void glTexCoordP2uiv(GLenum type,const GLuint* coords){__glewTexCoordP2uiv(type,coords);}
-static PFNGLTEXCOORDP3UIPROC __glewTexCoordP3ui = NULL;
-void glTexCoordP3ui(GLenum type,GLuint coords){__glewTexCoordP3ui(type,coords);}
-static PFNGLTEXCOORDP3UIVPROC __glewTexCoordP3uiv = NULL;
-void glTexCoordP3uiv(GLenum type,const GLuint* coords){__glewTexCoordP3uiv(type,coords);}
-static PFNGLTEXCOORDP4UIPROC __glewTexCoordP4ui = NULL;
-void glTexCoordP4ui(GLenum type,GLuint coords){__glewTexCoordP4ui(type,coords);}
-static PFNGLTEXCOORDP4UIVPROC __glewTexCoordP4uiv = NULL;
-void glTexCoordP4uiv(GLenum type,const GLuint* coords){__glewTexCoordP4uiv(type,coords);}
-static PFNGLVERTEXATTRIBP1UIPROC __glewVertexAttribP1ui = NULL;
-void glVertexAttribP1ui(GLuint index,GLenum type,GLboolean normalized,GLuint value){__glewVertexAttribP1ui(index,type,normalized,value);}
-static PFNGLVERTEXATTRIBP1UIVPROC __glewVertexAttribP1uiv = NULL;
-void glVertexAttribP1uiv(GLuint index,GLenum type,GLboolean normalized,const GLuint* value){__glewVertexAttribP1uiv(index,type,normalized,value);}
-static PFNGLVERTEXATTRIBP2UIPROC __glewVertexAttribP2ui = NULL;
-void glVertexAttribP2ui(GLuint index,GLenum type,GLboolean normalized,GLuint value){__glewVertexAttribP2ui(index,type,normalized,value);}
-static PFNGLVERTEXATTRIBP2UIVPROC __glewVertexAttribP2uiv = NULL;
-void glVertexAttribP2uiv(GLuint index,GLenum type,GLboolean normalized,const GLuint* value){__glewVertexAttribP2uiv(index,type,normalized,value);}
-static PFNGLVERTEXATTRIBP3UIPROC __glewVertexAttribP3ui = NULL;
-void glVertexAttribP3ui(GLuint index,GLenum type,GLboolean normalized,GLuint value){__glewVertexAttribP3ui(index,type,normalized,value);}
-static PFNGLVERTEXATTRIBP3UIVPROC __glewVertexAttribP3uiv = NULL;
-void glVertexAttribP3uiv(GLuint index,GLenum type,GLboolean normalized,const GLuint* value){__glewVertexAttribP3uiv(index,type,normalized,value);}
-static PFNGLVERTEXATTRIBP4UIPROC __glewVertexAttribP4ui = NULL;
-void glVertexAttribP4ui(GLuint index,GLenum type,GLboolean normalized,GLuint value){__glewVertexAttribP4ui(index,type,normalized,value);}
-static PFNGLVERTEXATTRIBP4UIVPROC __glewVertexAttribP4uiv = NULL;
-void glVertexAttribP4uiv(GLuint index,GLenum type,GLboolean normalized,const GLuint* value){__glewVertexAttribP4uiv(index,type,normalized,value);}
-static PFNGLVERTEXP2UIPROC __glewVertexP2ui = NULL;
-void glVertexP2ui(GLenum type,GLuint value){__glewVertexP2ui(type,value);}
-static PFNGLVERTEXP2UIVPROC __glewVertexP2uiv = NULL;
-void glVertexP2uiv(GLenum type,const GLuint* value){__glewVertexP2uiv(type,value);}
-static PFNGLVERTEXP3UIPROC __glewVertexP3ui = NULL;
-void glVertexP3ui(GLenum type,GLuint value){__glewVertexP3ui(type,value);}
-static PFNGLVERTEXP3UIVPROC __glewVertexP3uiv = NULL;
-void glVertexP3uiv(GLenum type,const GLuint* value){__glewVertexP3uiv(type,value);}
-static PFNGLVERTEXP4UIPROC __glewVertexP4ui = NULL;
-void glVertexP4ui(GLenum type,GLuint value){__glewVertexP4ui(type,value);}
-static PFNGLVERTEXP4UIVPROC __glewVertexP4uiv = NULL;
-void glVertexP4uiv(GLenum type,const GLuint* value){__glewVertexP4uiv(type,value);}
-
-static PFNGLDEPTHRANGEARRAYVPROC __glewDepthRangeArrayv = NULL;
-void glDepthRangeArrayv(GLuint first,GLsizei count,const GLclampd * v){__glewDepthRangeArrayv(first,count,v);}
-static PFNGLDEPTHRANGEINDEXEDPROC __glewDepthRangeIndexed = NULL;
-void glDepthRangeIndexed(GLuint index,GLclampd n,GLclampd f){__glewDepthRangeIndexed(index,n,f);}
-static PFNGLGETDOUBLEI_VPROC __glewGetDoublei_v = NULL;
-void glGetDoublei_v(GLenum target,GLuint index,GLdouble* data){__glewGetDoublei_v(target,index,data);}
-static PFNGLGETFLOATI_VPROC __glewGetFloati_v = NULL;
-void glGetFloati_v(GLenum target,GLuint index,GLfloat* data){__glewGetFloati_v(target,index,data);}
-static PFNGLSCISSORARRAYVPROC __glewScissorArrayv = NULL;
-void glScissorArrayv(GLuint first,GLsizei count,const GLint * v){__glewScissorArrayv(first,count,v);}
-static PFNGLSCISSORINDEXEDPROC __glewScissorIndexed = NULL;
-void glScissorIndexed(GLuint index,GLint left,GLint bottom,GLsizei width,GLsizei height){__glewScissorIndexed(index,left,bottom,width,height);}
-static PFNGLSCISSORINDEXEDVPROC __glewScissorIndexedv = NULL;
-void glScissorIndexedv(GLuint index,const GLint * v){__glewScissorIndexedv(index,v);}
-static PFNGLVIEWPORTARRAYVPROC __glewViewportArrayv = NULL;
-void glViewportArrayv(GLuint first,GLsizei count,const GLfloat * v){__glewViewportArrayv(first,count,v);}
-static PFNGLVIEWPORTINDEXEDFPROC __glewViewportIndexedf = NULL;
-void glViewportIndexedf(GLuint index,GLfloat x,GLfloat y,GLfloat w,GLfloat h){__glewViewportIndexedf(index,x,y,w,h);}
-static PFNGLVIEWPORTINDEXEDFVPROC __glewViewportIndexedfv = NULL;
-void glViewportIndexedfv(GLuint index,const GLfloat * v){__glewViewportIndexedfv(index,v);}
-
-static PFNGLWINDOWPOS2DARBPROC __glewWindowPos2dARB = NULL;
-void glWindowPos2dARB(GLdouble x,GLdouble y){__glewWindowPos2dARB(x,y);}
-static PFNGLWINDOWPOS2DVARBPROC __glewWindowPos2dvARB = NULL;
-void glWindowPos2dvARB(const GLdouble* p){__glewWindowPos2dvARB(p);}
-static PFNGLWINDOWPOS2FARBPROC __glewWindowPos2fARB = NULL;
-void glWindowPos2fARB(GLfloat x,GLfloat y){__glewWindowPos2fARB(x,y);}
-static PFNGLWINDOWPOS2FVARBPROC __glewWindowPos2fvARB = NULL;
-void glWindowPos2fvARB(const GLfloat* p){__glewWindowPos2fvARB(p);}
-static PFNGLWINDOWPOS2IARBPROC __glewWindowPos2iARB = NULL;
-void glWindowPos2iARB(GLint x,GLint y){__glewWindowPos2iARB(x,y);}
-static PFNGLWINDOWPOS2IVARBPROC __glewWindowPos2ivARB = NULL;
-void glWindowPos2ivARB(const GLint* p){__glewWindowPos2ivARB(p);}
-static PFNGLWINDOWPOS2SARBPROC __glewWindowPos2sARB = NULL;
-void glWindowPos2sARB(GLshort x,GLshort y){__glewWindowPos2sARB(x,y);}
-static PFNGLWINDOWPOS2SVARBPROC __glewWindowPos2svARB = NULL;
-void glWindowPos2svARB(const GLshort* p){__glewWindowPos2svARB(p);}
-static PFNGLWINDOWPOS3DARBPROC __glewWindowPos3dARB = NULL;
-void glWindowPos3dARB(GLdouble x,GLdouble y,GLdouble z){__glewWindowPos3dARB(x,y,z);}
-static PFNGLWINDOWPOS3DVARBPROC __glewWindowPos3dvARB = NULL;
-void glWindowPos3dvARB(const GLdouble* p){__glewWindowPos3dvARB(p);}
-static PFNGLWINDOWPOS3FARBPROC __glewWindowPos3fARB = NULL;
-void glWindowPos3fARB(GLfloat x,GLfloat y,GLfloat z){__glewWindowPos3fARB(x,y,z);}
-static PFNGLWINDOWPOS3FVARBPROC __glewWindowPos3fvARB = NULL;
-void glWindowPos3fvARB(const GLfloat* p){__glewWindowPos3fvARB(p);}
-static PFNGLWINDOWPOS3IARBPROC __glewWindowPos3iARB = NULL;
-void glWindowPos3iARB(GLint x,GLint y,GLint z){__glewWindowPos3iARB(x,y,z);}
-static PFNGLWINDOWPOS3IVARBPROC __glewWindowPos3ivARB = NULL;
-void glWindowPos3ivARB(const GLint* p){__glewWindowPos3ivARB(p);}
-static PFNGLWINDOWPOS3SARBPROC __glewWindowPos3sARB = NULL;
-void glWindowPos3sARB(GLshort x,GLshort y,GLshort z){__glewWindowPos3sARB(x,y,z);}
-static PFNGLWINDOWPOS3SVARBPROC __glewWindowPos3svARB = NULL;
-void glWindowPos3svARB(const GLshort* p){__glewWindowPos3svARB(p);}
-
-static PFNGLDRAWBUFFERSATIPROC __glewDrawBuffersATI = NULL;
-void glDrawBuffersATI(GLsizei n,const GLenum* bufs){__glewDrawBuffersATI(n,bufs);}
-
-static PFNGLDRAWELEMENTARRAYATIPROC __glewDrawElementArrayATI = NULL;
-void glDrawElementArrayATI(GLenum mode,GLsizei count){__glewDrawElementArrayATI(mode,count);}
-static PFNGLDRAWRANGEELEMENTARRAYATIPROC __glewDrawRangeElementArrayATI = NULL;
-void glDrawRangeElementArrayATI(GLenum mode,GLuint start,GLuint end,GLsizei count){__glewDrawRangeElementArrayATI(mode,start,end,count);}
-static PFNGLELEMENTPOINTERATIPROC __glewElementPointerATI = NULL;
-void glElementPointerATI(GLenum type,const GLvoid *pointer){__glewElementPointerATI(type,pointer);}
-
-static PFNGLGETTEXBUMPPARAMETERFVATIPROC __glewGetTexBumpParameterfvATI = NULL;
-void glGetTexBumpParameterfvATI(GLenum pname,GLfloat *param){__glewGetTexBumpParameterfvATI(pname,param);}
-static PFNGLGETTEXBUMPPARAMETERIVATIPROC __glewGetTexBumpParameterivATI = NULL;
-void glGetTexBumpParameterivATI(GLenum pname,GLint *param){__glewGetTexBumpParameterivATI(pname,param);}
-static PFNGLTEXBUMPPARAMETERFVATIPROC __glewTexBumpParameterfvATI = NULL;
-void glTexBumpParameterfvATI(GLenum pname,GLfloat *param){__glewTexBumpParameterfvATI(pname,param);}
-static PFNGLTEXBUMPPARAMETERIVATIPROC __glewTexBumpParameterivATI = NULL;
-void glTexBumpParameterivATI(GLenum pname,GLint *param){__glewTexBumpParameterivATI(pname,param);}
-
-static PFNGLALPHAFRAGMENTOP1ATIPROC __glewAlphaFragmentOp1ATI = NULL;
-void glAlphaFragmentOp1ATI(GLenum op,GLuint dst,GLuint dstMod,GLuint arg1,GLuint arg1Rep,GLuint arg1Mod){__glewAlphaFragmentOp1ATI(op,dst,dstMod,arg1,arg1Rep,arg1Mod);}
-static PFNGLALPHAFRAGMENTOP2ATIPROC __glewAlphaFragmentOp2ATI = NULL;
-void glAlphaFragmentOp2ATI(GLenum op,GLuint dst,GLuint dstMod,GLuint arg1,GLuint arg1Rep,GLuint arg1Mod,GLuint arg2,GLuint arg2Rep,GLuint arg2Mod){__glewAlphaFragmentOp2ATI(op,dst,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod);}
-static PFNGLALPHAFRAGMENTOP3ATIPROC __glewAlphaFragmentOp3ATI = NULL;
-void glAlphaFragmentOp3ATI(GLenum op,GLuint dst,GLuint dstMod,GLuint arg1,GLuint arg1Rep,GLuint arg1Mod,GLuint arg2,GLuint arg2Rep,GLuint arg2Mod,GLuint arg3,GLuint arg3Rep,GLuint arg3Mod){__glewAlphaFragmentOp3ATI(op,dst,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod,arg3,arg3Rep,arg3Mod);}
-static PFNGLBEGINFRAGMENTSHADERATIPROC __glewBeginFragmentShaderATI = NULL;
-void glBeginFragmentShaderATI(void){__glewBeginFragmentShaderATI();}
-static PFNGLBINDFRAGMENTSHADERATIPROC __glewBindFragmentShaderATI = NULL;
-void glBindFragmentShaderATI(GLuint id){__glewBindFragmentShaderATI(id);}
-static PFNGLCOLORFRAGMENTOP1ATIPROC __glewColorFragmentOp1ATI = NULL;
-void glColorFragmentOp1ATI(GLenum op,GLuint dst,GLuint dstMask,GLuint dstMod,GLuint arg1,GLuint arg1Rep,GLuint arg1Mod){__glewColorFragmentOp1ATI(op,dst,dstMask,dstMod,arg1,arg1Rep,arg1Mod);}
-static PFNGLCOLORFRAGMENTOP2ATIPROC __glewColorFragmentOp2ATI = NULL;
-void glColorFragmentOp2ATI(GLenum op,GLuint dst,GLuint dstMask,GLuint dstMod,GLuint arg1,GLuint arg1Rep,GLuint arg1Mod,GLuint arg2,GLuint arg2Rep,GLuint arg2Mod){__glewColorFragmentOp2ATI(op,dst,dstMask,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod);}
-static PFNGLCOLORFRAGMENTOP3ATIPROC __glewColorFragmentOp3ATI = NULL;
-void glColorFragmentOp3ATI(GLenum op,GLuint dst,GLuint dstMask,GLuint dstMod,GLuint arg1,GLuint arg1Rep,GLuint arg1Mod,GLuint arg2,GLuint arg2Rep,GLuint arg2Mod,GLuint arg3,GLuint arg3Rep,GLuint arg3Mod){__glewColorFragmentOp3ATI(op,dst,dstMask,dstMod,arg1,arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod,arg3,arg3Rep,arg3Mod);}
-static PFNGLDELETEFRAGMENTSHADERATIPROC __glewDeleteFragmentShaderATI = NULL;
-void glDeleteFragmentShaderATI(GLuint id){__glewDeleteFragmentShaderATI(id);}
-static PFNGLENDFRAGMENTSHADERATIPROC __glewEndFragmentShaderATI = NULL;
-void glEndFragmentShaderATI(void){__glewEndFragmentShaderATI();}
-static PFNGLGENFRAGMENTSHADERSATIPROC __glewGenFragmentShadersATI = NULL;
-GLuint glGenFragmentShadersATI(GLuint range){return __glewGenFragmentShadersATI(range);}
-static PFNGLPASSTEXCOORDATIPROC __glewPassTexCoordATI = NULL;
-void glPassTexCoordATI(GLuint dst,GLuint coord,GLenum swizzle){__glewPassTexCoordATI(dst,coord,swizzle);}
-static PFNGLSAMPLEMAPATIPROC __glewSampleMapATI = NULL;
-void glSampleMapATI(GLuint dst,GLuint interp,GLenum swizzle){__glewSampleMapATI(dst,interp,swizzle);}
-static PFNGLSETFRAGMENTSHADERCONSTANTATIPROC __glewSetFragmentShaderConstantATI = NULL;
-void glSetFragmentShaderConstantATI(GLuint dst,const GLfloat* value){__glewSetFragmentShaderConstantATI(dst,value);}
-
-static PFNGLMAPOBJECTBUFFERATIPROC __glewMapObjectBufferATI = NULL;
-GLvoid * glMapObjectBufferATI(GLuint buffer){return __glewMapObjectBufferATI(buffer);}
-static PFNGLUNMAPOBJECTBUFFERATIPROC __glewUnmapObjectBufferATI = NULL;
-void glUnmapObjectBufferATI(GLuint buffer){__glewUnmapObjectBufferATI(buffer);}
-
-static PFNGLPNTRIANGLESFATIPROC __glewPNTrianglesfATI = NULL;
-void glPNTrianglesfATI(GLenum pname,GLfloat param){__glewPNTrianglesfATI(pname,param);}
-static PFNGLPNTRIANGLESIATIPROC __glewPNTrianglesiATI = NULL;
-void glPNTrianglesiATI(GLenum pname,GLint param){__glewPNTrianglesiATI(pname,param);}
-
-static PFNGLSTENCILFUNCSEPARATEATIPROC __glewStencilFuncSeparateATI = NULL;
-void glStencilFuncSeparateATI(GLenum frontfunc,GLenum backfunc,GLint ref,GLuint mask){__glewStencilFuncSeparateATI(frontfunc,backfunc,ref,mask);}
-static PFNGLSTENCILOPSEPARATEATIPROC __glewStencilOpSeparateATI = NULL;
-void glStencilOpSeparateATI(GLenum face,GLenum sfail,GLenum dpfail,GLenum dppass){__glewStencilOpSeparateATI(face,sfail,dpfail,dppass);}
-
-static PFNGLARRAYOBJECTATIPROC __glewArrayObjectATI = NULL;
-void glArrayObjectATI(GLenum array,GLint size,GLenum type,GLsizei stride,GLuint buffer,GLuint offset){__glewArrayObjectATI(array,size,type,stride,buffer,offset);}
-static PFNGLFREEOBJECTBUFFERATIPROC __glewFreeObjectBufferATI = NULL;
-void glFreeObjectBufferATI(GLuint buffer){__glewFreeObjectBufferATI(buffer);}
-static PFNGLGETARRAYOBJECTFVATIPROC __glewGetArrayObjectfvATI = NULL;
-void glGetArrayObjectfvATI(GLenum array,GLenum pname,GLfloat* params){__glewGetArrayObjectfvATI(array,pname,params);}
-static PFNGLGETARRAYOBJECTIVATIPROC __glewGetArrayObjectivATI = NULL;
-void glGetArrayObjectivATI(GLenum array,GLenum pname,GLint* params){__glewGetArrayObjectivATI(array,pname,params);}
-static PFNGLGETOBJECTBUFFERFVATIPROC __glewGetObjectBufferfvATI = NULL;
-void glGetObjectBufferfvATI(GLuint buffer,GLenum pname,GLfloat* params){__glewGetObjectBufferfvATI(buffer,pname,params);}
-static PFNGLGETOBJECTBUFFERIVATIPROC __glewGetObjectBufferivATI = NULL;
-void glGetObjectBufferivATI(GLuint buffer,GLenum pname,GLint* params){__glewGetObjectBufferivATI(buffer,pname,params);}
-static PFNGLGETVARIANTARRAYOBJECTFVATIPROC __glewGetVariantArrayObjectfvATI = NULL;
-void glGetVariantArrayObjectfvATI(GLuint id,GLenum pname,GLfloat* params){__glewGetVariantArrayObjectfvATI(id,pname,params);}
-static PFNGLGETVARIANTARRAYOBJECTIVATIPROC __glewGetVariantArrayObjectivATI = NULL;
-void glGetVariantArrayObjectivATI(GLuint id,GLenum pname,GLint* params){__glewGetVariantArrayObjectivATI(id,pname,params);}
-static PFNGLISOBJECTBUFFERATIPROC __glewIsObjectBufferATI = NULL;
-GLboolean glIsObjectBufferATI(GLuint buffer){return __glewIsObjectBufferATI(buffer);}
-static PFNGLNEWOBJECTBUFFERATIPROC __glewNewObjectBufferATI = NULL;
-GLuint glNewObjectBufferATI(GLsizei size,const GLvoid *pointer,GLenum usage){return __glewNewObjectBufferATI(size,pointer,usage);}
-static PFNGLUPDATEOBJECTBUFFERATIPROC __glewUpdateObjectBufferATI = NULL;
-void glUpdateObjectBufferATI(GLuint buffer,GLuint offset,GLsizei size,const GLvoid *pointer,GLenum preserve){__glewUpdateObjectBufferATI(buffer,offset,size,pointer,preserve);}
-static PFNGLVARIANTARRAYOBJECTATIPROC __glewVariantArrayObjectATI = NULL;
-void glVariantArrayObjectATI(GLuint id,GLenum type,GLsizei stride,GLuint buffer,GLuint offset){__glewVariantArrayObjectATI(id,type,stride,buffer,offset);}
-
-static PFNGLGETVERTEXATTRIBARRAYOBJECTFVATIPROC __glewGetVertexAttribArrayObjectfvATI = NULL;
-void glGetVertexAttribArrayObjectfvATI(GLuint index,GLenum pname,GLfloat* params){__glewGetVertexAttribArrayObjectfvATI(index,pname,params);}
-static PFNGLGETVERTEXATTRIBARRAYOBJECTIVATIPROC __glewGetVertexAttribArrayObjectivATI = NULL;
-void glGetVertexAttribArrayObjectivATI(GLuint index,GLenum pname,GLint* params){__glewGetVertexAttribArrayObjectivATI(index,pname,params);}
-static PFNGLVERTEXATTRIBARRAYOBJECTATIPROC __glewVertexAttribArrayObjectATI = NULL;
-void glVertexAttribArrayObjectATI(GLuint index,GLint size,GLenum type,GLboolean normalized,GLsizei stride,GLuint buffer,GLuint offset){__glewVertexAttribArrayObjectATI(index,size,type,normalized,stride,buffer,offset);}
-
-static PFNGLCLIENTACTIVEVERTEXSTREAMATIPROC __glewClientActiveVertexStreamATI = NULL;
-void glClientActiveVertexStreamATI(GLenum stream){__glewClientActiveVertexStreamATI(stream);}
-static PFNGLNORMALSTREAM3BATIPROC __glewNormalStream3bATI = NULL;
-void glNormalStream3bATI(GLenum stream,GLbyte x,GLbyte y,GLbyte z){__glewNormalStream3bATI(stream,x,y,z);}
-static PFNGLNORMALSTREAM3BVATIPROC __glewNormalStream3bvATI = NULL;
-void glNormalStream3bvATI(GLenum stream,const GLbyte *coords){__glewNormalStream3bvATI(stream,coords);}
-static PFNGLNORMALSTREAM3DATIPROC __glewNormalStream3dATI = NULL;
-void glNormalStream3dATI(GLenum stream,GLdouble x,GLdouble y,GLdouble z){__glewNormalStream3dATI(stream,x,y,z);}
-static PFNGLNORMALSTREAM3DVATIPROC __glewNormalStream3dvATI = NULL;
-void glNormalStream3dvATI(GLenum stream,const GLdouble *coords){__glewNormalStream3dvATI(stream,coords);}
-static PFNGLNORMALSTREAM3FATIPROC __glewNormalStream3fATI = NULL;
-void glNormalStream3fATI(GLenum stream,GLfloat x,GLfloat y,GLfloat z){__glewNormalStream3fATI(stream,x,y,z);}
-static PFNGLNORMALSTREAM3FVATIPROC __glewNormalStream3fvATI = NULL;
-void glNormalStream3fvATI(GLenum stream,const GLfloat *coords){__glewNormalStream3fvATI(stream,coords);}
-static PFNGLNORMALSTREAM3IATIPROC __glewNormalStream3iATI = NULL;
-void glNormalStream3iATI(GLenum stream,GLint x,GLint y,GLint z){__glewNormalStream3iATI(stream,x,y,z);}
-static PFNGLNORMALSTREAM3IVATIPROC __glewNormalStream3ivATI = NULL;
-void glNormalStream3ivATI(GLenum stream,const GLint *coords){__glewNormalStream3ivATI(stream,coords);}
-static PFNGLNORMALSTREAM3SATIPROC __glewNormalStream3sATI = NULL;
-void glNormalStream3sATI(GLenum stream,GLshort x,GLshort y,GLshort z){__glewNormalStream3sATI(stream,x,y,z);}
-static PFNGLNORMALSTREAM3SVATIPROC __glewNormalStream3svATI = NULL;
-void glNormalStream3svATI(GLenum stream,const GLshort *coords){__glewNormalStream3svATI(stream,coords);}
-static PFNGLVERTEXBLENDENVFATIPROC __glewVertexBlendEnvfATI = NULL;
-void glVertexBlendEnvfATI(GLenum pname,GLfloat param){__glewVertexBlendEnvfATI(pname,param);}
-static PFNGLVERTEXBLENDENVIATIPROC __glewVertexBlendEnviATI = NULL;
-void glVertexBlendEnviATI(GLenum pname,GLint param){__glewVertexBlendEnviATI(pname,param);}
-static PFNGLVERTEXSTREAM1DATIPROC __glewVertexStream1dATI = NULL;
-void glVertexStream1dATI(GLenum stream,GLdouble x){__glewVertexStream1dATI(stream,x);}
-static PFNGLVERTEXSTREAM1DVATIPROC __glewVertexStream1dvATI = NULL;
-void glVertexStream1dvATI(GLenum stream,const GLdouble *coords){__glewVertexStream1dvATI(stream,coords);}
-static PFNGLVERTEXSTREAM1FATIPROC __glewVertexStream1fATI = NULL;
-void glVertexStream1fATI(GLenum stream,GLfloat x){__glewVertexStream1fATI(stream,x);}
-static PFNGLVERTEXSTREAM1FVATIPROC __glewVertexStream1fvATI = NULL;
-void glVertexStream1fvATI(GLenum stream,const GLfloat *coords){__glewVertexStream1fvATI(stream,coords);}
-static PFNGLVERTEXSTREAM1IATIPROC __glewVertexStream1iATI = NULL;
-void glVertexStream1iATI(GLenum stream,GLint x){__glewVertexStream1iATI(stream,x);}
-static PFNGLVERTEXSTREAM1IVATIPROC __glewVertexStream1ivATI = NULL;
-void glVertexStream1ivATI(GLenum stream,const GLint *coords){__glewVertexStream1ivATI(stream,coords);}
-static PFNGLVERTEXSTREAM1SATIPROC __glewVertexStream1sATI = NULL;
-void glVertexStream1sATI(GLenum stream,GLshort x){__glewVertexStream1sATI(stream,x);}
-static PFNGLVERTEXSTREAM1SVATIPROC __glewVertexStream1svATI = NULL;
-void glVertexStream1svATI(GLenum stream,const GLshort *coords){__glewVertexStream1svATI(stream,coords);}
-static PFNGLVERTEXSTREAM2DATIPROC __glewVertexStream2dATI = NULL;
-void glVertexStream2dATI(GLenum stream,GLdouble x,GLdouble y){__glewVertexStream2dATI(stream,x,y);}
-static PFNGLVERTEXSTREAM2DVATIPROC __glewVertexStream2dvATI = NULL;
-void glVertexStream2dvATI(GLenum stream,const GLdouble *coords){__glewVertexStream2dvATI(stream,coords);}
-static PFNGLVERTEXSTREAM2FATIPROC __glewVertexStream2fATI = NULL;
-void glVertexStream2fATI(GLenum stream,GLfloat x,GLfloat y){__glewVertexStream2fATI(stream,x,y);}
-static PFNGLVERTEXSTREAM2FVATIPROC __glewVertexStream2fvATI = NULL;
-void glVertexStream2fvATI(GLenum stream,const GLfloat *coords){__glewVertexStream2fvATI(stream,coords);}
-static PFNGLVERTEXSTREAM2IATIPROC __glewVertexStream2iATI = NULL;
-void glVertexStream2iATI(GLenum stream,GLint x,GLint y){__glewVertexStream2iATI(stream,x,y);}
-static PFNGLVERTEXSTREAM2IVATIPROC __glewVertexStream2ivATI = NULL;
-void glVertexStream2ivATI(GLenum stream,const GLint *coords){__glewVertexStream2ivATI(stream,coords);}
-static PFNGLVERTEXSTREAM2SATIPROC __glewVertexStream2sATI = NULL;
-void glVertexStream2sATI(GLenum stream,GLshort x,GLshort y){__glewVertexStream2sATI(stream,x,y);}
-static PFNGLVERTEXSTREAM2SVATIPROC __glewVertexStream2svATI = NULL;
-void glVertexStream2svATI(GLenum stream,const GLshort *coords){__glewVertexStream2svATI(stream,coords);}
-static PFNGLVERTEXSTREAM3DATIPROC __glewVertexStream3dATI = NULL;
-void glVertexStream3dATI(GLenum stream,GLdouble x,GLdouble y,GLdouble z){__glewVertexStream3dATI(stream,x,y,z);}
-static PFNGLVERTEXSTREAM3DVATIPROC __glewVertexStream3dvATI = NULL;
-void glVertexStream3dvATI(GLenum stream,const GLdouble *coords){__glewVertexStream3dvATI(stream,coords);}
-static PFNGLVERTEXSTREAM3FATIPROC __glewVertexStream3fATI = NULL;
-void glVertexStream3fATI(GLenum stream,GLfloat x,GLfloat y,GLfloat z){__glewVertexStream3fATI(stream,x,y,z);}
-static PFNGLVERTEXSTREAM3FVATIPROC __glewVertexStream3fvATI = NULL;
-void glVertexStream3fvATI(GLenum stream,const GLfloat *coords){__glewVertexStream3fvATI(stream,coords);}
-static PFNGLVERTEXSTREAM3IATIPROC __glewVertexStream3iATI = NULL;
-void glVertexStream3iATI(GLenum stream,GLint x,GLint y,GLint z){__glewVertexStream3iATI(stream,x,y,z);}
-static PFNGLVERTEXSTREAM3IVATIPROC __glewVertexStream3ivATI = NULL;
-void glVertexStream3ivATI(GLenum stream,const GLint *coords){__glewVertexStream3ivATI(stream,coords);}
-static PFNGLVERTEXSTREAM3SATIPROC __glewVertexStream3sATI = NULL;
-void glVertexStream3sATI(GLenum stream,GLshort x,GLshort y,GLshort z){__glewVertexStream3sATI(stream,x,y,z);}
-static PFNGLVERTEXSTREAM3SVATIPROC __glewVertexStream3svATI = NULL;
-void glVertexStream3svATI(GLenum stream,const GLshort *coords){__glewVertexStream3svATI(stream,coords);}
-static PFNGLVERTEXSTREAM4DATIPROC __glewVertexStream4dATI = NULL;
-void glVertexStream4dATI(GLenum stream,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewVertexStream4dATI(stream,x,y,z,w);}
-static PFNGLVERTEXSTREAM4DVATIPROC __glewVertexStream4dvATI = NULL;
-void glVertexStream4dvATI(GLenum stream,const GLdouble *coords){__glewVertexStream4dvATI(stream,coords);}
-static PFNGLVERTEXSTREAM4FATIPROC __glewVertexStream4fATI = NULL;
-void glVertexStream4fATI(GLenum stream,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewVertexStream4fATI(stream,x,y,z,w);}
-static PFNGLVERTEXSTREAM4FVATIPROC __glewVertexStream4fvATI = NULL;
-void glVertexStream4fvATI(GLenum stream,const GLfloat *coords){__glewVertexStream4fvATI(stream,coords);}
-static PFNGLVERTEXSTREAM4IATIPROC __glewVertexStream4iATI = NULL;
-void glVertexStream4iATI(GLenum stream,GLint x,GLint y,GLint z,GLint w){__glewVertexStream4iATI(stream,x,y,z,w);}
-static PFNGLVERTEXSTREAM4IVATIPROC __glewVertexStream4ivATI = NULL;
-void glVertexStream4ivATI(GLenum stream,const GLint *coords){__glewVertexStream4ivATI(stream,coords);}
-static PFNGLVERTEXSTREAM4SATIPROC __glewVertexStream4sATI = NULL;
-void glVertexStream4sATI(GLenum stream,GLshort x,GLshort y,GLshort z,GLshort w){__glewVertexStream4sATI(stream,x,y,z,w);}
-static PFNGLVERTEXSTREAM4SVATIPROC __glewVertexStream4svATI = NULL;
-void glVertexStream4svATI(GLenum stream,const GLshort *coords){__glewVertexStream4svATI(stream,coords);}
-
-static PFNGLGETUNIFORMBUFFERSIZEEXTPROC __glewGetUniformBufferSizeEXT = NULL;
-GLint glGetUniformBufferSizeEXT(GLuint program,GLint location){return __glewGetUniformBufferSizeEXT(program,location);}
-static PFNGLGETUNIFORMOFFSETEXTPROC __glewGetUniformOffsetEXT = NULL;
-GLintptr glGetUniformOffsetEXT(GLuint program,GLint location){return __glewGetUniformOffsetEXT(program,location);}
-static PFNGLUNIFORMBUFFEREXTPROC __glewUniformBufferEXT = NULL;
-void glUniformBufferEXT(GLuint program,GLint location,GLuint buffer){__glewUniformBufferEXT(program,location,buffer);}
-
-static PFNGLBLENDCOLOREXTPROC __glewBlendColorEXT = NULL;
-void glBlendColorEXT(GLclampf red,GLclampf green,GLclampf blue,GLclampf alpha){__glewBlendColorEXT(red,green,blue,alpha);}
-
-static PFNGLBLENDEQUATIONSEPARATEEXTPROC __glewBlendEquationSeparateEXT = NULL;
-void glBlendEquationSeparateEXT(GLenum modeRGB,GLenum modeAlpha){__glewBlendEquationSeparateEXT(modeRGB,modeAlpha);}
-
-static PFNGLBLENDFUNCSEPARATEEXTPROC __glewBlendFuncSeparateEXT = NULL;
-void glBlendFuncSeparateEXT(GLenum sfactorRGB,GLenum dfactorRGB,GLenum sfactorAlpha,GLenum dfactorAlpha){__glewBlendFuncSeparateEXT(sfactorRGB,dfactorRGB,sfactorAlpha,dfactorAlpha);}
-
-static PFNGLBLENDEQUATIONEXTPROC __glewBlendEquationEXT = NULL;
-void glBlendEquationEXT(GLenum mode){__glewBlendEquationEXT(mode);}
-
-static PFNGLCOLORSUBTABLEEXTPROC __glewColorSubTableEXT = NULL;
-void glColorSubTableEXT(GLenum target,GLsizei start,GLsizei count,GLenum format,GLenum type,const GLvoid *data){__glewColorSubTableEXT(target,start,count,format,type,data);}
-static PFNGLCOPYCOLORSUBTABLEEXTPROC __glewCopyColorSubTableEXT = NULL;
-void glCopyColorSubTableEXT(GLenum target,GLsizei start,GLint x,GLint y,GLsizei width){__glewCopyColorSubTableEXT(target,start,x,y,width);}
-
-static PFNGLLOCKARRAYSEXTPROC __glewLockArraysEXT = NULL;
-void glLockArraysEXT(GLint first,GLsizei count){__glewLockArraysEXT(first,count);}
-static PFNGLUNLOCKARRAYSEXTPROC __glewUnlockArraysEXT = NULL;
-void glUnlockArraysEXT(void){__glewUnlockArraysEXT();}
-
-static PFNGLCONVOLUTIONFILTER1DEXTPROC __glewConvolutionFilter1DEXT = NULL;
-void glConvolutionFilter1DEXT(GLenum target,GLenum internalformat,GLsizei width,GLenum format,GLenum type,const GLvoid *image){__glewConvolutionFilter1DEXT(target,internalformat,width,format,type,image);}
-static PFNGLCONVOLUTIONFILTER2DEXTPROC __glewConvolutionFilter2DEXT = NULL;
-void glConvolutionFilter2DEXT(GLenum target,GLenum internalformat,GLsizei width,GLsizei height,GLenum format,GLenum type,const GLvoid *image){__glewConvolutionFilter2DEXT(target,internalformat,width,height,format,type,image);}
-static PFNGLCONVOLUTIONPARAMETERFEXTPROC __glewConvolutionParameterfEXT = NULL;
-void glConvolutionParameterfEXT(GLenum target,GLenum pname,GLfloat param){__glewConvolutionParameterfEXT(target,pname,param);}
-static PFNGLCONVOLUTIONPARAMETERFVEXTPROC __glewConvolutionParameterfvEXT = NULL;
-void glConvolutionParameterfvEXT(GLenum target,GLenum pname,const GLfloat* params){__glewConvolutionParameterfvEXT(target,pname,params);}
-static PFNGLCONVOLUTIONPARAMETERIEXTPROC __glewConvolutionParameteriEXT = NULL;
-void glConvolutionParameteriEXT(GLenum target,GLenum pname,GLint param){__glewConvolutionParameteriEXT(target,pname,param);}
-static PFNGLCONVOLUTIONPARAMETERIVEXTPROC __glewConvolutionParameterivEXT = NULL;
-void glConvolutionParameterivEXT(GLenum target,GLenum pname,const GLint* params){__glewConvolutionParameterivEXT(target,pname,params);}
-static PFNGLCOPYCONVOLUTIONFILTER1DEXTPROC __glewCopyConvolutionFilter1DEXT = NULL;
-void glCopyConvolutionFilter1DEXT(GLenum target,GLenum internalformat,GLint x,GLint y,GLsizei width){__glewCopyConvolutionFilter1DEXT(target,internalformat,x,y,width);}
-static PFNGLCOPYCONVOLUTIONFILTER2DEXTPROC __glewCopyConvolutionFilter2DEXT = NULL;
-void glCopyConvolutionFilter2DEXT(GLenum target,GLenum internalformat,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyConvolutionFilter2DEXT(target,internalformat,x,y,width,height);}
-static PFNGLGETCONVOLUTIONFILTEREXTPROC __glewGetConvolutionFilterEXT = NULL;
-void glGetConvolutionFilterEXT(GLenum target,GLenum format,GLenum type,GLvoid *image){__glewGetConvolutionFilterEXT(target,format,type,image);}
-static PFNGLGETCONVOLUTIONPARAMETERFVEXTPROC __glewGetConvolutionParameterfvEXT = NULL;
-void glGetConvolutionParameterfvEXT(GLenum target,GLenum pname,GLfloat* params){__glewGetConvolutionParameterfvEXT(target,pname,params);}
-static PFNGLGETCONVOLUTIONPARAMETERIVEXTPROC __glewGetConvolutionParameterivEXT = NULL;
-void glGetConvolutionParameterivEXT(GLenum target,GLenum pname,GLint* params){__glewGetConvolutionParameterivEXT(target,pname,params);}
-static PFNGLGETSEPARABLEFILTEREXTPROC __glewGetSeparableFilterEXT = NULL;
-void glGetSeparableFilterEXT(GLenum target,GLenum format,GLenum type,GLvoid *row,GLvoid *column,GLvoid *span){__glewGetSeparableFilterEXT(target,format,type,row,column,span);}
-static PFNGLSEPARABLEFILTER2DEXTPROC __glewSeparableFilter2DEXT = NULL;
-void glSeparableFilter2DEXT(GLenum target,GLenum internalformat,GLsizei width,GLsizei height,GLenum format,GLenum type,const GLvoid *row,const GLvoid *column){__glewSeparableFilter2DEXT(target,internalformat,width,height,format,type,row,column);}
-
-static PFNGLBINORMALPOINTEREXTPROC __glewBinormalPointerEXT = NULL;
-void glBinormalPointerEXT(GLenum type,GLsizei stride,GLvoid *pointer){__glewBinormalPointerEXT(type,stride,pointer);}
-static PFNGLTANGENTPOINTEREXTPROC __glewTangentPointerEXT = NULL;
-void glTangentPointerEXT(GLenum type,GLsizei stride,GLvoid *pointer){__glewTangentPointerEXT(type,stride,pointer);}
-
-static PFNGLCOPYTEXIMAGE1DEXTPROC __glewCopyTexImage1DEXT = NULL;
-void glCopyTexImage1DEXT(GLenum target,GLint level,GLenum internalformat,GLint x,GLint y,GLsizei width,GLint border){__glewCopyTexImage1DEXT(target,level,internalformat,x,y,width,border);}
-static PFNGLCOPYTEXIMAGE2DEXTPROC __glewCopyTexImage2DEXT = NULL;
-void glCopyTexImage2DEXT(GLenum target,GLint level,GLenum internalformat,GLint x,GLint y,GLsizei width,GLsizei height,GLint border){__glewCopyTexImage2DEXT(target,level,internalformat,x,y,width,height,border);}
-static PFNGLCOPYTEXSUBIMAGE1DEXTPROC __glewCopyTexSubImage1DEXT = NULL;
-void glCopyTexSubImage1DEXT(GLenum target,GLint level,GLint xoffset,GLint x,GLint y,GLsizei width){__glewCopyTexSubImage1DEXT(target,level,xoffset,x,y,width);}
-static PFNGLCOPYTEXSUBIMAGE2DEXTPROC __glewCopyTexSubImage2DEXT = NULL;
-void glCopyTexSubImage2DEXT(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyTexSubImage2DEXT(target,level,xoffset,yoffset,x,y,width,height);}
-static PFNGLCOPYTEXSUBIMAGE3DEXTPROC __glewCopyTexSubImage3DEXT = NULL;
-void glCopyTexSubImage3DEXT(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyTexSubImage3DEXT(target,level,xoffset,yoffset,zoffset,x,y,width,height);}
-
-static PFNGLCULLPARAMETERDVEXTPROC __glewCullParameterdvEXT = NULL;
-void glCullParameterdvEXT(GLenum pname,GLdouble* params){__glewCullParameterdvEXT(pname,params);}
-static PFNGLCULLPARAMETERFVEXTPROC __glewCullParameterfvEXT = NULL;
-void glCullParameterfvEXT(GLenum pname,GLfloat* params){__glewCullParameterfvEXT(pname,params);}
-
-static PFNGLINSERTEVENTMARKEREXTPROC __glewInsertEventMarkerEXT = NULL;
-void glInsertEventMarkerEXT(GLsizei length,const GLchar* marker){__glewInsertEventMarkerEXT(length,marker);}
-static PFNGLPOPGROUPMARKEREXTPROC __glewPopGroupMarkerEXT = NULL;
-void glPopGroupMarkerEXT(void){__glewPopGroupMarkerEXT();}
-static PFNGLPUSHGROUPMARKEREXTPROC __glewPushGroupMarkerEXT = NULL;
-void glPushGroupMarkerEXT(GLsizei length,const GLchar* marker){__glewPushGroupMarkerEXT(length,marker);}
-
-static PFNGLDEPTHBOUNDSEXTPROC __glewDepthBoundsEXT = NULL;
-void glDepthBoundsEXT(GLclampd zmin,GLclampd zmax){__glewDepthBoundsEXT(zmin,zmax);}
-
-static PFNGLBINDMULTITEXTUREEXTPROC __glewBindMultiTextureEXT = NULL;
-void glBindMultiTextureEXT(GLenum texunit,GLenum target,GLuint texture){__glewBindMultiTextureEXT(texunit,target,texture);}
-static PFNGLCHECKNAMEDFRAMEBUFFERSTATUSEXTPROC __glewCheckNamedFramebufferStatusEXT = NULL;
-GLenum glCheckNamedFramebufferStatusEXT(GLuint framebuffer,GLenum target){return __glewCheckNamedFramebufferStatusEXT(framebuffer,target);}
-static PFNGLCLIENTATTRIBDEFAULTEXTPROC __glewClientAttribDefaultEXT = NULL;
-void glClientAttribDefaultEXT(GLbitfield mask){__glewClientAttribDefaultEXT(mask);}
-static PFNGLCOMPRESSEDMULTITEXIMAGE1DEXTPROC __glewCompressedMultiTexImage1DEXT = NULL;
-void glCompressedMultiTexImage1DEXT(GLenum texunit,GLenum target,GLint level,GLenum internalformat,GLsizei width,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedMultiTexImage1DEXT(texunit,target,level,internalformat,width,border,imageSize,data);}
-static PFNGLCOMPRESSEDMULTITEXIMAGE2DEXTPROC __glewCompressedMultiTexImage2DEXT = NULL;
-void glCompressedMultiTexImage2DEXT(GLenum texunit,GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedMultiTexImage2DEXT(texunit,target,level,internalformat,width,height,border,imageSize,data);}
-static PFNGLCOMPRESSEDMULTITEXIMAGE3DEXTPROC __glewCompressedMultiTexImage3DEXT = NULL;
-void glCompressedMultiTexImage3DEXT(GLenum texunit,GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedMultiTexImage3DEXT(texunit,target,level,internalformat,width,height,depth,border,imageSize,data);}
-static PFNGLCOMPRESSEDMULTITEXSUBIMAGE1DEXTPROC __glewCompressedMultiTexSubImage1DEXT = NULL;
-void glCompressedMultiTexSubImage1DEXT(GLenum texunit,GLenum target,GLint level,GLint xoffset,GLsizei width,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedMultiTexSubImage1DEXT(texunit,target,level,xoffset,width,format,imageSize,data);}
-static PFNGLCOMPRESSEDMULTITEXSUBIMAGE2DEXTPROC __glewCompressedMultiTexSubImage2DEXT = NULL;
-void glCompressedMultiTexSubImage2DEXT(GLenum texunit,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLsizei width,GLsizei height,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedMultiTexSubImage2DEXT(texunit,target,level,xoffset,yoffset,width,height,format,imageSize,data);}
-static PFNGLCOMPRESSEDMULTITEXSUBIMAGE3DEXTPROC __glewCompressedMultiTexSubImage3DEXT = NULL;
-void glCompressedMultiTexSubImage3DEXT(GLenum texunit,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedMultiTexSubImage3DEXT(texunit,target,level,xoffset,yoffset,zoffset,width,height,depth,format,imageSize,data);}
-static PFNGLCOMPRESSEDTEXTUREIMAGE1DEXTPROC __glewCompressedTextureImage1DEXT = NULL;
-void glCompressedTextureImage1DEXT(GLuint texture,GLenum target,GLint level,GLenum internalformat,GLsizei width,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedTextureImage1DEXT(texture,target,level,internalformat,width,border,imageSize,data);}
-static PFNGLCOMPRESSEDTEXTUREIMAGE2DEXTPROC __glewCompressedTextureImage2DEXT = NULL;
-void glCompressedTextureImage2DEXT(GLuint texture,GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedTextureImage2DEXT(texture,target,level,internalformat,width,height,border,imageSize,data);}
-static PFNGLCOMPRESSEDTEXTUREIMAGE3DEXTPROC __glewCompressedTextureImage3DEXT = NULL;
-void glCompressedTextureImage3DEXT(GLuint texture,GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLint border,GLsizei imageSize,const GLvoid *data){__glewCompressedTextureImage3DEXT(texture,target,level,internalformat,width,height,depth,border,imageSize,data);}
-static PFNGLCOMPRESSEDTEXTURESUBIMAGE1DEXTPROC __glewCompressedTextureSubImage1DEXT = NULL;
-void glCompressedTextureSubImage1DEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLsizei width,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedTextureSubImage1DEXT(texture,target,level,xoffset,width,format,imageSize,data);}
-static PFNGLCOMPRESSEDTEXTURESUBIMAGE2DEXTPROC __glewCompressedTextureSubImage2DEXT = NULL;
-void glCompressedTextureSubImage2DEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLsizei width,GLsizei height,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedTextureSubImage2DEXT(texture,target,level,xoffset,yoffset,width,height,format,imageSize,data);}
-static PFNGLCOMPRESSEDTEXTURESUBIMAGE3DEXTPROC __glewCompressedTextureSubImage3DEXT = NULL;
-void glCompressedTextureSubImage3DEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLenum format,GLsizei imageSize,const GLvoid *data){__glewCompressedTextureSubImage3DEXT(texture,target,level,xoffset,yoffset,zoffset,width,height,depth,format,imageSize,data);}
-static PFNGLCOPYMULTITEXIMAGE1DEXTPROC __glewCopyMultiTexImage1DEXT = NULL;
-void glCopyMultiTexImage1DEXT(GLenum texunit,GLenum target,GLint level,GLenum internalformat,GLint x,GLint y,GLsizei width,GLint border){__glewCopyMultiTexImage1DEXT(texunit,target,level,internalformat,x,y,width,border);}
-static PFNGLCOPYMULTITEXIMAGE2DEXTPROC __glewCopyMultiTexImage2DEXT = NULL;
-void glCopyMultiTexImage2DEXT(GLenum texunit,GLenum target,GLint level,GLenum internalformat,GLint x,GLint y,GLsizei width,GLsizei height,GLint border){__glewCopyMultiTexImage2DEXT(texunit,target,level,internalformat,x,y,width,height,border);}
-static PFNGLCOPYMULTITEXSUBIMAGE1DEXTPROC __glewCopyMultiTexSubImage1DEXT = NULL;
-void glCopyMultiTexSubImage1DEXT(GLenum texunit,GLenum target,GLint level,GLint xoffset,GLint x,GLint y,GLsizei width){__glewCopyMultiTexSubImage1DEXT(texunit,target,level,xoffset,x,y,width);}
-static PFNGLCOPYMULTITEXSUBIMAGE2DEXTPROC __glewCopyMultiTexSubImage2DEXT = NULL;
-void glCopyMultiTexSubImage2DEXT(GLenum texunit,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyMultiTexSubImage2DEXT(texunit,target,level,xoffset,yoffset,x,y,width,height);}
-static PFNGLCOPYMULTITEXSUBIMAGE3DEXTPROC __glewCopyMultiTexSubImage3DEXT = NULL;
-void glCopyMultiTexSubImage3DEXT(GLenum texunit,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyMultiTexSubImage3DEXT(texunit,target,level,xoffset,yoffset,zoffset,x,y,width,height);}
-static PFNGLCOPYTEXTUREIMAGE1DEXTPROC __glewCopyTextureImage1DEXT = NULL;
-void glCopyTextureImage1DEXT(GLuint texture,GLenum target,GLint level,GLenum internalformat,GLint x,GLint y,GLsizei width,GLint border){__glewCopyTextureImage1DEXT(texture,target,level,internalformat,x,y,width,border);}
-static PFNGLCOPYTEXTUREIMAGE2DEXTPROC __glewCopyTextureImage2DEXT = NULL;
-void glCopyTextureImage2DEXT(GLuint texture,GLenum target,GLint level,GLenum internalformat,GLint x,GLint y,GLsizei width,GLsizei height,GLint border){__glewCopyTextureImage2DEXT(texture,target,level,internalformat,x,y,width,height,border);}
-static PFNGLCOPYTEXTURESUBIMAGE1DEXTPROC __glewCopyTextureSubImage1DEXT = NULL;
-void glCopyTextureSubImage1DEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLint x,GLint y,GLsizei width){__glewCopyTextureSubImage1DEXT(texture,target,level,xoffset,x,y,width);}
-static PFNGLCOPYTEXTURESUBIMAGE2DEXTPROC __glewCopyTextureSubImage2DEXT = NULL;
-void glCopyTextureSubImage2DEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyTextureSubImage2DEXT(texture,target,level,xoffset,yoffset,x,y,width,height);}
-static PFNGLCOPYTEXTURESUBIMAGE3DEXTPROC __glewCopyTextureSubImage3DEXT = NULL;
-void glCopyTextureSubImage3DEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLint x,GLint y,GLsizei width,GLsizei height){__glewCopyTextureSubImage3DEXT(texture,target,level,xoffset,yoffset,zoffset,x,y,width,height);}
-static PFNGLDISABLECLIENTSTATEINDEXEDEXTPROC __glewDisableClientStateIndexedEXT = NULL;
-void glDisableClientStateIndexedEXT(GLenum array,GLuint index){__glewDisableClientStateIndexedEXT(array,index);}
-static PFNGLDISABLECLIENTSTATEIEXTPROC __glewDisableClientStateiEXT = NULL;
-void glDisableClientStateiEXT(GLenum array,GLuint index){__glewDisableClientStateiEXT(array,index);}
-static PFNGLDISABLEVERTEXARRAYATTRIBEXTPROC __glewDisableVertexArrayAttribEXT = NULL;
-void glDisableVertexArrayAttribEXT(GLuint vaobj,GLuint index){__glewDisableVertexArrayAttribEXT(vaobj,index);}
-static PFNGLDISABLEVERTEXARRAYEXTPROC __glewDisableVertexArrayEXT = NULL;
-void glDisableVertexArrayEXT(GLuint vaobj,GLenum array){__glewDisableVertexArrayEXT(vaobj,array);}
-static PFNGLENABLECLIENTSTATEINDEXEDEXTPROC __glewEnableClientStateIndexedEXT = NULL;
-void glEnableClientStateIndexedEXT(GLenum array,GLuint index){__glewEnableClientStateIndexedEXT(array,index);}
-static PFNGLENABLECLIENTSTATEIEXTPROC __glewEnableClientStateiEXT = NULL;
-void glEnableClientStateiEXT(GLenum array,GLuint index){__glewEnableClientStateiEXT(array,index);}
-static PFNGLENABLEVERTEXARRAYATTRIBEXTPROC __glewEnableVertexArrayAttribEXT = NULL;
-void glEnableVertexArrayAttribEXT(GLuint vaobj,GLuint index){__glewEnableVertexArrayAttribEXT(vaobj,index);}
-static PFNGLENABLEVERTEXARRAYEXTPROC __glewEnableVertexArrayEXT = NULL;
-void glEnableVertexArrayEXT(GLuint vaobj,GLenum array){__glewEnableVertexArrayEXT(vaobj,array);}
-static PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEEXTPROC __glewFlushMappedNamedBufferRangeEXT = NULL;
-void glFlushMappedNamedBufferRangeEXT(GLuint buffer,GLintptr offset,GLsizeiptr length){__glewFlushMappedNamedBufferRangeEXT(buffer,offset,length);}
-static PFNGLFRAMEBUFFERDRAWBUFFEREXTPROC __glewFramebufferDrawBufferEXT = NULL;
-void glFramebufferDrawBufferEXT(GLuint framebuffer,GLenum mode){__glewFramebufferDrawBufferEXT(framebuffer,mode);}
-static PFNGLFRAMEBUFFERDRAWBUFFERSEXTPROC __glewFramebufferDrawBuffersEXT = NULL;
-void glFramebufferDrawBuffersEXT(GLuint framebuffer,GLsizei n,const GLenum* bufs){__glewFramebufferDrawBuffersEXT(framebuffer,n,bufs);}
-static PFNGLFRAMEBUFFERREADBUFFEREXTPROC __glewFramebufferReadBufferEXT = NULL;
-void glFramebufferReadBufferEXT(GLuint framebuffer,GLenum mode){__glewFramebufferReadBufferEXT(framebuffer,mode);}
-static PFNGLGENERATEMULTITEXMIPMAPEXTPROC __glewGenerateMultiTexMipmapEXT = NULL;
-void glGenerateMultiTexMipmapEXT(GLenum texunit,GLenum target){__glewGenerateMultiTexMipmapEXT(texunit,target);}
-static PFNGLGENERATETEXTUREMIPMAPEXTPROC __glewGenerateTextureMipmapEXT = NULL;
-void glGenerateTextureMipmapEXT(GLuint texture,GLenum target){__glewGenerateTextureMipmapEXT(texture,target);}
-static PFNGLGETCOMPRESSEDMULTITEXIMAGEEXTPROC __glewGetCompressedMultiTexImageEXT = NULL;
-void glGetCompressedMultiTexImageEXT(GLenum texunit,GLenum target,GLint level,GLvoid *img){__glewGetCompressedMultiTexImageEXT(texunit,target,level,img);}
-static PFNGLGETCOMPRESSEDTEXTUREIMAGEEXTPROC __glewGetCompressedTextureImageEXT = NULL;
-void glGetCompressedTextureImageEXT(GLuint texture,GLenum target,GLint level,GLvoid *img){__glewGetCompressedTextureImageEXT(texture,target,level,img);}
-static PFNGLGETDOUBLEINDEXEDVEXTPROC __glewGetDoubleIndexedvEXT = NULL;
-void glGetDoubleIndexedvEXT(GLenum target,GLuint index,GLdouble* params){__glewGetDoubleIndexedvEXT(target,index,params);}
-static PFNGLGETDOUBLEI_VEXTPROC __glewGetDoublei_vEXT = NULL;
-void glGetDoublei_vEXT(GLenum pname,GLuint index,GLdouble* params){__glewGetDoublei_vEXT(pname,index,params);}
-static PFNGLGETFLOATINDEXEDVEXTPROC __glewGetFloatIndexedvEXT = NULL;
-void glGetFloatIndexedvEXT(GLenum target,GLuint index,GLfloat* params){__glewGetFloatIndexedvEXT(target,index,params);}
-static PFNGLGETFLOATI_VEXTPROC __glewGetFloati_vEXT = NULL;
-void glGetFloati_vEXT(GLenum pname,GLuint index,GLfloat* params){__glewGetFloati_vEXT(pname,index,params);}
-static PFNGLGETFRAMEBUFFERPARAMETERIVEXTPROC __glewGetFramebufferParameterivEXT = NULL;
-void glGetFramebufferParameterivEXT(GLuint framebuffer,GLenum pname,GLint* param){__glewGetFramebufferParameterivEXT(framebuffer,pname,param);}
-static PFNGLGETMULTITEXENVFVEXTPROC __glewGetMultiTexEnvfvEXT = NULL;
-void glGetMultiTexEnvfvEXT(GLenum texunit,GLenum target,GLenum pname,GLfloat* params){__glewGetMultiTexEnvfvEXT(texunit,target,pname,params);}
-static PFNGLGETMULTITEXENVIVEXTPROC __glewGetMultiTexEnvivEXT = NULL;
-void glGetMultiTexEnvivEXT(GLenum texunit,GLenum target,GLenum pname,GLint* params){__glewGetMultiTexEnvivEXT(texunit,target,pname,params);}
-static PFNGLGETMULTITEXGENDVEXTPROC __glewGetMultiTexGendvEXT = NULL;
-void glGetMultiTexGendvEXT(GLenum texunit,GLenum coord,GLenum pname,GLdouble* params){__glewGetMultiTexGendvEXT(texunit,coord,pname,params);}
-static PFNGLGETMULTITEXGENFVEXTPROC __glewGetMultiTexGenfvEXT = NULL;
-void glGetMultiTexGenfvEXT(GLenum texunit,GLenum coord,GLenum pname,GLfloat* params){__glewGetMultiTexGenfvEXT(texunit,coord,pname,params);}
-static PFNGLGETMULTITEXGENIVEXTPROC __glewGetMultiTexGenivEXT = NULL;
-void glGetMultiTexGenivEXT(GLenum texunit,GLenum coord,GLenum pname,GLint* params){__glewGetMultiTexGenivEXT(texunit,coord,pname,params);}
-static PFNGLGETMULTITEXIMAGEEXTPROC __glewGetMultiTexImageEXT = NULL;
-void glGetMultiTexImageEXT(GLenum texunit,GLenum target,GLint level,GLenum format,GLenum type,GLvoid *pixels){__glewGetMultiTexImageEXT(texunit,target,level,format,type,pixels);}
-static PFNGLGETMULTITEXLEVELPARAMETERFVEXTPROC __glewGetMultiTexLevelParameterfvEXT = NULL;
-void glGetMultiTexLevelParameterfvEXT(GLenum texunit,GLenum target,GLint level,GLenum pname,GLfloat* params){__glewGetMultiTexLevelParameterfvEXT(texunit,target,level,pname,params);}
-static PFNGLGETMULTITEXLEVELPARAMETERIVEXTPROC __glewGetMultiTexLevelParameterivEXT = NULL;
-void glGetMultiTexLevelParameterivEXT(GLenum texunit,GLenum target,GLint level,GLenum pname,GLint* params){__glewGetMultiTexLevelParameterivEXT(texunit,target,level,pname,params);}
-static PFNGLGETMULTITEXPARAMETERIIVEXTPROC __glewGetMultiTexParameterIivEXT = NULL;
-void glGetMultiTexParameterIivEXT(GLenum texunit,GLenum target,GLenum pname,GLint* params){__glewGetMultiTexParameterIivEXT(texunit,target,pname,params);}
-static PFNGLGETMULTITEXPARAMETERIUIVEXTPROC __glewGetMultiTexParameterIuivEXT = NULL;
-void glGetMultiTexParameterIuivEXT(GLenum texunit,GLenum target,GLenum pname,GLuint* params){__glewGetMultiTexParameterIuivEXT(texunit,target,pname,params);}
-static PFNGLGETMULTITEXPARAMETERFVEXTPROC __glewGetMultiTexParameterfvEXT = NULL;
-void glGetMultiTexParameterfvEXT(GLenum texunit,GLenum target,GLenum pname,GLfloat* params){__glewGetMultiTexParameterfvEXT(texunit,target,pname,params);}
-static PFNGLGETMULTITEXPARAMETERIVEXTPROC __glewGetMultiTexParameterivEXT = NULL;
-void glGetMultiTexParameterivEXT(GLenum texunit,GLenum target,GLenum pname,GLint* params){__glewGetMultiTexParameterivEXT(texunit,target,pname,params);}
-static PFNGLGETNAMEDBUFFERPARAMETERIVEXTPROC __glewGetNamedBufferParameterivEXT = NULL;
-void glGetNamedBufferParameterivEXT(GLuint buffer,GLenum pname,GLint* params){__glewGetNamedBufferParameterivEXT(buffer,pname,params);}
-static PFNGLGETNAMEDBUFFERPOINTERVEXTPROC __glewGetNamedBufferPointervEXT = NULL;
-void glGetNamedBufferPointervEXT(GLuint buffer,GLenum pname,void** params){__glewGetNamedBufferPointervEXT(buffer,pname,params);}
-static PFNGLGETNAMEDBUFFERSUBDATAEXTPROC __glewGetNamedBufferSubDataEXT = NULL;
-void glGetNamedBufferSubDataEXT(GLuint buffer,GLintptr offset,GLsizeiptr size,GLvoid *data){__glewGetNamedBufferSubDataEXT(buffer,offset,size,data);}
-static PFNGLGETNAMEDFRAMEBUFFERATTACHMENTPARAMETERIVEXTPROC __glewGetNamedFramebufferAttachmentParameterivEXT = NULL;
-void glGetNamedFramebufferAttachmentParameterivEXT(GLuint framebuffer,GLenum attachment,GLenum pname,GLint* params){__glewGetNamedFramebufferAttachmentParameterivEXT(framebuffer,attachment,pname,params);}
-static PFNGLGETNAMEDPROGRAMLOCALPARAMETERIIVEXTPROC __glewGetNamedProgramLocalParameterIivEXT = NULL;
-void glGetNamedProgramLocalParameterIivEXT(GLuint program,GLenum target,GLuint index,GLint* params){__glewGetNamedProgramLocalParameterIivEXT(program,target,index,params);}
-static PFNGLGETNAMEDPROGRAMLOCALPARAMETERIUIVEXTPROC __glewGetNamedProgramLocalParameterIuivEXT = NULL;
-void glGetNamedProgramLocalParameterIuivEXT(GLuint program,GLenum target,GLuint index,GLuint* params){__glewGetNamedProgramLocalParameterIuivEXT(program,target,index,params);}
-static PFNGLGETNAMEDPROGRAMLOCALPARAMETERDVEXTPROC __glewGetNamedProgramLocalParameterdvEXT = NULL;
-void glGetNamedProgramLocalParameterdvEXT(GLuint program,GLenum target,GLuint index,GLdouble* params){__glewGetNamedProgramLocalParameterdvEXT(program,target,index,params);}
-static PFNGLGETNAMEDPROGRAMLOCALPARAMETERFVEXTPROC __glewGetNamedProgramLocalParameterfvEXT = NULL;
-void glGetNamedProgramLocalParameterfvEXT(GLuint program,GLenum target,GLuint index,GLfloat* params){__glewGetNamedProgramLocalParameterfvEXT(program,target,index,params);}
-static PFNGLGETNAMEDPROGRAMSTRINGEXTPROC __glewGetNamedProgramStringEXT = NULL;
-void glGetNamedProgramStringEXT(GLuint program,GLenum target,GLenum pname,GLvoid *string){__glewGetNamedProgramStringEXT(program,target,pname,string);}
-static PFNGLGETNAMEDPROGRAMIVEXTPROC __glewGetNamedProgramivEXT = NULL;
-void glGetNamedProgramivEXT(GLuint program,GLenum target,GLenum pname,GLint* params){__glewGetNamedProgramivEXT(program,target,pname,params);}
-static PFNGLGETNAMEDRENDERBUFFERPARAMETERIVEXTPROC __glewGetNamedRenderbufferParameterivEXT = NULL;
-void glGetNamedRenderbufferParameterivEXT(GLuint renderbuffer,GLenum pname,GLint* params){__glewGetNamedRenderbufferParameterivEXT(renderbuffer,pname,params);}
-static PFNGLGETPOINTERINDEXEDVEXTPROC __glewGetPointerIndexedvEXT = NULL;
-void glGetPointerIndexedvEXT(GLenum target,GLuint index,GLvoid** params){__glewGetPointerIndexedvEXT(target,index,params);}
-static PFNGLGETPOINTERI_VEXTPROC __glewGetPointeri_vEXT = NULL;
-void glGetPointeri_vEXT(GLenum pname,GLuint index,GLvoid** params){__glewGetPointeri_vEXT(pname,index,params);}
-static PFNGLGETTEXTUREIMAGEEXTPROC __glewGetTextureImageEXT = NULL;
-void glGetTextureImageEXT(GLuint texture,GLenum target,GLint level,GLenum format,GLenum type,GLvoid *pixels){__glewGetTextureImageEXT(texture,target,level,format,type,pixels);}
-static PFNGLGETTEXTURELEVELPARAMETERFVEXTPROC __glewGetTextureLevelParameterfvEXT = NULL;
-void glGetTextureLevelParameterfvEXT(GLuint texture,GLenum target,GLint level,GLenum pname,GLfloat* params){__glewGetTextureLevelParameterfvEXT(texture,target,level,pname,params);}
-static PFNGLGETTEXTURELEVELPARAMETERIVEXTPROC __glewGetTextureLevelParameterivEXT = NULL;
-void glGetTextureLevelParameterivEXT(GLuint texture,GLenum target,GLint level,GLenum pname,GLint* params){__glewGetTextureLevelParameterivEXT(texture,target,level,pname,params);}
-static PFNGLGETTEXTUREPARAMETERIIVEXTPROC __glewGetTextureParameterIivEXT = NULL;
-void glGetTextureParameterIivEXT(GLuint texture,GLenum target,GLenum pname,GLint* params){__glewGetTextureParameterIivEXT(texture,target,pname,params);}
-static PFNGLGETTEXTUREPARAMETERIUIVEXTPROC __glewGetTextureParameterIuivEXT = NULL;
-void glGetTextureParameterIuivEXT(GLuint texture,GLenum target,GLenum pname,GLuint* params){__glewGetTextureParameterIuivEXT(texture,target,pname,params);}
-static PFNGLGETTEXTUREPARAMETERFVEXTPROC __glewGetTextureParameterfvEXT = NULL;
-void glGetTextureParameterfvEXT(GLuint texture,GLenum target,GLenum pname,GLfloat* params){__glewGetTextureParameterfvEXT(texture,target,pname,params);}
-static PFNGLGETTEXTUREPARAMETERIVEXTPROC __glewGetTextureParameterivEXT = NULL;
-void glGetTextureParameterivEXT(GLuint texture,GLenum target,GLenum pname,GLint* params){__glewGetTextureParameterivEXT(texture,target,pname,params);}
-static PFNGLGETVERTEXARRAYINTEGERI_VEXTPROC __glewGetVertexArrayIntegeri_vEXT = NULL;
-void glGetVertexArrayIntegeri_vEXT(GLuint vaobj,GLuint index,GLenum pname,GLint* param){__glewGetVertexArrayIntegeri_vEXT(vaobj,index,pname,param);}
-static PFNGLGETVERTEXARRAYINTEGERVEXTPROC __glewGetVertexArrayIntegervEXT = NULL;
-void glGetVertexArrayIntegervEXT(GLuint vaobj,GLenum pname,GLint* param){__glewGetVertexArrayIntegervEXT(vaobj,pname,param);}
-static PFNGLGETVERTEXARRAYPOINTERI_VEXTPROC __glewGetVertexArrayPointeri_vEXT = NULL;
-void glGetVertexArrayPointeri_vEXT(GLuint vaobj,GLuint index,GLenum pname,GLvoid** param){__glewGetVertexArrayPointeri_vEXT(vaobj,index,pname,param);}
-static PFNGLGETVERTEXARRAYPOINTERVEXTPROC __glewGetVertexArrayPointervEXT = NULL;
-void glGetVertexArrayPointervEXT(GLuint vaobj,GLenum pname,GLvoid** param){__glewGetVertexArrayPointervEXT(vaobj,pname,param);}
-static PFNGLMAPNAMEDBUFFEREXTPROC __glewMapNamedBufferEXT = NULL;
-GLvoid * glMapNamedBufferEXT(GLuint buffer,GLenum access){return __glewMapNamedBufferEXT(buffer,access);}
-static PFNGLMAPNAMEDBUFFERRANGEEXTPROC __glewMapNamedBufferRangeEXT = NULL;
-GLvoid * glMapNamedBufferRangeEXT(GLuint buffer,GLintptr offset,GLsizeiptr length,GLbitfield access){return __glewMapNamedBufferRangeEXT(buffer,offset,length,access);}
-static PFNGLMATRIXFRUSTUMEXTPROC __glewMatrixFrustumEXT = NULL;
-void glMatrixFrustumEXT(GLenum matrixMode,GLdouble l,GLdouble r,GLdouble b,GLdouble t,GLdouble n,GLdouble f){__glewMatrixFrustumEXT(matrixMode,l,r,b,t,n,f);}
-static PFNGLMATRIXLOADIDENTITYEXTPROC __glewMatrixLoadIdentityEXT = NULL;
-void glMatrixLoadIdentityEXT(GLenum matrixMode){__glewMatrixLoadIdentityEXT(matrixMode);}
-static PFNGLMATRIXLOADTRANSPOSEDEXTPROC __glewMatrixLoadTransposedEXT = NULL;
-void glMatrixLoadTransposedEXT(GLenum matrixMode,const GLdouble* m){__glewMatrixLoadTransposedEXT(matrixMode,m);}
-static PFNGLMATRIXLOADTRANSPOSEFEXTPROC __glewMatrixLoadTransposefEXT = NULL;
-void glMatrixLoadTransposefEXT(GLenum matrixMode,const GLfloat* m){__glewMatrixLoadTransposefEXT(matrixMode,m);}
-static PFNGLMATRIXLOADDEXTPROC __glewMatrixLoaddEXT = NULL;
-void glMatrixLoaddEXT(GLenum matrixMode,const GLdouble* m){__glewMatrixLoaddEXT(matrixMode,m);}
-static PFNGLMATRIXLOADFEXTPROC __glewMatrixLoadfEXT = NULL;
-void glMatrixLoadfEXT(GLenum matrixMode,const GLfloat* m){__glewMatrixLoadfEXT(matrixMode,m);}
-static PFNGLMATRIXMULTTRANSPOSEDEXTPROC __glewMatrixMultTransposedEXT = NULL;
-void glMatrixMultTransposedEXT(GLenum matrixMode,const GLdouble* m){__glewMatrixMultTransposedEXT(matrixMode,m);}
-static PFNGLMATRIXMULTTRANSPOSEFEXTPROC __glewMatrixMultTransposefEXT = NULL;
-void glMatrixMultTransposefEXT(GLenum matrixMode,const GLfloat* m){__glewMatrixMultTransposefEXT(matrixMode,m);}
-static PFNGLMATRIXMULTDEXTPROC __glewMatrixMultdEXT = NULL;
-void glMatrixMultdEXT(GLenum matrixMode,const GLdouble* m){__glewMatrixMultdEXT(matrixMode,m);}
-static PFNGLMATRIXMULTFEXTPROC __glewMatrixMultfEXT = NULL;
-void glMatrixMultfEXT(GLenum matrixMode,const GLfloat* m){__glewMatrixMultfEXT(matrixMode,m);}
-static PFNGLMATRIXORTHOEXTPROC __glewMatrixOrthoEXT = NULL;
-void glMatrixOrthoEXT(GLenum matrixMode,GLdouble l,GLdouble r,GLdouble b,GLdouble t,GLdouble n,GLdouble f){__glewMatrixOrthoEXT(matrixMode,l,r,b,t,n,f);}
-static PFNGLMATRIXPOPEXTPROC __glewMatrixPopEXT = NULL;
-void glMatrixPopEXT(GLenum matrixMode){__glewMatrixPopEXT(matrixMode);}
-static PFNGLMATRIXPUSHEXTPROC __glewMatrixPushEXT = NULL;
-void glMatrixPushEXT(GLenum matrixMode){__glewMatrixPushEXT(matrixMode);}
-static PFNGLMATRIXROTATEDEXTPROC __glewMatrixRotatedEXT = NULL;
-void glMatrixRotatedEXT(GLenum matrixMode,GLdouble angle,GLdouble x,GLdouble y,GLdouble z){__glewMatrixRotatedEXT(matrixMode,angle,x,y,z);}
-static PFNGLMATRIXROTATEFEXTPROC __glewMatrixRotatefEXT = NULL;
-void glMatrixRotatefEXT(GLenum matrixMode,GLfloat angle,GLfloat x,GLfloat y,GLfloat z){__glewMatrixRotatefEXT(matrixMode,angle,x,y,z);}
-static PFNGLMATRIXSCALEDEXTPROC __glewMatrixScaledEXT = NULL;
-void glMatrixScaledEXT(GLenum matrixMode,GLdouble x,GLdouble y,GLdouble z){__glewMatrixScaledEXT(matrixMode,x,y,z);}
-static PFNGLMATRIXSCALEFEXTPROC __glewMatrixScalefEXT = NULL;
-void glMatrixScalefEXT(GLenum matrixMode,GLfloat x,GLfloat y,GLfloat z){__glewMatrixScalefEXT(matrixMode,x,y,z);}
-static PFNGLMATRIXTRANSLATEDEXTPROC __glewMatrixTranslatedEXT = NULL;
-void glMatrixTranslatedEXT(GLenum matrixMode,GLdouble x,GLdouble y,GLdouble z){__glewMatrixTranslatedEXT(matrixMode,x,y,z);}
-static PFNGLMATRIXTRANSLATEFEXTPROC __glewMatrixTranslatefEXT = NULL;
-void glMatrixTranslatefEXT(GLenum matrixMode,GLfloat x,GLfloat y,GLfloat z){__glewMatrixTranslatefEXT(matrixMode,x,y,z);}
-static PFNGLMULTITEXBUFFEREXTPROC __glewMultiTexBufferEXT = NULL;
-void glMultiTexBufferEXT(GLenum texunit,GLenum target,GLenum internalformat,GLuint buffer){__glewMultiTexBufferEXT(texunit,target,internalformat,buffer);}
-static PFNGLMULTITEXCOORDPOINTEREXTPROC __glewMultiTexCoordPointerEXT = NULL;
-void glMultiTexCoordPointerEXT(GLenum texunit,GLint size,GLenum type,GLsizei stride,const GLvoid *pointer){__glewMultiTexCoordPointerEXT(texunit,size,type,stride,pointer);}
-static PFNGLMULTITEXENVFEXTPROC __glewMultiTexEnvfEXT = NULL;
-void glMultiTexEnvfEXT(GLenum texunit,GLenum target,GLenum pname,GLfloat param){__glewMultiTexEnvfEXT(texunit,target,pname,param);}
-static PFNGLMULTITEXENVFVEXTPROC __glewMultiTexEnvfvEXT = NULL;
-void glMultiTexEnvfvEXT(GLenum texunit,GLenum target,GLenum pname,const GLfloat* params){__glewMultiTexEnvfvEXT(texunit,target,pname,params);}
-static PFNGLMULTITEXENVIEXTPROC __glewMultiTexEnviEXT = NULL;
-void glMultiTexEnviEXT(GLenum texunit,GLenum target,GLenum pname,GLint param){__glewMultiTexEnviEXT(texunit,target,pname,param);}
-static PFNGLMULTITEXENVIVEXTPROC __glewMultiTexEnvivEXT = NULL;
-void glMultiTexEnvivEXT(GLenum texunit,GLenum target,GLenum pname,const GLint* params){__glewMultiTexEnvivEXT(texunit,target,pname,params);}
-static PFNGLMULTITEXGENDEXTPROC __glewMultiTexGendEXT = NULL;
-void glMultiTexGendEXT(GLenum texunit,GLenum coord,GLenum pname,GLdouble param){__glewMultiTexGendEXT(texunit,coord,pname,param);}
-static PFNGLMULTITEXGENDVEXTPROC __glewMultiTexGendvEXT = NULL;
-void glMultiTexGendvEXT(GLenum texunit,GLenum coord,GLenum pname,const GLdouble* params){__glewMultiTexGendvEXT(texunit,coord,pname,params);}
-static PFNGLMULTITEXGENFEXTPROC __glewMultiTexGenfEXT = NULL;
-void glMultiTexGenfEXT(GLenum texunit,GLenum coord,GLenum pname,GLfloat param){__glewMultiTexGenfEXT(texunit,coord,pname,param);}
-static PFNGLMULTITEXGENFVEXTPROC __glewMultiTexGenfvEXT = NULL;
-void glMultiTexGenfvEXT(GLenum texunit,GLenum coord,GLenum pname,const GLfloat* params){__glewMultiTexGenfvEXT(texunit,coord,pname,params);}
-static PFNGLMULTITEXGENIEXTPROC __glewMultiTexGeniEXT = NULL;
-void glMultiTexGeniEXT(GLenum texunit,GLenum coord,GLenum pname,GLint param){__glewMultiTexGeniEXT(texunit,coord,pname,param);}
-static PFNGLMULTITEXGENIVEXTPROC __glewMultiTexGenivEXT = NULL;
-void glMultiTexGenivEXT(GLenum texunit,GLenum coord,GLenum pname,const GLint* params){__glewMultiTexGenivEXT(texunit,coord,pname,params);}
-static PFNGLMULTITEXIMAGE1DEXTPROC __glewMultiTexImage1DEXT = NULL;
-void glMultiTexImage1DEXT(GLenum texunit,GLenum target,GLint level,GLint internalformat,GLsizei width,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewMultiTexImage1DEXT(texunit,target,level,internalformat,width,border,format,type,pixels);}
-static PFNGLMULTITEXIMAGE2DEXTPROC __glewMultiTexImage2DEXT = NULL;
-void glMultiTexImage2DEXT(GLenum texunit,GLenum target,GLint level,GLint internalformat,GLsizei width,GLsizei height,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewMultiTexImage2DEXT(texunit,target,level,internalformat,width,height,border,format,type,pixels);}
-static PFNGLMULTITEXIMAGE3DEXTPROC __glewMultiTexImage3DEXT = NULL;
-void glMultiTexImage3DEXT(GLenum texunit,GLenum target,GLint level,GLint internalformat,GLsizei width,GLsizei height,GLsizei depth,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewMultiTexImage3DEXT(texunit,target,level,internalformat,width,height,depth,border,format,type,pixels);}
-static PFNGLMULTITEXPARAMETERIIVEXTPROC __glewMultiTexParameterIivEXT = NULL;
-void glMultiTexParameterIivEXT(GLenum texunit,GLenum target,GLenum pname,const GLint* params){__glewMultiTexParameterIivEXT(texunit,target,pname,params);}
-static PFNGLMULTITEXPARAMETERIUIVEXTPROC __glewMultiTexParameterIuivEXT = NULL;
-void glMultiTexParameterIuivEXT(GLenum texunit,GLenum target,GLenum pname,const GLuint* params){__glewMultiTexParameterIuivEXT(texunit,target,pname,params);}
-static PFNGLMULTITEXPARAMETERFEXTPROC __glewMultiTexParameterfEXT = NULL;
-void glMultiTexParameterfEXT(GLenum texunit,GLenum target,GLenum pname,GLfloat param){__glewMultiTexParameterfEXT(texunit,target,pname,param);}
-static PFNGLMULTITEXPARAMETERFVEXTPROC __glewMultiTexParameterfvEXT = NULL;
-void glMultiTexParameterfvEXT(GLenum texunit,GLenum target,GLenum pname,const GLfloat* param){__glewMultiTexParameterfvEXT(texunit,target,pname,param);}
-static PFNGLMULTITEXPARAMETERIEXTPROC __glewMultiTexParameteriEXT = NULL;
-void glMultiTexParameteriEXT(GLenum texunit,GLenum target,GLenum pname,GLint param){__glewMultiTexParameteriEXT(texunit,target,pname,param);}
-static PFNGLMULTITEXPARAMETERIVEXTPROC __glewMultiTexParameterivEXT = NULL;
-void glMultiTexParameterivEXT(GLenum texunit,GLenum target,GLenum pname,const GLint* param){__glewMultiTexParameterivEXT(texunit,target,pname,param);}
-static PFNGLMULTITEXRENDERBUFFEREXTPROC __glewMultiTexRenderbufferEXT = NULL;
-void glMultiTexRenderbufferEXT(GLenum texunit,GLenum target,GLuint renderbuffer){__glewMultiTexRenderbufferEXT(texunit,target,renderbuffer);}
-static PFNGLMULTITEXSUBIMAGE1DEXTPROC __glewMultiTexSubImage1DEXT = NULL;
-void glMultiTexSubImage1DEXT(GLenum texunit,GLenum target,GLint level,GLint xoffset,GLsizei width,GLenum format,GLenum type,const GLvoid *pixels){__glewMultiTexSubImage1DEXT(texunit,target,level,xoffset,width,format,type,pixels);}
-static PFNGLMULTITEXSUBIMAGE2DEXTPROC __glewMultiTexSubImage2DEXT = NULL;
-void glMultiTexSubImage2DEXT(GLenum texunit,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLsizei width,GLsizei height,GLenum format,GLenum type,const GLvoid *pixels){__glewMultiTexSubImage2DEXT(texunit,target,level,xoffset,yoffset,width,height,format,type,pixels);}
-static PFNGLMULTITEXSUBIMAGE3DEXTPROC __glewMultiTexSubImage3DEXT = NULL;
-void glMultiTexSubImage3DEXT(GLenum texunit,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLenum format,GLenum type,const GLvoid *pixels){__glewMultiTexSubImage3DEXT(texunit,target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels);}
-static PFNGLNAMEDBUFFERDATAEXTPROC __glewNamedBufferDataEXT = NULL;
-void glNamedBufferDataEXT(GLuint buffer,GLsizeiptr size,const GLvoid *data,GLenum usage){__glewNamedBufferDataEXT(buffer,size,data,usage);}
-static PFNGLNAMEDBUFFERSUBDATAEXTPROC __glewNamedBufferSubDataEXT = NULL;
-void glNamedBufferSubDataEXT(GLuint buffer,GLintptr offset,GLsizeiptr size,const GLvoid *data){__glewNamedBufferSubDataEXT(buffer,offset,size,data);}
-static PFNGLNAMEDCOPYBUFFERSUBDATAEXTPROC __glewNamedCopyBufferSubDataEXT = NULL;
-void glNamedCopyBufferSubDataEXT(GLuint readBuffer,GLuint writeBuffer,GLintptr readOffset,GLintptr writeOffset,GLsizeiptr size){__glewNamedCopyBufferSubDataEXT(readBuffer,writeBuffer,readOffset,writeOffset,size);}
-static PFNGLNAMEDFRAMEBUFFERRENDERBUFFEREXTPROC __glewNamedFramebufferRenderbufferEXT = NULL;
-void glNamedFramebufferRenderbufferEXT(GLuint framebuffer,GLenum attachment,GLenum renderbuffertarget,GLuint renderbuffer){__glewNamedFramebufferRenderbufferEXT(framebuffer,attachment,renderbuffertarget,renderbuffer);}
-static PFNGLNAMEDFRAMEBUFFERTEXTURE1DEXTPROC __glewNamedFramebufferTexture1DEXT = NULL;
-void glNamedFramebufferTexture1DEXT(GLuint framebuffer,GLenum attachment,GLenum textarget,GLuint texture,GLint level){__glewNamedFramebufferTexture1DEXT(framebuffer,attachment,textarget,texture,level);}
-static PFNGLNAMEDFRAMEBUFFERTEXTURE2DEXTPROC __glewNamedFramebufferTexture2DEXT = NULL;
-void glNamedFramebufferTexture2DEXT(GLuint framebuffer,GLenum attachment,GLenum textarget,GLuint texture,GLint level){__glewNamedFramebufferTexture2DEXT(framebuffer,attachment,textarget,texture,level);}
-static PFNGLNAMEDFRAMEBUFFERTEXTURE3DEXTPROC __glewNamedFramebufferTexture3DEXT = NULL;
-void glNamedFramebufferTexture3DEXT(GLuint framebuffer,GLenum attachment,GLenum textarget,GLuint texture,GLint level,GLint zoffset){__glewNamedFramebufferTexture3DEXT(framebuffer,attachment,textarget,texture,level,zoffset);}
-static PFNGLNAMEDFRAMEBUFFERTEXTUREEXTPROC __glewNamedFramebufferTextureEXT = NULL;
-void glNamedFramebufferTextureEXT(GLuint framebuffer,GLenum attachment,GLuint texture,GLint level){__glewNamedFramebufferTextureEXT(framebuffer,attachment,texture,level);}
-static PFNGLNAMEDFRAMEBUFFERTEXTUREFACEEXTPROC __glewNamedFramebufferTextureFaceEXT = NULL;
-void glNamedFramebufferTextureFaceEXT(GLuint framebuffer,GLenum attachment,GLuint texture,GLint level,GLenum face){__glewNamedFramebufferTextureFaceEXT(framebuffer,attachment,texture,level,face);}
-static PFNGLNAMEDFRAMEBUFFERTEXTURELAYEREXTPROC __glewNamedFramebufferTextureLayerEXT = NULL;
-void glNamedFramebufferTextureLayerEXT(GLuint framebuffer,GLenum attachment,GLuint texture,GLint level,GLint layer){__glewNamedFramebufferTextureLayerEXT(framebuffer,attachment,texture,level,layer);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETER4DEXTPROC __glewNamedProgramLocalParameter4dEXT = NULL;
-void glNamedProgramLocalParameter4dEXT(GLuint program,GLenum target,GLuint index,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewNamedProgramLocalParameter4dEXT(program,target,index,x,y,z,w);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETER4DVEXTPROC __glewNamedProgramLocalParameter4dvEXT = NULL;
-void glNamedProgramLocalParameter4dvEXT(GLuint program,GLenum target,GLuint index,const GLdouble* params){__glewNamedProgramLocalParameter4dvEXT(program,target,index,params);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETER4FEXTPROC __glewNamedProgramLocalParameter4fEXT = NULL;
-void glNamedProgramLocalParameter4fEXT(GLuint program,GLenum target,GLuint index,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewNamedProgramLocalParameter4fEXT(program,target,index,x,y,z,w);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETER4FVEXTPROC __glewNamedProgramLocalParameter4fvEXT = NULL;
-void glNamedProgramLocalParameter4fvEXT(GLuint program,GLenum target,GLuint index,const GLfloat* params){__glewNamedProgramLocalParameter4fvEXT(program,target,index,params);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETERI4IEXTPROC __glewNamedProgramLocalParameterI4iEXT = NULL;
-void glNamedProgramLocalParameterI4iEXT(GLuint program,GLenum target,GLuint index,GLint x,GLint y,GLint z,GLint w){__glewNamedProgramLocalParameterI4iEXT(program,target,index,x,y,z,w);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETERI4IVEXTPROC __glewNamedProgramLocalParameterI4ivEXT = NULL;
-void glNamedProgramLocalParameterI4ivEXT(GLuint program,GLenum target,GLuint index,const GLint* params){__glewNamedProgramLocalParameterI4ivEXT(program,target,index,params);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETERI4UIEXTPROC __glewNamedProgramLocalParameterI4uiEXT = NULL;
-void glNamedProgramLocalParameterI4uiEXT(GLuint program,GLenum target,GLuint index,GLuint x,GLuint y,GLuint z,GLuint w){__glewNamedProgramLocalParameterI4uiEXT(program,target,index,x,y,z,w);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETERI4UIVEXTPROC __glewNamedProgramLocalParameterI4uivEXT = NULL;
-void glNamedProgramLocalParameterI4uivEXT(GLuint program,GLenum target,GLuint index,const GLuint* params){__glewNamedProgramLocalParameterI4uivEXT(program,target,index,params);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETERS4FVEXTPROC __glewNamedProgramLocalParameters4fvEXT = NULL;
-void glNamedProgramLocalParameters4fvEXT(GLuint program,GLenum target,GLuint index,GLsizei count,const GLfloat* params){__glewNamedProgramLocalParameters4fvEXT(program,target,index,count,params);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETERSI4IVEXTPROC __glewNamedProgramLocalParametersI4ivEXT = NULL;
-void glNamedProgramLocalParametersI4ivEXT(GLuint program,GLenum target,GLuint index,GLsizei count,const GLint* params){__glewNamedProgramLocalParametersI4ivEXT(program,target,index,count,params);}
-static PFNGLNAMEDPROGRAMLOCALPARAMETERSI4UIVEXTPROC __glewNamedProgramLocalParametersI4uivEXT = NULL;
-void glNamedProgramLocalParametersI4uivEXT(GLuint program,GLenum target,GLuint index,GLsizei count,const GLuint* params){__glewNamedProgramLocalParametersI4uivEXT(program,target,index,count,params);}
-static PFNGLNAMEDPROGRAMSTRINGEXTPROC __glewNamedProgramStringEXT = NULL;
-void glNamedProgramStringEXT(GLuint program,GLenum target,GLenum format,GLsizei len,const GLvoid *string){__glewNamedProgramStringEXT(program,target,format,len,string);}
-static PFNGLNAMEDRENDERBUFFERSTORAGEEXTPROC __glewNamedRenderbufferStorageEXT = NULL;
-void glNamedRenderbufferStorageEXT(GLuint renderbuffer,GLenum internalformat,GLsizei width,GLsizei height){__glewNamedRenderbufferStorageEXT(renderbuffer,internalformat,width,height);}
-static PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLECOVERAGEEXTPROC __glewNamedRenderbufferStorageMultisampleCoverageEXT = NULL;
-void glNamedRenderbufferStorageMultisampleCoverageEXT(GLuint renderbuffer,GLsizei coverageSamples,GLsizei colorSamples,GLenum internalformat,GLsizei width,GLsizei height){__glewNamedRenderbufferStorageMultisampleCoverageEXT(renderbuffer,coverageSamples,colorSamples,internalformat,width,height);}
-static PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC __glewNamedRenderbufferStorageMultisampleEXT = NULL;
-void glNamedRenderbufferStorageMultisampleEXT(GLuint renderbuffer,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height){__glewNamedRenderbufferStorageMultisampleEXT(renderbuffer,samples,internalformat,width,height);}
-static PFNGLPROGRAMUNIFORM1FEXTPROC __glewProgramUniform1fEXT = NULL;
-void glProgramUniform1fEXT(GLuint program,GLint location,GLfloat v0){__glewProgramUniform1fEXT(program,location,v0);}
-static PFNGLPROGRAMUNIFORM1FVEXTPROC __glewProgramUniform1fvEXT = NULL;
-void glProgramUniform1fvEXT(GLuint program,GLint location,GLsizei count,const GLfloat* value){__glewProgramUniform1fvEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM1IEXTPROC __glewProgramUniform1iEXT = NULL;
-void glProgramUniform1iEXT(GLuint program,GLint location,GLint v0){__glewProgramUniform1iEXT(program,location,v0);}
-static PFNGLPROGRAMUNIFORM1IVEXTPROC __glewProgramUniform1ivEXT = NULL;
-void glProgramUniform1ivEXT(GLuint program,GLint location,GLsizei count,const GLint* value){__glewProgramUniform1ivEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM1UIEXTPROC __glewProgramUniform1uiEXT = NULL;
-void glProgramUniform1uiEXT(GLuint program,GLint location,GLuint v0){__glewProgramUniform1uiEXT(program,location,v0);}
-static PFNGLPROGRAMUNIFORM1UIVEXTPROC __glewProgramUniform1uivEXT = NULL;
-void glProgramUniform1uivEXT(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform1uivEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2FEXTPROC __glewProgramUniform2fEXT = NULL;
-void glProgramUniform2fEXT(GLuint program,GLint location,GLfloat v0,GLfloat v1){__glewProgramUniform2fEXT(program,location,v0,v1);}
-static PFNGLPROGRAMUNIFORM2FVEXTPROC __glewProgramUniform2fvEXT = NULL;
-void glProgramUniform2fvEXT(GLuint program,GLint location,GLsizei count,const GLfloat* value){__glewProgramUniform2fvEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2IEXTPROC __glewProgramUniform2iEXT = NULL;
-void glProgramUniform2iEXT(GLuint program,GLint location,GLint v0,GLint v1){__glewProgramUniform2iEXT(program,location,v0,v1);}
-static PFNGLPROGRAMUNIFORM2IVEXTPROC __glewProgramUniform2ivEXT = NULL;
-void glProgramUniform2ivEXT(GLuint program,GLint location,GLsizei count,const GLint* value){__glewProgramUniform2ivEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2UIEXTPROC __glewProgramUniform2uiEXT = NULL;
-void glProgramUniform2uiEXT(GLuint program,GLint location,GLuint v0,GLuint v1){__glewProgramUniform2uiEXT(program,location,v0,v1);}
-static PFNGLPROGRAMUNIFORM2UIVEXTPROC __glewProgramUniform2uivEXT = NULL;
-void glProgramUniform2uivEXT(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform2uivEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3FEXTPROC __glewProgramUniform3fEXT = NULL;
-void glProgramUniform3fEXT(GLuint program,GLint location,GLfloat v0,GLfloat v1,GLfloat v2){__glewProgramUniform3fEXT(program,location,v0,v1,v2);}
-static PFNGLPROGRAMUNIFORM3FVEXTPROC __glewProgramUniform3fvEXT = NULL;
-void glProgramUniform3fvEXT(GLuint program,GLint location,GLsizei count,const GLfloat* value){__glewProgramUniform3fvEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3IEXTPROC __glewProgramUniform3iEXT = NULL;
-void glProgramUniform3iEXT(GLuint program,GLint location,GLint v0,GLint v1,GLint v2){__glewProgramUniform3iEXT(program,location,v0,v1,v2);}
-static PFNGLPROGRAMUNIFORM3IVEXTPROC __glewProgramUniform3ivEXT = NULL;
-void glProgramUniform3ivEXT(GLuint program,GLint location,GLsizei count,const GLint* value){__glewProgramUniform3ivEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3UIEXTPROC __glewProgramUniform3uiEXT = NULL;
-void glProgramUniform3uiEXT(GLuint program,GLint location,GLuint v0,GLuint v1,GLuint v2){__glewProgramUniform3uiEXT(program,location,v0,v1,v2);}
-static PFNGLPROGRAMUNIFORM3UIVEXTPROC __glewProgramUniform3uivEXT = NULL;
-void glProgramUniform3uivEXT(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform3uivEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4FEXTPROC __glewProgramUniform4fEXT = NULL;
-void glProgramUniform4fEXT(GLuint program,GLint location,GLfloat v0,GLfloat v1,GLfloat v2,GLfloat v3){__glewProgramUniform4fEXT(program,location,v0,v1,v2,v3);}
-static PFNGLPROGRAMUNIFORM4FVEXTPROC __glewProgramUniform4fvEXT = NULL;
-void glProgramUniform4fvEXT(GLuint program,GLint location,GLsizei count,const GLfloat* value){__glewProgramUniform4fvEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4IEXTPROC __glewProgramUniform4iEXT = NULL;
-void glProgramUniform4iEXT(GLuint program,GLint location,GLint v0,GLint v1,GLint v2,GLint v3){__glewProgramUniform4iEXT(program,location,v0,v1,v2,v3);}
-static PFNGLPROGRAMUNIFORM4IVEXTPROC __glewProgramUniform4ivEXT = NULL;
-void glProgramUniform4ivEXT(GLuint program,GLint location,GLsizei count,const GLint* value){__glewProgramUniform4ivEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4UIEXTPROC __glewProgramUniform4uiEXT = NULL;
-void glProgramUniform4uiEXT(GLuint program,GLint location,GLuint v0,GLuint v1,GLuint v2,GLuint v3){__glewProgramUniform4uiEXT(program,location,v0,v1,v2,v3);}
-static PFNGLPROGRAMUNIFORM4UIVEXTPROC __glewProgramUniform4uivEXT = NULL;
-void glProgramUniform4uivEXT(GLuint program,GLint location,GLsizei count,const GLuint* value){__glewProgramUniform4uivEXT(program,location,count,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2FVEXTPROC __glewProgramUniformMatrix2fvEXT = NULL;
-void glProgramUniformMatrix2fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix2fvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2X3FVEXTPROC __glewProgramUniformMatrix2x3fvEXT = NULL;
-void glProgramUniformMatrix2x3fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix2x3fvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX2X4FVEXTPROC __glewProgramUniformMatrix2x4fvEXT = NULL;
-void glProgramUniformMatrix2x4fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix2x4fvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3FVEXTPROC __glewProgramUniformMatrix3fvEXT = NULL;
-void glProgramUniformMatrix3fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix3fvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3X2FVEXTPROC __glewProgramUniformMatrix3x2fvEXT = NULL;
-void glProgramUniformMatrix3x2fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix3x2fvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX3X4FVEXTPROC __glewProgramUniformMatrix3x4fvEXT = NULL;
-void glProgramUniformMatrix3x4fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix3x4fvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4FVEXTPROC __glewProgramUniformMatrix4fvEXT = NULL;
-void glProgramUniformMatrix4fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix4fvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4X2FVEXTPROC __glewProgramUniformMatrix4x2fvEXT = NULL;
-void glProgramUniformMatrix4x2fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix4x2fvEXT(program,location,count,transpose,value);}
-static PFNGLPROGRAMUNIFORMMATRIX4X3FVEXTPROC __glewProgramUniformMatrix4x3fvEXT = NULL;
-void glProgramUniformMatrix4x3fvEXT(GLuint program,GLint location,GLsizei count,GLboolean transpose,const GLfloat* value){__glewProgramUniformMatrix4x3fvEXT(program,location,count,transpose,value);}
-static PFNGLPUSHCLIENTATTRIBDEFAULTEXTPROC __glewPushClientAttribDefaultEXT = NULL;
-void glPushClientAttribDefaultEXT(GLbitfield mask){__glewPushClientAttribDefaultEXT(mask);}
-static PFNGLTEXTUREBUFFEREXTPROC __glewTextureBufferEXT = NULL;
-void glTextureBufferEXT(GLuint texture,GLenum target,GLenum internalformat,GLuint buffer){__glewTextureBufferEXT(texture,target,internalformat,buffer);}
-static PFNGLTEXTUREIMAGE1DEXTPROC __glewTextureImage1DEXT = NULL;
-void glTextureImage1DEXT(GLuint texture,GLenum target,GLint level,GLint internalformat,GLsizei width,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewTextureImage1DEXT(texture,target,level,internalformat,width,border,format,type,pixels);}
-static PFNGLTEXTUREIMAGE2DEXTPROC __glewTextureImage2DEXT = NULL;
-void glTextureImage2DEXT(GLuint texture,GLenum target,GLint level,GLint internalformat,GLsizei width,GLsizei height,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewTextureImage2DEXT(texture,target,level,internalformat,width,height,border,format,type,pixels);}
-static PFNGLTEXTUREIMAGE3DEXTPROC __glewTextureImage3DEXT = NULL;
-void glTextureImage3DEXT(GLuint texture,GLenum target,GLint level,GLint internalformat,GLsizei width,GLsizei height,GLsizei depth,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewTextureImage3DEXT(texture,target,level,internalformat,width,height,depth,border,format,type,pixels);}
-static PFNGLTEXTUREPARAMETERIIVEXTPROC __glewTextureParameterIivEXT = NULL;
-void glTextureParameterIivEXT(GLuint texture,GLenum target,GLenum pname,const GLint* params){__glewTextureParameterIivEXT(texture,target,pname,params);}
-static PFNGLTEXTUREPARAMETERIUIVEXTPROC __glewTextureParameterIuivEXT = NULL;
-void glTextureParameterIuivEXT(GLuint texture,GLenum target,GLenum pname,const GLuint* params){__glewTextureParameterIuivEXT(texture,target,pname,params);}
-static PFNGLTEXTUREPARAMETERFEXTPROC __glewTextureParameterfEXT = NULL;
-void glTextureParameterfEXT(GLuint texture,GLenum target,GLenum pname,GLfloat param){__glewTextureParameterfEXT(texture,target,pname,param);}
-static PFNGLTEXTUREPARAMETERFVEXTPROC __glewTextureParameterfvEXT = NULL;
-void glTextureParameterfvEXT(GLuint texture,GLenum target,GLenum pname,const GLfloat* param){__glewTextureParameterfvEXT(texture,target,pname,param);}
-static PFNGLTEXTUREPARAMETERIEXTPROC __glewTextureParameteriEXT = NULL;
-void glTextureParameteriEXT(GLuint texture,GLenum target,GLenum pname,GLint param){__glewTextureParameteriEXT(texture,target,pname,param);}
-static PFNGLTEXTUREPARAMETERIVEXTPROC __glewTextureParameterivEXT = NULL;
-void glTextureParameterivEXT(GLuint texture,GLenum target,GLenum pname,const GLint* param){__glewTextureParameterivEXT(texture,target,pname,param);}
-static PFNGLTEXTURERENDERBUFFEREXTPROC __glewTextureRenderbufferEXT = NULL;
-void glTextureRenderbufferEXT(GLuint texture,GLenum target,GLuint renderbuffer){__glewTextureRenderbufferEXT(texture,target,renderbuffer);}
-static PFNGLTEXTURESUBIMAGE1DEXTPROC __glewTextureSubImage1DEXT = NULL;
-void glTextureSubImage1DEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLsizei width,GLenum format,GLenum type,const GLvoid *pixels){__glewTextureSubImage1DEXT(texture,target,level,xoffset,width,format,type,pixels);}
-static PFNGLTEXTURESUBIMAGE2DEXTPROC __glewTextureSubImage2DEXT = NULL;
-void glTextureSubImage2DEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLsizei width,GLsizei height,GLenum format,GLenum type,const GLvoid *pixels){__glewTextureSubImage2DEXT(texture,target,level,xoffset,yoffset,width,height,format,type,pixels);}
-static PFNGLTEXTURESUBIMAGE3DEXTPROC __glewTextureSubImage3DEXT = NULL;
-void glTextureSubImage3DEXT(GLuint texture,GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLenum format,GLenum type,const GLvoid *pixels){__glewTextureSubImage3DEXT(texture,target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels);}
-static PFNGLUNMAPNAMEDBUFFEREXTPROC __glewUnmapNamedBufferEXT = NULL;
-GLboolean glUnmapNamedBufferEXT(GLuint buffer){return __glewUnmapNamedBufferEXT(buffer);}
-static PFNGLVERTEXARRAYCOLOROFFSETEXTPROC __glewVertexArrayColorOffsetEXT = NULL;
-void glVertexArrayColorOffsetEXT(GLuint vaobj,GLuint buffer,GLint size,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArrayColorOffsetEXT(vaobj,buffer,size,type,stride,offset);}
-static PFNGLVERTEXARRAYEDGEFLAGOFFSETEXTPROC __glewVertexArrayEdgeFlagOffsetEXT = NULL;
-void glVertexArrayEdgeFlagOffsetEXT(GLuint vaobj,GLuint buffer,GLsizei stride,GLintptr offset){__glewVertexArrayEdgeFlagOffsetEXT(vaobj,buffer,stride,offset);}
-static PFNGLVERTEXARRAYFOGCOORDOFFSETEXTPROC __glewVertexArrayFogCoordOffsetEXT = NULL;
-void glVertexArrayFogCoordOffsetEXT(GLuint vaobj,GLuint buffer,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArrayFogCoordOffsetEXT(vaobj,buffer,type,stride,offset);}
-static PFNGLVERTEXARRAYINDEXOFFSETEXTPROC __glewVertexArrayIndexOffsetEXT = NULL;
-void glVertexArrayIndexOffsetEXT(GLuint vaobj,GLuint buffer,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArrayIndexOffsetEXT(vaobj,buffer,type,stride,offset);}
-static PFNGLVERTEXARRAYMULTITEXCOORDOFFSETEXTPROC __glewVertexArrayMultiTexCoordOffsetEXT = NULL;
-void glVertexArrayMultiTexCoordOffsetEXT(GLuint vaobj,GLuint buffer,GLenum texunit,GLint size,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArrayMultiTexCoordOffsetEXT(vaobj,buffer,texunit,size,type,stride,offset);}
-static PFNGLVERTEXARRAYNORMALOFFSETEXTPROC __glewVertexArrayNormalOffsetEXT = NULL;
-void glVertexArrayNormalOffsetEXT(GLuint vaobj,GLuint buffer,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArrayNormalOffsetEXT(vaobj,buffer,type,stride,offset);}
-static PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROC __glewVertexArraySecondaryColorOffsetEXT = NULL;
-void glVertexArraySecondaryColorOffsetEXT(GLuint vaobj,GLuint buffer,GLint size,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArraySecondaryColorOffsetEXT(vaobj,buffer,size,type,stride,offset);}
-static PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROC __glewVertexArrayTexCoordOffsetEXT = NULL;
-void glVertexArrayTexCoordOffsetEXT(GLuint vaobj,GLuint buffer,GLint size,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArrayTexCoordOffsetEXT(vaobj,buffer,size,type,stride,offset);}
-static PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROC __glewVertexArrayVertexAttribIOffsetEXT = NULL;
-void glVertexArrayVertexAttribIOffsetEXT(GLuint vaobj,GLuint buffer,GLuint index,GLint size,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArrayVertexAttribIOffsetEXT(vaobj,buffer,index,size,type,stride,offset);}
-static PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC __glewVertexArrayVertexAttribOffsetEXT = NULL;
-void glVertexArrayVertexAttribOffsetEXT(GLuint vaobj,GLuint buffer,GLuint index,GLint size,GLenum type,GLboolean normalized,GLsizei stride,GLintptr offset){__glewVertexArrayVertexAttribOffsetEXT(vaobj,buffer,index,size,type,normalized,stride,offset);}
-static PFNGLVERTEXARRAYVERTEXOFFSETEXTPROC __glewVertexArrayVertexOffsetEXT = NULL;
-void glVertexArrayVertexOffsetEXT(GLuint vaobj,GLuint buffer,GLint size,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArrayVertexOffsetEXT(vaobj,buffer,size,type,stride,offset);}
-
-static PFNGLCOLORMASKINDEXEDEXTPROC __glewColorMaskIndexedEXT = NULL;
-void glColorMaskIndexedEXT(GLuint buf,GLboolean r,GLboolean g,GLboolean b,GLboolean a){__glewColorMaskIndexedEXT(buf,r,g,b,a);}
-static PFNGLDISABLEINDEXEDEXTPROC __glewDisableIndexedEXT = NULL;
-void glDisableIndexedEXT(GLenum target,GLuint index){__glewDisableIndexedEXT(target,index);}
-static PFNGLENABLEINDEXEDEXTPROC __glewEnableIndexedEXT = NULL;
-void glEnableIndexedEXT(GLenum target,GLuint index){__glewEnableIndexedEXT(target,index);}
-static PFNGLGETBOOLEANINDEXEDVEXTPROC __glewGetBooleanIndexedvEXT = NULL;
-void glGetBooleanIndexedvEXT(GLenum value,GLuint index,GLboolean* data){__glewGetBooleanIndexedvEXT(value,index,data);}
-static PFNGLGETINTEGERINDEXEDVEXTPROC __glewGetIntegerIndexedvEXT = NULL;
-void glGetIntegerIndexedvEXT(GLenum value,GLuint index,GLint* data){__glewGetIntegerIndexedvEXT(value,index,data);}
-static PFNGLISENABLEDINDEXEDEXTPROC __glewIsEnabledIndexedEXT = NULL;
-GLboolean glIsEnabledIndexedEXT(GLenum target,GLuint index){return __glewIsEnabledIndexedEXT(target,index);}
-
-static PFNGLDRAWARRAYSINSTANCEDEXTPROC __glewDrawArraysInstancedEXT = NULL;
-void glDrawArraysInstancedEXT(GLenum mode,GLint start,GLsizei count,GLsizei primcount){__glewDrawArraysInstancedEXT(mode,start,count,primcount);}
-static PFNGLDRAWELEMENTSINSTANCEDEXTPROC __glewDrawElementsInstancedEXT = NULL;
-void glDrawElementsInstancedEXT(GLenum mode,GLsizei count,GLenum type,const GLvoid *indices,GLsizei primcount){__glewDrawElementsInstancedEXT(mode,count,type,indices,primcount);}
-
-static PFNGLDRAWRANGEELEMENTSEXTPROC __glewDrawRangeElementsEXT = NULL;
-void glDrawRangeElementsEXT(GLenum mode,GLuint start,GLuint end,GLsizei count,GLenum type,const GLvoid *indices){__glewDrawRangeElementsEXT(mode,start,end,count,type,indices);}
-
-static PFNGLFOGCOORDPOINTEREXTPROC __glewFogCoordPointerEXT = NULL;
-void glFogCoordPointerEXT(GLenum type,GLsizei stride,const GLvoid *pointer){__glewFogCoordPointerEXT(type,stride,pointer);}
-static PFNGLFOGCOORDDEXTPROC __glewFogCoorddEXT = NULL;
-void glFogCoorddEXT(GLdouble coord){__glewFogCoorddEXT(coord);}
-static PFNGLFOGCOORDDVEXTPROC __glewFogCoorddvEXT = NULL;
-void glFogCoorddvEXT(const GLdouble *coord){__glewFogCoorddvEXT(coord);}
-static PFNGLFOGCOORDFEXTPROC __glewFogCoordfEXT = NULL;
-void glFogCoordfEXT(GLfloat coord){__glewFogCoordfEXT(coord);}
-static PFNGLFOGCOORDFVEXTPROC __glewFogCoordfvEXT = NULL;
-void glFogCoordfvEXT(const GLfloat *coord){__glewFogCoordfvEXT(coord);}
-
-static PFNGLFRAGMENTCOLORMATERIALEXTPROC __glewFragmentColorMaterialEXT = NULL;
-void glFragmentColorMaterialEXT(GLenum face,GLenum mode){__glewFragmentColorMaterialEXT(face,mode);}
-static PFNGLFRAGMENTLIGHTMODELFEXTPROC __glewFragmentLightModelfEXT = NULL;
-void glFragmentLightModelfEXT(GLenum pname,GLfloat param){__glewFragmentLightModelfEXT(pname,param);}
-static PFNGLFRAGMENTLIGHTMODELFVEXTPROC __glewFragmentLightModelfvEXT = NULL;
-void glFragmentLightModelfvEXT(GLenum pname,GLfloat* params){__glewFragmentLightModelfvEXT(pname,params);}
-static PFNGLFRAGMENTLIGHTMODELIEXTPROC __glewFragmentLightModeliEXT = NULL;
-void glFragmentLightModeliEXT(GLenum pname,GLint param){__glewFragmentLightModeliEXT(pname,param);}
-static PFNGLFRAGMENTLIGHTMODELIVEXTPROC __glewFragmentLightModelivEXT = NULL;
-void glFragmentLightModelivEXT(GLenum pname,GLint* params){__glewFragmentLightModelivEXT(pname,params);}
-static PFNGLFRAGMENTLIGHTFEXTPROC __glewFragmentLightfEXT = NULL;
-void glFragmentLightfEXT(GLenum light,GLenum pname,GLfloat param){__glewFragmentLightfEXT(light,pname,param);}
-static PFNGLFRAGMENTLIGHTFVEXTPROC __glewFragmentLightfvEXT = NULL;
-void glFragmentLightfvEXT(GLenum light,GLenum pname,GLfloat* params){__glewFragmentLightfvEXT(light,pname,params);}
-static PFNGLFRAGMENTLIGHTIEXTPROC __glewFragmentLightiEXT = NULL;
-void glFragmentLightiEXT(GLenum light,GLenum pname,GLint param){__glewFragmentLightiEXT(light,pname,param);}
-static PFNGLFRAGMENTLIGHTIVEXTPROC __glewFragmentLightivEXT = NULL;
-void glFragmentLightivEXT(GLenum light,GLenum pname,GLint* params){__glewFragmentLightivEXT(light,pname,params);}
-static PFNGLFRAGMENTMATERIALFEXTPROC __glewFragmentMaterialfEXT = NULL;
-void glFragmentMaterialfEXT(GLenum face,GLenum pname,const GLfloat param){__glewFragmentMaterialfEXT(face,pname,param);}
-static PFNGLFRAGMENTMATERIALFVEXTPROC __glewFragmentMaterialfvEXT = NULL;
-void glFragmentMaterialfvEXT(GLenum face,GLenum pname,const GLfloat* params){__glewFragmentMaterialfvEXT(face,pname,params);}
-static PFNGLFRAGMENTMATERIALIEXTPROC __glewFragmentMaterialiEXT = NULL;
-void glFragmentMaterialiEXT(GLenum face,GLenum pname,const GLint param){__glewFragmentMaterialiEXT(face,pname,param);}
-static PFNGLFRAGMENTMATERIALIVEXTPROC __glewFragmentMaterialivEXT = NULL;
-void glFragmentMaterialivEXT(GLenum face,GLenum pname,const GLint* params){__glewFragmentMaterialivEXT(face,pname,params);}
-static PFNGLGETFRAGMENTLIGHTFVEXTPROC __glewGetFragmentLightfvEXT = NULL;
-void glGetFragmentLightfvEXT(GLenum light,GLenum pname,GLfloat* params){__glewGetFragmentLightfvEXT(light,pname,params);}
-static PFNGLGETFRAGMENTLIGHTIVEXTPROC __glewGetFragmentLightivEXT = NULL;
-void glGetFragmentLightivEXT(GLenum light,GLenum pname,GLint* params){__glewGetFragmentLightivEXT(light,pname,params);}
-static PFNGLGETFRAGMENTMATERIALFVEXTPROC __glewGetFragmentMaterialfvEXT = NULL;
-void glGetFragmentMaterialfvEXT(GLenum face,GLenum pname,const GLfloat* params){__glewGetFragmentMaterialfvEXT(face,pname,params);}
-static PFNGLGETFRAGMENTMATERIALIVEXTPROC __glewGetFragmentMaterialivEXT = NULL;
-void glGetFragmentMaterialivEXT(GLenum face,GLenum pname,const GLint* params){__glewGetFragmentMaterialivEXT(face,pname,params);}
-static PFNGLLIGHTENVIEXTPROC __glewLightEnviEXT = NULL;
-void glLightEnviEXT(GLenum pname,GLint param){__glewLightEnviEXT(pname,param);}
-
-static PFNGLBLITFRAMEBUFFEREXTPROC __glewBlitFramebufferEXT = NULL;
-void glBlitFramebufferEXT(GLint srcX0,GLint srcY0,GLint srcX1,GLint srcY1,GLint dstX0,GLint dstY0,GLint dstX1,GLint dstY1,GLbitfield mask,GLenum filter){__glewBlitFramebufferEXT(srcX0,srcY0,srcX1,srcY1,dstX0,dstY0,dstX1,dstY1,mask,filter);}
-
-static PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC __glewRenderbufferStorageMultisampleEXT = NULL;
-void glRenderbufferStorageMultisampleEXT(GLenum target,GLsizei samples,GLenum internalformat,GLsizei width,GLsizei height){__glewRenderbufferStorageMultisampleEXT(target,samples,internalformat,width,height);}
-
-static PFNGLBINDFRAMEBUFFEREXTPROC __glewBindFramebufferEXT = NULL;
-void glBindFramebufferEXT(GLenum target,GLuint framebuffer){__glewBindFramebufferEXT(target,framebuffer);}
-static PFNGLBINDRENDERBUFFEREXTPROC __glewBindRenderbufferEXT = NULL;
-void glBindRenderbufferEXT(GLenum target,GLuint renderbuffer){__glewBindRenderbufferEXT(target,renderbuffer);}
-static PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC __glewCheckFramebufferStatusEXT = NULL;
-GLenum glCheckFramebufferStatusEXT(GLenum target){return __glewCheckFramebufferStatusEXT(target);}
-static PFNGLDELETEFRAMEBUFFERSEXTPROC __glewDeleteFramebuffersEXT = NULL;
-void glDeleteFramebuffersEXT(GLsizei n,const GLuint* framebuffers){__glewDeleteFramebuffersEXT(n,framebuffers);}
-static PFNGLDELETERENDERBUFFERSEXTPROC __glewDeleteRenderbuffersEXT = NULL;
-void glDeleteRenderbuffersEXT(GLsizei n,const GLuint* renderbuffers){__glewDeleteRenderbuffersEXT(n,renderbuffers);}
-static PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC __glewFramebufferRenderbufferEXT = NULL;
-void glFramebufferRenderbufferEXT(GLenum target,GLenum attachment,GLenum renderbuffertarget,GLuint renderbuffer){__glewFramebufferRenderbufferEXT(target,attachment,renderbuffertarget,renderbuffer);}
-static PFNGLFRAMEBUFFERTEXTURE1DEXTPROC __glewFramebufferTexture1DEXT = NULL;
-void glFramebufferTexture1DEXT(GLenum target,GLenum attachment,GLenum textarget,GLuint texture,GLint level){__glewFramebufferTexture1DEXT(target,attachment,textarget,texture,level);}
-static PFNGLFRAMEBUFFERTEXTURE2DEXTPROC __glewFramebufferTexture2DEXT = NULL;
-void glFramebufferTexture2DEXT(GLenum target,GLenum attachment,GLenum textarget,GLuint texture,GLint level){__glewFramebufferTexture2DEXT(target,attachment,textarget,texture,level);}
-static PFNGLFRAMEBUFFERTEXTURE3DEXTPROC __glewFramebufferTexture3DEXT = NULL;
-void glFramebufferTexture3DEXT(GLenum target,GLenum attachment,GLenum textarget,GLuint texture,GLint level,GLint zoffset){__glewFramebufferTexture3DEXT(target,attachment,textarget,texture,level,zoffset);}
-static PFNGLGENFRAMEBUFFERSEXTPROC __glewGenFramebuffersEXT = NULL;
-void glGenFramebuffersEXT(GLsizei n,GLuint* framebuffers){__glewGenFramebuffersEXT(n,framebuffers);}
-static PFNGLGENRENDERBUFFERSEXTPROC __glewGenRenderbuffersEXT = NULL;
-void glGenRenderbuffersEXT(GLsizei n,GLuint* renderbuffers){__glewGenRenderbuffersEXT(n,renderbuffers);}
-static PFNGLGENERATEMIPMAPEXTPROC __glewGenerateMipmapEXT = NULL;
-void glGenerateMipmapEXT(GLenum target){__glewGenerateMipmapEXT(target);}
-static PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVEXTPROC __glewGetFramebufferAttachmentParameterivEXT = NULL;
-void glGetFramebufferAttachmentParameterivEXT(GLenum target,GLenum attachment,GLenum pname,GLint* params){__glewGetFramebufferAttachmentParameterivEXT(target,attachment,pname,params);}
-static PFNGLGETRENDERBUFFERPARAMETERIVEXTPROC __glewGetRenderbufferParameterivEXT = NULL;
-void glGetRenderbufferParameterivEXT(GLenum target,GLenum pname,GLint* params){__glewGetRenderbufferParameterivEXT(target,pname,params);}
-static PFNGLISFRAMEBUFFEREXTPROC __glewIsFramebufferEXT = NULL;
-GLboolean glIsFramebufferEXT(GLuint framebuffer){return __glewIsFramebufferEXT(framebuffer);}
-static PFNGLISRENDERBUFFEREXTPROC __glewIsRenderbufferEXT = NULL;
-GLboolean glIsRenderbufferEXT(GLuint renderbuffer){return __glewIsRenderbufferEXT(renderbuffer);}
-static PFNGLRENDERBUFFERSTORAGEEXTPROC __glewRenderbufferStorageEXT = NULL;
-void glRenderbufferStorageEXT(GLenum target,GLenum internalformat,GLsizei width,GLsizei height){__glewRenderbufferStorageEXT(target,internalformat,width,height);}
-
-static PFNGLFRAMEBUFFERTEXTUREEXTPROC __glewFramebufferTextureEXT = NULL;
-void glFramebufferTextureEXT(GLenum target,GLenum attachment,GLuint texture,GLint level){__glewFramebufferTextureEXT(target,attachment,texture,level);}
-static PFNGLFRAMEBUFFERTEXTUREFACEEXTPROC __glewFramebufferTextureFaceEXT = NULL;
-void glFramebufferTextureFaceEXT(GLenum target,GLenum attachment,GLuint texture,GLint level,GLenum face){__glewFramebufferTextureFaceEXT(target,attachment,texture,level,face);}
-static PFNGLPROGRAMPARAMETERIEXTPROC __glewProgramParameteriEXT = NULL;
-void glProgramParameteriEXT(GLuint program,GLenum pname,GLint value){__glewProgramParameteriEXT(program,pname,value);}
-
-static PFNGLPROGRAMENVPARAMETERS4FVEXTPROC __glewProgramEnvParameters4fvEXT = NULL;
-void glProgramEnvParameters4fvEXT(GLenum target,GLuint index,GLsizei count,const GLfloat* params){__glewProgramEnvParameters4fvEXT(target,index,count,params);}
-static PFNGLPROGRAMLOCALPARAMETERS4FVEXTPROC __glewProgramLocalParameters4fvEXT = NULL;
-void glProgramLocalParameters4fvEXT(GLenum target,GLuint index,GLsizei count,const GLfloat* params){__glewProgramLocalParameters4fvEXT(target,index,count,params);}
-
-static PFNGLBINDFRAGDATALOCATIONEXTPROC __glewBindFragDataLocationEXT = NULL;
-void glBindFragDataLocationEXT(GLuint program,GLuint color,const GLchar *name){__glewBindFragDataLocationEXT(program,color,name);}
-static PFNGLGETFRAGDATALOCATIONEXTPROC __glewGetFragDataLocationEXT = NULL;
-GLint glGetFragDataLocationEXT(GLuint program,const GLchar *name){return __glewGetFragDataLocationEXT(program,name);}
-static PFNGLGETUNIFORMUIVEXTPROC __glewGetUniformuivEXT = NULL;
-void glGetUniformuivEXT(GLuint program,GLint location,GLuint *params){__glewGetUniformuivEXT(program,location,params);}
-static PFNGLGETVERTEXATTRIBIIVEXTPROC __glewGetVertexAttribIivEXT = NULL;
-void glGetVertexAttribIivEXT(GLuint index,GLenum pname,GLint *params){__glewGetVertexAttribIivEXT(index,pname,params);}
-static PFNGLGETVERTEXATTRIBIUIVEXTPROC __glewGetVertexAttribIuivEXT = NULL;
-void glGetVertexAttribIuivEXT(GLuint index,GLenum pname,GLuint *params){__glewGetVertexAttribIuivEXT(index,pname,params);}
-static PFNGLUNIFORM1UIEXTPROC __glewUniform1uiEXT = NULL;
-void glUniform1uiEXT(GLint location,GLuint v0){__glewUniform1uiEXT(location,v0);}
-static PFNGLUNIFORM1UIVEXTPROC __glewUniform1uivEXT = NULL;
-void glUniform1uivEXT(GLint location,GLsizei count,const GLuint *value){__glewUniform1uivEXT(location,count,value);}
-static PFNGLUNIFORM2UIEXTPROC __glewUniform2uiEXT = NULL;
-void glUniform2uiEXT(GLint location,GLuint v0,GLuint v1){__glewUniform2uiEXT(location,v0,v1);}
-static PFNGLUNIFORM2UIVEXTPROC __glewUniform2uivEXT = NULL;
-void glUniform2uivEXT(GLint location,GLsizei count,const GLuint *value){__glewUniform2uivEXT(location,count,value);}
-static PFNGLUNIFORM3UIEXTPROC __glewUniform3uiEXT = NULL;
-void glUniform3uiEXT(GLint location,GLuint v0,GLuint v1,GLuint v2){__glewUniform3uiEXT(location,v0,v1,v2);}
-static PFNGLUNIFORM3UIVEXTPROC __glewUniform3uivEXT = NULL;
-void glUniform3uivEXT(GLint location,GLsizei count,const GLuint *value){__glewUniform3uivEXT(location,count,value);}
-static PFNGLUNIFORM4UIEXTPROC __glewUniform4uiEXT = NULL;
-void glUniform4uiEXT(GLint location,GLuint v0,GLuint v1,GLuint v2,GLuint v3){__glewUniform4uiEXT(location,v0,v1,v2,v3);}
-static PFNGLUNIFORM4UIVEXTPROC __glewUniform4uivEXT = NULL;
-void glUniform4uivEXT(GLint location,GLsizei count,const GLuint *value){__glewUniform4uivEXT(location,count,value);}
-static PFNGLVERTEXATTRIBI1IEXTPROC __glewVertexAttribI1iEXT = NULL;
-void glVertexAttribI1iEXT(GLuint index,GLint x){__glewVertexAttribI1iEXT(index,x);}
-static PFNGLVERTEXATTRIBI1IVEXTPROC __glewVertexAttribI1ivEXT = NULL;
-void glVertexAttribI1ivEXT(GLuint index,const GLint *v){__glewVertexAttribI1ivEXT(index,v);}
-static PFNGLVERTEXATTRIBI1UIEXTPROC __glewVertexAttribI1uiEXT = NULL;
-void glVertexAttribI1uiEXT(GLuint index,GLuint x){__glewVertexAttribI1uiEXT(index,x);}
-static PFNGLVERTEXATTRIBI1UIVEXTPROC __glewVertexAttribI1uivEXT = NULL;
-void glVertexAttribI1uivEXT(GLuint index,const GLuint *v){__glewVertexAttribI1uivEXT(index,v);}
-static PFNGLVERTEXATTRIBI2IEXTPROC __glewVertexAttribI2iEXT = NULL;
-void glVertexAttribI2iEXT(GLuint index,GLint x,GLint y){__glewVertexAttribI2iEXT(index,x,y);}
-static PFNGLVERTEXATTRIBI2IVEXTPROC __glewVertexAttribI2ivEXT = NULL;
-void glVertexAttribI2ivEXT(GLuint index,const GLint *v){__glewVertexAttribI2ivEXT(index,v);}
-static PFNGLVERTEXATTRIBI2UIEXTPROC __glewVertexAttribI2uiEXT = NULL;
-void glVertexAttribI2uiEXT(GLuint index,GLuint x,GLuint y){__glewVertexAttribI2uiEXT(index,x,y);}
-static PFNGLVERTEXATTRIBI2UIVEXTPROC __glewVertexAttribI2uivEXT = NULL;
-void glVertexAttribI2uivEXT(GLuint index,const GLuint *v){__glewVertexAttribI2uivEXT(index,v);}
-static PFNGLVERTEXATTRIBI3IEXTPROC __glewVertexAttribI3iEXT = NULL;
-void glVertexAttribI3iEXT(GLuint index,GLint x,GLint y,GLint z){__glewVertexAttribI3iEXT(index,x,y,z);}
-static PFNGLVERTEXATTRIBI3IVEXTPROC __glewVertexAttribI3ivEXT = NULL;
-void glVertexAttribI3ivEXT(GLuint index,const GLint *v){__glewVertexAttribI3ivEXT(index,v);}
-static PFNGLVERTEXATTRIBI3UIEXTPROC __glewVertexAttribI3uiEXT = NULL;
-void glVertexAttribI3uiEXT(GLuint index,GLuint x,GLuint y,GLuint z){__glewVertexAttribI3uiEXT(index,x,y,z);}
-static PFNGLVERTEXATTRIBI3UIVEXTPROC __glewVertexAttribI3uivEXT = NULL;
-void glVertexAttribI3uivEXT(GLuint index,const GLuint *v){__glewVertexAttribI3uivEXT(index,v);}
-static PFNGLVERTEXATTRIBI4BVEXTPROC __glewVertexAttribI4bvEXT = NULL;
-void glVertexAttribI4bvEXT(GLuint index,const GLbyte *v){__glewVertexAttribI4bvEXT(index,v);}
-static PFNGLVERTEXATTRIBI4IEXTPROC __glewVertexAttribI4iEXT = NULL;
-void glVertexAttribI4iEXT(GLuint index,GLint x,GLint y,GLint z,GLint w){__glewVertexAttribI4iEXT(index,x,y,z,w);}
-static PFNGLVERTEXATTRIBI4IVEXTPROC __glewVertexAttribI4ivEXT = NULL;
-void glVertexAttribI4ivEXT(GLuint index,const GLint *v){__glewVertexAttribI4ivEXT(index,v);}
-static PFNGLVERTEXATTRIBI4SVEXTPROC __glewVertexAttribI4svEXT = NULL;
-void glVertexAttribI4svEXT(GLuint index,const GLshort *v){__glewVertexAttribI4svEXT(index,v);}
-static PFNGLVERTEXATTRIBI4UBVEXTPROC __glewVertexAttribI4ubvEXT = NULL;
-void glVertexAttribI4ubvEXT(GLuint index,const GLubyte *v){__glewVertexAttribI4ubvEXT(index,v);}
-static PFNGLVERTEXATTRIBI4UIEXTPROC __glewVertexAttribI4uiEXT = NULL;
-void glVertexAttribI4uiEXT(GLuint index,GLuint x,GLuint y,GLuint z,GLuint w){__glewVertexAttribI4uiEXT(index,x,y,z,w);}
-static PFNGLVERTEXATTRIBI4UIVEXTPROC __glewVertexAttribI4uivEXT = NULL;
-void glVertexAttribI4uivEXT(GLuint index,const GLuint *v){__glewVertexAttribI4uivEXT(index,v);}
-static PFNGLVERTEXATTRIBI4USVEXTPROC __glewVertexAttribI4usvEXT = NULL;
-void glVertexAttribI4usvEXT(GLuint index,const GLushort *v){__glewVertexAttribI4usvEXT(index,v);}
-static PFNGLVERTEXATTRIBIPOINTEREXTPROC __glewVertexAttribIPointerEXT = NULL;
-void glVertexAttribIPointerEXT(GLuint index,GLint size,GLenum type,GLsizei stride,const GLvoid *pointer){__glewVertexAttribIPointerEXT(index,size,type,stride,pointer);}
-
-static PFNGLGETHISTOGRAMEXTPROC __glewGetHistogramEXT = NULL;
-void glGetHistogramEXT(GLenum target,GLboolean reset,GLenum format,GLenum type,GLvoid *values){__glewGetHistogramEXT(target,reset,format,type,values);}
-static PFNGLGETHISTOGRAMPARAMETERFVEXTPROC __glewGetHistogramParameterfvEXT = NULL;
-void glGetHistogramParameterfvEXT(GLenum target,GLenum pname,GLfloat* params){__glewGetHistogramParameterfvEXT(target,pname,params);}
-static PFNGLGETHISTOGRAMPARAMETERIVEXTPROC __glewGetHistogramParameterivEXT = NULL;
-void glGetHistogramParameterivEXT(GLenum target,GLenum pname,GLint* params){__glewGetHistogramParameterivEXT(target,pname,params);}
-static PFNGLGETMINMAXEXTPROC __glewGetMinmaxEXT = NULL;
-void glGetMinmaxEXT(GLenum target,GLboolean reset,GLenum format,GLenum type,GLvoid *values){__glewGetMinmaxEXT(target,reset,format,type,values);}
-static PFNGLGETMINMAXPARAMETERFVEXTPROC __glewGetMinmaxParameterfvEXT = NULL;
-void glGetMinmaxParameterfvEXT(GLenum target,GLenum pname,GLfloat* params){__glewGetMinmaxParameterfvEXT(target,pname,params);}
-static PFNGLGETMINMAXPARAMETERIVEXTPROC __glewGetMinmaxParameterivEXT = NULL;
-void glGetMinmaxParameterivEXT(GLenum target,GLenum pname,GLint* params){__glewGetMinmaxParameterivEXT(target,pname,params);}
-static PFNGLHISTOGRAMEXTPROC __glewHistogramEXT = NULL;
-void glHistogramEXT(GLenum target,GLsizei width,GLenum internalformat,GLboolean sink){__glewHistogramEXT(target,width,internalformat,sink);}
-static PFNGLMINMAXEXTPROC __glewMinmaxEXT = NULL;
-void glMinmaxEXT(GLenum target,GLenum internalformat,GLboolean sink){__glewMinmaxEXT(target,internalformat,sink);}
-static PFNGLRESETHISTOGRAMEXTPROC __glewResetHistogramEXT = NULL;
-void glResetHistogramEXT(GLenum target){__glewResetHistogramEXT(target);}
-static PFNGLRESETMINMAXEXTPROC __glewResetMinmaxEXT = NULL;
-void glResetMinmaxEXT(GLenum target){__glewResetMinmaxEXT(target);}
-
-static PFNGLINDEXFUNCEXTPROC __glewIndexFuncEXT = NULL;
-void glIndexFuncEXT(GLenum func,GLfloat ref){__glewIndexFuncEXT(func,ref);}
-
-static PFNGLINDEXMATERIALEXTPROC __glewIndexMaterialEXT = NULL;
-void glIndexMaterialEXT(GLenum face,GLenum mode){__glewIndexMaterialEXT(face,mode);}
-
-static PFNGLAPPLYTEXTUREEXTPROC __glewApplyTextureEXT = NULL;
-void glApplyTextureEXT(GLenum mode){__glewApplyTextureEXT(mode);}
-static PFNGLTEXTURELIGHTEXTPROC __glewTextureLightEXT = NULL;
-void glTextureLightEXT(GLenum pname){__glewTextureLightEXT(pname);}
-static PFNGLTEXTUREMATERIALEXTPROC __glewTextureMaterialEXT = NULL;
-void glTextureMaterialEXT(GLenum face,GLenum mode){__glewTextureMaterialEXT(face,mode);}
-
-static PFNGLMULTIDRAWARRAYSEXTPROC __glewMultiDrawArraysEXT = NULL;
-void glMultiDrawArraysEXT(GLenum mode,const GLint* first,const GLsizei *count,GLsizei primcount){__glewMultiDrawArraysEXT(mode,first,count,primcount);}
-static PFNGLMULTIDRAWELEMENTSEXTPROC __glewMultiDrawElementsEXT = NULL;
-void glMultiDrawElementsEXT(GLenum mode,GLsizei* count,GLenum type,const GLvoid * const *indices,GLsizei primcount){__glewMultiDrawElementsEXT(mode,count,type,indices,primcount);}
-
-static PFNGLSAMPLEMASKEXTPROC __glewSampleMaskEXT = NULL;
-void glSampleMaskEXT(GLclampf value,GLboolean invert){__glewSampleMaskEXT(value,invert);}
-static PFNGLSAMPLEPATTERNEXTPROC __glewSamplePatternEXT = NULL;
-void glSamplePatternEXT(GLenum pattern){__glewSamplePatternEXT(pattern);}
-
-static PFNGLCOLORTABLEEXTPROC __glewColorTableEXT = NULL;
-void glColorTableEXT(GLenum target,GLenum internalFormat,GLsizei width,GLenum format,GLenum type,const GLvoid *data){__glewColorTableEXT(target,internalFormat,width,format,type,data);}
-static PFNGLGETCOLORTABLEEXTPROC __glewGetColorTableEXT = NULL;
-void glGetColorTableEXT(GLenum target,GLenum format,GLenum type,GLvoid *data){__glewGetColorTableEXT(target,format,type,data);}
-static PFNGLGETCOLORTABLEPARAMETERFVEXTPROC __glewGetColorTableParameterfvEXT = NULL;
-void glGetColorTableParameterfvEXT(GLenum target,GLenum pname,GLfloat* params){__glewGetColorTableParameterfvEXT(target,pname,params);}
-static PFNGLGETCOLORTABLEPARAMETERIVEXTPROC __glewGetColorTableParameterivEXT = NULL;
-void glGetColorTableParameterivEXT(GLenum target,GLenum pname,GLint* params){__glewGetColorTableParameterivEXT(target,pname,params);}
-
-static PFNGLGETPIXELTRANSFORMPARAMETERFVEXTPROC __glewGetPixelTransformParameterfvEXT = NULL;
-void glGetPixelTransformParameterfvEXT(GLenum target,GLenum pname,const GLfloat* params){__glewGetPixelTransformParameterfvEXT(target,pname,params);}
-static PFNGLGETPIXELTRANSFORMPARAMETERIVEXTPROC __glewGetPixelTransformParameterivEXT = NULL;
-void glGetPixelTransformParameterivEXT(GLenum target,GLenum pname,const GLint* params){__glewGetPixelTransformParameterivEXT(target,pname,params);}
-static PFNGLPIXELTRANSFORMPARAMETERFEXTPROC __glewPixelTransformParameterfEXT = NULL;
-void glPixelTransformParameterfEXT(GLenum target,GLenum pname,const GLfloat param){__glewPixelTransformParameterfEXT(target,pname,param);}
-static PFNGLPIXELTRANSFORMPARAMETERFVEXTPROC __glewPixelTransformParameterfvEXT = NULL;
-void glPixelTransformParameterfvEXT(GLenum target,GLenum pname,const GLfloat* params){__glewPixelTransformParameterfvEXT(target,pname,params);}
-static PFNGLPIXELTRANSFORMPARAMETERIEXTPROC __glewPixelTransformParameteriEXT = NULL;
-void glPixelTransformParameteriEXT(GLenum target,GLenum pname,const GLint param){__glewPixelTransformParameteriEXT(target,pname,param);}
-static PFNGLPIXELTRANSFORMPARAMETERIVEXTPROC __glewPixelTransformParameterivEXT = NULL;
-void glPixelTransformParameterivEXT(GLenum target,GLenum pname,const GLint* params){__glewPixelTransformParameterivEXT(target,pname,params);}
-
-static PFNGLPOINTPARAMETERFEXTPROC __glewPointParameterfEXT = NULL;
-void glPointParameterfEXT(GLenum pname,GLfloat param){__glewPointParameterfEXT(pname,param);}
-static PFNGLPOINTPARAMETERFVEXTPROC __glewPointParameterfvEXT = NULL;
-void glPointParameterfvEXT(GLenum pname,const GLfloat* params){__glewPointParameterfvEXT(pname,params);}
-
-static PFNGLPOLYGONOFFSETEXTPROC __glewPolygonOffsetEXT = NULL;
-void glPolygonOffsetEXT(GLfloat factor,GLfloat bias){__glewPolygonOffsetEXT(factor,bias);}
-
-static PFNGLPROVOKINGVERTEXEXTPROC __glewProvokingVertexEXT = NULL;
-void glProvokingVertexEXT(GLenum mode){__glewProvokingVertexEXT(mode);}
-
-static PFNGLBEGINSCENEEXTPROC __glewBeginSceneEXT = NULL;
-void glBeginSceneEXT(void){__glewBeginSceneEXT();}
-static PFNGLENDSCENEEXTPROC __glewEndSceneEXT = NULL;
-void glEndSceneEXT(void){__glewEndSceneEXT();}
-
-static PFNGLSECONDARYCOLOR3BEXTPROC __glewSecondaryColor3bEXT = NULL;
-void glSecondaryColor3bEXT(GLbyte red,GLbyte green,GLbyte blue){__glewSecondaryColor3bEXT(red,green,blue);}
-static PFNGLSECONDARYCOLOR3BVEXTPROC __glewSecondaryColor3bvEXT = NULL;
-void glSecondaryColor3bvEXT(const GLbyte *v){__glewSecondaryColor3bvEXT(v);}
-static PFNGLSECONDARYCOLOR3DEXTPROC __glewSecondaryColor3dEXT = NULL;
-void glSecondaryColor3dEXT(GLdouble red,GLdouble green,GLdouble blue){__glewSecondaryColor3dEXT(red,green,blue);}
-static PFNGLSECONDARYCOLOR3DVEXTPROC __glewSecondaryColor3dvEXT = NULL;
-void glSecondaryColor3dvEXT(const GLdouble *v){__glewSecondaryColor3dvEXT(v);}
-static PFNGLSECONDARYCOLOR3FEXTPROC __glewSecondaryColor3fEXT = NULL;
-void glSecondaryColor3fEXT(GLfloat red,GLfloat green,GLfloat blue){__glewSecondaryColor3fEXT(red,green,blue);}
-static PFNGLSECONDARYCOLOR3FVEXTPROC __glewSecondaryColor3fvEXT = NULL;
-void glSecondaryColor3fvEXT(const GLfloat *v){__glewSecondaryColor3fvEXT(v);}
-static PFNGLSECONDARYCOLOR3IEXTPROC __glewSecondaryColor3iEXT = NULL;
-void glSecondaryColor3iEXT(GLint red,GLint green,GLint blue){__glewSecondaryColor3iEXT(red,green,blue);}
-static PFNGLSECONDARYCOLOR3IVEXTPROC __glewSecondaryColor3ivEXT = NULL;
-void glSecondaryColor3ivEXT(const GLint *v){__glewSecondaryColor3ivEXT(v);}
-static PFNGLSECONDARYCOLOR3SEXTPROC __glewSecondaryColor3sEXT = NULL;
-void glSecondaryColor3sEXT(GLshort red,GLshort green,GLshort blue){__glewSecondaryColor3sEXT(red,green,blue);}
-static PFNGLSECONDARYCOLOR3SVEXTPROC __glewSecondaryColor3svEXT = NULL;
-void glSecondaryColor3svEXT(const GLshort *v){__glewSecondaryColor3svEXT(v);}
-static PFNGLSECONDARYCOLOR3UBEXTPROC __glewSecondaryColor3ubEXT = NULL;
-void glSecondaryColor3ubEXT(GLubyte red,GLubyte green,GLubyte blue){__glewSecondaryColor3ubEXT(red,green,blue);}
-static PFNGLSECONDARYCOLOR3UBVEXTPROC __glewSecondaryColor3ubvEXT = NULL;
-void glSecondaryColor3ubvEXT(const GLubyte *v){__glewSecondaryColor3ubvEXT(v);}
-static PFNGLSECONDARYCOLOR3UIEXTPROC __glewSecondaryColor3uiEXT = NULL;
-void glSecondaryColor3uiEXT(GLuint red,GLuint green,GLuint blue){__glewSecondaryColor3uiEXT(red,green,blue);}
-static PFNGLSECONDARYCOLOR3UIVEXTPROC __glewSecondaryColor3uivEXT = NULL;
-void glSecondaryColor3uivEXT(const GLuint *v){__glewSecondaryColor3uivEXT(v);}
-static PFNGLSECONDARYCOLOR3USEXTPROC __glewSecondaryColor3usEXT = NULL;
-void glSecondaryColor3usEXT(GLushort red,GLushort green,GLushort blue){__glewSecondaryColor3usEXT(red,green,blue);}
-static PFNGLSECONDARYCOLOR3USVEXTPROC __glewSecondaryColor3usvEXT = NULL;
-void glSecondaryColor3usvEXT(const GLushort *v){__glewSecondaryColor3usvEXT(v);}
-static PFNGLSECONDARYCOLORPOINTEREXTPROC __glewSecondaryColorPointerEXT = NULL;
-void glSecondaryColorPointerEXT(GLint size,GLenum type,GLsizei stride,const GLvoid *pointer){__glewSecondaryColorPointerEXT(size,type,stride,pointer);}
-
-static PFNGLACTIVEPROGRAMEXTPROC __glewActiveProgramEXT = NULL;
-void glActiveProgramEXT(GLuint program){__glewActiveProgramEXT(program);}
-static PFNGLCREATESHADERPROGRAMEXTPROC __glewCreateShaderProgramEXT = NULL;
-GLuint glCreateShaderProgramEXT(GLenum type,const GLchar* string){return __glewCreateShaderProgramEXT(type,string);}
-static PFNGLUSESHADERPROGRAMEXTPROC __glewUseShaderProgramEXT = NULL;
-void glUseShaderProgramEXT(GLenum type,GLuint program){__glewUseShaderProgramEXT(type,program);}
-
-static PFNGLBINDIMAGETEXTUREEXTPROC __glewBindImageTextureEXT = NULL;
-void glBindImageTextureEXT(GLuint index,GLuint texture,GLint level,GLboolean layered,GLint layer,GLenum access,GLint format){__glewBindImageTextureEXT(index,texture,level,layered,layer,access,format);}
-static PFNGLMEMORYBARRIEREXTPROC __glewMemoryBarrierEXT = NULL;
-void glMemoryBarrierEXT(GLbitfield barriers){__glewMemoryBarrierEXT(barriers);}
-
-static PFNGLACTIVESTENCILFACEEXTPROC __glewActiveStencilFaceEXT = NULL;
-void glActiveStencilFaceEXT(GLenum face){__glewActiveStencilFaceEXT(face);}
-
-static PFNGLTEXSUBIMAGE1DEXTPROC __glewTexSubImage1DEXT = NULL;
-void glTexSubImage1DEXT(GLenum target,GLint level,GLint xoffset,GLsizei width,GLenum format,GLenum type,const GLvoid *pixels){__glewTexSubImage1DEXT(target,level,xoffset,width,format,type,pixels);}
-static PFNGLTEXSUBIMAGE2DEXTPROC __glewTexSubImage2DEXT = NULL;
-void glTexSubImage2DEXT(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLsizei width,GLsizei height,GLenum format,GLenum type,const GLvoid *pixels){__glewTexSubImage2DEXT(target,level,xoffset,yoffset,width,height,format,type,pixels);}
-static PFNGLTEXSUBIMAGE3DEXTPROC __glewTexSubImage3DEXT = NULL;
-void glTexSubImage3DEXT(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLsizei width,GLsizei height,GLsizei depth,GLenum format,GLenum type,const GLvoid *pixels){__glewTexSubImage3DEXT(target,level,xoffset,yoffset,zoffset,width,height,depth,format,type,pixels);}
-
-static PFNGLTEXIMAGE3DEXTPROC __glewTexImage3DEXT = NULL;
-void glTexImage3DEXT(GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewTexImage3DEXT(target,level,internalformat,width,height,depth,border,format,type,pixels);}
-
-static PFNGLFRAMEBUFFERTEXTURELAYEREXTPROC __glewFramebufferTextureLayerEXT = NULL;
-void glFramebufferTextureLayerEXT(GLenum target,GLenum attachment,GLuint texture,GLint level,GLint layer){__glewFramebufferTextureLayerEXT(target,attachment,texture,level,layer);}
-
-static PFNGLTEXBUFFEREXTPROC __glewTexBufferEXT = NULL;
-void glTexBufferEXT(GLenum target,GLenum internalformat,GLuint buffer){__glewTexBufferEXT(target,internalformat,buffer);}
-
-static PFNGLCLEARCOLORIIEXTPROC __glewClearColorIiEXT = NULL;
-void glClearColorIiEXT(GLint red,GLint green,GLint blue,GLint alpha){__glewClearColorIiEXT(red,green,blue,alpha);}
-static PFNGLCLEARCOLORIUIEXTPROC __glewClearColorIuiEXT = NULL;
-void glClearColorIuiEXT(GLuint red,GLuint green,GLuint blue,GLuint alpha){__glewClearColorIuiEXT(red,green,blue,alpha);}
-static PFNGLGETTEXPARAMETERIIVEXTPROC __glewGetTexParameterIivEXT = NULL;
-void glGetTexParameterIivEXT(GLenum target,GLenum pname,GLint *params){__glewGetTexParameterIivEXT(target,pname,params);}
-static PFNGLGETTEXPARAMETERIUIVEXTPROC __glewGetTexParameterIuivEXT = NULL;
-void glGetTexParameterIuivEXT(GLenum target,GLenum pname,GLuint *params){__glewGetTexParameterIuivEXT(target,pname,params);}
-static PFNGLTEXPARAMETERIIVEXTPROC __glewTexParameterIivEXT = NULL;
-void glTexParameterIivEXT(GLenum target,GLenum pname,const GLint *params){__glewTexParameterIivEXT(target,pname,params);}
-static PFNGLTEXPARAMETERIUIVEXTPROC __glewTexParameterIuivEXT = NULL;
-void glTexParameterIuivEXT(GLenum target,GLenum pname,const GLuint *params){__glewTexParameterIuivEXT(target,pname,params);}
-
-static PFNGLARETEXTURESRESIDENTEXTPROC __glewAreTexturesResidentEXT = NULL;
-GLboolean glAreTexturesResidentEXT(GLsizei n,const GLuint* textures,GLboolean* residences){return __glewAreTexturesResidentEXT(n,textures,residences);}
-static PFNGLBINDTEXTUREEXTPROC __glewBindTextureEXT = NULL;
-void glBindTextureEXT(GLenum target,GLuint texture){__glewBindTextureEXT(target,texture);}
-static PFNGLDELETETEXTURESEXTPROC __glewDeleteTexturesEXT = NULL;
-void glDeleteTexturesEXT(GLsizei n,const GLuint* textures){__glewDeleteTexturesEXT(n,textures);}
-static PFNGLGENTEXTURESEXTPROC __glewGenTexturesEXT = NULL;
-void glGenTexturesEXT(GLsizei n,GLuint* textures){__glewGenTexturesEXT(n,textures);}
-static PFNGLISTEXTUREEXTPROC __glewIsTextureEXT = NULL;
-GLboolean glIsTextureEXT(GLuint texture){return __glewIsTextureEXT(texture);}
-static PFNGLPRIORITIZETEXTURESEXTPROC __glewPrioritizeTexturesEXT = NULL;
-void glPrioritizeTexturesEXT(GLsizei n,const GLuint* textures,const GLclampf* priorities){__glewPrioritizeTexturesEXT(n,textures,priorities);}
-
-static PFNGLTEXTURENORMALEXTPROC __glewTextureNormalEXT = NULL;
-void glTextureNormalEXT(GLenum mode){__glewTextureNormalEXT(mode);}
-
-static PFNGLGETQUERYOBJECTI64VEXTPROC __glewGetQueryObjecti64vEXT = NULL;
-void glGetQueryObjecti64vEXT(GLuint id,GLenum pname,GLint64EXT *params){__glewGetQueryObjecti64vEXT(id,pname,params);}
-static PFNGLGETQUERYOBJECTUI64VEXTPROC __glewGetQueryObjectui64vEXT = NULL;
-void glGetQueryObjectui64vEXT(GLuint id,GLenum pname,GLuint64EXT *params){__glewGetQueryObjectui64vEXT(id,pname,params);}
-
-static PFNGLBEGINTRANSFORMFEEDBACKEXTPROC __glewBeginTransformFeedbackEXT = NULL;
-void glBeginTransformFeedbackEXT(GLenum primitiveMode){__glewBeginTransformFeedbackEXT(primitiveMode);}
-static PFNGLBINDBUFFERBASEEXTPROC __glewBindBufferBaseEXT = NULL;
-void glBindBufferBaseEXT(GLenum target,GLuint index,GLuint buffer){__glewBindBufferBaseEXT(target,index,buffer);}
-static PFNGLBINDBUFFEROFFSETEXTPROC __glewBindBufferOffsetEXT = NULL;
-void glBindBufferOffsetEXT(GLenum target,GLuint index,GLuint buffer,GLintptr offset){__glewBindBufferOffsetEXT(target,index,buffer,offset);}
-static PFNGLBINDBUFFERRANGEEXTPROC __glewBindBufferRangeEXT = NULL;
-void glBindBufferRangeEXT(GLenum target,GLuint index,GLuint buffer,GLintptr offset,GLsizeiptr size){__glewBindBufferRangeEXT(target,index,buffer,offset,size);}
-static PFNGLENDTRANSFORMFEEDBACKEXTPROC __glewEndTransformFeedbackEXT = NULL;
-void glEndTransformFeedbackEXT(void){__glewEndTransformFeedbackEXT();}
-static PFNGLGETTRANSFORMFEEDBACKVARYINGEXTPROC __glewGetTransformFeedbackVaryingEXT = NULL;
-void glGetTransformFeedbackVaryingEXT(GLuint program,GLuint index,GLsizei bufSize,GLsizei* length,GLsizei *size,GLenum *type,GLchar *name){__glewGetTransformFeedbackVaryingEXT(program,index,bufSize,length,size,type,name);}
-static PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC __glewTransformFeedbackVaryingsEXT = NULL;
-void glTransformFeedbackVaryingsEXT(GLuint program,GLsizei count,const GLchar * const* varyings,GLenum bufferMode){__glewTransformFeedbackVaryingsEXT(program,count,varyings,bufferMode);}
-
-static PFNGLARRAYELEMENTEXTPROC __glewArrayElementEXT = NULL;
-void glArrayElementEXT(GLint i){__glewArrayElementEXT(i);}
-static PFNGLCOLORPOINTEREXTPROC __glewColorPointerEXT = NULL;
-void glColorPointerEXT(GLint size,GLenum type,GLsizei stride,GLsizei count,const GLvoid *pointer){__glewColorPointerEXT(size,type,stride,count,pointer);}
-static PFNGLDRAWARRAYSEXTPROC __glewDrawArraysEXT = NULL;
-void glDrawArraysEXT(GLenum mode,GLint first,GLsizei count){__glewDrawArraysEXT(mode,first,count);}
-static PFNGLEDGEFLAGPOINTEREXTPROC __glewEdgeFlagPointerEXT = NULL;
-void glEdgeFlagPointerEXT(GLsizei stride,GLsizei count,const GLboolean* pointer){__glewEdgeFlagPointerEXT(stride,count,pointer);}
-static PFNGLINDEXPOINTEREXTPROC __glewIndexPointerEXT = NULL;
-void glIndexPointerEXT(GLenum type,GLsizei stride,GLsizei count,const GLvoid *pointer){__glewIndexPointerEXT(type,stride,count,pointer);}
-static PFNGLNORMALPOINTEREXTPROC __glewNormalPointerEXT = NULL;
-void glNormalPointerEXT(GLenum type,GLsizei stride,GLsizei count,const GLvoid *pointer){__glewNormalPointerEXT(type,stride,count,pointer);}
-static PFNGLTEXCOORDPOINTEREXTPROC __glewTexCoordPointerEXT = NULL;
-void glTexCoordPointerEXT(GLint size,GLenum type,GLsizei stride,GLsizei count,const GLvoid *pointer){__glewTexCoordPointerEXT(size,type,stride,count,pointer);}
-static PFNGLVERTEXPOINTEREXTPROC __glewVertexPointerEXT = NULL;
-void glVertexPointerEXT(GLint size,GLenum type,GLsizei stride,GLsizei count,const GLvoid *pointer){__glewVertexPointerEXT(size,type,stride,count,pointer);}
-
-static PFNGLGETVERTEXATTRIBLDVEXTPROC __glewGetVertexAttribLdvEXT = NULL;
-void glGetVertexAttribLdvEXT(GLuint index,GLenum pname,GLdouble* params){__glewGetVertexAttribLdvEXT(index,pname,params);}
-static PFNGLVERTEXARRAYVERTEXATTRIBLOFFSETEXTPROC __glewVertexArrayVertexAttribLOffsetEXT = NULL;
-void glVertexArrayVertexAttribLOffsetEXT(GLuint vaobj,GLuint buffer,GLuint index,GLint size,GLenum type,GLsizei stride,GLintptr offset){__glewVertexArrayVertexAttribLOffsetEXT(vaobj,buffer,index,size,type,stride,offset);}
-static PFNGLVERTEXATTRIBL1DEXTPROC __glewVertexAttribL1dEXT = NULL;
-void glVertexAttribL1dEXT(GLuint index,GLdouble x){__glewVertexAttribL1dEXT(index,x);}
-static PFNGLVERTEXATTRIBL1DVEXTPROC __glewVertexAttribL1dvEXT = NULL;
-void glVertexAttribL1dvEXT(GLuint index,const GLdouble* v){__glewVertexAttribL1dvEXT(index,v);}
-static PFNGLVERTEXATTRIBL2DEXTPROC __glewVertexAttribL2dEXT = NULL;
-void glVertexAttribL2dEXT(GLuint index,GLdouble x,GLdouble y){__glewVertexAttribL2dEXT(index,x,y);}
-static PFNGLVERTEXATTRIBL2DVEXTPROC __glewVertexAttribL2dvEXT = NULL;
-void glVertexAttribL2dvEXT(GLuint index,const GLdouble* v){__glewVertexAttribL2dvEXT(index,v);}
-static PFNGLVERTEXATTRIBL3DEXTPROC __glewVertexAttribL3dEXT = NULL;
-void glVertexAttribL3dEXT(GLuint index,GLdouble x,GLdouble y,GLdouble z){__glewVertexAttribL3dEXT(index,x,y,z);}
-static PFNGLVERTEXATTRIBL3DVEXTPROC __glewVertexAttribL3dvEXT = NULL;
-void glVertexAttribL3dvEXT(GLuint index,const GLdouble* v){__glewVertexAttribL3dvEXT(index,v);}
-static PFNGLVERTEXATTRIBL4DEXTPROC __glewVertexAttribL4dEXT = NULL;
-void glVertexAttribL4dEXT(GLuint index,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewVertexAttribL4dEXT(index,x,y,z,w);}
-static PFNGLVERTEXATTRIBL4DVEXTPROC __glewVertexAttribL4dvEXT = NULL;
-void glVertexAttribL4dvEXT(GLuint index,const GLdouble* v){__glewVertexAttribL4dvEXT(index,v);}
-static PFNGLVERTEXATTRIBLPOINTEREXTPROC __glewVertexAttribLPointerEXT = NULL;
-void glVertexAttribLPointerEXT(GLuint index,GLint size,GLenum type,GLsizei stride,const GLvoid *pointer){__glewVertexAttribLPointerEXT(index,size,type,stride,pointer);}
-
-static PFNGLBEGINVERTEXSHADEREXTPROC __glewBeginVertexShaderEXT = NULL;
-void glBeginVertexShaderEXT(void){__glewBeginVertexShaderEXT();}
-static PFNGLBINDLIGHTPARAMETEREXTPROC __glewBindLightParameterEXT = NULL;
-GLuint glBindLightParameterEXT(GLenum light,GLenum value){return __glewBindLightParameterEXT(light,value);}
-static PFNGLBINDMATERIALPARAMETEREXTPROC __glewBindMaterialParameterEXT = NULL;
-GLuint glBindMaterialParameterEXT(GLenum face,GLenum value){return __glewBindMaterialParameterEXT(face,value);}
-static PFNGLBINDPARAMETEREXTPROC __glewBindParameterEXT = NULL;
-GLuint glBindParameterEXT(GLenum value){return __glewBindParameterEXT(value);}
-static PFNGLBINDTEXGENPARAMETEREXTPROC __glewBindTexGenParameterEXT = NULL;
-GLuint glBindTexGenParameterEXT(GLenum unit,GLenum coord,GLenum value){return __glewBindTexGenParameterEXT(unit,coord,value);}
-static PFNGLBINDTEXTUREUNITPARAMETEREXTPROC __glewBindTextureUnitParameterEXT = NULL;
-GLuint glBindTextureUnitParameterEXT(GLenum unit,GLenum value){return __glewBindTextureUnitParameterEXT(unit,value);}
-static PFNGLBINDVERTEXSHADEREXTPROC __glewBindVertexShaderEXT = NULL;
-void glBindVertexShaderEXT(GLuint id){__glewBindVertexShaderEXT(id);}
-static PFNGLDELETEVERTEXSHADEREXTPROC __glewDeleteVertexShaderEXT = NULL;
-void glDeleteVertexShaderEXT(GLuint id){__glewDeleteVertexShaderEXT(id);}
-static PFNGLDISABLEVARIANTCLIENTSTATEEXTPROC __glewDisableVariantClientStateEXT = NULL;
-void glDisableVariantClientStateEXT(GLuint id){__glewDisableVariantClientStateEXT(id);}
-static PFNGLENABLEVARIANTCLIENTSTATEEXTPROC __glewEnableVariantClientStateEXT = NULL;
-void glEnableVariantClientStateEXT(GLuint id){__glewEnableVariantClientStateEXT(id);}
-static PFNGLENDVERTEXSHADEREXTPROC __glewEndVertexShaderEXT = NULL;
-void glEndVertexShaderEXT(void){__glewEndVertexShaderEXT();}
-static PFNGLEXTRACTCOMPONENTEXTPROC __glewExtractComponentEXT = NULL;
-void glExtractComponentEXT(GLuint res,GLuint src,GLuint num){__glewExtractComponentEXT(res,src,num);}
-static PFNGLGENSYMBOLSEXTPROC __glewGenSymbolsEXT = NULL;
-GLuint glGenSymbolsEXT(GLenum dataType,GLenum storageType,GLenum range,GLuint components){return __glewGenSymbolsEXT(dataType,storageType,range,components);}
-static PFNGLGENVERTEXSHADERSEXTPROC __glewGenVertexShadersEXT = NULL;
-GLuint glGenVertexShadersEXT(GLuint range){return __glewGenVertexShadersEXT(range);}
-static PFNGLGETINVARIANTBOOLEANVEXTPROC __glewGetInvariantBooleanvEXT = NULL;
-void glGetInvariantBooleanvEXT(GLuint id,GLenum value,GLboolean *data){__glewGetInvariantBooleanvEXT(id,value,data);}
-static PFNGLGETINVARIANTFLOATVEXTPROC __glewGetInvariantFloatvEXT = NULL;
-void glGetInvariantFloatvEXT(GLuint id,GLenum value,GLfloat *data){__glewGetInvariantFloatvEXT(id,value,data);}
-static PFNGLGETINVARIANTINTEGERVEXTPROC __glewGetInvariantIntegervEXT = NULL;
-void glGetInvariantIntegervEXT(GLuint id,GLenum value,GLint *data){__glewGetInvariantIntegervEXT(id,value,data);}
-static PFNGLGETLOCALCONSTANTBOOLEANVEXTPROC __glewGetLocalConstantBooleanvEXT = NULL;
-void glGetLocalConstantBooleanvEXT(GLuint id,GLenum value,GLboolean *data){__glewGetLocalConstantBooleanvEXT(id,value,data);}
-static PFNGLGETLOCALCONSTANTFLOATVEXTPROC __glewGetLocalConstantFloatvEXT = NULL;
-void glGetLocalConstantFloatvEXT(GLuint id,GLenum value,GLfloat *data){__glewGetLocalConstantFloatvEXT(id,value,data);}
-static PFNGLGETLOCALCONSTANTINTEGERVEXTPROC __glewGetLocalConstantIntegervEXT = NULL;
-void glGetLocalConstantIntegervEXT(GLuint id,GLenum value,GLint *data){__glewGetLocalConstantIntegervEXT(id,value,data);}
-static PFNGLGETVARIANTBOOLEANVEXTPROC __glewGetVariantBooleanvEXT = NULL;
-void glGetVariantBooleanvEXT(GLuint id,GLenum value,GLboolean *data){__glewGetVariantBooleanvEXT(id,value,data);}
-static PFNGLGETVARIANTFLOATVEXTPROC __glewGetVariantFloatvEXT = NULL;
-void glGetVariantFloatvEXT(GLuint id,GLenum value,GLfloat *data){__glewGetVariantFloatvEXT(id,value,data);}
-static PFNGLGETVARIANTINTEGERVEXTPROC __glewGetVariantIntegervEXT = NULL;
-void glGetVariantIntegervEXT(GLuint id,GLenum value,GLint *data){__glewGetVariantIntegervEXT(id,value,data);}
-static PFNGLGETVARIANTPOINTERVEXTPROC __glewGetVariantPointervEXT = NULL;
-void glGetVariantPointervEXT(GLuint id,GLenum value,GLvoid **data){__glewGetVariantPointervEXT(id,value,data);}
-static PFNGLINSERTCOMPONENTEXTPROC __glewInsertComponentEXT = NULL;
-void glInsertComponentEXT(GLuint res,GLuint src,GLuint num){__glewInsertComponentEXT(res,src,num);}
-static PFNGLISVARIANTENABLEDEXTPROC __glewIsVariantEnabledEXT = NULL;
-GLboolean glIsVariantEnabledEXT(GLuint id,GLenum cap){return __glewIsVariantEnabledEXT(id,cap);}
-static PFNGLSETINVARIANTEXTPROC __glewSetInvariantEXT = NULL;
-void glSetInvariantEXT(GLuint id,GLenum type,GLvoid *addr){__glewSetInvariantEXT(id,type,addr);}
-static PFNGLSETLOCALCONSTANTEXTPROC __glewSetLocalConstantEXT = NULL;
-void glSetLocalConstantEXT(GLuint id,GLenum type,GLvoid *addr){__glewSetLocalConstantEXT(id,type,addr);}
-static PFNGLSHADEROP1EXTPROC __glewShaderOp1EXT = NULL;
-void glShaderOp1EXT(GLenum op,GLuint res,GLuint arg1){__glewShaderOp1EXT(op,res,arg1);}
-static PFNGLSHADEROP2EXTPROC __glewShaderOp2EXT = NULL;
-void glShaderOp2EXT(GLenum op,GLuint res,GLuint arg1,GLuint arg2){__glewShaderOp2EXT(op,res,arg1,arg2);}
-static PFNGLSHADEROP3EXTPROC __glewShaderOp3EXT = NULL;
-void glShaderOp3EXT(GLenum op,GLuint res,GLuint arg1,GLuint arg2,GLuint arg3){__glewShaderOp3EXT(op,res,arg1,arg2,arg3);}
-static PFNGLSWIZZLEEXTPROC __glewSwizzleEXT = NULL;
-void glSwizzleEXT(GLuint res,GLuint in,GLenum outX,GLenum outY,GLenum outZ,GLenum outW){__glewSwizzleEXT(res,in,outX,outY,outZ,outW);}
-static PFNGLVARIANTPOINTEREXTPROC __glewVariantPointerEXT = NULL;
-void glVariantPointerEXT(GLuint id,GLenum type,GLuint stride,GLvoid *addr){__glewVariantPointerEXT(id,type,stride,addr);}
-static PFNGLVARIANTBVEXTPROC __glewVariantbvEXT = NULL;
-void glVariantbvEXT(GLuint id,GLbyte *addr){__glewVariantbvEXT(id,addr);}
-static PFNGLVARIANTDVEXTPROC __glewVariantdvEXT = NULL;
-void glVariantdvEXT(GLuint id,GLdouble *addr){__glewVariantdvEXT(id,addr);}
-static PFNGLVARIANTFVEXTPROC __glewVariantfvEXT = NULL;
-void glVariantfvEXT(GLuint id,GLfloat *addr){__glewVariantfvEXT(id,addr);}
-static PFNGLVARIANTIVEXTPROC __glewVariantivEXT = NULL;
-void glVariantivEXT(GLuint id,GLint *addr){__glewVariantivEXT(id,addr);}
-static PFNGLVARIANTSVEXTPROC __glewVariantsvEXT = NULL;
-void glVariantsvEXT(GLuint id,GLshort *addr){__glewVariantsvEXT(id,addr);}
-static PFNGLVARIANTUBVEXTPROC __glewVariantubvEXT = NULL;
-void glVariantubvEXT(GLuint id,GLubyte *addr){__glewVariantubvEXT(id,addr);}
-static PFNGLVARIANTUIVEXTPROC __glewVariantuivEXT = NULL;
-void glVariantuivEXT(GLuint id,GLuint *addr){__glewVariantuivEXT(id,addr);}
-static PFNGLVARIANTUSVEXTPROC __glewVariantusvEXT = NULL;
-void glVariantusvEXT(GLuint id,GLushort *addr){__glewVariantusvEXT(id,addr);}
-static PFNGLWRITEMASKEXTPROC __glewWriteMaskEXT = NULL;
-void glWriteMaskEXT(GLuint res,GLuint in,GLenum outX,GLenum outY,GLenum outZ,GLenum outW){__glewWriteMaskEXT(res,in,outX,outY,outZ,outW);}
-
-static PFNGLVERTEXWEIGHTPOINTEREXTPROC __glewVertexWeightPointerEXT = NULL;
-void glVertexWeightPointerEXT(GLint size,GLenum type,GLsizei stride,GLvoid *pointer){__glewVertexWeightPointerEXT(size,type,stride,pointer);}
-static PFNGLVERTEXWEIGHTFEXTPROC __glewVertexWeightfEXT = NULL;
-void glVertexWeightfEXT(GLfloat weight){__glewVertexWeightfEXT(weight);}
-static PFNGLVERTEXWEIGHTFVEXTPROC __glewVertexWeightfvEXT = NULL;
-void glVertexWeightfvEXT(GLfloat* weight){__glewVertexWeightfvEXT(weight);}
-
-static PFNGLIMPORTSYNCEXTPROC __glewImportSyncEXT = NULL;
-GLsync glImportSyncEXT(GLenum external_sync_type,GLintptr external_sync,GLbitfield flags){return __glewImportSyncEXT(external_sync_type,external_sync,flags);}
-
-static PFNGLFRAMETERMINATORGREMEDYPROC __glewFrameTerminatorGREMEDY = NULL;
-void glFrameTerminatorGREMEDY(void){__glewFrameTerminatorGREMEDY();}
-
-static PFNGLSTRINGMARKERGREMEDYPROC __glewStringMarkerGREMEDY = NULL;
-void glStringMarkerGREMEDY(GLsizei len,const GLvoid *string){__glewStringMarkerGREMEDY(len,string);}
-
-static PFNGLGETIMAGETRANSFORMPARAMETERFVHPPROC __glewGetImageTransformParameterfvHP = NULL;
-void glGetImageTransformParameterfvHP(GLenum target,GLenum pname,const GLfloat* params){__glewGetImageTransformParameterfvHP(target,pname,params);}
-static PFNGLGETIMAGETRANSFORMPARAMETERIVHPPROC __glewGetImageTransformParameterivHP = NULL;
-void glGetImageTransformParameterivHP(GLenum target,GLenum pname,const GLint* params){__glewGetImageTransformParameterivHP(target,pname,params);}
-static PFNGLIMAGETRANSFORMPARAMETERFHPPROC __glewImageTransformParameterfHP = NULL;
-void glImageTransformParameterfHP(GLenum target,GLenum pname,const GLfloat param){__glewImageTransformParameterfHP(target,pname,param);}
-static PFNGLIMAGETRANSFORMPARAMETERFVHPPROC __glewImageTransformParameterfvHP = NULL;
-void glImageTransformParameterfvHP(GLenum target,GLenum pname,const GLfloat* params){__glewImageTransformParameterfvHP(target,pname,params);}
-static PFNGLIMAGETRANSFORMPARAMETERIHPPROC __glewImageTransformParameteriHP = NULL;
-void glImageTransformParameteriHP(GLenum target,GLenum pname,const GLint param){__glewImageTransformParameteriHP(target,pname,param);}
-static PFNGLIMAGETRANSFORMPARAMETERIVHPPROC __glewImageTransformParameterivHP = NULL;
-void glImageTransformParameterivHP(GLenum target,GLenum pname,const GLint* params){__glewImageTransformParameterivHP(target,pname,params);}
-
-static PFNGLMULTIMODEDRAWARRAYSIBMPROC __glewMultiModeDrawArraysIBM = NULL;
-void glMultiModeDrawArraysIBM(const GLenum* mode,const GLint *first,const GLsizei *count,GLsizei primcount,GLint modestride){__glewMultiModeDrawArraysIBM(mode,first,count,primcount,modestride);}
-static PFNGLMULTIMODEDRAWELEMENTSIBMPROC __glewMultiModeDrawElementsIBM = NULL;
-void glMultiModeDrawElementsIBM(const GLenum* mode,const GLsizei *count,GLenum type,const GLvoid * const *indices,GLsizei primcount,GLint modestride){__glewMultiModeDrawElementsIBM(mode,count,type,indices,primcount,modestride);}
-
-static PFNGLCOLORPOINTERLISTIBMPROC __glewColorPointerListIBM = NULL;
-void glColorPointerListIBM(GLint size,GLenum type,GLint stride,const GLvoid ** pointer,GLint ptrstride){__glewColorPointerListIBM(size,type,stride,pointer,ptrstride);}
-static PFNGLEDGEFLAGPOINTERLISTIBMPROC __glewEdgeFlagPointerListIBM = NULL;
-void glEdgeFlagPointerListIBM(GLint stride,const GLboolean ** pointer,GLint ptrstride){__glewEdgeFlagPointerListIBM(stride,pointer,ptrstride);}
-static PFNGLFOGCOORDPOINTERLISTIBMPROC __glewFogCoordPointerListIBM = NULL;
-void glFogCoordPointerListIBM(GLenum type,GLint stride,const GLvoid ** pointer,GLint ptrstride){__glewFogCoordPointerListIBM(type,stride,pointer,ptrstride);}
-static PFNGLINDEXPOINTERLISTIBMPROC __glewIndexPointerListIBM = NULL;
-void glIndexPointerListIBM(GLenum type,GLint stride,const GLvoid ** pointer,GLint ptrstride){__glewIndexPointerListIBM(type,stride,pointer,ptrstride);}
-static PFNGLNORMALPOINTERLISTIBMPROC __glewNormalPointerListIBM = NULL;
-void glNormalPointerListIBM(GLenum type,GLint stride,const GLvoid ** pointer,GLint ptrstride){__glewNormalPointerListIBM(type,stride,pointer,ptrstride);}
-static PFNGLSECONDARYCOLORPOINTERLISTIBMPROC __glewSecondaryColorPointerListIBM = NULL;
-void glSecondaryColorPointerListIBM(GLint size,GLenum type,GLint stride,const GLvoid ** pointer,GLint ptrstride){__glewSecondaryColorPointerListIBM(size,type,stride,pointer,ptrstride);}
-static PFNGLTEXCOORDPOINTERLISTIBMPROC __glewTexCoordPointerListIBM = NULL;
-void glTexCoordPointerListIBM(GLint size,GLenum type,GLint stride,const GLvoid ** pointer,GLint ptrstride){__glewTexCoordPointerListIBM(size,type,stride,pointer,ptrstride);}
-static PFNGLVERTEXPOINTERLISTIBMPROC __glewVertexPointerListIBM = NULL;
-void glVertexPointerListIBM(GLint size,GLenum type,GLint stride,const GLvoid ** pointer,GLint ptrstride){__glewVertexPointerListIBM(size,type,stride,pointer,ptrstride);}
-
-static PFNGLMAPTEXTURE2DINTELPROC __glewMapTexture2DINTEL = NULL;
-GLvoid * glMapTexture2DINTEL(GLuint texture,GLint level,GLbitfield access,GLint* stride,GLenum *layout){return __glewMapTexture2DINTEL(texture,level,access,stride,layout);}
-static PFNGLSYNCTEXTUREINTELPROC __glewSyncTextureINTEL = NULL;
-void glSyncTextureINTEL(GLuint texture){__glewSyncTextureINTEL(texture);}
-static PFNGLUNMAPTEXTURE2DINTELPROC __glewUnmapTexture2DINTEL = NULL;
-void glUnmapTexture2DINTEL(GLuint texture,GLint level){__glewUnmapTexture2DINTEL(texture,level);}
-
-static PFNGLCOLORPOINTERVINTELPROC __glewColorPointervINTEL = NULL;
-void glColorPointervINTEL(GLint size,GLenum type,const void** pointer){__glewColorPointervINTEL(size,type,pointer);}
-static PFNGLNORMALPOINTERVINTELPROC __glewNormalPointervINTEL = NULL;
-void glNormalPointervINTEL(GLenum type,const void** pointer){__glewNormalPointervINTEL(type,pointer);}
-static PFNGLTEXCOORDPOINTERVINTELPROC __glewTexCoordPointervINTEL = NULL;
-void glTexCoordPointervINTEL(GLint size,GLenum type,const void** pointer){__glewTexCoordPointervINTEL(size,type,pointer);}
-static PFNGLVERTEXPOINTERVINTELPROC __glewVertexPointervINTEL = NULL;
-void glVertexPointervINTEL(GLint size,GLenum type,const void** pointer){__glewVertexPointervINTEL(size,type,pointer);}
-
-static PFNGLTEXSCISSORFUNCINTELPROC __glewTexScissorFuncINTEL = NULL;
-void glTexScissorFuncINTEL(GLenum target,GLenum lfunc,GLenum hfunc){__glewTexScissorFuncINTEL(target,lfunc,hfunc);}
-static PFNGLTEXSCISSORINTELPROC __glewTexScissorINTEL = NULL;
-void glTexScissorINTEL(GLenum target,GLclampf tlow,GLclampf thigh){__glewTexScissorINTEL(target,tlow,thigh);}
-
-static PFNGLDEBUGMESSAGECALLBACKPROC __glewDebugMessageCallback = NULL;
-void glDebugMessageCallback(GLDEBUGPROC callback,const GLvoid *userParam){__glewDebugMessageCallback(callback,userParam);}
-static PFNGLDEBUGMESSAGECONTROLPROC __glewDebugMessageControl = NULL;
-void glDebugMessageControl(GLenum source,GLenum type,GLenum severity,GLsizei count,const GLuint* ids,GLboolean enabled){__glewDebugMessageControl(source,type,severity,count,ids,enabled);}
-static PFNGLDEBUGMESSAGEINSERTPROC __glewDebugMessageInsert = NULL;
-void glDebugMessageInsert(GLenum source,GLenum type,GLuint id,GLenum severity,GLsizei length,const GLchar* buf){__glewDebugMessageInsert(source,type,id,severity,length,buf);}
-static PFNGLGETDEBUGMESSAGELOGPROC __glewGetDebugMessageLog = NULL;
-GLuint glGetDebugMessageLog(GLuint count,GLsizei bufsize,GLenum* sources,GLenum* types,GLuint* ids,GLenum* severities,GLsizei* lengths,GLchar* messageLog){return __glewGetDebugMessageLog(count,bufsize,sources,types,ids,severities,lengths,messageLog);}
-static PFNGLGETOBJECTLABELPROC __glewGetObjectLabel = NULL;
-void glGetObjectLabel(GLenum identifier,GLuint name,GLsizei bufSize,GLsizei* length,GLchar *label){__glewGetObjectLabel(identifier,name,bufSize,length,label);}
-static PFNGLGETOBJECTPTRLABELPROC __glewGetObjectPtrLabel = NULL;
-void glGetObjectPtrLabel(void* ptr,GLsizei bufSize,GLsizei* length,GLchar *label){__glewGetObjectPtrLabel(ptr,bufSize,length,label);}
-static PFNGLOBJECTLABELPROC __glewObjectLabel = NULL;
-void glObjectLabel(GLenum identifier,GLuint name,GLsizei length,const GLchar* label){__glewObjectLabel(identifier,name,length,label);}
-static PFNGLOBJECTPTRLABELPROC __glewObjectPtrLabel = NULL;
-void glObjectPtrLabel(void* ptr,GLsizei length,const GLchar* label){__glewObjectPtrLabel(ptr,length,label);}
-static PFNGLPOPDEBUGGROUPPROC __glewPopDebugGroup = NULL;
-void glPopDebugGroup(void){__glewPopDebugGroup();}
-static PFNGLPUSHDEBUGGROUPPROC __glewPushDebugGroup = NULL;
-void glPushDebugGroup(GLenum source,GLuint id,GLsizei length,const GLchar * message){__glewPushDebugGroup(source,id,length,message);}
-
-static PFNGLBUFFERREGIONENABLEDPROC __glewBufferRegionEnabled = NULL;
-GLuint glBufferRegionEnabled(void){return __glewBufferRegionEnabled();}
-static PFNGLDELETEBUFFERREGIONPROC __glewDeleteBufferRegion = NULL;
-void glDeleteBufferRegion(GLenum region){__glewDeleteBufferRegion(region);}
-static PFNGLDRAWBUFFERREGIONPROC __glewDrawBufferRegion = NULL;
-void glDrawBufferRegion(GLuint region,GLint x,GLint y,GLsizei width,GLsizei height,GLint xDest,GLint yDest){__glewDrawBufferRegion(region,x,y,width,height,xDest,yDest);}
-static PFNGLNEWBUFFERREGIONPROC __glewNewBufferRegion = NULL;
-GLuint glNewBufferRegion(GLenum region){return __glewNewBufferRegion(region);}
-static PFNGLREADBUFFERREGIONPROC __glewReadBufferRegion = NULL;
-void glReadBufferRegion(GLuint region,GLint x,GLint y,GLsizei width,GLsizei height){__glewReadBufferRegion(region,x,y,width,height);}
-
-static PFNGLRESIZEBUFFERSMESAPROC __glewResizeBuffersMESA = NULL;
-void glResizeBuffersMESA(void){__glewResizeBuffersMESA();}
-
-static PFNGLWINDOWPOS2DMESAPROC __glewWindowPos2dMESA = NULL;
-void glWindowPos2dMESA(GLdouble x,GLdouble y){__glewWindowPos2dMESA(x,y);}
-static PFNGLWINDOWPOS2DVMESAPROC __glewWindowPos2dvMESA = NULL;
-void glWindowPos2dvMESA(const GLdouble* p){__glewWindowPos2dvMESA(p);}
-static PFNGLWINDOWPOS2FMESAPROC __glewWindowPos2fMESA = NULL;
-void glWindowPos2fMESA(GLfloat x,GLfloat y){__glewWindowPos2fMESA(x,y);}
-static PFNGLWINDOWPOS2FVMESAPROC __glewWindowPos2fvMESA = NULL;
-void glWindowPos2fvMESA(const GLfloat* p){__glewWindowPos2fvMESA(p);}
-static PFNGLWINDOWPOS2IMESAPROC __glewWindowPos2iMESA = NULL;
-void glWindowPos2iMESA(GLint x,GLint y){__glewWindowPos2iMESA(x,y);}
-static PFNGLWINDOWPOS2IVMESAPROC __glewWindowPos2ivMESA = NULL;
-void glWindowPos2ivMESA(const GLint* p){__glewWindowPos2ivMESA(p);}
-static PFNGLWINDOWPOS2SMESAPROC __glewWindowPos2sMESA = NULL;
-void glWindowPos2sMESA(GLshort x,GLshort y){__glewWindowPos2sMESA(x,y);}
-static PFNGLWINDOWPOS2SVMESAPROC __glewWindowPos2svMESA = NULL;
-void glWindowPos2svMESA(const GLshort* p){__glewWindowPos2svMESA(p);}
-static PFNGLWINDOWPOS3DMESAPROC __glewWindowPos3dMESA = NULL;
-void glWindowPos3dMESA(GLdouble x,GLdouble y,GLdouble z){__glewWindowPos3dMESA(x,y,z);}
-static PFNGLWINDOWPOS3DVMESAPROC __glewWindowPos3dvMESA = NULL;
-void glWindowPos3dvMESA(const GLdouble* p){__glewWindowPos3dvMESA(p);}
-static PFNGLWINDOWPOS3FMESAPROC __glewWindowPos3fMESA = NULL;
-void glWindowPos3fMESA(GLfloat x,GLfloat y,GLfloat z){__glewWindowPos3fMESA(x,y,z);}
-static PFNGLWINDOWPOS3FVMESAPROC __glewWindowPos3fvMESA = NULL;
-void glWindowPos3fvMESA(const GLfloat* p){__glewWindowPos3fvMESA(p);}
-static PFNGLWINDOWPOS3IMESAPROC __glewWindowPos3iMESA = NULL;
-void glWindowPos3iMESA(GLint x,GLint y,GLint z){__glewWindowPos3iMESA(x,y,z);}
-static PFNGLWINDOWPOS3IVMESAPROC __glewWindowPos3ivMESA = NULL;
-void glWindowPos3ivMESA(const GLint* p){__glewWindowPos3ivMESA(p);}
-static PFNGLWINDOWPOS3SMESAPROC __glewWindowPos3sMESA = NULL;
-void glWindowPos3sMESA(GLshort x,GLshort y,GLshort z){__glewWindowPos3sMESA(x,y,z);}
-static PFNGLWINDOWPOS3SVMESAPROC __glewWindowPos3svMESA = NULL;
-void glWindowPos3svMESA(const GLshort* p){__glewWindowPos3svMESA(p);}
-static PFNGLWINDOWPOS4DMESAPROC __glewWindowPos4dMESA = NULL;
-void glWindowPos4dMESA(GLdouble x,GLdouble y,GLdouble z,GLdouble _a3){__glewWindowPos4dMESA(x,y,z, _a3);}
-static PFNGLWINDOWPOS4DVMESAPROC __glewWindowPos4dvMESA = NULL;
-void glWindowPos4dvMESA(const GLdouble* p){__glewWindowPos4dvMESA(p);}
-static PFNGLWINDOWPOS4FMESAPROC __glewWindowPos4fMESA = NULL;
-void glWindowPos4fMESA(GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewWindowPos4fMESA(x,y,z,w);}
-static PFNGLWINDOWPOS4FVMESAPROC __glewWindowPos4fvMESA = NULL;
-void glWindowPos4fvMESA(const GLfloat* p){__glewWindowPos4fvMESA(p);}
-static PFNGLWINDOWPOS4IMESAPROC __glewWindowPos4iMESA = NULL;
-void glWindowPos4iMESA(GLint x,GLint y,GLint z,GLint w){__glewWindowPos4iMESA(x,y,z,w);}
-static PFNGLWINDOWPOS4IVMESAPROC __glewWindowPos4ivMESA = NULL;
-void glWindowPos4ivMESA(const GLint* p){__glewWindowPos4ivMESA(p);}
-static PFNGLWINDOWPOS4SMESAPROC __glewWindowPos4sMESA = NULL;
-void glWindowPos4sMESA(GLshort x,GLshort y,GLshort z,GLshort w){__glewWindowPos4sMESA(x,y,z,w);}
-static PFNGLWINDOWPOS4SVMESAPROC __glewWindowPos4svMESA = NULL;
-void glWindowPos4svMESA(const GLshort* p){__glewWindowPos4svMESA(p);}
-
-static PFNGLBEGINCONDITIONALRENDERNVXPROC __glewBeginConditionalRenderNVX = NULL;
-void glBeginConditionalRenderNVX(GLuint id){__glewBeginConditionalRenderNVX(id);}
-static PFNGLENDCONDITIONALRENDERNVXPROC __glewEndConditionalRenderNVX = NULL;
-void glEndConditionalRenderNVX(void){__glewEndConditionalRenderNVX();}
-
-static PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSNVPROC __glewMultiDrawArraysIndirectBindlessNV = NULL;
-void glMultiDrawArraysIndirectBindlessNV(GLenum mode,const GLvoid *indirect,GLsizei drawCount,GLsizei stride,GLint vertexBufferCount){__glewMultiDrawArraysIndirectBindlessNV(mode,indirect,drawCount,stride,vertexBufferCount);}
-static PFNGLMULTIDRAWELEMENTSINDIRECTBINDLESSNVPROC __glewMultiDrawElementsIndirectBindlessNV = NULL;
-void glMultiDrawElementsIndirectBindlessNV(GLenum mode,GLenum type,const GLvoid *indirect,GLsizei drawCount,GLsizei stride,GLint vertexBufferCount){__glewMultiDrawElementsIndirectBindlessNV(mode,type,indirect,drawCount,stride,vertexBufferCount);}
-
-static PFNGLGETIMAGEHANDLENVPROC __glewGetImageHandleNV = NULL;
-GLuint64 glGetImageHandleNV(GLuint texture,GLint level,GLboolean layered,GLint layer,GLenum format){return __glewGetImageHandleNV(texture,level,layered,layer,format);}
-static PFNGLGETTEXTUREHANDLENVPROC __glewGetTextureHandleNV = NULL;
-GLuint64 glGetTextureHandleNV(GLuint texture){return __glewGetTextureHandleNV(texture);}
-static PFNGLGETTEXTURESAMPLERHANDLENVPROC __glewGetTextureSamplerHandleNV = NULL;
-GLuint64 glGetTextureSamplerHandleNV(GLuint texture,GLuint sampler){return __glewGetTextureSamplerHandleNV(texture,sampler);}
-static PFNGLISIMAGEHANDLERESIDENTNVPROC __glewIsImageHandleResidentNV = NULL;
-GLboolean glIsImageHandleResidentNV(GLuint64 handle){return __glewIsImageHandleResidentNV(handle);}
-static PFNGLISTEXTUREHANDLERESIDENTNVPROC __glewIsTextureHandleResidentNV = NULL;
-GLboolean glIsTextureHandleResidentNV(GLuint64 handle){return __glewIsTextureHandleResidentNV(handle);}
-static PFNGLMAKEIMAGEHANDLENONRESIDENTNVPROC __glewMakeImageHandleNonResidentNV = NULL;
-void glMakeImageHandleNonResidentNV(GLuint64 handle){__glewMakeImageHandleNonResidentNV(handle);}
-static PFNGLMAKEIMAGEHANDLERESIDENTNVPROC __glewMakeImageHandleResidentNV = NULL;
-void glMakeImageHandleResidentNV(GLuint64 handle,GLenum access){__glewMakeImageHandleResidentNV(handle,access);}
-static PFNGLMAKETEXTUREHANDLENONRESIDENTNVPROC __glewMakeTextureHandleNonResidentNV = NULL;
-void glMakeTextureHandleNonResidentNV(GLuint64 handle){__glewMakeTextureHandleNonResidentNV(handle);}
-static PFNGLMAKETEXTUREHANDLERESIDENTNVPROC __glewMakeTextureHandleResidentNV = NULL;
-void glMakeTextureHandleResidentNV(GLuint64 handle){__glewMakeTextureHandleResidentNV(handle);}
-static PFNGLPROGRAMUNIFORMHANDLEUI64NVPROC __glewProgramUniformHandleui64NV = NULL;
-void glProgramUniformHandleui64NV(GLuint program,GLint location,GLuint64 value){__glewProgramUniformHandleui64NV(program,location,value);}
-static PFNGLPROGRAMUNIFORMHANDLEUI64VNVPROC __glewProgramUniformHandleui64vNV = NULL;
-void glProgramUniformHandleui64vNV(GLuint program,GLint location,GLsizei count,const GLuint64* values){__glewProgramUniformHandleui64vNV(program,location,count,values);}
-static PFNGLUNIFORMHANDLEUI64NVPROC __glewUniformHandleui64NV = NULL;
-void glUniformHandleui64NV(GLint location,GLuint64 value){__glewUniformHandleui64NV(location,value);}
-static PFNGLUNIFORMHANDLEUI64VNVPROC __glewUniformHandleui64vNV = NULL;
-void glUniformHandleui64vNV(GLint location,GLsizei count,const GLuint64* value){__glewUniformHandleui64vNV(location,count,value);}
-
-static PFNGLBLENDBARRIERNVPROC __glewBlendBarrierNV = NULL;
-void glBlendBarrierNV(void){__glewBlendBarrierNV();}
-static PFNGLBLENDPARAMETERINVPROC __glewBlendParameteriNV = NULL;
-void glBlendParameteriNV(GLenum pname,GLint value){__glewBlendParameteriNV(pname,value);}
-
-static PFNGLBEGINCONDITIONALRENDERNVPROC __glewBeginConditionalRenderNV = NULL;
-void glBeginConditionalRenderNV(GLuint id,GLenum mode){__glewBeginConditionalRenderNV(id,mode);}
-static PFNGLENDCONDITIONALRENDERNVPROC __glewEndConditionalRenderNV = NULL;
-void glEndConditionalRenderNV(void){__glewEndConditionalRenderNV();}
-
-static PFNGLCOPYIMAGESUBDATANVPROC __glewCopyImageSubDataNV = NULL;
-void glCopyImageSubDataNV(GLuint srcName,GLenum srcTarget,GLint srcLevel,GLint srcX,GLint srcY,GLint srcZ,GLuint dstName,GLenum dstTarget,GLint dstLevel,GLint dstX,GLint dstY,GLint dstZ,GLsizei width,GLsizei height,GLsizei depth){__glewCopyImageSubDataNV(srcName,srcTarget,srcLevel,srcX,srcY,srcZ,dstName,dstTarget,dstLevel,dstX,dstY,dstZ,width,height,depth);}
-
-static PFNGLCLEARDEPTHDNVPROC __glewClearDepthdNV = NULL;
-void glClearDepthdNV(GLdouble depth){__glewClearDepthdNV(depth);}
-static PFNGLDEPTHBOUNDSDNVPROC __glewDepthBoundsdNV = NULL;
-void glDepthBoundsdNV(GLdouble zmin,GLdouble zmax){__glewDepthBoundsdNV(zmin,zmax);}
-static PFNGLDEPTHRANGEDNVPROC __glewDepthRangedNV = NULL;
-void glDepthRangedNV(GLdouble zNear,GLdouble zFar){__glewDepthRangedNV(zNear,zFar);}
-
-static PFNGLDRAWTEXTURENVPROC __glewDrawTextureNV = NULL;
-void glDrawTextureNV(GLuint texture,GLuint sampler,GLfloat x0,GLfloat y0,GLfloat x1,GLfloat y1,GLfloat z,GLfloat s0,GLfloat t0,GLfloat s1,GLfloat t1){__glewDrawTextureNV(texture,sampler,x0,y0,x1,y1,z,s0,t0,s1,t1);}
-
-static PFNGLEVALMAPSNVPROC __glewEvalMapsNV = NULL;
-void glEvalMapsNV(GLenum target,GLenum mode){__glewEvalMapsNV(target,mode);}
-static PFNGLGETMAPATTRIBPARAMETERFVNVPROC __glewGetMapAttribParameterfvNV = NULL;
-void glGetMapAttribParameterfvNV(GLenum target,GLuint index,GLenum pname,GLfloat* params){__glewGetMapAttribParameterfvNV(target,index,pname,params);}
-static PFNGLGETMAPATTRIBPARAMETERIVNVPROC __glewGetMapAttribParameterivNV = NULL;
-void glGetMapAttribParameterivNV(GLenum target,GLuint index,GLenum pname,GLint* params){__glewGetMapAttribParameterivNV(target,index,pname,params);}
-static PFNGLGETMAPCONTROLPOINTSNVPROC __glewGetMapControlPointsNV = NULL;
-void glGetMapControlPointsNV(GLenum target,GLuint index,GLenum type,GLsizei ustride,GLsizei vstride,GLboolean packed,GLvoid *points){__glewGetMapControlPointsNV(target,index,type,ustride,vstride,packed,points);}
-static PFNGLGETMAPPARAMETERFVNVPROC __glewGetMapParameterfvNV = NULL;
-void glGetMapParameterfvNV(GLenum target,GLenum pname,GLfloat* params){__glewGetMapParameterfvNV(target,pname,params);}
-static PFNGLGETMAPPARAMETERIVNVPROC __glewGetMapParameterivNV = NULL;
-void glGetMapParameterivNV(GLenum target,GLenum pname,GLint* params){__glewGetMapParameterivNV(target,pname,params);}
-static PFNGLMAPCONTROLPOINTSNVPROC __glewMapControlPointsNV = NULL;
-void glMapControlPointsNV(GLenum target,GLuint index,GLenum type,GLsizei ustride,GLsizei vstride,GLint uorder,GLint vorder,GLboolean packed,const GLvoid *points){__glewMapControlPointsNV(target,index,type,ustride,vstride,uorder,vorder,packed,points);}
-static PFNGLMAPPARAMETERFVNVPROC __glewMapParameterfvNV = NULL;
-void glMapParameterfvNV(GLenum target,GLenum pname,const GLfloat* params){__glewMapParameterfvNV(target,pname,params);}
-static PFNGLMAPPARAMETERIVNVPROC __glewMapParameterivNV = NULL;
-void glMapParameterivNV(GLenum target,GLenum pname,const GLint* params){__glewMapParameterivNV(target,pname,params);}
-
-static PFNGLGETMULTISAMPLEFVNVPROC __glewGetMultisamplefvNV = NULL;
-void glGetMultisamplefvNV(GLenum pname,GLuint index,GLfloat* val){__glewGetMultisamplefvNV(pname,index,val);}
-static PFNGLSAMPLEMASKINDEXEDNVPROC __glewSampleMaskIndexedNV = NULL;
-void glSampleMaskIndexedNV(GLuint index,GLbitfield mask){__glewSampleMaskIndexedNV(index,mask);}
-static PFNGLTEXRENDERBUFFERNVPROC __glewTexRenderbufferNV = NULL;
-void glTexRenderbufferNV(GLenum target,GLuint renderbuffer){__glewTexRenderbufferNV(target,renderbuffer);}
-
-static PFNGLDELETEFENCESNVPROC __glewDeleteFencesNV = NULL;
-void glDeleteFencesNV(GLsizei n,const GLuint* fences){__glewDeleteFencesNV(n,fences);}
-static PFNGLFINISHFENCENVPROC __glewFinishFenceNV = NULL;
-void glFinishFenceNV(GLuint fence){__glewFinishFenceNV(fence);}
-static PFNGLGENFENCESNVPROC __glewGenFencesNV = NULL;
-void glGenFencesNV(GLsizei n,GLuint* fences){__glewGenFencesNV(n,fences);}
-static PFNGLGETFENCEIVNVPROC __glewGetFenceivNV = NULL;
-void glGetFenceivNV(GLuint fence,GLenum pname,GLint* params){__glewGetFenceivNV(fence,pname,params);}
-static PFNGLISFENCENVPROC __glewIsFenceNV = NULL;
-GLboolean glIsFenceNV(GLuint fence){return __glewIsFenceNV(fence);}
-static PFNGLSETFENCENVPROC __glewSetFenceNV = NULL;
-void glSetFenceNV(GLuint fence,GLenum condition){__glewSetFenceNV(fence,condition);}
-static PFNGLTESTFENCENVPROC __glewTestFenceNV = NULL;
-GLboolean glTestFenceNV(GLuint fence){return __glewTestFenceNV(fence);}
-
-static PFNGLGETPROGRAMNAMEDPARAMETERDVNVPROC __glewGetProgramNamedParameterdvNV = NULL;
-void glGetProgramNamedParameterdvNV(GLuint id,GLsizei len,const GLubyte* name,GLdouble *params){__glewGetProgramNamedParameterdvNV(id,len,name,params);}
-static PFNGLGETPROGRAMNAMEDPARAMETERFVNVPROC __glewGetProgramNamedParameterfvNV = NULL;
-void glGetProgramNamedParameterfvNV(GLuint id,GLsizei len,const GLubyte* name,GLfloat *params){__glewGetProgramNamedParameterfvNV(id,len,name,params);}
-static PFNGLPROGRAMNAMEDPARAMETER4DNVPROC __glewProgramNamedParameter4dNV = NULL;
-void glProgramNamedParameter4dNV(GLuint id,GLsizei len,const GLubyte* name,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewProgramNamedParameter4dNV(id,len,name,x,y,z,w);}
-static PFNGLPROGRAMNAMEDPARAMETER4DVNVPROC __glewProgramNamedParameter4dvNV = NULL;
-void glProgramNamedParameter4dvNV(GLuint id,GLsizei len,const GLubyte* name,const GLdouble v[]){__glewProgramNamedParameter4dvNV(id,len,name,v);}
-static PFNGLPROGRAMNAMEDPARAMETER4FNVPROC __glewProgramNamedParameter4fNV = NULL;
-void glProgramNamedParameter4fNV(GLuint id,GLsizei len,const GLubyte* name,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewProgramNamedParameter4fNV(id,len,name,x,y,z,w);}
-static PFNGLPROGRAMNAMEDPARAMETER4FVNVPROC __glewProgramNamedParameter4fvNV = NULL;
-void glProgramNamedParameter4fvNV(GLuint id,GLsizei len,const GLubyte* name,const GLfloat v[]){__glewProgramNamedParameter4fvNV(id,len,name,v);}
-
-static PFNGLRENDERBUFFERSTORAGEMULTISAMPLECOVERAGENVPROC __glewRenderbufferStorageMultisampleCoverageNV = NULL;
-void glRenderbufferStorageMultisampleCoverageNV(GLenum target,GLsizei coverageSamples,GLsizei colorSamples,GLenum internalformat,GLsizei width,GLsizei height){__glewRenderbufferStorageMultisampleCoverageNV(target,coverageSamples,colorSamples,internalformat,width,height);}
-
-static PFNGLPROGRAMVERTEXLIMITNVPROC __glewProgramVertexLimitNV = NULL;
-void glProgramVertexLimitNV(GLenum target,GLint limit){__glewProgramVertexLimitNV(target,limit);}
-
-static PFNGLPROGRAMENVPARAMETERI4INVPROC __glewProgramEnvParameterI4iNV = NULL;
-void glProgramEnvParameterI4iNV(GLenum target,GLuint index,GLint x,GLint y,GLint z,GLint w){__glewProgramEnvParameterI4iNV(target,index,x,y,z,w);}
-static PFNGLPROGRAMENVPARAMETERI4IVNVPROC __glewProgramEnvParameterI4ivNV = NULL;
-void glProgramEnvParameterI4ivNV(GLenum target,GLuint index,const GLint *params){__glewProgramEnvParameterI4ivNV(target,index,params);}
-static PFNGLPROGRAMENVPARAMETERI4UINVPROC __glewProgramEnvParameterI4uiNV = NULL;
-void glProgramEnvParameterI4uiNV(GLenum target,GLuint index,GLuint x,GLuint y,GLuint z,GLuint w){__glewProgramEnvParameterI4uiNV(target,index,x,y,z,w);}
-static PFNGLPROGRAMENVPARAMETERI4UIVNVPROC __glewProgramEnvParameterI4uivNV = NULL;
-void glProgramEnvParameterI4uivNV(GLenum target,GLuint index,const GLuint *params){__glewProgramEnvParameterI4uivNV(target,index,params);}
-static PFNGLPROGRAMENVPARAMETERSI4IVNVPROC __glewProgramEnvParametersI4ivNV = NULL;
-void glProgramEnvParametersI4ivNV(GLenum target,GLuint index,GLsizei count,const GLint *params){__glewProgramEnvParametersI4ivNV(target,index,count,params);}
-static PFNGLPROGRAMENVPARAMETERSI4UIVNVPROC __glewProgramEnvParametersI4uivNV = NULL;
-void glProgramEnvParametersI4uivNV(GLenum target,GLuint index,GLsizei count,const GLuint *params){__glewProgramEnvParametersI4uivNV(target,index,count,params);}
-static PFNGLPROGRAMLOCALPARAMETERI4INVPROC __glewProgramLocalParameterI4iNV = NULL;
-void glProgramLocalParameterI4iNV(GLenum target,GLuint index,GLint x,GLint y,GLint z,GLint w){__glewProgramLocalParameterI4iNV(target,index,x,y,z,w);}
-static PFNGLPROGRAMLOCALPARAMETERI4IVNVPROC __glewProgramLocalParameterI4ivNV = NULL;
-void glProgramLocalParameterI4ivNV(GLenum target,GLuint index,const GLint *params){__glewProgramLocalParameterI4ivNV(target,index,params);}
-static PFNGLPROGRAMLOCALPARAMETERI4UINVPROC __glewProgramLocalParameterI4uiNV = NULL;
-void glProgramLocalParameterI4uiNV(GLenum target,GLuint index,GLuint x,GLuint y,GLuint z,GLuint w){__glewProgramLocalParameterI4uiNV(target,index,x,y,z,w);}
-static PFNGLPROGRAMLOCALPARAMETERI4UIVNVPROC __glewProgramLocalParameterI4uivNV = NULL;
-void glProgramLocalParameterI4uivNV(GLenum target,GLuint index,const GLuint *params){__glewProgramLocalParameterI4uivNV(target,index,params);}
-static PFNGLPROGRAMLOCALPARAMETERSI4IVNVPROC __glewProgramLocalParametersI4ivNV = NULL;
-void glProgramLocalParametersI4ivNV(GLenum target,GLuint index,GLsizei count,const GLint *params){__glewProgramLocalParametersI4ivNV(target,index,count,params);}
-static PFNGLPROGRAMLOCALPARAMETERSI4UIVNVPROC __glewProgramLocalParametersI4uivNV = NULL;
-void glProgramLocalParametersI4uivNV(GLenum target,GLuint index,GLsizei count,const GLuint *params){__glewProgramLocalParametersI4uivNV(target,index,count,params);}
-
-static PFNGLGETUNIFORMI64VNVPROC __glewGetUniformi64vNV = NULL;
-void glGetUniformi64vNV(GLuint program,GLint location,GLint64EXT* params){__glewGetUniformi64vNV(program,location,params);}
-static PFNGLGETUNIFORMUI64VNVPROC __glewGetUniformui64vNV = NULL;
-void glGetUniformui64vNV(GLuint program,GLint location,GLuint64EXT* params){__glewGetUniformui64vNV(program,location,params);}
-static PFNGLPROGRAMUNIFORM1I64NVPROC __glewProgramUniform1i64NV = NULL;
-void glProgramUniform1i64NV(GLuint program,GLint location,GLint64EXT x){__glewProgramUniform1i64NV(program,location,x);}
-static PFNGLPROGRAMUNIFORM1I64VNVPROC __glewProgramUniform1i64vNV = NULL;
-void glProgramUniform1i64vNV(GLuint program,GLint location,GLsizei count,const GLint64EXT* value){__glewProgramUniform1i64vNV(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM1UI64NVPROC __glewProgramUniform1ui64NV = NULL;
-void glProgramUniform1ui64NV(GLuint program,GLint location,GLuint64EXT x){__glewProgramUniform1ui64NV(program,location,x);}
-static PFNGLPROGRAMUNIFORM1UI64VNVPROC __glewProgramUniform1ui64vNV = NULL;
-void glProgramUniform1ui64vNV(GLuint program,GLint location,GLsizei count,const GLuint64EXT* value){__glewProgramUniform1ui64vNV(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2I64NVPROC __glewProgramUniform2i64NV = NULL;
-void glProgramUniform2i64NV(GLuint program,GLint location,GLint64EXT x,GLint64EXT y){__glewProgramUniform2i64NV(program,location,x,y);}
-static PFNGLPROGRAMUNIFORM2I64VNVPROC __glewProgramUniform2i64vNV = NULL;
-void glProgramUniform2i64vNV(GLuint program,GLint location,GLsizei count,const GLint64EXT* value){__glewProgramUniform2i64vNV(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM2UI64NVPROC __glewProgramUniform2ui64NV = NULL;
-void glProgramUniform2ui64NV(GLuint program,GLint location,GLuint64EXT x,GLuint64EXT y){__glewProgramUniform2ui64NV(program,location,x,y);}
-static PFNGLPROGRAMUNIFORM2UI64VNVPROC __glewProgramUniform2ui64vNV = NULL;
-void glProgramUniform2ui64vNV(GLuint program,GLint location,GLsizei count,const GLuint64EXT* value){__glewProgramUniform2ui64vNV(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3I64NVPROC __glewProgramUniform3i64NV = NULL;
-void glProgramUniform3i64NV(GLuint program,GLint location,GLint64EXT x,GLint64EXT y,GLint64EXT z){__glewProgramUniform3i64NV(program,location,x,y,z);}
-static PFNGLPROGRAMUNIFORM3I64VNVPROC __glewProgramUniform3i64vNV = NULL;
-void glProgramUniform3i64vNV(GLuint program,GLint location,GLsizei count,const GLint64EXT* value){__glewProgramUniform3i64vNV(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM3UI64NVPROC __glewProgramUniform3ui64NV = NULL;
-void glProgramUniform3ui64NV(GLuint program,GLint location,GLuint64EXT x,GLuint64EXT y,GLuint64EXT z){__glewProgramUniform3ui64NV(program,location,x,y,z);}
-static PFNGLPROGRAMUNIFORM3UI64VNVPROC __glewProgramUniform3ui64vNV = NULL;
-void glProgramUniform3ui64vNV(GLuint program,GLint location,GLsizei count,const GLuint64EXT* value){__glewProgramUniform3ui64vNV(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4I64NVPROC __glewProgramUniform4i64NV = NULL;
-void glProgramUniform4i64NV(GLuint program,GLint location,GLint64EXT x,GLint64EXT y,GLint64EXT z,GLint64EXT w){__glewProgramUniform4i64NV(program,location,x,y,z,w);}
-static PFNGLPROGRAMUNIFORM4I64VNVPROC __glewProgramUniform4i64vNV = NULL;
-void glProgramUniform4i64vNV(GLuint program,GLint location,GLsizei count,const GLint64EXT* value){__glewProgramUniform4i64vNV(program,location,count,value);}
-static PFNGLPROGRAMUNIFORM4UI64NVPROC __glewProgramUniform4ui64NV = NULL;
-void glProgramUniform4ui64NV(GLuint program,GLint location,GLuint64EXT x,GLuint64EXT y,GLuint64EXT z,GLuint64EXT w){__glewProgramUniform4ui64NV(program,location,x,y,z,w);}
-static PFNGLPROGRAMUNIFORM4UI64VNVPROC __glewProgramUniform4ui64vNV = NULL;
-void glProgramUniform4ui64vNV(GLuint program,GLint location,GLsizei count,const GLuint64EXT* value){__glewProgramUniform4ui64vNV(program,location,count,value);}
-static PFNGLUNIFORM1I64NVPROC __glewUniform1i64NV = NULL;
-void glUniform1i64NV(GLint location,GLint64EXT x){__glewUniform1i64NV(location,x);}
-static PFNGLUNIFORM1I64VNVPROC __glewUniform1i64vNV = NULL;
-void glUniform1i64vNV(GLint location,GLsizei count,const GLint64EXT* value){__glewUniform1i64vNV(location,count,value);}
-static PFNGLUNIFORM1UI64NVPROC __glewUniform1ui64NV = NULL;
-void glUniform1ui64NV(GLint location,GLuint64EXT x){__glewUniform1ui64NV(location,x);}
-static PFNGLUNIFORM1UI64VNVPROC __glewUniform1ui64vNV = NULL;
-void glUniform1ui64vNV(GLint location,GLsizei count,const GLuint64EXT* value){__glewUniform1ui64vNV(location,count,value);}
-static PFNGLUNIFORM2I64NVPROC __glewUniform2i64NV = NULL;
-void glUniform2i64NV(GLint location,GLint64EXT x,GLint64EXT y){__glewUniform2i64NV(location,x,y);}
-static PFNGLUNIFORM2I64VNVPROC __glewUniform2i64vNV = NULL;
-void glUniform2i64vNV(GLint location,GLsizei count,const GLint64EXT* value){__glewUniform2i64vNV(location,count,value);}
-static PFNGLUNIFORM2UI64NVPROC __glewUniform2ui64NV = NULL;
-void glUniform2ui64NV(GLint location,GLuint64EXT x,GLuint64EXT y){__glewUniform2ui64NV(location,x,y);}
-static PFNGLUNIFORM2UI64VNVPROC __glewUniform2ui64vNV = NULL;
-void glUniform2ui64vNV(GLint location,GLsizei count,const GLuint64EXT* value){__glewUniform2ui64vNV(location,count,value);}
-static PFNGLUNIFORM3I64NVPROC __glewUniform3i64NV = NULL;
-void glUniform3i64NV(GLint location,GLint64EXT x,GLint64EXT y,GLint64EXT z){__glewUniform3i64NV(location,x,y,z);}
-static PFNGLUNIFORM3I64VNVPROC __glewUniform3i64vNV = NULL;
-void glUniform3i64vNV(GLint location,GLsizei count,const GLint64EXT* value){__glewUniform3i64vNV(location,count,value);}
-static PFNGLUNIFORM3UI64NVPROC __glewUniform3ui64NV = NULL;
-void glUniform3ui64NV(GLint location,GLuint64EXT x,GLuint64EXT y,GLuint64EXT z){__glewUniform3ui64NV(location,x,y,z);}
-static PFNGLUNIFORM3UI64VNVPROC __glewUniform3ui64vNV = NULL;
-void glUniform3ui64vNV(GLint location,GLsizei count,const GLuint64EXT* value){__glewUniform3ui64vNV(location,count,value);}
-static PFNGLUNIFORM4I64NVPROC __glewUniform4i64NV = NULL;
-void glUniform4i64NV(GLint location,GLint64EXT x,GLint64EXT y,GLint64EXT z,GLint64EXT w){__glewUniform4i64NV(location,x,y,z,w);}
-static PFNGLUNIFORM4I64VNVPROC __glewUniform4i64vNV = NULL;
-void glUniform4i64vNV(GLint location,GLsizei count,const GLint64EXT* value){__glewUniform4i64vNV(location,count,value);}
-static PFNGLUNIFORM4UI64NVPROC __glewUniform4ui64NV = NULL;
-void glUniform4ui64NV(GLint location,GLuint64EXT x,GLuint64EXT y,GLuint64EXT z,GLuint64EXT w){__glewUniform4ui64NV(location,x,y,z,w);}
-static PFNGLUNIFORM4UI64VNVPROC __glewUniform4ui64vNV = NULL;
-void glUniform4ui64vNV(GLint location,GLsizei count,const GLuint64EXT* value){__glewUniform4ui64vNV(location,count,value);}
-
-static PFNGLCOLOR3HNVPROC __glewColor3hNV = NULL;
-void glColor3hNV(GLhalf red,GLhalf green,GLhalf blue){__glewColor3hNV(red,green,blue);}
-static PFNGLCOLOR3HVNVPROC __glewColor3hvNV = NULL;
-void glColor3hvNV(const GLhalf* v){__glewColor3hvNV(v);}
-static PFNGLCOLOR4HNVPROC __glewColor4hNV = NULL;
-void glColor4hNV(GLhalf red,GLhalf green,GLhalf blue,GLhalf alpha){__glewColor4hNV(red,green,blue,alpha);}
-static PFNGLCOLOR4HVNVPROC __glewColor4hvNV = NULL;
-void glColor4hvNV(const GLhalf* v){__glewColor4hvNV(v);}
-static PFNGLFOGCOORDHNVPROC __glewFogCoordhNV = NULL;
-void glFogCoordhNV(GLhalf fog){__glewFogCoordhNV(fog);}
-static PFNGLFOGCOORDHVNVPROC __glewFogCoordhvNV = NULL;
-void glFogCoordhvNV(const GLhalf* fog){__glewFogCoordhvNV(fog);}
-static PFNGLMULTITEXCOORD1HNVPROC __glewMultiTexCoord1hNV = NULL;
-void glMultiTexCoord1hNV(GLenum target,GLhalf s){__glewMultiTexCoord1hNV(target,s);}
-static PFNGLMULTITEXCOORD1HVNVPROC __glewMultiTexCoord1hvNV = NULL;
-void glMultiTexCoord1hvNV(GLenum target,const GLhalf* v){__glewMultiTexCoord1hvNV(target,v);}
-static PFNGLMULTITEXCOORD2HNVPROC __glewMultiTexCoord2hNV = NULL;
-void glMultiTexCoord2hNV(GLenum target,GLhalf s,GLhalf t){__glewMultiTexCoord2hNV(target,s,t);}
-static PFNGLMULTITEXCOORD2HVNVPROC __glewMultiTexCoord2hvNV = NULL;
-void glMultiTexCoord2hvNV(GLenum target,const GLhalf* v){__glewMultiTexCoord2hvNV(target,v);}
-static PFNGLMULTITEXCOORD3HNVPROC __glewMultiTexCoord3hNV = NULL;
-void glMultiTexCoord3hNV(GLenum target,GLhalf s,GLhalf t,GLhalf r){__glewMultiTexCoord3hNV(target,s,t,r);}
-static PFNGLMULTITEXCOORD3HVNVPROC __glewMultiTexCoord3hvNV = NULL;
-void glMultiTexCoord3hvNV(GLenum target,const GLhalf* v){__glewMultiTexCoord3hvNV(target,v);}
-static PFNGLMULTITEXCOORD4HNVPROC __glewMultiTexCoord4hNV = NULL;
-void glMultiTexCoord4hNV(GLenum target,GLhalf s,GLhalf t,GLhalf r,GLhalf q){__glewMultiTexCoord4hNV(target,s,t,r,q);}
-static PFNGLMULTITEXCOORD4HVNVPROC __glewMultiTexCoord4hvNV = NULL;
-void glMultiTexCoord4hvNV(GLenum target,const GLhalf* v){__glewMultiTexCoord4hvNV(target,v);}
-static PFNGLNORMAL3HNVPROC __glewNormal3hNV = NULL;
-void glNormal3hNV(GLhalf nx,GLhalf ny,GLhalf nz){__glewNormal3hNV(nx,ny,nz);}
-static PFNGLNORMAL3HVNVPROC __glewNormal3hvNV = NULL;
-void glNormal3hvNV(const GLhalf* v){__glewNormal3hvNV(v);}
-static PFNGLSECONDARYCOLOR3HNVPROC __glewSecondaryColor3hNV = NULL;
-void glSecondaryColor3hNV(GLhalf red,GLhalf green,GLhalf blue){__glewSecondaryColor3hNV(red,green,blue);}
-static PFNGLSECONDARYCOLOR3HVNVPROC __glewSecondaryColor3hvNV = NULL;
-void glSecondaryColor3hvNV(const GLhalf* v){__glewSecondaryColor3hvNV(v);}
-static PFNGLTEXCOORD1HNVPROC __glewTexCoord1hNV = NULL;
-void glTexCoord1hNV(GLhalf s){__glewTexCoord1hNV(s);}
-static PFNGLTEXCOORD1HVNVPROC __glewTexCoord1hvNV = NULL;
-void glTexCoord1hvNV(const GLhalf* v){__glewTexCoord1hvNV(v);}
-static PFNGLTEXCOORD2HNVPROC __glewTexCoord2hNV = NULL;
-void glTexCoord2hNV(GLhalf s,GLhalf t){__glewTexCoord2hNV(s,t);}
-static PFNGLTEXCOORD2HVNVPROC __glewTexCoord2hvNV = NULL;
-void glTexCoord2hvNV(const GLhalf* v){__glewTexCoord2hvNV(v);}
-static PFNGLTEXCOORD3HNVPROC __glewTexCoord3hNV = NULL;
-void glTexCoord3hNV(GLhalf s,GLhalf t,GLhalf r){__glewTexCoord3hNV(s,t,r);}
-static PFNGLTEXCOORD3HVNVPROC __glewTexCoord3hvNV = NULL;
-void glTexCoord3hvNV(const GLhalf* v){__glewTexCoord3hvNV(v);}
-static PFNGLTEXCOORD4HNVPROC __glewTexCoord4hNV = NULL;
-void glTexCoord4hNV(GLhalf s,GLhalf t,GLhalf r,GLhalf q){__glewTexCoord4hNV(s,t,r,q);}
-static PFNGLTEXCOORD4HVNVPROC __glewTexCoord4hvNV = NULL;
-void glTexCoord4hvNV(const GLhalf* v){__glewTexCoord4hvNV(v);}
-static PFNGLVERTEX2HNVPROC __glewVertex2hNV = NULL;
-void glVertex2hNV(GLhalf x,GLhalf y){__glewVertex2hNV(x,y);}
-static PFNGLVERTEX2HVNVPROC __glewVertex2hvNV = NULL;
-void glVertex2hvNV(const GLhalf* v){__glewVertex2hvNV(v);}
-static PFNGLVERTEX3HNVPROC __glewVertex3hNV = NULL;
-void glVertex3hNV(GLhalf x,GLhalf y,GLhalf z){__glewVertex3hNV(x,y,z);}
-static PFNGLVERTEX3HVNVPROC __glewVertex3hvNV = NULL;
-void glVertex3hvNV(const GLhalf* v){__glewVertex3hvNV(v);}
-static PFNGLVERTEX4HNVPROC __glewVertex4hNV = NULL;
-void glVertex4hNV(GLhalf x,GLhalf y,GLhalf z,GLhalf w){__glewVertex4hNV(x,y,z,w);}
-static PFNGLVERTEX4HVNVPROC __glewVertex4hvNV = NULL;
-void glVertex4hvNV(const GLhalf* v){__glewVertex4hvNV(v);}
-static PFNGLVERTEXATTRIB1HNVPROC __glewVertexAttrib1hNV = NULL;
-void glVertexAttrib1hNV(GLuint index,GLhalf x){__glewVertexAttrib1hNV(index,x);}
-static PFNGLVERTEXATTRIB1HVNVPROC __glewVertexAttrib1hvNV = NULL;
-void glVertexAttrib1hvNV(GLuint index,const GLhalf* v){__glewVertexAttrib1hvNV(index,v);}
-static PFNGLVERTEXATTRIB2HNVPROC __glewVertexAttrib2hNV = NULL;
-void glVertexAttrib2hNV(GLuint index,GLhalf x,GLhalf y){__glewVertexAttrib2hNV(index,x,y);}
-static PFNGLVERTEXATTRIB2HVNVPROC __glewVertexAttrib2hvNV = NULL;
-void glVertexAttrib2hvNV(GLuint index,const GLhalf* v){__glewVertexAttrib2hvNV(index,v);}
-static PFNGLVERTEXATTRIB3HNVPROC __glewVertexAttrib3hNV = NULL;
-void glVertexAttrib3hNV(GLuint index,GLhalf x,GLhalf y,GLhalf z){__glewVertexAttrib3hNV(index,x,y,z);}
-static PFNGLVERTEXATTRIB3HVNVPROC __glewVertexAttrib3hvNV = NULL;
-void glVertexAttrib3hvNV(GLuint index,const GLhalf* v){__glewVertexAttrib3hvNV(index,v);}
-static PFNGLVERTEXATTRIB4HNVPROC __glewVertexAttrib4hNV = NULL;
-void glVertexAttrib4hNV(GLuint index,GLhalf x,GLhalf y,GLhalf z,GLhalf w){__glewVertexAttrib4hNV(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4HVNVPROC __glewVertexAttrib4hvNV = NULL;
-void glVertexAttrib4hvNV(GLuint index,const GLhalf* v){__glewVertexAttrib4hvNV(index,v);}
-static PFNGLVERTEXATTRIBS1HVNVPROC __glewVertexAttribs1hvNV = NULL;
-void glVertexAttribs1hvNV(GLuint index,GLsizei n,const GLhalf* v){__glewVertexAttribs1hvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS2HVNVPROC __glewVertexAttribs2hvNV = NULL;
-void glVertexAttribs2hvNV(GLuint index,GLsizei n,const GLhalf* v){__glewVertexAttribs2hvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS3HVNVPROC __glewVertexAttribs3hvNV = NULL;
-void glVertexAttribs3hvNV(GLuint index,GLsizei n,const GLhalf* v){__glewVertexAttribs3hvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS4HVNVPROC __glewVertexAttribs4hvNV = NULL;
-void glVertexAttribs4hvNV(GLuint index,GLsizei n,const GLhalf* v){__glewVertexAttribs4hvNV(index,n,v);}
-static PFNGLVERTEXWEIGHTHNVPROC __glewVertexWeighthNV = NULL;
-void glVertexWeighthNV(GLhalf weight){__glewVertexWeighthNV(weight);}
-static PFNGLVERTEXWEIGHTHVNVPROC __glewVertexWeighthvNV = NULL;
-void glVertexWeighthvNV(const GLhalf* weight){__glewVertexWeighthvNV(weight);}
-
-static PFNGLBEGINOCCLUSIONQUERYNVPROC __glewBeginOcclusionQueryNV = NULL;
-void glBeginOcclusionQueryNV(GLuint id){__glewBeginOcclusionQueryNV(id);}
-static PFNGLDELETEOCCLUSIONQUERIESNVPROC __glewDeleteOcclusionQueriesNV = NULL;
-void glDeleteOcclusionQueriesNV(GLsizei n,const GLuint* ids){__glewDeleteOcclusionQueriesNV(n,ids);}
-static PFNGLENDOCCLUSIONQUERYNVPROC __glewEndOcclusionQueryNV = NULL;
-void glEndOcclusionQueryNV(void){__glewEndOcclusionQueryNV();}
-static PFNGLGENOCCLUSIONQUERIESNVPROC __glewGenOcclusionQueriesNV = NULL;
-void glGenOcclusionQueriesNV(GLsizei n,GLuint* ids){__glewGenOcclusionQueriesNV(n,ids);}
-static PFNGLGETOCCLUSIONQUERYIVNVPROC __glewGetOcclusionQueryivNV = NULL;
-void glGetOcclusionQueryivNV(GLuint id,GLenum pname,GLint* params){__glewGetOcclusionQueryivNV(id,pname,params);}
-static PFNGLGETOCCLUSIONQUERYUIVNVPROC __glewGetOcclusionQueryuivNV = NULL;
-void glGetOcclusionQueryuivNV(GLuint id,GLenum pname,GLuint* params){__glewGetOcclusionQueryuivNV(id,pname,params);}
-static PFNGLISOCCLUSIONQUERYNVPROC __glewIsOcclusionQueryNV = NULL;
-GLboolean glIsOcclusionQueryNV(GLuint id){return __glewIsOcclusionQueryNV(id);}
-
-static PFNGLPROGRAMBUFFERPARAMETERSIIVNVPROC __glewProgramBufferParametersIivNV = NULL;
-void glProgramBufferParametersIivNV(GLenum target,GLuint buffer,GLuint index,GLsizei count,const GLint *params){__glewProgramBufferParametersIivNV(target,buffer,index,count,params);}
-static PFNGLPROGRAMBUFFERPARAMETERSIUIVNVPROC __glewProgramBufferParametersIuivNV = NULL;
-void glProgramBufferParametersIuivNV(GLenum target,GLuint buffer,GLuint index,GLsizei count,const GLuint *params){__glewProgramBufferParametersIuivNV(target,buffer,index,count,params);}
-static PFNGLPROGRAMBUFFERPARAMETERSFVNVPROC __glewProgramBufferParametersfvNV = NULL;
-void glProgramBufferParametersfvNV(GLenum target,GLuint buffer,GLuint index,GLsizei count,const GLfloat *params){__glewProgramBufferParametersfvNV(target,buffer,index,count,params);}
-
-static PFNGLCOPYPATHNVPROC __glewCopyPathNV = NULL;
-void glCopyPathNV(GLuint resultPath,GLuint srcPath){__glewCopyPathNV(resultPath,srcPath);}
-static PFNGLCOVERFILLPATHINSTANCEDNVPROC __glewCoverFillPathInstancedNV = NULL;
-void glCoverFillPathInstancedNV(GLsizei numPaths,GLenum pathNameType,const void* paths,GLuint pathBase,GLenum coverMode,GLenum transformType,const GLfloat *transformValues){__glewCoverFillPathInstancedNV(numPaths,pathNameType,paths,pathBase,coverMode,transformType,transformValues);}
-static PFNGLCOVERFILLPATHNVPROC __glewCoverFillPathNV = NULL;
-void glCoverFillPathNV(GLuint path,GLenum coverMode){__glewCoverFillPathNV(path,coverMode);}
-static PFNGLCOVERSTROKEPATHINSTANCEDNVPROC __glewCoverStrokePathInstancedNV = NULL;
-void glCoverStrokePathInstancedNV(GLsizei numPaths,GLenum pathNameType,const void* paths,GLuint pathBase,GLenum coverMode,GLenum transformType,const GLfloat *transformValues){__glewCoverStrokePathInstancedNV(numPaths,pathNameType,paths,pathBase,coverMode,transformType,transformValues);}
-static PFNGLCOVERSTROKEPATHNVPROC __glewCoverStrokePathNV = NULL;
-void glCoverStrokePathNV(GLuint name,GLenum coverMode){__glewCoverStrokePathNV(name,coverMode);}
-static PFNGLDELETEPATHSNVPROC __glewDeletePathsNV = NULL;
-void glDeletePathsNV(GLuint path,GLsizei range){__glewDeletePathsNV(path,range);}
-static PFNGLGENPATHSNVPROC __glewGenPathsNV = NULL;
-GLuint glGenPathsNV(GLsizei range){return __glewGenPathsNV(range);}
-static PFNGLGETPATHCOLORGENFVNVPROC __glewGetPathColorGenfvNV = NULL;
-void glGetPathColorGenfvNV(GLenum color,GLenum pname,GLfloat* value){__glewGetPathColorGenfvNV(color,pname,value);}
-static PFNGLGETPATHCOLORGENIVNVPROC __glewGetPathColorGenivNV = NULL;
-void glGetPathColorGenivNV(GLenum color,GLenum pname,GLint* value){__glewGetPathColorGenivNV(color,pname,value);}
-static PFNGLGETPATHCOMMANDSNVPROC __glewGetPathCommandsNV = NULL;
-void glGetPathCommandsNV(GLuint name,GLubyte* commands){__glewGetPathCommandsNV(name,commands);}
-static PFNGLGETPATHCOORDSNVPROC __glewGetPathCoordsNV = NULL;
-void glGetPathCoordsNV(GLuint name,GLfloat* coords){__glewGetPathCoordsNV(name,coords);}
-static PFNGLGETPATHDASHARRAYNVPROC __glewGetPathDashArrayNV = NULL;
-void glGetPathDashArrayNV(GLuint name,GLfloat* dashArray){__glewGetPathDashArrayNV(name,dashArray);}
-static PFNGLGETPATHLENGTHNVPROC __glewGetPathLengthNV = NULL;
-GLfloat glGetPathLengthNV(GLuint path,GLsizei startSegment,GLsizei numSegments){return __glewGetPathLengthNV(path,startSegment,numSegments);}
-static PFNGLGETPATHMETRICRANGENVPROC __glewGetPathMetricRangeNV = NULL;
-void glGetPathMetricRangeNV(GLbitfield metricQueryMask,GLuint fistPathName,GLsizei numPaths,GLsizei stride,GLfloat* metrics){__glewGetPathMetricRangeNV(metricQueryMask,fistPathName,numPaths,stride,metrics);}
-static PFNGLGETPATHMETRICSNVPROC __glewGetPathMetricsNV = NULL;
-void glGetPathMetricsNV(GLbitfield metricQueryMask,GLsizei numPaths,GLenum pathNameType,const void* paths,GLuint pathBase,GLsizei stride,GLfloat *metrics){__glewGetPathMetricsNV(metricQueryMask,numPaths,pathNameType,paths,pathBase,stride,metrics);}
-static PFNGLGETPATHPARAMETERFVNVPROC __glewGetPathParameterfvNV = NULL;
-void glGetPathParameterfvNV(GLuint name,GLenum param,GLfloat* value){__glewGetPathParameterfvNV(name,param,value);}
-static PFNGLGETPATHPARAMETERIVNVPROC __glewGetPathParameterivNV = NULL;
-void glGetPathParameterivNV(GLuint name,GLenum param,GLint* value){__glewGetPathParameterivNV(name,param,value);}
-static PFNGLGETPATHSPACINGNVPROC __glewGetPathSpacingNV = NULL;
-void glGetPathSpacingNV(GLenum pathListMode,GLsizei numPaths,GLenum pathNameType,const void* paths,GLuint pathBase,GLfloat advanceScale,GLfloat kerningScale,GLenum transformType,GLfloat *returnedSpacing){__glewGetPathSpacingNV(pathListMode,numPaths,pathNameType,paths,pathBase,advanceScale,kerningScale,transformType,returnedSpacing);}
-static PFNGLGETPATHTEXGENFVNVPROC __glewGetPathTexGenfvNV = NULL;
-void glGetPathTexGenfvNV(GLenum texCoordSet,GLenum pname,GLfloat* value){__glewGetPathTexGenfvNV(texCoordSet,pname,value);}
-static PFNGLGETPATHTEXGENIVNVPROC __glewGetPathTexGenivNV = NULL;
-void glGetPathTexGenivNV(GLenum texCoordSet,GLenum pname,GLint* value){__glewGetPathTexGenivNV(texCoordSet,pname,value);}
-static PFNGLINTERPOLATEPATHSNVPROC __glewInterpolatePathsNV = NULL;
-void glInterpolatePathsNV(GLuint resultPath,GLuint pathA,GLuint pathB,GLfloat weight){__glewInterpolatePathsNV(resultPath,pathA,pathB,weight);}
-static PFNGLISPATHNVPROC __glewIsPathNV = NULL;
-GLboolean glIsPathNV(GLuint path){return __glewIsPathNV(path);}
-static PFNGLISPOINTINFILLPATHNVPROC __glewIsPointInFillPathNV = NULL;
-GLboolean glIsPointInFillPathNV(GLuint path,GLuint mask,GLfloat x,GLfloat y){return __glewIsPointInFillPathNV(path,mask,x,y);}
-static PFNGLISPOINTINSTROKEPATHNVPROC __glewIsPointInStrokePathNV = NULL;
-GLboolean glIsPointInStrokePathNV(GLuint path,GLfloat x,GLfloat y){return __glewIsPointInStrokePathNV(path,x,y);}
-static PFNGLPATHCOLORGENNVPROC __glewPathColorGenNV = NULL;
-void glPathColorGenNV(GLenum color,GLenum genMode,GLenum colorFormat,const GLfloat* coeffs){__glewPathColorGenNV(color,genMode,colorFormat,coeffs);}
-static PFNGLPATHCOMMANDSNVPROC __glewPathCommandsNV = NULL;
-void glPathCommandsNV(GLuint path,GLsizei numCommands,const GLubyte* commands,GLsizei numCoords,GLenum coordType,const GLvoid*coords){__glewPathCommandsNV(path,numCommands,commands,numCoords,coordType,coords);}
-static PFNGLPATHCOORDSNVPROC __glewPathCoordsNV = NULL;
-void glPathCoordsNV(GLuint path,GLsizei numCoords,GLenum coordType,const void* coords){__glewPathCoordsNV(path,numCoords,coordType,coords);}
-static PFNGLPATHCOVERDEPTHFUNCNVPROC __glewPathCoverDepthFuncNV = NULL;
-void glPathCoverDepthFuncNV(GLenum zfunc){__glewPathCoverDepthFuncNV(zfunc);}
-static PFNGLPATHDASHARRAYNVPROC __glewPathDashArrayNV = NULL;
-void glPathDashArrayNV(GLuint path,GLsizei dashCount,const GLfloat* dashArray){__glewPathDashArrayNV(path,dashCount,dashArray);}
-static PFNGLPATHFOGGENNVPROC __glewPathFogGenNV = NULL;
-void glPathFogGenNV(GLenum genMode){__glewPathFogGenNV(genMode);}
-static PFNGLPATHGLYPHRANGENVPROC __glewPathGlyphRangeNV = NULL;
-void glPathGlyphRangeNV(GLuint firstPathName,GLenum fontTarget,const void* fontName,GLbitfield fontStyle,GLuint firstGlyph,GLsizei numGlyphs,GLenum handleMissingGlyphs,GLuint pathParameterTemplate,GLfloat emScale){__glewPathGlyphRangeNV(firstPathName,fontTarget,fontName,fontStyle,firstGlyph,numGlyphs,handleMissingGlyphs,pathParameterTemplate,emScale);}
-static PFNGLPATHGLYPHSNVPROC __glewPathGlyphsNV = NULL;
-void glPathGlyphsNV(GLuint firstPathName,GLenum fontTarget,const void* fontName,GLbitfield fontStyle,GLsizei numGlyphs,GLenum type,const GLvoid*charcodes,GLenum handleMissingGlyphs,GLuint pathParameterTemplate,GLfloat emScale){__glewPathGlyphsNV(firstPathName,fontTarget,fontName,fontStyle,numGlyphs,type,charcodes,handleMissingGlyphs,pathParameterTemplate,emScale);}
-static PFNGLPATHPARAMETERFNVPROC __glewPathParameterfNV = NULL;
-void glPathParameterfNV(GLuint path,GLenum pname,GLfloat value){__glewPathParameterfNV(path,pname,value);}
-static PFNGLPATHPARAMETERFVNVPROC __glewPathParameterfvNV = NULL;
-void glPathParameterfvNV(GLuint path,GLenum pname,const GLfloat* value){__glewPathParameterfvNV(path,pname,value);}
-static PFNGLPATHPARAMETERINVPROC __glewPathParameteriNV = NULL;
-void glPathParameteriNV(GLuint path,GLenum pname,GLint value){__glewPathParameteriNV(path,pname,value);}
-static PFNGLPATHPARAMETERIVNVPROC __glewPathParameterivNV = NULL;
-void glPathParameterivNV(GLuint path,GLenum pname,const GLint* value){__glewPathParameterivNV(path,pname,value);}
-static PFNGLPATHSTENCILDEPTHOFFSETNVPROC __glewPathStencilDepthOffsetNV = NULL;
-void glPathStencilDepthOffsetNV(GLfloat factor,GLfloat units){__glewPathStencilDepthOffsetNV(factor,units);}
-static PFNGLPATHSTENCILFUNCNVPROC __glewPathStencilFuncNV = NULL;
-void glPathStencilFuncNV(GLenum func,GLint ref,GLuint mask){__glewPathStencilFuncNV(func,ref,mask);}
-static PFNGLPATHSTRINGNVPROC __glewPathStringNV = NULL;
-void glPathStringNV(GLuint path,GLenum format,GLsizei length,const void* pathString){__glewPathStringNV(path,format,length,pathString);}
-static PFNGLPATHSUBCOMMANDSNVPROC __glewPathSubCommandsNV = NULL;
-void glPathSubCommandsNV(GLuint path,GLsizei commandStart,GLsizei commandsToDelete,GLsizei numCommands,const GLubyte* commands,GLsizei numCoords,GLenum coordType,const GLvoid*coords){__glewPathSubCommandsNV(path,commandStart,commandsToDelete,numCommands,commands,numCoords,coordType,coords);}
-static PFNGLPATHSUBCOORDSNVPROC __glewPathSubCoordsNV = NULL;
-void glPathSubCoordsNV(GLuint path,GLsizei coordStart,GLsizei numCoords,GLenum coordType,const void* coords){__glewPathSubCoordsNV(path,coordStart,numCoords,coordType,coords);}
-static PFNGLPATHTEXGENNVPROC __glewPathTexGenNV = NULL;
-void glPathTexGenNV(GLenum texCoordSet,GLenum genMode,GLint components,const GLfloat* coeffs){__glewPathTexGenNV(texCoordSet,genMode,components,coeffs);}
-static PFNGLPOINTALONGPATHNVPROC __glewPointAlongPathNV = NULL;
-GLboolean glPointAlongPathNV(GLuint path,GLsizei startSegment,GLsizei numSegments,GLfloat distance,GLfloat* x,GLfloat *y,GLfloat *tangentX,GLfloat *tangentY){return __glewPointAlongPathNV(path,startSegment,numSegments,distance,x,y,tangentX,tangentY);}
-static PFNGLSTENCILFILLPATHINSTANCEDNVPROC __glewStencilFillPathInstancedNV = NULL;
-void glStencilFillPathInstancedNV(GLsizei numPaths,GLenum pathNameType,const void* paths,GLuint pathBase,GLenum fillMode,GLuint mask,GLenum transformType,const GLfloat *transformValues){__glewStencilFillPathInstancedNV(numPaths,pathNameType,paths,pathBase,fillMode,mask,transformType,transformValues);}
-static PFNGLSTENCILFILLPATHNVPROC __glewStencilFillPathNV = NULL;
-void glStencilFillPathNV(GLuint path,GLenum fillMode,GLuint mask){__glewStencilFillPathNV(path,fillMode,mask);}
-static PFNGLSTENCILSTROKEPATHINSTANCEDNVPROC __glewStencilStrokePathInstancedNV = NULL;
-void glStencilStrokePathInstancedNV(GLsizei numPaths,GLenum pathNameType,const void* paths,GLuint pathBase,GLint reference,GLuint mask,GLenum transformType,const GLfloat *transformValues){__glewStencilStrokePathInstancedNV(numPaths,pathNameType,paths,pathBase,reference,mask,transformType,transformValues);}
-static PFNGLSTENCILSTROKEPATHNVPROC __glewStencilStrokePathNV = NULL;
-void glStencilStrokePathNV(GLuint path,GLint reference,GLuint mask){__glewStencilStrokePathNV(path,reference,mask);}
-static PFNGLTRANSFORMPATHNVPROC __glewTransformPathNV = NULL;
-void glTransformPathNV(GLuint resultPath,GLuint srcPath,GLenum transformType,const GLfloat* transformValues){__glewTransformPathNV(resultPath,srcPath,transformType,transformValues);}
-static PFNGLWEIGHTPATHSNVPROC __glewWeightPathsNV = NULL;
-void glWeightPathsNV(GLuint resultPath,GLsizei numPaths,const GLuint paths[],const GLfloat weights[]){__glewWeightPathsNV(resultPath,numPaths,paths,weights);}
-
-static PFNGLFLUSHPIXELDATARANGENVPROC __glewFlushPixelDataRangeNV = NULL;
-void glFlushPixelDataRangeNV(GLenum target){__glewFlushPixelDataRangeNV(target);}
-static PFNGLPIXELDATARANGENVPROC __glewPixelDataRangeNV = NULL;
-void glPixelDataRangeNV(GLenum target,GLsizei length,GLvoid *pointer){__glewPixelDataRangeNV(target,length,pointer);}
-
-static PFNGLPOINTPARAMETERINVPROC __glewPointParameteriNV = NULL;
-void glPointParameteriNV(GLenum pname,GLint param){__glewPointParameteriNV(pname,param);}
-static PFNGLPOINTPARAMETERIVNVPROC __glewPointParameterivNV = NULL;
-void glPointParameterivNV(GLenum pname,const GLint* params){__glewPointParameterivNV(pname,params);}
-
-static PFNGLGETVIDEOI64VNVPROC __glewGetVideoi64vNV = NULL;
-void glGetVideoi64vNV(GLuint video_slot,GLenum pname,GLint64EXT* params){__glewGetVideoi64vNV(video_slot,pname,params);}
-static PFNGLGETVIDEOIVNVPROC __glewGetVideoivNV = NULL;
-void glGetVideoivNV(GLuint video_slot,GLenum pname,GLint* params){__glewGetVideoivNV(video_slot,pname,params);}
-static PFNGLGETVIDEOUI64VNVPROC __glewGetVideoui64vNV = NULL;
-void glGetVideoui64vNV(GLuint video_slot,GLenum pname,GLuint64EXT* params){__glewGetVideoui64vNV(video_slot,pname,params);}
-static PFNGLGETVIDEOUIVNVPROC __glewGetVideouivNV = NULL;
-void glGetVideouivNV(GLuint video_slot,GLenum pname,GLuint* params){__glewGetVideouivNV(video_slot,pname,params);}
-static PFNGLPRESENTFRAMEDUALFILLNVPROC __glewPresentFrameDualFillNV = NULL;
-void glPresentFrameDualFillNV(GLuint video_slot,GLuint64EXT minPresentTime,GLuint beginPresentTimeId,GLuint presentDurationId,GLenum type,GLenum target0,GLuint fill0,GLenum target1,GLuint fill1,GLenum target2,GLuint fill2,GLenum target3,GLuint fill3){__glewPresentFrameDualFillNV(video_slot,minPresentTime,beginPresentTimeId,presentDurationId,type,target0,fill0,target1,fill1,target2,fill2,target3,fill3);}
-static PFNGLPRESENTFRAMEKEYEDNVPROC __glewPresentFrameKeyedNV = NULL;
-void glPresentFrameKeyedNV(GLuint video_slot,GLuint64EXT minPresentTime,GLuint beginPresentTimeId,GLuint presentDurationId,GLenum type,GLenum target0,GLuint fill0,GLuint key0,GLenum target1,GLuint fill1,GLuint key1){__glewPresentFrameKeyedNV(video_slot,minPresentTime,beginPresentTimeId,presentDurationId,type,target0,fill0,key0,target1,fill1,key1);}
-
-static PFNGLPRIMITIVERESTARTINDEXNVPROC __glewPrimitiveRestartIndexNV = NULL;
-void glPrimitiveRestartIndexNV(GLuint index){__glewPrimitiveRestartIndexNV(index);}
-static PFNGLPRIMITIVERESTARTNVPROC __glewPrimitiveRestartNV = NULL;
-void glPrimitiveRestartNV(void){__glewPrimitiveRestartNV();}
-
-static PFNGLCOMBINERINPUTNVPROC __glewCombinerInputNV = NULL;
-void glCombinerInputNV(GLenum stage,GLenum portion,GLenum variable,GLenum input,GLenum mapping,GLenum componentUsage){__glewCombinerInputNV(stage,portion,variable,input,mapping,componentUsage);}
-static PFNGLCOMBINEROUTPUTNVPROC __glewCombinerOutputNV = NULL;
-void glCombinerOutputNV(GLenum stage,GLenum portion,GLenum abOutput,GLenum cdOutput,GLenum sumOutput,GLenum scale,GLenum bias,GLboolean abDotProduct,GLboolean cdDotProduct,GLboolean muxSum){__glewCombinerOutputNV(stage,portion,abOutput,cdOutput,sumOutput,scale,bias,abDotProduct,cdDotProduct,muxSum);}
-static PFNGLCOMBINERPARAMETERFNVPROC __glewCombinerParameterfNV = NULL;
-void glCombinerParameterfNV(GLenum pname,GLfloat param){__glewCombinerParameterfNV(pname,param);}
-static PFNGLCOMBINERPARAMETERFVNVPROC __glewCombinerParameterfvNV = NULL;
-void glCombinerParameterfvNV(GLenum pname,const GLfloat* params){__glewCombinerParameterfvNV(pname,params);}
-static PFNGLCOMBINERPARAMETERINVPROC __glewCombinerParameteriNV = NULL;
-void glCombinerParameteriNV(GLenum pname,GLint param){__glewCombinerParameteriNV(pname,param);}
-static PFNGLCOMBINERPARAMETERIVNVPROC __glewCombinerParameterivNV = NULL;
-void glCombinerParameterivNV(GLenum pname,const GLint* params){__glewCombinerParameterivNV(pname,params);}
-static PFNGLFINALCOMBINERINPUTNVPROC __glewFinalCombinerInputNV = NULL;
-void glFinalCombinerInputNV(GLenum variable,GLenum input,GLenum mapping,GLenum componentUsage){__glewFinalCombinerInputNV(variable,input,mapping,componentUsage);}
-static PFNGLGETCOMBINERINPUTPARAMETERFVNVPROC __glewGetCombinerInputParameterfvNV = NULL;
-void glGetCombinerInputParameterfvNV(GLenum stage,GLenum portion,GLenum variable,GLenum pname,GLfloat* params){__glewGetCombinerInputParameterfvNV(stage,portion,variable,pname,params);}
-static PFNGLGETCOMBINERINPUTPARAMETERIVNVPROC __glewGetCombinerInputParameterivNV = NULL;
-void glGetCombinerInputParameterivNV(GLenum stage,GLenum portion,GLenum variable,GLenum pname,GLint* params){__glewGetCombinerInputParameterivNV(stage,portion,variable,pname,params);}
-static PFNGLGETCOMBINEROUTPUTPARAMETERFVNVPROC __glewGetCombinerOutputParameterfvNV = NULL;
-void glGetCombinerOutputParameterfvNV(GLenum stage,GLenum portion,GLenum pname,GLfloat* params){__glewGetCombinerOutputParameterfvNV(stage,portion,pname,params);}
-static PFNGLGETCOMBINEROUTPUTPARAMETERIVNVPROC __glewGetCombinerOutputParameterivNV = NULL;
-void glGetCombinerOutputParameterivNV(GLenum stage,GLenum portion,GLenum pname,GLint* params){__glewGetCombinerOutputParameterivNV(stage,portion,pname,params);}
-static PFNGLGETFINALCOMBINERINPUTPARAMETERFVNVPROC __glewGetFinalCombinerInputParameterfvNV = NULL;
-void glGetFinalCombinerInputParameterfvNV(GLenum variable,GLenum pname,GLfloat* params){__glewGetFinalCombinerInputParameterfvNV(variable,pname,params);}
-static PFNGLGETFINALCOMBINERINPUTPARAMETERIVNVPROC __glewGetFinalCombinerInputParameterivNV = NULL;
-void glGetFinalCombinerInputParameterivNV(GLenum variable,GLenum pname,GLint* params){__glewGetFinalCombinerInputParameterivNV(variable,pname,params);}
-
-static PFNGLCOMBINERSTAGEPARAMETERFVNVPROC __glewCombinerStageParameterfvNV = NULL;
-void glCombinerStageParameterfvNV(GLenum stage,GLenum pname,const GLfloat* params){__glewCombinerStageParameterfvNV(stage,pname,params);}
-static PFNGLGETCOMBINERSTAGEPARAMETERFVNVPROC __glewGetCombinerStageParameterfvNV = NULL;
-void glGetCombinerStageParameterfvNV(GLenum stage,GLenum pname,GLfloat* params){__glewGetCombinerStageParameterfvNV(stage,pname,params);}
-
-static PFNGLGETBUFFERPARAMETERUI64VNVPROC __glewGetBufferParameterui64vNV = NULL;
-void glGetBufferParameterui64vNV(GLenum target,GLenum pname,GLuint64EXT* params){__glewGetBufferParameterui64vNV(target,pname,params);}
-static PFNGLGETINTEGERUI64VNVPROC __glewGetIntegerui64vNV = NULL;
-void glGetIntegerui64vNV(GLenum value,GLuint64EXT* result){__glewGetIntegerui64vNV(value,result);}
-static PFNGLGETNAMEDBUFFERPARAMETERUI64VNVPROC __glewGetNamedBufferParameterui64vNV = NULL;
-void glGetNamedBufferParameterui64vNV(GLuint buffer,GLenum pname,GLuint64EXT* params){__glewGetNamedBufferParameterui64vNV(buffer,pname,params);}
-static PFNGLISBUFFERRESIDENTNVPROC __glewIsBufferResidentNV = NULL;
-GLboolean glIsBufferResidentNV(GLenum target){return __glewIsBufferResidentNV(target);}
-static PFNGLISNAMEDBUFFERRESIDENTNVPROC __glewIsNamedBufferResidentNV = NULL;
-GLboolean glIsNamedBufferResidentNV(GLuint buffer){return __glewIsNamedBufferResidentNV(buffer);}
-static PFNGLMAKEBUFFERNONRESIDENTNVPROC __glewMakeBufferNonResidentNV = NULL;
-void glMakeBufferNonResidentNV(GLenum target){__glewMakeBufferNonResidentNV(target);}
-static PFNGLMAKEBUFFERRESIDENTNVPROC __glewMakeBufferResidentNV = NULL;
-void glMakeBufferResidentNV(GLenum target,GLenum access){__glewMakeBufferResidentNV(target,access);}
-static PFNGLMAKENAMEDBUFFERNONRESIDENTNVPROC __glewMakeNamedBufferNonResidentNV = NULL;
-void glMakeNamedBufferNonResidentNV(GLuint buffer){__glewMakeNamedBufferNonResidentNV(buffer);}
-static PFNGLMAKENAMEDBUFFERRESIDENTNVPROC __glewMakeNamedBufferResidentNV = NULL;
-void glMakeNamedBufferResidentNV(GLuint buffer,GLenum access){__glewMakeNamedBufferResidentNV(buffer,access);}
-static PFNGLPROGRAMUNIFORMUI64NVPROC __glewProgramUniformui64NV = NULL;
-void glProgramUniformui64NV(GLuint program,GLint location,GLuint64EXT value){__glewProgramUniformui64NV(program,location,value);}
-static PFNGLPROGRAMUNIFORMUI64VNVPROC __glewProgramUniformui64vNV = NULL;
-void glProgramUniformui64vNV(GLuint program,GLint location,GLsizei count,const GLuint64EXT* value){__glewProgramUniformui64vNV(program,location,count,value);}
-static PFNGLUNIFORMUI64NVPROC __glewUniformui64NV = NULL;
-void glUniformui64NV(GLint location,GLuint64EXT value){__glewUniformui64NV(location,value);}
-static PFNGLUNIFORMUI64VNVPROC __glewUniformui64vNV = NULL;
-void glUniformui64vNV(GLint location,GLsizei count,const GLuint64EXT* value){__glewUniformui64vNV(location,count,value);}
-
-static PFNGLTEXTUREBARRIERNVPROC __glewTextureBarrierNV = NULL;
-void glTextureBarrierNV(void){__glewTextureBarrierNV();}
-
-static PFNGLTEXIMAGE2DMULTISAMPLECOVERAGENVPROC __glewTexImage2DMultisampleCoverageNV = NULL;
-void glTexImage2DMultisampleCoverageNV(GLenum target,GLsizei coverageSamples,GLsizei colorSamples,GLint internalFormat,GLsizei width,GLsizei height,GLboolean fixedSampleLocations){__glewTexImage2DMultisampleCoverageNV(target,coverageSamples,colorSamples,internalFormat,width,height,fixedSampleLocations);}
-static PFNGLTEXIMAGE3DMULTISAMPLECOVERAGENVPROC __glewTexImage3DMultisampleCoverageNV = NULL;
-void glTexImage3DMultisampleCoverageNV(GLenum target,GLsizei coverageSamples,GLsizei colorSamples,GLint internalFormat,GLsizei width,GLsizei height,GLsizei depth,GLboolean fixedSampleLocations){__glewTexImage3DMultisampleCoverageNV(target,coverageSamples,colorSamples,internalFormat,width,height,depth,fixedSampleLocations);}
-static PFNGLTEXTUREIMAGE2DMULTISAMPLECOVERAGENVPROC __glewTextureImage2DMultisampleCoverageNV = NULL;
-void glTextureImage2DMultisampleCoverageNV(GLuint texture,GLenum target,GLsizei coverageSamples,GLsizei colorSamples,GLint internalFormat,GLsizei width,GLsizei height,GLboolean fixedSampleLocations){__glewTextureImage2DMultisampleCoverageNV(texture,target,coverageSamples,colorSamples,internalFormat,width,height,fixedSampleLocations);}
-static PFNGLTEXTUREIMAGE2DMULTISAMPLENVPROC __glewTextureImage2DMultisampleNV = NULL;
-void glTextureImage2DMultisampleNV(GLuint texture,GLenum target,GLsizei samples,GLint internalFormat,GLsizei width,GLsizei height,GLboolean fixedSampleLocations){__glewTextureImage2DMultisampleNV(texture,target,samples,internalFormat,width,height,fixedSampleLocations);}
-static PFNGLTEXTUREIMAGE3DMULTISAMPLECOVERAGENVPROC __glewTextureImage3DMultisampleCoverageNV = NULL;
-void glTextureImage3DMultisampleCoverageNV(GLuint texture,GLenum target,GLsizei coverageSamples,GLsizei colorSamples,GLint internalFormat,GLsizei width,GLsizei height,GLsizei depth,GLboolean fixedSampleLocations){__glewTextureImage3DMultisampleCoverageNV(texture,target,coverageSamples,colorSamples,internalFormat,width,height,depth,fixedSampleLocations);}
-static PFNGLTEXTUREIMAGE3DMULTISAMPLENVPROC __glewTextureImage3DMultisampleNV = NULL;
-void glTextureImage3DMultisampleNV(GLuint texture,GLenum target,GLsizei samples,GLint internalFormat,GLsizei width,GLsizei height,GLsizei depth,GLboolean fixedSampleLocations){__glewTextureImage3DMultisampleNV(texture,target,samples,internalFormat,width,height,depth,fixedSampleLocations);}
-
-static PFNGLACTIVEVARYINGNVPROC __glewActiveVaryingNV = NULL;
-void glActiveVaryingNV(GLuint program,const GLchar *name){__glewActiveVaryingNV(program,name);}
-static PFNGLBEGINTRANSFORMFEEDBACKNVPROC __glewBeginTransformFeedbackNV = NULL;
-void glBeginTransformFeedbackNV(GLenum primitiveMode){__glewBeginTransformFeedbackNV(primitiveMode);}
-static PFNGLBINDBUFFERBASENVPROC __glewBindBufferBaseNV = NULL;
-void glBindBufferBaseNV(GLenum target,GLuint index,GLuint buffer){__glewBindBufferBaseNV(target,index,buffer);}
-static PFNGLBINDBUFFEROFFSETNVPROC __glewBindBufferOffsetNV = NULL;
-void glBindBufferOffsetNV(GLenum target,GLuint index,GLuint buffer,GLintptr offset){__glewBindBufferOffsetNV(target,index,buffer,offset);}
-static PFNGLBINDBUFFERRANGENVPROC __glewBindBufferRangeNV = NULL;
-void glBindBufferRangeNV(GLenum target,GLuint index,GLuint buffer,GLintptr offset,GLsizeiptr size){__glewBindBufferRangeNV(target,index,buffer,offset,size);}
-static PFNGLENDTRANSFORMFEEDBACKNVPROC __glewEndTransformFeedbackNV = NULL;
-void glEndTransformFeedbackNV(void){__glewEndTransformFeedbackNV();}
-static PFNGLGETACTIVEVARYINGNVPROC __glewGetActiveVaryingNV = NULL;
-void glGetActiveVaryingNV(GLuint program,GLuint index,GLsizei bufSize,GLsizei *length,GLsizei *size,GLenum *type,GLchar *name){__glewGetActiveVaryingNV(program,index,bufSize,length,size,type,name);}
-static PFNGLGETTRANSFORMFEEDBACKVARYINGNVPROC __glewGetTransformFeedbackVaryingNV = NULL;
-void glGetTransformFeedbackVaryingNV(GLuint program,GLuint index,GLint *location){__glewGetTransformFeedbackVaryingNV(program,index,location);}
-static PFNGLGETVARYINGLOCATIONNVPROC __glewGetVaryingLocationNV = NULL;
-GLint glGetVaryingLocationNV(GLuint program,const GLchar *name){return __glewGetVaryingLocationNV(program,name);}
-static PFNGLTRANSFORMFEEDBACKATTRIBSNVPROC __glewTransformFeedbackAttribsNV = NULL;
-void glTransformFeedbackAttribsNV(GLuint count,const GLint *attribs,GLenum bufferMode){__glewTransformFeedbackAttribsNV(count,attribs,bufferMode);}
-static PFNGLTRANSFORMFEEDBACKVARYINGSNVPROC __glewTransformFeedbackVaryingsNV = NULL;
-void glTransformFeedbackVaryingsNV(GLuint program,GLsizei count,const GLint *locations,GLenum bufferMode){__glewTransformFeedbackVaryingsNV(program,count,locations,bufferMode);}
-
-static PFNGLBINDTRANSFORMFEEDBACKNVPROC __glewBindTransformFeedbackNV = NULL;
-void glBindTransformFeedbackNV(GLenum target,GLuint id){__glewBindTransformFeedbackNV(target,id);}
-static PFNGLDELETETRANSFORMFEEDBACKSNVPROC __glewDeleteTransformFeedbacksNV = NULL;
-void glDeleteTransformFeedbacksNV(GLsizei n,const GLuint* ids){__glewDeleteTransformFeedbacksNV(n,ids);}
-static PFNGLDRAWTRANSFORMFEEDBACKNVPROC __glewDrawTransformFeedbackNV = NULL;
-void glDrawTransformFeedbackNV(GLenum mode,GLuint id){__glewDrawTransformFeedbackNV(mode,id);}
-static PFNGLGENTRANSFORMFEEDBACKSNVPROC __glewGenTransformFeedbacksNV = NULL;
-void glGenTransformFeedbacksNV(GLsizei n,GLuint* ids){__glewGenTransformFeedbacksNV(n,ids);}
-static PFNGLISTRANSFORMFEEDBACKNVPROC __glewIsTransformFeedbackNV = NULL;
-GLboolean glIsTransformFeedbackNV(GLuint id){return __glewIsTransformFeedbackNV(id);}
-static PFNGLPAUSETRANSFORMFEEDBACKNVPROC __glewPauseTransformFeedbackNV = NULL;
-void glPauseTransformFeedbackNV(void){__glewPauseTransformFeedbackNV();}
-static PFNGLRESUMETRANSFORMFEEDBACKNVPROC __glewResumeTransformFeedbackNV = NULL;
-void glResumeTransformFeedbackNV(void){__glewResumeTransformFeedbackNV();}
-
-static PFNGLVDPAUFININVPROC __glewVDPAUFiniNV = NULL;
-void glVDPAUFiniNV(void){__glewVDPAUFiniNV();}
-static PFNGLVDPAUGETSURFACEIVNVPROC __glewVDPAUGetSurfaceivNV = NULL;
-void glVDPAUGetSurfaceivNV(GLvdpauSurfaceNV surface,GLenum pname,GLsizei bufSize,GLsizei* length,GLint *values){__glewVDPAUGetSurfaceivNV(surface,pname,bufSize,length,values);}
-static PFNGLVDPAUINITNVPROC __glewVDPAUInitNV = NULL;
-void glVDPAUInitNV(const void* vdpDevice,const GLvoid*getProcAddress){__glewVDPAUInitNV(vdpDevice,getProcAddress);}
-static PFNGLVDPAUISSURFACENVPROC __glewVDPAUIsSurfaceNV = NULL;
-void glVDPAUIsSurfaceNV(GLvdpauSurfaceNV surface){__glewVDPAUIsSurfaceNV(surface);}
-static PFNGLVDPAUMAPSURFACESNVPROC __glewVDPAUMapSurfacesNV = NULL;
-void glVDPAUMapSurfacesNV(GLsizei numSurfaces,const GLvdpauSurfaceNV* surfaces){__glewVDPAUMapSurfacesNV(numSurfaces,surfaces);}
-static PFNGLVDPAUREGISTEROUTPUTSURFACENVPROC __glewVDPAURegisterOutputSurfaceNV = NULL;
-GLvdpauSurfaceNV glVDPAURegisterOutputSurfaceNV(const void* vdpSurface,GLenum target,GLsizei numTextureNames,const GLuint *textureNames){return __glewVDPAURegisterOutputSurfaceNV(vdpSurface,target,numTextureNames,textureNames);}
-static PFNGLVDPAUREGISTERVIDEOSURFACENVPROC __glewVDPAURegisterVideoSurfaceNV = NULL;
-GLvdpauSurfaceNV glVDPAURegisterVideoSurfaceNV(const void* vdpSurface,GLenum target,GLsizei numTextureNames,const GLuint *textureNames){return __glewVDPAURegisterVideoSurfaceNV(vdpSurface,target,numTextureNames,textureNames);}
-static PFNGLVDPAUSURFACEACCESSNVPROC __glewVDPAUSurfaceAccessNV = NULL;
-void glVDPAUSurfaceAccessNV(GLvdpauSurfaceNV surface,GLenum access){__glewVDPAUSurfaceAccessNV(surface,access);}
-static PFNGLVDPAUUNMAPSURFACESNVPROC __glewVDPAUUnmapSurfacesNV = NULL;
-void glVDPAUUnmapSurfacesNV(GLsizei numSurface,const GLvdpauSurfaceNV* surfaces){__glewVDPAUUnmapSurfacesNV(numSurface,surfaces);}
-static PFNGLVDPAUUNREGISTERSURFACENVPROC __glewVDPAUUnregisterSurfaceNV = NULL;
-void glVDPAUUnregisterSurfaceNV(GLvdpauSurfaceNV surface){__glewVDPAUUnregisterSurfaceNV(surface);}
-
-static PFNGLFLUSHVERTEXARRAYRANGENVPROC __glewFlushVertexArrayRangeNV = NULL;
-void glFlushVertexArrayRangeNV(void){__glewFlushVertexArrayRangeNV();}
-static PFNGLVERTEXARRAYRANGENVPROC __glewVertexArrayRangeNV = NULL;
-void glVertexArrayRangeNV(GLsizei length,GLvoid *pointer){__glewVertexArrayRangeNV(length,pointer);}
-
-static PFNGLGETVERTEXATTRIBLI64VNVPROC __glewGetVertexAttribLi64vNV = NULL;
-void glGetVertexAttribLi64vNV(GLuint index,GLenum pname,GLint64EXT* params){__glewGetVertexAttribLi64vNV(index,pname,params);}
-static PFNGLGETVERTEXATTRIBLUI64VNVPROC __glewGetVertexAttribLui64vNV = NULL;
-void glGetVertexAttribLui64vNV(GLuint index,GLenum pname,GLuint64EXT* params){__glewGetVertexAttribLui64vNV(index,pname,params);}
-static PFNGLVERTEXATTRIBL1I64NVPROC __glewVertexAttribL1i64NV = NULL;
-void glVertexAttribL1i64NV(GLuint index,GLint64EXT x){__glewVertexAttribL1i64NV(index,x);}
-static PFNGLVERTEXATTRIBL1I64VNVPROC __glewVertexAttribL1i64vNV = NULL;
-void glVertexAttribL1i64vNV(GLuint index,const GLint64EXT* v){__glewVertexAttribL1i64vNV(index,v);}
-static PFNGLVERTEXATTRIBL1UI64NVPROC __glewVertexAttribL1ui64NV = NULL;
-void glVertexAttribL1ui64NV(GLuint index,GLuint64EXT x){__glewVertexAttribL1ui64NV(index,x);}
-static PFNGLVERTEXATTRIBL1UI64VNVPROC __glewVertexAttribL1ui64vNV = NULL;
-void glVertexAttribL1ui64vNV(GLuint index,const GLuint64EXT* v){__glewVertexAttribL1ui64vNV(index,v);}
-static PFNGLVERTEXATTRIBL2I64NVPROC __glewVertexAttribL2i64NV = NULL;
-void glVertexAttribL2i64NV(GLuint index,GLint64EXT x,GLint64EXT y){__glewVertexAttribL2i64NV(index,x,y);}
-static PFNGLVERTEXATTRIBL2I64VNVPROC __glewVertexAttribL2i64vNV = NULL;
-void glVertexAttribL2i64vNV(GLuint index,const GLint64EXT* v){__glewVertexAttribL2i64vNV(index,v);}
-static PFNGLVERTEXATTRIBL2UI64NVPROC __glewVertexAttribL2ui64NV = NULL;
-void glVertexAttribL2ui64NV(GLuint index,GLuint64EXT x,GLuint64EXT y){__glewVertexAttribL2ui64NV(index,x,y);}
-static PFNGLVERTEXATTRIBL2UI64VNVPROC __glewVertexAttribL2ui64vNV = NULL;
-void glVertexAttribL2ui64vNV(GLuint index,const GLuint64EXT* v){__glewVertexAttribL2ui64vNV(index,v);}
-static PFNGLVERTEXATTRIBL3I64NVPROC __glewVertexAttribL3i64NV = NULL;
-void glVertexAttribL3i64NV(GLuint index,GLint64EXT x,GLint64EXT y,GLint64EXT z){__glewVertexAttribL3i64NV(index,x,y,z);}
-static PFNGLVERTEXATTRIBL3I64VNVPROC __glewVertexAttribL3i64vNV = NULL;
-void glVertexAttribL3i64vNV(GLuint index,const GLint64EXT* v){__glewVertexAttribL3i64vNV(index,v);}
-static PFNGLVERTEXATTRIBL3UI64NVPROC __glewVertexAttribL3ui64NV = NULL;
-void glVertexAttribL3ui64NV(GLuint index,GLuint64EXT x,GLuint64EXT y,GLuint64EXT z){__glewVertexAttribL3ui64NV(index,x,y,z);}
-static PFNGLVERTEXATTRIBL3UI64VNVPROC __glewVertexAttribL3ui64vNV = NULL;
-void glVertexAttribL3ui64vNV(GLuint index,const GLuint64EXT* v){__glewVertexAttribL3ui64vNV(index,v);}
-static PFNGLVERTEXATTRIBL4I64NVPROC __glewVertexAttribL4i64NV = NULL;
-void glVertexAttribL4i64NV(GLuint index,GLint64EXT x,GLint64EXT y,GLint64EXT z,GLint64EXT w){__glewVertexAttribL4i64NV(index,x,y,z,w);}
-static PFNGLVERTEXATTRIBL4I64VNVPROC __glewVertexAttribL4i64vNV = NULL;
-void glVertexAttribL4i64vNV(GLuint index,const GLint64EXT* v){__glewVertexAttribL4i64vNV(index,v);}
-static PFNGLVERTEXATTRIBL4UI64NVPROC __glewVertexAttribL4ui64NV = NULL;
-void glVertexAttribL4ui64NV(GLuint index,GLuint64EXT x,GLuint64EXT y,GLuint64EXT z,GLuint64EXT w){__glewVertexAttribL4ui64NV(index,x,y,z,w);}
-static PFNGLVERTEXATTRIBL4UI64VNVPROC __glewVertexAttribL4ui64vNV = NULL;
-void glVertexAttribL4ui64vNV(GLuint index,const GLuint64EXT* v){__glewVertexAttribL4ui64vNV(index,v);}
-static PFNGLVERTEXATTRIBLFORMATNVPROC __glewVertexAttribLFormatNV = NULL;
-void glVertexAttribLFormatNV(GLuint index,GLint size,GLenum type,GLsizei stride){__glewVertexAttribLFormatNV(index,size,type,stride);}
-
-static PFNGLBUFFERADDRESSRANGENVPROC __glewBufferAddressRangeNV = NULL;
-void glBufferAddressRangeNV(GLenum pname,GLuint index,GLuint64EXT address,GLsizeiptr length){__glewBufferAddressRangeNV(pname,index,address,length);}
-static PFNGLCOLORFORMATNVPROC __glewColorFormatNV = NULL;
-void glColorFormatNV(GLint size,GLenum type,GLsizei stride){__glewColorFormatNV(size,type,stride);}
-static PFNGLEDGEFLAGFORMATNVPROC __glewEdgeFlagFormatNV = NULL;
-void glEdgeFlagFormatNV(GLsizei stride){__glewEdgeFlagFormatNV(stride);}
-static PFNGLFOGCOORDFORMATNVPROC __glewFogCoordFormatNV = NULL;
-void glFogCoordFormatNV(GLenum type,GLsizei stride){__glewFogCoordFormatNV(type,stride);}
-static PFNGLGETINTEGERUI64I_VNVPROC __glewGetIntegerui64i_vNV = NULL;
-void glGetIntegerui64i_vNV(GLenum value,GLuint index,GLuint64EXT result[]){__glewGetIntegerui64i_vNV(value,index,result);}
-static PFNGLINDEXFORMATNVPROC __glewIndexFormatNV = NULL;
-void glIndexFormatNV(GLenum type,GLsizei stride){__glewIndexFormatNV(type,stride);}
-static PFNGLNORMALFORMATNVPROC __glewNormalFormatNV = NULL;
-void glNormalFormatNV(GLenum type,GLsizei stride){__glewNormalFormatNV(type,stride);}
-static PFNGLSECONDARYCOLORFORMATNVPROC __glewSecondaryColorFormatNV = NULL;
-void glSecondaryColorFormatNV(GLint size,GLenum type,GLsizei stride){__glewSecondaryColorFormatNV(size,type,stride);}
-static PFNGLTEXCOORDFORMATNVPROC __glewTexCoordFormatNV = NULL;
-void glTexCoordFormatNV(GLint size,GLenum type,GLsizei stride){__glewTexCoordFormatNV(size,type,stride);}
-static PFNGLVERTEXATTRIBFORMATNVPROC __glewVertexAttribFormatNV = NULL;
-void glVertexAttribFormatNV(GLuint index,GLint size,GLenum type,GLboolean normalized,GLsizei stride){__glewVertexAttribFormatNV(index,size,type,normalized,stride);}
-static PFNGLVERTEXATTRIBIFORMATNVPROC __glewVertexAttribIFormatNV = NULL;
-void glVertexAttribIFormatNV(GLuint index,GLint size,GLenum type,GLsizei stride){__glewVertexAttribIFormatNV(index,size,type,stride);}
-static PFNGLVERTEXFORMATNVPROC __glewVertexFormatNV = NULL;
-void glVertexFormatNV(GLint size,GLenum type,GLsizei stride){__glewVertexFormatNV(size,type,stride);}
-
-static PFNGLAREPROGRAMSRESIDENTNVPROC __glewAreProgramsResidentNV = NULL;
-GLboolean glAreProgramsResidentNV(GLsizei n,const GLuint* ids,GLboolean *residences){return __glewAreProgramsResidentNV(n,ids,residences);}
-static PFNGLBINDPROGRAMNVPROC __glewBindProgramNV = NULL;
-void glBindProgramNV(GLenum target,GLuint id){__glewBindProgramNV(target,id);}
-static PFNGLDELETEPROGRAMSNVPROC __glewDeleteProgramsNV = NULL;
-void glDeleteProgramsNV(GLsizei n,const GLuint* ids){__glewDeleteProgramsNV(n,ids);}
-static PFNGLEXECUTEPROGRAMNVPROC __glewExecuteProgramNV = NULL;
-void glExecuteProgramNV(GLenum target,GLuint id,const GLfloat* params){__glewExecuteProgramNV(target,id,params);}
-static PFNGLGENPROGRAMSNVPROC __glewGenProgramsNV = NULL;
-void glGenProgramsNV(GLsizei n,GLuint* ids){__glewGenProgramsNV(n,ids);}
-static PFNGLGETPROGRAMPARAMETERDVNVPROC __glewGetProgramParameterdvNV = NULL;
-void glGetProgramParameterdvNV(GLenum target,GLuint index,GLenum pname,GLdouble* params){__glewGetProgramParameterdvNV(target,index,pname,params);}
-static PFNGLGETPROGRAMPARAMETERFVNVPROC __glewGetProgramParameterfvNV = NULL;
-void glGetProgramParameterfvNV(GLenum target,GLuint index,GLenum pname,GLfloat* params){__glewGetProgramParameterfvNV(target,index,pname,params);}
-static PFNGLGETPROGRAMSTRINGNVPROC __glewGetProgramStringNV = NULL;
-void glGetProgramStringNV(GLuint id,GLenum pname,GLubyte* program){__glewGetProgramStringNV(id,pname,program);}
-static PFNGLGETPROGRAMIVNVPROC __glewGetProgramivNV = NULL;
-void glGetProgramivNV(GLuint id,GLenum pname,GLint* params){__glewGetProgramivNV(id,pname,params);}
-static PFNGLGETTRACKMATRIXIVNVPROC __glewGetTrackMatrixivNV = NULL;
-void glGetTrackMatrixivNV(GLenum target,GLuint address,GLenum pname,GLint* params){__glewGetTrackMatrixivNV(target,address,pname,params);}
-static PFNGLGETVERTEXATTRIBPOINTERVNVPROC __glewGetVertexAttribPointervNV = NULL;
-void glGetVertexAttribPointervNV(GLuint index,GLenum pname,GLvoid** pointer){__glewGetVertexAttribPointervNV(index,pname,pointer);}
-static PFNGLGETVERTEXATTRIBDVNVPROC __glewGetVertexAttribdvNV = NULL;
-void glGetVertexAttribdvNV(GLuint index,GLenum pname,GLdouble* params){__glewGetVertexAttribdvNV(index,pname,params);}
-static PFNGLGETVERTEXATTRIBFVNVPROC __glewGetVertexAttribfvNV = NULL;
-void glGetVertexAttribfvNV(GLuint index,GLenum pname,GLfloat* params){__glewGetVertexAttribfvNV(index,pname,params);}
-static PFNGLGETVERTEXATTRIBIVNVPROC __glewGetVertexAttribivNV = NULL;
-void glGetVertexAttribivNV(GLuint index,GLenum pname,GLint* params){__glewGetVertexAttribivNV(index,pname,params);}
-static PFNGLISPROGRAMNVPROC __glewIsProgramNV = NULL;
-GLboolean glIsProgramNV(GLuint id){return __glewIsProgramNV(id);}
-static PFNGLLOADPROGRAMNVPROC __glewLoadProgramNV = NULL;
-void glLoadProgramNV(GLenum target,GLuint id,GLsizei len,const GLubyte* program){__glewLoadProgramNV(target,id,len,program);}
-static PFNGLPROGRAMPARAMETER4DNVPROC __glewProgramParameter4dNV = NULL;
-void glProgramParameter4dNV(GLenum target,GLuint index,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewProgramParameter4dNV(target,index,x,y,z,w);}
-static PFNGLPROGRAMPARAMETER4DVNVPROC __glewProgramParameter4dvNV = NULL;
-void glProgramParameter4dvNV(GLenum target,GLuint index,const GLdouble* params){__glewProgramParameter4dvNV(target,index,params);}
-static PFNGLPROGRAMPARAMETER4FNVPROC __glewProgramParameter4fNV = NULL;
-void glProgramParameter4fNV(GLenum target,GLuint index,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewProgramParameter4fNV(target,index,x,y,z,w);}
-static PFNGLPROGRAMPARAMETER4FVNVPROC __glewProgramParameter4fvNV = NULL;
-void glProgramParameter4fvNV(GLenum target,GLuint index,const GLfloat* params){__glewProgramParameter4fvNV(target,index,params);}
-static PFNGLPROGRAMPARAMETERS4DVNVPROC __glewProgramParameters4dvNV = NULL;
-void glProgramParameters4dvNV(GLenum target,GLuint index,GLsizei num,const GLdouble* params){__glewProgramParameters4dvNV(target,index,num,params);}
-static PFNGLPROGRAMPARAMETERS4FVNVPROC __glewProgramParameters4fvNV = NULL;
-void glProgramParameters4fvNV(GLenum target,GLuint index,GLsizei num,const GLfloat* params){__glewProgramParameters4fvNV(target,index,num,params);}
-static PFNGLREQUESTRESIDENTPROGRAMSNVPROC __glewRequestResidentProgramsNV = NULL;
-void glRequestResidentProgramsNV(GLsizei n,GLuint* ids){__glewRequestResidentProgramsNV(n,ids);}
-static PFNGLTRACKMATRIXNVPROC __glewTrackMatrixNV = NULL;
-void glTrackMatrixNV(GLenum target,GLuint address,GLenum matrix,GLenum transform){__glewTrackMatrixNV(target,address,matrix,transform);}
-static PFNGLVERTEXATTRIB1DNVPROC __glewVertexAttrib1dNV = NULL;
-void glVertexAttrib1dNV(GLuint index,GLdouble x){__glewVertexAttrib1dNV(index,x);}
-static PFNGLVERTEXATTRIB1DVNVPROC __glewVertexAttrib1dvNV = NULL;
-void glVertexAttrib1dvNV(GLuint index,const GLdouble* v){__glewVertexAttrib1dvNV(index,v);}
-static PFNGLVERTEXATTRIB1FNVPROC __glewVertexAttrib1fNV = NULL;
-void glVertexAttrib1fNV(GLuint index,GLfloat x){__glewVertexAttrib1fNV(index,x);}
-static PFNGLVERTEXATTRIB1FVNVPROC __glewVertexAttrib1fvNV = NULL;
-void glVertexAttrib1fvNV(GLuint index,const GLfloat* v){__glewVertexAttrib1fvNV(index,v);}
-static PFNGLVERTEXATTRIB1SNVPROC __glewVertexAttrib1sNV = NULL;
-void glVertexAttrib1sNV(GLuint index,GLshort x){__glewVertexAttrib1sNV(index,x);}
-static PFNGLVERTEXATTRIB1SVNVPROC __glewVertexAttrib1svNV = NULL;
-void glVertexAttrib1svNV(GLuint index,const GLshort* v){__glewVertexAttrib1svNV(index,v);}
-static PFNGLVERTEXATTRIB2DNVPROC __glewVertexAttrib2dNV = NULL;
-void glVertexAttrib2dNV(GLuint index,GLdouble x,GLdouble y){__glewVertexAttrib2dNV(index,x,y);}
-static PFNGLVERTEXATTRIB2DVNVPROC __glewVertexAttrib2dvNV = NULL;
-void glVertexAttrib2dvNV(GLuint index,const GLdouble* v){__glewVertexAttrib2dvNV(index,v);}
-static PFNGLVERTEXATTRIB2FNVPROC __glewVertexAttrib2fNV = NULL;
-void glVertexAttrib2fNV(GLuint index,GLfloat x,GLfloat y){__glewVertexAttrib2fNV(index,x,y);}
-static PFNGLVERTEXATTRIB2FVNVPROC __glewVertexAttrib2fvNV = NULL;
-void glVertexAttrib2fvNV(GLuint index,const GLfloat* v){__glewVertexAttrib2fvNV(index,v);}
-static PFNGLVERTEXATTRIB2SNVPROC __glewVertexAttrib2sNV = NULL;
-void glVertexAttrib2sNV(GLuint index,GLshort x,GLshort y){__glewVertexAttrib2sNV(index,x,y);}
-static PFNGLVERTEXATTRIB2SVNVPROC __glewVertexAttrib2svNV = NULL;
-void glVertexAttrib2svNV(GLuint index,const GLshort* v){__glewVertexAttrib2svNV(index,v);}
-static PFNGLVERTEXATTRIB3DNVPROC __glewVertexAttrib3dNV = NULL;
-void glVertexAttrib3dNV(GLuint index,GLdouble x,GLdouble y,GLdouble z){__glewVertexAttrib3dNV(index,x,y,z);}
-static PFNGLVERTEXATTRIB3DVNVPROC __glewVertexAttrib3dvNV = NULL;
-void glVertexAttrib3dvNV(GLuint index,const GLdouble* v){__glewVertexAttrib3dvNV(index,v);}
-static PFNGLVERTEXATTRIB3FNVPROC __glewVertexAttrib3fNV = NULL;
-void glVertexAttrib3fNV(GLuint index,GLfloat x,GLfloat y,GLfloat z){__glewVertexAttrib3fNV(index,x,y,z);}
-static PFNGLVERTEXATTRIB3FVNVPROC __glewVertexAttrib3fvNV = NULL;
-void glVertexAttrib3fvNV(GLuint index,const GLfloat* v){__glewVertexAttrib3fvNV(index,v);}
-static PFNGLVERTEXATTRIB3SNVPROC __glewVertexAttrib3sNV = NULL;
-void glVertexAttrib3sNV(GLuint index,GLshort x,GLshort y,GLshort z){__glewVertexAttrib3sNV(index,x,y,z);}
-static PFNGLVERTEXATTRIB3SVNVPROC __glewVertexAttrib3svNV = NULL;
-void glVertexAttrib3svNV(GLuint index,const GLshort* v){__glewVertexAttrib3svNV(index,v);}
-static PFNGLVERTEXATTRIB4DNVPROC __glewVertexAttrib4dNV = NULL;
-void glVertexAttrib4dNV(GLuint index,GLdouble x,GLdouble y,GLdouble z,GLdouble w){__glewVertexAttrib4dNV(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4DVNVPROC __glewVertexAttrib4dvNV = NULL;
-void glVertexAttrib4dvNV(GLuint index,const GLdouble* v){__glewVertexAttrib4dvNV(index,v);}
-static PFNGLVERTEXATTRIB4FNVPROC __glewVertexAttrib4fNV = NULL;
-void glVertexAttrib4fNV(GLuint index,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewVertexAttrib4fNV(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4FVNVPROC __glewVertexAttrib4fvNV = NULL;
-void glVertexAttrib4fvNV(GLuint index,const GLfloat* v){__glewVertexAttrib4fvNV(index,v);}
-static PFNGLVERTEXATTRIB4SNVPROC __glewVertexAttrib4sNV = NULL;
-void glVertexAttrib4sNV(GLuint index,GLshort x,GLshort y,GLshort z,GLshort w){__glewVertexAttrib4sNV(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4SVNVPROC __glewVertexAttrib4svNV = NULL;
-void glVertexAttrib4svNV(GLuint index,const GLshort* v){__glewVertexAttrib4svNV(index,v);}
-static PFNGLVERTEXATTRIB4UBNVPROC __glewVertexAttrib4ubNV = NULL;
-void glVertexAttrib4ubNV(GLuint index,GLubyte x,GLubyte y,GLubyte z,GLubyte w){__glewVertexAttrib4ubNV(index,x,y,z,w);}
-static PFNGLVERTEXATTRIB4UBVNVPROC __glewVertexAttrib4ubvNV = NULL;
-void glVertexAttrib4ubvNV(GLuint index,const GLubyte* v){__glewVertexAttrib4ubvNV(index,v);}
-static PFNGLVERTEXATTRIBPOINTERNVPROC __glewVertexAttribPointerNV = NULL;
-void glVertexAttribPointerNV(GLuint index,GLint size,GLenum type,GLsizei stride,const GLvoid *pointer){__glewVertexAttribPointerNV(index,size,type,stride,pointer);}
-static PFNGLVERTEXATTRIBS1DVNVPROC __glewVertexAttribs1dvNV = NULL;
-void glVertexAttribs1dvNV(GLuint index,GLsizei n,const GLdouble* v){__glewVertexAttribs1dvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS1FVNVPROC __glewVertexAttribs1fvNV = NULL;
-void glVertexAttribs1fvNV(GLuint index,GLsizei n,const GLfloat* v){__glewVertexAttribs1fvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS1SVNVPROC __glewVertexAttribs1svNV = NULL;
-void glVertexAttribs1svNV(GLuint index,GLsizei n,const GLshort* v){__glewVertexAttribs1svNV(index,n,v);}
-static PFNGLVERTEXATTRIBS2DVNVPROC __glewVertexAttribs2dvNV = NULL;
-void glVertexAttribs2dvNV(GLuint index,GLsizei n,const GLdouble* v){__glewVertexAttribs2dvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS2FVNVPROC __glewVertexAttribs2fvNV = NULL;
-void glVertexAttribs2fvNV(GLuint index,GLsizei n,const GLfloat* v){__glewVertexAttribs2fvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS2SVNVPROC __glewVertexAttribs2svNV = NULL;
-void glVertexAttribs2svNV(GLuint index,GLsizei n,const GLshort* v){__glewVertexAttribs2svNV(index,n,v);}
-static PFNGLVERTEXATTRIBS3DVNVPROC __glewVertexAttribs3dvNV = NULL;
-void glVertexAttribs3dvNV(GLuint index,GLsizei n,const GLdouble* v){__glewVertexAttribs3dvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS3FVNVPROC __glewVertexAttribs3fvNV = NULL;
-void glVertexAttribs3fvNV(GLuint index,GLsizei n,const GLfloat* v){__glewVertexAttribs3fvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS3SVNVPROC __glewVertexAttribs3svNV = NULL;
-void glVertexAttribs3svNV(GLuint index,GLsizei n,const GLshort* v){__glewVertexAttribs3svNV(index,n,v);}
-static PFNGLVERTEXATTRIBS4DVNVPROC __glewVertexAttribs4dvNV = NULL;
-void glVertexAttribs4dvNV(GLuint index,GLsizei n,const GLdouble* v){__glewVertexAttribs4dvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS4FVNVPROC __glewVertexAttribs4fvNV = NULL;
-void glVertexAttribs4fvNV(GLuint index,GLsizei n,const GLfloat* v){__glewVertexAttribs4fvNV(index,n,v);}
-static PFNGLVERTEXATTRIBS4SVNVPROC __glewVertexAttribs4svNV = NULL;
-void glVertexAttribs4svNV(GLuint index,GLsizei n,const GLshort* v){__glewVertexAttribs4svNV(index,n,v);}
-static PFNGLVERTEXATTRIBS4UBVNVPROC __glewVertexAttribs4ubvNV = NULL;
-void glVertexAttribs4ubvNV(GLuint index,GLsizei n,const GLubyte* v){__glewVertexAttribs4ubvNV(index,n,v);}
-
-static PFNGLBEGINVIDEOCAPTURENVPROC __glewBeginVideoCaptureNV = NULL;
-void glBeginVideoCaptureNV(GLuint video_capture_slot){__glewBeginVideoCaptureNV(video_capture_slot);}
-static PFNGLBINDVIDEOCAPTURESTREAMBUFFERNVPROC __glewBindVideoCaptureStreamBufferNV = NULL;
-void glBindVideoCaptureStreamBufferNV(GLuint video_capture_slot,GLuint stream,GLenum frame_region,GLintptrARB offset){__glewBindVideoCaptureStreamBufferNV(video_capture_slot,stream,frame_region,offset);}
-static PFNGLBINDVIDEOCAPTURESTREAMTEXTURENVPROC __glewBindVideoCaptureStreamTextureNV = NULL;
-void glBindVideoCaptureStreamTextureNV(GLuint video_capture_slot,GLuint stream,GLenum frame_region,GLenum target,GLuint texture){__glewBindVideoCaptureStreamTextureNV(video_capture_slot,stream,frame_region,target,texture);}
-static PFNGLENDVIDEOCAPTURENVPROC __glewEndVideoCaptureNV = NULL;
-void glEndVideoCaptureNV(GLuint video_capture_slot){__glewEndVideoCaptureNV(video_capture_slot);}
-static PFNGLGETVIDEOCAPTURESTREAMDVNVPROC __glewGetVideoCaptureStreamdvNV = NULL;
-void glGetVideoCaptureStreamdvNV(GLuint video_capture_slot,GLuint stream,GLenum pname,GLdouble* params){__glewGetVideoCaptureStreamdvNV(video_capture_slot,stream,pname,params);}
-static PFNGLGETVIDEOCAPTURESTREAMFVNVPROC __glewGetVideoCaptureStreamfvNV = NULL;
-void glGetVideoCaptureStreamfvNV(GLuint video_capture_slot,GLuint stream,GLenum pname,GLfloat* params){__glewGetVideoCaptureStreamfvNV(video_capture_slot,stream,pname,params);}
-static PFNGLGETVIDEOCAPTURESTREAMIVNVPROC __glewGetVideoCaptureStreamivNV = NULL;
-void glGetVideoCaptureStreamivNV(GLuint video_capture_slot,GLuint stream,GLenum pname,GLint* params){__glewGetVideoCaptureStreamivNV(video_capture_slot,stream,pname,params);}
-static PFNGLGETVIDEOCAPTUREIVNVPROC __glewGetVideoCaptureivNV = NULL;
-void glGetVideoCaptureivNV(GLuint video_capture_slot,GLenum pname,GLint* params){__glewGetVideoCaptureivNV(video_capture_slot,pname,params);}
-static PFNGLVIDEOCAPTURENVPROC __glewVideoCaptureNV = NULL;
-GLenum glVideoCaptureNV(GLuint video_capture_slot,GLuint* sequence_num,GLuint64EXT *capture_time){return __glewVideoCaptureNV(video_capture_slot,sequence_num,capture_time);}
-static PFNGLVIDEOCAPTURESTREAMPARAMETERDVNVPROC __glewVideoCaptureStreamParameterdvNV = NULL;
-void glVideoCaptureStreamParameterdvNV(GLuint video_capture_slot,GLuint stream,GLenum pname,const GLdouble* params){__glewVideoCaptureStreamParameterdvNV(video_capture_slot,stream,pname,params);}
-static PFNGLVIDEOCAPTURESTREAMPARAMETERFVNVPROC __glewVideoCaptureStreamParameterfvNV = NULL;
-void glVideoCaptureStreamParameterfvNV(GLuint video_capture_slot,GLuint stream,GLenum pname,const GLfloat* params){__glewVideoCaptureStreamParameterfvNV(video_capture_slot,stream,pname,params);}
-static PFNGLVIDEOCAPTURESTREAMPARAMETERIVNVPROC __glewVideoCaptureStreamParameterivNV = NULL;
-void glVideoCaptureStreamParameterivNV(GLuint video_capture_slot,GLuint stream,GLenum pname,const GLint* params){__glewVideoCaptureStreamParameterivNV(video_capture_slot,stream,pname,params);}
-
-static PFNGLCLEARDEPTHFOESPROC __glewClearDepthfOES = NULL;
-void glClearDepthfOES(GLclampd depth){__glewClearDepthfOES(depth);}
-static PFNGLCLIPPLANEFOESPROC __glewClipPlanefOES = NULL;
-void glClipPlanefOES(GLenum plane,const GLfloat* equation){__glewClipPlanefOES(plane,equation);}
-static PFNGLDEPTHRANGEFOESPROC __glewDepthRangefOES = NULL;
-void glDepthRangefOES(GLclampf n,GLclampf f){__glewDepthRangefOES(n,f);}
-static PFNGLFRUSTUMFOESPROC __glewFrustumfOES = NULL;
-void glFrustumfOES(GLfloat l,GLfloat r,GLfloat b,GLfloat t,GLfloat n,GLfloat f){__glewFrustumfOES(l,r,b,t,n,f);}
-static PFNGLGETCLIPPLANEFOESPROC __glewGetClipPlanefOES = NULL;
-void glGetClipPlanefOES(GLenum plane,GLfloat* equation){__glewGetClipPlanefOES(plane,equation);}
-static PFNGLORTHOFOESPROC __glewOrthofOES = NULL;
-void glOrthofOES(GLfloat l,GLfloat r,GLfloat b,GLfloat t,GLfloat n,GLfloat f){__glewOrthofOES(l,r,b,t,n,f);}
-
-static PFNGLALPHAFUNCXPROC __glewAlphaFuncx = NULL;
-void glAlphaFuncx(GLenum func,GLclampx ref){__glewAlphaFuncx(func,ref);}
-static PFNGLCLEARCOLORXPROC __glewClearColorx = NULL;
-void glClearColorx(GLclampx red,GLclampx green,GLclampx blue,GLclampx alpha){__glewClearColorx(red,green,blue,alpha);}
-static PFNGLCLEARDEPTHXPROC __glewClearDepthx = NULL;
-void glClearDepthx(GLclampx depth){__glewClearDepthx(depth);}
-static PFNGLCOLOR4XPROC __glewColor4x = NULL;
-void glColor4x(GLfixed red,GLfixed green,GLfixed blue,GLfixed alpha){__glewColor4x(red,green,blue,alpha);}
-static PFNGLDEPTHRANGEXPROC __glewDepthRangex = NULL;
-void glDepthRangex(GLclampx zNear,GLclampx zFar){__glewDepthRangex(zNear,zFar);}
-static PFNGLFOGXPROC __glewFogx = NULL;
-void glFogx(GLenum pname,GLfixed param){__glewFogx(pname,param);}
-static PFNGLFOGXVPROC __glewFogxv = NULL;
-void glFogxv(GLenum pname,const GLfixed* params){__glewFogxv(pname,params);}
-static PFNGLFRUSTUMFPROC __glewFrustumf = NULL;
-void glFrustumf(GLfloat left,GLfloat right,GLfloat bottom,GLfloat top,GLfloat zNear,GLfloat zFar){__glewFrustumf(left,right,bottom,top,zNear,zFar);}
-static PFNGLFRUSTUMXPROC __glewFrustumx = NULL;
-void glFrustumx(GLfixed left,GLfixed right,GLfixed bottom,GLfixed top,GLfixed zNear,GLfixed zFar){__glewFrustumx(left,right,bottom,top,zNear,zFar);}
-static PFNGLLIGHTMODELXPROC __glewLightModelx = NULL;
-void glLightModelx(GLenum pname,GLfixed param){__glewLightModelx(pname,param);}
-static PFNGLLIGHTMODELXVPROC __glewLightModelxv = NULL;
-void glLightModelxv(GLenum pname,const GLfixed* params){__glewLightModelxv(pname,params);}
-static PFNGLLIGHTXPROC __glewLightx = NULL;
-void glLightx(GLenum light,GLenum pname,GLfixed param){__glewLightx(light,pname,param);}
-static PFNGLLIGHTXVPROC __glewLightxv = NULL;
-void glLightxv(GLenum light,GLenum pname,const GLfixed* params){__glewLightxv(light,pname,params);}
-static PFNGLLINEWIDTHXPROC __glewLineWidthx = NULL;
-void glLineWidthx(GLfixed width){__glewLineWidthx(width);}
-static PFNGLLOADMATRIXXPROC __glewLoadMatrixx = NULL;
-void glLoadMatrixx(const GLfixed* m){__glewLoadMatrixx(m);}
-static PFNGLMATERIALXPROC __glewMaterialx = NULL;
-void glMaterialx(GLenum face,GLenum pname,GLfixed param){__glewMaterialx(face,pname,param);}
-static PFNGLMATERIALXVPROC __glewMaterialxv = NULL;
-void glMaterialxv(GLenum face,GLenum pname,const GLfixed* params){__glewMaterialxv(face,pname,params);}
-static PFNGLMULTMATRIXXPROC __glewMultMatrixx = NULL;
-void glMultMatrixx(const GLfixed* m){__glewMultMatrixx(m);}
-static PFNGLMULTITEXCOORD4XPROC __glewMultiTexCoord4x = NULL;
-void glMultiTexCoord4x(GLenum target,GLfixed s,GLfixed t,GLfixed r,GLfixed q){__glewMultiTexCoord4x(target,s,t,r,q);}
-static PFNGLNORMAL3XPROC __glewNormal3x = NULL;
-void glNormal3x(GLfixed nx,GLfixed ny,GLfixed nz){__glewNormal3x(nx,ny,nz);}
-static PFNGLORTHOFPROC __glewOrthof = NULL;
-void glOrthof(GLfloat left,GLfloat right,GLfloat bottom,GLfloat top,GLfloat zNear,GLfloat zFar){__glewOrthof(left,right,bottom,top,zNear,zFar);}
-static PFNGLORTHOXPROC __glewOrthox = NULL;
-void glOrthox(GLfixed left,GLfixed right,GLfixed bottom,GLfixed top,GLfixed zNear,GLfixed zFar){__glewOrthox(left,right,bottom,top,zNear,zFar);}
-static PFNGLPOINTSIZEXPROC __glewPointSizex = NULL;
-void glPointSizex(GLfixed size){__glewPointSizex(size);}
-static PFNGLPOLYGONOFFSETXPROC __glewPolygonOffsetx = NULL;
-void glPolygonOffsetx(GLfixed factor,GLfixed units){__glewPolygonOffsetx(factor,units);}
-static PFNGLROTATEXPROC __glewRotatex = NULL;
-void glRotatex(GLfixed angle,GLfixed x,GLfixed y,GLfixed z){__glewRotatex(angle,x,y,z);}
-static PFNGLSAMPLECOVERAGEXPROC __glewSampleCoveragex = NULL;
-void glSampleCoveragex(GLclampx value,GLboolean invert){__glewSampleCoveragex(value,invert);}
-static PFNGLSCALEXPROC __glewScalex = NULL;
-void glScalex(GLfixed x,GLfixed y,GLfixed z){__glewScalex(x,y,z);}
-static PFNGLTEXENVXPROC __glewTexEnvx = NULL;
-void glTexEnvx(GLenum target,GLenum pname,GLfixed param){__glewTexEnvx(target,pname,param);}
-static PFNGLTEXENVXVPROC __glewTexEnvxv = NULL;
-void glTexEnvxv(GLenum target,GLenum pname,const GLfixed* params){__glewTexEnvxv(target,pname,params);}
-static PFNGLTEXPARAMETERXPROC __glewTexParameterx = NULL;
-void glTexParameterx(GLenum target,GLenum pname,GLfixed param){__glewTexParameterx(target,pname,param);}
-static PFNGLTRANSLATEXPROC __glewTranslatex = NULL;
-void glTranslatex(GLfixed x,GLfixed y,GLfixed z){__glewTranslatex(x,y,z);}
-
-static PFNGLCLIPPLANEFPROC __glewClipPlanef = NULL;
-void glClipPlanef(GLenum plane,const GLfloat* equation){__glewClipPlanef(plane,equation);}
-static PFNGLCLIPPLANEXPROC __glewClipPlanex = NULL;
-void glClipPlanex(GLenum plane,const GLfixed* equation){__glewClipPlanex(plane,equation);}
-static PFNGLGETCLIPPLANEFPROC __glewGetClipPlanef = NULL;
-void glGetClipPlanef(GLenum pname,GLfloat eqn[4]){__glewGetClipPlanef(pname,eqn);}
-static PFNGLGETCLIPPLANEXPROC __glewGetClipPlanex = NULL;
-void glGetClipPlanex(GLenum pname,GLfixed eqn[4]){__glewGetClipPlanex(pname,eqn);}
-static PFNGLGETFIXEDVPROC __glewGetFixedv = NULL;
-void glGetFixedv(GLenum pname,GLfixed* params){__glewGetFixedv(pname,params);}
-static PFNGLGETLIGHTXVPROC __glewGetLightxv = NULL;
-void glGetLightxv(GLenum light,GLenum pname,GLfixed* params){__glewGetLightxv(light,pname,params);}
-static PFNGLGETMATERIALXVPROC __glewGetMaterialxv = NULL;
-void glGetMaterialxv(GLenum face,GLenum pname,GLfixed* params){__glewGetMaterialxv(face,pname,params);}
-static PFNGLGETTEXENVXVPROC __glewGetTexEnvxv = NULL;
-void glGetTexEnvxv(GLenum env,GLenum pname,GLfixed* params){__glewGetTexEnvxv(env,pname,params);}
-static PFNGLGETTEXPARAMETERXVPROC __glewGetTexParameterxv = NULL;
-void glGetTexParameterxv(GLenum target,GLenum pname,GLfixed* params){__glewGetTexParameterxv(target,pname,params);}
-static PFNGLPOINTPARAMETERXPROC __glewPointParameterx = NULL;
-void glPointParameterx(GLenum pname,GLfixed param){__glewPointParameterx(pname,param);}
-static PFNGLPOINTPARAMETERXVPROC __glewPointParameterxv = NULL;
-void glPointParameterxv(GLenum pname,const GLfixed* params){__glewPointParameterxv(pname,params);}
-static PFNGLPOINTSIZEPOINTEROESPROC __glewPointSizePointerOES = NULL;
-void glPointSizePointerOES(GLenum type,GLsizei stride,const GLvoid* pointer){__glewPointSizePointerOES(type,stride,pointer);}
-static PFNGLTEXPARAMETERXVPROC __glewTexParameterxv = NULL;
-void glTexParameterxv(GLenum target,GLenum pname,const GLfixed* params){__glewTexParameterxv(target,pname,params);}
-
-static PFNGLERRORSTRINGREGALPROC __glewErrorStringREGAL = NULL;
-const GLchar* glErrorStringREGAL(GLenum error){return __glewErrorStringREGAL(error);}
-
-static PFNGLGETEXTENSIONREGALPROC __glewGetExtensionREGAL = NULL;
-GLboolean glGetExtensionREGAL(const GLchar* ext){return __glewGetExtensionREGAL(ext);}
-static PFNGLISSUPPORTEDREGALPROC __glewIsSupportedREGAL = NULL;
-GLboolean glIsSupportedREGAL(const GLchar* ext){return __glewIsSupportedREGAL(ext);}
-
-static PFNGLLOGMESSAGECALLBACKREGALPROC __glewLogMessageCallbackREGAL = NULL;
-void glLogMessageCallbackREGAL(GLLOGPROCREGAL callback){__glewLogMessageCallbackREGAL(callback);}
-
-static PFNGLDETAILTEXFUNCSGISPROC __glewDetailTexFuncSGIS = NULL;
-void glDetailTexFuncSGIS(GLenum target,GLsizei n,const GLfloat* points){__glewDetailTexFuncSGIS(target,n,points);}
-static PFNGLGETDETAILTEXFUNCSGISPROC __glewGetDetailTexFuncSGIS = NULL;
-void glGetDetailTexFuncSGIS(GLenum target,GLfloat* points){__glewGetDetailTexFuncSGIS(target,points);}
-
-static PFNGLFOGFUNCSGISPROC __glewFogFuncSGIS = NULL;
-void glFogFuncSGIS(GLsizei n,const GLfloat* points){__glewFogFuncSGIS(n,points);}
-static PFNGLGETFOGFUNCSGISPROC __glewGetFogFuncSGIS = NULL;
-void glGetFogFuncSGIS(GLfloat* points){__glewGetFogFuncSGIS(points);}
-
-static PFNGLSAMPLEMASKSGISPROC __glewSampleMaskSGIS = NULL;
-void glSampleMaskSGIS(GLclampf value,GLboolean invert){__glewSampleMaskSGIS(value,invert);}
-static PFNGLSAMPLEPATTERNSGISPROC __glewSamplePatternSGIS = NULL;
-void glSamplePatternSGIS(GLenum pattern){__glewSamplePatternSGIS(pattern);}
-
-static PFNGLGETSHARPENTEXFUNCSGISPROC __glewGetSharpenTexFuncSGIS = NULL;
-void glGetSharpenTexFuncSGIS(GLenum target,GLfloat* points){__glewGetSharpenTexFuncSGIS(target,points);}
-static PFNGLSHARPENTEXFUNCSGISPROC __glewSharpenTexFuncSGIS = NULL;
-void glSharpenTexFuncSGIS(GLenum target,GLsizei n,const GLfloat* points){__glewSharpenTexFuncSGIS(target,n,points);}
-
-static PFNGLTEXIMAGE4DSGISPROC __glewTexImage4DSGIS = NULL;
-void glTexImage4DSGIS(GLenum target,GLint level,GLenum internalformat,GLsizei width,GLsizei height,GLsizei depth,GLsizei extent,GLint border,GLenum format,GLenum type,const GLvoid *pixels){__glewTexImage4DSGIS(target,level,internalformat,width,height,depth,extent,border,format,type,pixels);}
-static PFNGLTEXSUBIMAGE4DSGISPROC __glewTexSubImage4DSGIS = NULL;
-void glTexSubImage4DSGIS(GLenum target,GLint level,GLint xoffset,GLint yoffset,GLint zoffset,GLint woffset,GLsizei width,GLsizei height,GLsizei depth,GLsizei extent,GLenum format,GLenum type,const GLvoid *pixels){__glewTexSubImage4DSGIS(target,level,xoffset,yoffset,zoffset,woffset,width,height,depth,extent,format,type,pixels);}
-
-static PFNGLGETTEXFILTERFUNCSGISPROC __glewGetTexFilterFuncSGIS = NULL;
-void glGetTexFilterFuncSGIS(GLenum target,GLenum filter,GLfloat* weights){__glewGetTexFilterFuncSGIS(target,filter,weights);}
-static PFNGLTEXFILTERFUNCSGISPROC __glewTexFilterFuncSGIS = NULL;
-void glTexFilterFuncSGIS(GLenum target,GLenum filter,GLsizei n,const GLfloat* weights){__glewTexFilterFuncSGIS(target,filter,n,weights);}
-
-static PFNGLASYNCMARKERSGIXPROC __glewAsyncMarkerSGIX = NULL;
-void glAsyncMarkerSGIX(GLuint marker){__glewAsyncMarkerSGIX(marker);}
-static PFNGLDELETEASYNCMARKERSSGIXPROC __glewDeleteAsyncMarkersSGIX = NULL;
-void glDeleteAsyncMarkersSGIX(GLuint marker,GLsizei range){__glewDeleteAsyncMarkersSGIX(marker,range);}
-static PFNGLFINISHASYNCSGIXPROC __glewFinishAsyncSGIX = NULL;
-GLint glFinishAsyncSGIX(GLuint* markerp){return __glewFinishAsyncSGIX(markerp);}
-static PFNGLGENASYNCMARKERSSGIXPROC __glewGenAsyncMarkersSGIX = NULL;
-GLuint glGenAsyncMarkersSGIX(GLsizei range){return __glewGenAsyncMarkersSGIX(range);}
-static PFNGLISASYNCMARKERSGIXPROC __glewIsAsyncMarkerSGIX = NULL;
-GLboolean glIsAsyncMarkerSGIX(GLuint marker){return __glewIsAsyncMarkerSGIX(marker);}
-static PFNGLPOLLASYNCSGIXPROC __glewPollAsyncSGIX = NULL;
-GLint glPollAsyncSGIX(GLuint* markerp){return __glewPollAsyncSGIX(markerp);}
-
-static PFNGLFLUSHRASTERSGIXPROC __glewFlushRasterSGIX = NULL;
-void glFlushRasterSGIX(void){__glewFlushRasterSGIX();}
-
-static PFNGLTEXTUREFOGSGIXPROC __glewTextureFogSGIX = NULL;
-void glTextureFogSGIX(GLenum pname){__glewTextureFogSGIX(pname);}
-
-static PFNGLFRAGMENTCOLORMATERIALSGIXPROC __glewFragmentColorMaterialSGIX = NULL;
-void glFragmentColorMaterialSGIX(GLenum face,GLenum mode){__glewFragmentColorMaterialSGIX(face,mode);}
-static PFNGLFRAGMENTLIGHTMODELFSGIXPROC __glewFragmentLightModelfSGIX = NULL;
-void glFragmentLightModelfSGIX(GLenum pname,GLfloat param){__glewFragmentLightModelfSGIX(pname,param);}
-static PFNGLFRAGMENTLIGHTMODELFVSGIXPROC __glewFragmentLightModelfvSGIX = NULL;
-void glFragmentLightModelfvSGIX(GLenum pname,GLfloat* params){__glewFragmentLightModelfvSGIX(pname,params);}
-static PFNGLFRAGMENTLIGHTMODELISGIXPROC __glewFragmentLightModeliSGIX = NULL;
-void glFragmentLightModeliSGIX(GLenum pname,GLint param){__glewFragmentLightModeliSGIX(pname,param);}
-static PFNGLFRAGMENTLIGHTMODELIVSGIXPROC __glewFragmentLightModelivSGIX = NULL;
-void glFragmentLightModelivSGIX(GLenum pname,GLint* params){__glewFragmentLightModelivSGIX(pname,params);}
-static PFNGLFRAGMENTLIGHTFSGIXPROC __glewFragmentLightfSGIX = NULL;
-void glFragmentLightfSGIX(GLenum light,GLenum pname,GLfloat param){__glewFragmentLightfSGIX(light,pname,param);}
-static PFNGLFRAGMENTLIGHTFVSGIXPROC __glewFragmentLightfvSGIX = NULL;
-void glFragmentLightfvSGIX(GLenum light,GLenum pname,GLfloat* params){__glewFragmentLightfvSGIX(light,pname,params);}
-static PFNGLFRAGMENTLIGHTISGIXPROC __glewFragmentLightiSGIX = NULL;
-void glFragmentLightiSGIX(GLenum light,GLenum pname,GLint param){__glewFragmentLightiSGIX(light,pname,param);}
-static PFNGLFRAGMENTLIGHTIVSGIXPROC __glewFragmentLightivSGIX = NULL;
-void glFragmentLightivSGIX(GLenum light,GLenum pname,GLint* params){__glewFragmentLightivSGIX(light,pname,params);}
-static PFNGLFRAGMENTMATERIALFSGIXPROC __glewFragmentMaterialfSGIX = NULL;
-void glFragmentMaterialfSGIX(GLenum face,GLenum pname,const GLfloat param){__glewFragmentMaterialfSGIX(face,pname,param);}
-static PFNGLFRAGMENTMATERIALFVSGIXPROC __glewFragmentMaterialfvSGIX = NULL;
-void glFragmentMaterialfvSGIX(GLenum face,GLenum pname,const GLfloat* params){__glewFragmentMaterialfvSGIX(face,pname,params);}
-static PFNGLFRAGMENTMATERIALISGIXPROC __glewFragmentMaterialiSGIX = NULL;
-void glFragmentMaterialiSGIX(GLenum face,GLenum pname,const GLint param){__glewFragmentMaterialiSGIX(face,pname,param);}
-static PFNGLFRAGMENTMATERIALIVSGIXPROC __glewFragmentMaterialivSGIX = NULL;
-void glFragmentMaterialivSGIX(GLenum face,GLenum pname,const GLint* params){__glewFragmentMaterialivSGIX(face,pname,params);}
-static PFNGLGETFRAGMENTLIGHTFVSGIXPROC __glewGetFragmentLightfvSGIX = NULL;
-void glGetFragmentLightfvSGIX(GLenum light,GLenum value,GLfloat* data){__glewGetFragmentLightfvSGIX(light,value,data);}
-static PFNGLGETFRAGMENTLIGHTIVSGIXPROC __glewGetFragmentLightivSGIX = NULL;
-void glGetFragmentLightivSGIX(GLenum light,GLenum value,GLint* data){__glewGetFragmentLightivSGIX(light,value,data);}
-static PFNGLGETFRAGMENTMATERIALFVSGIXPROC __glewGetFragmentMaterialfvSGIX = NULL;
-void glGetFragmentMaterialfvSGIX(GLenum face,GLenum pname,const GLfloat* data){__glewGetFragmentMaterialfvSGIX(face,pname,data);}
-static PFNGLGETFRAGMENTMATERIALIVSGIXPROC __glewGetFragmentMaterialivSGIX = NULL;
-void glGetFragmentMaterialivSGIX(GLenum face,GLenum pname,const GLint* data){__glewGetFragmentMaterialivSGIX(face,pname,data);}
-
-static PFNGLFRAMEZOOMSGIXPROC __glewFrameZoomSGIX = NULL;
-void glFrameZoomSGIX(GLint factor){__glewFrameZoomSGIX(factor);}
-
-static PFNGLPIXELTEXGENSGIXPROC __glewPixelTexGenSGIX = NULL;
-void glPixelTexGenSGIX(GLenum mode){__glewPixelTexGenSGIX(mode);}
-
-static PFNGLREFERENCEPLANESGIXPROC __glewReferencePlaneSGIX = NULL;
-void glReferencePlaneSGIX(const GLdouble* equation){__glewReferencePlaneSGIX(equation);}
-
-static PFNGLSPRITEPARAMETERFSGIXPROC __glewSpriteParameterfSGIX = NULL;
-void glSpriteParameterfSGIX(GLenum pname,GLfloat param){__glewSpriteParameterfSGIX(pname,param);}
-static PFNGLSPRITEPARAMETERFVSGIXPROC __glewSpriteParameterfvSGIX = NULL;
-void glSpriteParameterfvSGIX(GLenum pname,GLfloat* params){__glewSpriteParameterfvSGIX(pname,params);}
-static PFNGLSPRITEPARAMETERISGIXPROC __glewSpriteParameteriSGIX = NULL;
-void glSpriteParameteriSGIX(GLenum pname,GLint param){__glewSpriteParameteriSGIX(pname,param);}
-static PFNGLSPRITEPARAMETERIVSGIXPROC __glewSpriteParameterivSGIX = NULL;
-void glSpriteParameterivSGIX(GLenum pname,GLint* params){__glewSpriteParameterivSGIX(pname,params);}
-
-static PFNGLTAGSAMPLEBUFFERSGIXPROC __glewTagSampleBufferSGIX = NULL;
-void glTagSampleBufferSGIX(void){__glewTagSampleBufferSGIX();}
-
-static PFNGLCOLORTABLEPARAMETERFVSGIPROC __glewColorTableParameterfvSGI = NULL;
-void glColorTableParameterfvSGI(GLenum target,GLenum pname,const GLfloat* params){__glewColorTableParameterfvSGI(target,pname,params);}
-static PFNGLCOLORTABLEPARAMETERIVSGIPROC __glewColorTableParameterivSGI = NULL;
-void glColorTableParameterivSGI(GLenum target,GLenum pname,const GLint* params){__glewColorTableParameterivSGI(target,pname,params);}
-static PFNGLCOLORTABLESGIPROC __glewColorTableSGI = NULL;
-void glColorTableSGI(GLenum target,GLenum internalformat,GLsizei width,GLenum format,GLenum type,const GLvoid *table){__glewColorTableSGI(target,internalformat,width,format,type,table);}
-static PFNGLCOPYCOLORTABLESGIPROC __glewCopyColorTableSGI = NULL;
-void glCopyColorTableSGI(GLenum target,GLenum internalformat,GLint x,GLint y,GLsizei width){__glewCopyColorTableSGI(target,internalformat,x,y,width);}
-static PFNGLGETCOLORTABLEPARAMETERFVSGIPROC __glewGetColorTableParameterfvSGI = NULL;
-void glGetColorTableParameterfvSGI(GLenum target,GLenum pname,GLfloat* params){__glewGetColorTableParameterfvSGI(target,pname,params);}
-static PFNGLGETCOLORTABLEPARAMETERIVSGIPROC __glewGetColorTableParameterivSGI = NULL;
-void glGetColorTableParameterivSGI(GLenum target,GLenum pname,GLint* params){__glewGetColorTableParameterivSGI(target,pname,params);}
-static PFNGLGETCOLORTABLESGIPROC __glewGetColorTableSGI = NULL;
-void glGetColorTableSGI(GLenum target,GLenum format,GLenum type,GLvoid *table){__glewGetColorTableSGI(target,format,type,table);}
-
-static PFNGLFINISHTEXTURESUNXPROC __glewFinishTextureSUNX = NULL;
-void glFinishTextureSUNX(void){__glewFinishTextureSUNX();}
-
-static PFNGLGLOBALALPHAFACTORBSUNPROC __glewGlobalAlphaFactorbSUN = NULL;
-void glGlobalAlphaFactorbSUN(GLbyte factor){__glewGlobalAlphaFactorbSUN(factor);}
-static PFNGLGLOBALALPHAFACTORDSUNPROC __glewGlobalAlphaFactordSUN = NULL;
-void glGlobalAlphaFactordSUN(GLdouble factor){__glewGlobalAlphaFactordSUN(factor);}
-static PFNGLGLOBALALPHAFACTORFSUNPROC __glewGlobalAlphaFactorfSUN = NULL;
-void glGlobalAlphaFactorfSUN(GLfloat factor){__glewGlobalAlphaFactorfSUN(factor);}
-static PFNGLGLOBALALPHAFACTORISUNPROC __glewGlobalAlphaFactoriSUN = NULL;
-void glGlobalAlphaFactoriSUN(GLint factor){__glewGlobalAlphaFactoriSUN(factor);}
-static PFNGLGLOBALALPHAFACTORSSUNPROC __glewGlobalAlphaFactorsSUN = NULL;
-void glGlobalAlphaFactorsSUN(GLshort factor){__glewGlobalAlphaFactorsSUN(factor);}
-static PFNGLGLOBALALPHAFACTORUBSUNPROC __glewGlobalAlphaFactorubSUN = NULL;
-void glGlobalAlphaFactorubSUN(GLubyte factor){__glewGlobalAlphaFactorubSUN(factor);}
-static PFNGLGLOBALALPHAFACTORUISUNPROC __glewGlobalAlphaFactoruiSUN = NULL;
-void glGlobalAlphaFactoruiSUN(GLuint factor){__glewGlobalAlphaFactoruiSUN(factor);}
-static PFNGLGLOBALALPHAFACTORUSSUNPROC __glewGlobalAlphaFactorusSUN = NULL;
-void glGlobalAlphaFactorusSUN(GLushort factor){__glewGlobalAlphaFactorusSUN(factor);}
-
-static PFNGLREADVIDEOPIXELSSUNPROC __glewReadVideoPixelsSUN = NULL;
-void glReadVideoPixelsSUN(GLint x,GLint y,GLsizei width,GLsizei height,GLenum format,GLenum type,GLvoid* pixels){__glewReadVideoPixelsSUN(x,y,width,height,format,type,pixels);}
-
-static PFNGLREPLACEMENTCODEPOINTERSUNPROC __glewReplacementCodePointerSUN = NULL;
-void glReplacementCodePointerSUN(GLenum type,GLsizei stride,const GLvoid *pointer){__glewReplacementCodePointerSUN(type,stride,pointer);}
-static PFNGLREPLACEMENTCODEUBSUNPROC __glewReplacementCodeubSUN = NULL;
-void glReplacementCodeubSUN(GLubyte code){__glewReplacementCodeubSUN(code);}
-static PFNGLREPLACEMENTCODEUBVSUNPROC __glewReplacementCodeubvSUN = NULL;
-void glReplacementCodeubvSUN(const GLubyte* code){__glewReplacementCodeubvSUN(code);}
-static PFNGLREPLACEMENTCODEUISUNPROC __glewReplacementCodeuiSUN = NULL;
-void glReplacementCodeuiSUN(GLuint code){__glewReplacementCodeuiSUN(code);}
-static PFNGLREPLACEMENTCODEUIVSUNPROC __glewReplacementCodeuivSUN = NULL;
-void glReplacementCodeuivSUN(const GLuint* code){__glewReplacementCodeuivSUN(code);}
-static PFNGLREPLACEMENTCODEUSSUNPROC __glewReplacementCodeusSUN = NULL;
-void glReplacementCodeusSUN(GLushort code){__glewReplacementCodeusSUN(code);}
-static PFNGLREPLACEMENTCODEUSVSUNPROC __glewReplacementCodeusvSUN = NULL;
-void glReplacementCodeusvSUN(const GLushort* code){__glewReplacementCodeusvSUN(code);}
-
-static PFNGLCOLOR3FVERTEX3FSUNPROC __glewColor3fVertex3fSUN = NULL;
-void glColor3fVertex3fSUN(GLfloat r,GLfloat g,GLfloat b,GLfloat x,GLfloat y,GLfloat z){__glewColor3fVertex3fSUN(r,g,b,x,y,z);}
-static PFNGLCOLOR3FVERTEX3FVSUNPROC __glewColor3fVertex3fvSUN = NULL;
-void glColor3fVertex3fvSUN(const GLfloat* c,const GLfloat *v){__glewColor3fVertex3fvSUN(c,v);}
-static PFNGLCOLOR4FNORMAL3FVERTEX3FSUNPROC __glewColor4fNormal3fVertex3fSUN = NULL;
-void glColor4fNormal3fVertex3fSUN(GLfloat r,GLfloat g,GLfloat b,GLfloat a,GLfloat nx,GLfloat ny,GLfloat nz,GLfloat x,GLfloat y,GLfloat z){__glewColor4fNormal3fVertex3fSUN(r,g,b,a,nx,ny,nz,x,y,z);}
-static PFNGLCOLOR4FNORMAL3FVERTEX3FVSUNPROC __glewColor4fNormal3fVertex3fvSUN = NULL;
-void glColor4fNormal3fVertex3fvSUN(const GLfloat* c,const GLfloat *n,const GLfloat *v){__glewColor4fNormal3fVertex3fvSUN(c,n,v);}
-static PFNGLCOLOR4UBVERTEX2FSUNPROC __glewColor4ubVertex2fSUN = NULL;
-void glColor4ubVertex2fSUN(GLubyte r,GLubyte g,GLubyte b,GLubyte a,GLfloat x,GLfloat y){__glewColor4ubVertex2fSUN(r,g,b,a,x,y);}
-static PFNGLCOLOR4UBVERTEX2FVSUNPROC __glewColor4ubVertex2fvSUN = NULL;
-void glColor4ubVertex2fvSUN(const GLubyte* c,const GLfloat *v){__glewColor4ubVertex2fvSUN(c,v);}
-static PFNGLCOLOR4UBVERTEX3FSUNPROC __glewColor4ubVertex3fSUN = NULL;
-void glColor4ubVertex3fSUN(GLubyte r,GLubyte g,GLubyte b,GLubyte a,GLfloat x,GLfloat y,GLfloat z){__glewColor4ubVertex3fSUN(r,g,b,a,x,y,z);}
-static PFNGLCOLOR4UBVERTEX3FVSUNPROC __glewColor4ubVertex3fvSUN = NULL;
-void glColor4ubVertex3fvSUN(const GLubyte* c,const GLfloat *v){__glewColor4ubVertex3fvSUN(c,v);}
-static PFNGLNORMAL3FVERTEX3FSUNPROC __glewNormal3fVertex3fSUN = NULL;
-void glNormal3fVertex3fSUN(GLfloat nx,GLfloat ny,GLfloat nz,GLfloat x,GLfloat y,GLfloat z){__glewNormal3fVertex3fSUN(nx,ny,nz,x,y,z);}
-static PFNGLNORMAL3FVERTEX3FVSUNPROC __glewNormal3fVertex3fvSUN = NULL;
-void glNormal3fVertex3fvSUN(const GLfloat* n,const GLfloat *v){__glewNormal3fVertex3fvSUN(n,v);}
-static PFNGLREPLACEMENTCODEUICOLOR3FVERTEX3FSUNPROC __glewReplacementCodeuiColor3fVertex3fSUN = NULL;
-void glReplacementCodeuiColor3fVertex3fSUN(GLuint rc,GLfloat r,GLfloat g,GLfloat b,GLfloat x,GLfloat y,GLfloat z){__glewReplacementCodeuiColor3fVertex3fSUN(rc,r,g,b,x,y,z);}
-static PFNGLREPLACEMENTCODEUICOLOR3FVERTEX3FVSUNPROC __glewReplacementCodeuiColor3fVertex3fvSUN = NULL;
-void glReplacementCodeuiColor3fVertex3fvSUN(const GLuint* rc,const GLfloat *c,const GLfloat *v){__glewReplacementCodeuiColor3fVertex3fvSUN(rc,c,v);}
-static PFNGLREPLACEMENTCODEUICOLOR4FNORMAL3FVERTEX3FSUNPROC __glewReplacementCodeuiColor4fNormal3fVertex3fSUN = NULL;
-void glReplacementCodeuiColor4fNormal3fVertex3fSUN(GLuint rc,GLfloat r,GLfloat g,GLfloat b,GLfloat a,GLfloat nx,GLfloat ny,GLfloat nz,GLfloat x,GLfloat y,GLfloat z){__glewReplacementCodeuiColor4fNormal3fVertex3fSUN(rc,r,g,b,a,nx,ny,nz,x,y,z);}
-static PFNGLREPLACEMENTCODEUICOLOR4FNORMAL3FVERTEX3FVSUNPROC __glewReplacementCodeuiColor4fNormal3fVertex3fvSUN = NULL;
-void glReplacementCodeuiColor4fNormal3fVertex3fvSUN(const GLuint* rc,const GLfloat *c,const GLfloat *n,const GLfloat *v){__glewReplacementCodeuiColor4fNormal3fVertex3fvSUN(rc,c,n,v);}
-static PFNGLREPLACEMENTCODEUICOLOR4UBVERTEX3FSUNPROC __glewReplacementCodeuiColor4ubVertex3fSUN = NULL;
-void glReplacementCodeuiColor4ubVertex3fSUN(GLuint rc,GLubyte r,GLubyte g,GLubyte b,GLubyte a,GLfloat x,GLfloat y,GLfloat z){__glewReplacementCodeuiColor4ubVertex3fSUN(rc,r,g,b,a,x,y,z);}
-static PFNGLREPLACEMENTCODEUICOLOR4UBVERTEX3FVSUNPROC __glewReplacementCodeuiColor4ubVertex3fvSUN = NULL;
-void glReplacementCodeuiColor4ubVertex3fvSUN(const GLuint* rc,const GLubyte *c,const GLfloat *v){__glewReplacementCodeuiColor4ubVertex3fvSUN(rc,c,v);}
-static PFNGLREPLACEMENTCODEUINORMAL3FVERTEX3FSUNPROC __glewReplacementCodeuiNormal3fVertex3fSUN = NULL;
-void glReplacementCodeuiNormal3fVertex3fSUN(GLuint rc,GLfloat nx,GLfloat ny,GLfloat nz,GLfloat x,GLfloat y,GLfloat z){__glewReplacementCodeuiNormal3fVertex3fSUN(rc,nx,ny,nz,x,y,z);}
-static PFNGLREPLACEMENTCODEUINORMAL3FVERTEX3FVSUNPROC __glewReplacementCodeuiNormal3fVertex3fvSUN = NULL;
-void glReplacementCodeuiNormal3fVertex3fvSUN(const GLuint* rc,const GLfloat *n,const GLfloat *v){__glewReplacementCodeuiNormal3fVertex3fvSUN(rc,n,v);}
-static PFNGLREPLACEMENTCODEUITEXCOORD2FCOLOR4FNORMAL3FVERTEX3FSUNPROC __glewReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN = NULL;
-void glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN(GLuint rc,GLfloat s,GLfloat t,GLfloat r,GLfloat g,GLfloat b,GLfloat a,GLfloat nx,GLfloat ny,GLfloat nz,GLfloat x,GLfloat y,GLfloat z){__glewReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN(rc,s,t,r,g,b,a,nx,ny,nz,x,y,z);}
-static PFNGLREPLACEMENTCODEUITEXCOORD2FCOLOR4FNORMAL3FVERTEX3FVSUNPROC __glewReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN = NULL;
-void glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN(const GLuint* rc,const GLfloat *tc,const GLfloat *c,const GLfloat *n,const GLfloat *v){__glewReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN(rc,tc,c,n,v);}
-static PFNGLREPLACEMENTCODEUITEXCOORD2FNORMAL3FVERTEX3FSUNPROC __glewReplacementCodeuiTexCoord2fNormal3fVertex3fSUN = NULL;
-void glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN(GLuint rc,GLfloat s,GLfloat t,GLfloat nx,GLfloat ny,GLfloat nz,GLfloat x,GLfloat y,GLfloat z){__glewReplacementCodeuiTexCoord2fNormal3fVertex3fSUN(rc,s,t,nx,ny,nz,x,y,z);}
-static PFNGLREPLACEMENTCODEUITEXCOORD2FNORMAL3FVERTEX3FVSUNPROC __glewReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN = NULL;
-void glReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN(const GLuint* rc,const GLfloat *tc,const GLfloat *n,const GLfloat *v){__glewReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN(rc,tc,n,v);}
-static PFNGLREPLACEMENTCODEUITEXCOORD2FVERTEX3FSUNPROC __glewReplacementCodeuiTexCoord2fVertex3fSUN = NULL;
-void glReplacementCodeuiTexCoord2fVertex3fSUN(GLuint rc,GLfloat s,GLfloat t,GLfloat x,GLfloat y,GLfloat z){__glewReplacementCodeuiTexCoord2fVertex3fSUN(rc,s,t,x,y,z);}
-static PFNGLREPLACEMENTCODEUITEXCOORD2FVERTEX3FVSUNPROC __glewReplacementCodeuiTexCoord2fVertex3fvSUN = NULL;
-void glReplacementCodeuiTexCoord2fVertex3fvSUN(const GLuint* rc,const GLfloat *tc,const GLfloat *v){__glewReplacementCodeuiTexCoord2fVertex3fvSUN(rc,tc,v);}
-static PFNGLREPLACEMENTCODEUIVERTEX3FSUNPROC __glewReplacementCodeuiVertex3fSUN = NULL;
-void glReplacementCodeuiVertex3fSUN(GLuint rc,GLfloat x,GLfloat y,GLfloat z){__glewReplacementCodeuiVertex3fSUN(rc,x,y,z);}
-static PFNGLREPLACEMENTCODEUIVERTEX3FVSUNPROC __glewReplacementCodeuiVertex3fvSUN = NULL;
-void glReplacementCodeuiVertex3fvSUN(const GLuint* rc,const GLfloat *v){__glewReplacementCodeuiVertex3fvSUN(rc,v);}
-static PFNGLTEXCOORD2FCOLOR3FVERTEX3FSUNPROC __glewTexCoord2fColor3fVertex3fSUN = NULL;
-void glTexCoord2fColor3fVertex3fSUN(GLfloat s,GLfloat t,GLfloat r,GLfloat g,GLfloat b,GLfloat x,GLfloat y,GLfloat z){__glewTexCoord2fColor3fVertex3fSUN(s,t,r,g,b,x,y,z);}
-static PFNGLTEXCOORD2FCOLOR3FVERTEX3FVSUNPROC __glewTexCoord2fColor3fVertex3fvSUN = NULL;
-void glTexCoord2fColor3fVertex3fvSUN(const GLfloat* tc,const GLfloat *c,const GLfloat *v){__glewTexCoord2fColor3fVertex3fvSUN(tc,c,v);}
-static PFNGLTEXCOORD2FCOLOR4FNORMAL3FVERTEX3FSUNPROC __glewTexCoord2fColor4fNormal3fVertex3fSUN = NULL;
-void glTexCoord2fColor4fNormal3fVertex3fSUN(GLfloat s,GLfloat t,GLfloat r,GLfloat g,GLfloat b,GLfloat a,GLfloat nx,GLfloat ny,GLfloat nz,GLfloat x,GLfloat y,GLfloat z){__glewTexCoord2fColor4fNormal3fVertex3fSUN(s,t,r,g,b,a,nx,ny,nz,x,y,z);}
-static PFNGLTEXCOORD2FCOLOR4FNORMAL3FVERTEX3FVSUNPROC __glewTexCoord2fColor4fNormal3fVertex3fvSUN = NULL;
-void glTexCoord2fColor4fNormal3fVertex3fvSUN(const GLfloat* tc,const GLfloat *c,const GLfloat *n,const GLfloat *v){__glewTexCoord2fColor4fNormal3fVertex3fvSUN(tc,c,n,v);}
-static PFNGLTEXCOORD2FCOLOR4UBVERTEX3FSUNPROC __glewTexCoord2fColor4ubVertex3fSUN = NULL;
-void glTexCoord2fColor4ubVertex3fSUN(GLfloat s,GLfloat t,GLubyte r,GLubyte g,GLubyte b,GLubyte a,GLfloat x,GLfloat y,GLfloat z){__glewTexCoord2fColor4ubVertex3fSUN(s,t,r,g,b,a,x,y,z);}
-static PFNGLTEXCOORD2FCOLOR4UBVERTEX3FVSUNPROC __glewTexCoord2fColor4ubVertex3fvSUN = NULL;
-void glTexCoord2fColor4ubVertex3fvSUN(const GLfloat* tc,const GLubyte *c,const GLfloat *v){__glewTexCoord2fColor4ubVertex3fvSUN(tc,c,v);}
-static PFNGLTEXCOORD2FNORMAL3FVERTEX3FSUNPROC __glewTexCoord2fNormal3fVertex3fSUN = NULL;
-void glTexCoord2fNormal3fVertex3fSUN(GLfloat s,GLfloat t,GLfloat nx,GLfloat ny,GLfloat nz,GLfloat x,GLfloat y,GLfloat z){__glewTexCoord2fNormal3fVertex3fSUN(s,t,nx,ny,nz,x,y,z);}
-static PFNGLTEXCOORD2FNORMAL3FVERTEX3FVSUNPROC __glewTexCoord2fNormal3fVertex3fvSUN = NULL;
-void glTexCoord2fNormal3fVertex3fvSUN(const GLfloat* tc,const GLfloat *n,const GLfloat *v){__glewTexCoord2fNormal3fVertex3fvSUN(tc,n,v);}
-static PFNGLTEXCOORD2FVERTEX3FSUNPROC __glewTexCoord2fVertex3fSUN = NULL;
-void glTexCoord2fVertex3fSUN(GLfloat s,GLfloat t,GLfloat x,GLfloat y,GLfloat z){__glewTexCoord2fVertex3fSUN(s,t,x,y,z);}
-static PFNGLTEXCOORD2FVERTEX3FVSUNPROC __glewTexCoord2fVertex3fvSUN = NULL;
-void glTexCoord2fVertex3fvSUN(const GLfloat* tc,const GLfloat *v){__glewTexCoord2fVertex3fvSUN(tc,v);}
-static PFNGLTEXCOORD4FCOLOR4FNORMAL3FVERTEX4FSUNPROC __glewTexCoord4fColor4fNormal3fVertex4fSUN = NULL;
-void glTexCoord4fColor4fNormal3fVertex4fSUN(GLfloat s,GLfloat t,GLfloat p,GLfloat q,GLfloat r,GLfloat g,GLfloat b,GLfloat a,GLfloat nx,GLfloat ny,GLfloat nz,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewTexCoord4fColor4fNormal3fVertex4fSUN(s,t,p,q,r,g,b,a,nx,ny,nz,x,y,z,w);}
-static PFNGLTEXCOORD4FCOLOR4FNORMAL3FVERTEX4FVSUNPROC __glewTexCoord4fColor4fNormal3fVertex4fvSUN = NULL;
-void glTexCoord4fColor4fNormal3fVertex4fvSUN(const GLfloat* tc,const GLfloat *c,const GLfloat *n,const GLfloat *v){__glewTexCoord4fColor4fNormal3fVertex4fvSUN(tc,c,n,v);}
-static PFNGLTEXCOORD4FVERTEX4FSUNPROC __glewTexCoord4fVertex4fSUN = NULL;
-void glTexCoord4fVertex4fSUN(GLfloat s,GLfloat t,GLfloat p,GLfloat q,GLfloat x,GLfloat y,GLfloat z,GLfloat w){__glewTexCoord4fVertex4fSUN(s,t,p,q,x,y,z,w);}
-static PFNGLTEXCOORD4FVERTEX4FVSUNPROC __glewTexCoord4fVertex4fvSUN = NULL;
-void glTexCoord4fVertex4fvSUN(const GLfloat* tc,const GLfloat *v){__glewTexCoord4fVertex4fvSUN(tc,v);}
-
-static PFNGLADDSWAPHINTRECTWINPROC __glewAddSwapHintRectWIN = NULL;
-void glAddSwapHintRectWIN(GLint x,GLint y,GLsizei width,GLsizei height){__glewAddSwapHintRectWIN(x,y,width,height);}
+PFNGLACCUMPROC __glewAccum = NULL;
+PFNGLALPHAFUNCPROC __glewAlphaFunc = NULL;
+PFNGLARETEXTURESRESIDENTPROC __glewAreTexturesResident = NULL;
+PFNGLARRAYELEMENTPROC __glewArrayElement = NULL;
+PFNGLBEGINPROC __glewBegin = NULL;
+PFNGLBINDTEXTUREPROC __glewBindTexture = NULL;
+PFNGLBITMAPPROC __glewBitmap = NULL;
+PFNGLBLENDFUNCPROC __glewBlendFunc = NULL;
+PFNGLCALLLISTPROC __glewCallList = NULL;
+PFNGLCALLLISTSPROC __glewCallLists = NULL;
+PFNGLCLEARPROC __glewClear = NULL;
+PFNGLCLEARACCUMPROC __glewClearAccum = NULL;
+PFNGLCLEARCOLORPROC __glewClearColor = NULL;
+PFNGLCLEARDEPTHPROC __glewClearDepth = NULL;
+PFNGLCLEARINDEXPROC __glewClearIndex = NULL;
+PFNGLCLEARSTENCILPROC __glewClearStencil = NULL;
+PFNGLCLIPPLANEPROC __glewClipPlane = NULL;
+PFNGLCOLOR3BPROC __glewColor3b = NULL;
+PFNGLCOLOR3BVPROC __glewColor3bv = NULL;
+PFNGLCOLOR3DPROC __glewColor3d = NULL;
+PFNGLCOLOR3DVPROC __glewColor3dv = NULL;
+PFNGLCOLOR3FPROC __glewColor3f = NULL;
+PFNGLCOLOR3FVPROC __glewColor3fv = NULL;
+PFNGLCOLOR3IPROC __glewColor3i = NULL;
+PFNGLCOLOR3IVPROC __glewColor3iv = NULL;
+PFNGLCOLOR3SPROC __glewColor3s = NULL;
+PFNGLCOLOR3SVPROC __glewColor3sv = NULL;
+PFNGLCOLOR3UBPROC __glewColor3ub = NULL;
+PFNGLCOLOR3UBVPROC __glewColor3ubv = NULL;
+PFNGLCOLOR3UIPROC __glewColor3ui = NULL;
+PFNGLCOLOR3UIVPROC __glewColor3uiv = NULL;
+PFNGLCOLOR3USPROC __glewColor3us = NULL;
+PFNGLCOLOR3USVPROC __glewColor3usv = NULL;
+PFNGLCOLOR4BPROC __glewColor4b = NULL;
+PFNGLCOLOR4BVPROC __glewColor4bv = NULL;
+PFNGLCOLOR4DPROC __glewColor4d = NULL;
+PFNGLCOLOR4DVPROC __glewColor4dv = NULL;
+PFNGLCOLOR4FPROC __glewColor4f = NULL;
+PFNGLCOLOR4FVPROC __glewColor4fv = NULL;
+PFNGLCOLOR4IPROC __glewColor4i = NULL;
+PFNGLCOLOR4IVPROC __glewColor4iv = NULL;
+PFNGLCOLOR4SPROC __glewColor4s = NULL;
+PFNGLCOLOR4SVPROC __glewColor4sv = NULL;
+PFNGLCOLOR4UBPROC __glewColor4ub = NULL;
+PFNGLCOLOR4UBVPROC __glewColor4ubv = NULL;
+PFNGLCOLOR4UIPROC __glewColor4ui = NULL;
+PFNGLCOLOR4UIVPROC __glewColor4uiv = NULL;
+PFNGLCOLOR4USPROC __glewColor4us = NULL;
+PFNGLCOLOR4USVPROC __glewColor4usv = NULL;
+PFNGLCOLORMASKPROC __glewColorMask = NULL;
+PFNGLCOLORMATERIALPROC __glewColorMaterial = NULL;
+PFNGLCOLORPOINTERPROC __glewColorPointer = NULL;
+PFNGLCOPYPIXELSPROC __glewCopyPixels = NULL;
+PFNGLCOPYTEXIMAGE1DPROC __glewCopyTexImage1D = NULL;
+PFNGLCOPYTEXIMAGE2DPROC __glewCopyTexImage2D = NULL;
+PFNGLCOPYTEXSUBIMAGE1DPROC __glewCopyTexSubImage1D = NULL;
+PFNGLCOPYTEXSUBIMAGE2DPROC __glewCopyTexSubImage2D = NULL;
+PFNGLCULLFACEPROC __glewCullFace = NULL;
+PFNGLDELETELISTSPROC __glewDeleteLists = NULL;
+PFNGLDELETETEXTURESPROC __glewDeleteTextures = NULL;
+PFNGLDEPTHFUNCPROC __glewDepthFunc = NULL;
+PFNGLDEPTHMASKPROC __glewDepthMask = NULL;
+PFNGLDEPTHRANGEPROC __glewDepthRange = NULL;
+PFNGLDISABLEPROC __glewDisable = NULL;
+PFNGLDISABLECLIENTSTATEPROC __glewDisableClientState = NULL;
+PFNGLDRAWARRAYSPROC __glewDrawArrays = NULL;
+PFNGLDRAWBUFFERPROC __glewDrawBuffer = NULL;
+PFNGLDRAWELEMENTSPROC __glewDrawElements = NULL;
+PFNGLDRAWPIXELSPROC __glewDrawPixels = NULL;
+PFNGLEDGEFLAGPROC __glewEdgeFlag = NULL;
+PFNGLEDGEFLAGPOINTERPROC __glewEdgeFlagPointer = NULL;
+PFNGLEDGEFLAGVPROC __glewEdgeFlagv = NULL;
+PFNGLENABLEPROC __glewEnable = NULL;
+PFNGLENABLECLIENTSTATEPROC __glewEnableClientState = NULL;
+PFNGLENDPROC __glewEnd = NULL;
+PFNGLENDLISTPROC __glewEndList = NULL;
+PFNGLEVALCOORD1DPROC __glewEvalCoord1d = NULL;
+PFNGLEVALCOORD1DVPROC __glewEvalCoord1dv = NULL;
+PFNGLEVALCOORD1FPROC __glewEvalCoord1f = NULL;
+PFNGLEVALCOORD1FVPROC __glewEvalCoord1fv = NULL;
+PFNGLEVALCOORD2DPROC __glewEvalCoord2d = NULL;
+PFNGLEVALCOORD2DVPROC __glewEvalCoord2dv = NULL;
+PFNGLEVALCOORD2FPROC __glewEvalCoord2f = NULL;
+PFNGLEVALCOORD2FVPROC __glewEvalCoord2fv = NULL;
+PFNGLEVALMESH1PROC __glewEvalMesh1 = NULL;
+PFNGLEVALMESH2PROC __glewEvalMesh2 = NULL;
+PFNGLEVALPOINT1PROC __glewEvalPoint1 = NULL;
+PFNGLEVALPOINT2PROC __glewEvalPoint2 = NULL;
+PFNGLFEEDBACKBUFFERPROC __glewFeedbackBuffer = NULL;
+PFNGLFINISHPROC __glewFinish = NULL;
+PFNGLFLUSHPROC __glewFlush = NULL;
+PFNGLFOGFPROC __glewFogf = NULL;
+PFNGLFOGFVPROC __glewFogfv = NULL;
+PFNGLFOGIPROC __glewFogi = NULL;
+PFNGLFOGIVPROC __glewFogiv = NULL;
+PFNGLFRONTFACEPROC __glewFrontFace = NULL;
+PFNGLFRUSTUMPROC __glewFrustum = NULL;
+PFNGLGENLISTSPROC __glewGenLists = NULL;
+PFNGLGENTEXTURESPROC __glewGenTextures = NULL;
+PFNGLGETBOOLEANVPROC __glewGetBooleanv = NULL;
+PFNGLGETCLIPPLANEPROC __glewGetClipPlane = NULL;
+PFNGLGETDOUBLEVPROC __glewGetDoublev = NULL;
+PFNGLGETERRORPROC __glewGetError = NULL;
+PFNGLGETFLOATVPROC __glewGetFloatv = NULL;
+PFNGLGETINTEGERVPROC __glewGetIntegerv = NULL;
+PFNGLGETLIGHTFVPROC __glewGetLightfv = NULL;
+PFNGLGETLIGHTIVPROC __glewGetLightiv = NULL;
+PFNGLGETMAPDVPROC __glewGetMapdv = NULL;
+PFNGLGETMAPFVPROC __glewGetMapfv = NULL;
+PFNGLGETMAPIVPROC __glewGetMapiv = NULL;
+PFNGLGETMATERIALFVPROC __glewGetMaterialfv = NULL;
+PFNGLGETMATERIALIVPROC __glewGetMaterialiv = NULL;
+PFNGLGETPIXELMAPFVPROC __glewGetPixelMapfv = NULL;
+PFNGLGETPIXELMAPUIVPROC __glewGetPixelMapuiv = NULL;
+PFNGLGETPIXELMAPUSVPROC __glewGetPixelMapusv = NULL;
+PFNGLGETPOINTERVPROC __glewGetPointerv = NULL;
+PFNGLGETPOLYGONSTIPPLEPROC __glewGetPolygonStipple = NULL;
+PFNGLGETSTRINGPROC __glewGetString = NULL;
+PFNGLGETTEXENVFVPROC __glewGetTexEnvfv = NULL;
+PFNGLGETTEXENVIVPROC __glewGetTexEnviv = NULL;
+PFNGLGETTEXGENDVPROC __glewGetTexGendv = NULL;
+PFNGLGETTEXGENFVPROC __glewGetTexGenfv = NULL;
+PFNGLGETTEXGENIVPROC __glewGetTexGeniv = NULL;
+PFNGLGETTEXIMAGEPROC __glewGetTexImage = NULL;
+PFNGLGETTEXLEVELPARAMETERFVPROC __glewGetTexLevelParameterfv = NULL;
+PFNGLGETTEXLEVELPARAMETERIVPROC __glewGetTexLevelParameteriv = NULL;
+PFNGLGETTEXPARAMETERFVPROC __glewGetTexParameterfv = NULL;
+PFNGLGETTEXPARAMETERIVPROC __glewGetTexParameteriv = NULL;
+PFNGLHINTPROC __glewHint = NULL;
+PFNGLINDEXMASKPROC __glewIndexMask = NULL;
+PFNGLINDEXPOINTERPROC __glewIndexPointer = NULL;
+PFNGLINDEXDPROC __glewIndexd = NULL;
+PFNGLINDEXDVPROC __glewIndexdv = NULL;
+PFNGLINDEXFPROC __glewIndexf = NULL;
+PFNGLINDEXFVPROC __glewIndexfv = NULL;
+PFNGLINDEXIPROC __glewIndexi = NULL;
+PFNGLINDEXIVPROC __glewIndexiv = NULL;
+PFNGLINDEXSPROC __glewIndexs = NULL;
+PFNGLINDEXSVPROC __glewIndexsv = NULL;
+PFNGLINDEXUBPROC __glewIndexub = NULL;
+PFNGLINDEXUBVPROC __glewIndexubv = NULL;
+PFNGLINITNAMESPROC __glewInitNames = NULL;
+PFNGLINTERLEAVEDARRAYSPROC __glewInterleavedArrays = NULL;
+PFNGLISENABLEDPROC __glewIsEnabled = NULL;
+PFNGLISLISTPROC __glewIsList = NULL;
+PFNGLISTEXTUREPROC __glewIsTexture = NULL;
+PFNGLLIGHTMODELFPROC __glewLightModelf = NULL;
+PFNGLLIGHTMODELFVPROC __glewLightModelfv = NULL;
+PFNGLLIGHTMODELIPROC __glewLightModeli = NULL;
+PFNGLLIGHTMODELIVPROC __glewLightModeliv = NULL;
+PFNGLLIGHTFPROC __glewLightf = NULL;
+PFNGLLIGHTFVPROC __glewLightfv = NULL;
+PFNGLLIGHTIPROC __glewLighti = NULL;
+PFNGLLIGHTIVPROC __glewLightiv = NULL;
+PFNGLLINESTIPPLEPROC __glewLineStipple = NULL;
+PFNGLLINEWIDTHPROC __glewLineWidth = NULL;
+PFNGLLISTBASEPROC __glewListBase = NULL;
+PFNGLLOADIDENTITYPROC __glewLoadIdentity = NULL;
+PFNGLLOADMATRIXDPROC __glewLoadMatrixd = NULL;
+PFNGLLOADMATRIXFPROC __glewLoadMatrixf = NULL;
+PFNGLLOADNAMEPROC __glewLoadName = NULL;
+PFNGLLOGICOPPROC __glewLogicOp = NULL;
+PFNGLMAP1DPROC __glewMap1d = NULL;
+PFNGLMAP1FPROC __glewMap1f = NULL;
+PFNGLMAP2DPROC __glewMap2d = NULL;
+PFNGLMAP2FPROC __glewMap2f = NULL;
+PFNGLMAPGRID1DPROC __glewMapGrid1d = NULL;
+PFNGLMAPGRID1FPROC __glewMapGrid1f = NULL;
+PFNGLMAPGRID2DPROC __glewMapGrid2d = NULL;
+PFNGLMAPGRID2FPROC __glewMapGrid2f = NULL;
+PFNGLMATERIALFPROC __glewMaterialf = NULL;
+PFNGLMATERIALFVPROC __glewMaterialfv = NULL;
+PFNGLMATERIALIPROC __glewMateriali = NULL;
+PFNGLMATERIALIVPROC __glewMaterialiv = NULL;
+PFNGLMATRIXMODEPROC __glewMatrixMode = NULL;
+PFNGLMULTMATRIXDPROC __glewMultMatrixd = NULL;
+PFNGLMULTMATRIXFPROC __glewMultMatrixf = NULL;
+PFNGLNEWLISTPROC __glewNewList = NULL;
+PFNGLNORMAL3BPROC __glewNormal3b = NULL;
+PFNGLNORMAL3BVPROC __glewNormal3bv = NULL;
+PFNGLNORMAL3DPROC __glewNormal3d = NULL;
+PFNGLNORMAL3DVPROC __glewNormal3dv = NULL;
+PFNGLNORMAL3FPROC __glewNormal3f = NULL;
+PFNGLNORMAL3FVPROC __glewNormal3fv = NULL;
+PFNGLNORMAL3IPROC __glewNormal3i = NULL;
+PFNGLNORMAL3IVPROC __glewNormal3iv = NULL;
+PFNGLNORMAL3SPROC __glewNormal3s = NULL;
+PFNGLNORMAL3SVPROC __glewNormal3sv = NULL;
+PFNGLNORMALPOINTERPROC __glewNormalPointer = NULL;
+PFNGLORTHOPROC __glewOrtho = NULL;
+PFNGLPASSTHROUGHPROC __glewPassThrough = NULL;
+PFNGLPIXELMAPFVPROC __glewPixelMapfv = NULL;
+PFNGLPIXELMAPUIVPROC __glewPixelMapuiv = NULL;
+PFNGLPIXELMAPUSVPROC __glewPixelMapusv = NULL;
+PFNGLPIXELSTOREFPROC __glewPixelStoref = NULL;
+PFNGLPIXELSTOREIPROC __glewPixelStorei = NULL;
+PFNGLPIXELTRANSFERFPROC __glewPixelTransferf = NULL;
+PFNGLPIXELTRANSFERIPROC __glewPixelTransferi = NULL;
+PFNGLPIXELZOOMPROC __glewPixelZoom = NULL;
+PFNGLPOINTSIZEPROC __glewPointSize = NULL;
+PFNGLPOLYGONMODEPROC __glewPolygonMode = NULL;
+PFNGLPOLYGONOFFSETPROC __glewPolygonOffset = NULL;
+PFNGLPOLYGONSTIPPLEPROC __glewPolygonStipple = NULL;
+PFNGLPOPATTRIBPROC __glewPopAttrib = NULL;
+PFNGLPOPCLIENTATTRIBPROC __glewPopClientAttrib = NULL;
+PFNGLPOPMATRIXPROC __glewPopMatrix = NULL;
+PFNGLPOPNAMEPROC __glewPopName = NULL;
+PFNGLPRIORITIZETEXTURESPROC __glewPrioritizeTextures = NULL;
+PFNGLPUSHATTRIBPROC __glewPushAttrib = NULL;
+PFNGLPUSHCLIENTATTRIBPROC __glewPushClientAttrib = NULL;
+PFNGLPUSHMATRIXPROC __glewPushMatrix = NULL;
+PFNGLPUSHNAMEPROC __glewPushName = NULL;
+PFNGLRASTERPOS2DPROC __glewRasterPos2d = NULL;
+PFNGLRASTERPOS2DVPROC __glewRasterPos2dv = NULL;
+PFNGLRASTERPOS2FPROC __glewRasterPos2f = NULL;
+PFNGLRASTERPOS2FVPROC __glewRasterPos2fv = NULL;
+PFNGLRASTERPOS2IPROC __glewRasterPos2i = NULL;
+PFNGLRASTERPOS2IVPROC __glewRasterPos2iv = NULL;
+PFNGLRASTERPOS2SPROC __glewRasterPos2s = NULL;
+PFNGLRASTERPOS2SVPROC __glewRasterPos2sv = NULL;
+PFNGLRASTERPOS3DPROC __glewRasterPos3d = NULL;
+PFNGLRASTERPOS3DVPROC __glewRasterPos3dv = NULL;
+PFNGLRASTERPOS3FPROC __glewRasterPos3f = NULL;
+PFNGLRASTERPOS3FVPROC __glewRasterPos3fv = NULL;
+PFNGLRASTERPOS3IPROC __glewRasterPos3i = NULL;
+PFNGLRASTERPOS3IVPROC __glewRasterPos3iv = NULL;
+PFNGLRASTERPOS3SPROC __glewRasterPos3s = NULL;
+PFNGLRASTERPOS3SVPROC __glewRasterPos3sv = NULL;
+PFNGLRASTERPOS4DPROC __glewRasterPos4d = NULL;
+PFNGLRASTERPOS4DVPROC __glewRasterPos4dv = NULL;
+PFNGLRASTERPOS4FPROC __glewRasterPos4f = NULL;
+PFNGLRASTERPOS4FVPROC __glewRasterPos4fv = NULL;
+PFNGLRASTERPOS4IPROC __glewRasterPos4i = NULL;
+PFNGLRASTERPOS4IVPROC __glewRasterPos4iv = NULL;
+PFNGLRASTERPOS4SPROC __glewRasterPos4s = NULL;
+PFNGLRASTERPOS4SVPROC __glewRasterPos4sv = NULL;
+PFNGLREADBUFFERPROC __glewReadBuffer = NULL;
+PFNGLREADPIXELSPROC __glewReadPixels = NULL;
+PFNGLRECTDPROC __glewRectd = NULL;
+PFNGLRECTDVPROC __glewRectdv = NULL;
+PFNGLRECTFPROC __glewRectf = NULL;
+PFNGLRECTFVPROC __glewRectfv = NULL;
+PFNGLRECTIPROC __glewRecti = NULL;
+PFNGLRECTIVPROC __glewRectiv = NULL;
+PFNGLRECTSPROC __glewRects = NULL;
+PFNGLRECTSVPROC __glewRectsv = NULL;
+PFNGLRENDERMODEPROC __glewRenderMode = NULL;
+PFNGLROTATEDPROC __glewRotated = NULL;
+PFNGLROTATEFPROC __glewRotatef = NULL;
+PFNGLSCALEDPROC __glewScaled = NULL;
+PFNGLSCALEFPROC __glewScalef = NULL;
+PFNGLSCISSORPROC __glewScissor = NULL;
+PFNGLSELECTBUFFERPROC __glewSelectBuffer = NULL;
+PFNGLSHADEMODELPROC __glewShadeModel = NULL;
+PFNGLSTENCILFUNCPROC __glewStencilFunc = NULL;
+PFNGLSTENCILMASKPROC __glewStencilMask = NULL;
+PFNGLSTENCILOPPROC __glewStencilOp = NULL;
+PFNGLTEXCOORD1DPROC __glewTexCoord1d = NULL;
+PFNGLTEXCOORD1DVPROC __glewTexCoord1dv = NULL;
+PFNGLTEXCOORD1FPROC __glewTexCoord1f = NULL;
+PFNGLTEXCOORD1FVPROC __glewTexCoord1fv = NULL;
+PFNGLTEXCOORD1IPROC __glewTexCoord1i = NULL;
+PFNGLTEXCOORD1IVPROC __glewTexCoord1iv = NULL;
+PFNGLTEXCOORD1SPROC __glewTexCoord1s = NULL;
+PFNGLTEXCOORD1SVPROC __glewTexCoord1sv = NULL;
+PFNGLTEXCOORD2DPROC __glewTexCoord2d = NULL;
+PFNGLTEXCOORD2DVPROC __glewTexCoord2dv = NULL;
+PFNGLTEXCOORD2FPROC __glewTexCoord2f = NULL;
+PFNGLTEXCOORD2FVPROC __glewTexCoord2fv = NULL;
+PFNGLTEXCOORD2IPROC __glewTexCoord2i = NULL;
+PFNGLTEXCOORD2IVPROC __glewTexCoord2iv = NULL;
+PFNGLTEXCOORD2SPROC __glewTexCoord2s = NULL;
+PFNGLTEXCOORD2SVPROC __glewTexCoord2sv = NULL;
+PFNGLTEXCOORD3DPROC __glewTexCoord3d = NULL;
+PFNGLTEXCOORD3DVPROC __glewTexCoord3dv = NULL;
+PFNGLTEXCOORD3FPROC __glewTexCoord3f = NULL;
+PFNGLTEXCOORD3FVPROC __glewTexCoord3fv = NULL;
+PFNGLTEXCOORD3IPROC __glewTexCoord3i = NULL;
+PFNGLTEXCOORD3IVPROC __glewTexCoord3iv = NULL;
+PFNGLTEXCOORD3SPROC __glewTexCoord3s = NULL;
+PFNGLTEXCOORD3SVPROC __glewTexCoord3sv = NULL;
+PFNGLTEXCOORD4DPROC __glewTexCoord4d = NULL;
+PFNGLTEXCOORD4DVPROC __glewTexCoord4dv = NULL;
+PFNGLTEXCOORD4FPROC __glewTexCoord4f = NULL;
+PFNGLTEXCOORD4FVPROC __glewTexCoord4fv = NULL;
+PFNGLTEXCOORD4IPROC __glewTexCoord4i = NULL;
+PFNGLTEXCOORD4IVPROC __glewTexCoord4iv = NULL;
+PFNGLTEXCOORD4SPROC __glewTexCoord4s = NULL;
+PFNGLTEXCOORD4SVPROC __glewTexCoord4sv = NULL;
+PFNGLTEXCOORDPOINTERPROC __glewTexCoordPointer = NULL;
+PFNGLTEXENVFPROC __glewTexEnvf = NULL;
+PFNGLTEXENVFVPROC __glewTexEnvfv = NULL;
+PFNGLTEXENVIPROC __glewTexEnvi = NULL;
+PFNGLTEXENVIVPROC __glewTexEnviv = NULL;
+PFNGLTEXGENDPROC __glewTexGend = NULL;
+PFNGLTEXGENDVPROC __glewTexGendv = NULL;
+PFNGLTEXGENFPROC __glewTexGenf = NULL;
+PFNGLTEXGENFVPROC __glewTexGenfv = NULL;
+PFNGLTEXGENIPROC __glewTexGeni = NULL;
+PFNGLTEXGENIVPROC __glewTexGeniv = NULL;
+PFNGLTEXIMAGE1DPROC __glewTexImage1D = NULL;
+PFNGLTEXIMAGE2DPROC __glewTexImage2D = NULL;
+PFNGLTEXPARAMETERFPROC __glewTexParameterf = NULL;
+PFNGLTEXPARAMETERFVPROC __glewTexParameterfv = NULL;
+PFNGLTEXPARAMETERIPROC __glewTexParameteri = NULL;
+PFNGLTEXPARAMETERIVPROC __glewTexParameteriv = NULL;
+PFNGLTEXSUBIMAGE1DPROC __glewTexSubImage1D = NULL;
+PFNGLTEXSUBIMAGE2DPROC __glewTexSubImage2D = NULL;
+PFNGLTRANSLATEDPROC __glewTranslated = NULL;
+PFNGLTRANSLATEFPROC __glewTranslatef = NULL;
+PFNGLVERTEX2DPROC __glewVertex2d = NULL;
+PFNGLVERTEX2DVPROC __glewVertex2dv = NULL;
+PFNGLVERTEX2FPROC __glewVertex2f = NULL;
+PFNGLVERTEX2FVPROC __glewVertex2fv = NULL;
+PFNGLVERTEX2IPROC __glewVertex2i = NULL;
+PFNGLVERTEX2IVPROC __glewVertex2iv = NULL;
+PFNGLVERTEX2SPROC __glewVertex2s = NULL;
+PFNGLVERTEX2SVPROC __glewVertex2sv = NULL;
+PFNGLVERTEX3DPROC __glewVertex3d = NULL;
+PFNGLVERTEX3DVPROC __glewVertex3dv = NULL;
+PFNGLVERTEX3FPROC __glewVertex3f = NULL;
+PFNGLVERTEX3FVPROC __glewVertex3fv = NULL;
+PFNGLVERTEX3IPROC __glewVertex3i = NULL;
+PFNGLVERTEX3IVPROC __glewVertex3iv = NULL;
+PFNGLVERTEX3SPROC __glewVertex3s = NULL;
+PFNGLVERTEX3SVPROC __glewVertex3sv = NULL;
+PFNGLVERTEX4DPROC __glewVertex4d = NULL;
+PFNGLVERTEX4DVPROC __glewVertex4dv = NULL;
+PFNGLVERTEX4FPROC __glewVertex4f = NULL;
+PFNGLVERTEX4FVPROC __glewVertex4fv = NULL;
+PFNGLVERTEX4IPROC __glewVertex4i = NULL;
+PFNGLVERTEX4IVPROC __glewVertex4iv = NULL;
+PFNGLVERTEX4SPROC __glewVertex4s = NULL;
+PFNGLVERTEX4SVPROC __glewVertex4sv = NULL;
+PFNGLVERTEXPOINTERPROC __glewVertexPointer = NULL;
+PFNGLVIEWPORTPROC __glewViewport = NULL;
+
+PFNGLCOPYTEXSUBIMAGE3DPROC __glewCopyTexSubImage3D = NULL;
+PFNGLDRAWRANGEELEMENTSPROC __glewDrawRangeElements = NULL;
+PFNGLTEXIMAGE3DPROC __glewTexImage3D = NULL;
+PFNGLTEXSUBIMAGE3DPROC __glewTexSubImage3D = NULL;
+
+PFNGLACTIVETEXTUREPROC __glewActiveTexture = NULL;
+PFNGLCLIENTACTIVETEXTUREPROC __glewClientActiveTexture = NULL;
+PFNGLCOMPRESSEDTEXIMAGE1DPROC __glewCompressedTexImage1D = NULL;
+PFNGLCOMPRESSEDTEXIMAGE2DPROC __glewCompressedTexImage2D = NULL;
+PFNGLCOMPRESSEDTEXIMAGE3DPROC __glewCompressedTexImage3D = NULL;
+PFNGLCOMPRESSEDTEXSUBIMAGE1DPROC __glewCompressedTexSubImage1D = NULL;
+PFNGLCOMPRESSEDTEXSUBIMAGE2DPROC __glewCompressedTexSubImage2D = NULL;
+PFNGLCOMPRESSEDTEXSUBIMAGE3DPROC __glewCompressedTexSubImage3D = NULL;
+PFNGLGETCOMPRESSEDTEXIMAGEPROC __glewGetCompressedTexImage = NULL;
+PFNGLLOADTRANSPOSEMATRIXDPROC __glewLoadTransposeMatrixd = NULL;
+PFNGLLOADTRANSPOSEMATRIXFPROC __glewLoadTransposeMatrixf = NULL;
+PFNGLMULTTRANSPOSEMATRIXDPROC __glewMultTransposeMatrixd = NULL;
+PFNGLMULTTRANSPOSEMATRIXFPROC __glewMultTransposeMatrixf = NULL;
+PFNGLMULTITEXCOORD1DPROC __glewMultiTexCoord1d = NULL;
+PFNGLMULTITEXCOORD1DVPROC __glewMultiTexCoord1dv = NULL;
+PFNGLMULTITEXCOORD1FPROC __glewMultiTexCoord1f = NULL;
+PFNGLMULTITEXCOORD1FVPROC __glewMultiTexCoord1fv = NULL;
+PFNGLMULTITEXCOORD1IPROC __glewMultiTexCoord1i = NULL;
+PFNGLMULTITEXCOORD1IVPROC __glewMultiTexCoord1iv = NULL;
+PFNGLMULTITEXCOORD1SPROC __glewMultiTexCoord1s = NULL;
+PFNGLMULTITEXCOORD1SVPROC __glewMultiTexCoord1sv = NULL;
+PFNGLMULTITEXCOORD2DPROC __glewMultiTexCoord2d = NULL;
+PFNGLMULTITEXCOORD2DVPROC __glewMultiTexCoord2dv = NULL;
+PFNGLMULTITEXCOORD2FPROC __glewMultiTexCoord2f = NULL;
+PFNGLMULTITEXCOORD2FVPROC __glewMultiTexCoord2fv = NULL;
+PFNGLMULTITEXCOORD2IPROC __glewMultiTexCoord2i = NULL;
+PFNGLMULTITEXCOORD2IVPROC __glewMultiTexCoord2iv = NULL;
+PFNGLMULTITEXCOORD2SPROC __glewMultiTexCoord2s = NULL;
+PFNGLMULTITEXCOORD2SVPROC __glewMultiTexCoord2sv = NULL;
+PFNGLMULTITEXCOORD3DPROC __glewMultiTexCoord3d = NULL;
+PFNGLMULTITEXCOORD3DVPROC __glewMultiTexCoord3dv = NULL;
+PFNGLMULTITEXCOORD3FPROC __glewMultiTexCoord3f = NULL;
+PFNGLMULTITEXCOORD3FVPROC __glewMultiTexCoord3fv = NULL;
+PFNGLMULTITEXCOORD3IPROC __glewMultiTexCoord3i = NULL;
+PFNGLMULTITEXCOORD3IVPROC __glewMultiTexCoord3iv = NULL;
+PFNGLMULTITEXCOORD3SPROC __glewMultiTexCoord3s = NULL;
+PFNGLMULTITEXCOORD3SVPROC __glewMultiTexCoord3sv = NULL;
+PFNGLMULTITEXCOORD4DPROC __glewMultiTexCoord4d = NULL;
+PFNGLMULTITEXCOORD4DVPROC __glewMultiTexCoord4dv = NULL;
+PFNGLMULTITEXCOORD4FPROC __glewMultiTexCoord4f = NULL;
+PFNGLMULTITEXCOORD4FVPROC __glewMultiTexCoord4fv = NULL;
+PFNGLMULTITEXCOORD4IPROC __glewMultiTexCoord4i = NULL;
+PFNGLMULTITEXCOORD4IVPROC __glewMultiTexCoord4iv = NULL;
+PFNGLMULTITEXCOORD4SPROC __glewMultiTexCoord4s = NULL;
+PFNGLMULTITEXCOORD4SVPROC __glewMultiTexCoord4sv = NULL;
+PFNGLSAMPLECOVERAGEPROC __glewSampleCoverage = NULL;
+
+PFNGLBLENDCOLORPROC __glewBlendColor = NULL;
+PFNGLBLENDEQUATIONPROC __glewBlendEquation = NULL;
+PFNGLBLENDFUNCSEPARATEPROC __glewBlendFuncSeparate = NULL;
+PFNGLFOGCOORDPOINTERPROC __glewFogCoordPointer = NULL;
+PFNGLFOGCOORDDPROC __glewFogCoordd = NULL;
+PFNGLFOGCOORDDVPROC __glewFogCoorddv = NULL;
+PFNGLFOGCOORDFPROC __glewFogCoordf = NULL;
+PFNGLFOGCOORDFVPROC __glewFogCoordfv = NULL;
+PFNGLMULTIDRAWARRAYSPROC __glewMultiDrawArrays = NULL;
+PFNGLMULTIDRAWELEMENTSPROC __glewMultiDrawElements = NULL;
+PFNGLPOINTPARAMETERFPROC __glewPointParameterf = NULL;
+PFNGLPOINTPARAMETERFVPROC __glewPointParameterfv = NULL;
+PFNGLPOINTPARAMETERIPROC __glewPointParameteri = NULL;
+PFNGLPOINTPARAMETERIVPROC __glewPointParameteriv = NULL;
+PFNGLSECONDARYCOLOR3BPROC __glewSecondaryColor3b = NULL;
+PFNGLSECONDARYCOLOR3BVPROC __glewSecondaryColor3bv = NULL;
+PFNGLSECONDARYCOLOR3DPROC __glewSecondaryColor3d = NULL;
+PFNGLSECONDARYCOLOR3DVPROC __glewSecondaryColor3dv = NULL;
+PFNGLSECONDARYCOLOR3FPROC __glewSecondaryColor3f = NULL;
+PFNGLSECONDARYCOLOR3FVPROC __glewSecondaryColor3fv = NULL;
+PFNGLSECONDARYCOLOR3IPROC __glewSecondaryColor3i = NULL;
+PFNGLSECONDARYCOLOR3IVPROC __glewSecondaryColor3iv = NULL;
+PFNGLSECONDARYCOLOR3SPROC __glewSecondaryColor3s = NULL;
+PFNGLSECONDARYCOLOR3SVPROC __glewSecondaryColor3sv = NULL;
+PFNGLSECONDARYCOLOR3UBPROC __glewSecondaryColor3ub = NULL;
+PFNGLSECONDARYCOLOR3UBVPROC __glewSecondaryColor3ubv = NULL;
+PFNGLSECONDARYCOLOR3UIPROC __glewSecondaryColor3ui = NULL;
+PFNGLSECONDARYCOLOR3UIVPROC __glewSecondaryColor3uiv = NULL;
+PFNGLSECONDARYCOLOR3USPROC __glewSecondaryColor3us = NULL;
+PFNGLSECONDARYCOLOR3USVPROC __glewSecondaryColor3usv = NULL;
+PFNGLSECONDARYCOLORPOINTERPROC __glewSecondaryColorPointer = NULL;
+PFNGLWINDOWPOS2DPROC __glewWindowPos2d = NULL;
+PFNGLWINDOWPOS2DVPROC __glewWindowPos2dv = NULL;
+PFNGLWINDOWPOS2FPROC __glewWindowPos2f = NULL;
+PFNGLWINDOWPOS2FVPROC __glewWindowPos2fv = NULL;
+PFNGLWINDOWPOS2IPROC __glewWindowPos2i = NULL;
+PFNGLWINDOWPOS2IVPROC __glewWindowPos2iv = NULL;
+PFNGLWINDOWPOS2SPROC __glewWindowPos2s = NULL;
+PFNGLWINDOWPOS2SVPROC __glewWindowPos2sv = NULL;
+PFNGLWINDOWPOS3DPROC __glewWindowPos3d = NULL;
+PFNGLWINDOWPOS3DVPROC __glewWindowPos3dv = NULL;
+PFNGLWINDOWPOS3FPROC __glewWindowPos3f = NULL;
+PFNGLWINDOWPOS3FVPROC __glewWindowPos3fv = NULL;
+PFNGLWINDOWPOS3IPROC __glewWindowPos3i = NULL;
+PFNGLWINDOWPOS3IVPROC __glewWindowPos3iv = NULL;
+PFNGLWINDOWPOS3SPROC __glewWindowPos3s = NULL;
+PFNGLWINDOWPOS3SVPROC __glewWindowPos3sv = NULL;
+
+PFNGLBEGINQUERYPROC __glewBeginQuery = NULL;
+PFNGLBINDBUFFERPROC __glewBindBuffer = NULL;
+PFNGLBUFFERDATAPROC __glewBufferData = NULL;
+PFNGLBUFFERSUBDATAPROC __glewBufferSubData = NULL;
+PFNGLDELETEBUFFERSPROC __glewDeleteBuffers = NULL;
+PFNGLDELETEQUERIESPROC __glewDeleteQueries = NULL;
+PFNGLENDQUERYPROC __glewEndQuery = NULL;
+PFNGLGENBUFFERSPROC __glewGenBuffers = NULL;
+PFNGLGENQUERIESPROC __glewGenQueries = NULL;
+PFNGLGETBUFFERPARAMETERIVPROC __glewGetBufferParameteriv = NULL;
+PFNGLGETBUFFERPOINTERVPROC __glewGetBufferPointerv = NULL;
+PFNGLGETBUFFERSUBDATAPROC __glewGetBufferSubData = NULL;
+PFNGLGETQUERYOBJECTIVPROC __glewGetQueryObjectiv = NULL;
+PFNGLGETQUERYOBJECTUIVPROC __glewGetQueryObjectuiv = NULL;
+PFNGLGETQUERYIVPROC __glewGetQueryiv = NULL;
+PFNGLISBUFFERPROC __glewIsBuffer = NULL;
+PFNGLISQUERYPROC __glewIsQuery = NULL;
+PFNGLMAPBUFFERPROC __glewMapBuffer = NULL;
+PFNGLUNMAPBUFFERPROC __glewUnmapBuffer = NULL;
+
+PFNGLATTACHSHADERPROC __glewAttachShader = NULL;
+PFNGLBINDATTRIBLOCATIONPROC __glewBindAttribLocation = NULL;
+PFNGLBLENDEQUATIONSEPARATEPROC __glewBlendEquationSeparate = NULL;
+PFNGLCOMPILESHADERPROC __glewCompileShader = NULL;
+PFNGLCREATEPROGRAMPROC __glewCreateProgram = NULL;
+PFNGLCREATESHADERPROC __glewCreateShader = NULL;
+PFNGLDELETEPROGRAMPROC __glewDeleteProgram = NULL;
+PFNGLDELETESHADERPROC __glewDeleteShader = NULL;
+PFNGLDETACHSHADERPROC __glewDetachShader = NULL;
+PFNGLDISABLEVERTEXATTRIBARRAYPROC __glewDisableVertexAttribArray = NULL;
+PFNGLDRAWBUFFERSPROC __glewDrawBuffers = NULL;
+PFNGLENABLEVERTEXATTRIBARRAYPROC __glewEnableVertexAttribArray = NULL;
+PFNGLGETACTIVEATTRIBPROC __glewGetActiveAttrib = NULL;
+PFNGLGETACTIVEUNIFORMPROC __glewGetActiveUniform = NULL;
+PFNGLGETATTACHEDSHADERSPROC __glewGetAttachedShaders = NULL;
+PFNGLGETATTRIBLOCATIONPROC __glewGetAttribLocation = NULL;
+PFNGLGETPROGRAMINFOLOGPROC __glewGetProgramInfoLog = NULL;
+PFNGLGETPROGRAMIVPROC __glewGetProgramiv = NULL;
+PFNGLGETSHADERINFOLOGPROC __glewGetShaderInfoLog = NULL;
+PFNGLGETSHADERSOURCEPROC __glewGetShaderSource = NULL;
+PFNGLGETSHADERIVPROC __glewGetShaderiv = NULL;
+PFNGLGETUNIFORMLOCATIONPROC __glewGetUniformLocation = NULL;
+PFNGLGETUNIFORMFVPROC __glewGetUniformfv = NULL;
+PFNGLGETUNIFORMIVPROC __glewGetUniformiv = NULL;
+PFNGLGETVERTEXATTRIBPOINTERVPROC __glewGetVertexAttribPointerv = NULL;
+PFNGLGETVERTEXATTRIBDVPROC __glewGetVertexAttribdv = NULL;
+PFNGLGETVERTEXATTRIBFVPROC __glewGetVertexAttribfv = NULL;
+PFNGLGETVERTEXATTRIBIVPROC __glewGetVertexAttribiv = NULL;
+PFNGLISPROGRAMPROC __glewIsProgram = NULL;
+PFNGLISSHADERPROC __glewIsShader = NULL;
+PFNGLLINKPROGRAMPROC __glewLinkProgram = NULL;
+PFNGLSHADERSOURCEPROC __glewShaderSource = NULL;
+PFNGLSTENCILFUNCSEPARATEPROC __glewStencilFuncSeparate = NULL;
+PFNGLSTENCILMASKSEPARATEPROC __glewStencilMaskSeparate = NULL;
+PFNGLSTENCILOPSEPARATEPROC __glewStencilOpSeparate = NULL;
+PFNGLUNIFORM1FPROC __glewUniform1f = NULL;
+PFNGLUNIFORM1FVPROC __glewUniform1fv = NULL;
+PFNGLUNIFORM1IPROC __glewUniform1i = NULL;
+PFNGLUNIFORM1IVPROC __glewUniform1iv = NULL;
+PFNGLUNIFORM2FPROC __glewUniform2f = NULL;
+PFNGLUNIFORM2FVPROC __glewUniform2fv = NULL;
+PFNGLUNIFORM2IPROC __glewUniform2i = NULL;
+PFNGLUNIFORM2IVPROC __glewUniform2iv = NULL;
+PFNGLUNIFORM3FPROC __glewUniform3f = NULL;
+PFNGLUNIFORM3FVPROC __glewUniform3fv = NULL;
+PFNGLUNIFORM3IPROC __glewUniform3i = NULL;
+PFNGLUNIFORM3IVPROC __glewUniform3iv = NULL;
+PFNGLUNIFORM4FPROC __glewUniform4f = NULL;
+PFNGLUNIFORM4FVPROC __glewUniform4fv = NULL;
+PFNGLUNIFORM4IPROC __glewUniform4i = NULL;
+PFNGLUNIFORM4IVPROC __glewUniform4iv = NULL;
+PFNGLUNIFORMMATRIX2FVPROC __glewUniformMatrix2fv = NULL;
+PFNGLUNIFORMMATRIX3FVPROC __glewUniformMatrix3fv = NULL;
+PFNGLUNIFORMMATRIX4FVPROC __glewUniformMatrix4fv = NULL;
+PFNGLUSEPROGRAMPROC __glewUseProgram = NULL;
+PFNGLVALIDATEPROGRAMPROC __glewValidateProgram = NULL;
+PFNGLVERTEXATTRIB1DPROC __glewVertexAttrib1d = NULL;
+PFNGLVERTEXATTRIB1DVPROC __glewVertexAttrib1dv = NULL;
+PFNGLVERTEXATTRIB1FPROC __glewVertexAttrib1f = NULL;
+PFNGLVERTEXATTRIB1FVPROC __glewVertexAttrib1fv = NULL;
+PFNGLVERTEXATTRIB1SPROC __glewVertexAttrib1s = NULL;
+PFNGLVERTEXATTRIB1SVPROC __glewVertexAttrib1sv = NULL;
+PFNGLVERTEXATTRIB2DPROC __glewVertexAttrib2d = NULL;
+PFNGLVERTEXATTRIB2DVPROC __glewVertexAttrib2dv = NULL;
+PFNGLVERTEXATTRIB2FPROC __glewVertexAttrib2f = NULL;
+PFNGLVERTEXATTRIB2FVPROC __glewVertexAttrib2fv = NULL;
+PFNGLVERTEXATTRIB2SPROC __glewVertexAttrib2s = NULL;
+PFNGLVERTEXATTRIB2SVPROC __glewVertexAttrib2sv = NULL;
+PFNGLVERTEXATTRIB3DPROC __glewVertexAttrib3d = NULL;
+PFNGLVERTEXATTRIB3DVPROC __glewVertexAttrib3dv = NULL;
+PFNGLVERTEXATTRIB3FPROC __glewVertexAttrib3f = NULL;
+PFNGLVERTEXATTRIB3FVPROC __glewVertexAttrib3fv = NULL;
+PFNGLVERTEXATTRIB3SPROC __glewVertexAttrib3s = NULL;
+PFNGLVERTEXATTRIB3SVPROC __glewVertexAttrib3sv = NULL;
+PFNGLVERTEXATTRIB4NBVPROC __glewVertexAttrib4Nbv = NULL;
+PFNGLVERTEXATTRIB4NIVPROC __glewVertexAttrib4Niv = NULL;
+PFNGLVERTEXATTRIB4NSVPROC __glewVertexAttrib4Nsv = NULL;
+PFNGLVERTEXATTRIB4NUBPROC __glewVertexAttrib4Nub = NULL;
+PFNGLVERTEXATTRIB4NUBVPROC __glewVertexAttrib4Nubv = NULL;
+PFNGLVERTEXATTRIB4NUIVPROC __glewVertexAttrib4Nuiv = NULL;
+PFNGLVERTEXATTRIB4NUSVPROC __glewVertexAttrib4Nusv = NULL;
+PFNGLVERTEXATTRIB4BVPROC __glewVertexAttrib4bv = NULL;
+PFNGLVERTEXATTRIB4DPROC __glewVertexAttrib4d = NULL;
+PFNGLVERTEXATTRIB4DVPROC __glewVertexAttrib4dv = NULL;
+PFNGLVERTEXATTRIB4FPROC __glewVertexAttrib4f = NULL;
+PFNGLVERTEXATTRIB4FVPROC __glewVertexAttrib4fv = NULL;
+PFNGLVERTEXATTRIB4IVPROC __glewVertexAttrib4iv = NULL;
+PFNGLVERTEXATTRIB4SPROC __glewVertexAttrib4s = NULL;
+PFNGLVERTEXATTRIB4SVPROC __glewVertexAttrib4sv = NULL;
+PFNGLVERTEXATTRIB4UBVPROC __glewVertexAttrib4ubv = NULL;
+PFNGLVERTEXATTRIB4UIVPROC __glewVertexAttrib4uiv = NULL;
+PFNGLVERTEXATTRIB4USVPROC __glewVertexAttrib4usv = NULL;
+PFNGLVERTEXATTRIBPOINTERPROC __glewVertexAttribPointer = NULL;
+
+PFNGLUNIFORMMATRIX2X3FVPROC __glewUniformMatrix2x3fv = NULL;
+PFNGLUNIFORMMATRIX2X4FVPROC __glewUniformMatrix2x4fv = NULL;
+PFNGLUNIFORMMATRIX3X2FVPROC __glewUniformMatrix3x2fv = NULL;
+PFNGLUNIFORMMATRIX3X4FVPROC __glewUniformMatrix3x4fv = NULL;
+PFNGLUNIFORMMATRIX4X2FVPROC __glewUniformMatrix4x2fv = NULL;
+PFNGLUNIFORMMATRIX4X3FVPROC __glewUniformMatrix4x3fv = NULL;
+
+PFNGLBEGINCONDITIONALRENDERPROC __glewBeginConditionalRender = NULL;
+PFNGLBEGINTRANSFORMFEEDBACKPROC __glewBeginTransformFeedback = NULL;
+PFNGLBINDFRAGDATALOCATIONPROC __glewBindFragDataLocation = NULL;
+PFNGLCLAMPCOLORPROC __glewClampColor = NULL;
+PFNGLCLEARBUFFERFIPROC __glewClearBufferfi = NULL;
+PFNGLCLEARBUFFERFVPROC __glewClearBufferfv = NULL;
+PFNGLCLEARBUFFERIVPROC __glewClearBufferiv = NULL;
+PFNGLCLEARBUFFERUIVPROC __glewClearBufferuiv = NULL;
+PFNGLCOLORMASKIPROC __glewColorMaski = NULL;
+PFNGLDISABLEIPROC __glewDisablei = NULL;
+PFNGLENABLEIPROC __glewEnablei = NULL;
+PFNGLENDCONDITIONALRENDERPROC __glewEndConditionalRender = NULL;
+PFNGLENDTRANSFORMFEEDBACKPROC __glewEndTransformFeedback = NULL;
+PFNGLGETBOOLEANI_VPROC __glewGetBooleani_v = NULL;
+PFNGLGETFRAGDATALOCATIONPROC __glewGetFragDataLocation = NULL;
+PFNGLGETSTRINGIPROC __glewGetStringi = NULL;
+PFNGLGETTEXPARAMETERIIVPROC __glewGetTexParameterIiv = NULL;
+PFNGLGETTEXPARAMETERIUIVPROC __glewGetTexParameterIuiv = NULL;
+PFNGLGETTRANSFORMFEEDBACKVARYINGPROC __glewGetTransformFeedbackVarying = NULL;
+PFNGLGETUNIFORMUIVPROC __glewGetUniformuiv = NULL;
+PFNGLGETVERTEXATTRIBIIVPROC __glewGetVertexAttribIiv = NULL;
+PFNGLGETVERTEXATTRIBIUIVPROC __glewGetVertexAttribIuiv = NULL;
+PFNGLISENABLEDIPROC __glewIsEnabledi = NULL;
+PFNGLTEXPARAMETERIIVPROC __glewTexParameterIiv = NULL;
+PFNGLTEXPARAMETERIUIVPROC __glewTexParameterIuiv = NULL;
+PFNGLTRANSFORMFEEDBACKVARYINGSPROC __glewTransformFeedbackVaryings = NULL;
+PFNGLUNIFORM1UIPROC __glewUniform1ui = NULL;
+PFNGLUNIFORM1UIVPROC __glewUniform1uiv = NULL;
+PFNGLUNIFORM2UIPROC __glewUniform2ui = NULL;
+PFNGLUNIFORM2UIVPROC __glewUniform2uiv = NULL;
+PFNGLUNIFORM3UIPROC __glewUniform3ui = NULL;
+PFNGLUNIFORM3UIVPROC __glewUniform3uiv = NULL;
+PFNGLUNIFORM4UIPROC __glewUniform4ui = NULL;
+PFNGLUNIFORM4UIVPROC __glewUniform4uiv = NULL;
+PFNGLVERTEXATTRIBI1IPROC __glewVertexAttribI1i = NULL;
+PFNGLVERTEXATTRIBI1IVPROC __glewVertexAttribI1iv = NULL;
+PFNGLVERTEXATTRIBI1UIPROC __glewVertexAttribI1ui = NULL;
+PFNGLVERTEXATTRIBI1UIVPROC __glewVertexAttribI1uiv = NULL;
+PFNGLVERTEXATTRIBI2IPROC __glewVertexAttribI2i = NULL;
+PFNGLVERTEXATTRIBI2IVPROC __glewVertexAttribI2iv = NULL;
+PFNGLVERTEXATTRIBI2UIPROC __glewVertexAttribI2ui = NULL;
+PFNGLVERTEXATTRIBI2UIVPROC __glewVertexAttribI2uiv = NULL;
+PFNGLVERTEXATTRIBI3IPROC __glewVertexAttribI3i = NULL;
+PFNGLVERTEXATTRIBI3IVPROC __glewVertexAttribI3iv = NULL;
+PFNGLVERTEXATTRIBI3UIPROC __glewVertexAttribI3ui = NULL;
+PFNGLVERTEXATTRIBI3UIVPROC __glewVertexAttribI3uiv = NULL;
+PFNGLVERTEXATTRIBI4BVPROC __glewVertexAttribI4bv = NULL;
+PFNGLVERTEXATTRIBI4IPROC __glewVertexAttribI4i = NULL;
+PFNGLVERTEXATTRIBI4IVPROC __glewVertexAttribI4iv = NULL;
+PFNGLVERTEXATTRIBI4SVPROC __glewVertexAttribI4sv = NULL;
+PFNGLVERTEXATTRIBI4UBVPROC __glewVertexAttribI4ubv = NULL;
+PFNGLVERTEXATTRIBI4UIPROC __glewVertexAttribI4ui = NULL;
+PFNGLVERTEXATTRIBI4UIVPROC __glewVertexAttribI4uiv = NULL;
+PFNGLVERTEXATTRIBI4USVPROC __glewVertexAttribI4usv = NULL;
+PFNGLVERTEXATTRIBIPOINTERPROC __glewVertexAttribIPointer = NULL;
+
+PFNGLDRAWARRAYSINSTANCEDPROC __glewDrawArraysInstanced = NULL;
+PFNGLDRAWELEMENTSINSTANCEDPROC __glewDrawElementsInstanced = NULL;
+PFNGLPRIMITIVERESTARTINDEXPROC __glewPrimitiveRestartIndex = NULL;
+PFNGLTEXBUFFERPROC __glewTexBuffer = NULL;
+
+PFNGLFRAMEBUFFERTEXTUREPROC __glewFramebufferTexture = NULL;
+PFNGLGETBUFFERPARAMETERI64VPROC __glewGetBufferParameteri64v = NULL;
+PFNGLGETINTEGER64I_VPROC __glewGetInteger64i_v = NULL;
+
+PFNGLVERTEXATTRIBDIVISORPROC __glewVertexAttribDivisor = NULL;
+
+PFNGLBLENDEQUATIONSEPARATEIPROC __glewBlendEquationSeparatei = NULL;
+PFNGLBLENDEQUATIONIPROC __glewBlendEquationi = NULL;
+PFNGLBLENDFUNCSEPARATEIPROC __glewBlendFuncSeparatei = NULL;
+PFNGLBLENDFUNCIPROC __glewBlendFunci = NULL;
+PFNGLMINSAMPLESHADINGPROC __glewMinSampleShading = NULL;
+
+PFNGLTBUFFERMASK3DFXPROC __glewTbufferMask3DFX = NULL;
+
+PFNGLDEBUGMESSAGECALLBACKAMDPROC __glewDebugMessageCallbackAMD = NULL;
+PFNGLDEBUGMESSAGEENABLEAMDPROC __glewDebugMessageEnableAMD = NULL;
+PFNGLDEBUGMESSAGEINSERTAMDPROC __glewDebugMessageInsertAMD = NULL;
+PFNGLGETDEBUGMESSAGELOGAMDPROC __glewGetDebugMessageLogAMD = NULL;
+
+PFNGLBLENDEQUATIONINDEXEDAMDPROC __glewBlendEquationIndexedAMD = NULL;
+PFNGLBLENDEQUATIONSEPARATEINDEXEDAMDPROC __glewBlendEquationSeparateIndexedAMD = NULL;
+PFNGLBLENDFUNCINDEXEDAMDPROC __glewBlendFuncIndexedAMD = NULL;
+PFNGLBLENDFUNCSEPARATEINDEXEDAMDPROC __glewBlendFuncSeparateIndexedAMD = NULL;
+
+PFNGLVERTEXATTRIBPARAMETERIAMDPROC __glewVertexAttribParameteriAMD = NULL;
+
+PFNGLMULTIDRAWARRAYSINDIRECTAMDPROC __glewMultiDrawArraysIndirectAMD = NULL;
+PFNGLMULTIDRAWELEMENTSINDIRECTAMDPROC __glewMultiDrawElementsIndirectAMD = NULL;
+
+PFNGLDELETENAMESAMDPROC __glewDeleteNamesAMD = NULL;
+PFNGLGENNAMESAMDPROC __glewGenNamesAMD = NULL;
+PFNGLISNAMEAMDPROC __glewIsNameAMD = NULL;
+
+PFNGLBEGINPERFMONITORAMDPROC __glewBeginPerfMonitorAMD = NULL;
+PFNGLDELETEPERFMONITORSAMDPROC __glewDeletePerfMonitorsAMD = NULL;
+PFNGLENDPERFMONITORAMDPROC __glewEndPerfMonitorAMD = NULL;
+PFNGLGENPERFMONITORSAMDPROC __glewGenPerfMonitorsAMD = NULL;
+PFNGLGETPERFMONITORCOUNTERDATAAMDPROC __glewGetPerfMonitorCounterDataAMD = NULL;
+PFNGLGETPERFMONITORCOUNTERINFOAMDPROC __glewGetPerfMonitorCounterInfoAMD = NULL;
+PFNGLGETPERFMONITORCOUNTERSTRINGAMDPROC __glewGetPerfMonitorCounterStringAMD = NULL;
+PFNGLGETPERFMONITORCOUNTERSAMDPROC __glewGetPerfMonitorCountersAMD = NULL;
+PFNGLGETPERFMONITORGROUPSTRINGAMDPROC __glewGetPerfMonitorGroupStringAMD = NULL;
+PFNGLGETPERFMONITORGROUPSAMDPROC __glewGetPerfMonitorGroupsAMD = NULL;
+PFNGLSELECTPERFMONITORCOUNTERSAMDPROC __glewSelectPerfMonitorCountersAMD = NULL;
+
+PFNGLSETMULTISAMPLEFVAMDPROC __glewSetMultisamplefvAMD = NULL;
+
+PFNGLTEXSTORAGESPARSEAMDPROC __glewTexStorageSparseAMD = NULL;
+PFNGLTEXTURESTORAGESPARSEAMDPROC __glewTextureStorageSparseAMD = NULL;
+
+PFNGLSTENCILOPVALUEAMDPROC __glewStencilOpValueAMD = NULL;
+
+PFNGLTESSELLATIONFACTORAMDPROC __glewTessellationFactorAMD = NULL;
+PFNGLTESSELLATIONMODEAMDPROC __glewTessellationModeAMD = NULL;
+
+PFNGLBLITFRAMEBUFFERANGLEPROC __glewBlitFramebufferANGLE = NULL;
+
+PFNGLRENDERBUFFERSTORAGEMULTISAMPLEANGLEPROC __glewRenderbufferStorageMultisampleANGLE = NULL;
+
+PFNGLDRAWARRAYSINSTANCEDANGLEPROC __glewDrawArraysInstancedANGLE = NULL;
+PFNGLDRAWELEMENTSINSTANCEDANGLEPROC __glewDrawElementsInstancedANGLE = NULL;
+PFNGLVERTEXATTRIBDIVISORANGLEPROC __glewVertexAttribDivisorANGLE = NULL;
+
+PFNGLBEGINQUERYANGLEPROC __glewBeginQueryANGLE = NULL;
+PFNGLDELETEQUERIESANGLEPROC __glewDeleteQueriesANGLE = NULL;
+PFNGLENDQUERYANGLEPROC __glewEndQueryANGLE = NULL;
+PFNGLGENQUERIESANGLEPROC __glewGenQueriesANGLE = NULL;
+PFNGLGETQUERYOBJECTI64VANGLEPROC __glewGetQueryObjecti64vANGLE = NULL;
+PFNGLGETQUERYOBJECTIVANGLEPROC __glewGetQueryObjectivANGLE = NULL;
+PFNGLGETQUERYOBJECTUI64VANGLEPROC __glewGetQueryObjectui64vANGLE = NULL;
+PFNGLGETQUERYOBJECTUIVANGLEPROC __glewGetQueryObjectuivANGLE = NULL;
+PFNGLGETQUERYIVANGLEPROC __glewGetQueryivANGLE = NULL;
+PFNGLISQUERYANGLEPROC __glewIsQueryANGLE = NULL;
+PFNGLQUERYCOUNTERANGLEPROC __glewQueryCounterANGLE = NULL;
+
+PFNGLGETTRANSLATEDSHADERSOURCEANGLEPROC __glewGetTranslatedShaderSourceANGLE = NULL;
+
+PFNGLDRAWELEMENTARRAYAPPLEPROC __glewDrawElementArrayAPPLE = NULL;
+PFNGLDRAWRANGEELEMENTARRAYAPPLEPROC __glewDrawRangeElementArrayAPPLE = NULL;
+PFNGLELEMENTPOINTERAPPLEPROC __glewElementPointerAPPLE = NULL;
+PFNGLMULTIDRAWELEMENTARRAYAPPLEPROC __glewMultiDrawElementArrayAPPLE = NULL;
+PFNGLMULTIDRAWRANGEELEMENTARRAYAPPLEPROC __glewMultiDrawRangeElementArrayAPPLE = NULL;
+
+PFNGLDELETEFENCESAPPLEPROC __glewDeleteFencesAPPLE = NULL;
+PFNGLFINISHFENCEAPPLEPROC __glewFinishFenceAPPLE = NULL;
+PFNGLFINISHOBJECTAPPLEPROC __glewFinishObjectAPPLE = NULL;
+PFNGLGENFENCESAPPLEPROC __glewGenFencesAPPLE = NULL;
+PFNGLISFENCEAPPLEPROC __glewIsFenceAPPLE = NULL;
+PFNGLSETFENCEAPPLEPROC __glewSetFenceAPPLE = NULL;
+PFNGLTESTFENCEAPPLEPROC __glewTestFenceAPPLE = NULL;
+PFNGLTESTOBJECTAPPLEPROC __glewTestObjectAPPLE = NULL;
+
+PFNGLBUFFERPARAMETERIAPPLEPROC __glewBufferParameteriAPPLE = NULL;
+PFNGLFLUSHMAPPEDBUFFERRANGEAPPLEPROC __glewFlushMappedBufferRangeAPPLE = NULL;
+
+PFNGLGETOBJECTPARAMETERIVAPPLEPROC __glewGetObjectParameterivAPPLE = NULL;
+PFNGLOBJECTPURGEABLEAPPLEPROC __glewObjectPurgeableAPPLE = NULL;
+PFNGLOBJECTUNPURGEABLEAPPLEPROC __glewObjectUnpurgeableAPPLE = NULL;
+
+PFNGLGETTEXPARAMETERPOINTERVAPPLEPROC __glewGetTexParameterPointervAPPLE = NULL;
+PFNGLTEXTURERANGEAPPLEPROC __glewTextureRangeAPPLE = NULL;
+
+PFNGLBINDVERTEXARRAYAPPLEPROC __glewBindVertexArrayAPPLE = NULL;
+PFNGLDELETEVERTEXARRAYSAPPLEPROC __glewDeleteVertexArraysAPPLE = NULL;
+PFNGLGENVERTEXARRAYSAPPLEPROC __glewGenVertexArraysAPPLE = NULL;
+PFNGLISVERTEXARRAYAPPLEPROC __glewIsVertexArrayAPPLE = NULL;
+
+PFNGLFLUSHVERTEXARRAYRANGEAPPLEPROC __glewFlushVertexArrayRangeAPPLE = NULL;
+PFNGLVERTEXARRAYPARAMETERIAPPLEPROC __glewVertexArrayParameteriAPPLE = NULL;
+PFNGLVERTEXARRAYRANGEAPPLEPROC __glewVertexArrayRangeAPPLE = NULL;
+
+PFNGLDISABLEVERTEXATTRIBAPPLEPROC __glewDisableVertexAttribAPPLE = NULL;
+PFNGLENABLEVERTEXATTRIBAPPLEPROC __glewEnableVertexAttribAPPLE = NULL;
+PFNGLISVERTEXATTRIBENABLEDAPPLEPROC __glewIsVertexAttribEnabledAPPLE = NULL;
+PFNGLMAPVERTEXATTRIB1DAPPLEPROC __glewMapVertexAttrib1dAPPLE = NULL;
+PFNGLMAPVERTEXATTRIB1FAPPLEPROC __glewMapVertexAttrib1fAPPLE = NULL;
+PFNGLMAPVERTEXATTRIB2DAPPLEPROC __glewMapVertexAttrib2dAPPLE = NULL;
+PFNGLMAPVERTEXATTRIB2FAPPLEPROC __glewMapVertexAttrib2fAPPLE = NULL;
+
+PFNGLCLEARDEPTHFPROC __glewClearDepthf = NULL;
+PFNGLDEPTHRANGEFPROC __glewDepthRangef = NULL;
+PFNGLGETSHADERPRECISIONFORMATPROC __glewGetShaderPrecisionFormat = NULL;
+PFNGLRELEASESHADERCOMPILERPROC __glewReleaseShaderCompiler = NULL;
+PFNGLSHADERBINARYPROC __glewShaderBinary = NULL;
+
+PFNGLDRAWARRAYSINSTANCEDBASEINSTANCEPROC __glewDrawArraysInstancedBaseInstance = NULL;
+PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC __glewDrawElementsInstancedBaseInstance = NULL;
+PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC __glewDrawElementsInstancedBaseVertexBaseInstance = NULL;
+
+PFNGLGETIMAGEHANDLEARBPROC __glewGetImageHandleARB = NULL;
+PFNGLGETTEXTUREHANDLEARBPROC __glewGetTextureHandleARB = NULL;
+PFNGLGETTEXTURESAMPLERHANDLEARBPROC __glewGetTextureSamplerHandleARB = NULL;
+PFNGLGETVERTEXATTRIBLUI64VARBPROC __glewGetVertexAttribLui64vARB = NULL;
+PFNGLISIMAGEHANDLERESIDENTARBPROC __glewIsImageHandleResidentARB = NULL;
+PFNGLISTEXTUREHANDLERESIDENTARBPROC __glewIsTextureHandleResidentARB = NULL;
+PFNGLMAKEIMAGEHANDLENONRESIDENTARBPROC __glewMakeImageHandleNonResidentARB = NULL;
+PFNGLMAKEIMAGEHANDLERESIDENTARBPROC __glewMakeImageHandleResidentARB = NULL;
+PFNGLMAKETEXTUREHANDLENONRESIDENTARBPROC __glewMakeTextureHandleNonResidentARB = NULL;
+PFNGLMAKETEXTUREHANDLERESIDENTARBPROC __glewMakeTextureHandleResidentARB = NULL;
+PFNGLPROGRAMUNIFORMHANDLEUI64ARBPROC __glewProgramUniformHandleui64ARB = NULL;
+PFNGLPROGRAMUNIFORMHANDLEUI64VARBPROC __glewProgramUniformHandleui64vARB = NULL;
+PFNGLUNIFORMHANDLEUI64ARBPROC __glewUniformHandleui64ARB = NULL;
+PFNGLUNIFORMHANDLEUI64VARBPROC __glewUniformHandleui64vARB = NULL;
+PFNGLVERTEXATTRIBL1UI64ARBPROC __glewVertexAttribL1ui64ARB = NULL;
+PFNGLVERTEXATTRIBL1UI64VARBPROC __glewVertexAttribL1ui64vARB = NULL;
+
+PFNGLBINDFRAGDATALOCATIONINDEXEDPROC __glewBindFragDataLocationIndexed = NULL;
+PFNGLGETFRAGDATAINDEXPROC __glewGetFragDataIndex = NULL;
+
+PFNGLBUFFERSTORAGEPROC __glewBufferStorage = NULL;
+PFNGLNAMEDBUFFERSTORAGEEXTPROC __glewNamedBufferStorageEXT = NULL;
+
+PFNGLCREATESYNCFROMCLEVENTARBPROC __glewCreateSyncFromCLeventARB = NULL;
+
+PFNGLCLEARBUFFERDATAPROC __glewClearBufferData = NULL;
+PFNGLCLEARBUFFERSUBDATAPROC __glewClearBufferSubData = NULL;
+PFNGLCLEARNAMEDBUFFERDATAEXTPROC __glewClearNamedBufferDataEXT = NULL;
+PFNGLCLEARNAMEDBUFFERSUBDATAEXTPROC __glewClearNamedBufferSubDataEXT = NULL;
+
+PFNGLCLEARTEXIMAGEPROC __glewClearTexImage = NULL;
+PFNGLCLEARTEXSUBIMAGEPROC __glewClearTexSubImage = NULL;
+
+PFNGLCLAMPCOLORARBPROC __glewClampColorARB = NULL;
+
+PFNGLDISPATCHCOMPUTEPROC __glewDispatchCompute = NULL;
+PFNGLDISPATCHCOMPUTEINDIRECTPROC __glewDispatchComputeIndirect = NULL;
+
+PFNGLDISPATCHCOMPUTEGROUPSIZEARBPROC __glewDispatchComputeGroupSizeARB = NULL;
+
+PFNGLCOPYBUFFERSUBDATAPROC __glewCopyBufferSubData = NULL;
+
+PFNGLCOPYIMAGESUBDATAPROC __glewCopyImageSubData = NULL;
+
+PFNGLDEBUGMESSAGECALLBACKARBPROC __glewDebugMessageCallbackARB = NULL;
+PFNGLDEBUGMESSAGECONTROLARBPROC __glewDebugMessageControlARB = NULL;
+PFNGLDEBUGMESSAGEINSERTARBPROC __glewDebugMessageInsertARB = NULL;
+PFNGLGETDEBUGMESSAGELOGARBPROC __glewGetDebugMessageLogARB = NULL;
+
+PFNGLDRAWBUFFERSARBPROC __glewDrawBuffersARB = NULL;
+
+PFNGLBLENDEQUATIONSEPARATEIARBPROC __glewBlendEquationSeparateiARB = NULL;
+PFNGLBLENDEQUATIONIARBPROC __glewBlendEquationiARB = NULL;
+PFNGLBLENDFUNCSEPARATEIARBPROC __glewBlendFuncSeparateiARB = NULL;
+PFNGLBLENDFUNCIARBPROC __glewBlendFunciARB = NULL;
+
+PFNGLDRAWELEMENTSBASEVERTEXPROC __glewDrawElementsBaseVertex = NULL;
+PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC __glewDrawElementsInstancedBaseVertex = NULL;
+PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC __glewDrawRangeElementsBaseVertex = NULL;
+PFNGLMULTIDRAWELEMENTSBASEVERTEXPROC __glewMultiDrawElementsBaseVertex = NULL;
+
+PFNGLDRAWARRAYSINDIRECTPROC __glewDrawArraysIndirect = NULL;
+PFNGLDRAWELEMENTSINDIRECTPROC __glewDrawElementsIndirect = NULL;
+
+PFNGLFRAMEBUFFERPARAMETERIPROC __glewFramebufferParameteri = NULL;
+PFNGLGETFRAMEBUFFERPARAMETERIVPROC __glewGetFramebufferParameteriv = NULL;
+PFNGLGETNAMEDFRAMEBUFFERPARAMETERIVEXTPROC __glewGetNamedFramebufferParameterivEXT = NULL;
+PFNGLNAMEDFRAMEBUFFERPARAMETERIEXTPROC __glewNamedFramebufferParameteriEXT = NULL;
+
+PFNGLBINDFRAMEBUFFERPROC __glewBindFramebuffer = NULL;
+PFNGLBINDRENDERBUFFERPROC __glewBindRenderbuffer = NULL;
+PFNGLBLITFRAMEBUFFERPROC __glewBlitFramebuffer = NULL;
+PFNGLCHECKFRAMEBUFFERSTATUSPROC __glewCheckFramebufferStatus = NULL;
+PFNGLDELETEFRAMEBUFFERSPROC __glewDeleteFramebuffers = NULL;
+PFNGLDELETERENDERBUFFERSPROC __glewDeleteRenderbuffers = NULL;
+PFNGLFRAMEBUFFERRENDERBUFFERPROC __glewFramebufferRenderbuffer = NULL;
+PFNGLFRAMEBUFFERTEXTURE1DPROC __glewFramebufferTexture1D = NULL;
+PFNGLFRAMEBUFFERTEXTURE2DPROC __glewFramebufferTexture2D = NULL;
+PFNGLFRAMEBUFFERTEXTURE3DPROC __glewFramebufferTexture3D = NULL;
+PFNGLFRAMEBUFFERTEXTURELAYERPROC __glewFramebufferTextureLayer = NULL;
+PFNGLGENFRAMEBUFFERSPROC __glewGenFramebuffers = NULL;
+PFNGLGENRENDERBUFFERSPROC __glewGenRenderbuffers = NULL;
+PFNGLGENERATEMIPMAPPROC __glewGenerateMipmap = NULL;
+PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC __glewGetFramebufferAttachmentParameteriv = NULL;
+PFNGLGETRENDERBUFFERPARAMETERIVPROC __glewGetRenderbufferParameteriv = NULL;
+PFNGLISFRAMEBUFFERPROC __glewIsFramebuffer = NULL;
+PFNGLISRENDERBUFFERPROC __glewIsRenderbuffer = NULL;
+PFNGLRENDERBUFFERSTORAGEPROC __glewRenderbufferStorage = NULL;
+PFNGLRENDERBUFFERSTORAGEMULTISAMPLEPROC __glewRenderbufferStorageMultisample = NULL;
+
+PFNGLFRAMEBUFFERTEXTUREARBPROC __glewFramebufferTextureARB = NULL;
+PFNGLFRAMEBUFFERTEXTUREFACEARBPROC __glewFramebufferTextureFaceARB = NULL;
+PFNGLFRAMEBUFFERTEXTURELAYERARBPROC __glewFramebufferTextureLayerARB = NULL;
+PFNGLPROGRAMPARAMETERIARBPROC __glewProgramParameteriARB = NULL;
+
+PFNGLGETPROGRAMBINARYPROC __glewGetProgramBinary = NULL;
+PFNGLPROGRAMBINARYPROC __glewProgramBinary = NULL;
+PFNGLPROGRAMPARAMETERIPROC __glewProgramParameteri = NULL;
+
+PFNGLGETUNIFORMDVPROC __glewGetUniformdv = NULL;
+PFNGLUNIFORM1DPROC __glewUniform1d = NULL;
+PFNGLUNIFORM1DVPROC __glewUniform1dv = NULL;
+PFNGLUNIFORM2DPROC __glewUniform2d = NULL;
+PFNGLUNIFORM2DVPROC __glewUniform2dv = NULL;
+PFNGLUNIFORM3DPROC __glewUniform3d = NULL;
+PFNGLUNIFORM3DVPROC __glewUniform3dv = NULL;
+PFNGLUNIFORM4DPROC __glewUniform4d = NULL;
+PFNGLUNIFORM4DVPROC __glewUniform4dv = NULL;
+PFNGLUNIFORMMATRIX2DVPROC __glewUniformMatrix2dv = NULL;
+PFNGLUNIFORMMATRIX2X3DVPROC __glewUniformMatrix2x3dv = NULL;
+PFNGLUNIFORMMATRIX2X4DVPROC __glewUniformMatrix2x4dv = NULL;
+PFNGLUNIFORMMATRIX3DVPROC __glewUniformMatrix3dv = NULL;
+PFNGLUNIFORMMATRIX3X2DVPROC __glewUniformMatrix3x2dv = NULL;
+PFNGLUNIFORMMATRIX3X4DVPROC __glewUniformMatrix3x4dv = NULL;
+PFNGLUNIFORMMATRIX4DVPROC __glewUniformMatrix4dv = NULL;
+PFNGLUNIFORMMATRIX4X2DVPROC __glewUniformMatrix4x2dv = NULL;
+PFNGLUNIFORMMATRIX4X3DVPROC __glewUniformMatrix4x3dv = NULL;
+
+PFNGLCOLORSUBTABLEPROC __glewColorSubTable = NULL;
+PFNGLCOLORTABLEPROC __glewColorTable = NULL;
+PFNGLCOLORTABLEPARAMETERFVPROC __glewColorTableParameterfv = NULL;
+PFNGLCOLORTABLEPARAMETERIVPROC __glewColorTableParameteriv = NULL;
+PFNGLCONVOLUTIONFILTER1DPROC __glewConvolutionFilter1D = NULL;
+PFNGLCONVOLUTIONFILTER2DPROC __glewConvolutionFilter2D = NULL;
+PFNGLCONVOLUTIONPARAMETERFPROC __glewConvolutionParameterf = NULL;
+PFNGLCONVOLUTIONPARAMETERFVPROC __glewConvolutionParameterfv = NULL;
+PFNGLCONVOLUTIONPARAMETERIPROC __glewConvolutionParameteri = NULL;
+PFNGLCONVOLUTIONPARAMETERIVPROC __glewConvolutionParameteriv = NULL;
+PFNGLCOPYCOLORSUBTABLEPROC __glewCopyColorSubTable = NULL;
+PFNGLCOPYCOLORTABLEPROC __glewCopyColorTable = NULL;
+PFNGLCOPYCONVOLUTIONFILTER1DPROC __glewCopyConvolutionFilter1D = NULL;
+PFNGLCOPYCONVOLUTIONFILTER2DPROC __glewCopyConvolutionFilter2D = NULL;
+PFNGLGETCOLORTABLEPROC __glewGetColorTable = NULL;
+PFNGLGETCOLORTABLEPARAMETERFVPROC __glewGetColorTableParameterfv = NULL;
+PFNGLGETCOLORTABLEPARAMETERIVPROC __glewGetColorTableParameteriv = NULL;
+PFNGLGETCONVOLUTIONFILTERPROC __glewGetConvolutionFilter = NULL;
+PFNGLGETCONVOLUTIONPARAMETERFVPROC __glewGetConvolutionParameterfv = NULL;
+PFNGLGETCONVOLUTIONPARAMETERIVPROC __glewGetConvolutionParameteriv = NULL;
+PFNGLGETHISTOGRAMPROC __glewGetHistogram = NULL;
+PFNGLGETHISTOGRAMPARAMETERFVPROC __glewGetHistogramParameterfv = NULL;
+PFNGLGETHISTOGRAMPARAMETERIVPROC __glewGetHistogramParameteriv = NULL;
+PFNGLGETMINMAXPROC __glewGetMinmax = NULL;
+PFNGLGETMINMAXPARAMETERFVPROC __glewGetMinmaxParameterfv = NULL;
+PFNGLGETMINMAXPARAMETERIVPROC __glewGetMinmaxParameteriv = NULL;
+PFNGLGETSEPARABLEFILTERPROC __glewGetSeparableFilter = NULL;
+PFNGLHISTOGRAMPROC __glewHistogram = NULL;
+PFNGLMINMAXPROC __glewMinmax = NULL;
+PFNGLRESETHISTOGRAMPROC __glewResetHistogram = NULL;
+PFNGLRESETMINMAXPROC __glewResetMinmax = NULL;
+PFNGLSEPARABLEFILTER2DPROC __glewSeparableFilter2D = NULL;
+
+PFNGLMULTIDRAWARRAYSINDIRECTCOUNTARBPROC __glewMultiDrawArraysIndirectCountARB = NULL;
+PFNGLMULTIDRAWELEMENTSINDIRECTCOUNTARBPROC __glewMultiDrawElementsIndirectCountARB = NULL;
+
+PFNGLDRAWARRAYSINSTANCEDARBPROC __glewDrawArraysInstancedARB = NULL;
+PFNGLDRAWELEMENTSINSTANCEDARBPROC __glewDrawElementsInstancedARB = NULL;
+PFNGLVERTEXATTRIBDIVISORARBPROC __glewVertexAttribDivisorARB = NULL;
+
+PFNGLGETINTERNALFORMATIVPROC __glewGetInternalformativ = NULL;
+
+PFNGLGETINTERNALFORMATI64VPROC __glewGetInternalformati64v = NULL;
+
+PFNGLINVALIDATEBUFFERDATAPROC __glewInvalidateBufferData = NULL;
+PFNGLINVALIDATEBUFFERSUBDATAPROC __glewInvalidateBufferSubData = NULL;
+PFNGLINVALIDATEFRAMEBUFFERPROC __glewInvalidateFramebuffer = NULL;
+PFNGLINVALIDATESUBFRAMEBUFFERPROC __glewInvalidateSubFramebuffer = NULL;
+PFNGLINVALIDATETEXIMAGEPROC __glewInvalidateTexImage = NULL;
+PFNGLINVALIDATETEXSUBIMAGEPROC __glewInvalidateTexSubImage = NULL;
+
+PFNGLFLUSHMAPPEDBUFFERRANGEPROC __glewFlushMappedBufferRange = NULL;
+PFNGLMAPBUFFERRANGEPROC __glewMapBufferRange = NULL;
+
+PFNGLCURRENTPALETTEMATRIXARBPROC __glewCurrentPaletteMatrixARB = NULL;
+PFNGLMATRIXINDEXPOINTERARBPROC __glewMatrixIndexPointerARB = NULL;
+PFNGLMATRIXINDEXUBVARBPROC __glewMatrixIndexubvARB = NULL;
+PFNGLMATRIXINDEXUIVARBPROC __glewMatrixIndexuivARB = NULL;
+PFNGLMATRIXINDEXUSVARBPROC __glewMatrixIndexusvARB = NULL;
+
+PFNGLBINDBUFFERSBASEPROC __glewBindBuffersBase = NULL;
+PFNGLBINDBUFFERSRANGEPROC __glewBindBuffersRange = NULL;
+PFNGLBINDIMAGETEXTURESPROC __glewBindImageTextures = NULL;
+PFNGLBINDSAMPLERSPROC __glewBindSamplers = NULL;
+PFNGLBINDTEXTURESPROC __glewBindTextures = NULL;
+PFNGLBINDVERTEXBUFFERSPROC __glewBindVertexBuffers = NULL;
+
+PFNGLMULTIDRAWARRAYSINDIRECTPROC __glewMultiDrawArraysIndirect = NULL;
+PFNGLMULTIDRAWELEMENTSINDIRECTPROC __glewMultiDrawElementsIndirect = NULL;
+
+PFNGLSAMPLECOVERAGEARBPROC __glewSampleCoverageARB = NULL;
+
+PFNGLACTIVETEXTUREARBPROC __glewActiveTextureARB = NULL;
+PFNGLCLIENTACTIVETEXTUREARBPROC __glewClientActiveTextureARB = NULL;
+PFNGLMULTITEXCOORD1DARBPROC __glewMultiTexCoord1dARB = NULL;
+PFNGLMULTITEXCOORD1DVARBPROC __glewMultiTexCoord1dvARB = NULL;
+PFNGLMULTITEXCOORD1FARBPROC __glewMultiTexCoord1fARB = NULL;
+PFNGLMULTITEXCOORD1FVARBPROC __glewMultiTexCoord1fvARB = NULL;
+PFNGLMULTITEXCOORD1IARBPROC __glewMultiTexCoord1iARB = NULL;
+PFNGLMULTITEXCOORD1IVARBPROC __glewMultiTexCoord1ivARB = NULL;
+PFNGLMULTITEXCOORD1SARBPROC __glewMultiTexCoord1sARB = NULL;
+PFNGLMULTITEXCOORD1SVARBPROC __glewMultiTexCoord1svARB = NULL;
+PFNGLMULTITEXCOORD2DARBPROC __glewMultiTexCoord2dARB = NULL;
+PFNGLMULTITEXCOORD2DVARBPROC __glewMultiTexCoord2dvARB = NULL;
+PFNGLMULTITEXCOORD2FARBPROC __glewMultiTexCoord2fARB = NULL;
+PFNGLMULTITEXCOORD2FVARBPROC __glewMultiTexCoord2fvARB = NULL;
+PFNGLMULTITEXCOORD2IARBPROC __glewMultiTexCoord2iARB = NULL;
+PFNGLMULTITEXCOORD2IVARBPROC __glewMultiTexCoord2ivARB = NULL;
+PFNGLMULTITEXCOORD2SARBPROC __glewMultiTexCoord2sARB = NULL;
+PFNGLMULTITEXCOORD2SVARBPROC __glewMultiTexCoord2svARB = NULL;
+PFNGLMULTITEXCOORD3DARBPROC __glewMultiTexCoord3dARB = NULL;
+PFNGLMULTITEXCOORD3DVARBPROC __glewMultiTexCoord3dvARB = NULL;
+PFNGLMULTITEXCOORD3FARBPROC __glewMultiTexCoord3fARB = NULL;
+PFNGLMULTITEXCOORD3FVARBPROC __glewMultiTexCoord3fvARB = NULL;
+PFNGLMULTITEXCOORD3IARBPROC __glewMultiTexCoord3iARB = NULL;
+PFNGLMULTITEXCOORD3IVARBPROC __glewMultiTexCoord3ivARB = NULL;
+PFNGLMULTITEXCOORD3SARBPROC __glewMultiTexCoord3sARB = NULL;
+PFNGLMULTITEXCOORD3SVARBPROC __glewMultiTexCoord3svARB = NULL;
+PFNGLMULTITEXCOORD4DARBPROC __glewMultiTexCoord4dARB = NULL;
+PFNGLMULTITEXCOORD4DVARBPROC __glewMultiTexCoord4dvARB = NULL;
+PFNGLMULTITEXCOORD4FARBPROC __glewMultiTexCoord4fARB = NULL;
+PFNGLMULTITEXCOORD4FVARBPROC __glewMultiTexCoord4fvARB = NULL;
+PFNGLMULTITEXCOORD4IARBPROC __glewMultiTexCoord4iARB = NULL;
+PFNGLMULTITEXCOORD4IVARBPROC __glewMultiTexCoord4ivARB = NULL;
+PFNGLMULTITEXCOORD4SARBPROC __glewMultiTexCoord4sARB = NULL;
+PFNGLMULTITEXCOORD4SVARBPROC __glewMultiTexCoord4svARB = NULL;
+
+PFNGLBEGINQUERYARBPROC __glewBeginQueryARB = NULL;
+PFNGLDELETEQUERIESARBPROC __glewDeleteQueriesARB = NULL;
+PFNGLENDQUERYARBPROC __glewEndQueryARB = NULL;
+PFNGLGENQUERIESARBPROC __glewGenQueriesARB = NULL;
+PFNGLGETQUERYOBJECTIVARBPROC __glewGetQueryObjectivARB = NULL;
+PFNGLGETQUERYOBJECTUIVARBPROC __glewGetQueryObjectuivARB = NULL;
+PFNGLGETQUERYIVARBPROC __glewGetQueryivARB = NULL;
+PFNGLISQUERYARBPROC __glewIsQueryARB = NULL;
+
+PFNGLPOINTPARAMETERFARBPROC __glewPointParameterfARB = NULL;
+PFNGLPOINTPARAMETERFVARBPROC __glewPointParameterfvARB = NULL;
+
+PFNGLGETPROGRAMINTERFACEIVPROC __glewGetProgramInterfaceiv = NULL;
+PFNGLGETPROGRAMRESOURCEINDEXPROC __glewGetProgramResourceIndex = NULL;
+PFNGLGETPROGRAMRESOURCELOCATIONPROC __glewGetProgramResourceLocation = NULL;
+PFNGLGETPROGRAMRESOURCELOCATIONINDEXPROC __glewGetProgramResourceLocationIndex = NULL;
+PFNGLGETPROGRAMRESOURCENAMEPROC __glewGetProgramResourceName = NULL;
+PFNGLGETPROGRAMRESOURCEIVPROC __glewGetProgramResourceiv = NULL;
+
+PFNGLPROVOKINGVERTEXPROC __glewProvokingVertex = NULL;
+
+PFNGLGETGRAPHICSRESETSTATUSARBPROC __glewGetGraphicsResetStatusARB = NULL;
+PFNGLGETNCOLORTABLEARBPROC __glewGetnColorTableARB = NULL;
+PFNGLGETNCOMPRESSEDTEXIMAGEARBPROC __glewGetnCompressedTexImageARB = NULL;
+PFNGLGETNCONVOLUTIONFILTERARBPROC __glewGetnConvolutionFilterARB = NULL;
+PFNGLGETNHISTOGRAMARBPROC __glewGetnHistogramARB = NULL;
+PFNGLGETNMAPDVARBPROC __glewGetnMapdvARB = NULL;
+PFNGLGETNMAPFVARBPROC __glewGetnMapfvARB = NULL;
+PFNGLGETNMAPIVARBPROC __glewGetnMapivARB = NULL;
+PFNGLGETNMINMAXARBPROC __glewGetnMinmaxARB = NULL;
+PFNGLGETNPIXELMAPFVARBPROC __glewGetnPixelMapfvARB = NULL;
+PFNGLGETNPIXELMAPUIVARBPROC __glewGetnPixelMapuivARB = NULL;
+PFNGLGETNPIXELMAPUSVARBPROC __glewGetnPixelMapusvARB = NULL;
+PFNGLGETNPOLYGONSTIPPLEARBPROC __glewGetnPolygonStippleARB = NULL;
+PFNGLGETNSEPARABLEFILTERARBPROC __glewGetnSeparableFilterARB = NULL;
+PFNGLGETNTEXIMAGEARBPROC __glewGetnTexImageARB = NULL;
+PFNGLGETNUNIFORMDVARBPROC __glewGetnUniformdvARB = NULL;
+PFNGLGETNUNIFORMFVARBPROC __glewGetnUniformfvARB = NULL;
+PFNGLGETNUNIFORMIVARBPROC __glewGetnUniformivARB = NULL;
+PFNGLGETNUNIFORMUIVARBPROC __glewGetnUniformuivARB = NULL;
+PFNGLREADNPIXELSARBPROC __glewReadnPixelsARB = NULL;
+
+PFNGLMINSAMPLESHADINGARBPROC __glewMinSampleShadingARB = NULL;
+
+PFNGLBINDSAMPLERPROC __glewBindSampler = NULL;
+PFNGLDELETESAMPLERSPROC __glewDeleteSamplers = NULL;
+PFNGLGENSAMPLERSPROC __glewGenSamplers = NULL;
+PFNGLGETSAMPLERPARAMETERIIVPROC __glewGetSamplerParameterIiv = NULL;
+PFNGLGETSAMPLERPARAMETERIUIVPROC __glewGetSamplerParameterIuiv = NULL;
+PFNGLGETSAMPLERPARAMETERFVPROC __glewGetSamplerParameterfv = NULL;
+PFNGLGETSAMPLERPARAMETERIVPROC __glewGetSamplerParameteriv = NULL;
+PFNGLISSAMPLERPROC __glewIsSampler = NULL;
+PFNGLSAMPLERPARAMETERIIVPROC __glewSamplerParameterIiv = NULL;
+PFNGLSAMPLERPARAMETERIUIVPROC __glewSamplerParameterIuiv = NULL;
+PFNGLSAMPLERPARAMETERFPROC __glewSamplerParameterf = NULL;
+PFNGLSAMPLERPARAMETERFVPROC __glewSamplerParameterfv = NULL;
+PFNGLSAMPLERPARAMETERIPROC __glewSamplerParameteri = NULL;
+PFNGLSAMPLERPARAMETERIVPROC __glewSamplerParameteriv = NULL;
+
+PFNGLACTIVESHADERPROGRAMPROC __glewActiveShaderProgram = NULL;
+PFNGLBINDPROGRAMPIPELINEPROC __glewBindProgramPipeline = NULL;
+PFNGLCREATESHADERPROGRAMVPROC __glewCreateShaderProgramv = NULL;
+PFNGLDELETEPROGRAMPIPELINESPROC __glewDeleteProgramPipelines = NULL;
+PFNGLGENPROGRAMPIPELINESPROC __glewGenProgramPipelines = NULL;
+PFNGLGETPROGRAMPIPELINEINFOLOGPROC __glewGetProgramPipelineInfoLog = NULL;
+PFNGLGETPROGRAMPIPELINEIVPROC __glewGetProgramPipelineiv = NULL;
+PFNGLISPROGRAMPIPELINEPROC __glewIsProgramPipeline = NULL;
+PFNGLPROGRAMUNIFORM1DPROC __glewProgramUniform1d = NULL;
+PFNGLPROGRAMUNIFORM1DVPROC __glewProgramUniform1dv = NULL;
+PFNGLPROGRAMUNIFORM1FPROC __glewProgramUniform1f = NULL;
+PFNGLPROGRAMUNIFORM1FVPROC __glewProgramUniform1fv = NULL;
+PFNGLPROGRAMUNIFORM1IPROC __glewProgramUniform1i = NULL;
+PFNGLPROGRAMUNIFORM1IVPROC __glewProgramUniform1iv = NULL;
+PFNGLPROGRAMUNIFORM1UIPROC __glewProgramUniform1ui = NULL;
+PFNGLPROGRAMUNIFORM1UIVPROC __glewProgramUniform1uiv = NULL;
+PFNGLPROGRAMUNIFORM2DPROC __glewProgramUniform2d = NULL;
+PFNGLPROGRAMUNIFORM2DVPROC __glewProgramUniform2dv = NULL;
+PFNGLPROGRAMUNIFORM2FPROC __glewProgramUniform2f = NULL;
+PFNGLPROGRAMUNIFORM2FVPROC __glewProgramUniform2fv = NULL;
+PFNGLPROGRAMUNIFORM2IPROC __glewProgramUniform2i = NULL;
+PFNGLPROGRAMUNIFORM2IVPROC __glewProgramUniform2iv = NULL;
+PFNGLPROGRAMUNIFORM2UIPROC __glewProgramUniform2ui = NULL;
+PFNGLPROGRAMUNIFORM2UIVPROC __glewProgramUniform2uiv = NULL;
+PFNGLPROGRAMUNIFORM3DPROC __glewProgramUniform3d = NULL;
+PFNGLPROGRAMUNIFORM3DVPROC __glewProgramUniform3dv = NULL;
+PFNGLPROGRAMUNIFORM3FPROC __glewProgramUniform3f = NULL;
+PFNGLPROGRAMUNIFORM3FVPROC __glewProgramUniform3fv = NULL;
+PFNGLPROGRAMUNIFORM3IPROC __glewProgramUniform3i = NULL;
+PFNGLPROGRAMUNIFORM3IVPROC __glewProgramUniform3iv = NULL;
+PFNGLPROGRAMUNIFORM3UIPROC __glewProgramUniform3ui = NULL;
+PFNGLPROGRAMUNIFORM3UIVPROC __glewProgramUniform3uiv = NULL;
+PFNGLPROGRAMUNIFORM4DPROC __glewProgramUniform4d = NULL;
+PFNGLPROGRAMUNIFORM4DVPROC __glewProgramUniform4dv = NULL;
+PFNGLPROGRAMUNIFORM4FPROC __glewProgramUniform4f = NULL;
+PFNGLPROGRAMUNIFORM4FVPROC __glewProgramUniform4fv = NULL;
+PFNGLPROGRAMUNIFORM4IPROC __glewProgramUniform4i = NULL;
+PFNGLPROGRAMUNIFORM4IVPROC __glewProgramUniform4iv = NULL;
+PFNGLPROGRAMUNIFORM4UIPROC __glewProgramUniform4ui = NULL;
+PFNGLPROGRAMUNIFORM4UIVPROC __glewProgramUniform4uiv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX2DVPROC __glewProgramUniformMatrix2dv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX2FVPROC __glewProgramUniformMatrix2fv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX2X3DVPROC __glewProgramUniformMatrix2x3dv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX2X3FVPROC __glewProgramUniformMatrix2x3fv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX2X4DVPROC __glewProgramUniformMatrix2x4dv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX2X4FVPROC __glewProgramUniformMatrix2x4fv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX3DVPROC __glewProgramUniformMatrix3dv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX3FVPROC __glewProgramUniformMatrix3fv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX3X2DVPROC __glewProgramUniformMatrix3x2dv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX3X2FVPROC __glewProgramUniformMatrix3x2fv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX3X4DVPROC __glewProgramUniformMatrix3x4dv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX3X4FVPROC __glewProgramUniformMatrix3x4fv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX4DVPROC __glewProgramUniformMatrix4dv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX4FVPROC __glewProgramUniformMatrix4fv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX4X2DVPROC __glewProgramUniformMatrix4x2dv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX4X2FVPROC __glewProgramUniformMatrix4x2fv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX4X3DVPROC __glewProgramUniformMatrix4x3dv = NULL;
+PFNGLPROGRAMUNIFORMMATRIX4X3FVPROC __glewProgramUniformMatrix4x3fv = NULL;
+PFNGLUSEPROGRAMSTAGESPROC __glewUseProgramStages = NULL;
+PFNGLVALIDATEPROGRAMPIPELINEPROC __glewValidateProgramPipeline = NULL;
+
+PFNGLGETACTIVEATOMICCOUNTERBUFFERIVPROC __glewGetActiveAtomicCounterBufferiv = NULL;
+
+PFNGLBINDIMAGETEXTUREPROC __glewBindImageTexture = NULL;
+PFNGLMEMORYBARRIERPROC __glewMemoryBarrier = NULL;
+
+PFNGLATTACHOBJECTARBPROC __glewAttachObjectARB = NULL;
+PFNGLCOMPILESHADERARBPROC __glewCompileShaderARB = NULL;
+PFNGLCREATEPROGRAMOBJECTARBPROC __glewCreateProgramObjectARB = NULL;
+PFNGLCREATESHADEROBJECTARBPROC __glewCreateShaderObjectARB = NULL;
+PFNGLDELETEOBJECTARBPROC __glewDeleteObjectARB = NULL;
+PFNGLDETACHOBJECTARBPROC __glewDetachObjectARB = NULL;
+PFNGLGETACTIVEUNIFORMARBPROC __glewGetActiveUniformARB = NULL;
+PFNGLGETATTACHEDOBJECTSARBPROC __glewGetAttachedObjectsARB = NULL;
+PFNGLGETHANDLEARBPROC __glewGetHandleARB = NULL;
+PFNGLGETINFOLOGARBPROC __glewGetInfoLogARB = NULL;
+PFNGLGETOBJECTPARAMETERFVARBPROC __glewGetObjectParameterfvARB = NULL;
+PFNGLGETOBJECTPARAMETERIVARBPROC __glewGetObjectParameterivARB = NULL;
+PFNGLGETSHADERSOURCEARBPROC __glewGetShaderSourceARB = NULL;
+PFNGLGETUNIFORMLOCATIONARBPROC __glewGetUniformLocationARB = NULL;
+PFNGLGETUNIFORMFVARBPROC __glewGetUniformfvARB = NULL;
+PFNGLGETUNIFORMIVARBPROC __glewGetUniformivARB = NULL;
+PFNGLLINKPROGRAMARBPROC __glewLinkProgramARB = NULL;
+PFNGLSHADERSOURCEARBPROC __glewShaderSourceARB = NULL;
+PFNGLUNIFORM1FARBPROC __glewUniform1fARB = NULL;
+PFNGLUNIFORM1FVARBPROC __glewUniform1fvARB = NULL;
+PFNGLUNIFORM1IARBPROC __glewUniform1iARB = NULL;
+PFNGLUNIFORM1IVARBPROC __glewUniform1ivARB = NULL;
+PFNGLUNIFORM2FARBPROC __glewUniform2fARB = NULL;
+PFNGLUNIFORM2FVARBPROC __glewUniform2fvARB = NULL;
+PFNGLUNIFORM2IARBPROC __glewUniform2iARB = NULL;
+PFNGLUNIFORM2IVARBPROC __glewUniform2ivARB = NULL;
+PFNGLUNIFORM3FARBPROC __glewUniform3fARB = NULL;
+PFNGLUNIFORM3FVARBPROC __glewUniform3fvARB = NULL;
+PFNGLUNIFORM3IARBPROC __glewUniform3iARB = NULL;
+PFNGLUNIFORM3IVARBPROC __glewUniform3ivARB = NULL;
+PFNGLUNIFORM4FARBPROC __glewUniform4fARB = NULL;
+PFNGLUNIFORM4FVARBPROC __glewUniform4fvARB = NULL;
+PFNGLUNIFORM4IARBPROC __glewUniform4iARB = NULL;
+PFNGLUNIFORM4IVARBPROC __glewUniform4ivARB = NULL;
+PFNGLUNIFORMMATRIX2FVARBPROC __glewUniformMatrix2fvARB = NULL;
+PFNGLUNIFORMMATRIX3FVARBPROC __glewUniformMatrix3fvARB = NULL;
+PFNGLUNIFORMMATRIX4FVARBPROC __glewUniformMatrix4fvARB = NULL;
+PFNGLUSEPROGRAMOBJECTARBPROC __glewUseProgramObjectARB = NULL;
+PFNGLVALIDATEPROGRAMARBPROC __glewValidateProgramARB = NULL;
+
+PFNGLSHADERSTORAGEBLOCKBINDINGPROC __glewShaderStorageBlockBinding = NULL;
+
+PFNGLGETACTIVESUBROUTINENAMEPROC __glewGetActiveSubroutineName = NULL;
+PFNGLGETACTIVESUBROUTINEUNIFORMNAMEPROC __glewGetActiveSubroutineUniformName = NULL;
+PFNGLGETACTIVESUBROUTINEUNIFORMIVPROC __glewGetActiveSubroutineUniformiv = NULL;
+PFNGLGETPROGRAMSTAGEIVPROC __glewGetProgramStageiv = NULL;
+PFNGLGETSUBROUTINEINDEXPROC __glewGetSubroutineIndex = NULL;
+PFNGLGETSUBROUTINEUNIFORMLOCATIONPROC __glewGetSubroutineUniformLocation = NULL;
+PFNGLGETUNIFORMSUBROUTINEUIVPROC __glewGetUniformSubroutineuiv = NULL;
+PFNGLUNIFORMSUBROUTINESUIVPROC __glewUniformSubroutinesuiv = NULL;
+
+PFNGLCOMPILESHADERINCLUDEARBPROC __glewCompileShaderIncludeARB = NULL;
+PFNGLDELETENAMEDSTRINGARBPROC __glewDeleteNamedStringARB = NULL;
+PFNGLGETNAMEDSTRINGARBPROC __glewGetNamedStringARB = NULL;
+PFNGLGETNAMEDSTRINGIVARBPROC __glewGetNamedStringivARB = NULL;
+PFNGLISNAMEDSTRINGARBPROC __glewIsNamedStringARB = NULL;
+PFNGLNAMEDSTRINGARBPROC __glewNamedStringARB = NULL;
+
+PFNGLTEXPAGECOMMITMENTARBPROC __glewTexPageCommitmentARB = NULL;
+PFNGLTEXTUREPAGECOMMITMENTEXTPROC __glewTexturePageCommitmentEXT = NULL;
+
+PFNGLCLIENTWAITSYNCPROC __glewClientWaitSync = NULL;
+PFNGLDELETESYNCPROC __glewDeleteSync = NULL;
+PFNGLFENCESYNCPROC __glewFenceSync = NULL;
+PFNGLGETINTEGER64VPROC __glewGetInteger64v = NULL;
+PFNGLGETSYNCIVPROC __glewGetSynciv = NULL;
+PFNGLISSYNCPROC __glewIsSync = NULL;
+PFNGLWAITSYNCPROC __glewWaitSync = NULL;
+
+PFNGLPATCHPARAMETERFVPROC __glewPatchParameterfv = NULL;
+PFNGLPATCHPARAMETERIPROC __glewPatchParameteri = NULL;
+
+PFNGLTEXBUFFERARBPROC __glewTexBufferARB = NULL;
+
+PFNGLTEXBUFFERRANGEPROC __glewTexBufferRange = NULL;
+PFNGLTEXTUREBUFFERRANGEEXTPROC __glewTextureBufferRangeEXT = NULL;
+
+PFNGLCOMPRESSEDTEXIMAGE1DARBPROC __glewCompressedTexImage1DARB = NULL;
+PFNGLCOMPRESSEDTEXIMAGE2DARBPROC __glewCompressedTexImage2DARB = NULL;
+PFNGLCOMPRESSEDTEXIMAGE3DARBPROC __glewCompressedTexImage3DARB = NULL;
+PFNGLCOMPRESSEDTEXSUBIMAGE1DARBPROC __glewCompressedTexSubImage1DARB = NULL;
+PFNGLCOMPRESSEDTEXSUBIMAGE2DARBPROC __glewCompressedTexSubImage2DARB = NULL;
+PFNGLCOMPRESSEDTEXSUBIMAGE3DARBPROC __glewCompressedTexSubImage3DARB = NULL;
+PFNGLGETCOMPRESSEDTEXIMAGEARBPROC __glewGetCompressedTexImageARB = NULL;
+
+PFNGLGETMULTISAMPLEFVPROC __glewGetMultisamplefv = NULL;
+PFNGLSAMPLEMASKIPROC __glewSampleMaski = NULL;
+PFNGLTEXIMAGE2DMULTISAMPLEPROC __glewTexImage2DMultisample = NULL;
+PFNGLTEXIMAGE3DMULTISAMPLEPROC __glewTexImage3DMultisample = NULL;
+
+PFNGLTEXSTORAGE1DPROC __glewTexStorage1D = NULL;
+PFNGLTEXSTORAGE2DPROC __glewTexStorage2D = NULL;
+PFNGLTEXSTORAGE3DPROC __glewTexStorage3D = NULL;
+PFNGLTEXTURESTORAGE1DEXTPROC __glewTextureStorage1DEXT = NULL;
+PFNGLTEXTURESTORAGE2DEXTPROC __glewTextureStorage2DEXT = NULL;
+PFNGLTEXTURESTORAGE3DEXTPROC __glewTextureStorage3DEXT = NULL;
+
+PFNGLTEXSTORAGE2DMULTISAMPLEPROC __glewTexStorage2DMultisample = NULL;
+PFNGLTEXSTORAGE3DMULTISAMPLEPROC __glewTexStorage3DMultisample = NULL;
+PFNGLTEXTURESTORAGE2DMULTISAMPLEEXTPROC __glewTextureStorage2DMultisampleEXT = NULL;
+PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC __glewTextureStorage3DMultisampleEXT = NULL;
+
+PFNGLTEXTUREVIEWPROC __glewTextureView = NULL;
+
+PFNGLGETQUERYOBJECTI64VPROC __glewGetQueryObjecti64v = NULL;
+PFNGLGETQUERYOBJECTUI64VPROC __glewGetQueryObjectui64v = NULL;
+PFNGLQUERYCOUNTERPROC __glewQueryCounter = NULL;
+
+PFNGLBINDTRANSFORMFEEDBACKPROC __glewBindTransformFeedback = NULL;
+PFNGLDELETETRANSFORMFEEDBACKSPROC __glewDeleteTransformFeedbacks = NULL;
+PFNGLDRAWTRANSFORMFEEDBACKPROC __glewDrawTransformFeedback = NULL;
+PFNGLGENTRANSFORMFEEDBACKSPROC __glewGenTransformFeedbacks = NULL;
+PFNGLISTRANSFORMFEEDBACKPROC __glewIsTransformFeedback = NULL;
+PFNGLPAUSETRANSFORMFEEDBACKPROC __glewPauseTransformFeedback = NULL;
+PFNGLRESUMETRANSFORMFEEDBACKPROC __glewResumeTransformFeedback = NULL;
+
+PFNGLBEGINQUERYINDEXEDPROC __glewBeginQueryIndexed = NULL;
+PFNGLDRAWTRANSFORMFEEDBACKSTREAMPROC __glewDrawTransformFeedbackStream = NULL;
+PFNGLENDQUERYINDEXEDPROC __glewEndQueryIndexed = NULL;
+PFNGLGETQUERYINDEXEDIVPROC __glewGetQueryIndexediv = NULL;
+
+PFNGLDRAWTRANSFORMFEEDBACKINSTANCEDPROC __glewDrawTransformFeedbackInstanced = NULL;
+PFNGLDRAWTRANSFORMFEEDBACKSTREAMINSTANCEDPROC __glewDrawTransformFeedbackStreamInstanced = NULL;
+
+PFNGLLOADTRANSPOSEMATRIXDARBPROC __glewLoadTransposeMatrixdARB = NULL;
+PFNGLLOADTRANSPOSEMATRIXFARBPROC __glewLoadTransposeMatrixfARB = NULL;
+PFNGLMULTTRANSPOSEMATRIXDARBPROC __glewMultTransposeMatrixdARB = NULL;
+PFNGLMULTTRANSPOSEMATRIXFARBPROC __glewMultTransposeMatrixfARB = NULL;
+
+PFNGLBINDBUFFERBASEPROC __glewBindBufferBase = NULL;
+PFNGLBINDBUFFERRANGEPROC __glewBindBufferRange = NULL;
+PFNGLGETACTIVEUNIFORMBLOCKNAMEPROC __glewGetActiveUniformBlockName = NULL;
+PFNGLGETACTIVEUNIFORMBLOCKIVPROC __glewGetActiveUniformBlockiv = NULL;
+PFNGLGETACTIVEUNIFORMNAMEPROC __glewGetActiveUniformName = NULL;
+PFNGLGETACTIVEUNIFORMSIVPROC __glewGetActiveUniformsiv = NULL;
+PFNGLGETINTEGERI_VPROC __glewGetIntegeri_v = NULL;
+PFNGLGETUNIFORMBLOCKINDEXPROC __glewGetUniformBlockIndex = NULL;
+PFNGLGETUNIFORMINDICESPROC __glewGetUniformIndices = NULL;
+PFNGLUNIFORMBLOCKBINDINGPROC __glewUniformBlockBinding = NULL;
+
+PFNGLBINDVERTEXARRAYPROC __glewBindVertexArray = NULL;
+PFNGLDELETEVERTEXARRAYSPROC __glewDeleteVertexArrays = NULL;
+PFNGLGENVERTEXARRAYSPROC __glewGenVertexArrays = NULL;
+PFNGLISVERTEXARRAYPROC __glewIsVertexArray = NULL;
+
+PFNGLGETVERTEXATTRIBLDVPROC __glewGetVertexAttribLdv = NULL;
+PFNGLVERTEXATTRIBL1DPROC __glewVertexAttribL1d = NULL;
+PFNGLVERTEXATTRIBL1DVPROC __glewVertexAttribL1dv = NULL;
+PFNGLVERTEXATTRIBL2DPROC __glewVertexAttribL2d = NULL;
+PFNGLVERTEXATTRIBL2DVPROC __glewVertexAttribL2dv = NULL;
+PFNGLVERTEXATTRIBL3DPROC __glewVertexAttribL3d = NULL;
+PFNGLVERTEXATTRIBL3DVPROC __glewVertexAttribL3dv = NULL;
+PFNGLVERTEXATTRIBL4DPROC __glewVertexAttribL4d = NULL;
+PFNGLVERTEXATTRIBL4DVPROC __glewVertexAttribL4dv = NULL;
+PFNGLVERTEXATTRIBLPOINTERPROC __glewVertexAttribLPointer = NULL;
+
+PFNGLBINDVERTEXBUFFERPROC __glewBindVertexBuffer = NULL;
+PFNGLVERTEXATTRIBBINDINGPROC __glewVertexAttribBinding = NULL;
+PFNGLVERTEXATTRIBFORMATPROC __glewVertexAttribFormat = NULL;
+PFNGLVERTEXATTRIBIFORMATPROC __glewVertexAttribIFormat = NULL;
+PFNGLVERTEXATTRIBLFORMATPROC __glewVertexAttribLFormat = NULL;
+PFNGLVERTEXBINDINGDIVISORPROC __glewVertexBindingDivisor = NULL;
+
+PFNGLVERTEXBLENDARBPROC __glewVertexBlendARB = NULL;
+PFNGLWEIGHTPOINTERARBPROC __glewWeightPointerARB = NULL;
+PFNGLWEIGHTBVARBPROC __glewWeightbvARB = NULL;
+PFNGLWEIGHTDVARBPROC __glewWeightdvARB = NULL;
+PFNGLWEIGHTFVARBPROC __glewWeightfvARB = NULL;
+PFNGLWEIGHTIVARBPROC __glewWeightivARB = NULL;
+PFNGLWEIGHTSVARBPROC __glewWeightsvARB = NULL;
+PFNGLWEIGHTUBVARBPROC __glewWeightubvARB = NULL;
+PFNGLWEIGHTUIVARBPROC __glewWeightuivARB = NULL;
+PFNGLWEIGHTUSVARBPROC __glewWeightusvARB = NULL;
+
+PFNGLBINDBUFFERARBPROC __glewBindBufferARB = NULL;
+PFNGLBUFFERDATAARBPROC __glewBufferDataARB = NULL;
+PFNGLBUFFERSUBDATAARBPROC __glewBufferSubDataARB = NULL;
+PFNGLDELETEBUFFERSARBPROC __glewDeleteBuffersARB = NULL;
+PFNGLGENBUFFERSARBPROC __glewGenBuffersARB = NULL;
+PFNGLGETBUFFERPARAMETERIVARBPROC __glewGetBufferParameterivARB = NULL;
+PFNGLGETBUFFERPOINTERVARBPROC __glewGetBufferPointervARB = NULL;
+PFNGLGETBUFFERSUBDATAARBPROC __glewGetBufferSubDataARB = NULL;
+PFNGLISBUFFERARBPROC __glewIsBufferARB = NULL;
+PFNGLMAPBUFFERARBPROC __glewMapBufferARB = NULL;
+PFNGLUNMAPBUFFERARBPROC __glewUnmapBufferARB = NULL;
+
+PFNGLBINDPROGRAMARBPROC __glewBindProgramARB = NULL;
+PFNGLDELETEPROGRAMSARBPROC __glewDeleteProgramsARB = NULL;
+PFNGLDISABLEVERTEXATTRIBARRAYARBPROC __glewDisableVertexAttribArrayARB = NULL;
+PFNGLENABLEVERTEXATTRIBARRAYARBPROC __glewEnableVertexAttribArrayARB = NULL;
+PFNGLGENPROGRAMSARBPROC __glewGenProgramsARB = NULL;
+PFNGLGETPROGRAMENVPARAMETERDVARBPROC __glewGetProgramEnvParameterdvARB = NULL;
+PFNGLGETPROGRAMENVPARAMETERFVARBPROC __glewGetProgramEnvParameterfvARB = NULL;
+PFNGLGETPROGRAMLOCALPARAMETERDVARBPROC __glewGetProgramLocalParameterdvARB = NULL;
+PFNGLGETPROGRAMLOCALPARAMETERFVARBPROC __glewGetProgramLocalParameterfvARB = NULL;
+PFNGLGETPROGRAMSTRINGARBPROC __glewGetProgramStringARB = NULL;
+PFNGLGETPROGRAMIVARBPROC __glewGetProgramivARB = NULL;
+PFNGLGETVERTEXATTRIBPOINTERVARBPROC __glewGetVertexAttribPointervARB = NULL;
+PFNGLGETVERTEXATTRIBDVARBPROC __glewGetVertexAttribdvARB = NULL;
+PFNGLGETVERTEXATTRIBFVARBPROC __glewGetVertexAttribfvARB = NULL;
+PFNGLGETVERTEXATTRIBIVARBPROC __glewGetVertexAttribivARB = NULL;
+PFNGLISPROGRAMARBPROC __glewIsProgramARB = NULL;
+PFNGLPROGRAMENVPARAMETER4DARBPROC __glewProgramEnvParameter4dARB = NULL;
+PFNGLPROGRAMENVPARAMETER4DVARBPROC __glewProgramEnvParameter4dvARB = NULL;
+PFNGLPROGRAMENVPARAMETER4FARBPROC __glewProgramEnvParameter4fARB = NULL;
+PFNGLPROGRAMENVPARAMETER4FVARBPROC __glewProgramEnvParameter4fvARB = NULL;
+PFNGLPROGRAMLOCALPARAMETER4DARBPROC __glewProgramLocalParameter4dARB = NULL;
+PFNGLPROGRAMLOCALPARAMETER4DVARBPROC __glewProgramLocalParameter4dvARB = NULL;
+PFNGLPROGRAMLOCALPARAMETER4FARBPROC __glewProgramLocalParameter4fARB = NULL;
+PFNGLPROGRAMLOCALPARAMETER4FVARBPROC __glewProgramLocalParameter4fvARB = NULL;
+PFNGLPROGRAMSTRINGARBPROC __glewProgramStringARB = NULL;
+PFNGLVERTEXATTRIB1DARBPROC __glewVertexAttrib1dARB = NULL;
+PFNGLVERTEXATTRIB1DVARBPROC __glewVertexAttrib1dvARB = NULL;
+PFNGLVERTEXATTRIB1FARBPROC __glewVertexAttrib1fARB = NULL;
+PFNGLVERTEXATTRIB1FVARBPROC __glewVertexAttrib1fvARB = NULL;
+PFNGLVERTEXATTRIB1SARBPROC __glewVertexAttrib1sARB = NULL;
+PFNGLVERTEXATTRIB1SVARBPROC __glewVertexAttrib1svARB = NULL;
+PFNGLVERTEXATTRIB2DARBPROC __glewVertexAttrib2dARB = NULL;
+PFNGLVERTEXATTRIB2DVARBPROC __glewVertexAttrib2dvARB = NULL;
+PFNGLVERTEXATTRIB2FARBPROC __glewVertexAttrib2fARB = NULL;
+PFNGLVERTEXATTRIB2FVARBPROC __glewVertexAttrib2fvARB = NULL;
+PFNGLVERTEXATTRIB2SARBPROC __glewVertexAttrib2sARB = NULL;
+PFNGLVERTEXATTRIB2SVARBPROC __glewVertexAttrib2svARB = NULL;
+PFNGLVERTEXATTRIB3DARBPROC __glewVertexAttrib3dARB = NULL;
+PFNGLVERTEXATTRIB3DVARBPROC __glewVertexAttrib3dvARB = NULL;
+PFNGLVERTEXATTRIB3FARBPROC __glewVertexAttrib3fARB = NULL;
+PFNGLVERTEXATTRIB3FVARBPROC __glewVertexAttrib3fvARB = NULL;
+PFNGLVERTEXATTRIB3SARBPROC __glewVertexAttrib3sARB = NULL;
+PFNGLVERTEXATTRIB3SVARBPROC __glewVertexAttrib3svARB = NULL;
+PFNGLVERTEXATTRIB4NBVARBPROC __glewVertexAttrib4NbvARB = NULL;
+PFNGLVERTEXATTRIB4NIVARBPROC __glewVertexAttrib4NivARB = NULL;
+PFNGLVERTEXATTRIB4NSVARBPROC __glewVertexAttrib4NsvARB = NULL;
+PFNGLVERTEXATTRIB4NUBARBPROC __glewVertexAttrib4NubARB = NULL;
+PFNGLVERTEXATTRIB4NUBVARBPROC __glewVertexAttrib4NubvARB = NULL;
+PFNGLVERTEXATTRIB4NUIVARBPROC __glewVertexAttrib4NuivARB = NULL;
+PFNGLVERTEXATTRIB4NUSVARBPROC __glewVertexAttrib4NusvARB = NULL;
+PFNGLVERTEXATTRIB4BVARBPROC __glewVertexAttrib4bvARB = NULL;
+PFNGLVERTEXATTRIB4DARBPROC __glewVertexAttrib4dARB = NULL;
+PFNGLVERTEXATTRIB4DVARBPROC __glewVertexAttrib4dvARB = NULL;
+PFNGLVERTEXATTRIB4FARBPROC __glewVertexAttrib4fARB = NULL;
+PFNGLVERTEXATTRIB4FVARBPROC __glewVertexAttrib4fvARB = NULL;
+PFNGLVERTEXATTRIB4IVARBPROC __glewVertexAttrib4ivARB = NULL;
+PFNGLVERTEXATTRIB4SARBPROC __glewVertexAttrib4sARB = NULL;
+PFNGLVERTEXATTRIB4SVARBPROC __glewVertexAttrib4svARB = NULL;
+PFNGLVERTEXATTRIB4UBVARBPROC __glewVertexAttrib4ubvARB = NULL;
+PFNGLVERTEXATTRIB4UIVARBPROC __glewVertexAttrib4uivARB = NULL;
+PFNGLVERTEXATTRIB4USVARBPROC __glewVertexAttrib4usvARB = NULL;
+PFNGLVERTEXATTRIBPOINTERARBPROC __glewVertexAttribPointerARB = NULL;
+
+PFNGLBINDATTRIBLOCATIONARBPROC __glewBindAttribLocationARB = NULL;
+PFNGLGETACTIVEATTRIBARBPROC __glewGetActiveAttribARB = NULL;
+PFNGLGETATTRIBLOCATIONARBPROC __glewGetAttribLocationARB = NULL;
+
+PFNGLCOLORP3UIPROC __glewColorP3ui = NULL;
+PFNGLCOLORP3UIVPROC __glewColorP3uiv = NULL;
+PFNGLCOLORP4UIPROC __glewColorP4ui = NULL;
+PFNGLCOLORP4UIVPROC __glewColorP4uiv = NULL;
+PFNGLMULTITEXCOORDP1UIPROC __glewMultiTexCoordP1ui = NULL;
+PFNGLMULTITEXCOORDP1UIVPROC __glewMultiTexCoordP1uiv = NULL;
+PFNGLMULTITEXCOORDP2UIPROC __glewMultiTexCoordP2ui = NULL;
+PFNGLMULTITEXCOORDP2UIVPROC __glewMultiTexCoordP2uiv = NULL;
+PFNGLMULTITEXCOORDP3UIPROC __glewMultiTexCoordP3ui = NULL;
+PFNGLMULTITEXCOORDP3UIVPROC __glewMultiTexCoordP3uiv = NULL;
+PFNGLMULTITEXCOORDP4UIPROC __glewMultiTexCoordP4ui = NULL;
+PFNGLMULTITEXCOORDP4UIVPROC __glewMultiTexCoordP4uiv = NULL;
+PFNGLNORMALP3UIPROC __glewNormalP3ui = NULL;
+PFNGLNORMALP3UIVPROC __glewNormalP3uiv = NULL;
+PFNGLSECONDARYCOLORP3UIPROC __glewSecondaryColorP3ui = NULL;
+PFNGLSECONDARYCOLORP3UIVPROC __glewSecondaryColorP3uiv = NULL;
+PFNGLTEXCOORDP1UIPROC __glewTexCoordP1ui = NULL;
+PFNGLTEXCOORDP1UIVPROC __glewTexCoordP1uiv = NULL;
+PFNGLTEXCOORDP2UIPROC __glewTexCoordP2ui = NULL;
+PFNGLTEXCOORDP2UIVPROC __glewTexCoordP2uiv = NULL;
+PFNGLTEXCOORDP3UIPROC __glewTexCoordP3ui = NULL;
+PFNGLTEXCOORDP3UIVPROC __glewTexCoordP3uiv = NULL;
+PFNGLTEXCOORDP4UIPROC __glewTexCoordP4ui = NULL;
+PFNGLTEXCOORDP4UIVPROC __glewTexCoordP4uiv = NULL;
+PFNGLVERTEXATTRIBP1UIPROC __glewVertexAttribP1ui = NULL;
+PFNGLVERTEXATTRIBP1UIVPROC __glewVertexAttribP1uiv = NULL;
+PFNGLVERTEXATTRIBP2UIPROC __glewVertexAttribP2ui = NULL;
+PFNGLVERTEXATTRIBP2UIVPROC __glewVertexAttribP2uiv = NULL;
+PFNGLVERTEXATTRIBP3UIPROC __glewVertexAttribP3ui = NULL;
+PFNGLVERTEXATTRIBP3UIVPROC __glewVertexAttribP3uiv = NULL;
+PFNGLVERTEXATTRIBP4UIPROC __glewVertexAttribP4ui = NULL;
+PFNGLVERTEXATTRIBP4UIVPROC __glewVertexAttribP4uiv = NULL;
+PFNGLVERTEXP2UIPROC __glewVertexP2ui = NULL;
+PFNGLVERTEXP2UIVPROC __glewVertexP2uiv = NULL;
+PFNGLVERTEXP3UIPROC __glewVertexP3ui = NULL;
+PFNGLVERTEXP3UIVPROC __glewVertexP3uiv = NULL;
+PFNGLVERTEXP4UIPROC __glewVertexP4ui = NULL;
+PFNGLVERTEXP4UIVPROC __glewVertexP4uiv = NULL;
+
+PFNGLDEPTHRANGEARRAYVPROC __glewDepthRangeArrayv = NULL;
+PFNGLDEPTHRANGEINDEXEDPROC __glewDepthRangeIndexed = NULL;
+PFNGLGETDOUBLEI_VPROC __glewGetDoublei_v = NULL;
+PFNGLGETFLOATI_VPROC __glewGetFloati_v = NULL;
+PFNGLSCISSORARRAYVPROC __glewScissorArrayv = NULL;
+PFNGLSCISSORINDEXEDPROC __glewScissorIndexed = NULL;
+PFNGLSCISSORINDEXEDVPROC __glewScissorIndexedv = NULL;
+PFNGLVIEWPORTARRAYVPROC __glewViewportArrayv = NULL;
+PFNGLVIEWPORTINDEXEDFPROC __glewViewportIndexedf = NULL;
+PFNGLVIEWPORTINDEXEDFVPROC __glewViewportIndexedfv = NULL;
+
+PFNGLWINDOWPOS2DARBPROC __glewWindowPos2dARB = NULL;
+PFNGLWINDOWPOS2DVARBPROC __glewWindowPos2dvARB = NULL;
+PFNGLWINDOWPOS2FARBPROC __glewWindowPos2fARB = NULL;
+PFNGLWINDOWPOS2FVARBPROC __glewWindowPos2fvARB = NULL;
+PFNGLWINDOWPOS2IARBPROC __glewWindowPos2iARB = NULL;
+PFNGLWINDOWPOS2IVARBPROC __glewWindowPos2ivARB = NULL;
+PFNGLWINDOWPOS2SARBPROC __glewWindowPos2sARB = NULL;
+PFNGLWINDOWPOS2SVARBPROC __glewWindowPos2svARB = NULL;
+PFNGLWINDOWPOS3DARBPROC __glewWindowPos3dARB = NULL;
+PFNGLWINDOWPOS3DVARBPROC __glewWindowPos3dvARB = NULL;
+PFNGLWINDOWPOS3FARBPROC __glewWindowPos3fARB = NULL;
+PFNGLWINDOWPOS3FVARBPROC __glewWindowPos3fvARB = NULL;
+PFNGLWINDOWPOS3IARBPROC __glewWindowPos3iARB = NULL;
+PFNGLWINDOWPOS3IVARBPROC __glewWindowPos3ivARB = NULL;
+PFNGLWINDOWPOS3SARBPROC __glewWindowPos3sARB = NULL;
+PFNGLWINDOWPOS3SVARBPROC __glewWindowPos3svARB = NULL;
+
+PFNGLDRAWBUFFERSATIPROC __glewDrawBuffersATI = NULL;
+
+PFNGLDRAWELEMENTARRAYATIPROC __glewDrawElementArrayATI = NULL;
+PFNGLDRAWRANGEELEMENTARRAYATIPROC __glewDrawRangeElementArrayATI = NULL;
+PFNGLELEMENTPOINTERATIPROC __glewElementPointerATI = NULL;
+
+PFNGLGETTEXBUMPPARAMETERFVATIPROC __glewGetTexBumpParameterfvATI = NULL;
+PFNGLGETTEXBUMPPARAMETERIVATIPROC __glewGetTexBumpParameterivATI = NULL;
+PFNGLTEXBUMPPARAMETERFVATIPROC __glewTexBumpParameterfvATI = NULL;
+PFNGLTEXBUMPPARAMETERIVATIPROC __glewTexBumpParameterivATI = NULL;
+
+PFNGLALPHAFRAGMENTOP1ATIPROC __glewAlphaFragmentOp1ATI = NULL;
+PFNGLALPHAFRAGMENTOP2ATIPROC __glewAlphaFragmentOp2ATI = NULL;
+PFNGLALPHAFRAGMENTOP3ATIPROC __glewAlphaFragmentOp3ATI = NULL;
+PFNGLBEGINFRAGMENTSHADERATIPROC __glewBeginFragmentShaderATI = NULL;
+PFNGLBINDFRAGMENTSHADERATIPROC __glewBindFragmentShaderATI = NULL;
+PFNGLCOLORFRAGMENTOP1ATIPROC __glewColorFragmentOp1ATI = NULL;
+PFNGLCOLORFRAGMENTOP2ATIPROC __glewColorFragmentOp2ATI = NULL;
+PFNGLCOLORFRAGMENTOP3ATIPROC __glewColorFragmentOp3ATI = NULL;
+PFNGLDELETEFRAGMENTSHADERATIPROC __glewDeleteFragmentShaderATI = NULL;
+PFNGLENDFRAGMENTSHADERATIPROC __glewEndFragmentShaderATI = NULL;
+PFNGLGENFRAGMENTSHADERSATIPROC __glewGenFragmentShadersATI = NULL;
+PFNGLPASSTEXCOORDATIPROC __glewPassTexCoordATI = NULL;
+PFNGLSAMPLEMAPATIPROC __glewSampleMapATI = NULL;
+PFNGLSETFRAGMENTSHADERCONSTANTATIPROC __glewSetFragmentShaderConstantATI = NULL;
+
+PFNGLMAPOBJECTBUFFERATIPROC __glewMapObjectBufferATI = NULL;
+PFNGLUNMAPOBJECTBUFFERATIPROC __glewUnmapObjectBufferATI = NULL;
+
+PFNGLPNTRIANGLESFATIPROC __glewPNTrianglesfATI = NULL;
+PFNGLPNTRIANGLESIATIPROC __glewPNTrianglesiATI = NULL;
+
+PFNGLSTENCILFUNCSEPARATEATIPROC __glewStencilFuncSeparateATI = NULL;
+PFNGLSTENCILOPSEPARATEATIPROC __glewStencilOpSeparateATI = NULL;
+
+PFNGLARRAYOBJECTATIPROC __glewArrayObjectATI = NULL;
+PFNGLFREEOBJECTBUFFERATIPROC __glewFreeObjectBufferATI = NULL;
+PFNGLGETARRAYOBJECTFVATIPROC __glewGetArrayObjectfvATI = NULL;
+PFNGLGETARRAYOBJECTIVATIPROC __glewGetArrayObjectivATI = NULL;
+PFNGLGETOBJECTBUFFERFVATIPROC __glewGetObjectBufferfvATI = NULL;
+PFNGLGETOBJECTBUFFERIVATIPROC __glewGetObjectBufferivATI = NULL;
+PFNGLGETVARIANTARRAYOBJECTFVATIPROC __glewGetVariantArrayObjectfvATI = NULL;
+PFNGLGETVARIANTARRAYOBJECTIVATIPROC __glewGetVariantArrayObjectivATI = NULL;
+PFNGLISOBJECTBUFFERATIPROC __glewIsObjectBufferATI = NULL;
+PFNGLNEWOBJECTBUFFERATIPROC __glewNewObjectBufferATI = NULL;
+PFNGLUPDATEOBJECTBUFFERATIPROC __glewUpdateObjectBufferATI = NULL;
+PFNGLVARIANTARRAYOBJECTATIPROC __glewVariantArrayObjectATI = NULL;
+
+PFNGLGETVERTEXATTRIBARRAYOBJECTFVATIPROC __glewGetVertexAttribArrayObjectfvATI = NULL;
+PFNGLGETVERTEXATTRIBARRAYOBJECTIVATIPROC __glewGetVertexAttribArrayObjectivATI = NULL;
+PFNGLVERTEXATTRIBARRAYOBJECTATIPROC __glewVertexAttribArrayObjectATI = NULL;
+
+PFNGLCLIENTACTIVEVERTEXSTREAMATIPROC __glewClientActiveVertexStreamATI = NULL;
+PFNGLNORMALSTREAM3BATIPROC __glewNormalStream3bATI = NULL;
+PFNGLNORMALSTREAM3BVATIPROC __glewNormalStream3bvATI = NULL;
+PFNGLNORMALSTREAM3DATIPROC __glewNormalStream3dATI = NULL;
+PFNGLNORMALSTREAM3DVATIPROC __glewNormalStream3dvATI = NULL;
+PFNGLNORMALSTREAM3FATIPROC __glewNormalStream3fATI = NULL;
+PFNGLNORMALSTREAM3FVATIPROC __glewNormalStream3fvATI = NULL;
+PFNGLNORMALSTREAM3IATIPROC __glewNormalStream3iATI = NULL;
+PFNGLNORMALSTREAM3IVATIPROC __glewNormalStream3ivATI = NULL;
+PFNGLNORMALSTREAM3SATIPROC __glewNormalStream3sATI = NULL;
+PFNGLNORMALSTREAM3SVATIPROC __glewNormalStream3svATI = NULL;
+PFNGLVERTEXBLENDENVFATIPROC __glewVertexBlendEnvfATI = NULL;
+PFNGLVERTEXBLENDENVIATIPROC __glewVertexBlendEnviATI = NULL;
+PFNGLVERTEXSTREAM1DATIPROC __glewVertexStream1dATI = NULL;
+PFNGLVERTEXSTREAM1DVATIPROC __glewVertexStream1dvATI = NULL;
+PFNGLVERTEXSTREAM1FATIPROC __glewVertexStream1fATI = NULL;
+PFNGLVERTEXSTREAM1FVATIPROC __glewVertexStream1fvATI = NULL;
+PFNGLVERTEXSTREAM1IATIPROC __glewVertexStream1iATI = NULL;
+PFNGLVERTEXSTREAM1IVATIPROC __glewVertexStream1ivATI = NULL;
+PFNGLVERTEXSTREAM1SATIPROC __glewVertexStream1sATI = NULL;
+PFNGLVERTEXSTREAM1SVATIPROC __glewVertexStream1svATI = NULL;
+PFNGLVERTEXSTREAM2DATIPROC __glewVertexStream2dATI = NULL;
+PFNGLVERTEXSTREAM2DVATIPROC __glewVertexStream2dvATI = NULL;
+PFNGLVERTEXSTREAM2FATIPROC __glewVertexStream2fATI = NULL;
+PFNGLVERTEXSTREAM2FVATIPROC __glewVertexStream2fvATI = NULL;
+PFNGLVERTEXSTREAM2IATIPROC __glewVertexStream2iATI = NULL;
+PFNGLVERTEXSTREAM2IVATIPROC __glewVertexStream2ivATI = NULL;
+PFNGLVERTEXSTREAM2SATIPROC __glewVertexStream2sATI = NULL;
+PFNGLVERTEXSTREAM2SVATIPROC __glewVertexStream2svATI = NULL;
+PFNGLVERTEXSTREAM3DATIPROC __glewVertexStream3dATI = NULL;
+PFNGLVERTEXSTREAM3DVATIPROC __glewVertexStream3dvATI = NULL;
+PFNGLVERTEXSTREAM3FATIPROC __glewVertexStream3fATI = NULL;
+PFNGLVERTEXSTREAM3FVATIPROC __glewVertexStream3fvATI = NULL;
+PFNGLVERTEXSTREAM3IATIPROC __glewVertexStream3iATI = NULL;
+PFNGLVERTEXSTREAM3IVATIPROC __glewVertexStream3ivATI = NULL;
+PFNGLVERTEXSTREAM3SATIPROC __glewVertexStream3sATI = NULL;
+PFNGLVERTEXSTREAM3SVATIPROC __glewVertexStream3svATI = NULL;
+PFNGLVERTEXSTREAM4DATIPROC __glewVertexStream4dATI = NULL;
+PFNGLVERTEXSTREAM4DVATIPROC __glewVertexStream4dvATI = NULL;
+PFNGLVERTEXSTREAM4FATIPROC __glewVertexStream4fATI = NULL;
+PFNGLVERTEXSTREAM4FVATIPROC __glewVertexStream4fvATI = NULL;
+PFNGLVERTEXSTREAM4IATIPROC __glewVertexStream4iATI = NULL;
+PFNGLVERTEXSTREAM4IVATIPROC __glewVertexStream4ivATI = NULL;
+PFNGLVERTEXSTREAM4SATIPROC __glewVertexStream4sATI = NULL;
+PFNGLVERTEXSTREAM4SVATIPROC __glewVertexStream4svATI = NULL;
+
+PFNGLGETUNIFORMBUFFERSIZEEXTPROC __glewGetUniformBufferSizeEXT = NULL;
+PFNGLGETUNIFORMOFFSETEXTPROC __glewGetUniformOffsetEXT = NULL;
+PFNGLUNIFORMBUFFEREXTPROC __glewUniformBufferEXT = NULL;
+
+PFNGLBLENDCOLOREXTPROC __glewBlendColorEXT = NULL;
+
+PFNGLBLENDEQUATIONSEPARATEEXTPROC __glewBlendEquationSeparateEXT = NULL;
+
+PFNGLBLENDFUNCSEPARATEEXTPROC __glewBlendFuncSeparateEXT = NULL;
+
+PFNGLBLENDEQUATIONEXTPROC __glewBlendEquationEXT = NULL;
+
+PFNGLCOLORSUBTABLEEXTPROC __glewColorSubTableEXT = NULL;
+PFNGLCOPYCOLORSUBTABLEEXTPROC __glewCopyColorSubTableEXT = NULL;
+
+PFNGLLOCKARRAYSEXTPROC __glewLockArraysEXT = NULL;
+PFNGLUNLOCKARRAYSEXTPROC __glewUnlockArraysEXT = NULL;
+
+PFNGLCONVOLUTIONFILTER1DEXTPROC __glewConvolutionFilter1DEXT = NULL;
+PFNGLCONVOLUTIONFILTER2DEXTPROC __glewConvolutionFilter2DEXT = NULL;
+PFNGLCONVOLUTIONPARAMETERFEXTPROC __glewConvolutionParameterfEXT = NULL;
+PFNGLCONVOLUTIONPARAMETERFVEXTPROC __glewConvolutionParameterfvEXT = NULL;
+PFNGLCONVOLUTIONPARAMETERIEXTPROC __glewConvolutionParameteriEXT = NULL;
+PFNGLCONVOLUTIONPARAMETERIVEXTPROC __glewConvolutionParameterivEXT = NULL;
+PFNGLCOPYCONVOLUTIONFILTER1DEXTPROC __glewCopyConvolutionFilter1DEXT = NULL;
+PFNGLCOPYCONVOLUTIONFILTER2DEXTPROC __glewCopyConvolutionFilter2DEXT = NULL;
+PFNGLGETCONVOLUTIONFILTEREXTPROC __glewGetConvolutionFilterEXT = NULL;
+PFNGLGETCONVOLUTIONPARAMETERFVEXTPROC __glewGetConvolutionParameterfvEXT = NULL;
+PFNGLGETCONVOLUTIONPARAMETERIVEXTPROC __glewGetConvolutionParameterivEXT = NULL;
+PFNGLGETSEPARABLEFILTEREXTPROC __glewGetSeparableFilterEXT = NULL;
+PFNGLSEPARABLEFILTER2DEXTPROC __glewSeparableFilter2DEXT = NULL;
+
+PFNGLBINORMALPOINTEREXTPROC __glewBinormalPointerEXT = NULL;
+PFNGLTANGENTPOINTEREXTPROC __glewTangentPointerEXT = NULL;
+
+PFNGLCOPYTEXIMAGE1DEXTPROC __glewCopyTexImage1DEXT = NULL;
+PFNGLCOPYTEXIMAGE2DEXTPROC __glewCopyTexImage2DEXT = NULL;
+PFNGLCOPYTEXSUBIMAGE1DEXTPROC __glewCopyTexSubImage1DEXT = NULL;
+PFNGLCOPYTEXSUBIMAGE2DEXTPROC __glewCopyTexSubImage2DEXT = NULL;
+PFNGLCOPYTEXSUBIMAGE3DEXTPROC __glewCopyTexSubImage3DEXT = NULL;
+
+PFNGLCULLPARAMETERDVEXTPROC __glewCullParameterdvEXT = NULL;
+PFNGLCULLPARAMETERFVEXTPROC __glewCullParameterfvEXT = NULL;
+
+PFNGLINSERTEVENTMARKEREXTPROC __glewInsertEventMarkerEXT = NULL;
+PFNGLPOPGROUPMARKEREXTPROC __glewPopGroupMarkerEXT = NULL;
+PFNGLPUSHGROUPMARKEREXTPROC __glewPushGroupMarkerEXT = NULL;
+
+PFNGLDEPTHBOUNDSEXTPROC __glewDepthBoundsEXT = NULL;
+
+PFNGLBINDMULTITEXTUREEXTPROC __glewBindMultiTextureEXT = NULL;
+PFNGLCHECKNAMEDFRAMEBUFFERSTATUSEXTPROC __glewCheckNamedFramebufferStatusEXT = NULL;
+PFNGLCLIENTATTRIBDEFAULTEXTPROC __glewClientAttribDefaultEXT = NULL;
+PFNGLCOMPRESSEDMULTITEXIMAGE1DEXTPROC __glewCompressedMultiTexImage1DEXT = NULL;
+PFNGLCOMPRESSEDMULTITEXIMAGE2DEXTPROC __glewCompressedMultiTexImage2DEXT = NULL;
+PFNGLCOMPRESSEDMULTITEXIMAGE3DEXTPROC __glewCompressedMultiTexImage3DEXT = NULL;
+PFNGLCOMPRESSEDMULTITEXSUBIMAGE1DEXTPROC __glewCompressedMultiTexSubImage1DEXT = NULL;
+PFNGLCOMPRESSEDMULTITEXSUBIMAGE2DEXTPROC __glewCompressedMultiTexSubImage2DEXT = NULL;
+PFNGLCOMPRESSEDMULTITEXSUBIMAGE3DEXTPROC __glewCompressedMultiTexSubImage3DEXT = NULL;
+PFNGLCOMPRESSEDTEXTUREIMAGE1DEXTPROC __glewCompressedTextureImage1DEXT = NULL;
+PFNGLCOMPRESSEDTEXTUREIMAGE2DEXTPROC __glewCompressedTextureImage2DEXT = NULL;
+PFNGLCOMPRESSEDTEXTUREIMAGE3DEXTPROC __glewCompressedTextureImage3DEXT = NULL;
+PFNGLCOMPRESSEDTEXTURESUBIMAGE1DEXTPROC __glewCompressedTextureSubImage1DEXT = NULL;
+PFNGLCOMPRESSEDTEXTURESUBIMAGE2DEXTPROC __glewCompressedTextureSubImage2DEXT = NULL;
+PFNGLCOMPRESSEDTEXTURESUBIMAGE3DEXTPROC __glewCompressedTextureSubImage3DEXT = NULL;
+PFNGLCOPYMULTITEXIMAGE1DEXTPROC __glewCopyMultiTexImage1DEXT = NULL;
+PFNGLCOPYMULTITEXIMAGE2DEXTPROC __glewCopyMultiTexImage2DEXT = NULL;
+PFNGLCOPYMULTITEXSUBIMAGE1DEXTPROC __glewCopyMultiTexSubImage1DEXT = NULL;
+PFNGLCOPYMULTITEXSUBIMAGE2DEXTPROC __glewCopyMultiTexSubImage2DEXT = NULL;
+PFNGLCOPYMULTITEXSUBIMAGE3DEXTPROC __glewCopyMultiTexSubImage3DEXT = NULL;
+PFNGLCOPYTEXTUREIMAGE1DEXTPROC __glewCopyTextureImage1DEXT = NULL;
+PFNGLCOPYTEXTUREIMAGE2DEXTPROC __glewCopyTextureImage2DEXT = NULL;
+PFNGLCOPYTEXTURESUBIMAGE1DEXTPROC __glewCopyTextureSubImage1DEXT = NULL;
+PFNGLCOPYTEXTURESUBIMAGE2DEXTPROC __glewCopyTextureSubImage2DEXT = NULL;
+PFNGLCOPYTEXTURESUBIMAGE3DEXTPROC __glewCopyTextureSubImage3DEXT = NULL;
+PFNGLDISABLECLIENTSTATEINDEXEDEXTPROC __glewDisableClientStateIndexedEXT = NULL;
+PFNGLDISABLECLIENTSTATEIEXTPROC __glewDisableClientStateiEXT = NULL;
+PFNGLDISABLEVERTEXARRAYATTRIBEXTPROC __glewDisableVertexArrayAttribEXT = NULL;
+PFNGLDISABLEVERTEXARRAYEXTPROC __glewDisableVertexArrayEXT = NULL;
+PFNGLENABLECLIENTSTATEINDEXEDEXTPROC __glewEnableClientStateIndexedEXT = NULL;
+PFNGLENABLECLIENTSTATEIEXTPROC __glewEnableClientStateiEXT = NULL;
+PFNGLENABLEVERTEXARRAYATTRIBEXTPROC __glewEnableVertexArrayAttribEXT = NULL;
+PFNGLENABLEVERTEXARRAYEXTPROC __glewEnableVertexArrayEXT = NULL;
+PFNGLFLUSHMAPPEDNAMEDBUFFERRANGEEXTPROC __glewFlushMappedNamedBufferRangeEXT = NULL;
+PFNGLFRAMEBUFFERDRAWBUFFEREXTPROC __glewFramebufferDrawBufferEXT = NULL;
+PFNGLFRAMEBUFFERDRAWBUFFERSEXTPROC __glewFramebufferDrawBuffersEXT = NULL;
+PFNGLFRAMEBUFFERREADBUFFEREXTPROC __glewFramebufferReadBufferEXT = NULL;
+PFNGLGENERATEMULTITEXMIPMAPEXTPROC __glewGenerateMultiTexMipmapEXT = NULL;
+PFNGLGENERATETEXTUREMIPMAPEXTPROC __glewGenerateTextureMipmapEXT = NULL;
+PFNGLGETCOMPRESSEDMULTITEXIMAGEEXTPROC __glewGetCompressedMultiTexImageEXT = NULL;
+PFNGLGETCOMPRESSEDTEXTUREIMAGEEXTPROC __glewGetCompressedTextureImageEXT = NULL;
+PFNGLGETDOUBLEINDEXEDVEXTPROC __glewGetDoubleIndexedvEXT = NULL;
+PFNGLGETDOUBLEI_VEXTPROC __glewGetDoublei_vEXT = NULL;
+PFNGLGETFLOATINDEXEDVEXTPROC __glewGetFloatIndexedvEXT = NULL;
+PFNGLGETFLOATI_VEXTPROC __glewGetFloati_vEXT = NULL;
+PFNGLGETFRAMEBUFFERPARAMETERIVEXTPROC __glewGetFramebufferParameterivEXT = NULL;
+PFNGLGETMULTITEXENVFVEXTPROC __glewGetMultiTexEnvfvEXT = NULL;
+PFNGLGETMULTITEXENVIVEXTPROC __glewGetMultiTexEnvivEXT = NULL;
+PFNGLGETMULTITEXGENDVEXTPROC __glewGetMultiTexGendvEXT = NULL;
+PFNGLGETMULTITEXGENFVEXTPROC __glewGetMultiTexGenfvEXT = NULL;
+PFNGLGETMULTITEXGENIVEXTPROC __glewGetMultiTexGenivEXT = NULL;
+PFNGLGETMULTITEXIMAGEEXTPROC __glewGetMultiTexImageEXT = NULL;
+PFNGLGETMULTITEXLEVELPARAMETERFVEXTPROC __glewGetMultiTexLevelParameterfvEXT = NULL;
+PFNGLGETMULTITEXLEVELPARAMETERIVEXTPROC __glewGetMultiTexLevelParameterivEXT = NULL;
+PFNGLGETMULTITEXPARAMETERIIVEXTPROC __glewGetMultiTexParameterIivEXT = NULL;
+PFNGLGETMULTITEXPARAMETERIUIVEXTPROC __glewGetMultiTexParameterIuivEXT = NULL;
+PFNGLGETMULTITEXPARAMETERFVEXTPROC __glewGetMultiTexParameterfvEXT = NULL;
+PFNGLGETMULTITEXPARAMETERIVEXTPROC __glewGetMultiTexParameterivEXT = NULL;
+PFNGLGETNAMEDBUFFERPARAMETERIVEXTPROC __glewGetNamedBufferParameterivEXT = NULL;
+PFNGLGETNAMEDBUFFERPOINTERVEXTPROC __glewGetNamedBufferPointervEXT = NULL;
+PFNGLGETNAMEDBUFFERSUBDATAEXTPROC __glewGetNamedBufferSubDataEXT = NULL;
+PFNGLGETNAMEDFRAMEBUFFERATTACHMENTPARAMETERIVEXTPROC __glewGetNamedFramebufferAttachmentParameterivEXT = NULL;
+PFNGLGETNAMEDPROGRAMLOCALPARAMETERIIVEXTPROC __glewGetNamedProgramLocalParameterIivEXT = NULL;
+PFNGLGETNAMEDPROGRAMLOCALPARAMETERIUIVEXTPROC __glewGetNamedProgramLocalParameterIuivEXT = NULL;
+PFNGLGETNAMEDPROGRAMLOCALPARAMETERDVEXTPROC __glewGetNamedProgramLocalParameterdvEXT = NULL;
+PFNGLGETNAMEDPROGRAMLOCALPARAMETERFVEXTPROC __glewGetNamedProgramLocalParameterfvEXT = NULL;
+PFNGLGETNAMEDPROGRAMSTRINGEXTPROC __glewGetNamedProgramStringEXT = NULL;
+PFNGLGETNAMEDPROGRAMIVEXTPROC __glewGetNamedProgramivEXT = NULL;
+PFNGLGETNAMEDRENDERBUFFERPARAMETERIVEXTPROC __glewGetNamedRenderbufferParameterivEXT = NULL;
+PFNGLGETPOINTERINDEXEDVEXTPROC __glewGetPointerIndexedvEXT = NULL;
+PFNGLGETPOINTERI_VEXTPROC __glewGetPointeri_vEXT = NULL;
+PFNGLGETTEXTUREIMAGEEXTPROC __glewGetTextureImageEXT = NULL;
+PFNGLGETTEXTURELEVELPARAMETERFVEXTPROC __glewGetTextureLevelParameterfvEXT = NULL;
+PFNGLGETTEXTURELEVELPARAMETERIVEXTPROC __glewGetTextureLevelParameterivEXT = NULL;
+PFNGLGETTEXTUREPARAMETERIIVEXTPROC __glewGetTextureParameterIivEXT = NULL;
+PFNGLGETTEXTUREPARAMETERIUIVEXTPROC __glewGetTextureParameterIuivEXT = NULL;
+PFNGLGETTEXTUREPARAMETERFVEXTPROC __glewGetTextureParameterfvEXT = NULL;
+PFNGLGETTEXTUREPARAMETERIVEXTPROC __glewGetTextureParameterivEXT = NULL;
+PFNGLGETVERTEXARRAYINTEGERI_VEXTPROC __glewGetVertexArrayIntegeri_vEXT = NULL;
+PFNGLGETVERTEXARRAYINTEGERVEXTPROC __glewGetVertexArrayIntegervEXT = NULL;
+PFNGLGETVERTEXARRAYPOINTERI_VEXTPROC __glewGetVertexArrayPointeri_vEXT = NULL;
+PFNGLGETVERTEXARRAYPOINTERVEXTPROC __glewGetVertexArrayPointervEXT = NULL;
+PFNGLMAPNAMEDBUFFEREXTPROC __glewMapNamedBufferEXT = NULL;
+PFNGLMAPNAMEDBUFFERRANGEEXTPROC __glewMapNamedBufferRangeEXT = NULL;
+PFNGLMATRIXFRUSTUMEXTPROC __glewMatrixFrustumEXT = NULL;
+PFNGLMATRIXLOADIDENTITYEXTPROC __glewMatrixLoadIdentityEXT = NULL;
+PFNGLMATRIXLOADTRANSPOSEDEXTPROC __glewMatrixLoadTransposedEXT = NULL;
+PFNGLMATRIXLOADTRANSPOSEFEXTPROC __glewMatrixLoadTransposefEXT = NULL;
+PFNGLMATRIXLOADDEXTPROC __glewMatrixLoaddEXT = NULL;
+PFNGLMATRIXLOADFEXTPROC __glewMatrixLoadfEXT = NULL;
+PFNGLMATRIXMULTTRANSPOSEDEXTPROC __glewMatrixMultTransposedEXT = NULL;
+PFNGLMATRIXMULTTRANSPOSEFEXTPROC __glewMatrixMultTransposefEXT = NULL;
+PFNGLMATRIXMULTDEXTPROC __glewMatrixMultdEXT = NULL;
+PFNGLMATRIXMULTFEXTPROC __glewMatrixMultfEXT = NULL;
+PFNGLMATRIXORTHOEXTPROC __glewMatrixOrthoEXT = NULL;
+PFNGLMATRIXPOPEXTPROC __glewMatrixPopEXT = NULL;
+PFNGLMATRIXPUSHEXTPROC __glewMatrixPushEXT = NULL;
+PFNGLMATRIXROTATEDEXTPROC __glewMatrixRotatedEXT = NULL;
+PFNGLMATRIXROTATEFEXTPROC __glewMatrixRotatefEXT = NULL;
+PFNGLMATRIXSCALEDEXTPROC __glewMatrixScaledEXT = NULL;
+PFNGLMATRIXSCALEFEXTPROC __glewMatrixScalefEXT = NULL;
+PFNGLMATRIXTRANSLATEDEXTPROC __glewMatrixTranslatedEXT = NULL;
+PFNGLMATRIXTRANSLATEFEXTPROC __glewMatrixTranslatefEXT = NULL;
+PFNGLMULTITEXBUFFEREXTPROC __glewMultiTexBufferEXT = NULL;
+PFNGLMULTITEXCOORDPOINTEREXTPROC __glewMultiTexCoordPointerEXT = NULL;
+PFNGLMULTITEXENVFEXTPROC __glewMultiTexEnvfEXT = NULL;
+PFNGLMULTITEXENVFVEXTPROC __glewMultiTexEnvfvEXT = NULL;
+PFNGLMULTITEXENVIEXTPROC __glewMultiTexEnviEXT = NULL;
+PFNGLMULTITEXENVIVEXTPROC __glewMultiTexEnvivEXT = NULL;
+PFNGLMULTITEXGENDEXTPROC __glewMultiTexGendEXT = NULL;
+PFNGLMULTITEXGENDVEXTPROC __glewMultiTexGendvEXT = NULL;
+PFNGLMULTITEXGENFEXTPROC __glewMultiTexGenfEXT = NULL;
+PFNGLMULTITEXGENFVEXTPROC __glewMultiTexGenfvEXT = NULL;
+PFNGLMULTITEXGENIEXTPROC __glewMultiTexGeniEXT = NULL;
+PFNGLMULTITEXGENIVEXTPROC __glewMultiTexGenivEXT = NULL;
+PFNGLMULTITEXIMAGE1DEXTPROC __glewMultiTexImage1DEXT = NULL;
+PFNGLMULTITEXIMAGE2DEXTPROC __glewMultiTexImage2DEXT = NULL;
+PFNGLMULTITEXIMAGE3DEXTPROC __glewMultiTexImage3DEXT = NULL;
+PFNGLMULTITEXPARAMETERIIVEXTPROC __glewMultiTexParameterIivEXT = NULL;
+PFNGLMULTITEXPARAMETERIUIVEXTPROC __glewMultiTexParameterIuivEXT = NULL;
+PFNGLMULTITEXPARAMETERFEXTPROC __glewMultiTexParameterfEXT = NULL;
+PFNGLMULTITEXPARAMETERFVEXTPROC __glewMultiTexParameterfvEXT = NULL;
+PFNGLMULTITEXPARAMETERIEXTPROC __glewMultiTexParameteriEXT = NULL;
+PFNGLMULTITEXPARAMETERIVEXTPROC __glewMultiTexParameterivEXT = NULL;
+PFNGLMULTITEXRENDERBUFFEREXTPROC __glewMultiTexRenderbufferEXT = NULL;
+PFNGLMULTITEXSUBIMAGE1DEXTPROC __glewMultiTexSubImage1DEXT = NULL;
+PFNGLMULTITEXSUBIMAGE2DEXTPROC __glewMultiTexSubImage2DEXT = NULL;
+PFNGLMULTITEXSUBIMAGE3DEXTPROC __glewMultiTexSubImage3DEXT = NULL;
+PFNGLNAMEDBUFFERDATAEXTPROC __glewNamedBufferDataEXT = NULL;
+PFNGLNAMEDBUFFERSUBDATAEXTPROC __glewNamedBufferSubDataEXT = NULL;
+PFNGLNAMEDCOPYBUFFERSUBDATAEXTPROC __glewNamedCopyBufferSubDataEXT = NULL;
+PFNGLNAMEDFRAMEBUFFERRENDERBUFFEREXTPROC __glewNamedFramebufferRenderbufferEXT = NULL;
+PFNGLNAMEDFRAMEBUFFERTEXTURE1DEXTPROC __glewNamedFramebufferTexture1DEXT = NULL;
+PFNGLNAMEDFRAMEBUFFERTEXTURE2DEXTPROC __glewNamedFramebufferTexture2DEXT = NULL;
+PFNGLNAMEDFRAMEBUFFERTEXTURE3DEXTPROC __glewNamedFramebufferTexture3DEXT = NULL;
+PFNGLNAMEDFRAMEBUFFERTEXTUREEXTPROC __glewNamedFramebufferTextureEXT = NULL;
+PFNGLNAMEDFRAMEBUFFERTEXTUREFACEEXTPROC __glewNamedFramebufferTextureFaceEXT = NULL;
+PFNGLNAMEDFRAMEBUFFERTEXTURELAYEREXTPROC __glewNamedFramebufferTextureLayerEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETER4DEXTPROC __glewNamedProgramLocalParameter4dEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETER4DVEXTPROC __glewNamedProgramLocalParameter4dvEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETER4FEXTPROC __glewNamedProgramLocalParameter4fEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETER4FVEXTPROC __glewNamedProgramLocalParameter4fvEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETERI4IEXTPROC __glewNamedProgramLocalParameterI4iEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETERI4IVEXTPROC __glewNamedProgramLocalParameterI4ivEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETERI4UIEXTPROC __glewNamedProgramLocalParameterI4uiEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETERI4UIVEXTPROC __glewNamedProgramLocalParameterI4uivEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETERS4FVEXTPROC __glewNamedProgramLocalParameters4fvEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETERSI4IVEXTPROC __glewNamedProgramLocalParametersI4ivEXT = NULL;
+PFNGLNAMEDPROGRAMLOCALPARAMETERSI4UIVEXTPROC __glewNamedProgramLocalParametersI4uivEXT = NULL;
+PFNGLNAMEDPROGRAMSTRINGEXTPROC __glewNamedProgramStringEXT = NULL;
+PFNGLNAMEDRENDERBUFFERSTORAGEEXTPROC __glewNamedRenderbufferStorageEXT = NULL;
+PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLECOVERAGEEXTPROC __glewNamedRenderbufferStorageMultisampleCoverageEXT = NULL;
+PFNGLNAMEDRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC __glewNamedRenderbufferStorageMultisampleEXT = NULL;
+PFNGLPROGRAMUNIFORM1FEXTPROC __glewProgramUniform1fEXT = NULL;
+PFNGLPROGRAMUNIFORM1FVEXTPROC __glewProgramUniform1fvEXT = NULL;
+PFNGLPROGRAMUNIFORM1IEXTPROC __glewProgramUniform1iEXT = NULL;
+PFNGLPROGRAMUNIFORM1IVEXTPROC __glewProgramUniform1ivEXT = NULL;
+PFNGLPROGRAMUNIFORM1UIEXTPROC __glewProgramUniform1uiEXT = NULL;
+PFNGLPROGRAMUNIFORM1UIVEXTPROC __glewProgramUniform1uivEXT = NULL;
+PFNGLPROGRAMUNIFORM2FEXTPROC __glewProgramUniform2fEXT = NULL;
+PFNGLPROGRAMUNIFORM2FVEXTPROC __glewProgramUniform2fvEXT = NULL;
+PFNGLPROGRAMUNIFORM2IEXTPROC __glewProgramUniform2iEXT = NULL;
+PFNGLPROGRAMUNIFORM2IVEXTPROC __glewProgramUniform2ivEXT = NULL;
+PFNGLPROGRAMUNIFORM2UIEXTPROC __glewProgramUniform2uiEXT = NULL;
+PFNGLPROGRAMUNIFORM2UIVEXTPROC __glewProgramUniform2uivEXT = NULL;
+PFNGLPROGRAMUNIFORM3FEXTPROC __glewProgramUniform3fEXT = NULL;
+PFNGLPROGRAMUNIFORM3FVEXTPROC __glewProgramUniform3fvEXT = NULL;
+PFNGLPROGRAMUNIFORM3IEXTPROC __glewProgramUniform3iEXT = NULL;
+PFNGLPROGRAMUNIFORM3IVEXTPROC __glewProgramUniform3ivEXT = NULL;
+PFNGLPROGRAMUNIFORM3UIEXTPROC __glewProgramUniform3uiEXT = NULL;
+PFNGLPROGRAMUNIFORM3UIVEXTPROC __glewProgramUniform3uivEXT = NULL;
+PFNGLPROGRAMUNIFORM4FEXTPROC __glewProgramUniform4fEXT = NULL;
+PFNGLPROGRAMUNIFORM4FVEXTPROC __glewProgramUniform4fvEXT = NULL;
+PFNGLPROGRAMUNIFORM4IEXTPROC __glewProgramUniform4iEXT = NULL;
+PFNGLPROGRAMUNIFORM4IVEXTPROC __glewProgramUniform4ivEXT = NULL;
+PFNGLPROGRAMUNIFORM4UIEXTPROC __glewProgramUniform4uiEXT = NULL;
+PFNGLPROGRAMUNIFORM4UIVEXTPROC __glewProgramUniform4uivEXT = NULL;
+PFNGLPROGRAMUNIFORMMATRIX2FVEXTPROC __glewProgramUniformMatrix2fvEXT = NULL;
+PFNGLPROGRAMUNIFORMMATRIX2X3FVEXTPROC __glewProgramUniformMatrix2x3fvEXT = NULL;
+PFNGLPROGRAMUNIFORMMATRIX2X4FVEXTPROC __glewProgramUniformMatrix2x4fvEXT = NULL;
+PFNGLPROGRAMUNIFORMMATRIX3FVEXTPROC __glewProgramUniformMatrix3fvEXT = NULL;
+PFNGLPROGRAMUNIFORMMATRIX3X2FVEXTPROC __glewProgramUniformMatrix3x2fvEXT = NULL;
+PFNGLPROGRAMUNIFORMMATRIX3X4FVEXTPROC __glewProgramUniformMatrix3x4fvEXT = NULL;
+PFNGLPROGRAMUNIFORMMATRIX4FVEXTPROC __glewProgramUniformMatrix4fvEXT = NULL;
+PFNGLPROGRAMUNIFORMMATRIX4X2FVEXTPROC __glewProgramUniformMatrix4x2fvEXT = NULL;
+PFNGLPROGRAMUNIFORMMATRIX4X3FVEXTPROC __glewProgramUniformMatrix4x3fvEXT = NULL;
+PFNGLPUSHCLIENTATTRIBDEFAULTEXTPROC __glewPushClientAttribDefaultEXT = NULL;
+PFNGLTEXTUREBUFFEREXTPROC __glewTextureBufferEXT = NULL;
+PFNGLTEXTUREIMAGE1DEXTPROC __glewTextureImage1DEXT = NULL;
+PFNGLTEXTUREIMAGE2DEXTPROC __glewTextureImage2DEXT = NULL;
+PFNGLTEXTUREIMAGE3DEXTPROC __glewTextureImage3DEXT = NULL;
+PFNGLTEXTUREPARAMETERIIVEXTPROC __glewTextureParameterIivEXT = NULL;
+PFNGLTEXTUREPARAMETERIUIVEXTPROC __glewTextureParameterIuivEXT = NULL;
+PFNGLTEXTUREPARAMETERFEXTPROC __glewTextureParameterfEXT = NULL;
+PFNGLTEXTUREPARAMETERFVEXTPROC __glewTextureParameterfvEXT = NULL;
+PFNGLTEXTUREPARAMETERIEXTPROC __glewTextureParameteriEXT = NULL;
+PFNGLTEXTUREPARAMETERIVEXTPROC __glewTextureParameterivEXT = NULL;
+PFNGLTEXTURERENDERBUFFEREXTPROC __glewTextureRenderbufferEXT = NULL;
+PFNGLTEXTURESUBIMAGE1DEXTPROC __glewTextureSubImage1DEXT = NULL;
+PFNGLTEXTURESUBIMAGE2DEXTPROC __glewTextureSubImage2DEXT = NULL;
+PFNGLTEXTURESUBIMAGE3DEXTPROC __glewTextureSubImage3DEXT = NULL;
+PFNGLUNMAPNAMEDBUFFEREXTPROC __glewUnmapNamedBufferEXT = NULL;
+PFNGLVERTEXARRAYCOLOROFFSETEXTPROC __glewVertexArrayColorOffsetEXT = NULL;
+PFNGLVERTEXARRAYEDGEFLAGOFFSETEXTPROC __glewVertexArrayEdgeFlagOffsetEXT = NULL;
+PFNGLVERTEXARRAYFOGCOORDOFFSETEXTPROC __glewVertexArrayFogCoordOffsetEXT = NULL;
+PFNGLVERTEXARRAYINDEXOFFSETEXTPROC __glewVertexArrayIndexOffsetEXT = NULL;
+PFNGLVERTEXARRAYMULTITEXCOORDOFFSETEXTPROC __glewVertexArrayMultiTexCoordOffsetEXT = NULL;
+PFNGLVERTEXARRAYNORMALOFFSETEXTPROC __glewVertexArrayNormalOffsetEXT = NULL;
+PFNGLVERTEXARRAYSECONDARYCOLOROFFSETEXTPROC __glewVertexArraySecondaryColorOffsetEXT = NULL;
+PFNGLVERTEXARRAYTEXCOORDOFFSETEXTPROC __glewVertexArrayTexCoordOffsetEXT = NULL;
+PFNGLVERTEXARRAYVERTEXATTRIBIOFFSETEXTPROC __glewVertexArrayVertexAttribIOffsetEXT = NULL;
+PFNGLVERTEXARRAYVERTEXATTRIBOFFSETEXTPROC __glewVertexArrayVertexAttribOffsetEXT = NULL;
+PFNGLVERTEXARRAYVERTEXOFFSETEXTPROC __glewVertexArrayVertexOffsetEXT = NULL;
+
+PFNGLCOLORMASKINDEXEDEXTPROC __glewColorMaskIndexedEXT = NULL;
+PFNGLDISABLEINDEXEDEXTPROC __glewDisableIndexedEXT = NULL;
+PFNGLENABLEINDEXEDEXTPROC __glewEnableIndexedEXT = NULL;
+PFNGLGETBOOLEANINDEXEDVEXTPROC __glewGetBooleanIndexedvEXT = NULL;
+PFNGLGETINTEGERINDEXEDVEXTPROC __glewGetIntegerIndexedvEXT = NULL;
+PFNGLISENABLEDINDEXEDEXTPROC __glewIsEnabledIndexedEXT = NULL;
+
+PFNGLDRAWARRAYSINSTANCEDEXTPROC __glewDrawArraysInstancedEXT = NULL;
+PFNGLDRAWELEMENTSINSTANCEDEXTPROC __glewDrawElementsInstancedEXT = NULL;
+
+PFNGLDRAWRANGEELEMENTSEXTPROC __glewDrawRangeElementsEXT = NULL;
+
+PFNGLFOGCOORDPOINTEREXTPROC __glewFogCoordPointerEXT = NULL;
+PFNGLFOGCOORDDEXTPROC __glewFogCoorddEXT = NULL;
+PFNGLFOGCOORDDVEXTPROC __glewFogCoorddvEXT = NULL;
+PFNGLFOGCOORDFEXTPROC __glewFogCoordfEXT = NULL;
+PFNGLFOGCOORDFVEXTPROC __glewFogCoordfvEXT = NULL;
+
+PFNGLFRAGMENTCOLORMATERIALEXTPROC __glewFragmentColorMaterialEXT = NULL;
+PFNGLFRAGMENTLIGHTMODELFEXTPROC __glewFragmentLightModelfEXT = NULL;
+PFNGLFRAGMENTLIGHTMODELFVEXTPROC __glewFragmentLightModelfvEXT = NULL;
+PFNGLFRAGMENTLIGHTMODELIEXTPROC __glewFragmentLightModeliEXT = NULL;
+PFNGLFRAGMENTLIGHTMODELIVEXTPROC __glewFragmentLightModelivEXT = NULL;
+PFNGLFRAGMENTLIGHTFEXTPROC __glewFragmentLightfEXT = NULL;
+PFNGLFRAGMENTLIGHTFVEXTPROC __glewFragmentLightfvEXT = NULL;
+PFNGLFRAGMENTLIGHTIEXTPROC __glewFragmentLightiEXT = NULL;
+PFNGLFRAGMENTLIGHTIVEXTPROC __glewFragmentLightivEXT = NULL;
+PFNGLFRAGMENTMATERIALFEXTPROC __glewFragmentMaterialfEXT = NULL;
+PFNGLFRAGMENTMATERIALFVEXTPROC __glewFragmentMaterialfvEXT = NULL;
+PFNGLFRAGMENTMATERIALIEXTPROC __glewFragmentMaterialiEXT = NULL;
+PFNGLFRAGMENTMATERIALIVEXTPROC __glewFragmentMaterialivEXT = NULL;
+PFNGLGETFRAGMENTLIGHTFVEXTPROC __glewGetFragmentLightfvEXT = NULL;
+PFNGLGETFRAGMENTLIGHTIVEXTPROC __glewGetFragmentLightivEXT = NULL;
+PFNGLGETFRAGMENTMATERIALFVEXTPROC __glewGetFragmentMaterialfvEXT = NULL;
+PFNGLGETFRAGMENTMATERIALIVEXTPROC __glewGetFragmentMaterialivEXT = NULL;
+PFNGLLIGHTENVIEXTPROC __glewLightEnviEXT = NULL;
+
+PFNGLBLITFRAMEBUFFEREXTPROC __glewBlitFramebufferEXT = NULL;
+
+PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC __glewRenderbufferStorageMultisampleEXT = NULL;
+
+PFNGLBINDFRAMEBUFFEREXTPROC __glewBindFramebufferEXT = NULL;
+PFNGLBINDRENDERBUFFEREXTPROC __glewBindRenderbufferEXT = NULL;
+PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC __glewCheckFramebufferStatusEXT = NULL;
+PFNGLDELETEFRAMEBUFFERSEXTPROC __glewDeleteFramebuffersEXT = NULL;
+PFNGLDELETERENDERBUFFERSEXTPROC __glewDeleteRenderbuffersEXT = NULL;
+PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC __glewFramebufferRenderbufferEXT = NULL;
+PFNGLFRAMEBUFFERTEXTURE1DEXTPROC __glewFramebufferTexture1DEXT = NULL;
+PFNGLFRAMEBUFFERTEXTURE2DEXTPROC __glewFramebufferTexture2DEXT = NULL;
+PFNGLFRAMEBUFFERTEXTURE3DEXTPROC __glewFramebufferTexture3DEXT = NULL;
+PFNGLGENFRAMEBUFFERSEXTPROC __glewGenFramebuffersEXT = NULL;
+PFNGLGENRENDERBUFFERSEXTPROC __glewGenRenderbuffersEXT = NULL;
+PFNGLGENERATEMIPMAPEXTPROC __glewGenerateMipmapEXT = NULL;
+PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVEXTPROC __glewGetFramebufferAttachmentParameterivEXT = NULL;
+PFNGLGETRENDERBUFFERPARAMETERIVEXTPROC __glewGetRenderbufferParameterivEXT = NULL;
+PFNGLISFRAMEBUFFEREXTPROC __glewIsFramebufferEXT = NULL;
+PFNGLISRENDERBUFFEREXTPROC __glewIsRenderbufferEXT = NULL;
+PFNGLRENDERBUFFERSTORAGEEXTPROC __glewRenderbufferStorageEXT = NULL;
+
+PFNGLFRAMEBUFFERTEXTUREEXTPROC __glewFramebufferTextureEXT = NULL;
+PFNGLFRAMEBUFFERTEXTUREFACEEXTPROC __glewFramebufferTextureFaceEXT = NULL;
+PFNGLPROGRAMPARAMETERIEXTPROC __glewProgramParameteriEXT = NULL;
+
+PFNGLPROGRAMENVPARAMETERS4FVEXTPROC __glewProgramEnvParameters4fvEXT = NULL;
+PFNGLPROGRAMLOCALPARAMETERS4FVEXTPROC __glewProgramLocalParameters4fvEXT = NULL;
+
+PFNGLBINDFRAGDATALOCATIONEXTPROC __glewBindFragDataLocationEXT = NULL;
+PFNGLGETFRAGDATALOCATIONEXTPROC __glewGetFragDataLocationEXT = NULL;
+PFNGLGETUNIFORMUIVEXTPROC __glewGetUniformuivEXT = NULL;
+PFNGLGETVERTEXATTRIBIIVEXTPROC __glewGetVertexAttribIivEXT = NULL;
+PFNGLGETVERTEXATTRIBIUIVEXTPROC __glewGetVertexAttribIuivEXT = NULL;
+PFNGLUNIFORM1UIEXTPROC __glewUniform1uiEXT = NULL;
+PFNGLUNIFORM1UIVEXTPROC __glewUniform1uivEXT = NULL;
+PFNGLUNIFORM2UIEXTPROC __glewUniform2uiEXT = NULL;
+PFNGLUNIFORM2UIVEXTPROC __glewUniform2uivEXT = NULL;
+PFNGLUNIFORM3UIEXTPROC __glewUniform3uiEXT = NULL;
+PFNGLUNIFORM3UIVEXTPROC __glewUniform3uivEXT = NULL;
+PFNGLUNIFORM4UIEXTPROC __glewUniform4uiEXT = NULL;
+PFNGLUNIFORM4UIVEXTPROC __glewUniform4uivEXT = NULL;
+PFNGLVERTEXATTRIBI1IEXTPROC __glewVertexAttribI1iEXT = NULL;
+PFNGLVERTEXATTRIBI1IVEXTPROC __glewVertexAttribI1ivEXT = NULL;
+PFNGLVERTEXATTRIBI1UIEXTPROC __glewVertexAttribI1uiEXT = NULL;
+PFNGLVERTEXATTRIBI1UIVEXTPROC __glewVertexAttribI1uivEXT = NULL;
+PFNGLVERTEXATTRIBI2IEXTPROC __glewVertexAttribI2iEXT = NULL;
+PFNGLVERTEXATTRIBI2IVEXTPROC __glewVertexAttribI2ivEXT = NULL;
+PFNGLVERTEXATTRIBI2UIEXTPROC __glewVertexAttribI2uiEXT = NULL;
+PFNGLVERTEXATTRIBI2UIVEXTPROC __glewVertexAttribI2uivEXT = NULL;
+PFNGLVERTEXATTRIBI3IEXTPROC __glewVertexAttribI3iEXT = NULL;
+PFNGLVERTEXATTRIBI3IVEXTPROC __glewVertexAttribI3ivEXT = NULL;
+PFNGLVERTEXATTRIBI3UIEXTPROC __glewVertexAttribI3uiEXT = NULL;
+PFNGLVERTEXATTRIBI3UIVEXTPROC __glewVertexAttribI3uivEXT = NULL;
+PFNGLVERTEXATTRIBI4BVEXTPROC __glewVertexAttribI4bvEXT = NULL;
+PFNGLVERTEXATTRIBI4IEXTPROC __glewVertexAttribI4iEXT = NULL;
+PFNGLVERTEXATTRIBI4IVEXTPROC __glewVertexAttribI4ivEXT = NULL;
+PFNGLVERTEXATTRIBI4SVEXTPROC __glewVertexAttribI4svEXT = NULL;
+PFNGLVERTEXATTRIBI4UBVEXTPROC __glewVertexAttribI4ubvEXT = NULL;
+PFNGLVERTEXATTRIBI4UIEXTPROC __glewVertexAttribI4uiEXT = NULL;
+PFNGLVERTEXATTRIBI4UIVEXTPROC __glewVertexAttribI4uivEXT = NULL;
+PFNGLVERTEXATTRIBI4USVEXTPROC __glewVertexAttribI4usvEXT = NULL;
+PFNGLVERTEXATTRIBIPOINTEREXTPROC __glewVertexAttribIPointerEXT = NULL;
+
+PFNGLGETHISTOGRAMEXTPROC __glewGetHistogramEXT = NULL;
+PFNGLGETHISTOGRAMPARAMETERFVEXTPROC __glewGetHistogramParameterfvEXT = NULL;
+PFNGLGETHISTOGRAMPARAMETERIVEXTPROC __glewGetHistogramParameterivEXT = NULL;
+PFNGLGETMINMAXEXTPROC __glewGetMinmaxEXT = NULL;
+PFNGLGETMINMAXPARAMETERFVEXTPROC __glewGetMinmaxParameterfvEXT = NULL;
+PFNGLGETMINMAXPARAMETERIVEXTPROC __glewGetMinmaxParameterivEXT = NULL;
+PFNGLHISTOGRAMEXTPROC __glewHistogramEXT = NULL;
+PFNGLMINMAXEXTPROC __glewMinmaxEXT = NULL;
+PFNGLRESETHISTOGRAMEXTPROC __glewResetHistogramEXT = NULL;
+PFNGLRESETMINMAXEXTPROC __glewResetMinmaxEXT = NULL;
+
+PFNGLINDEXFUNCEXTPROC __glewIndexFuncEXT = NULL;
+
+PFNGLINDEXMATERIALEXTPROC __glewIndexMaterialEXT = NULL;
+
+PFNGLAPPLYTEXTUREEXTPROC __glewApplyTextureEXT = NULL;
+PFNGLTEXTURELIGHTEXTPROC __glewTextureLightEXT = NULL;
+PFNGLTEXTUREMATERIALEXTPROC __glewTextureMaterialEXT = NULL;
+
+PFNGLMULTIDRAWARRAYSEXTPROC __glewMultiDrawArraysEXT = NULL;
+PFNGLMULTIDRAWELEMENTSEXTPROC __glewMultiDrawElementsEXT = NULL;
+
+PFNGLSAMPLEMASKEXTPROC __glewSampleMaskEXT = NULL;
+PFNGLSAMPLEPATTERNEXTPROC __glewSamplePatternEXT = NULL;
+
+PFNGLCOLORTABLEEXTPROC __glewColorTableEXT = NULL;
+PFNGLGETCOLORTABLEEXTPROC __glewGetColorTableEXT = NULL;
+PFNGLGETCOLORTABLEPARAMETERFVEXTPROC __glewGetColorTableParameterfvEXT = NULL;
+PFNGLGETCOLORTABLEPARAMETERIVEXTPROC __glewGetColorTableParameterivEXT = NULL;
+
+PFNGLGETPIXELTRANSFORMPARAMETERFVEXTPROC __glewGetPixelTransformParameterfvEXT = NULL;
+PFNGLGETPIXELTRANSFORMPARAMETERIVEXTPROC __glewGetPixelTransformParameterivEXT = NULL;
+PFNGLPIXELTRANSFORMPARAMETERFEXTPROC __glewPixelTransformParameterfEXT = NULL;
+PFNGLPIXELTRANSFORMPARAMETERFVEXTPROC __glewPixelTransformParameterfvEXT = NULL;
+PFNGLPIXELTRANSFORMPARAMETERIEXTPROC __glewPixelTransformParameteriEXT = NULL;
+PFNGLPIXELTRANSFORMPARAMETERIVEXTPROC __glewPixelTransformParameterivEXT = NULL;
+
+PFNGLPOINTPARAMETERFEXTPROC __glewPointParameterfEXT = NULL;
+PFNGLPOINTPARAMETERFVEXTPROC __glewPointParameterfvEXT = NULL;
+
+PFNGLPOLYGONOFFSETEXTPROC __glewPolygonOffsetEXT = NULL;
+
+PFNGLPROVOKINGVERTEXEXTPROC __glewProvokingVertexEXT = NULL;
+
+PFNGLBEGINSCENEEXTPROC __glewBeginSceneEXT = NULL;
+PFNGLENDSCENEEXTPROC __glewEndSceneEXT = NULL;
+
+PFNGLSECONDARYCOLOR3BEXTPROC __glewSecondaryColor3bEXT = NULL;
+PFNGLSECONDARYCOLOR3BVEXTPROC __glewSecondaryColor3bvEXT = NULL;
+PFNGLSECONDARYCOLOR3DEXTPROC __glewSecondaryColor3dEXT = NULL;
+PFNGLSECONDARYCOLOR3DVEXTPROC __glewSecondaryColor3dvEXT = NULL;
+PFNGLSECONDARYCOLOR3FEXTPROC __glewSecondaryColor3fEXT = NULL;
+PFNGLSECONDARYCOLOR3FVEXTPROC __glewSecondaryColor3fvEXT = NULL;
+PFNGLSECONDARYCOLOR3IEXTPROC __glewSecondaryColor3iEXT = NULL;
+PFNGLSECONDARYCOLOR3IVEXTPROC __glewSecondaryColor3ivEXT = NULL;
+PFNGLSECONDARYCOLOR3SEXTPROC __glewSecondaryColor3sEXT = NULL;
+PFNGLSECONDARYCOLOR3SVEXTPROC __glewSecondaryColor3svEXT = NULL;
+PFNGLSECONDARYCOLOR3UBEXTPROC __glewSecondaryColor3ubEXT = NULL;
+PFNGLSECONDARYCOLOR3UBVEXTPROC __glewSecondaryColor3ubvEXT = NULL;
+PFNGLSECONDARYCOLOR3UIEXTPROC __glewSecondaryColor3uiEXT = NULL;
+PFNGLSECONDARYCOLOR3UIVEXTPROC __glewSecondaryColor3uivEXT = NULL;
+PFNGLSECONDARYCOLOR3USEXTPROC __glewSecondaryColor3usEXT = NULL;
+PFNGLSECONDARYCOLOR3USVEXTPROC __glewSecondaryColor3usvEXT = NULL;
+PFNGLSECONDARYCOLORPOINTEREXTPROC __glewSecondaryColorPointerEXT = NULL;
+
+PFNGLACTIVEPROGRAMEXTPROC __glewActiveProgramEXT = NULL;
+PFNGLCREATESHADERPROGRAMEXTPROC __glewCreateShaderProgramEXT = NULL;
+PFNGLUSESHADERPROGRAMEXTPROC __glewUseShaderProgramEXT = NULL;
+
+PFNGLBINDIMAGETEXTUREEXTPROC __glewBindImageTextureEXT = NULL;
+PFNGLMEMORYBARRIEREXTPROC __glewMemoryBarrierEXT = NULL;
+
+PFNGLACTIVESTENCILFACEEXTPROC __glewActiveStencilFaceEXT = NULL;
+
+PFNGLTEXSUBIMAGE1DEXTPROC __glewTexSubImage1DEXT = NULL;
+PFNGLTEXSUBIMAGE2DEXTPROC __glewTexSubImage2DEXT = NULL;
+PFNGLTEXSUBIMAGE3DEXTPROC __glewTexSubImage3DEXT = NULL;
+
+PFNGLTEXIMAGE3DEXTPROC __glewTexImage3DEXT = NULL;
+
+PFNGLFRAMEBUFFERTEXTURELAYEREXTPROC __glewFramebufferTextureLayerEXT = NULL;
+
+PFNGLTEXBUFFEREXTPROC __glewTexBufferEXT = NULL;
+
+PFNGLCLEARCOLORIIEXTPROC __glewClearColorIiEXT = NULL;
+PFNGLCLEARCOLORIUIEXTPROC __glewClearColorIuiEXT = NULL;
+PFNGLGETTEXPARAMETERIIVEXTPROC __glewGetTexParameterIivEXT = NULL;
+PFNGLGETTEXPARAMETERIUIVEXTPROC __glewGetTexParameterIuivEXT = NULL;
+PFNGLTEXPARAMETERIIVEXTPROC __glewTexParameterIivEXT = NULL;
+PFNGLTEXPARAMETERIUIVEXTPROC __glewTexParameterIuivEXT = NULL;
+
+PFNGLARETEXTURESRESIDENTEXTPROC __glewAreTexturesResidentEXT = NULL;
+PFNGLBINDTEXTUREEXTPROC __glewBindTextureEXT = NULL;
+PFNGLDELETETEXTURESEXTPROC __glewDeleteTexturesEXT = NULL;
+PFNGLGENTEXTURESEXTPROC __glewGenTexturesEXT = NULL;
+PFNGLISTEXTUREEXTPROC __glewIsTextureEXT = NULL;
+PFNGLPRIORITIZETEXTURESEXTPROC __glewPrioritizeTexturesEXT = NULL;
+
+PFNGLTEXTURENORMALEXTPROC __glewTextureNormalEXT = NULL;
+
+PFNGLGETQUERYOBJECTI64VEXTPROC __glewGetQueryObjecti64vEXT = NULL;
+PFNGLGETQUERYOBJECTUI64VEXTPROC __glewGetQueryObjectui64vEXT = NULL;
+
+PFNGLBEGINTRANSFORMFEEDBACKEXTPROC __glewBeginTransformFeedbackEXT = NULL;
+PFNGLBINDBUFFERBASEEXTPROC __glewBindBufferBaseEXT = NULL;
+PFNGLBINDBUFFEROFFSETEXTPROC __glewBindBufferOffsetEXT = NULL;
+PFNGLBINDBUFFERRANGEEXTPROC __glewBindBufferRangeEXT = NULL;
+PFNGLENDTRANSFORMFEEDBACKEXTPROC __glewEndTransformFeedbackEXT = NULL;
+PFNGLGETTRANSFORMFEEDBACKVARYINGEXTPROC __glewGetTransformFeedbackVaryingEXT = NULL;
+PFNGLTRANSFORMFEEDBACKVARYINGSEXTPROC __glewTransformFeedbackVaryingsEXT = NULL;
+
+PFNGLARRAYELEMENTEXTPROC __glewArrayElementEXT = NULL;
+PFNGLCOLORPOINTEREXTPROC __glewColorPointerEXT = NULL;
+PFNGLDRAWARRAYSEXTPROC __glewDrawArraysEXT = NULL;
+PFNGLEDGEFLAGPOINTEREXTPROC __glewEdgeFlagPointerEXT = NULL;
+PFNGLINDEXPOINTEREXTPROC __glewIndexPointerEXT = NULL;
+PFNGLNORMALPOINTEREXTPROC __glewNormalPointerEXT = NULL;
+PFNGLTEXCOORDPOINTEREXTPROC __glewTexCoordPointerEXT = NULL;
+PFNGLVERTEXPOINTEREXTPROC __glewVertexPointerEXT = NULL;
+
+PFNGLGETVERTEXATTRIBLDVEXTPROC __glewGetVertexAttribLdvEXT = NULL;
+PFNGLVERTEXARRAYVERTEXATTRIBLOFFSETEXTPROC __glewVertexArrayVertexAttribLOffsetEXT = NULL;
+PFNGLVERTEXATTRIBL1DEXTPROC __glewVertexAttribL1dEXT = NULL;
+PFNGLVERTEXATTRIBL1DVEXTPROC __glewVertexAttribL1dvEXT = NULL;
+PFNGLVERTEXATTRIBL2DEXTPROC __glewVertexAttribL2dEXT = NULL;
+PFNGLVERTEXATTRIBL2DVEXTPROC __glewVertexAttribL2dvEXT = NULL;
+PFNGLVERTEXATTRIBL3DEXTPROC __glewVertexAttribL3dEXT = NULL;
+PFNGLVERTEXATTRIBL3DVEXTPROC __glewVertexAttribL3dvEXT = NULL;
+PFNGLVERTEXATTRIBL4DEXTPROC __glewVertexAttribL4dEXT = NULL;
+PFNGLVERTEXATTRIBL4DVEXTPROC __glewVertexAttribL4dvEXT = NULL;
+PFNGLVERTEXATTRIBLPOINTEREXTPROC __glewVertexAttribLPointerEXT = NULL;
+
+PFNGLBEGINVERTEXSHADEREXTPROC __glewBeginVertexShaderEXT = NULL;
+PFNGLBINDLIGHTPARAMETEREXTPROC __glewBindLightParameterEXT = NULL;
+PFNGLBINDMATERIALPARAMETEREXTPROC __glewBindMaterialParameterEXT = NULL;
+PFNGLBINDPARAMETEREXTPROC __glewBindParameterEXT = NULL;
+PFNGLBINDTEXGENPARAMETEREXTPROC __glewBindTexGenParameterEXT = NULL;
+PFNGLBINDTEXTUREUNITPARAMETEREXTPROC __glewBindTextureUnitParameterEXT = NULL;
+PFNGLBINDVERTEXSHADEREXTPROC __glewBindVertexShaderEXT = NULL;
+PFNGLDELETEVERTEXSHADEREXTPROC __glewDeleteVertexShaderEXT = NULL;
+PFNGLDISABLEVARIANTCLIENTSTATEEXTPROC __glewDisableVariantClientStateEXT = NULL;
+PFNGLENABLEVARIANTCLIENTSTATEEXTPROC __glewEnableVariantClientStateEXT = NULL;
+PFNGLENDVERTEXSHADEREXTPROC __glewEndVertexShaderEXT = NULL;
+PFNGLEXTRACTCOMPONENTEXTPROC __glewExtractComponentEXT = NULL;
+PFNGLGENSYMBOLSEXTPROC __glewGenSymbolsEXT = NULL;
+PFNGLGENVERTEXSHADERSEXTPROC __glewGenVertexShadersEXT = NULL;
+PFNGLGETINVARIANTBOOLEANVEXTPROC __glewGetInvariantBooleanvEXT = NULL;
+PFNGLGETINVARIANTFLOATVEXTPROC __glewGetInvariantFloatvEXT = NULL;
+PFNGLGETINVARIANTINTEGERVEXTPROC __glewGetInvariantIntegervEXT = NULL;
+PFNGLGETLOCALCONSTANTBOOLEANVEXTPROC __glewGetLocalConstantBooleanvEXT = NULL;
+PFNGLGETLOCALCONSTANTFLOATVEXTPROC __glewGetLocalConstantFloatvEXT = NULL;
+PFNGLGETLOCALCONSTANTINTEGERVEXTPROC __glewGetLocalConstantIntegervEXT = NULL;
+PFNGLGETVARIANTBOOLEANVEXTPROC __glewGetVariantBooleanvEXT = NULL;
+PFNGLGETVARIANTFLOATVEXTPROC __glewGetVariantFloatvEXT = NULL;
+PFNGLGETVARIANTINTEGERVEXTPROC __glewGetVariantIntegervEXT = NULL;
+PFNGLGETVARIANTPOINTERVEXTPROC __glewGetVariantPointervEXT = NULL;
+PFNGLINSERTCOMPONENTEXTPROC __glewInsertComponentEXT = NULL;
+PFNGLISVARIANTENABLEDEXTPROC __glewIsVariantEnabledEXT = NULL;
+PFNGLSETINVARIANTEXTPROC __glewSetInvariantEXT = NULL;
+PFNGLSETLOCALCONSTANTEXTPROC __glewSetLocalConstantEXT = NULL;
+PFNGLSHADEROP1EXTPROC __glewShaderOp1EXT = NULL;
+PFNGLSHADEROP2EXTPROC __glewShaderOp2EXT = NULL;
+PFNGLSHADEROP3EXTPROC __glewShaderOp3EXT = NULL;
+PFNGLSWIZZLEEXTPROC __glewSwizzleEXT = NULL;
+PFNGLVARIANTPOINTEREXTPROC __glewVariantPointerEXT = NULL;
+PFNGLVARIANTBVEXTPROC __glewVariantbvEXT = NULL;
+PFNGLVARIANTDVEXTPROC __glewVariantdvEXT = NULL;
+PFNGLVARIANTFVEXTPROC __glewVariantfvEXT = NULL;
+PFNGLVARIANTIVEXTPROC __glewVariantivEXT = NULL;
+PFNGLVARIANTSVEXTPROC __glewVariantsvEXT = NULL;
+PFNGLVARIANTUBVEXTPROC __glewVariantubvEXT = NULL;
+PFNGLVARIANTUIVEXTPROC __glewVariantuivEXT = NULL;
+PFNGLVARIANTUSVEXTPROC __glewVariantusvEXT = NULL;
+PFNGLWRITEMASKEXTPROC __glewWriteMaskEXT = NULL;
+
+PFNGLVERTEXWEIGHTPOINTEREXTPROC __glewVertexWeightPointerEXT = NULL;
+PFNGLVERTEXWEIGHTFEXTPROC __glewVertexWeightfEXT = NULL;
+PFNGLVERTEXWEIGHTFVEXTPROC __glewVertexWeightfvEXT = NULL;
+
+PFNGLIMPORTSYNCEXTPROC __glewImportSyncEXT = NULL;
+
+PFNGLFRAMETERMINATORGREMEDYPROC __glewFrameTerminatorGREMEDY = NULL;
+
+PFNGLSTRINGMARKERGREMEDYPROC __glewStringMarkerGREMEDY = NULL;
+
+PFNGLGETIMAGETRANSFORMPARAMETERFVHPPROC __glewGetImageTransformParameterfvHP = NULL;
+PFNGLGETIMAGETRANSFORMPARAMETERIVHPPROC __glewGetImageTransformParameterivHP = NULL;
+PFNGLIMAGETRANSFORMPARAMETERFHPPROC __glewImageTransformParameterfHP = NULL;
+PFNGLIMAGETRANSFORMPARAMETERFVHPPROC __glewImageTransformParameterfvHP = NULL;
+PFNGLIMAGETRANSFORMPARAMETERIHPPROC __glewImageTransformParameteriHP = NULL;
+PFNGLIMAGETRANSFORMPARAMETERIVHPPROC __glewImageTransformParameterivHP = NULL;
+
+PFNGLMULTIMODEDRAWARRAYSIBMPROC __glewMultiModeDrawArraysIBM = NULL;
+PFNGLMULTIMODEDRAWELEMENTSIBMPROC __glewMultiModeDrawElementsIBM = NULL;
+
+PFNGLCOLORPOINTERLISTIBMPROC __glewColorPointerListIBM = NULL;
+PFNGLEDGEFLAGPOINTERLISTIBMPROC __glewEdgeFlagPointerListIBM = NULL;
+PFNGLFOGCOORDPOINTERLISTIBMPROC __glewFogCoordPointerListIBM = NULL;
+PFNGLINDEXPOINTERLISTIBMPROC __glewIndexPointerListIBM = NULL;
+PFNGLNORMALPOINTERLISTIBMPROC __glewNormalPointerListIBM = NULL;
+PFNGLSECONDARYCOLORPOINTERLISTIBMPROC __glewSecondaryColorPointerListIBM = NULL;
+PFNGLTEXCOORDPOINTERLISTIBMPROC __glewTexCoordPointerListIBM = NULL;
+PFNGLVERTEXPOINTERLISTIBMPROC __glewVertexPointerListIBM = NULL;
+
+PFNGLMAPTEXTURE2DINTELPROC __glewMapTexture2DINTEL = NULL;
+PFNGLSYNCTEXTUREINTELPROC __glewSyncTextureINTEL = NULL;
+PFNGLUNMAPTEXTURE2DINTELPROC __glewUnmapTexture2DINTEL = NULL;
+
+PFNGLCOLORPOINTERVINTELPROC __glewColorPointervINTEL = NULL;
+PFNGLNORMALPOINTERVINTELPROC __glewNormalPointervINTEL = NULL;
+PFNGLTEXCOORDPOINTERVINTELPROC __glewTexCoordPointervINTEL = NULL;
+PFNGLVERTEXPOINTERVINTELPROC __glewVertexPointervINTEL = NULL;
+
+PFNGLTEXSCISSORFUNCINTELPROC __glewTexScissorFuncINTEL = NULL;
+PFNGLTEXSCISSORINTELPROC __glewTexScissorINTEL = NULL;
+
+PFNGLDEBUGMESSAGECALLBACKPROC __glewDebugMessageCallback = NULL;
+PFNGLDEBUGMESSAGECONTROLPROC __glewDebugMessageControl = NULL;
+PFNGLDEBUGMESSAGEINSERTPROC __glewDebugMessageInsert = NULL;
+PFNGLGETDEBUGMESSAGELOGPROC __glewGetDebugMessageLog = NULL;
+PFNGLGETOBJECTLABELPROC __glewGetObjectLabel = NULL;
+PFNGLGETOBJECTPTRLABELPROC __glewGetObjectPtrLabel = NULL;
+PFNGLOBJECTLABELPROC __glewObjectLabel = NULL;
+PFNGLOBJECTPTRLABELPROC __glewObjectPtrLabel = NULL;
+PFNGLPOPDEBUGGROUPPROC __glewPopDebugGroup = NULL;
+PFNGLPUSHDEBUGGROUPPROC __glewPushDebugGroup = NULL;
+
+PFNGLBUFFERREGIONENABLEDPROC __glewBufferRegionEnabled = NULL;
+PFNGLDELETEBUFFERREGIONPROC __glewDeleteBufferRegion = NULL;
+PFNGLDRAWBUFFERREGIONPROC __glewDrawBufferRegion = NULL;
+PFNGLNEWBUFFERREGIONPROC __glewNewBufferRegion = NULL;
+PFNGLREADBUFFERREGIONPROC __glewReadBufferRegion = NULL;
+
+PFNGLRESIZEBUFFERSMESAPROC __glewResizeBuffersMESA = NULL;
+
+PFNGLWINDOWPOS2DMESAPROC __glewWindowPos2dMESA = NULL;
+PFNGLWINDOWPOS2DVMESAPROC __glewWindowPos2dvMESA = NULL;
+PFNGLWINDOWPOS2FMESAPROC __glewWindowPos2fMESA = NULL;
+PFNGLWINDOWPOS2FVMESAPROC __glewWindowPos2fvMESA = NULL;
+PFNGLWINDOWPOS2IMESAPROC __glewWindowPos2iMESA = NULL;
+PFNGLWINDOWPOS2IVMESAPROC __glewWindowPos2ivMESA = NULL;
+PFNGLWINDOWPOS2SMESAPROC __glewWindowPos2sMESA = NULL;
+PFNGLWINDOWPOS2SVMESAPROC __glewWindowPos2svMESA = NULL;
+PFNGLWINDOWPOS3DMESAPROC __glewWindowPos3dMESA = NULL;
+PFNGLWINDOWPOS3DVMESAPROC __glewWindowPos3dvMESA = NULL;
+PFNGLWINDOWPOS3FMESAPROC __glewWindowPos3fMESA = NULL;
+PFNGLWINDOWPOS3FVMESAPROC __glewWindowPos3fvMESA = NULL;
+PFNGLWINDOWPOS3IMESAPROC __glewWindowPos3iMESA = NULL;
+PFNGLWINDOWPOS3IVMESAPROC __glewWindowPos3ivMESA = NULL;
+PFNGLWINDOWPOS3SMESAPROC __glewWindowPos3sMESA = NULL;
+PFNGLWINDOWPOS3SVMESAPROC __glewWindowPos3svMESA = NULL;
+PFNGLWINDOWPOS4DMESAPROC __glewWindowPos4dMESA = NULL;
+PFNGLWINDOWPOS4DVMESAPROC __glewWindowPos4dvMESA = NULL;
+PFNGLWINDOWPOS4FMESAPROC __glewWindowPos4fMESA = NULL;
+PFNGLWINDOWPOS4FVMESAPROC __glewWindowPos4fvMESA = NULL;
+PFNGLWINDOWPOS4IMESAPROC __glewWindowPos4iMESA = NULL;
+PFNGLWINDOWPOS4IVMESAPROC __glewWindowPos4ivMESA = NULL;
+PFNGLWINDOWPOS4SMESAPROC __glewWindowPos4sMESA = NULL;
+PFNGLWINDOWPOS4SVMESAPROC __glewWindowPos4svMESA = NULL;
+
+PFNGLBEGINCONDITIONALRENDERNVXPROC __glewBeginConditionalRenderNVX = NULL;
+PFNGLENDCONDITIONALRENDERNVXPROC __glewEndConditionalRenderNVX = NULL;
+
+PFNGLMULTIDRAWARRAYSINDIRECTBINDLESSNVPROC __glewMultiDrawArraysIndirectBindlessNV = NULL;
+PFNGLMULTIDRAWELEMENTSINDIRECTBINDLESSNVPROC __glewMultiDrawElementsIndirectBindlessNV = NULL;
+
+PFNGLGETIMAGEHANDLENVPROC __glewGetImageHandleNV = NULL;
+PFNGLGETTEXTUREHANDLENVPROC __glewGetTextureHandleNV = NULL;
+PFNGLGETTEXTURESAMPLERHANDLENVPROC __glewGetTextureSamplerHandleNV = NULL;
+PFNGLISIMAGEHANDLERESIDENTNVPROC __glewIsImageHandleResidentNV = NULL;
+PFNGLISTEXTUREHANDLERESIDENTNVPROC __glewIsTextureHandleResidentNV = NULL;
+PFNGLMAKEIMAGEHANDLENONRESIDENTNVPROC __glewMakeImageHandleNonResidentNV = NULL;
+PFNGLMAKEIMAGEHANDLERESIDENTNVPROC __glewMakeImageHandleResidentNV = NULL;
+PFNGLMAKETEXTUREHANDLENONRESIDENTNVPROC __glewMakeTextureHandleNonResidentNV = NULL;
+PFNGLMAKETEXTUREHANDLERESIDENTNVPROC __glewMakeTextureHandleResidentNV = NULL;
+PFNGLPROGRAMUNIFORMHANDLEUI64NVPROC __glewProgramUniformHandleui64NV = NULL;
+PFNGLPROGRAMUNIFORMHANDLEUI64VNVPROC __glewProgramUniformHandleui64vNV = NULL;
+PFNGLUNIFORMHANDLEUI64NVPROC __glewUniformHandleui64NV = NULL;
+PFNGLUNIFORMHANDLEUI64VNVPROC __glewUniformHandleui64vNV = NULL;
+
+PFNGLBLENDBARRIERNVPROC __glewBlendBarrierNV = NULL;
+PFNGLBLENDPARAMETERINVPROC __glewBlendParameteriNV = NULL;
+
+PFNGLBEGINCONDITIONALRENDERNVPROC __glewBeginConditionalRenderNV = NULL;
+PFNGLENDCONDITIONALRENDERNVPROC __glewEndConditionalRenderNV = NULL;
+
+PFNGLCOPYIMAGESUBDATANVPROC __glewCopyImageSubDataNV = NULL;
+
+PFNGLCLEARDEPTHDNVPROC __glewClearDepthdNV = NULL;
+PFNGLDEPTHBOUNDSDNVPROC __glewDepthBoundsdNV = NULL;
+PFNGLDEPTHRANGEDNVPROC __glewDepthRangedNV = NULL;
+
+PFNGLDRAWTEXTURENVPROC __glewDrawTextureNV = NULL;
+
+PFNGLEVALMAPSNVPROC __glewEvalMapsNV = NULL;
+PFNGLGETMAPATTRIBPARAMETERFVNVPROC __glewGetMapAttribParameterfvNV = NULL;
+PFNGLGETMAPATTRIBPARAMETERIVNVPROC __glewGetMapAttribParameterivNV = NULL;
+PFNGLGETMAPCONTROLPOINTSNVPROC __glewGetMapControlPointsNV = NULL;
+PFNGLGETMAPPARAMETERFVNVPROC __glewGetMapParameterfvNV = NULL;
+PFNGLGETMAPPARAMETERIVNVPROC __glewGetMapParameterivNV = NULL;
+PFNGLMAPCONTROLPOINTSNVPROC __glewMapControlPointsNV = NULL;
+PFNGLMAPPARAMETERFVNVPROC __glewMapParameterfvNV = NULL;
+PFNGLMAPPARAMETERIVNVPROC __glewMapParameterivNV = NULL;
+
+PFNGLGETMULTISAMPLEFVNVPROC __glewGetMultisamplefvNV = NULL;
+PFNGLSAMPLEMASKINDEXEDNVPROC __glewSampleMaskIndexedNV = NULL;
+PFNGLTEXRENDERBUFFERNVPROC __glewTexRenderbufferNV = NULL;
+
+PFNGLDELETEFENCESNVPROC __glewDeleteFencesNV = NULL;
+PFNGLFINISHFENCENVPROC __glewFinishFenceNV = NULL;
+PFNGLGENFENCESNVPROC __glewGenFencesNV = NULL;
+PFNGLGETFENCEIVNVPROC __glewGetFenceivNV = NULL;
+PFNGLISFENCENVPROC __glewIsFenceNV = NULL;
+PFNGLSETFENCENVPROC __glewSetFenceNV = NULL;
+PFNGLTESTFENCENVPROC __glewTestFenceNV = NULL;
+
+PFNGLGETPROGRAMNAMEDPARAMETERDVNVPROC __glewGetProgramNamedParameterdvNV = NULL;
+PFNGLGETPROGRAMNAMEDPARAMETERFVNVPROC __glewGetProgramNamedParameterfvNV = NULL;
+PFNGLPROGRAMNAMEDPARAMETER4DNVPROC __glewProgramNamedParameter4dNV = NULL;
+PFNGLPROGRAMNAMEDPARAMETER4DVNVPROC __glewProgramNamedParameter4dvNV = NULL;
+PFNGLPROGRAMNAMEDPARAMETER4FNVPROC __glewProgramNamedParameter4fNV = NULL;
+PFNGLPROGRAMNAMEDPARAMETER4FVNVPROC __glewProgramNamedParameter4fvNV = NULL;
+
+PFNGLRENDERBUFFERSTORAGEMULTISAMPLECOVERAGENVPROC __glewRenderbufferStorageMultisampleCoverageNV = NULL;
+
+PFNGLPROGRAMVERTEXLIMITNVPROC __glewProgramVertexLimitNV = NULL;
+
+PFNGLPROGRAMENVPARAMETERI4INVPROC __glewProgramEnvParameterI4iNV = NULL;
+PFNGLPROGRAMENVPARAMETERI4IVNVPROC __glewProgramEnvParameterI4ivNV = NULL;
+PFNGLPROGRAMENVPARAMETERI4UINVPROC __glewProgramEnvParameterI4uiNV = NULL;
+PFNGLPROGRAMENVPARAMETERI4UIVNVPROC __glewProgramEnvParameterI4uivNV = NULL;
+PFNGLPROGRAMENVPARAMETERSI4IVNVPROC __glewProgramEnvParametersI4ivNV = NULL;
+PFNGLPROGRAMENVPARAMETERSI4UIVNVPROC __glewProgramEnvParametersI4uivNV = NULL;
+PFNGLPROGRAMLOCALPARAMETERI4INVPROC __glewProgramLocalParameterI4iNV = NULL;
+PFNGLPROGRAMLOCALPARAMETERI4IVNVPROC __glewProgramLocalParameterI4ivNV = NULL;
+PFNGLPROGRAMLOCALPARAMETERI4UINVPROC __glewProgramLocalParameterI4uiNV = NULL;
+PFNGLPROGRAMLOCALPARAMETERI4UIVNVPROC __glewProgramLocalParameterI4uivNV = NULL;
+PFNGLPROGRAMLOCALPARAMETERSI4IVNVPROC __glewProgramLocalParametersI4ivNV = NULL;
+PFNGLPROGRAMLOCALPARAMETERSI4UIVNVPROC __glewProgramLocalParametersI4uivNV = NULL;
+
+PFNGLGETUNIFORMI64VNVPROC __glewGetUniformi64vNV = NULL;
+PFNGLGETUNIFORMUI64VNVPROC __glewGetUniformui64vNV = NULL;
+PFNGLPROGRAMUNIFORM1I64NVPROC __glewProgramUniform1i64NV = NULL;
+PFNGLPROGRAMUNIFORM1I64VNVPROC __glewProgramUniform1i64vNV = NULL;
+PFNGLPROGRAMUNIFORM1UI64NVPROC __glewProgramUniform1ui64NV = NULL;
+PFNGLPROGRAMUNIFORM1UI64VNVPROC __glewProgramUniform1ui64vNV = NULL;
+PFNGLPROGRAMUNIFORM2I64NVPROC __glewProgramUniform2i64NV = NULL;
+PFNGLPROGRAMUNIFORM2I64VNVPROC __glewProgramUniform2i64vNV = NULL;
+PFNGLPROGRAMUNIFORM2UI64NVPROC __glewProgramUniform2ui64NV = NULL;
+PFNGLPROGRAMUNIFORM2UI64VNVPROC __glewProgramUniform2ui64vNV = NULL;
+PFNGLPROGRAMUNIFORM3I64NVPROC __glewProgramUniform3i64NV = NULL;
+PFNGLPROGRAMUNIFORM3I64VNVPROC __glewProgramUniform3i64vNV = NULL;
+PFNGLPROGRAMUNIFORM3UI64NVPROC __glewProgramUniform3ui64NV = NULL;
+PFNGLPROGRAMUNIFORM3UI64VNVPROC __glewProgramUniform3ui64vNV = NULL;
+PFNGLPROGRAMUNIFORM4I64NVPROC __glewProgramUniform4i64NV = NULL;
+PFNGLPROGRAMUNIFORM4I64VNVPROC __glewProgramUniform4i64vNV = NULL;
+PFNGLPROGRAMUNIFORM4UI64NVPROC __glewProgramUniform4ui64NV = NULL;
+PFNGLPROGRAMUNIFORM4UI64VNVPROC __glewProgramUniform4ui64vNV = NULL;
+PFNGLUNIFORM1I64NVPROC __glewUniform1i64NV = NULL;
+PFNGLUNIFORM1I64VNVPROC __glewUniform1i64vNV = NULL;
+PFNGLUNIFORM1UI64NVPROC __glewUniform1ui64NV = NULL;
+PFNGLUNIFORM1UI64VNVPROC __glewUniform1ui64vNV = NULL;
+PFNGLUNIFORM2I64NVPROC __glewUniform2i64NV = NULL;
+PFNGLUNIFORM2I64VNVPROC __glewUniform2i64vNV = NULL;
+PFNGLUNIFORM2UI64NVPROC __glewUniform2ui64NV = NULL;
+PFNGLUNIFORM2UI64VNVPROC __glewUniform2ui64vNV = NULL;
+PFNGLUNIFORM3I64NVPROC __glewUniform3i64NV = NULL;
+PFNGLUNIFORM3I64VNVPROC __glewUniform3i64vNV = NULL;
+PFNGLUNIFORM3UI64NVPROC __glewUniform3ui64NV = NULL;
+PFNGLUNIFORM3UI64VNVPROC __glewUniform3ui64vNV = NULL;
+PFNGLUNIFORM4I64NVPROC __glewUniform4i64NV = NULL;
+PFNGLUNIFORM4I64VNVPROC __glewUniform4i64vNV = NULL;
+PFNGLUNIFORM4UI64NVPROC __glewUniform4ui64NV = NULL;
+PFNGLUNIFORM4UI64VNVPROC __glewUniform4ui64vNV = NULL;
+
+PFNGLCOLOR3HNVPROC __glewColor3hNV = NULL;
+PFNGLCOLOR3HVNVPROC __glewColor3hvNV = NULL;
+PFNGLCOLOR4HNVPROC __glewColor4hNV = NULL;
+PFNGLCOLOR4HVNVPROC __glewColor4hvNV = NULL;
+PFNGLFOGCOORDHNVPROC __glewFogCoordhNV = NULL;
+PFNGLFOGCOORDHVNVPROC __glewFogCoordhvNV = NULL;
+PFNGLMULTITEXCOORD1HNVPROC __glewMultiTexCoord1hNV = NULL;
+PFNGLMULTITEXCOORD1HVNVPROC __glewMultiTexCoord1hvNV = NULL;
+PFNGLMULTITEXCOORD2HNVPROC __glewMultiTexCoord2hNV = NULL;
+PFNGLMULTITEXCOORD2HVNVPROC __glewMultiTexCoord2hvNV = NULL;
+PFNGLMULTITEXCOORD3HNVPROC __glewMultiTexCoord3hNV = NULL;
+PFNGLMULTITEXCOORD3HVNVPROC __glewMultiTexCoord3hvNV = NULL;
+PFNGLMULTITEXCOORD4HNVPROC __glewMultiTexCoord4hNV = NULL;
+PFNGLMULTITEXCOORD4HVNVPROC __glewMultiTexCoord4hvNV = NULL;
+PFNGLNORMAL3HNVPROC __glewNormal3hNV = NULL;
+PFNGLNORMAL3HVNVPROC __glewNormal3hvNV = NULL;
+PFNGLSECONDARYCOLOR3HNVPROC __glewSecondaryColor3hNV = NULL;
+PFNGLSECONDARYCOLOR3HVNVPROC __glewSecondaryColor3hvNV = NULL;
+PFNGLTEXCOORD1HNVPROC __glewTexCoord1hNV = NULL;
+PFNGLTEXCOORD1HVNVPROC __glewTexCoord1hvNV = NULL;
+PFNGLTEXCOORD2HNVPROC __glewTexCoord2hNV = NULL;
+PFNGLTEXCOORD2HVNVPROC __glewTexCoord2hvNV = NULL;
+PFNGLTEXCOORD3HNVPROC __glewTexCoord3hNV = NULL;
+PFNGLTEXCOORD3HVNVPROC __glewTexCoord3hvNV = NULL;
+PFNGLTEXCOORD4HNVPROC __glewTexCoord4hNV = NULL;
+PFNGLTEXCOORD4HVNVPROC __glewTexCoord4hvNV = NULL;
+PFNGLVERTEX2HNVPROC __glewVertex2hNV = NULL;
+PFNGLVERTEX2HVNVPROC __glewVertex2hvNV = NULL;
+PFNGLVERTEX3HNVPROC __glewVertex3hNV = NULL;
+PFNGLVERTEX3HVNVPROC __glewVertex3hvNV = NULL;
+PFNGLVERTEX4HNVPROC __glewVertex4hNV = NULL;
+PFNGLVERTEX4HVNVPROC __glewVertex4hvNV = NULL;
+PFNGLVERTEXATTRIB1HNVPROC __glewVertexAttrib1hNV = NULL;
+PFNGLVERTEXATTRIB1HVNVPROC __glewVertexAttrib1hvNV = NULL;
+PFNGLVERTEXATTRIB2HNVPROC __glewVertexAttrib2hNV = NULL;
+PFNGLVERTEXATTRIB2HVNVPROC __glewVertexAttrib2hvNV = NULL;
+PFNGLVERTEXATTRIB3HNVPROC __glewVertexAttrib3hNV = NULL;
+PFNGLVERTEXATTRIB3HVNVPROC __glewVertexAttrib3hvNV = NULL;
+PFNGLVERTEXATTRIB4HNVPROC __glewVertexAttrib4hNV = NULL;
+PFNGLVERTEXATTRIB4HVNVPROC __glewVertexAttrib4hvNV = NULL;
+PFNGLVERTEXATTRIBS1HVNVPROC __glewVertexAttribs1hvNV = NULL;
+PFNGLVERTEXATTRIBS2HVNVPROC __glewVertexAttribs2hvNV = NULL;
+PFNGLVERTEXATTRIBS3HVNVPROC __glewVertexAttribs3hvNV = NULL;
+PFNGLVERTEXATTRIBS4HVNVPROC __glewVertexAttribs4hvNV = NULL;
+PFNGLVERTEXWEIGHTHNVPROC __glewVertexWeighthNV = NULL;
+PFNGLVERTEXWEIGHTHVNVPROC __glewVertexWeighthvNV = NULL;
+
+PFNGLBEGINOCCLUSIONQUERYNVPROC __glewBeginOcclusionQueryNV = NULL;
+PFNGLDELETEOCCLUSIONQUERIESNVPROC __glewDeleteOcclusionQueriesNV = NULL;
+PFNGLENDOCCLUSIONQUERYNVPROC __glewEndOcclusionQueryNV = NULL;
+PFNGLGENOCCLUSIONQUERIESNVPROC __glewGenOcclusionQueriesNV = NULL;
+PFNGLGETOCCLUSIONQUERYIVNVPROC __glewGetOcclusionQueryivNV = NULL;
+PFNGLGETOCCLUSIONQUERYUIVNVPROC __glewGetOcclusionQueryuivNV = NULL;
+PFNGLISOCCLUSIONQUERYNVPROC __glewIsOcclusionQueryNV = NULL;
+
+PFNGLPROGRAMBUFFERPARAMETERSIIVNVPROC __glewProgramBufferParametersIivNV = NULL;
+PFNGLPROGRAMBUFFERPARAMETERSIUIVNVPROC __glewProgramBufferParametersIuivNV = NULL;
+PFNGLPROGRAMBUFFERPARAMETERSFVNVPROC __glewProgramBufferParametersfvNV = NULL;
+
+PFNGLCOPYPATHNVPROC __glewCopyPathNV = NULL;
+PFNGLCOVERFILLPATHINSTANCEDNVPROC __glewCoverFillPathInstancedNV = NULL;
+PFNGLCOVERFILLPATHNVPROC __glewCoverFillPathNV = NULL;
+PFNGLCOVERSTROKEPATHINSTANCEDNVPROC __glewCoverStrokePathInstancedNV = NULL;
+PFNGLCOVERSTROKEPATHNVPROC __glewCoverStrokePathNV = NULL;
+PFNGLDELETEPATHSNVPROC __glewDeletePathsNV = NULL;
+PFNGLGENPATHSNVPROC __glewGenPathsNV = NULL;
+PFNGLGETPATHCOLORGENFVNVPROC __glewGetPathColorGenfvNV = NULL;
+PFNGLGETPATHCOLORGENIVNVPROC __glewGetPathColorGenivNV = NULL;
+PFNGLGETPATHCOMMANDSNVPROC __glewGetPathCommandsNV = NULL;
+PFNGLGETPATHCOORDSNVPROC __glewGetPathCoordsNV = NULL;
+PFNGLGETPATHDASHARRAYNVPROC __glewGetPathDashArrayNV = NULL;
+PFNGLGETPATHLENGTHNVPROC __glewGetPathLengthNV = NULL;
+PFNGLGETPATHMETRICRANGENVPROC __glewGetPathMetricRangeNV = NULL;
+PFNGLGETPATHMETRICSNVPROC __glewGetPathMetricsNV = NULL;
+PFNGLGETPATHPARAMETERFVNVPROC __glewGetPathParameterfvNV = NULL;
+PFNGLGETPATHPARAMETERIVNVPROC __glewGetPathParameterivNV = NULL;
+PFNGLGETPATHSPACINGNVPROC __glewGetPathSpacingNV = NULL;
+PFNGLGETPATHTEXGENFVNVPROC __glewGetPathTexGenfvNV = NULL;
+PFNGLGETPATHTEXGENIVNVPROC __glewGetPathTexGenivNV = NULL;
+PFNGLINTERPOLATEPATHSNVPROC __glewInterpolatePathsNV = NULL;
+PFNGLISPATHNVPROC __glewIsPathNV = NULL;
+PFNGLISPOINTINFILLPATHNVPROC __glewIsPointInFillPathNV = NULL;
+PFNGLISPOINTINSTROKEPATHNVPROC __glewIsPointInStrokePathNV = NULL;
+PFNGLPATHCOLORGENNVPROC __glewPathColorGenNV = NULL;
+PFNGLPATHCOMMANDSNVPROC __glewPathCommandsNV = NULL;
+PFNGLPATHCOORDSNVPROC __glewPathCoordsNV = NULL;
+PFNGLPATHCOVERDEPTHFUNCNVPROC __glewPathCoverDepthFuncNV = NULL;
+PFNGLPATHDASHARRAYNVPROC __glewPathDashArrayNV = NULL;
+PFNGLPATHFOGGENNVPROC __glewPathFogGenNV = NULL;
+PFNGLPATHGLYPHRANGENVPROC __glewPathGlyphRangeNV = NULL;
+PFNGLPATHGLYPHSNVPROC __glewPathGlyphsNV = NULL;
+PFNGLPATHPARAMETERFNVPROC __glewPathParameterfNV = NULL;
+PFNGLPATHPARAMETERFVNVPROC __glewPathParameterfvNV = NULL;
+PFNGLPATHPARAMETERINVPROC __glewPathParameteriNV = NULL;
+PFNGLPATHPARAMETERIVNVPROC __glewPathParameterivNV = NULL;
+PFNGLPATHSTENCILDEPTHOFFSETNVPROC __glewPathStencilDepthOffsetNV = NULL;
+PFNGLPATHSTENCILFUNCNVPROC __glewPathStencilFuncNV = NULL;
+PFNGLPATHSTRINGNVPROC __glewPathStringNV = NULL;
+PFNGLPATHSUBCOMMANDSNVPROC __glewPathSubCommandsNV = NULL;
+PFNGLPATHSUBCOORDSNVPROC __glewPathSubCoordsNV = NULL;
+PFNGLPATHTEXGENNVPROC __glewPathTexGenNV = NULL;
+PFNGLPOINTALONGPATHNVPROC __glewPointAlongPathNV = NULL;
+PFNGLSTENCILFILLPATHINSTANCEDNVPROC __glewStencilFillPathInstancedNV = NULL;
+PFNGLSTENCILFILLPATHNVPROC __glewStencilFillPathNV = NULL;
+PFNGLSTENCILSTROKEPATHINSTANCEDNVPROC __glewStencilStrokePathInstancedNV = NULL;
+PFNGLSTENCILSTROKEPATHNVPROC __glewStencilStrokePathNV = NULL;
+PFNGLTRANSFORMPATHNVPROC __glewTransformPathNV = NULL;
+PFNGLWEIGHTPATHSNVPROC __glewWeightPathsNV = NULL;
+
+PFNGLFLUSHPIXELDATARANGENVPROC __glewFlushPixelDataRangeNV = NULL;
+PFNGLPIXELDATARANGENVPROC __glewPixelDataRangeNV = NULL;
+
+PFNGLPOINTPARAMETERINVPROC __glewPointParameteriNV = NULL;
+PFNGLPOINTPARAMETERIVNVPROC __glewPointParameterivNV = NULL;
+
+PFNGLGETVIDEOI64VNVPROC __glewGetVideoi64vNV = NULL;
+PFNGLGETVIDEOIVNVPROC __glewGetVideoivNV = NULL;
+PFNGLGETVIDEOUI64VNVPROC __glewGetVideoui64vNV = NULL;
+PFNGLGETVIDEOUIVNVPROC __glewGetVideouivNV = NULL;
+PFNGLPRESENTFRAMEDUALFILLNVPROC __glewPresentFrameDualFillNV = NULL;
+PFNGLPRESENTFRAMEKEYEDNVPROC __glewPresentFrameKeyedNV = NULL;
+
+PFNGLPRIMITIVERESTARTINDEXNVPROC __glewPrimitiveRestartIndexNV = NULL;
+PFNGLPRIMITIVERESTARTNVPROC __glewPrimitiveRestartNV = NULL;
+
+PFNGLCOMBINERINPUTNVPROC __glewCombinerInputNV = NULL;
+PFNGLCOMBINEROUTPUTNVPROC __glewCombinerOutputNV = NULL;
+PFNGLCOMBINERPARAMETERFNVPROC __glewCombinerParameterfNV = NULL;
+PFNGLCOMBINERPARAMETERFVNVPROC __glewCombinerParameterfvNV = NULL;
+PFNGLCOMBINERPARAMETERINVPROC __glewCombinerParameteriNV = NULL;
+PFNGLCOMBINERPARAMETERIVNVPROC __glewCombinerParameterivNV = NULL;
+PFNGLFINALCOMBINERINPUTNVPROC __glewFinalCombinerInputNV = NULL;
+PFNGLGETCOMBINERINPUTPARAMETERFVNVPROC __glewGetCombinerInputParameterfvNV = NULL;
+PFNGLGETCOMBINERINPUTPARAMETERIVNVPROC __glewGetCombinerInputParameterivNV = NULL;
+PFNGLGETCOMBINEROUTPUTPARAMETERFVNVPROC __glewGetCombinerOutputParameterfvNV = NULL;
+PFNGLGETCOMBINEROUTPUTPARAMETERIVNVPROC __glewGetCombinerOutputParameterivNV = NULL;
+PFNGLGETFINALCOMBINERINPUTPARAMETERFVNVPROC __glewGetFinalCombinerInputParameterfvNV = NULL;
+PFNGLGETFINALCOMBINERINPUTPARAMETERIVNVPROC __glewGetFinalCombinerInputParameterivNV = NULL;
+
+PFNGLCOMBINERSTAGEPARAMETERFVNVPROC __glewCombinerStageParameterfvNV = NULL;
+PFNGLGETCOMBINERSTAGEPARAMETERFVNVPROC __glewGetCombinerStageParameterfvNV = NULL;
+
+PFNGLGETBUFFERPARAMETERUI64VNVPROC __glewGetBufferParameterui64vNV = NULL;
+PFNGLGETINTEGERUI64VNVPROC __glewGetIntegerui64vNV = NULL;
+PFNGLGETNAMEDBUFFERPARAMETERUI64VNVPROC __glewGetNamedBufferParameterui64vNV = NULL;
+PFNGLISBUFFERRESIDENTNVPROC __glewIsBufferResidentNV = NULL;
+PFNGLISNAMEDBUFFERRESIDENTNVPROC __glewIsNamedBufferResidentNV = NULL;
+PFNGLMAKEBUFFERNONRESIDENTNVPROC __glewMakeBufferNonResidentNV = NULL;
+PFNGLMAKEBUFFERRESIDENTNVPROC __glewMakeBufferResidentNV = NULL;
+PFNGLMAKENAMEDBUFFERNONRESIDENTNVPROC __glewMakeNamedBufferNonResidentNV = NULL;
+PFNGLMAKENAMEDBUFFERRESIDENTNVPROC __glewMakeNamedBufferResidentNV = NULL;
+PFNGLPROGRAMUNIFORMUI64NVPROC __glewProgramUniformui64NV = NULL;
+PFNGLPROGRAMUNIFORMUI64VNVPROC __glewProgramUniformui64vNV = NULL;
+PFNGLUNIFORMUI64NVPROC __glewUniformui64NV = NULL;
+PFNGLUNIFORMUI64VNVPROC __glewUniformui64vNV = NULL;
+
+PFNGLTEXTUREBARRIERNVPROC __glewTextureBarrierNV = NULL;
+
+PFNGLTEXIMAGE2DMULTISAMPLECOVERAGENVPROC __glewTexImage2DMultisampleCoverageNV = NULL;
+PFNGLTEXIMAGE3DMULTISAMPLECOVERAGENVPROC __glewTexImage3DMultisampleCoverageNV = NULL;
+PFNGLTEXTUREIMAGE2DMULTISAMPLECOVERAGENVPROC __glewTextureImage2DMultisampleCoverageNV = NULL;
+PFNGLTEXTUREIMAGE2DMULTISAMPLENVPROC __glewTextureImage2DMultisampleNV = NULL;
+PFNGLTEXTUREIMAGE3DMULTISAMPLECOVERAGENVPROC __glewTextureImage3DMultisampleCoverageNV = NULL;
+PFNGLTEXTUREIMAGE3DMULTISAMPLENVPROC __glewTextureImage3DMultisampleNV = NULL;
+
+PFNGLACTIVEVARYINGNVPROC __glewActiveVaryingNV = NULL;
+PFNGLBEGINTRANSFORMFEEDBACKNVPROC __glewBeginTransformFeedbackNV = NULL;
+PFNGLBINDBUFFERBASENVPROC __glewBindBufferBaseNV = NULL;
+PFNGLBINDBUFFEROFFSETNVPROC __glewBindBufferOffsetNV = NULL;
+PFNGLBINDBUFFERRANGENVPROC __glewBindBufferRangeNV = NULL;
+PFNGLENDTRANSFORMFEEDBACKNVPROC __glewEndTransformFeedbackNV = NULL;
+PFNGLGETACTIVEVARYINGNVPROC __glewGetActiveVaryingNV = NULL;
+PFNGLGETTRANSFORMFEEDBACKVARYINGNVPROC __glewGetTransformFeedbackVaryingNV = NULL;
+PFNGLGETVARYINGLOCATIONNVPROC __glewGetVaryingLocationNV = NULL;
+PFNGLTRANSFORMFEEDBACKATTRIBSNVPROC __glewTransformFeedbackAttribsNV = NULL;
+PFNGLTRANSFORMFEEDBACKVARYINGSNVPROC __glewTransformFeedbackVaryingsNV = NULL;
+
+PFNGLBINDTRANSFORMFEEDBACKNVPROC __glewBindTransformFeedbackNV = NULL;
+PFNGLDELETETRANSFORMFEEDBACKSNVPROC __glewDeleteTransformFeedbacksNV = NULL;
+PFNGLDRAWTRANSFORMFEEDBACKNVPROC __glewDrawTransformFeedbackNV = NULL;
+PFNGLGENTRANSFORMFEEDBACKSNVPROC __glewGenTransformFeedbacksNV = NULL;
+PFNGLISTRANSFORMFEEDBACKNVPROC __glewIsTransformFeedbackNV = NULL;
+PFNGLPAUSETRANSFORMFEEDBACKNVPROC __glewPauseTransformFeedbackNV = NULL;
+PFNGLRESUMETRANSFORMFEEDBACKNVPROC __glewResumeTransformFeedbackNV = NULL;
+
+PFNGLVDPAUFININVPROC __glewVDPAUFiniNV = NULL;
+PFNGLVDPAUGETSURFACEIVNVPROC __glewVDPAUGetSurfaceivNV = NULL;
+PFNGLVDPAUINITNVPROC __glewVDPAUInitNV = NULL;
+PFNGLVDPAUISSURFACENVPROC __glewVDPAUIsSurfaceNV = NULL;
+PFNGLVDPAUMAPSURFACESNVPROC __glewVDPAUMapSurfacesNV = NULL;
+PFNGLVDPAUREGISTEROUTPUTSURFACENVPROC __glewVDPAURegisterOutputSurfaceNV = NULL;
+PFNGLVDPAUREGISTERVIDEOSURFACENVPROC __glewVDPAURegisterVideoSurfaceNV = NULL;
+PFNGLVDPAUSURFACEACCESSNVPROC __glewVDPAUSurfaceAccessNV = NULL;
+PFNGLVDPAUUNMAPSURFACESNVPROC __glewVDPAUUnmapSurfacesNV = NULL;
+PFNGLVDPAUUNREGISTERSURFACENVPROC __glewVDPAUUnregisterSurfaceNV = NULL;
+
+PFNGLFLUSHVERTEXARRAYRANGENVPROC __glewFlushVertexArrayRangeNV = NULL;
+PFNGLVERTEXARRAYRANGENVPROC __glewVertexArrayRangeNV = NULL;
+
+PFNGLGETVERTEXATTRIBLI64VNVPROC __glewGetVertexAttribLi64vNV = NULL;
+PFNGLGETVERTEXATTRIBLUI64VNVPROC __glewGetVertexAttribLui64vNV = NULL;
+PFNGLVERTEXATTRIBL1I64NVPROC __glewVertexAttribL1i64NV = NULL;
+PFNGLVERTEXATTRIBL1I64VNVPROC __glewVertexAttribL1i64vNV = NULL;
+PFNGLVERTEXATTRIBL1UI64NVPROC __glewVertexAttribL1ui64NV = NULL;
+PFNGLVERTEXATTRIBL1UI64VNVPROC __glewVertexAttribL1ui64vNV = NULL;
+PFNGLVERTEXATTRIBL2I64NVPROC __glewVertexAttribL2i64NV = NULL;
+PFNGLVERTEXATTRIBL2I64VNVPROC __glewVertexAttribL2i64vNV = NULL;
+PFNGLVERTEXATTRIBL2UI64NVPROC __glewVertexAttribL2ui64NV = NULL;
+PFNGLVERTEXATTRIBL2UI64VNVPROC __glewVertexAttribL2ui64vNV = NULL;
+PFNGLVERTEXATTRIBL3I64NVPROC __glewVertexAttribL3i64NV = NULL;
+PFNGLVERTEXATTRIBL3I64VNVPROC __glewVertexAttribL3i64vNV = NULL;
+PFNGLVERTEXATTRIBL3UI64NVPROC __glewVertexAttribL3ui64NV = NULL;
+PFNGLVERTEXATTRIBL3UI64VNVPROC __glewVertexAttribL3ui64vNV = NULL;
+PFNGLVERTEXATTRIBL4I64NVPROC __glewVertexAttribL4i64NV = NULL;
+PFNGLVERTEXATTRIBL4I64VNVPROC __glewVertexAttribL4i64vNV = NULL;
+PFNGLVERTEXATTRIBL4UI64NVPROC __glewVertexAttribL4ui64NV = NULL;
+PFNGLVERTEXATTRIBL4UI64VNVPROC __glewVertexAttribL4ui64vNV = NULL;
+PFNGLVERTEXATTRIBLFORMATNVPROC __glewVertexAttribLFormatNV = NULL;
+
+PFNGLBUFFERADDRESSRANGENVPROC __glewBufferAddressRangeNV = NULL;
+PFNGLCOLORFORMATNVPROC __glewColorFormatNV = NULL;
+PFNGLEDGEFLAGFORMATNVPROC __glewEdgeFlagFormatNV = NULL;
+PFNGLFOGCOORDFORMATNVPROC __glewFogCoordFormatNV = NULL;
+PFNGLGETINTEGERUI64I_VNVPROC __glewGetIntegerui64i_vNV = NULL;
+PFNGLINDEXFORMATNVPROC __glewIndexFormatNV = NULL;
+PFNGLNORMALFORMATNVPROC __glewNormalFormatNV = NULL;
+PFNGLSECONDARYCOLORFORMATNVPROC __glewSecondaryColorFormatNV = NULL;
+PFNGLTEXCOORDFORMATNVPROC __glewTexCoordFormatNV = NULL;
+PFNGLVERTEXATTRIBFORMATNVPROC __glewVertexAttribFormatNV = NULL;
+PFNGLVERTEXATTRIBIFORMATNVPROC __glewVertexAttribIFormatNV = NULL;
+PFNGLVERTEXFORMATNVPROC __glewVertexFormatNV = NULL;
+
+PFNGLAREPROGRAMSRESIDENTNVPROC __glewAreProgramsResidentNV = NULL;
+PFNGLBINDPROGRAMNVPROC __glewBindProgramNV = NULL;
+PFNGLDELETEPROGRAMSNVPROC __glewDeleteProgramsNV = NULL;
+PFNGLEXECUTEPROGRAMNVPROC __glewExecuteProgramNV = NULL;
+PFNGLGENPROGRAMSNVPROC __glewGenProgramsNV = NULL;
+PFNGLGETPROGRAMPARAMETERDVNVPROC __glewGetProgramParameterdvNV = NULL;
+PFNGLGETPROGRAMPARAMETERFVNVPROC __glewGetProgramParameterfvNV = NULL;
+PFNGLGETPROGRAMSTRINGNVPROC __glewGetProgramStringNV = NULL;
+PFNGLGETPROGRAMIVNVPROC __glewGetProgramivNV = NULL;
+PFNGLGETTRACKMATRIXIVNVPROC __glewGetTrackMatrixivNV = NULL;
+PFNGLGETVERTEXATTRIBPOINTERVNVPROC __glewGetVertexAttribPointervNV = NULL;
+PFNGLGETVERTEXATTRIBDVNVPROC __glewGetVertexAttribdvNV = NULL;
+PFNGLGETVERTEXATTRIBFVNVPROC __glewGetVertexAttribfvNV = NULL;
+PFNGLGETVERTEXATTRIBIVNVPROC __glewGetVertexAttribivNV = NULL;
+PFNGLISPROGRAMNVPROC __glewIsProgramNV = NULL;
+PFNGLLOADPROGRAMNVPROC __glewLoadProgramNV = NULL;
+PFNGLPROGRAMPARAMETER4DNVPROC __glewProgramParameter4dNV = NULL;
+PFNGLPROGRAMPARAMETER4DVNVPROC __glewProgramParameter4dvNV = NULL;
+PFNGLPROGRAMPARAMETER4FNVPROC __glewProgramParameter4fNV = NULL;
+PFNGLPROGRAMPARAMETER4FVNVPROC __glewProgramParameter4fvNV = NULL;
+PFNGLPROGRAMPARAMETERS4DVNVPROC __glewProgramParameters4dvNV = NULL;
+PFNGLPROGRAMPARAMETERS4FVNVPROC __glewProgramParameters4fvNV = NULL;
+PFNGLREQUESTRESIDENTPROGRAMSNVPROC __glewRequestResidentProgramsNV = NULL;
+PFNGLTRACKMATRIXNVPROC __glewTrackMatrixNV = NULL;
+PFNGLVERTEXATTRIB1DNVPROC __glewVertexAttrib1dNV = NULL;
+PFNGLVERTEXATTRIB1DVNVPROC __glewVertexAttrib1dvNV = NULL;
+PFNGLVERTEXATTRIB1FNVPROC __glewVertexAttrib1fNV = NULL;
+PFNGLVERTEXATTRIB1FVNVPROC __glewVertexAttrib1fvNV = NULL;
+PFNGLVERTEXATTRIB1SNVPROC __glewVertexAttrib1sNV = NULL;
+PFNGLVERTEXATTRIB1SVNVPROC __glewVertexAttrib1svNV = NULL;
+PFNGLVERTEXATTRIB2DNVPROC __glewVertexAttrib2dNV = NULL;
+PFNGLVERTEXATTRIB2DVNVPROC __glewVertexAttrib2dvNV = NULL;
+PFNGLVERTEXATTRIB2FNVPROC __glewVertexAttrib2fNV = NULL;
+PFNGLVERTEXATTRIB2FVNVPROC __glewVertexAttrib2fvNV = NULL;
+PFNGLVERTEXATTRIB2SNVPROC __glewVertexAttrib2sNV = NULL;
+PFNGLVERTEXATTRIB2SVNVPROC __glewVertexAttrib2svNV = NULL;
+PFNGLVERTEXATTRIB3DNVPROC __glewVertexAttrib3dNV = NULL;
+PFNGLVERTEXATTRIB3DVNVPROC __glewVertexAttrib3dvNV = NULL;
+PFNGLVERTEXATTRIB3FNVPROC __glewVertexAttrib3fNV = NULL;
+PFNGLVERTEXATTRIB3FVNVPROC __glewVertexAttrib3fvNV = NULL;
+PFNGLVERTEXATTRIB3SNVPROC __glewVertexAttrib3sNV = NULL;
+PFNGLVERTEXATTRIB3SVNVPROC __glewVertexAttrib3svNV = NULL;
+PFNGLVERTEXATTRIB4DNVPROC __glewVertexAttrib4dNV = NULL;
+PFNGLVERTEXATTRIB4DVNVPROC __glewVertexAttrib4dvNV = NULL;
+PFNGLVERTEXATTRIB4FNVPROC __glewVertexAttrib4fNV = NULL;
+PFNGLVERTEXATTRIB4FVNVPROC __glewVertexAttrib4fvNV = NULL;
+PFNGLVERTEXATTRIB4SNVPROC __glewVertexAttrib4sNV = NULL;
+PFNGLVERTEXATTRIB4SVNVPROC __glewVertexAttrib4svNV = NULL;
+PFNGLVERTEXATTRIB4UBNVPROC __glewVertexAttrib4ubNV = NULL;
+PFNGLVERTEXATTRIB4UBVNVPROC __glewVertexAttrib4ubvNV = NULL;
+PFNGLVERTEXATTRIBPOINTERNVPROC __glewVertexAttribPointerNV = NULL;
+PFNGLVERTEXATTRIBS1DVNVPROC __glewVertexAttribs1dvNV = NULL;
+PFNGLVERTEXATTRIBS1FVNVPROC __glewVertexAttribs1fvNV = NULL;
+PFNGLVERTEXATTRIBS1SVNVPROC __glewVertexAttribs1svNV = NULL;
+PFNGLVERTEXATTRIBS2DVNVPROC __glewVertexAttribs2dvNV = NULL;
+PFNGLVERTEXATTRIBS2FVNVPROC __glewVertexAttribs2fvNV = NULL;
+PFNGLVERTEXATTRIBS2SVNVPROC __glewVertexAttribs2svNV = NULL;
+PFNGLVERTEXATTRIBS3DVNVPROC __glewVertexAttribs3dvNV = NULL;
+PFNGLVERTEXATTRIBS3FVNVPROC __glewVertexAttribs3fvNV = NULL;
+PFNGLVERTEXATTRIBS3SVNVPROC __glewVertexAttribs3svNV = NULL;
+PFNGLVERTEXATTRIBS4DVNVPROC __glewVertexAttribs4dvNV = NULL;
+PFNGLVERTEXATTRIBS4FVNVPROC __glewVertexAttribs4fvNV = NULL;
+PFNGLVERTEXATTRIBS4SVNVPROC __glewVertexAttribs4svNV = NULL;
+PFNGLVERTEXATTRIBS4UBVNVPROC __glewVertexAttribs4ubvNV = NULL;
+
+PFNGLBEGINVIDEOCAPTURENVPROC __glewBeginVideoCaptureNV = NULL;
+PFNGLBINDVIDEOCAPTURESTREAMBUFFERNVPROC __glewBindVideoCaptureStreamBufferNV = NULL;
+PFNGLBINDVIDEOCAPTURESTREAMTEXTURENVPROC __glewBindVideoCaptureStreamTextureNV = NULL;
+PFNGLENDVIDEOCAPTURENVPROC __glewEndVideoCaptureNV = NULL;
+PFNGLGETVIDEOCAPTURESTREAMDVNVPROC __glewGetVideoCaptureStreamdvNV = NULL;
+PFNGLGETVIDEOCAPTURESTREAMFVNVPROC __glewGetVideoCaptureStreamfvNV = NULL;
+PFNGLGETVIDEOCAPTURESTREAMIVNVPROC __glewGetVideoCaptureStreamivNV = NULL;
+PFNGLGETVIDEOCAPTUREIVNVPROC __glewGetVideoCaptureivNV = NULL;
+PFNGLVIDEOCAPTURENVPROC __glewVideoCaptureNV = NULL;
+PFNGLVIDEOCAPTURESTREAMPARAMETERDVNVPROC __glewVideoCaptureStreamParameterdvNV = NULL;
+PFNGLVIDEOCAPTURESTREAMPARAMETERFVNVPROC __glewVideoCaptureStreamParameterfvNV = NULL;
+PFNGLVIDEOCAPTURESTREAMPARAMETERIVNVPROC __glewVideoCaptureStreamParameterivNV = NULL;
+
+PFNGLCLEARDEPTHFOESPROC __glewClearDepthfOES = NULL;
+PFNGLCLIPPLANEFOESPROC __glewClipPlanefOES = NULL;
+PFNGLDEPTHRANGEFOESPROC __glewDepthRangefOES = NULL;
+PFNGLFRUSTUMFOESPROC __glewFrustumfOES = NULL;
+PFNGLGETCLIPPLANEFOESPROC __glewGetClipPlanefOES = NULL;
+PFNGLORTHOFOESPROC __glewOrthofOES = NULL;
+
+PFNGLALPHAFUNCXPROC __glewAlphaFuncx = NULL;
+PFNGLCLEARCOLORXPROC __glewClearColorx = NULL;
+PFNGLCLEARDEPTHXPROC __glewClearDepthx = NULL;
+PFNGLCOLOR4XPROC __glewColor4x = NULL;
+PFNGLDEPTHRANGEXPROC __glewDepthRangex = NULL;
+PFNGLFOGXPROC __glewFogx = NULL;
+PFNGLFOGXVPROC __glewFogxv = NULL;
+PFNGLFRUSTUMFPROC __glewFrustumf = NULL;
+PFNGLFRUSTUMXPROC __glewFrustumx = NULL;
+PFNGLLIGHTMODELXPROC __glewLightModelx = NULL;
+PFNGLLIGHTMODELXVPROC __glewLightModelxv = NULL;
+PFNGLLIGHTXPROC __glewLightx = NULL;
+PFNGLLIGHTXVPROC __glewLightxv = NULL;
+PFNGLLINEWIDTHXPROC __glewLineWidthx = NULL;
+PFNGLLOADMATRIXXPROC __glewLoadMatrixx = NULL;
+PFNGLMATERIALXPROC __glewMaterialx = NULL;
+PFNGLMATERIALXVPROC __glewMaterialxv = NULL;
+PFNGLMULTMATRIXXPROC __glewMultMatrixx = NULL;
+PFNGLMULTITEXCOORD4XPROC __glewMultiTexCoord4x = NULL;
+PFNGLNORMAL3XPROC __glewNormal3x = NULL;
+PFNGLORTHOFPROC __glewOrthof = NULL;
+PFNGLORTHOXPROC __glewOrthox = NULL;
+PFNGLPOINTSIZEXPROC __glewPointSizex = NULL;
+PFNGLPOLYGONOFFSETXPROC __glewPolygonOffsetx = NULL;
+PFNGLROTATEXPROC __glewRotatex = NULL;
+PFNGLSAMPLECOVERAGEXPROC __glewSampleCoveragex = NULL;
+PFNGLSCALEXPROC __glewScalex = NULL;
+PFNGLTEXENVXPROC __glewTexEnvx = NULL;
+PFNGLTEXENVXVPROC __glewTexEnvxv = NULL;
+PFNGLTEXPARAMETERXPROC __glewTexParameterx = NULL;
+PFNGLTRANSLATEXPROC __glewTranslatex = NULL;
+
+PFNGLCLIPPLANEFPROC __glewClipPlanef = NULL;
+PFNGLCLIPPLANEXPROC __glewClipPlanex = NULL;
+PFNGLGETCLIPPLANEFPROC __glewGetClipPlanef = NULL;
+PFNGLGETCLIPPLANEXPROC __glewGetClipPlanex = NULL;
+PFNGLGETFIXEDVPROC __glewGetFixedv = NULL;
+PFNGLGETLIGHTXVPROC __glewGetLightxv = NULL;
+PFNGLGETMATERIALXVPROC __glewGetMaterialxv = NULL;
+PFNGLGETTEXENVXVPROC __glewGetTexEnvxv = NULL;
+PFNGLGETTEXPARAMETERXVPROC __glewGetTexParameterxv = NULL;
+PFNGLPOINTPARAMETERXPROC __glewPointParameterx = NULL;
+PFNGLPOINTPARAMETERXVPROC __glewPointParameterxv = NULL;
+PFNGLPOINTSIZEPOINTEROESPROC __glewPointSizePointerOES = NULL;
+PFNGLTEXPARAMETERXVPROC __glewTexParameterxv = NULL;
+
+PFNGLERRORSTRINGREGALPROC __glewErrorStringREGAL = NULL;
+
+PFNGLGETEXTENSIONREGALPROC __glewGetExtensionREGAL = NULL;
+PFNGLISSUPPORTEDREGALPROC __glewIsSupportedREGAL = NULL;
+
+PFNGLLOGMESSAGECALLBACKREGALPROC __glewLogMessageCallbackREGAL = NULL;
+
+PFNGLDETAILTEXFUNCSGISPROC __glewDetailTexFuncSGIS = NULL;
+PFNGLGETDETAILTEXFUNCSGISPROC __glewGetDetailTexFuncSGIS = NULL;
+
+PFNGLFOGFUNCSGISPROC __glewFogFuncSGIS = NULL;
+PFNGLGETFOGFUNCSGISPROC __glewGetFogFuncSGIS = NULL;
+
+PFNGLSAMPLEMASKSGISPROC __glewSampleMaskSGIS = NULL;
+PFNGLSAMPLEPATTERNSGISPROC __glewSamplePatternSGIS = NULL;
+
+PFNGLGETSHARPENTEXFUNCSGISPROC __glewGetSharpenTexFuncSGIS = NULL;
+PFNGLSHARPENTEXFUNCSGISPROC __glewSharpenTexFuncSGIS = NULL;
+
+PFNGLTEXIMAGE4DSGISPROC __glewTexImage4DSGIS = NULL;
+PFNGLTEXSUBIMAGE4DSGISPROC __glewTexSubImage4DSGIS = NULL;
+
+PFNGLGETTEXFILTERFUNCSGISPROC __glewGetTexFilterFuncSGIS = NULL;
+PFNGLTEXFILTERFUNCSGISPROC __glewTexFilterFuncSGIS = NULL;
+
+PFNGLASYNCMARKERSGIXPROC __glewAsyncMarkerSGIX = NULL;
+PFNGLDELETEASYNCMARKERSSGIXPROC __glewDeleteAsyncMarkersSGIX = NULL;
+PFNGLFINISHASYNCSGIXPROC __glewFinishAsyncSGIX = NULL;
+PFNGLGENASYNCMARKERSSGIXPROC __glewGenAsyncMarkersSGIX = NULL;
+PFNGLISASYNCMARKERSGIXPROC __glewIsAsyncMarkerSGIX = NULL;
+PFNGLPOLLASYNCSGIXPROC __glewPollAsyncSGIX = NULL;
+
+PFNGLFLUSHRASTERSGIXPROC __glewFlushRasterSGIX = NULL;
+
+PFNGLTEXTUREFOGSGIXPROC __glewTextureFogSGIX = NULL;
+
+PFNGLFRAGMENTCOLORMATERIALSGIXPROC __glewFragmentColorMaterialSGIX = NULL;
+PFNGLFRAGMENTLIGHTMODELFSGIXPROC __glewFragmentLightModelfSGIX = NULL;
+PFNGLFRAGMENTLIGHTMODELFVSGIXPROC __glewFragmentLightModelfvSGIX = NULL;
+PFNGLFRAGMENTLIGHTMODELISGIXPROC __glewFragmentLightModeliSGIX = NULL;
+PFNGLFRAGMENTLIGHTMODELIVSGIXPROC __glewFragmentLightModelivSGIX = NULL;
+PFNGLFRAGMENTLIGHTFSGIXPROC __glewFragmentLightfSGIX = NULL;
+PFNGLFRAGMENTLIGHTFVSGIXPROC __glewFragmentLightfvSGIX = NULL;
+PFNGLFRAGMENTLIGHTISGIXPROC __glewFragmentLightiSGIX = NULL;
+PFNGLFRAGMENTLIGHTIVSGIXPROC __glewFragmentLightivSGIX = NULL;
+PFNGLFRAGMENTMATERIALFSGIXPROC __glewFragmentMaterialfSGIX = NULL;
+PFNGLFRAGMENTMATERIALFVSGIXPROC __glewFragmentMaterialfvSGIX = NULL;
+PFNGLFRAGMENTMATERIALISGIXPROC __glewFragmentMaterialiSGIX = NULL;
+PFNGLFRAGMENTMATERIALIVSGIXPROC __glewFragmentMaterialivSGIX = NULL;
+PFNGLGETFRAGMENTLIGHTFVSGIXPROC __glewGetFragmentLightfvSGIX = NULL;
+PFNGLGETFRAGMENTLIGHTIVSGIXPROC __glewGetFragmentLightivSGIX = NULL;
+PFNGLGETFRAGMENTMATERIALFVSGIXPROC __glewGetFragmentMaterialfvSGIX = NULL;
+PFNGLGETFRAGMENTMATERIALIVSGIXPROC __glewGetFragmentMaterialivSGIX = NULL;
+
+PFNGLFRAMEZOOMSGIXPROC __glewFrameZoomSGIX = NULL;
+
+PFNGLPIXELTEXGENSGIXPROC __glewPixelTexGenSGIX = NULL;
+
+PFNGLREFERENCEPLANESGIXPROC __glewReferencePlaneSGIX = NULL;
+
+PFNGLSPRITEPARAMETERFSGIXPROC __glewSpriteParameterfSGIX = NULL;
+PFNGLSPRITEPARAMETERFVSGIXPROC __glewSpriteParameterfvSGIX = NULL;
+PFNGLSPRITEPARAMETERISGIXPROC __glewSpriteParameteriSGIX = NULL;
+PFNGLSPRITEPARAMETERIVSGIXPROC __glewSpriteParameterivSGIX = NULL;
+
+PFNGLTAGSAMPLEBUFFERSGIXPROC __glewTagSampleBufferSGIX = NULL;
+
+PFNGLCOLORTABLEPARAMETERFVSGIPROC __glewColorTableParameterfvSGI = NULL;
+PFNGLCOLORTABLEPARAMETERIVSGIPROC __glewColorTableParameterivSGI = NULL;
+PFNGLCOLORTABLESGIPROC __glewColorTableSGI = NULL;
+PFNGLCOPYCOLORTABLESGIPROC __glewCopyColorTableSGI = NULL;
+PFNGLGETCOLORTABLEPARAMETERFVSGIPROC __glewGetColorTableParameterfvSGI = NULL;
+PFNGLGETCOLORTABLEPARAMETERIVSGIPROC __glewGetColorTableParameterivSGI = NULL;
+PFNGLGETCOLORTABLESGIPROC __glewGetColorTableSGI = NULL;
+
+PFNGLFINISHTEXTURESUNXPROC __glewFinishTextureSUNX = NULL;
+
+PFNGLGLOBALALPHAFACTORBSUNPROC __glewGlobalAlphaFactorbSUN = NULL;
+PFNGLGLOBALALPHAFACTORDSUNPROC __glewGlobalAlphaFactordSUN = NULL;
+PFNGLGLOBALALPHAFACTORFSUNPROC __glewGlobalAlphaFactorfSUN = NULL;
+PFNGLGLOBALALPHAFACTORISUNPROC __glewGlobalAlphaFactoriSUN = NULL;
+PFNGLGLOBALALPHAFACTORSSUNPROC __glewGlobalAlphaFactorsSUN = NULL;
+PFNGLGLOBALALPHAFACTORUBSUNPROC __glewGlobalAlphaFactorubSUN = NULL;
+PFNGLGLOBALALPHAFACTORUISUNPROC __glewGlobalAlphaFactoruiSUN = NULL;
+PFNGLGLOBALALPHAFACTORUSSUNPROC __glewGlobalAlphaFactorusSUN = NULL;
+
+PFNGLREADVIDEOPIXELSSUNPROC __glewReadVideoPixelsSUN = NULL;
+
+PFNGLREPLACEMENTCODEPOINTERSUNPROC __glewReplacementCodePointerSUN = NULL;
+PFNGLREPLACEMENTCODEUBSUNPROC __glewReplacementCodeubSUN = NULL;
+PFNGLREPLACEMENTCODEUBVSUNPROC __glewReplacementCodeubvSUN = NULL;
+PFNGLREPLACEMENTCODEUISUNPROC __glewReplacementCodeuiSUN = NULL;
+PFNGLREPLACEMENTCODEUIVSUNPROC __glewReplacementCodeuivSUN = NULL;
+PFNGLREPLACEMENTCODEUSSUNPROC __glewReplacementCodeusSUN = NULL;
+PFNGLREPLACEMENTCODEUSVSUNPROC __glewReplacementCodeusvSUN = NULL;
+
+PFNGLCOLOR3FVERTEX3FSUNPROC __glewColor3fVertex3fSUN = NULL;
+PFNGLCOLOR3FVERTEX3FVSUNPROC __glewColor3fVertex3fvSUN = NULL;
+PFNGLCOLOR4FNORMAL3FVERTEX3FSUNPROC __glewColor4fNormal3fVertex3fSUN = NULL;
+PFNGLCOLOR4FNORMAL3FVERTEX3FVSUNPROC __glewColor4fNormal3fVertex3fvSUN = NULL;
+PFNGLCOLOR4UBVERTEX2FSUNPROC __glewColor4ubVertex2fSUN = NULL;
+PFNGLCOLOR4UBVERTEX2FVSUNPROC __glewColor4ubVertex2fvSUN = NULL;
+PFNGLCOLOR4UBVERTEX3FSUNPROC __glewColor4ubVertex3fSUN = NULL;
+PFNGLCOLOR4UBVERTEX3FVSUNPROC __glewColor4ubVertex3fvSUN = NULL;
+PFNGLNORMAL3FVERTEX3FSUNPROC __glewNormal3fVertex3fSUN = NULL;
+PFNGLNORMAL3FVERTEX3FVSUNPROC __glewNormal3fVertex3fvSUN = NULL;
+PFNGLREPLACEMENTCODEUICOLOR3FVERTEX3FSUNPROC __glewReplacementCodeuiColor3fVertex3fSUN = NULL;
+PFNGLREPLACEMENTCODEUICOLOR3FVERTEX3FVSUNPROC __glewReplacementCodeuiColor3fVertex3fvSUN = NULL;
+PFNGLREPLACEMENTCODEUICOLOR4FNORMAL3FVERTEX3FSUNPROC __glewReplacementCodeuiColor4fNormal3fVertex3fSUN = NULL;
+PFNGLREPLACEMENTCODEUICOLOR4FNORMAL3FVERTEX3FVSUNPROC __glewReplacementCodeuiColor4fNormal3fVertex3fvSUN = NULL;
+PFNGLREPLACEMENTCODEUICOLOR4UBVERTEX3FSUNPROC __glewReplacementCodeuiColor4ubVertex3fSUN = NULL;
+PFNGLREPLACEMENTCODEUICOLOR4UBVERTEX3FVSUNPROC __glewReplacementCodeuiColor4ubVertex3fvSUN = NULL;
+PFNGLREPLACEMENTCODEUINORMAL3FVERTEX3FSUNPROC __glewReplacementCodeuiNormal3fVertex3fSUN = NULL;
+PFNGLREPLACEMENTCODEUINORMAL3FVERTEX3FVSUNPROC __glewReplacementCodeuiNormal3fVertex3fvSUN = NULL;
+PFNGLREPLACEMENTCODEUITEXCOORD2FCOLOR4FNORMAL3FVERTEX3FSUNPROC __glewReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN = NULL;
+PFNGLREPLACEMENTCODEUITEXCOORD2FCOLOR4FNORMAL3FVERTEX3FVSUNPROC __glewReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fvSUN = NULL;
+PFNGLREPLACEMENTCODEUITEXCOORD2FNORMAL3FVERTEX3FSUNPROC __glewReplacementCodeuiTexCoord2fNormal3fVertex3fSUN = NULL;
+PFNGLREPLACEMENTCODEUITEXCOORD2FNORMAL3FVERTEX3FVSUNPROC __glewReplacementCodeuiTexCoord2fNormal3fVertex3fvSUN = NULL;
+PFNGLREPLACEMENTCODEUITEXCOORD2FVERTEX3FSUNPROC __glewReplacementCodeuiTexCoord2fVertex3fSUN = NULL;
+PFNGLREPLACEMENTCODEUITEXCOORD2FVERTEX3FVSUNPROC __glewReplacementCodeuiTexCoord2fVertex3fvSUN = NULL;
+PFNGLREPLACEMENTCODEUIVERTEX3FSUNPROC __glewReplacementCodeuiVertex3fSUN = NULL;
+PFNGLREPLACEMENTCODEUIVERTEX3FVSUNPROC __glewReplacementCodeuiVertex3fvSUN = NULL;
+PFNGLTEXCOORD2FCOLOR3FVERTEX3FSUNPROC __glewTexCoord2fColor3fVertex3fSUN = NULL;
+PFNGLTEXCOORD2FCOLOR3FVERTEX3FVSUNPROC __glewTexCoord2fColor3fVertex3fvSUN = NULL;
+PFNGLTEXCOORD2FCOLOR4FNORMAL3FVERTEX3FSUNPROC __glewTexCoord2fColor4fNormal3fVertex3fSUN = NULL;
+PFNGLTEXCOORD2FCOLOR4FNORMAL3FVERTEX3FVSUNPROC __glewTexCoord2fColor4fNormal3fVertex3fvSUN = NULL;
+PFNGLTEXCOORD2FCOLOR4UBVERTEX3FSUNPROC __glewTexCoord2fColor4ubVertex3fSUN = NULL;
+PFNGLTEXCOORD2FCOLOR4UBVERTEX3FVSUNPROC __glewTexCoord2fColor4ubVertex3fvSUN = NULL;
+PFNGLTEXCOORD2FNORMAL3FVERTEX3FSUNPROC __glewTexCoord2fNormal3fVertex3fSUN = NULL;
+PFNGLTEXCOORD2FNORMAL3FVERTEX3FVSUNPROC __glewTexCoord2fNormal3fVertex3fvSUN = NULL;
+PFNGLTEXCOORD2FVERTEX3FSUNPROC __glewTexCoord2fVertex3fSUN = NULL;
+PFNGLTEXCOORD2FVERTEX3FVSUNPROC __glewTexCoord2fVertex3fvSUN = NULL;
+PFNGLTEXCOORD4FCOLOR4FNORMAL3FVERTEX4FSUNPROC __glewTexCoord4fColor4fNormal3fVertex4fSUN = NULL;
+PFNGLTEXCOORD4FCOLOR4FNORMAL3FVERTEX4FVSUNPROC __glewTexCoord4fColor4fNormal3fVertex4fvSUN = NULL;
+PFNGLTEXCOORD4FVERTEX4FSUNPROC __glewTexCoord4fVertex4fSUN = NULL;
+PFNGLTEXCOORD4FVERTEX4FVSUNPROC __glewTexCoord4fVertex4fvSUN = NULL;
+
+PFNGLADDSWAPHINTRECTWINPROC __glewAddSwapHintRectWIN = NULL;
 
 #endif /* !WIN32 || !GLEW_MX */
 
@@ -12879,12 +10373,9 @@ GLenum  glewContextInit (GLEW_CONTEXT_ARG_DEF_LIST)
   GLint major, minor;
   /* Since we're still initializing, the `GetString' function pointer hasn't
    * been loaded yet. */
-  __glewGetString = (PFNGLGETSTRINGPROC) glewGetProcAddress(
-                      fqn_from_convention(glew_convention, "glGetString")
-                    );
-  __glewGetStringi = (PFNGLGETSTRINGIPROC) glewGetProcAddress(
-    fqn_from_convention(glew_convention, "glGetStringi")
-    );
+  __glewGetString = (PFNGLGETSTRINGPROC) glewGetProcAddress(fqn_from_convention(glew_convention, "glGetString"));
+  __glewGetStringi = (PFNGLGETSTRINGIPROC) glewGetProcAddress(fqn_from_convention(glew_convention, "glGetStringi"));
+  __glewGetIntegerv = (PFNGLGETINTEGERVPROC)glewGetProcAddress(fqn_from_convention(glew_convention, "glGetIntegerv"));
   /* query opengl version */
   s = __glewGetString(GL_VERSION);
   dot = _glewStrCLen(s, '.');
@@ -16846,9 +14337,9 @@ const GLubyte * glewGetString (GLenum name)
   static const GLubyte* _glewString[] =
   {
     (const GLubyte*)NULL,
-    (const GLubyte*)"1.9.0",
+    (const GLubyte*)"1.10.0",
     (const GLubyte*)"1",
-    (const GLubyte*)"9",
+    (const GLubyte*)"10",
     (const GLubyte*)"0"
   };
   const int max_string = sizeof(_glewString)/sizeof(*_glewString) - 1;
@@ -16867,7 +14358,7 @@ extern GLenum wglewContextInit (void);
 extern GLenum glxewContextInit (void);
 #endif /* _WIN32 */
 
-GLEWAPI GLenum glewInitLibrary (const char *name, enum GL_Library_Type lib_type,
+GLenum glewInitLibrary (const char *name, enum GL_Library_Type lib_type,
                         enum GL_Name_Convention name_conv)
 {
   glew_gl_lib = name;
@@ -16876,7 +14367,7 @@ GLEWAPI GLenum glewInitLibrary (const char *name, enum GL_Library_Type lib_type,
 
   return glewInit();
 }
-GLEWAPI GLenum glewInit ()
+GLenum glewInit ()
 {
   GLenum r;
 
@@ -16904,9 +14395,9 @@ GLEWAPI GLenum glewInit ()
 
 #endif /* !GLEW_MX */
 #ifdef GLEW_MX
-GLEWAPI GLboolean glewContextIsSupported (const GLEWContext* ctx, const char* name)
+GLboolean glewContextIsSupported (const GLEWContext* ctx, const char* name)
 #else
-GLEWAPI GLboolean glewIsSupported (const char* name)
+GLboolean glewIsSupported (const char* name)
 #endif
 {
   GLubyte* pos = (GLubyte*)name;
