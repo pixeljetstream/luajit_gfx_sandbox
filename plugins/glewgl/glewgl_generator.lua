@@ -61,7 +61,7 @@ local function processHeader(name,idir,odir,onlybinding)
   local lkenumvalue = {}
   local lkprocused = {}
   
-  local record = false
+  local record = nil
   local eol
   local first = true
   for l in FileLines(inheader) do
@@ -74,10 +74,11 @@ local function processHeader(name,idir,odir,onlybinding)
       first = false
     end
     
-    if (l:match("%/%* [%-]+ [_%w]+")) then
-      record = true
+    local ext = l:match("%/%* [%-]+ ([_%w]+)")
+    if (ext) then
+      record = ext
     elseif (l:match("%/%* [%-]+ %*%/")) then
-      record = false
+      record = nil
     elseif (l:match("#define [_%w]+ GLEW_GET_FUN")) then
       -- ignore "#define glAccum GLEW_GET_FUN(__glewAccum)"
       -- but track name
@@ -108,7 +109,7 @@ local function processHeader(name,idir,odir,onlybinding)
         else
           fndef = fndef:sub(1,-2)..' __asm__("'..mangled..'");'
         end
-        local func = {str=fndef, def=def, name = fn, mangled=mangled}
+        local func = {str=fndef, def=def, name = fn, mangled=mangled, ext=typ.ext}
         lkproc2func[pfn] = func
         table.insert(funcs, func)
         if (not WRAPPED) then
@@ -140,7 +141,7 @@ local function processHeader(name,idir,odir,onlybinding)
       local enum,value = l:match("#define ([_%w]+) ([_%w]+)")
       if (enum and value and not lkenumignore[enum]) then
         lkenumvalue[enum] = value
-        table.insert(enums,{str=enum.." = "..value..",", name=enum})
+        table.insert(enums,{str=enum.." = "..value..",", name=enum, ext=record})
       end
       
     elseif (record and l:match("^typedef .+%([%w]+%s*%*"))then
@@ -148,7 +149,7 @@ local function processHeader(name,idir,odir,onlybinding)
       --  typedef void (GLAPIENTRY * PFNGLACCUMPROC) (GLenum op, GLfloat value);
       local api,pfn = l:match("^typedef [^%(]+ %(([%w]+)%s*%*%s*([_%w]+)%)")
       local fn  = l:match("(.+;)"):gsub(api,"")
-      lkproc2type[pfn] = {str=fn, name=pfn, orig=l}
+      lkproc2type[pfn] = {str=fn, name=pfn, orig=l, ext=record}
       
     elseif (record and l:match("typedef ")) then
       -- due to different platform types, let's use the last definition
@@ -156,7 +157,7 @@ local function processHeader(name,idir,odir,onlybinding)
       local key = l:match("([_%w]+);")
       if (not lktypes[key]) then
         lktypes[key] = true
-        table.insert(types,{str=def, name=key})
+        table.insert(types,{str=def, name=key, ext=record})
       end
     end
     
@@ -172,6 +173,7 @@ local function processHeader(name,idir,odir,onlybinding)
   local lkenumexported = {}
   for i,v in ipairs(enums) do
     local enum,value = v.str:match("([_%w]+) = ([_%w]+)")
+    local ext = v.ext
     if (not lkenumexported[enum]) then
       lkenumexported[enum] = true
       local nval = lkenumvalue[value]
@@ -181,10 +183,10 @@ local function processHeader(name,idir,odir,onlybinding)
         nval = lkenumvalue[nval]
       end
       if (lval) then
-        enums[i] = {str = enum.." = "..lval..",", name = enum }
+        enums[i] = {str = enum.." = "..lval..",", name = enum, ext=ext }
       end
     else
-      enums[i] = {str ="//"..v.str, name = enum }
+      enums[i] = {str ="//"..v.str, name = enum, ext=ext }
     end
   end
   
@@ -255,12 +257,23 @@ local function generateBinding(name,odir,gl,filter,ffiraw)
   ofile:write("local ffi = require 'ffi'"..eol)
   ofile:write("ffi.cdef [["..eol)
   
+  local lksymbols = {}
+  for i,v in ipairs(gl.enums) do
+    lksymbols[v.name] = true
+  end
+  for i,v in ipairs(gl.funcs) do
+    lksymbols[v.name] = true
+  end
   
   local filtered = function(id) return true end
   if (filter) then
     local except = {
       GLint64EXT = true,
-      GLuint64EXT = true
+      GLuint64EXT = true,
+      -- funcs with different meaning
+      glVertexAttribFormatNV = true,
+      glVertexAttribIFormatNV = true,
+      glVertexAttribLFormatNV = true,
     }
     local vendors = {}
     for i,ext in ipairs(gl.exts) do
@@ -269,12 +282,18 @@ local function generateBinding(name,odir,gl,filter,ffiraw)
     end
     vendors.VERSION = nil
     
-    for cap in filter:gmatch("([%w]+)%s*,?") do
-      vendors[cap] = true
+    local extensions = {}
+    for cap in filter:gmatch("([%w_]+)%s*,?") do
+      if (cap:find("_")) then
+        extensions[cap] = true
+      else
+        vendors[cap] = true
+      end
     end
     
-    filtered = function (id,var)
-      if (not id or except[id]) then return true end
+    filtered = function (id,var,ext)
+      if (not id or except[id] or not ext) then return true end
+      
       if (var) then
         local extname = id:match("%_%_GLEW%_(%w+)%_")
         if (extname and extname ~= "VERSION") then
@@ -282,32 +301,49 @@ local function generateBinding(name,odir,gl,filter,ffiraw)
         end
       end
       
-      local suffix = id:match("[A-Z]+%s*$")
-      return (not suffix) or (vendors[suffix]== nil and true or vendors[suffix])
+      local vendor = ext and ext:match("^%w+%_(%w+)%_")
+      local baseid
+      for i,v in pairs(vendors) do
+        local length = #i
+        if (id:sub(-length,-1) == i) then
+          baseid = id:sub(1,-length-1)
+          baseid = baseid:match("(.-)_?$")
+          break
+        end
+      end
+      
+      local doexport = vendors[vendor]
+      doexport = (doexport == nil) and true or doexport
+      doexport = doexport or extensions[ext]
+      
+      -- prevent stuff that already is in core
+      if (doexport and baseid and lksymbols[baseid]) then return false end
+      
+      return doexport
     end
   end
   
   for i,v in ipairs(gl.types) do
-    local out = filtered(v.name)
+    local out = filtered(v.name,false,v.ext)
     ofile:write(out and v.str..eol or "")
   end
   ofile:write(eol)
   
   ofile:write("enum {"..eol)
   for i,v in ipairs(gl.enums) do
-    local out = filtered(v.name)
+    local out = filtered(v.name,false,v.ext)
     ofile:write(out and v.str..eol or "")
   end
   ofile:write("};"..eol..eol)
   
   for i,v in ipairs(gl.funcs) do
-    local out = filtered(v.name)
+    local out = filtered(v.name,false,v.ext)
     ofile:write(out and "extern "..v.str..eol or "")
   end
   ofile:write(eol)
   
   for i,v in ipairs(gl.vars) do
-    local out = filtered(v.name,true)
+    local out = filtered(v.name,true,v.ext)
     ofile:write(out and "extern "..v.str..eol or "")
   end
   ofile:write("]]"..eol..eol)
@@ -334,7 +370,7 @@ makebinding(
   "glewgl",
   RELPATH ("glewinput/"),
   RELPATH (""),
-  "ARB,NV,AMD,NVX",
+  "ARB,NV,AMD,NVX,KHR,GL_EXT_direct_state_access",
   true)
   
 WRAPPED = false
