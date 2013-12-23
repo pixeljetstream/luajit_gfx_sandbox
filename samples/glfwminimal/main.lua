@@ -1,18 +1,20 @@
-print "glfw-minimal-host"
+local lxpath = (os.getenv("LUXINIA2") and os.getenv("LUXINIA2").."/..") or "../../runtime"
+dofile(lxpath.."/setup_package_paths.lua")
+
+print "glfw minimal"
 
 local glfw = require "glfw"
 local ffi  = require "ffi"
 local gl   = require "glewgl"
-local svPoll = LUXGLOBAL.svPoll
 
 local function main()
   assert( glfw.glfwInit() )
   local status = glfw.glfwOpenWindow( 640, 480, 8,8,8,8,24,8, glfw.GLFW_WINDOW)
   assert( status == glfw.GLFW_TRUE )
-  glfw.glfwSetWindowTitle( "glfw-minimal-host")
+  glfw.glfwSetWindowTitle( "glfw minimal")
   gl.glewInit()
   gl.glClearColor(0.2,0.2,0.2,0)
-  local clearbits = bit.bor(bit.bor(gl.GL_COLOR_BUFFER_BIT,gl.GL_STENCIL_BUFFER_BIT),gl.GL_DEPTH_BUFFER_BIT)
+  local clearbits = bit.bor(gl.GL_COLOR_BUFFER_BIT,gl.GL_STENCIL_BUFFER_BIT,gl.GL_DEPTH_BUFFER_BIT)
 
   glfw.glfwEnable(glfw.GLFW_STICKY_KEYS)
   glfw.glfwDisable(glfw.GLFW_AUTO_POLL_EVENTS)
@@ -27,7 +29,6 @@ local function main()
 
     glfw.glfwSwapBuffers()
     glfw.glfwPollEvents()
-    svPoll()
   end
   glfw.glfwTerminate()
   os.exit(0)
