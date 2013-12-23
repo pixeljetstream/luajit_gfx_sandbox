@@ -55,7 +55,6 @@ end
 local luxplatform = true
 local luxmath  = true
 local luxcore  = true
-local luxgfx   = true
 local luxscene = true
 
 
@@ -83,28 +82,6 @@ if(luxmath) then
     content,
     "luxmath.lua",[[
 require "luxinia2.luxplatform"
-]])
-
-end
-
-if(luxgfx) then
-  local content = ""
-  content = append(content,"luxgfx/gfxtypes.h")
-  content = append(content,"luxgfx/glconfig.h")
-  content = append(content,"luxgfx/buffer.h")
-  content = append(content,"luxgfx/vertex.h")
-  content = append(content,"luxgfx/texture.h")
-  content = append(content,"luxgfx/state.h")
-  content = append(content,"luxgfx/rendertarget.h")
-  content = append(content,"luxgfx/program.h")
-  content = append(content,"luxgfx/context.h")
-  
-  export(
-    "lxg | Lux Graphics",
-    content,
-    "luxgfx.lua",[[
-require "luxinia2.luxplatform"
-require "glewgl"
 ]])
 
 end
@@ -139,8 +116,6 @@ if(luxscene) then
   local content = ""
   content = append(content,"luxscene/meshbase.h")
   content = append(content,"luxscene/meshvcacheopt.h")
-  --content = append(content,"luxscene/shader.h")
-  --content = append(content,"luxscene/drawsystem.h")
   
   export(
     "lxs | Lux Scene",
@@ -149,7 +124,6 @@ if(luxscene) then
 require "luxinia2.luxplatform"
 require "luxinia2.luxmath"
 require "luxinia2.luxcore"
-require "luxinia2.luxgfx"
 ]])
 
 end

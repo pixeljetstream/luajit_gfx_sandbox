@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="luxbackend"
 	ProjectGUID="{234C470D-17B6-452D-B817-0DBFA34C1509}"
 	RootNamespace="Library"
@@ -72,7 +72,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				UseLibraryDependencyInputs="true"
-				AdditionalDependencies="luxgfx.lib luxcore.lib luxplatform.lib luxmath.lib luxscene.lib glewgl.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x86_debug\luxbackend.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug;..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 				GenerateDebugInformation="true"
@@ -158,7 +157,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				UseLibraryDependencyInputs="true"
-				AdditionalDependencies="luxgfx.lib luxcore.lib luxplatform.lib luxmath.lib luxscene.lib glewgl.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x64_debug\luxbackend.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x64_debug\msvc9;..\..\..\depend\lib\Windows_x64_debug;..\..\..\depend\lib\Windows_x64\msvc9;..\..\..\depend\lib\Windows_x64"
 				GenerateDebugInformation="true"
@@ -249,7 +247,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				UseLibraryDependencyInputs="true"
-				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib luxplatform.lib luxscene.lib glewgl.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x86\luxbackend.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
 				ImportLibrary="..\..\..\depend\lib\Windows_x86\msvc9\$(TargetName).lib"
@@ -336,7 +333,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				UseLibraryDependencyInputs="true"
-				AdditionalDependencies="luxmath.lib luxgfx.lib luxcore.lib luxplatform.lib luxscene.lib glewgl.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x64\luxbackend.dll"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x64\msvc9;..\..\..\depend\lib\Windows_x64"
 				ImportLibrary="..\..\..\depend\lib\Windows_x64\msvc9\$(TargetName).lib"
@@ -375,10 +371,410 @@
 				RelativePath="..\..\luxbackend\main.c"
 				>
 			</File>
+			<Filter
+				Name="luxscene"
+				>
+				<File
+					RelativePath="..\..\luxscene\meshbase.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxscene\meshvcacheoptcastano.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxscene\meshvcacheoptforsyth.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxscene\meshvcacheopttipsify.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="luxmath"
+				>
+				<File
+					RelativePath="..\..\luxmath\bounding.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\fastmath.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\fastmathxmm.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\frustum.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\geometry.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\matrix34.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\matrix44.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\misc.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\quaternion.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\vector2.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\vector3.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\vector4.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxmath\xmmmath.c"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="luxcore"
+				>
+				<File
+					RelativePath="..\..\luxcore\arraymisc.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\cont_defs.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\conthash.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\contmap.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\contoctree.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\contscalararray.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\contstringmap.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\contvector.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\handlesys.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\memory_defs.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\memorybase.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\memorydlmalloc.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\memorygeneric.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\memorylist.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\memorypool.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\memorystack.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\refsys.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\sortradix.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxcore\strmisc.c"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="luxplatform"
+				>
+				<File
+					RelativePath="..\..\luxplatform\file.c"
+					>
+				</File>
+				<File
+					RelativePath="..\..\luxplatform\platform.c"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="include"
 			>
+			<Filter
+				Name="luxplatform"
+				>
+				<File
+					RelativePath="..\..\include\luxinia\luxplatform\debug.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxplatform\endian.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxplatform\file.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxplatform\luxconfig.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxplatform\luxplatform.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxplatform\luxtypes.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="luxmath"
+				>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\basetypes.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\basetypes.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\bounding.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\fastmath.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\float16.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\frustum.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\geometry.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\luxmath.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\matrix34.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\matrix44.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\misc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\quaternion.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\simdmath.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\vector2.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\vector3.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\vector4.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxmath\xmmmath.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="luxcore"
+				>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\arraymisc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\containers.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\contbitarray.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\conthash.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\contmacrolinkedlist.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\contmap.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\contoctree.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\contscalararray.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\contstringmap.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\contstringmap.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\contvector.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\contvector.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\handlesys.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\luxcore.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\memory.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\memorybase.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\memorydlmalloc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\memorygeneric.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\memorylist.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\memorypool.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\memorypool.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\memorystack.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\refsys.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\refsys.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\scalarmisc.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\sortradix.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxcore\strmisc.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="luxscene"
+				>
+				<File
+					RelativePath="..\..\include\luxinia\luxscene\luxscene.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxscene\mesh.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxscene\meshbase.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\luxinia\luxscene\meshvcacheopt.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
