@@ -7,6 +7,8 @@ local glfw = require "glfw"
 local ffi  = require "ffi"
 local gl   = require "glewgl"
 
+dofile "scratch.lua"
+
 local function main()
   assert( glfw.glfwInit() )
   local status = glfw.glfwOpenWindow( 640, 480, 8,8,8,8,24,8, glfw.GLFW_WINDOW)
@@ -26,6 +28,8 @@ local function main()
     local t = glfw.glfwGetTime()
     if( THINK ) then THINK(t) end
     gl.glClear(clearbits)
+    
+    ScratchFunc()
 
     glfw.glfwSwapBuffers()
     glfw.glfwPollEvents()

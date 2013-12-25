@@ -1,30 +1,38 @@
 Luxinia 2
 -----------------------------------
-(c) 2009-2011 by Christoph Kubisch
+(c) 2009-2013 by Christoph Kubisch
 
 webpage: http://www.luxinia.de
 contact: info@luxinia.de
 
-luxinia 2 is the successor of luxinia 1.x
+luxinia 2 is the spiritual successor of luxinia 1.x
 
-CURRENTLY HEAVILY WORK IN PROGRESS, ONLY PARTS OF
-BACKEND ARE TESTED (luxcore/luxmath) DONT USE YET
-
-The major change is that it uses luajit2.x's capability
-to call native C functions and the engine itself is 
-implemented in Lua. The backend is mostly written
-in C and should be cross-platform capable, although
-typically visual studio is used.
-
-While version 1 has more features for game purposes
-(sound, collision, particles, animation ..), 
-version 2 is designed to be a rendering sandbox and
+While version 1 was a complete game-engine with many
+features (sound, collision, particles, animation ..), 
+version 2 is designed to be an experimental sandbox and
 easier to integrate in regular Lua projects (Lua owns
 the mainloop)
 
-A related project is the wxLua based EstrelaEditor
-http://www.luxinia.de/index.php/Estrela which will
-get tightly knit with luxinia2
+Constantly work in progress, loose framework
+
+The major change is that it uses luajit2.x's capability
+to call native C functions, hence more functionality is 
+written in Lua
+
+The luxbackend is mostly written in C and should be 
+cross-platform capable, although typically visual studio
+is used. It doesn't have to be used and simply exists
+for conveniance.
+
+A related project is the wxLua based IDE Estrela
+http://www.luxinia.de/index.php/Estrela 
+now advanced and maintained by ZeroBrane
+http://studio.zerobrane.com/
+which is tightly knit with luxinia2 and allows easy
+debugging.
 
 See LICENSE for details (MIT) and 3RDPARTY for
 other libraries used in this project.
+
+A similar framework like this can be found at
+https://github.com/malkia/ufo 

@@ -6,12 +6,10 @@ Third party code/libraries:
  * GLFW
  * GLEW
  * Malkia's LuaJIT Bindings
- * Cg
  * DevIL
  * CUDA
  * ASSIMP
- * ZMQ
- * MojoShader
+  * MojoShader
  
 
 Lua License
@@ -90,26 +88,6 @@ Homepage: https://github.com/malkia/ufo
 License:  https://github.com/malkia/ufo/blob/master/COPYRIGHT
 =============================================================================
 
-Nvidia Cg 
-=============================================================================
-Copyright: © 2002-2011 NVIDIA Corporation
-Homepage: http://developer.nvidia.com/object/cg_toolkit.html
-
-Cross Platform Advanced Shading Language
-
-No Warranties. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE 
-IS PROVIDED "AS IS" AND NVIDIA AND ITS SUPPLIERS DISCLAIM ALL WARRANTIES, EITHER 
-EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF 
-MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-
-No Liability for Consequential Damages. TO THE MAXIMUM EXTENT PERMITTED BY 
-APPLICABLE LAW, IN NO EVENT SHALL NVIDIA OR ITS SUPPLIERS BE LIABLE FOR ANY 
-SPECIAL, INCIDENTAL, INDIRECT, OR CONSEQUENTIAL DAMAGES WHATSOEVER (INCLUDING, 
-WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, 
-LOSS OF BUSINESS INFORMATION, OR ANY OTHER PECUNIARY LOSS) ARISING OUT OF THE 
-USE OF OR INABILITY TO USE THE SOFTWARE, EVEN IF NVIDIA HAS BEEN ADVISED OF 
-THE POSSIBILITY OF SUCH DAMAGES.
-=============================================================================
 
 DevIL 
 =============================================================================
@@ -195,16 +173,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 =============================================================================
 
-ZMQ
-=============================================================================
-Copyright: © 2007-2011 iMatix Corporation and Contributors
-Homepage: http://www.zeromq.org/
-License:  http://www.zeromq.org/area:licensing
-
-LuaZMQ
-Copyright: © 2011 by Robert G. Jakabosky
-Homepage: https://github.com/Neopallium/lua-zmq
-=============================================================================
 
 MojoShader
 =============================================================================
