@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua5.1.lib mojoshader.lib"
+				AdditionalDependencies="lua51.lib mojoshader.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x86\clibs\mojoshader.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug;..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86\"
@@ -140,7 +140,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua5.1.lib mojoshader.lib"
+				AdditionalDependencies="lua51.lib mojoshader.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x64\clibs\mojoshader.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x64_debug\msvc9;..\..\..\depend\lib\Windows_x86_debug;..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x64\"
@@ -213,7 +213,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua5.1.lib mojoshader.lib"
+				AdditionalDependencies="lua51.lib mojoshader.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x86\clibs\mojoshader.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x86\msvc9;..\..\..\depend\lib\Windows_x86"
@@ -289,7 +289,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="lua5.1.lib mojoshader.lib"
+				AdditionalDependencies="lua51.lib mojoshader.lib"
 				OutputFile="..\..\..\runtime\bin_Windows_x64\clibs\mojoshader.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\depend\lib\Windows_x64\msvc9;..\..\..\depend\lib\Windows_x64"
