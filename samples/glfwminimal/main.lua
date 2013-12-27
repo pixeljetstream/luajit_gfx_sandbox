@@ -10,7 +10,6 @@ local gl   = require "glewgl"
 dofile "scratch.lua"
 
 local function main()
-  local run = RUNNING
   assert( glfw.glfwInit(), "glfw init" )
   local status = glfw.glfwOpenWindow( 640, 480, 8,8,8,8,24,8, glfw.GLFW_WINDOW)
   assert( status == glfw.GLFW_TRUE, "glfw win open" )
@@ -26,7 +25,7 @@ local function main()
   do
     local t = glfw.glfwGetTime()
     
-    THINK(t) end
+    THINK(t)
     
     glfw.glfwSwapBuffers()
     glfw.glfwPollEvents()
