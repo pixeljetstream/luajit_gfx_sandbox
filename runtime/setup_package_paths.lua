@@ -9,7 +9,7 @@ do
     local s = jit.os == "Windows" and ".dll" or ".so"
     local cstr = string.format(";%s/?%s;%s/?51%s;%s/?/?%s;%s/?/?51%s;",p,s,p,s,p,s,p,s)
     local lstr = string.format(";%s/?.lua;%s/?/?.lua;%s/?/init.lua;",l,l,l)
-    package.path  = package.path..lstr
-    package.cpath = package.cpath..cstr
+    package.path  = lstr..package.path
+    package.cpath = cstr..package.cpath
   end
 end
