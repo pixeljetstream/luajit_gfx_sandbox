@@ -34,10 +34,10 @@ typedef ptrdiff_t GLsizeiptrARB;
 typedef unsigned short GLhalf;
 typedef GLintptr GLvdpauSurfaceNV;
 typedef int GLclampx;
-typedef void ( *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
-typedef void ( *GLLOGPROCREGAL)(GLenum stream, GLsizei length, const GLchar *message, GLvoid *context);
-typedef void ( *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
-typedef void ( *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
+typedef void ( *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
+typedef void ( *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, void* userParam);
+typedef void ( *GLLOGPROCREGAL)(GLenum stream, GLsizei length, const GLchar *message, void *context);
+typedef void ( *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 
 enum {
 GL_ZERO = 0,
@@ -612,7 +612,6 @@ GL_UNSIGNED_SHORT_5_6_5_REV = 0x8364,
 GL_UNSIGNED_SHORT_4_4_4_4_REV = 0x8365,
 GL_UNSIGNED_SHORT_1_5_5_5_REV = 0x8366,
 GL_UNSIGNED_INT_8_8_8_8_REV = 0x8367,
-GL_UNSIGNED_INT_2_10_10_10_REV = 0x8368,
 GL_ALIASED_POINT_SIZE_RANGE = 0x846D,
 GL_ALIASED_LINE_WIDTH_RANGE = 0x846E,
 GL_MULTISAMPLE = 0x809D,
@@ -750,18 +749,18 @@ GL_DEPTH_TEXTURE_MODE = 0x884B,
 GL_TEXTURE_COMPARE_MODE = 0x884C,
 GL_TEXTURE_COMPARE_FUNC = 0x884D,
 GL_COMPARE_R_TO_TEXTURE = 0x884E,
-GL_FOG_COORD_SRC = 0x8450,
+GL_CURRENT_FOG_COORD = 0x8453,
 GL_FOG_COORD = 0x8451,
 GL_FOG_COORD_ARRAY = 0x8457,
-GL_SRC0_RGB = 0x8580,
-GL_FOG_COORD_ARRAY_POINTER = 0x8456,
-GL_FOG_COORD_ARRAY_TYPE = 0x8454,
-GL_SRC1_ALPHA = 0x8589,
-GL_CURRENT_FOG_COORD = 0x8453,
-GL_FOG_COORD_ARRAY_STRIDE = 0x8455,
-GL_SRC0_ALPHA = 0x8588,
-GL_SRC1_RGB = 0x8581,
 GL_FOG_COORD_ARRAY_BUFFER_BINDING = 0x889D,
+GL_FOG_COORD_ARRAY_POINTER = 0x8456,
+GL_FOG_COORD_ARRAY_STRIDE = 0x8455,
+GL_FOG_COORD_ARRAY_TYPE = 0x8454,
+GL_FOG_COORD_SRC = 0x8450,
+GL_SRC0_ALPHA = 0x8588,
+GL_SRC0_RGB = 0x8580,
+GL_SRC1_ALPHA = 0x8589,
+GL_SRC1_RGB = 0x8581,
 GL_SRC2_ALPHA = 0x858A,
 GL_SRC2_RGB = 0x8582,
 GL_BUFFER_SIZE = 0x8764,
@@ -907,14 +906,14 @@ GL_COMPRESSED_SRGB = 0x8C48,
 GL_COMPRESSED_SRGB_ALPHA = 0x8C49,
 GL_COMPRESSED_SLUMINANCE = 0x8C4A,
 GL_COMPRESSED_SLUMINANCE_ALPHA = 0x8C4B,
-GL_MAX_CLIP_DISTANCES = 0x0D32,
-GL_CLIP_DISTANCE5 = 0x3005,
-GL_CLIP_DISTANCE1 = 0x3001,
-GL_CLIP_DISTANCE3 = 0x3003,
-GL_COMPARE_REF_TO_TEXTURE = 0x884E,
 GL_CLIP_DISTANCE0 = 0x3000,
-GL_CLIP_DISTANCE4 = 0x3004,
+GL_CLIP_DISTANCE1 = 0x3001,
 GL_CLIP_DISTANCE2 = 0x3002,
+GL_CLIP_DISTANCE3 = 0x3003,
+GL_CLIP_DISTANCE4 = 0x3004,
+GL_CLIP_DISTANCE5 = 0x3005,
+GL_COMPARE_REF_TO_TEXTURE = 0x884E,
+GL_MAX_CLIP_DISTANCES = 0x0D32,
 GL_MAX_VARYING_COMPONENTS = 0x8B4B,
 GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT = 0x0001,
 GL_MAJOR_VERSION = 0x821B,
@@ -923,8 +922,6 @@ GL_NUM_EXTENSIONS = 0x821D,
 GL_CONTEXT_FLAGS = 0x821E,
 GL_DEPTH_BUFFER = 0x8223,
 GL_STENCIL_BUFFER = 0x8224,
-GL_COMPRESSED_RED = 0x8225,
-GL_COMPRESSED_RG = 0x8226,
 GL_RGBA32F = 0x8814,
 GL_RGB32F = 0x8815,
 GL_RGBA16F = 0x881A,
@@ -1071,19 +1068,9 @@ GL_MAX_GEOMETRY_OUTPUT_COMPONENTS = 0x9124,
 GL_MAX_FRAGMENT_INPUT_COMPONENTS = 0x9125,
 GL_CONTEXT_PROFILE_MASK = 0x9126,
 GL_VERTEX_ATTRIB_ARRAY_DIVISOR = 0x88FE,
-GL_TEXTURE_SWIZZLE_R = 0x8E42,
-GL_TEXTURE_SWIZZLE_G = 0x8E43,
-GL_TEXTURE_SWIZZLE_B = 0x8E44,
-GL_TEXTURE_SWIZZLE_A = 0x8E45,
-GL_TEXTURE_SWIZZLE_RGBA = 0x8E46,
 GL_RGB10_A2UI = 0x906F,
-GL_GEOMETRY_SHADER_INVOCATIONS = 0x887F,
 GL_SAMPLE_SHADING = 0x8C36,
 GL_MIN_SAMPLE_SHADING_VALUE = 0x8C37,
-GL_MAX_GEOMETRY_SHADER_INVOCATIONS = 0x8E5A,
-GL_MIN_FRAGMENT_INTERPOLATION_OFFSET = 0x8E5B,
-GL_MAX_FRAGMENT_INTERPOLATION_OFFSET = 0x8E5C,
-GL_FRAGMENT_INTERPOLATION_OFFSET_BITS = 0x8E5D,
 GL_MIN_PROGRAM_TEXTURE_GATHER_OFFSET = 0x8E5E,
 GL_MAX_PROGRAM_TEXTURE_GATHER_OFFSET = 0x8E5F,
 GL_MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS = 0x8F9F,
@@ -1100,7 +1087,9 @@ GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT = 0x8E8E,
 GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT = 0x8E8F,
 GL_NUM_SHADING_LANGUAGE_VERSIONS = 0x82E9,
 GL_VERTEX_ATTRIB_ARRAY_LONG = 0x874E,
+GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED = 0x8221,
 GL_MAX_VERTEX_ATTRIB_STRIDE = 0x82E5,
+GL_TEXTURE_BUFFER_BINDING = 0x8C2A,
 GL_MULTISAMPLE_3DFX = 0x86B2,
 GL_SAMPLE_BUFFERS_3DFX = 0x86B3,
 GL_SAMPLES_3DFX = 0x86B4,
@@ -1139,6 +1128,12 @@ GL_PERFORMANCE_MONITOR_AMD = 0x9152,
 GL_QUERY_OBJECT_AMD = 0x9153,
 GL_VERTEX_ARRAY_OBJECT_AMD = 0x9154,
 GL_SAMPLER_OBJECT_AMD = 0x9155,
+GL_QUERY_DEPTH_PASS_EVENT_BIT_AMD = 0x00000001,
+GL_QUERY_DEPTH_FAIL_EVENT_BIT_AMD = 0x00000002,
+GL_QUERY_STENCIL_FAIL_EVENT_BIT_AMD = 0x00000004,
+GL_QUERY_DEPTH_BOUNDS_FAIL_EVENT_BIT_AMD = 0x00000008,
+GL_OCCLUSION_QUERY_EVENT_MASK_AMD = 0x874F,
+GL_QUERY_ALL_EVENT_BITS_AMD = 0xFFFFFFFF,
 GL_COUNTER_TYPE_AMD = 0x8BC0,
 GL_COUNTER_RANGE_AMD = 0x8BC1,
 GL_UNSIGNED_INT64_AMD = 0x8BC2,
@@ -1165,6 +1160,7 @@ GL_SET_AMD = 0x874A,
 GL_REPLACE_VALUE_AMD = 0x874B,
 GL_STENCIL_OP_VALUE_AMD = 0x874C,
 GL_STENCIL_BACK_OP_VALUE_AMD = 0x874D,
+GL_STREAM_RASTERIZATION_AMD = 0x91A0,
 GL_SAMPLER_BUFFER_AMD = 0x9001,
 GL_INT_SAMPLER_BUFFER_AMD = 0x9002,
 GL_UNSIGNED_INT_SAMPLER_BUFFER_AMD = 0x9003,
@@ -1236,6 +1232,7 @@ GL_MIN_PBUFFER_VIEWPORT_DIMS_APPLE = 0x8A10,
 GL_UNSIGNED_SHORT_8_8_APPLE = 0x85BA,
 GL_UNSIGNED_SHORT_8_8_REV_APPLE = 0x85BB,
 GL_RGB_422_APPLE = 0x8A1F,
+GL_RGB_RAW_422_APPLE = 0x8A51,
 GL_PACK_ROW_BYTES_APPLE = 0x8A15,
 GL_UNPACK_ROW_BYTES_APPLE = 0x8A16,
 GL_LIGHT_MODEL_SPECULAR_VECTOR_APPLE = 0x85B0,
@@ -1313,6 +1310,12 @@ GL_BUFFER_STORAGE_FLAGS = 0x8220,
 GL_SYNC_CL_EVENT_ARB = 0x8240,
 GL_SYNC_CL_EVENT_COMPLETE_ARB = 0x8241,
 GL_CLEAR_TEXTURE = 0x9365,
+//GL_LOWER_LEFT = 0x8CA1,
+//GL_UPPER_LEFT = 0x8CA2,
+GL_CLIP_ORIGIN = 0x935C,
+GL_CLIP_DEPTH_MODE = 0x935D,
+GL_NEGATIVE_ONE_TO_ONE = 0x935E,
+GL_ZERO_TO_ONE = 0x935F,
 GL_RGBA_FLOAT_MODE_ARB = 0x8820,
 GL_CLAMP_VERTEX_COLOR_ARB = 0x891A,
 GL_CLAMP_FRAGMENT_COLOR_ARB = 0x891B,
@@ -1348,8 +1351,14 @@ GL_MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB = 0x90EB,
 GL_MAX_COMPUTE_FIXED_GROUP_SIZE_ARB = 0x91BF,
 GL_MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB = 0x9344,
 GL_MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB = 0x9345,
+GL_QUERY_WAIT_INVERTED = 0x8E17,
+GL_QUERY_NO_WAIT_INVERTED = 0x8E18,
+GL_QUERY_BY_REGION_WAIT_INVERTED = 0x8E19,
+GL_QUERY_BY_REGION_NO_WAIT_INVERTED = 0x8E1A,
 GL_COPY_READ_BUFFER = 0x8F36,
 GL_COPY_WRITE_BUFFER = 0x8F37,
+GL_MAX_CULL_DISTANCES = 0x82F9,
+GL_MAX_COMBINED_CLIP_AND_CULL_DISTANCES = 0x82FA,
 GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB = 0x8242,
 GL_DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB = 0x8243,
 GL_DEBUG_CALLBACK_FUNCTION_ARB = 0x8244,
@@ -1381,6 +1390,9 @@ GL_DEPTH_COMPONENT24_ARB = 0x81A6,
 GL_DEPTH_COMPONENT32_ARB = 0x81A7,
 GL_TEXTURE_DEPTH_SIZE_ARB = 0x884A,
 GL_DEPTH_TEXTURE_MODE_ARB = 0x884B,
+GL_TEXTURE_TARGET = 0x1006,
+GL_QUERY_TARGET = 0x82EA,
+GL_TEXTURE_BINDING = 0x82EB,
 GL_MAX_DRAW_BUFFERS_ARB = 0x8824,
 GL_DRAW_BUFFER0_ARB = 0x8825,
 GL_DRAW_BUFFER1_ARB = 0x8826,
@@ -1529,11 +1541,11 @@ GL_PROGRAM_BINARY_RETRIEVABLE_HINT = 0x8257,
 GL_PROGRAM_BINARY_LENGTH = 0x8741,
 GL_NUM_PROGRAM_BINARY_FORMATS = 0x87FE,
 GL_PROGRAM_BINARY_FORMATS = 0x87FF,
-//GL_GEOMETRY_SHADER_INVOCATIONS = 0x887F,
-//GL_MAX_GEOMETRY_SHADER_INVOCATIONS = 0x8E5A,
-//GL_MIN_FRAGMENT_INTERPOLATION_OFFSET = 0x8E5B,
-//GL_MAX_FRAGMENT_INTERPOLATION_OFFSET = 0x8E5C,
-//GL_FRAGMENT_INTERPOLATION_OFFSET_BITS = 0x8E5D,
+GL_GEOMETRY_SHADER_INVOCATIONS = 0x887F,
+GL_MAX_GEOMETRY_SHADER_INVOCATIONS = 0x8E5A,
+GL_MIN_FRAGMENT_INTERPOLATION_OFFSET = 0x8E5B,
+GL_MAX_FRAGMENT_INTERPOLATION_OFFSET = 0x8E5C,
+GL_FRAGMENT_INTERPOLATION_OFFSET_BITS = 0x8E5D,
 GL_MAX_VERTEX_STREAMS = 0x8E71,
 GL_DOUBLE_MAT2 = 0x8F46,
 GL_DOUBLE_MAT3 = 0x8F47,
@@ -1796,6 +1808,17 @@ GL_QUERY_RESULT_ARB = 0x8866,
 GL_QUERY_RESULT_AVAILABLE_ARB = 0x8867,
 GL_SAMPLES_PASSED_ARB = 0x8914,
 GL_ANY_SAMPLES_PASSED = 0x8C2F,
+GL_VERTICES_SUBMITTED_ARB = 0x82EE,
+GL_PRIMITIVES_SUBMITTED_ARB = 0x82EF,
+GL_VERTEX_SHADER_INVOCATIONS_ARB = 0x82F0,
+GL_TESS_CONTROL_SHADER_PATCHES_ARB = 0x82F1,
+GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB = 0x82F2,
+GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB = 0x82F3,
+GL_FRAGMENT_SHADER_INVOCATIONS_ARB = 0x82F4,
+GL_COMPUTE_SHADER_INVOCATIONS_ARB = 0x82F5,
+GL_CLIPPING_INPUT_PRIMITIVES_ARB = 0x82F6,
+GL_CLIPPING_OUTPUT_PRIMITIVES_ARB = 0x82F7,
+//GL_GEOMETRY_SHADER_INVOCATIONS = 0x887F,
 GL_PIXEL_PACK_BUFFER_ARB = 0x88EB,
 GL_PIXEL_UNPACK_BUFFER_ARB = 0x88EC,
 GL_PIXEL_PACK_BUFFER_BINDING_ARB = 0x88ED,
@@ -2042,6 +2065,8 @@ GL_TEXTURE_COMPARE_MODE_ARB = 0x884C,
 GL_TEXTURE_COMPARE_FUNC_ARB = 0x884D,
 GL_COMPARE_R_TO_TEXTURE_ARB = 0x884E,
 GL_TEXTURE_COMPARE_FAIL_VALUE_ARB = 0x80BF,
+GL_SPARSE_STORAGE_BIT_ARB = 0x0400,
+GL_SPARSE_BUFFER_PAGE_SIZE_ARB = 0x82F8,
 GL_VIRTUAL_PAGE_SIZE_X_ARB = 0x9195,
 GL_VIRTUAL_PAGE_SIZE_Y_ARB = 0x9196,
 GL_VIRTUAL_PAGE_SIZE_Z_ARB = 0x9197,
@@ -2224,8 +2249,8 @@ GL_PROXY_TEXTURE_RECTANGLE_ARB = 0x84F7,
 GL_MAX_RECTANGLE_TEXTURE_SIZE_ARB = 0x84F8,
 //GL_SAMPLER_2D_RECT_ARB = 0x8B63,
 //GL_SAMPLER_2D_RECT_SHADOW_ARB = 0x8B64,
-//GL_COMPRESSED_RED = 0x8225,
-//GL_COMPRESSED_RG = 0x8226,
+GL_COMPRESSED_RED = 0x8225,
+GL_COMPRESSED_RG = 0x8226,
 GL_RG = 0x8227,
 GL_RG_INTEGER = 0x8228,
 GL_R8 = 0x8229,
@@ -2252,11 +2277,11 @@ GL_RG32UI = 0x823C,
 //GL_STENCIL_INDEX = 0x1901,
 //GL_STENCIL_INDEX8 = 0x8D48,
 GL_TEXTURE_IMMUTABLE_FORMAT = 0x912F,
-//GL_TEXTURE_SWIZZLE_R = 0x8E42,
-//GL_TEXTURE_SWIZZLE_G = 0x8E43,
-//GL_TEXTURE_SWIZZLE_B = 0x8E44,
-//GL_TEXTURE_SWIZZLE_A = 0x8E45,
-//GL_TEXTURE_SWIZZLE_RGBA = 0x8E46,
+GL_TEXTURE_SWIZZLE_R = 0x8E42,
+GL_TEXTURE_SWIZZLE_G = 0x8E43,
+GL_TEXTURE_SWIZZLE_B = 0x8E44,
+GL_TEXTURE_SWIZZLE_A = 0x8E45,
+GL_TEXTURE_SWIZZLE_RGBA = 0x8E46,
 GL_TEXTURE_VIEW_MIN_LEVEL = 0x82DB,
 GL_TEXTURE_VIEW_NUM_LEVELS = 0x82DC,
 GL_TEXTURE_VIEW_MIN_LAYER = 0x82DD,
@@ -2270,6 +2295,8 @@ GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE = 0x8E24,
 GL_TRANSFORM_FEEDBACK_BINDING = 0x8E25,
 GL_MAX_TRANSFORM_FEEDBACK_BUFFERS = 0x8E70,
 //GL_MAX_VERTEX_STREAMS = 0x8E71,
+GL_TRANSFORM_FEEDBACK_OVERFLOW_ARB = 0x82EC,
+GL_TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB = 0x82ED,
 GL_TRANSPOSE_MODELVIEW_MATRIX_ARB = 0x84E3,
 GL_TRANSPOSE_PROJECTION_MATRIX_ARB = 0x84E4,
 GL_TRANSPOSE_TEXTURE_MATRIX_ARB = 0x84E5,
@@ -2316,6 +2343,7 @@ GL_VERTEX_BINDING_OFFSET = 0x82D7,
 GL_VERTEX_BINDING_STRIDE = 0x82D8,
 GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET = 0x82D9,
 GL_MAX_VERTEX_ATTRIB_BINDINGS = 0x82DA,
+GL_VERTEX_BINDING_BUFFER = 0x8F4F,
 GL_MODELVIEW0_ARB = 0x1700,
 GL_MODELVIEW1_ARB = 0x850A,
 GL_MAX_VERTEX_UNITS_ARB = 0x86A4,
@@ -2476,7 +2504,7 @@ GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS_ARB = 0x8B4D,
 GL_OBJECT_ACTIVE_ATTRIBUTES_ARB = 0x8B89,
 GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB = 0x8B8A,
 //GL_UNSIGNED_INT_10F_11F_11F_REV = 0x8C3B,
-//GL_UNSIGNED_INT_2_10_10_10_REV = 0x8368,
+GL_UNSIGNED_INT_2_10_10_10_REV = 0x8368,
 GL_INT_2_10_10_10_REV = 0x8D9F,
 //GL_DEPTH_RANGE = 0x0B70,
 //GL_VIEWPORT = 0x0BA2,
@@ -2532,13 +2560,13 @@ GL_DUDV_ATI = 0x8779,
 GL_DU8DV8_ATI = 0x877A,
 GL_BUMP_ENVMAP_ATI = 0x877B,
 GL_BUMP_TARGET_ATI = 0x877C,
-GL_RED_BIT_ATI = 0x00000001,
 GL_2X_BIT_ATI = 0x00000001,
+GL_RED_BIT_ATI = 0x00000001,
 GL_4X_BIT_ATI = 0x00000002,
-GL_GREEN_BIT_ATI = 0x00000002,
 GL_COMP_BIT_ATI = 0x00000002,
-GL_BLUE_BIT_ATI = 0x00000004,
+GL_GREEN_BIT_ATI = 0x00000002,
 GL_8X_BIT_ATI = 0x00000004,
+GL_BLUE_BIT_ATI = 0x00000004,
 GL_NEGATE_BIT_ATI = 0x00000004,
 GL_BIAS_BIT_ATI = 0x00000008,
 GL_HALF_BIT_ATI = 0x00000008,
@@ -2715,6 +2743,12 @@ GL_MAP2_BINORMAL_EXT = 0x8447,
 GL_CULL_VERTEX_EXT = 0x81AA,
 GL_CULL_VERTEX_EYE_POSITION_EXT = 0x81AB,
 GL_CULL_VERTEX_OBJECT_POSITION_EXT = 0x81AC,
+GL_PROGRAM_PIPELINE_OBJECT_EXT = 0x8A4F,
+GL_PROGRAM_OBJECT_EXT = 0x8B40,
+GL_SHADER_OBJECT_EXT = 0x8B48,
+GL_BUFFER_OBJECT_EXT = 0x9151,
+GL_QUERY_OBJECT_EXT = 0x9153,
+GL_VERTEX_ARRAY_OBJECT_EXT = 0x9154,
 GL_DEPTH_BOUNDS_TEST_EXT = 0x8890,
 GL_DEPTH_BOUNDS_EXT = 0x8891,
 GL_PROGRAM_MATRIX_EXT = 0x8E2D,
@@ -3477,6 +3511,42 @@ GL_VERTEX_ARRAY_PARALLEL_POINTERS_INTEL = 0x83F5,
 GL_NORMAL_ARRAY_PARALLEL_POINTERS_INTEL = 0x83F6,
 GL_COLOR_ARRAY_PARALLEL_POINTERS_INTEL = 0x83F7,
 GL_TEXTURE_COORD_ARRAY_PARALLEL_POINTERS_INTEL = 0x83F8,
+GL_PERFQUERY_SINGLE_CONTEXT_INTEL = 0x0000,
+GL_PERFQUERY_GLOBAL_CONTEXT_INTEL = 0x0001,
+GL_PERFQUERY_DONOT_FLUSH_INTEL = 0x83F9,
+GL_PERFQUERY_FLUSH_INTEL = 0x83FA,
+GL_PERFQUERY_WAIT_INTEL = 0x83FB,
+GL_PERFQUERY_COUNTER_EVENT_INTEL = 0x94F0,
+GL_PERFQUERY_COUNTER_DURATION_NORM_INTEL = 0x94F1,
+GL_PERFQUERY_COUNTER_DURATION_RAW_INTEL = 0x94F2,
+GL_PERFQUERY_COUNTER_THROUGHPUT_INTEL = 0x94F3,
+GL_PERFQUERY_COUNTER_RAW_INTEL = 0x94F4,
+GL_PERFQUERY_COUNTER_TIMESTAMP_INTEL = 0x94F5,
+GL_PERFQUERY_COUNTER_DATA_UINT32_INTEL = 0x94F8,
+GL_PERFQUERY_COUNTER_DATA_UINT64_INTEL = 0x94F9,
+GL_PERFQUERY_COUNTER_DATA_FLOAT_INTEL = 0x94FA,
+GL_PERFQUERY_COUNTER_DATA_DOUBLE_INTEL = 0x94FB,
+GL_PERFQUERY_COUNTER_DATA_BOOL32_INTEL = 0x94FC,
+GL_PERFQUERY_QUERY_NAME_LENGTH_MAX_INTEL = 0x94FD,
+GL_PERFQUERY_COUNTER_NAME_LENGTH_MAX_INTEL = 0x94FE,
+GL_PERFQUERY_COUNTER_DESC_LENGTH_MAX_INTEL = 0x94FF,
+GL_PERFQUERY_GPA_EXTENDED_COUNTERS_INTEL = 0x9500,
+GL_BLEND_ADVANCED_COHERENT_KHR = 0x9285,
+GL_MULTIPLY_KHR = 0x9294,
+GL_SCREEN_KHR = 0x9295,
+GL_OVERLAY_KHR = 0x9296,
+GL_DARKEN_KHR = 0x9297,
+GL_LIGHTEN_KHR = 0x9298,
+GL_COLORDODGE_KHR = 0x9299,
+GL_COLORBURN_KHR = 0x929A,
+GL_HARDLIGHT_KHR = 0x929B,
+GL_SOFTLIGHT_KHR = 0x929C,
+GL_DIFFERENCE_KHR = 0x929E,
+GL_EXCLUSION_KHR = 0x92A0,
+GL_HSL_HUE_KHR = 0x92AD,
+GL_HSL_SATURATION_KHR = 0x92AE,
+GL_HSL_COLOR_KHR = 0x92AF,
+GL_HSL_LUMINOSITY_KHR = 0x92B0,
 GL_CONTEXT_FLAG_DEBUG_BIT = 0x00000002,
 //GL_STACK_OVERFLOW = 0x0503,
 //GL_STACK_UNDERFLOW = 0x0504,
@@ -3517,6 +3587,14 @@ GL_DEBUG_SEVERITY_HIGH = 0x9146,
 GL_DEBUG_SEVERITY_MEDIUM = 0x9147,
 GL_DEBUG_SEVERITY_LOW = 0x9148,
 GL_DEBUG_OUTPUT = 0x92E0,
+GL_CONTEXT_LOST = 0x0507,
+GL_LOSE_CONTEXT_ON_RESET = 0x8252,
+GL_GUILTY_CONTEXT_RESET = 0x8253,
+GL_INNOCENT_CONTEXT_RESET = 0x8254,
+GL_UNKNOWN_CONTEXT_RESET = 0x8255,
+GL_RESET_NOTIFICATION_STRATEGY = 0x8256,
+GL_NO_RESET_NOTIFICATION = 0x8261,
+GL_CONTEXT_ROBUST_ACCESS = 0x90F3,
 GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 0x93B0,
 GL_COMPRESSED_RGBA_ASTC_5x4_KHR = 0x93B1,
 GL_COMPRESSED_RGBA_ASTC_5x5_KHR = 0x93B2,
@@ -3545,6 +3623,34 @@ GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR = 0x93DA,
 GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = 0x93DB,
 GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = 0x93DC,
 GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = 0x93DD,
+//GL_COMPRESSED_RGBA_ASTC_4x4_KHR = 0x93B0,
+//GL_COMPRESSED_RGBA_ASTC_5x4_KHR = 0x93B1,
+//GL_COMPRESSED_RGBA_ASTC_5x5_KHR = 0x93B2,
+//GL_COMPRESSED_RGBA_ASTC_6x5_KHR = 0x93B3,
+//GL_COMPRESSED_RGBA_ASTC_6x6_KHR = 0x93B4,
+//GL_COMPRESSED_RGBA_ASTC_8x5_KHR = 0x93B5,
+//GL_COMPRESSED_RGBA_ASTC_8x6_KHR = 0x93B6,
+//GL_COMPRESSED_RGBA_ASTC_8x8_KHR = 0x93B7,
+//GL_COMPRESSED_RGBA_ASTC_10x5_KHR = 0x93B8,
+//GL_COMPRESSED_RGBA_ASTC_10x6_KHR = 0x93B9,
+//GL_COMPRESSED_RGBA_ASTC_10x8_KHR = 0x93BA,
+//GL_COMPRESSED_RGBA_ASTC_10x10_KHR = 0x93BB,
+//GL_COMPRESSED_RGBA_ASTC_12x10_KHR = 0x93BC,
+//GL_COMPRESSED_RGBA_ASTC_12x12_KHR = 0x93BD,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR = 0x93D0,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR = 0x93D1,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR = 0x93D2,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR = 0x93D3,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR = 0x93D4,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR = 0x93D5,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR = 0x93D6,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR = 0x93D7,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR = 0x93D8,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR = 0x93D9,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR = 0x93DA,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR = 0x93DB,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR = 0x93DC,
+//GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR = 0x93DD,
 GL_KTX_FRONT_REGION = 0x0,
 GL_KTX_BACK_REGION = 0x1,
 GL_KTX_Z_REGION = 0x2,
@@ -3564,6 +3670,10 @@ GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX = 0x9048,
 GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX = 0x9049,
 GL_GPU_MEMORY_INFO_EVICTION_COUNT_NVX = 0x904A,
 GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX = 0x904B,
+GL_XOR_NV = 0x1506,
+GL_RED_NV = 0x1903,
+GL_GREEN_NV = 0x1904,
+GL_BLUE_NV = 0x1905,
 GL_BLEND_PREMULTIPLIED_SRC_NV = 0x9280,
 GL_BLEND_OVERLAP_NV = 0x9281,
 GL_UNCORRELATED_NV = 0x9282,
@@ -3768,8 +3878,8 @@ GL_GLYPH_HEIGHT_BIT_NV = 0x02,
 GL_ITALIC_BIT_NV = 0x02,
 GL_MOVE_TO_NV = 0x02,
 GL_RELATIVE_MOVE_TO_NV = 0x03,
-GL_LINE_TO_NV = 0x04,
 GL_GLYPH_HORIZONTAL_BEARING_X_BIT_NV = 0x04,
+GL_LINE_TO_NV = 0x04,
 GL_RELATIVE_LINE_TO_NV = 0x05,
 GL_HORIZONTAL_LINE_TO_NV = 0x06,
 GL_RELATIVE_HORIZONTAL_LINE_TO_NV = 0x07,
@@ -3961,6 +4071,9 @@ GL_PER_STAGE_CONSTANTS_NV = 0x8535,
 GL_BUFFER_GPU_ADDRESS_NV = 0x8F1D,
 GL_GPU_ADDRESS_NV = 0x8F34,
 GL_MAX_SHADER_BUFFER_ADDRESS_NV = 0x8F35,
+GL_WARP_SIZE_NV = 0x9339,
+GL_WARPS_PER_SM_NV = 0x933A,
+GL_SM_COUNT_NV = 0x933B,
 GL_MAX_PROGRAM_PATCH_ATTRIBS_NV = 0x86D8,
 GL_TESS_CONTROL_PROGRAM_NV = 0x891E,
 GL_TESS_EVALUATION_PROGRAM_NV = 0x891F,
@@ -3998,8 +4111,8 @@ GL_OFFSET_TEXTURE_2D_MATRIX_NV = 0x86E1,
 GL_OFFSET_TEXTURE_MATRIX_NV = 0x86E1,
 GL_OFFSET_TEXTURE_2D_SCALE_NV = 0x86E2,
 GL_OFFSET_TEXTURE_SCALE_NV = 0x86E2,
-GL_OFFSET_TEXTURE_BIAS_NV = 0x86E3,
 GL_OFFSET_TEXTURE_2D_BIAS_NV = 0x86E3,
+GL_OFFSET_TEXTURE_BIAS_NV = 0x86E3,
 GL_PREVIOUS_TEXTURE_INPUT_NV = 0x86E4,
 GL_CONST_EYE_NV = 0x86E5,
 GL_PASS_THROUGH_NV = 0x86E6,
@@ -4130,6 +4243,9 @@ GL_TRANSFORM_FEEDBACK_NV = 0x8E22,
 GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV = 0x8E23,
 GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV = 0x8E24,
 GL_TRANSFORM_FEEDBACK_BINDING_NV = 0x8E25,
+GL_UNIFORM_BUFFER_UNIFIED_NV = 0x936E,
+GL_UNIFORM_BUFFER_ADDRESS_NV = 0x936F,
+GL_UNIFORM_BUFFER_LENGTH_NV = 0x9370,
 GL_SURFACE_STATE_NV = 0x86EB,
 GL_SURFACE_REGISTERED_NV = 0x86FD,
 GL_SURFACE_MAPPED_NV = 0x8700,
@@ -4432,9 +4548,9 @@ GL_DEPTH_COMPONENT24_SGIX = 0x81A6,
 GL_DEPTH_COMPONENT32_SGIX = 0x81A7,
 GL_FOG_OFFSET_SGIX = 0x8198,
 GL_FOG_OFFSET_VALUE_SGIX = 0x8199,
-GL_TEXTURE_FOG_SGIX = 0,
 GL_FOG_PATCHY_FACTOR_SGIX = 0,
 GL_FRAGMENT_FOG_SGIX = 0,
+GL_TEXTURE_FOG_SGIX = 0,
 GL_INTERLACE_SGIX = 0x8094,
 GL_PACK_RESAMPLE_SGIX = 0x842E,
 GL_UNPACK_RESAMPLE_SGIX = 0x842F,
@@ -4882,18 +4998,18 @@ extern void ( * glVertex4sv) (const GLshort *v) __asm__("__glewVertex4sv");
 extern void ( * glVertexPointer) (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewVertexPointer");
 extern void ( * glViewport) (GLint x, GLint y, GLsizei width, GLsizei height) __asm__("__glewViewport");
 extern void ( * glCopyTexSubImage3D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) __asm__("__glewCopyTexSubImage3D");
-extern void ( * glDrawRangeElements) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices) __asm__("__glewDrawRangeElements");
-extern void ( * glTexImage3D) (GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTexImage3D");
-extern void ( * glTexSubImage3D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTexSubImage3D");
+extern void ( * glDrawRangeElements) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices) __asm__("__glewDrawRangeElements");
+extern void ( * glTexImage3D) (GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels) __asm__("__glewTexImage3D");
+extern void ( * glTexSubImage3D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels) __asm__("__glewTexSubImage3D");
 extern void ( * glActiveTexture) (GLenum texture) __asm__("__glewActiveTexture");
 extern void ( * glClientActiveTexture) (GLenum texture) __asm__("__glewClientActiveTexture");
-extern void ( * glCompressedTexImage1D) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexImage1D");
-extern void ( * glCompressedTexImage2D) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexImage2D");
-extern void ( * glCompressedTexImage3D) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexImage3D");
-extern void ( * glCompressedTexSubImage1D) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexSubImage1D");
-extern void ( * glCompressedTexSubImage2D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexSubImage2D");
-extern void ( * glCompressedTexSubImage3D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexSubImage3D");
-extern void ( * glGetCompressedTexImage) (GLenum target, GLint lod, GLvoid *img) __asm__("__glewGetCompressedTexImage");
+extern void ( * glCompressedTexImage1D) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexImage1D");
+extern void ( * glCompressedTexImage2D) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexImage2D");
+extern void ( * glCompressedTexImage3D) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexImage3D");
+extern void ( * glCompressedTexSubImage1D) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexSubImage1D");
+extern void ( * glCompressedTexSubImage2D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexSubImage2D");
+extern void ( * glCompressedTexSubImage3D) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexSubImage3D");
+extern void ( * glGetCompressedTexImage) (GLenum target, GLint lod, void *img) __asm__("__glewGetCompressedTexImage");
 extern void ( * glLoadTransposeMatrixd) (const GLdouble m[16]) __asm__("__glewLoadTransposeMatrixd");
 extern void ( * glLoadTransposeMatrixf) (const GLfloat m[16]) __asm__("__glewLoadTransposeMatrixf");
 extern void ( * glMultTransposeMatrixd) (const GLdouble m[16]) __asm__("__glewMultTransposeMatrixd");
@@ -4934,13 +5050,13 @@ extern void ( * glSampleCoverage) (GLclampf value, GLboolean invert) __asm__("__
 extern void ( * glBlendColor) (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha) __asm__("__glewBlendColor");
 extern void ( * glBlendEquation) (GLenum mode) __asm__("__glewBlendEquation");
 extern void ( * glBlendFuncSeparate) (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha) __asm__("__glewBlendFuncSeparate");
-extern void ( * glFogCoordPointer) (GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewFogCoordPointer");
+extern void ( * glFogCoordPointer) (GLenum type, GLsizei stride, const void *pointer) __asm__("__glewFogCoordPointer");
 extern void ( * glFogCoordd) (GLdouble coord) __asm__("__glewFogCoordd");
 extern void ( * glFogCoorddv) (const GLdouble *coord) __asm__("__glewFogCoorddv");
 extern void ( * glFogCoordf) (GLfloat coord) __asm__("__glewFogCoordf");
 extern void ( * glFogCoordfv) (const GLfloat *coord) __asm__("__glewFogCoordfv");
 extern void ( * glMultiDrawArrays) (GLenum mode, const GLint *first, const GLsizei *count, GLsizei drawcount) __asm__("__glewMultiDrawArrays");
-extern void ( * glMultiDrawElements) (GLenum mode, const GLsizei *count, GLenum type, const GLvoid **indices, GLsizei drawcount) __asm__("__glewMultiDrawElements");
+extern void ( * glMultiDrawElements) (GLenum mode, const GLsizei *count, GLenum type, const void *const* indices, GLsizei drawcount) __asm__("__glewMultiDrawElements");
 extern void ( * glPointParameterf) (GLenum pname, GLfloat param) __asm__("__glewPointParameterf");
 extern void ( * glPointParameterfv) (GLenum pname, const GLfloat *params) __asm__("__glewPointParameterfv");
 extern void ( * glPointParameteri) (GLenum pname, GLint param) __asm__("__glewPointParameteri");
@@ -4961,7 +5077,7 @@ extern void ( * glSecondaryColor3ui) (GLuint red, GLuint green, GLuint blue) __a
 extern void ( * glSecondaryColor3uiv) (const GLuint *v) __asm__("__glewSecondaryColor3uiv");
 extern void ( * glSecondaryColor3us) (GLushort red, GLushort green, GLushort blue) __asm__("__glewSecondaryColor3us");
 extern void ( * glSecondaryColor3usv) (const GLushort *v) __asm__("__glewSecondaryColor3usv");
-extern void ( * glSecondaryColorPointer) (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewSecondaryColorPointer");
+extern void ( * glSecondaryColorPointer) (GLint size, GLenum type, GLsizei stride, const void *pointer) __asm__("__glewSecondaryColorPointer");
 extern void ( * glWindowPos2d) (GLdouble x, GLdouble y) __asm__("__glewWindowPos2d");
 extern void ( * glWindowPos2dv) (const GLdouble *p) __asm__("__glewWindowPos2dv");
 extern void ( * glWindowPos2f) (GLfloat x, GLfloat y) __asm__("__glewWindowPos2f");
@@ -4980,35 +5096,35 @@ extern void ( * glWindowPos3s) (GLshort x, GLshort y, GLshort z) __asm__("__glew
 extern void ( * glWindowPos3sv) (const GLshort *p) __asm__("__glewWindowPos3sv");
 extern void ( * glBeginQuery) (GLenum target, GLuint id) __asm__("__glewBeginQuery");
 extern void ( * glBindBuffer) (GLenum target, GLuint buffer) __asm__("__glewBindBuffer");
-extern void ( * glBufferData) (GLenum target, GLsizeiptr size, const GLvoid* data, GLenum usage) __asm__("__glewBufferData");
-extern void ( * glBufferSubData) (GLenum target, GLintptr offset, GLsizeiptr size, const GLvoid* data) __asm__("__glewBufferSubData");
+extern void ( * glBufferData) (GLenum target, GLsizeiptr size, const void* data, GLenum usage) __asm__("__glewBufferData");
+extern void ( * glBufferSubData) (GLenum target, GLintptr offset, GLsizeiptr size, const void* data) __asm__("__glewBufferSubData");
 extern void ( * glDeleteBuffers) (GLsizei n, const GLuint* buffers) __asm__("__glewDeleteBuffers");
 extern void ( * glDeleteQueries) (GLsizei n, const GLuint* ids) __asm__("__glewDeleteQueries");
 extern void ( * glEndQuery) (GLenum target) __asm__("__glewEndQuery");
 extern void ( * glGenBuffers) (GLsizei n, GLuint* buffers) __asm__("__glewGenBuffers");
 extern void ( * glGenQueries) (GLsizei n, GLuint* ids) __asm__("__glewGenQueries");
 extern void ( * glGetBufferParameteriv) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetBufferParameteriv");
-extern void ( * glGetBufferPointerv) (GLenum target, GLenum pname, GLvoid** params) __asm__("__glewGetBufferPointerv");
-extern void ( * glGetBufferSubData) (GLenum target, GLintptr offset, GLsizeiptr size, GLvoid* data) __asm__("__glewGetBufferSubData");
+extern void ( * glGetBufferPointerv) (GLenum target, GLenum pname, void** params) __asm__("__glewGetBufferPointerv");
+extern void ( * glGetBufferSubData) (GLenum target, GLintptr offset, GLsizeiptr size, void* data) __asm__("__glewGetBufferSubData");
 extern void ( * glGetQueryObjectiv) (GLuint id, GLenum pname, GLint* params) __asm__("__glewGetQueryObjectiv");
 extern void ( * glGetQueryObjectuiv) (GLuint id, GLenum pname, GLuint* params) __asm__("__glewGetQueryObjectuiv");
 extern void ( * glGetQueryiv) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetQueryiv");
 extern GLboolean ( * glIsBuffer) (GLuint buffer) __asm__("__glewIsBuffer");
 extern GLboolean ( * glIsQuery) (GLuint id) __asm__("__glewIsQuery");
-extern GLvoid* ( * glMapBuffer) (GLenum target, GLenum access) __asm__("__glewMapBuffer");
+extern void* ( * glMapBuffer) (GLenum target, GLenum access) __asm__("__glewMapBuffer");
 extern GLboolean ( * glUnmapBuffer) (GLenum target) __asm__("__glewUnmapBuffer");
 extern void ( * glAttachShader) (GLuint program, GLuint shader) __asm__("__glewAttachShader");
 extern void ( * glBindAttribLocation) (GLuint program, GLuint index, const GLchar* name) __asm__("__glewBindAttribLocation");
-extern void ( * glBlendEquationSeparate) (GLenum, GLenum) __asm__("__glewBlendEquationSeparate");
+extern void ( * glBlendEquationSeparate) (GLenum modeRGB, GLenum modeAlpha) __asm__("__glewBlendEquationSeparate");
 extern void ( * glCompileShader) (GLuint shader) __asm__("__glewCompileShader");
 extern GLuint ( * glCreateProgram) (void) __asm__("__glewCreateProgram");
 extern GLuint ( * glCreateShader) (GLenum type) __asm__("__glewCreateShader");
 extern void ( * glDeleteProgram) (GLuint program) __asm__("__glewDeleteProgram");
 extern void ( * glDeleteShader) (GLuint shader) __asm__("__glewDeleteShader");
 extern void ( * glDetachShader) (GLuint program, GLuint shader) __asm__("__glewDetachShader");
-extern void ( * glDisableVertexAttribArray) (GLuint) __asm__("__glewDisableVertexAttribArray");
+extern void ( * glDisableVertexAttribArray) (GLuint index) __asm__("__glewDisableVertexAttribArray");
 extern void ( * glDrawBuffers) (GLsizei n, const GLenum* bufs) __asm__("__glewDrawBuffers");
-extern void ( * glEnableVertexAttribArray) (GLuint) __asm__("__glewEnableVertexAttribArray");
+extern void ( * glEnableVertexAttribArray) (GLuint index) __asm__("__glewEnableVertexAttribArray");
 extern void ( * glGetActiveAttrib) (GLuint program, GLuint index, GLsizei maxLength, GLsizei* length, GLint* size, GLenum* type, GLchar* name) __asm__("__glewGetActiveAttrib");
 extern void ( * glGetActiveUniform) (GLuint program, GLuint index, GLsizei maxLength, GLsizei* length, GLint* size, GLenum* type, GLchar* name) __asm__("__glewGetActiveUniform");
 extern void ( * glGetAttachedShaders) (GLuint program, GLsizei maxCount, GLsizei* count, GLuint* shaders) __asm__("__glewGetAttachedShaders");
@@ -5021,16 +5137,16 @@ extern void ( * glGetShaderiv) (GLuint shader, GLenum pname, GLint* param) __asm
 extern GLint ( * glGetUniformLocation) (GLuint program, const GLchar* name) __asm__("__glewGetUniformLocation");
 extern void ( * glGetUniformfv) (GLuint program, GLint location, GLfloat* params) __asm__("__glewGetUniformfv");
 extern void ( * glGetUniformiv) (GLuint program, GLint location, GLint* params) __asm__("__glewGetUniformiv");
-extern void ( * glGetVertexAttribPointerv) (GLuint, GLenum, GLvoid**) __asm__("__glewGetVertexAttribPointerv");
-extern void ( * glGetVertexAttribdv) (GLuint, GLenum, GLdouble*) __asm__("__glewGetVertexAttribdv");
-extern void ( * glGetVertexAttribfv) (GLuint, GLenum, GLfloat*) __asm__("__glewGetVertexAttribfv");
-extern void ( * glGetVertexAttribiv) (GLuint, GLenum, GLint*) __asm__("__glewGetVertexAttribiv");
+extern void ( * glGetVertexAttribPointerv) (GLuint index, GLenum pname, void** pointer) __asm__("__glewGetVertexAttribPointerv");
+extern void ( * glGetVertexAttribdv) (GLuint index, GLenum pname, GLdouble* params) __asm__("__glewGetVertexAttribdv");
+extern void ( * glGetVertexAttribfv) (GLuint index, GLenum pname, GLfloat* params) __asm__("__glewGetVertexAttribfv");
+extern void ( * glGetVertexAttribiv) (GLuint index, GLenum pname, GLint* params) __asm__("__glewGetVertexAttribiv");
 extern GLboolean ( * glIsProgram) (GLuint program) __asm__("__glewIsProgram");
 extern GLboolean ( * glIsShader) (GLuint shader) __asm__("__glewIsShader");
 extern void ( * glLinkProgram) (GLuint program) __asm__("__glewLinkProgram");
-extern void ( * glShaderSource) (GLuint shader, GLsizei count, const GLchar** strings, const GLint* lengths) __asm__("__glewShaderSource");
+extern void ( * glShaderSource) (GLuint shader, GLsizei count, const GLchar *const* string, const GLint* length) __asm__("__glewShaderSource");
 extern void ( * glStencilFuncSeparate) (GLenum frontfunc, GLenum backfunc, GLint ref, GLuint mask) __asm__("__glewStencilFuncSeparate");
-extern void ( * glStencilMaskSeparate) (GLenum, GLuint) __asm__("__glewStencilMaskSeparate");
+extern void ( * glStencilMaskSeparate) (GLenum face, GLuint mask) __asm__("__glewStencilMaskSeparate");
 extern void ( * glStencilOpSeparate) (GLenum face, GLenum sfail, GLenum dpfail, GLenum dppass) __asm__("__glewStencilOpSeparate");
 extern void ( * glUniform1f) (GLint location, GLfloat v0) __asm__("__glewUniform1f");
 extern void ( * glUniform1fv) (GLint location, GLsizei count, const GLfloat* value) __asm__("__glewUniform1fv");
@@ -5089,75 +5205,75 @@ extern void ( * glVertexAttrib4sv) (GLuint index, const GLshort* v) __asm__("__g
 extern void ( * glVertexAttrib4ubv) (GLuint index, const GLubyte* v) __asm__("__glewVertexAttrib4ubv");
 extern void ( * glVertexAttrib4uiv) (GLuint index, const GLuint* v) __asm__("__glewVertexAttrib4uiv");
 extern void ( * glVertexAttrib4usv) (GLuint index, const GLushort* v) __asm__("__glewVertexAttrib4usv");
-extern void ( * glVertexAttribPointer) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* pointer) __asm__("__glewVertexAttribPointer");
+extern void ( * glVertexAttribPointer) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void* pointer) __asm__("__glewVertexAttribPointer");
 extern void ( * glUniformMatrix2x3fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) __asm__("__glewUniformMatrix2x3fv");
 extern void ( * glUniformMatrix2x4fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) __asm__("__glewUniformMatrix2x4fv");
 extern void ( * glUniformMatrix3x2fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) __asm__("__glewUniformMatrix3x2fv");
 extern void ( * glUniformMatrix3x4fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) __asm__("__glewUniformMatrix3x4fv");
 extern void ( * glUniformMatrix4x2fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) __asm__("__glewUniformMatrix4x2fv");
 extern void ( * glUniformMatrix4x3fv) (GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) __asm__("__glewUniformMatrix4x3fv");
-extern void ( * glBeginConditionalRender) (GLuint, GLenum) __asm__("__glewBeginConditionalRender");
-extern void ( * glBeginTransformFeedback) (GLenum) __asm__("__glewBeginTransformFeedback");
-extern void ( * glBindFragDataLocation) (GLuint, GLuint, const GLchar*) __asm__("__glewBindFragDataLocation");
-extern void ( * glClampColor) (GLenum, GLenum) __asm__("__glewClampColor");
-extern void ( * glClearBufferfi) (GLenum, GLint, GLfloat, GLint) __asm__("__glewClearBufferfi");
-extern void ( * glClearBufferfv) (GLenum, GLint, const GLfloat*) __asm__("__glewClearBufferfv");
-extern void ( * glClearBufferiv) (GLenum, GLint, const GLint*) __asm__("__glewClearBufferiv");
-extern void ( * glClearBufferuiv) (GLenum, GLint, const GLuint*) __asm__("__glewClearBufferuiv");
-extern void ( * glColorMaski) (GLuint, GLboolean, GLboolean, GLboolean, GLboolean) __asm__("__glewColorMaski");
-extern void ( * glDisablei) (GLenum, GLuint) __asm__("__glewDisablei");
-extern void ( * glEnablei) (GLenum, GLuint) __asm__("__glewEnablei");
+extern void ( * glBeginConditionalRender) (GLuint id, GLenum mode) __asm__("__glewBeginConditionalRender");
+extern void ( * glBeginTransformFeedback) (GLenum primitiveMode) __asm__("__glewBeginTransformFeedback");
+extern void ( * glBindFragDataLocation) (GLuint program, GLuint colorNumber, const GLchar* name) __asm__("__glewBindFragDataLocation");
+extern void ( * glClampColor) (GLenum target, GLenum clamp) __asm__("__glewClampColor");
+extern void ( * glClearBufferfi) (GLenum buffer, GLint drawBuffer, GLfloat depth, GLint stencil) __asm__("__glewClearBufferfi");
+extern void ( * glClearBufferfv) (GLenum buffer, GLint drawBuffer, const GLfloat* value) __asm__("__glewClearBufferfv");
+extern void ( * glClearBufferiv) (GLenum buffer, GLint drawBuffer, const GLint* value) __asm__("__glewClearBufferiv");
+extern void ( * glClearBufferuiv) (GLenum buffer, GLint drawBuffer, const GLuint* value) __asm__("__glewClearBufferuiv");
+extern void ( * glColorMaski) (GLuint buf, GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha) __asm__("__glewColorMaski");
+extern void ( * glDisablei) (GLenum cap, GLuint index) __asm__("__glewDisablei");
+extern void ( * glEnablei) (GLenum cap, GLuint index) __asm__("__glewEnablei");
 extern void ( * glEndConditionalRender) (void) __asm__("__glewEndConditionalRender");
 extern void ( * glEndTransformFeedback) (void) __asm__("__glewEndTransformFeedback");
-extern void ( * glGetBooleani_v) (GLenum, GLuint, GLboolean*) __asm__("__glewGetBooleani_v");
-extern GLint ( * glGetFragDataLocation) (GLuint, const GLchar*) __asm__("__glewGetFragDataLocation");
-extern const GLubyte* ( * glGetStringi) (GLenum, GLuint) __asm__("__glewGetStringi");
-extern void ( * glGetTexParameterIiv) (GLenum, GLenum, GLint*) __asm__("__glewGetTexParameterIiv");
-extern void ( * glGetTexParameterIuiv) (GLenum, GLenum, GLuint*) __asm__("__glewGetTexParameterIuiv");
-extern void ( * glGetTransformFeedbackVarying) (GLuint, GLuint, GLsizei, GLsizei *, GLsizei *, GLenum *, GLchar *) __asm__("__glewGetTransformFeedbackVarying");
-extern void ( * glGetUniformuiv) (GLuint, GLint, GLuint*) __asm__("__glewGetUniformuiv");
-extern void ( * glGetVertexAttribIiv) (GLuint, GLenum, GLint*) __asm__("__glewGetVertexAttribIiv");
-extern void ( * glGetVertexAttribIuiv) (GLuint, GLenum, GLuint*) __asm__("__glewGetVertexAttribIuiv");
-extern GLboolean ( * glIsEnabledi) (GLenum, GLuint) __asm__("__glewIsEnabledi");
-extern void ( * glTexParameterIiv) (GLenum, GLenum, const GLint*) __asm__("__glewTexParameterIiv");
-extern void ( * glTexParameterIuiv) (GLenum, GLenum, const GLuint*) __asm__("__glewTexParameterIuiv");
-extern void ( * glTransformFeedbackVaryings) (GLuint, GLsizei, const GLchar **, GLenum) __asm__("__glewTransformFeedbackVaryings");
-extern void ( * glUniform1ui) (GLint, GLuint) __asm__("__glewUniform1ui");
-extern void ( * glUniform1uiv) (GLint, GLsizei, const GLuint*) __asm__("__glewUniform1uiv");
-extern void ( * glUniform2ui) (GLint, GLuint, GLuint) __asm__("__glewUniform2ui");
-extern void ( * glUniform2uiv) (GLint, GLsizei, const GLuint*) __asm__("__glewUniform2uiv");
-extern void ( * glUniform3ui) (GLint, GLuint, GLuint, GLuint) __asm__("__glewUniform3ui");
-extern void ( * glUniform3uiv) (GLint, GLsizei, const GLuint*) __asm__("__glewUniform3uiv");
-extern void ( * glUniform4ui) (GLint, GLuint, GLuint, GLuint, GLuint) __asm__("__glewUniform4ui");
-extern void ( * glUniform4uiv) (GLint, GLsizei, const GLuint*) __asm__("__glewUniform4uiv");
-extern void ( * glVertexAttribI1i) (GLuint, GLint) __asm__("__glewVertexAttribI1i");
-extern void ( * glVertexAttribI1iv) (GLuint, const GLint*) __asm__("__glewVertexAttribI1iv");
-extern void ( * glVertexAttribI1ui) (GLuint, GLuint) __asm__("__glewVertexAttribI1ui");
-extern void ( * glVertexAttribI1uiv) (GLuint, const GLuint*) __asm__("__glewVertexAttribI1uiv");
-extern void ( * glVertexAttribI2i) (GLuint, GLint, GLint) __asm__("__glewVertexAttribI2i");
-extern void ( * glVertexAttribI2iv) (GLuint, const GLint*) __asm__("__glewVertexAttribI2iv");
-extern void ( * glVertexAttribI2ui) (GLuint, GLuint, GLuint) __asm__("__glewVertexAttribI2ui");
-extern void ( * glVertexAttribI2uiv) (GLuint, const GLuint*) __asm__("__glewVertexAttribI2uiv");
-extern void ( * glVertexAttribI3i) (GLuint, GLint, GLint, GLint) __asm__("__glewVertexAttribI3i");
-extern void ( * glVertexAttribI3iv) (GLuint, const GLint*) __asm__("__glewVertexAttribI3iv");
-extern void ( * glVertexAttribI3ui) (GLuint, GLuint, GLuint, GLuint) __asm__("__glewVertexAttribI3ui");
-extern void ( * glVertexAttribI3uiv) (GLuint, const GLuint*) __asm__("__glewVertexAttribI3uiv");
-extern void ( * glVertexAttribI4bv) (GLuint, const GLbyte*) __asm__("__glewVertexAttribI4bv");
-extern void ( * glVertexAttribI4i) (GLuint, GLint, GLint, GLint, GLint) __asm__("__glewVertexAttribI4i");
-extern void ( * glVertexAttribI4iv) (GLuint, const GLint*) __asm__("__glewVertexAttribI4iv");
-extern void ( * glVertexAttribI4sv) (GLuint, const GLshort*) __asm__("__glewVertexAttribI4sv");
-extern void ( * glVertexAttribI4ubv) (GLuint, const GLubyte*) __asm__("__glewVertexAttribI4ubv");
-extern void ( * glVertexAttribI4ui) (GLuint, GLuint, GLuint, GLuint, GLuint) __asm__("__glewVertexAttribI4ui");
-extern void ( * glVertexAttribI4uiv) (GLuint, const GLuint*) __asm__("__glewVertexAttribI4uiv");
-extern void ( * glVertexAttribI4usv) (GLuint, const GLushort*) __asm__("__glewVertexAttribI4usv");
-extern void ( * glVertexAttribIPointer) (GLuint, GLint, GLenum, GLsizei, const GLvoid*) __asm__("__glewVertexAttribIPointer");
-extern void ( * glDrawArraysInstanced) (GLenum, GLint, GLsizei, GLsizei) __asm__("__glewDrawArraysInstanced");
-extern void ( * glDrawElementsInstanced) (GLenum, GLsizei, GLenum, const GLvoid*, GLsizei) __asm__("__glewDrawElementsInstanced");
-extern void ( * glPrimitiveRestartIndex) (GLuint) __asm__("__glewPrimitiveRestartIndex");
-extern void ( * glTexBuffer) (GLenum, GLenum, GLuint) __asm__("__glewTexBuffer");
-extern void ( * glFramebufferTexture) (GLenum, GLenum, GLuint, GLint) __asm__("__glewFramebufferTexture");
-extern void ( * glGetBufferParameteri64v) (GLenum, GLenum, GLint64 *) __asm__("__glewGetBufferParameteri64v");
-extern void ( * glGetInteger64i_v) (GLenum, GLuint, GLint64 *) __asm__("__glewGetInteger64i_v");
+extern void ( * glGetBooleani_v) (GLenum pname, GLuint index, GLboolean* data) __asm__("__glewGetBooleani_v");
+extern GLint ( * glGetFragDataLocation) (GLuint program, const GLchar* name) __asm__("__glewGetFragDataLocation");
+extern const GLubyte* ( * glGetStringi) (GLenum name, GLuint index) __asm__("__glewGetStringi");
+extern void ( * glGetTexParameterIiv) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetTexParameterIiv");
+extern void ( * glGetTexParameterIuiv) (GLenum target, GLenum pname, GLuint* params) __asm__("__glewGetTexParameterIuiv");
+extern void ( * glGetTransformFeedbackVarying) (GLuint program, GLuint index, GLsizei bufSize, GLsizei * length, GLsizei * size, GLenum * type, GLchar * name) __asm__("__glewGetTransformFeedbackVarying");
+extern void ( * glGetUniformuiv) (GLuint program, GLint location, GLuint* params) __asm__("__glewGetUniformuiv");
+extern void ( * glGetVertexAttribIiv) (GLuint index, GLenum pname, GLint* params) __asm__("__glewGetVertexAttribIiv");
+extern void ( * glGetVertexAttribIuiv) (GLuint index, GLenum pname, GLuint* params) __asm__("__glewGetVertexAttribIuiv");
+extern GLboolean ( * glIsEnabledi) (GLenum cap, GLuint index) __asm__("__glewIsEnabledi");
+extern void ( * glTexParameterIiv) (GLenum target, GLenum pname, const GLint* params) __asm__("__glewTexParameterIiv");
+extern void ( * glTexParameterIuiv) (GLenum target, GLenum pname, const GLuint* params) __asm__("__glewTexParameterIuiv");
+extern void ( * glTransformFeedbackVaryings) (GLuint program, GLsizei count, const GLchar *const* varyings, GLenum bufferMode) __asm__("__glewTransformFeedbackVaryings");
+extern void ( * glUniform1ui) (GLint location, GLuint v0) __asm__("__glewUniform1ui");
+extern void ( * glUniform1uiv) (GLint location, GLsizei count, const GLuint* value) __asm__("__glewUniform1uiv");
+extern void ( * glUniform2ui) (GLint location, GLuint v0, GLuint v1) __asm__("__glewUniform2ui");
+extern void ( * glUniform2uiv) (GLint location, GLsizei count, const GLuint* value) __asm__("__glewUniform2uiv");
+extern void ( * glUniform3ui) (GLint location, GLuint v0, GLuint v1, GLuint v2) __asm__("__glewUniform3ui");
+extern void ( * glUniform3uiv) (GLint location, GLsizei count, const GLuint* value) __asm__("__glewUniform3uiv");
+extern void ( * glUniform4ui) (GLint location, GLuint v0, GLuint v1, GLuint v2, GLuint v3) __asm__("__glewUniform4ui");
+extern void ( * glUniform4uiv) (GLint location, GLsizei count, const GLuint* value) __asm__("__glewUniform4uiv");
+extern void ( * glVertexAttribI1i) (GLuint index, GLint v0) __asm__("__glewVertexAttribI1i");
+extern void ( * glVertexAttribI1iv) (GLuint index, const GLint* v0) __asm__("__glewVertexAttribI1iv");
+extern void ( * glVertexAttribI1ui) (GLuint index, GLuint v0) __asm__("__glewVertexAttribI1ui");
+extern void ( * glVertexAttribI1uiv) (GLuint index, const GLuint* v0) __asm__("__glewVertexAttribI1uiv");
+extern void ( * glVertexAttribI2i) (GLuint index, GLint v0, GLint v1) __asm__("__glewVertexAttribI2i");
+extern void ( * glVertexAttribI2iv) (GLuint index, const GLint* v0) __asm__("__glewVertexAttribI2iv");
+extern void ( * glVertexAttribI2ui) (GLuint index, GLuint v0, GLuint v1) __asm__("__glewVertexAttribI2ui");
+extern void ( * glVertexAttribI2uiv) (GLuint index, const GLuint* v0) __asm__("__glewVertexAttribI2uiv");
+extern void ( * glVertexAttribI3i) (GLuint index, GLint v0, GLint v1, GLint v2) __asm__("__glewVertexAttribI3i");
+extern void ( * glVertexAttribI3iv) (GLuint index, const GLint* v0) __asm__("__glewVertexAttribI3iv");
+extern void ( * glVertexAttribI3ui) (GLuint index, GLuint v0, GLuint v1, GLuint v2) __asm__("__glewVertexAttribI3ui");
+extern void ( * glVertexAttribI3uiv) (GLuint index, const GLuint* v0) __asm__("__glewVertexAttribI3uiv");
+extern void ( * glVertexAttribI4bv) (GLuint index, const GLbyte* v0) __asm__("__glewVertexAttribI4bv");
+extern void ( * glVertexAttribI4i) (GLuint index, GLint v0, GLint v1, GLint v2, GLint v3) __asm__("__glewVertexAttribI4i");
+extern void ( * glVertexAttribI4iv) (GLuint index, const GLint* v0) __asm__("__glewVertexAttribI4iv");
+extern void ( * glVertexAttribI4sv) (GLuint index, const GLshort* v0) __asm__("__glewVertexAttribI4sv");
+extern void ( * glVertexAttribI4ubv) (GLuint index, const GLubyte* v0) __asm__("__glewVertexAttribI4ubv");
+extern void ( * glVertexAttribI4ui) (GLuint index, GLuint v0, GLuint v1, GLuint v2, GLuint v3) __asm__("__glewVertexAttribI4ui");
+extern void ( * glVertexAttribI4uiv) (GLuint index, const GLuint* v0) __asm__("__glewVertexAttribI4uiv");
+extern void ( * glVertexAttribI4usv) (GLuint index, const GLushort* v0) __asm__("__glewVertexAttribI4usv");
+extern void ( * glVertexAttribIPointer) (GLuint index, GLint size, GLenum type, GLsizei stride, const void*pointer) __asm__("__glewVertexAttribIPointer");
+extern void ( * glDrawArraysInstanced) (GLenum mode, GLint first, GLsizei count, GLsizei primcount) __asm__("__glewDrawArraysInstanced");
+extern void ( * glDrawElementsInstanced) (GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount) __asm__("__glewDrawElementsInstanced");
+extern void ( * glPrimitiveRestartIndex) (GLuint buffer) __asm__("__glewPrimitiveRestartIndex");
+extern void ( * glTexBuffer) (GLenum target, GLenum internalFormat, GLuint buffer) __asm__("__glewTexBuffer");
+extern void ( * glFramebufferTexture) (GLenum target, GLenum attachment, GLuint texture, GLint level) __asm__("__glewFramebufferTexture");
+extern void ( * glGetBufferParameteri64v) (GLenum target, GLenum value, GLint64 * data) __asm__("__glewGetBufferParameteri64v");
+extern void ( * glGetInteger64i_v) (GLenum pname, GLuint index, GLint64 * data) __asm__("__glewGetInteger64i_v");
 extern void ( * glVertexAttribDivisor) (GLuint index, GLuint divisor) __asm__("__glewVertexAttribDivisor");
 extern void ( * glBlendEquationSeparatei) (GLuint buf, GLenum modeRGB, GLenum modeAlpha) __asm__("__glewBlendEquationSeparatei");
 extern void ( * glBlendEquationi) (GLuint buf, GLenum mode) __asm__("__glewBlendEquationi");
@@ -5165,7 +5281,7 @@ extern void ( * glBlendFuncSeparatei) (GLuint buf, GLenum srcRGB, GLenum dstRGB,
 extern void ( * glBlendFunci) (GLuint buf, GLenum src, GLenum dst) __asm__("__glewBlendFunci");
 extern void ( * glMinSampleShading) (GLclampf value) __asm__("__glewMinSampleShading");
 extern void ( * glTbufferMask3DFX) (GLuint mask) __asm__("__glewTbufferMask3DFX");
-extern void ( * glDebugMessageCallbackAMD) (GLDEBUGPROCAMD callback, void* userParam) __asm__("__glewDebugMessageCallbackAMD");
+extern void ( * glDebugMessageCallbackAMD) (GLDEBUGPROCAMD callback, void *userParam) __asm__("__glewDebugMessageCallbackAMD");
 extern void ( * glDebugMessageEnableAMD) (GLenum category, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled) __asm__("__glewDebugMessageEnableAMD");
 extern void ( * glDebugMessageInsertAMD) (GLenum category, GLenum severity, GLuint id, GLsizei length, const GLchar* buf) __asm__("__glewDebugMessageInsertAMD");
 extern GLuint ( * glGetDebugMessageLogAMD) (GLuint count, GLsizei bufsize, GLenum* categories, GLuint* severities, GLuint* ids, GLsizei* lengths, GLchar* message) __asm__("__glewGetDebugMessageLogAMD");
@@ -5174,17 +5290,18 @@ extern void ( * glBlendEquationSeparateIndexedAMD) (GLuint buf, GLenum modeRGB, 
 extern void ( * glBlendFuncIndexedAMD) (GLuint buf, GLenum src, GLenum dst) __asm__("__glewBlendFuncIndexedAMD");
 extern void ( * glBlendFuncSeparateIndexedAMD) (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha) __asm__("__glewBlendFuncSeparateIndexedAMD");
 extern void ( * glVertexAttribParameteriAMD) (GLuint index, GLenum pname, GLint param) __asm__("__glewVertexAttribParameteriAMD");
-extern void ( * glMultiDrawArraysIndirectAMD) (GLenum mode, const void* indirect, GLsizei primcount, GLsizei stride) __asm__("__glewMultiDrawArraysIndirectAMD");
-extern void ( * glMultiDrawElementsIndirectAMD) (GLenum mode, GLenum type, const void* indirect, GLsizei primcount, GLsizei stride) __asm__("__glewMultiDrawElementsIndirectAMD");
+extern void ( * glMultiDrawArraysIndirectAMD) (GLenum mode, const void *indirect, GLsizei primcount, GLsizei stride) __asm__("__glewMultiDrawArraysIndirectAMD");
+extern void ( * glMultiDrawElementsIndirectAMD) (GLenum mode, GLenum type, const void *indirect, GLsizei primcount, GLsizei stride) __asm__("__glewMultiDrawElementsIndirectAMD");
 extern void ( * glDeleteNamesAMD) (GLenum identifier, GLuint num, const GLuint* names) __asm__("__glewDeleteNamesAMD");
 extern void ( * glGenNamesAMD) (GLenum identifier, GLuint num, GLuint* names) __asm__("__glewGenNamesAMD");
 extern GLboolean ( * glIsNameAMD) (GLenum identifier, GLuint name) __asm__("__glewIsNameAMD");
+extern void ( * glQueryObjectParameteruiAMD) (GLenum target, GLuint id, GLenum pname, GLuint param) __asm__("__glewQueryObjectParameteruiAMD");
 extern void ( * glBeginPerfMonitorAMD) (GLuint monitor) __asm__("__glewBeginPerfMonitorAMD");
 extern void ( * glDeletePerfMonitorsAMD) (GLsizei n, GLuint* monitors) __asm__("__glewDeletePerfMonitorsAMD");
 extern void ( * glEndPerfMonitorAMD) (GLuint monitor) __asm__("__glewEndPerfMonitorAMD");
 extern void ( * glGenPerfMonitorsAMD) (GLsizei n, GLuint* monitors) __asm__("__glewGenPerfMonitorsAMD");
 extern void ( * glGetPerfMonitorCounterDataAMD) (GLuint monitor, GLenum pname, GLsizei dataSize, GLuint* data, GLint *bytesWritten) __asm__("__glewGetPerfMonitorCounterDataAMD");
-extern void ( * glGetPerfMonitorCounterInfoAMD) (GLuint group, GLuint counter, GLenum pname, void* data) __asm__("__glewGetPerfMonitorCounterInfoAMD");
+extern void ( * glGetPerfMonitorCounterInfoAMD) (GLuint group, GLuint counter, GLenum pname, void *data) __asm__("__glewGetPerfMonitorCounterInfoAMD");
 extern void ( * glGetPerfMonitorCounterStringAMD) (GLuint group, GLuint counter, GLsizei bufSize, GLsizei* length, GLchar *counterString) __asm__("__glewGetPerfMonitorCounterStringAMD");
 extern void ( * glGetPerfMonitorCountersAMD) (GLuint group, GLint* numCounters, GLint *maxActiveCounters, GLsizei countersSize, GLuint *counters) __asm__("__glewGetPerfMonitorCountersAMD");
 extern void ( * glGetPerfMonitorGroupStringAMD) (GLuint group, GLsizei bufSize, GLsizei* length, GLchar *groupString) __asm__("__glewGetPerfMonitorGroupStringAMD");
@@ -5199,7 +5316,7 @@ extern void ( * glTessellationModeAMD) (GLenum mode) __asm__("__glewTessellation
 extern void ( * glBlitFramebufferANGLE) (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) __asm__("__glewBlitFramebufferANGLE");
 extern void ( * glRenderbufferStorageMultisampleANGLE) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height) __asm__("__glewRenderbufferStorageMultisampleANGLE");
 extern void ( * glDrawArraysInstancedANGLE) (GLenum mode, GLint first, GLsizei count, GLsizei primcount) __asm__("__glewDrawArraysInstancedANGLE");
-extern void ( * glDrawElementsInstancedANGLE) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount) __asm__("__glewDrawElementsInstancedANGLE");
+extern void ( * glDrawElementsInstancedANGLE) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount) __asm__("__glewDrawElementsInstancedANGLE");
 extern void ( * glVertexAttribDivisorANGLE) (GLuint index, GLuint divisor) __asm__("__glewVertexAttribDivisorANGLE");
 extern void ( * glBeginQueryANGLE) (GLenum target, GLuint id) __asm__("__glewBeginQueryANGLE");
 extern void ( * glDeleteQueriesANGLE) (GLsizei n, const GLuint* ids) __asm__("__glewDeleteQueriesANGLE");
@@ -5215,7 +5332,7 @@ extern void ( * glQueryCounterANGLE) (GLuint id, GLenum target) __asm__("__glewQ
 extern void ( * glGetTranslatedShaderSourceANGLE) (GLuint shader, GLsizei bufsize, GLsizei* length, GLchar* source) __asm__("__glewGetTranslatedShaderSourceANGLE");
 extern void ( * glDrawElementArrayAPPLE) (GLenum mode, GLint first, GLsizei count) __asm__("__glewDrawElementArrayAPPLE");
 extern void ( * glDrawRangeElementArrayAPPLE) (GLenum mode, GLuint start, GLuint end, GLint first, GLsizei count) __asm__("__glewDrawRangeElementArrayAPPLE");
-extern void ( * glElementPointerAPPLE) (GLenum type, const GLvoid *pointer) __asm__("__glewElementPointerAPPLE");
+extern void ( * glElementPointerAPPLE) (GLenum type, const void *pointer) __asm__("__glewElementPointerAPPLE");
 extern void ( * glMultiDrawElementArrayAPPLE) (GLenum mode, const GLint* first, const GLsizei *count, GLsizei primcount) __asm__("__glewMultiDrawElementArrayAPPLE");
 extern void ( * glMultiDrawRangeElementArrayAPPLE) (GLenum mode, GLuint start, GLuint end, const GLint* first, const GLsizei *count, GLsizei primcount) __asm__("__glewMultiDrawRangeElementArrayAPPLE");
 extern void ( * glDeleteFencesAPPLE) (GLsizei n, const GLuint* fences) __asm__("__glewDeleteFencesAPPLE");
@@ -5231,15 +5348,15 @@ extern void ( * glFlushMappedBufferRangeAPPLE) (GLenum target, GLintptr offset, 
 extern void ( * glGetObjectParameterivAPPLE) (GLenum objectType, GLuint name, GLenum pname, GLint* params) __asm__("__glewGetObjectParameterivAPPLE");
 extern GLenum ( * glObjectPurgeableAPPLE) (GLenum objectType, GLuint name, GLenum option) __asm__("__glewObjectPurgeableAPPLE");
 extern GLenum ( * glObjectUnpurgeableAPPLE) (GLenum objectType, GLuint name, GLenum option) __asm__("__glewObjectUnpurgeableAPPLE");
-extern void ( * glGetTexParameterPointervAPPLE) (GLenum target, GLenum pname, GLvoid **params) __asm__("__glewGetTexParameterPointervAPPLE");
-extern void ( * glTextureRangeAPPLE) (GLenum target, GLsizei length, GLvoid *pointer) __asm__("__glewTextureRangeAPPLE");
+extern void ( * glGetTexParameterPointervAPPLE) (GLenum target, GLenum pname, void **params) __asm__("__glewGetTexParameterPointervAPPLE");
+extern void ( * glTextureRangeAPPLE) (GLenum target, GLsizei length, void *pointer) __asm__("__glewTextureRangeAPPLE");
 extern void ( * glBindVertexArrayAPPLE) (GLuint array) __asm__("__glewBindVertexArrayAPPLE");
 extern void ( * glDeleteVertexArraysAPPLE) (GLsizei n, const GLuint* arrays) __asm__("__glewDeleteVertexArraysAPPLE");
 extern void ( * glGenVertexArraysAPPLE) (GLsizei n, const GLuint* arrays) __asm__("__glewGenVertexArraysAPPLE");
 extern GLboolean ( * glIsVertexArrayAPPLE) (GLuint array) __asm__("__glewIsVertexArrayAPPLE");
-extern void ( * glFlushVertexArrayRangeAPPLE) (GLsizei length, GLvoid *pointer) __asm__("__glewFlushVertexArrayRangeAPPLE");
+extern void ( * glFlushVertexArrayRangeAPPLE) (GLsizei length, void *pointer) __asm__("__glewFlushVertexArrayRangeAPPLE");
 extern void ( * glVertexArrayParameteriAPPLE) (GLenum pname, GLint param) __asm__("__glewVertexArrayParameteriAPPLE");
-extern void ( * glVertexArrayRangeAPPLE) (GLsizei length, GLvoid *pointer) __asm__("__glewVertexArrayRangeAPPLE");
+extern void ( * glVertexArrayRangeAPPLE) (GLsizei length, void *pointer) __asm__("__glewVertexArrayRangeAPPLE");
 extern void ( * glDisableVertexAttribAPPLE) (GLuint index, GLenum pname) __asm__("__glewDisableVertexAttribAPPLE");
 extern void ( * glEnableVertexAttribAPPLE) (GLuint index, GLenum pname) __asm__("__glewEnableVertexAttribAPPLE");
 extern GLboolean ( * glIsVertexAttribEnabledAPPLE) (GLuint index, GLenum pname) __asm__("__glewIsVertexAttribEnabledAPPLE");
@@ -5251,10 +5368,11 @@ extern void ( * glClearDepthf) (GLclampf d) __asm__("__glewClearDepthf");
 extern void ( * glDepthRangef) (GLclampf n, GLclampf f) __asm__("__glewDepthRangef");
 extern void ( * glGetShaderPrecisionFormat) (GLenum shadertype, GLenum precisiontype, GLint* range, GLint *precision) __asm__("__glewGetShaderPrecisionFormat");
 extern void ( * glReleaseShaderCompiler) (void) __asm__("__glewReleaseShaderCompiler");
-extern void ( * glShaderBinary) (GLsizei count, const GLuint* shaders, GLenum binaryformat, const GLvoid*binary, GLsizei length) __asm__("__glewShaderBinary");
+extern void ( * glShaderBinary) (GLsizei count, const GLuint* shaders, GLenum binaryformat, const void*binary, GLsizei length) __asm__("__glewShaderBinary");
+extern void ( * glMemoryBarrierByRegion) (GLbitfield barriers) __asm__("__glewMemoryBarrierByRegion");
 extern void ( * glDrawArraysInstancedBaseInstance) (GLenum mode, GLint first, GLsizei count, GLsizei primcount, GLuint baseinstance) __asm__("__glewDrawArraysInstancedBaseInstance");
-extern void ( * glDrawElementsInstancedBaseInstance) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLuint baseinstance) __asm__("__glewDrawElementsInstancedBaseInstance");
-extern void ( * glDrawElementsInstancedBaseVertexBaseInstance) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex, GLuint baseinstance) __asm__("__glewDrawElementsInstancedBaseVertexBaseInstance");
+extern void ( * glDrawElementsInstancedBaseInstance) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount, GLuint baseinstance) __asm__("__glewDrawElementsInstancedBaseInstance");
+extern void ( * glDrawElementsInstancedBaseVertexBaseInstance) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount, GLint basevertex, GLuint baseinstance) __asm__("__glewDrawElementsInstancedBaseVertexBaseInstance");
 extern GLuint64 ( * glGetImageHandleARB) (GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format) __asm__("__glewGetImageHandleARB");
 extern GLuint64 ( * glGetTextureHandleARB) (GLuint texture) __asm__("__glewGetTextureHandleARB");
 extern GLuint64 ( * glGetTextureSamplerHandleARB) (GLuint texture, GLuint sampler) __asm__("__glewGetTextureSamplerHandleARB");
@@ -5273,36 +5391,130 @@ extern void ( * glVertexAttribL1ui64ARB) (GLuint index, GLuint64EXT x) __asm__("
 extern void ( * glVertexAttribL1ui64vARB) (GLuint index, const GLuint64EXT* v) __asm__("__glewVertexAttribL1ui64vARB");
 extern void ( * glBindFragDataLocationIndexed) (GLuint program, GLuint colorNumber, GLuint index, const GLchar * name) __asm__("__glewBindFragDataLocationIndexed");
 extern GLint ( * glGetFragDataIndex) (GLuint program, const GLchar * name) __asm__("__glewGetFragDataIndex");
-extern void ( * glBufferStorage) (GLenum target, GLsizeiptr size, const GLvoid* data, GLbitfield flags) __asm__("__glewBufferStorage");
-extern void ( * glNamedBufferStorageEXT) (GLuint buffer, GLsizeiptr size, const GLvoid* data, GLbitfield flags) __asm__("__glewNamedBufferStorageEXT");
+extern void ( * glBufferStorage) (GLenum target, GLsizeiptr size, const void *data, GLbitfield flags) __asm__("__glewBufferStorage");
+extern void ( * glNamedBufferStorageEXT) (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags) __asm__("__glewNamedBufferStorageEXT");
 extern GLsync ( * glCreateSyncFromCLeventARB) (cl_context context, cl_event event, GLbitfield flags) __asm__("__glewCreateSyncFromCLeventARB");
-extern void ( * glClearBufferData) (GLenum target, GLenum internalformat, GLenum format, GLenum type, const GLvoid* data) __asm__("__glewClearBufferData");
-extern void ( * glClearBufferSubData) (GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid* data) __asm__("__glewClearBufferSubData");
-extern void ( * glClearNamedBufferDataEXT) (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const GLvoid* data) __asm__("__glewClearNamedBufferDataEXT");
-extern void ( * glClearNamedBufferSubDataEXT) (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const GLvoid* data) __asm__("__glewClearNamedBufferSubDataEXT");
-extern void ( * glClearTexImage) (GLuint texture, GLint level, GLenum format, GLenum type, const GLvoid* data) __asm__("__glewClearTexImage");
-extern void ( * glClearTexSubImage) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid* data) __asm__("__glewClearTexSubImage");
+extern void ( * glClearBufferData) (GLenum target, GLenum internalformat, GLenum format, GLenum type, const void *data) __asm__("__glewClearBufferData");
+extern void ( * glClearBufferSubData) (GLenum target, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data) __asm__("__glewClearBufferSubData");
+extern void ( * glClearNamedBufferDataEXT) (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data) __asm__("__glewClearNamedBufferDataEXT");
+extern void ( * glClearNamedBufferSubDataEXT) (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data) __asm__("__glewClearNamedBufferSubDataEXT");
+extern void ( * glClearTexImage) (GLuint texture, GLint level, GLenum format, GLenum type, const void *data) __asm__("__glewClearTexImage");
+extern void ( * glClearTexSubImage) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *data) __asm__("__glewClearTexSubImage");
+extern void ( * glClipControl) (GLenum origin, GLenum depth) __asm__("__glewClipControl");
 extern void ( * glClampColorARB) (GLenum target, GLenum clamp) __asm__("__glewClampColorARB");
 extern void ( * glDispatchCompute) (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z) __asm__("__glewDispatchCompute");
 extern void ( * glDispatchComputeIndirect) (GLintptr indirect) __asm__("__glewDispatchComputeIndirect");
 extern void ( * glDispatchComputeGroupSizeARB) (GLuint num_groups_x, GLuint num_groups_y, GLuint num_groups_z, GLuint group_size_x, GLuint group_size_y, GLuint group_size_z) __asm__("__glewDispatchComputeGroupSizeARB");
 extern void ( * glCopyBufferSubData) (GLenum readtarget, GLenum writetarget, GLintptr readoffset, GLintptr writeoffset, GLsizeiptr size) __asm__("__glewCopyBufferSubData");
 extern void ( * glCopyImageSubData) (GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth) __asm__("__glewCopyImageSubData");
-extern void ( * glDebugMessageCallbackARB) (GLDEBUGPROCARB callback, const GLvoid *userParam) __asm__("__glewDebugMessageCallbackARB");
+extern void ( * glDebugMessageCallbackARB) (GLDEBUGPROCARB callback, const void *userParam) __asm__("__glewDebugMessageCallbackARB");
 extern void ( * glDebugMessageControlARB) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled) __asm__("__glewDebugMessageControlARB");
 extern void ( * glDebugMessageInsertARB) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* buf) __asm__("__glewDebugMessageInsertARB");
-extern GLuint ( * glGetDebugMessageLogARB) (GLuint count, GLsizei bufsize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, GLchar* messageLog) __asm__("__glewGetDebugMessageLogARB");
+extern GLuint ( * glGetDebugMessageLogARB) (GLuint count, GLsizei bufSize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, GLchar* messageLog) __asm__("__glewGetDebugMessageLogARB");
+extern void ( * glBindTextureUnit) (GLuint unit, GLuint texture) __asm__("__glewBindTextureUnit");
+extern void ( * glBlitNamedFramebuffer) (GLuint readFramebuffer, GLuint drawFramebuffer, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) __asm__("__glewBlitNamedFramebuffer");
+extern GLenum ( * glCheckNamedFramebufferStatus) (GLuint framebuffer, GLenum target) __asm__("__glewCheckNamedFramebufferStatus");
+extern void ( * glClearNamedBufferData) (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data) __asm__("__glewClearNamedBufferData");
+extern void ( * glClearNamedBufferSubData) (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data) __asm__("__glewClearNamedBufferSubData");
+extern void ( * glClearNamedFramebufferfi) (GLuint framebuffer, GLenum buffer, GLfloat depth, GLint stencil) __asm__("__glewClearNamedFramebufferfi");
+extern void ( * glClearNamedFramebufferfv) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLfloat* value) __asm__("__glewClearNamedFramebufferfv");
+extern void ( * glClearNamedFramebufferiv) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLint* value) __asm__("__glewClearNamedFramebufferiv");
+extern void ( * glClearNamedFramebufferuiv) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLuint* value) __asm__("__glewClearNamedFramebufferuiv");
+extern void ( * glCompressedTextureSubImage1D) (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureSubImage1D");
+extern void ( * glCompressedTextureSubImage2D) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureSubImage2D");
+extern void ( * glCompressedTextureSubImage3D) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureSubImage3D");
+extern void ( * glCopyNamedBufferSubData) (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size) __asm__("__glewCopyNamedBufferSubData");
+extern void ( * glCopyTextureSubImage1D) (GLuint texture, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) __asm__("__glewCopyTextureSubImage1D");
+extern void ( * glCopyTextureSubImage2D) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint x, GLint y, GLsizei width, GLsizei height) __asm__("__glewCopyTextureSubImage2D");
+extern void ( * glCopyTextureSubImage3D) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) __asm__("__glewCopyTextureSubImage3D");
+extern void ( * glCreateBuffers) (GLsizei n, GLuint* buffers) __asm__("__glewCreateBuffers");
+extern void ( * glCreateFramebuffers) (GLsizei n, GLuint* framebuffers) __asm__("__glewCreateFramebuffers");
+extern void ( * glCreateProgramPipelines) (GLsizei n, GLuint* pipelines) __asm__("__glewCreateProgramPipelines");
+extern void ( * glCreateQueries) (GLenum target, GLsizei n, GLuint* ids) __asm__("__glewCreateQueries");
+extern void ( * glCreateRenderbuffers) (GLsizei n, GLuint* renderbuffers) __asm__("__glewCreateRenderbuffers");
+extern void ( * glCreateSamplers) (GLsizei n, GLuint* samplers) __asm__("__glewCreateSamplers");
+extern void ( * glCreateTextures) (GLenum target, GLsizei n, GLuint* textures) __asm__("__glewCreateTextures");
+extern void ( * glCreateTransformFeedbacks) (GLsizei n, GLuint* ids) __asm__("__glewCreateTransformFeedbacks");
+extern void ( * glCreateVertexArrays) (GLsizei n, GLuint* arrays) __asm__("__glewCreateVertexArrays");
+extern void ( * glDisableVertexArrayAttrib) (GLuint vaobj, GLuint index) __asm__("__glewDisableVertexArrayAttrib");
+extern void ( * glEnableVertexArrayAttrib) (GLuint vaobj, GLuint index) __asm__("__glewEnableVertexArrayAttrib");
+extern void ( * glFlushMappedNamedBufferRange) (GLuint buffer, GLintptr offset, GLsizeiptr length) __asm__("__glewFlushMappedNamedBufferRange");
+extern void ( * glGenerateTextureMipmap) (GLuint texture) __asm__("__glewGenerateTextureMipmap");
+extern void ( * glGetCompressedTextureImage) (GLuint texture, GLint level, GLsizei bufSize, void *pixels) __asm__("__glewGetCompressedTextureImage");
+extern void ( * glGetNamedBufferParameteri64v) (GLuint buffer, GLenum pname, GLint64* params) __asm__("__glewGetNamedBufferParameteri64v");
+extern void ( * glGetNamedBufferParameteriv) (GLuint buffer, GLenum pname, GLint* params) __asm__("__glewGetNamedBufferParameteriv");
+extern void ( * glGetNamedBufferPointerv) (GLuint buffer, GLenum pname, void** params) __asm__("__glewGetNamedBufferPointerv");
+extern void ( * glGetNamedBufferSubData) (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data) __asm__("__glewGetNamedBufferSubData");
+extern void ( * glGetNamedFramebufferAttachmentParameteriv) (GLuint framebuffer, GLenum attachment, GLenum pname, GLint* params) __asm__("__glewGetNamedFramebufferAttachmentParameteriv");
+extern void ( * glGetNamedFramebufferParameteriv) (GLuint framebuffer, GLenum pname, GLint* param) __asm__("__glewGetNamedFramebufferParameteriv");
+extern void ( * glGetNamedRenderbufferParameteriv) (GLuint renderbuffer, GLenum pname, GLint* params) __asm__("__glewGetNamedRenderbufferParameteriv");
+extern void ( * glGetTextureImage) (GLuint texture, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels) __asm__("__glewGetTextureImage");
+extern void ( * glGetTextureLevelParameterfv) (GLuint texture, GLint level, GLenum pname, GLfloat* params) __asm__("__glewGetTextureLevelParameterfv");
+extern void ( * glGetTextureLevelParameteriv) (GLuint texture, GLint level, GLenum pname, GLint* params) __asm__("__glewGetTextureLevelParameteriv");
+extern void ( * glGetTextureParameterIiv) (GLuint texture, GLenum pname, GLint* params) __asm__("__glewGetTextureParameterIiv");
+extern void ( * glGetTextureParameterIuiv) (GLuint texture, GLenum pname, GLuint* params) __asm__("__glewGetTextureParameterIuiv");
+extern void ( * glGetTextureParameterfv) (GLuint texture, GLenum pname, GLfloat* params) __asm__("__glewGetTextureParameterfv");
+extern void ( * glGetTextureParameteriv) (GLuint texture, GLenum pname, GLint* params) __asm__("__glewGetTextureParameteriv");
+extern void ( * glGetTransformFeedbacki64_v) (GLuint xfb, GLenum pname, GLuint index, GLint64* param) __asm__("__glewGetTransformFeedbacki64_v");
+extern void ( * glGetTransformFeedbacki_v) (GLuint xfb, GLenum pname, GLuint index, GLint* param) __asm__("__glewGetTransformFeedbacki_v");
+extern void ( * glGetTransformFeedbackiv) (GLuint xfb, GLenum pname, GLint* param) __asm__("__glewGetTransformFeedbackiv");
+extern void ( * glGetVertexArrayIndexed64iv) (GLuint vaobj, GLuint index, GLenum pname, GLint64* param) __asm__("__glewGetVertexArrayIndexed64iv");
+extern void ( * glGetVertexArrayIndexediv) (GLuint vaobj, GLuint index, GLenum pname, GLint* param) __asm__("__glewGetVertexArrayIndexediv");
+extern void ( * glGetVertexArrayiv) (GLuint vaobj, GLenum pname, GLint* param) __asm__("__glewGetVertexArrayiv");
+extern void ( * glInvalidateNamedFramebufferData) (GLuint framebuffer, GLsizei numAttachments, const GLenum* attachments) __asm__("__glewInvalidateNamedFramebufferData");
+extern void ( * glInvalidateNamedFramebufferSubData) (GLuint framebuffer, GLsizei numAttachments, const GLenum* attachments, GLint x, GLint y, GLsizei width, GLsizei height) __asm__("__glewInvalidateNamedFramebufferSubData");
+extern void * ( * glMapNamedBuffer) (GLuint buffer, GLenum access) __asm__("__glewMapNamedBuffer");
+extern void * ( * glMapNamedBufferRange) (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access) __asm__("__glewMapNamedBufferRange");
+extern void ( * glNamedBufferData) (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage) __asm__("__glewNamedBufferData");
+extern void ( * glNamedBufferStorage) (GLuint buffer, GLsizeiptr size, const void *data, GLbitfield flags) __asm__("__glewNamedBufferStorage");
+extern void ( * glNamedBufferSubData) (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data) __asm__("__glewNamedBufferSubData");
+extern void ( * glNamedFramebufferDrawBuffer) (GLuint framebuffer, GLenum mode) __asm__("__glewNamedFramebufferDrawBuffer");
+extern void ( * glNamedFramebufferDrawBuffers) (GLuint framebuffer, GLsizei n, const GLenum* bufs) __asm__("__glewNamedFramebufferDrawBuffers");
+extern void ( * glNamedFramebufferParameteri) (GLuint framebuffer, GLenum pname, GLint param) __asm__("__glewNamedFramebufferParameteri");
+extern void ( * glNamedFramebufferReadBuffer) (GLuint framebuffer, GLenum mode) __asm__("__glewNamedFramebufferReadBuffer");
+extern void ( * glNamedFramebufferRenderbuffer) (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer) __asm__("__glewNamedFramebufferRenderbuffer");
+extern void ( * glNamedFramebufferTexture) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level) __asm__("__glewNamedFramebufferTexture");
+extern void ( * glNamedFramebufferTextureLayer) (GLuint framebuffer, GLenum attachment, GLuint texture, GLint level, GLint layer) __asm__("__glewNamedFramebufferTextureLayer");
+extern void ( * glNamedRenderbufferStorage) (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height) __asm__("__glewNamedRenderbufferStorage");
+extern void ( * glNamedRenderbufferStorageMultisample) (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height) __asm__("__glewNamedRenderbufferStorageMultisample");
+extern void ( * glTextureBuffer) (GLuint texture, GLenum internalformat, GLuint buffer) __asm__("__glewTextureBuffer");
+extern void ( * glTextureBufferRange) (GLuint texture, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size) __asm__("__glewTextureBufferRange");
+extern void ( * glTextureParameterIiv) (GLuint texture, GLenum pname, const GLint* params) __asm__("__glewTextureParameterIiv");
+extern void ( * glTextureParameterIuiv) (GLuint texture, GLenum pname, const GLuint* params) __asm__("__glewTextureParameterIuiv");
+extern void ( * glTextureParameterf) (GLuint texture, GLenum pname, GLfloat param) __asm__("__glewTextureParameterf");
+extern void ( * glTextureParameterfv) (GLuint texture, GLenum pname, const GLfloat* param) __asm__("__glewTextureParameterfv");
+extern void ( * glTextureParameteri) (GLuint texture, GLenum pname, GLint param) __asm__("__glewTextureParameteri");
+extern void ( * glTextureParameteriv) (GLuint texture, GLenum pname, const GLint* param) __asm__("__glewTextureParameteriv");
+extern void ( * glTextureStorage1D) (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width) __asm__("__glewTextureStorage1D");
+extern void ( * glTextureStorage2D) (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height) __asm__("__glewTextureStorage2D");
+extern void ( * glTextureStorage2DMultisample) (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations) __asm__("__glewTextureStorage2DMultisample");
+extern void ( * glTextureStorage3D) (GLuint texture, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth) __asm__("__glewTextureStorage3D");
+extern void ( * glTextureStorage3DMultisample) (GLuint texture, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations) __asm__("__glewTextureStorage3DMultisample");
+extern void ( * glTextureSubImage1D) (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels) __asm__("__glewTextureSubImage1D");
+extern void ( * glTextureSubImage2D) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels) __asm__("__glewTextureSubImage2D");
+extern void ( * glTextureSubImage3D) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels) __asm__("__glewTextureSubImage3D");
+extern void ( * glTransformFeedbackBufferBase) (GLuint xfb, GLuint index, GLuint buffer) __asm__("__glewTransformFeedbackBufferBase");
+extern void ( * glTransformFeedbackBufferRange) (GLuint xfb, GLuint index, GLuint buffer, GLintptr offset, GLsizeiptr size) __asm__("__glewTransformFeedbackBufferRange");
+extern GLboolean ( * glUnmapNamedBuffer) (GLuint buffer) __asm__("__glewUnmapNamedBuffer");
+extern void ( * glVertexArrayAttribBinding) (GLuint vaobj, GLuint attribindex, GLuint bindingindex) __asm__("__glewVertexArrayAttribBinding");
+extern void ( * glVertexArrayAttribFormat) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset) __asm__("__glewVertexArrayAttribFormat");
+extern void ( * glVertexArrayAttribIFormat) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) __asm__("__glewVertexArrayAttribIFormat");
+extern void ( * glVertexArrayAttribLFormat) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) __asm__("__glewVertexArrayAttribLFormat");
+extern void ( * glVertexArrayBindingDivisor) (GLuint vaobj, GLuint bindingindex, GLuint divisor) __asm__("__glewVertexArrayBindingDivisor");
+extern void ( * glVertexArrayElementBuffer) (GLuint vaobj, GLuint buffer) __asm__("__glewVertexArrayElementBuffer");
+extern void ( * glVertexArrayVertexBuffer) (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride) __asm__("__glewVertexArrayVertexBuffer");
+extern void ( * glVertexArrayVertexBuffers) (GLuint vaobj, GLuint first, GLsizei count, const GLuint* buffers, const GLintptr *offsets, const GLsizei *strides) __asm__("__glewVertexArrayVertexBuffers");
 extern void ( * glDrawBuffersARB) (GLsizei n, const GLenum* bufs) __asm__("__glewDrawBuffersARB");
 extern void ( * glBlendEquationSeparateiARB) (GLuint buf, GLenum modeRGB, GLenum modeAlpha) __asm__("__glewBlendEquationSeparateiARB");
 extern void ( * glBlendEquationiARB) (GLuint buf, GLenum mode) __asm__("__glewBlendEquationiARB");
 extern void ( * glBlendFuncSeparateiARB) (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha) __asm__("__glewBlendFuncSeparateiARB");
 extern void ( * glBlendFunciARB) (GLuint buf, GLenum src, GLenum dst) __asm__("__glewBlendFunciARB");
-extern void ( * glDrawElementsBaseVertex) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex) __asm__("__glewDrawElementsBaseVertex");
-extern void ( * glDrawElementsInstancedBaseVertex) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount, GLint basevertex) __asm__("__glewDrawElementsInstancedBaseVertex");
-extern void ( * glDrawRangeElementsBaseVertex) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices, GLint basevertex) __asm__("__glewDrawRangeElementsBaseVertex");
-extern void ( * glMultiDrawElementsBaseVertex) (GLenum mode, const GLsizei* count, GLenum type, const GLvoid* const *indices, GLsizei primcount, const GLint *basevertex) __asm__("__glewMultiDrawElementsBaseVertex");
-extern void ( * glDrawArraysIndirect) (GLenum mode, const GLvoid *indirect) __asm__("__glewDrawArraysIndirect");
-extern void ( * glDrawElementsIndirect) (GLenum mode, GLenum type, const GLvoid *indirect) __asm__("__glewDrawElementsIndirect");
+extern void ( * glDrawElementsBaseVertex) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLint basevertex) __asm__("__glewDrawElementsBaseVertex");
+extern void ( * glDrawElementsInstancedBaseVertex) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount, GLint basevertex) __asm__("__glewDrawElementsInstancedBaseVertex");
+extern void ( * glDrawRangeElementsBaseVertex) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices, GLint basevertex) __asm__("__glewDrawRangeElementsBaseVertex");
+extern void ( * glMultiDrawElementsBaseVertex) (GLenum mode, const GLsizei* count, GLenum type, const void *const *indices, GLsizei primcount, const GLint *basevertex) __asm__("__glewMultiDrawElementsBaseVertex");
+extern void ( * glDrawArraysIndirect) (GLenum mode, const void *indirect) __asm__("__glewDrawArraysIndirect");
+extern void ( * glDrawElementsIndirect) (GLenum mode, GLenum type, const void *indirect) __asm__("__glewDrawElementsIndirect");
 extern void ( * glFramebufferParameteri) (GLenum target, GLenum pname, GLint param) __asm__("__glewFramebufferParameteri");
 extern void ( * glGetFramebufferParameteriv) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetFramebufferParameteriv");
 extern void ( * glGetNamedFramebufferParameterivEXT) (GLuint framebuffer, GLenum pname, GLint* params) __asm__("__glewGetNamedFramebufferParameterivEXT");
@@ -5331,9 +5543,11 @@ extern void ( * glFramebufferTextureARB) (GLenum target, GLenum attachment, GLui
 extern void ( * glFramebufferTextureFaceARB) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLenum face) __asm__("__glewFramebufferTextureFaceARB");
 extern void ( * glFramebufferTextureLayerARB) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer) __asm__("__glewFramebufferTextureLayerARB");
 extern void ( * glProgramParameteriARB) (GLuint program, GLenum pname, GLint value) __asm__("__glewProgramParameteriARB");
-extern void ( * glGetProgramBinary) (GLuint program, GLsizei bufSize, GLsizei* length, GLenum *binaryFormat, GLvoid*binary) __asm__("__glewGetProgramBinary");
-extern void ( * glProgramBinary) (GLuint program, GLenum binaryFormat, const GLvoid *binary, GLsizei length) __asm__("__glewProgramBinary");
+extern void ( * glGetProgramBinary) (GLuint program, GLsizei bufSize, GLsizei* length, GLenum *binaryFormat, void*binary) __asm__("__glewGetProgramBinary");
+extern void ( * glProgramBinary) (GLuint program, GLenum binaryFormat, const void *binary, GLsizei length) __asm__("__glewProgramBinary");
 extern void ( * glProgramParameteri) (GLuint program, GLenum pname, GLint value) __asm__("__glewProgramParameteri");
+extern void ( * glGetCompressedTextureSubImage) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels) __asm__("__glewGetCompressedTextureSubImage");
+extern void ( * glGetTextureSubImage) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLsizei bufSize, void *pixels) __asm__("__glewGetTextureSubImage");
 extern void ( * glGetUniformdv) (GLuint program, GLint location, GLdouble* params) __asm__("__glewGetUniformdv");
 extern void ( * glUniform1d) (GLint location, GLdouble x) __asm__("__glewUniform1d");
 extern void ( * glUniform1dv) (GLint location, GLsizei count, const GLdouble* value) __asm__("__glewUniform1dv");
@@ -5352,12 +5566,12 @@ extern void ( * glUniformMatrix3x4dv) (GLint location, GLsizei count, GLboolean 
 extern void ( * glUniformMatrix4dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) __asm__("__glewUniformMatrix4dv");
 extern void ( * glUniformMatrix4x2dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) __asm__("__glewUniformMatrix4x2dv");
 extern void ( * glUniformMatrix4x3dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) __asm__("__glewUniformMatrix4x3dv");
-extern void ( * glColorSubTable) (GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *data) __asm__("__glewColorSubTable");
-extern void ( * glColorTable) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table) __asm__("__glewColorTable");
+extern void ( * glColorSubTable) (GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const void *data) __asm__("__glewColorSubTable");
+extern void ( * glColorTable) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void *table) __asm__("__glewColorTable");
 extern void ( * glColorTableParameterfv) (GLenum target, GLenum pname, const GLfloat *params) __asm__("__glewColorTableParameterfv");
 extern void ( * glColorTableParameteriv) (GLenum target, GLenum pname, const GLint *params) __asm__("__glewColorTableParameteriv");
-extern void ( * glConvolutionFilter1D) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image) __asm__("__glewConvolutionFilter1D");
-extern void ( * glConvolutionFilter2D) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image) __asm__("__glewConvolutionFilter2D");
+extern void ( * glConvolutionFilter1D) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void *image) __asm__("__glewConvolutionFilter1D");
+extern void ( * glConvolutionFilter2D) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *image) __asm__("__glewConvolutionFilter2D");
 extern void ( * glConvolutionParameterf) (GLenum target, GLenum pname, GLfloat params) __asm__("__glewConvolutionParameterf");
 extern void ( * glConvolutionParameterfv) (GLenum target, GLenum pname, const GLfloat *params) __asm__("__glewConvolutionParameterfv");
 extern void ( * glConvolutionParameteri) (GLenum target, GLenum pname, GLint params) __asm__("__glewConvolutionParameteri");
@@ -5366,26 +5580,26 @@ extern void ( * glCopyColorSubTable) (GLenum target, GLsizei start, GLint x, GLi
 extern void ( * glCopyColorTable) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width) __asm__("__glewCopyColorTable");
 extern void ( * glCopyConvolutionFilter1D) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width) __asm__("__glewCopyConvolutionFilter1D");
 extern void ( * glCopyConvolutionFilter2D) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height) __asm__("__glewCopyConvolutionFilter2D");
-extern void ( * glGetColorTable) (GLenum target, GLenum format, GLenum type, GLvoid *table) __asm__("__glewGetColorTable");
+extern void ( * glGetColorTable) (GLenum target, GLenum format, GLenum type, void *table) __asm__("__glewGetColorTable");
 extern void ( * glGetColorTableParameterfv) (GLenum target, GLenum pname, GLfloat *params) __asm__("__glewGetColorTableParameterfv");
 extern void ( * glGetColorTableParameteriv) (GLenum target, GLenum pname, GLint *params) __asm__("__glewGetColorTableParameteriv");
-extern void ( * glGetConvolutionFilter) (GLenum target, GLenum format, GLenum type, GLvoid *image) __asm__("__glewGetConvolutionFilter");
+extern void ( * glGetConvolutionFilter) (GLenum target, GLenum format, GLenum type, void *image) __asm__("__glewGetConvolutionFilter");
 extern void ( * glGetConvolutionParameterfv) (GLenum target, GLenum pname, GLfloat *params) __asm__("__glewGetConvolutionParameterfv");
 extern void ( * glGetConvolutionParameteriv) (GLenum target, GLenum pname, GLint *params) __asm__("__glewGetConvolutionParameteriv");
-extern void ( * glGetHistogram) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values) __asm__("__glewGetHistogram");
+extern void ( * glGetHistogram) (GLenum target, GLboolean reset, GLenum format, GLenum type, void *values) __asm__("__glewGetHistogram");
 extern void ( * glGetHistogramParameterfv) (GLenum target, GLenum pname, GLfloat *params) __asm__("__glewGetHistogramParameterfv");
 extern void ( * glGetHistogramParameteriv) (GLenum target, GLenum pname, GLint *params) __asm__("__glewGetHistogramParameteriv");
-extern void ( * glGetMinmax) (GLenum target, GLboolean reset, GLenum format, GLenum types, GLvoid *values) __asm__("__glewGetMinmax");
+extern void ( * glGetMinmax) (GLenum target, GLboolean reset, GLenum format, GLenum types, void *values) __asm__("__glewGetMinmax");
 extern void ( * glGetMinmaxParameterfv) (GLenum target, GLenum pname, GLfloat *params) __asm__("__glewGetMinmaxParameterfv");
 extern void ( * glGetMinmaxParameteriv) (GLenum target, GLenum pname, GLint *params) __asm__("__glewGetMinmaxParameteriv");
-extern void ( * glGetSeparableFilter) (GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span) __asm__("__glewGetSeparableFilter");
+extern void ( * glGetSeparableFilter) (GLenum target, GLenum format, GLenum type, void *row, void *column, void *span) __asm__("__glewGetSeparableFilter");
 extern void ( * glHistogram) (GLenum target, GLsizei width, GLenum internalformat, GLboolean sink) __asm__("__glewHistogram");
 extern void ( * glMinmax) (GLenum target, GLenum internalformat, GLboolean sink) __asm__("__glewMinmax");
 extern void ( * glResetHistogram) (GLenum target) __asm__("__glewResetHistogram");
 extern void ( * glResetMinmax) (GLenum target) __asm__("__glewResetMinmax");
-extern void ( * glSeparableFilter2D) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column) __asm__("__glewSeparableFilter2D");
-extern void ( * glMultiDrawArraysIndirectCountARB) (GLenum mode, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride) __asm__("__glewMultiDrawArraysIndirectCountARB");
-extern void ( * glMultiDrawElementsIndirectCountARB) (GLenum mode, GLenum type, const GLvoid *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride) __asm__("__glewMultiDrawElementsIndirectCountARB");
+extern void ( * glSeparableFilter2D) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *row, const void *column) __asm__("__glewSeparableFilter2D");
+extern void ( * glMultiDrawArraysIndirectCountARB) (GLenum mode, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride) __asm__("__glewMultiDrawArraysIndirectCountARB");
+extern void ( * glMultiDrawElementsIndirectCountARB) (GLenum mode, GLenum type, const void *indirect, GLintptr drawcount, GLsizei maxdrawcount, GLsizei stride) __asm__("__glewMultiDrawElementsIndirectCountARB");
 extern void ( * glDrawArraysInstancedARB) (GLenum mode, GLint first, GLsizei count, GLsizei primcount) __asm__("__glewDrawArraysInstancedARB");
 extern void ( * glDrawElementsInstancedARB) (GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei primcount) __asm__("__glewDrawElementsInstancedARB");
 extern void ( * glVertexAttribDivisorARB) (GLuint index, GLuint divisor) __asm__("__glewVertexAttribDivisorARB");
@@ -5398,9 +5612,9 @@ extern void ( * glInvalidateSubFramebuffer) (GLenum target, GLsizei numAttachmen
 extern void ( * glInvalidateTexImage) (GLuint texture, GLint level) __asm__("__glewInvalidateTexImage");
 extern void ( * glInvalidateTexSubImage) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth) __asm__("__glewInvalidateTexSubImage");
 extern void ( * glFlushMappedBufferRange) (GLenum target, GLintptr offset, GLsizeiptr length) __asm__("__glewFlushMappedBufferRange");
-extern GLvoid * ( * glMapBufferRange) (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access) __asm__("__glewMapBufferRange");
+extern void * ( * glMapBufferRange) (GLenum target, GLintptr offset, GLsizeiptr length, GLbitfield access) __asm__("__glewMapBufferRange");
 extern void ( * glCurrentPaletteMatrixARB) (GLint index) __asm__("__glewCurrentPaletteMatrixARB");
-extern void ( * glMatrixIndexPointerARB) (GLint size, GLenum type, GLsizei stride, GLvoid *pointer) __asm__("__glewMatrixIndexPointerARB");
+extern void ( * glMatrixIndexPointerARB) (GLint size, GLenum type, GLsizei stride, void *pointer) __asm__("__glewMatrixIndexPointerARB");
 extern void ( * glMatrixIndexubvARB) (GLint size, GLubyte *indices) __asm__("__glewMatrixIndexubvARB");
 extern void ( * glMatrixIndexuivARB) (GLint size, GLuint *indices) __asm__("__glewMatrixIndexuivARB");
 extern void ( * glMatrixIndexusvARB) (GLint size, GLushort *indices) __asm__("__glewMatrixIndexusvARB");
@@ -5410,8 +5624,8 @@ extern void ( * glBindImageTextures) (GLuint first, GLsizei count, const GLuint*
 extern void ( * glBindSamplers) (GLuint first, GLsizei count, const GLuint* samplers) __asm__("__glewBindSamplers");
 extern void ( * glBindTextures) (GLuint first, GLsizei count, const GLuint* textures) __asm__("__glewBindTextures");
 extern void ( * glBindVertexBuffers) (GLuint first, GLsizei count, const GLuint* buffers, const GLintptr *offsets, const GLsizei *strides) __asm__("__glewBindVertexBuffers");
-extern void ( * glMultiDrawArraysIndirect) (GLenum mode, const GLvoid *indirect, GLsizei primcount, GLsizei stride) __asm__("__glewMultiDrawArraysIndirect");
-extern void ( * glMultiDrawElementsIndirect) (GLenum mode, GLenum type, const GLvoid *indirect, GLsizei primcount, GLsizei stride) __asm__("__glewMultiDrawElementsIndirect");
+extern void ( * glMultiDrawArraysIndirect) (GLenum mode, const void *indirect, GLsizei primcount, GLsizei stride) __asm__("__glewMultiDrawArraysIndirect");
+extern void ( * glMultiDrawElementsIndirect) (GLenum mode, GLenum type, const void *indirect, GLsizei primcount, GLsizei stride) __asm__("__glewMultiDrawElementsIndirect");
 extern void ( * glSampleCoverageARB) (GLclampf value, GLboolean invert) __asm__("__glewSampleCoverageARB");
 extern void ( * glActiveTextureARB) (GLenum texture) __asm__("__glewActiveTextureARB");
 extern void ( * glClientActiveTextureARB) (GLenum texture) __asm__("__glewClientActiveTextureARB");
@@ -5477,7 +5691,7 @@ extern void ( * glGetnPixelMapfvARB) (GLenum map, GLsizei bufSize, GLfloat* valu
 extern void ( * glGetnPixelMapuivARB) (GLenum map, GLsizei bufSize, GLuint* values) __asm__("__glewGetnPixelMapuivARB");
 extern void ( * glGetnPixelMapusvARB) (GLenum map, GLsizei bufSize, GLushort* values) __asm__("__glewGetnPixelMapusvARB");
 extern void ( * glGetnPolygonStippleARB) (GLsizei bufSize, GLubyte* pattern) __asm__("__glewGetnPolygonStippleARB");
-extern void ( * glGetnSeparableFilterARB) (GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, void* row, GLsizei columnBufSize, GLvoid*column, GLvoid*span) __asm__("__glewGetnSeparableFilterARB");
+extern void ( * glGetnSeparableFilterARB) (GLenum target, GLenum format, GLenum type, GLsizei rowBufSize, void* row, GLsizei columnBufSize, void*column, void*span) __asm__("__glewGetnSeparableFilterARB");
 extern void ( * glGetnTexImageARB) (GLenum target, GLint level, GLenum format, GLenum type, GLsizei bufSize, void* img) __asm__("__glewGetnTexImageARB");
 extern void ( * glGetnUniformdvARB) (GLuint program, GLint location, GLsizei bufSize, GLdouble* params) __asm__("__glewGetnUniformdvARB");
 extern void ( * glGetnUniformfvARB) (GLuint program, GLint location, GLsizei bufSize, GLfloat* params) __asm__("__glewGetnUniformfvARB");
@@ -5501,7 +5715,7 @@ extern void ( * glSamplerParameteri) (GLuint sampler, GLenum pname, GLint param)
 extern void ( * glSamplerParameteriv) (GLuint sampler, GLenum pname, const GLint* params) __asm__("__glewSamplerParameteriv");
 extern void ( * glActiveShaderProgram) (GLuint pipeline, GLuint program) __asm__("__glewActiveShaderProgram");
 extern void ( * glBindProgramPipeline) (GLuint pipeline) __asm__("__glewBindProgramPipeline");
-extern GLuint ( * glCreateShaderProgramv) (GLenum type, GLsizei count, const GLchar ** strings) __asm__("__glewCreateShaderProgramv");
+extern GLuint ( * glCreateShaderProgramv) (GLenum type, GLsizei count, const GLchar * const * strings) __asm__("__glewCreateShaderProgramv");
 extern void ( * glDeleteProgramPipelines) (GLsizei n, const GLuint* pipelines) __asm__("__glewDeleteProgramPipelines");
 extern void ( * glGenProgramPipelines) (GLsizei n, GLuint* pipelines) __asm__("__glewGenProgramPipelines");
 extern void ( * glGetProgramPipelineInfoLog) (GLuint pipeline, GLsizei bufSize, GLsizei* length, GLchar *infoLog) __asm__("__glewGetProgramPipelineInfoLog");
@@ -5616,8 +5830,9 @@ extern void ( * glGetNamedStringARB) (GLint namelen, const GLchar* name, GLsizei
 extern void ( * glGetNamedStringivARB) (GLint namelen, const GLchar* name, GLenum pname, GLint *params) __asm__("__glewGetNamedStringivARB");
 extern GLboolean ( * glIsNamedStringARB) (GLint namelen, const GLchar* name) __asm__("__glewIsNamedStringARB");
 extern void ( * glNamedStringARB) (GLenum type, GLint namelen, const GLchar* name, GLint stringlen, const GLchar *string) __asm__("__glewNamedStringARB");
+extern void ( * glBufferPageCommitmentARB) (GLenum target, GLintptr offset, GLsizeiptr size, GLboolean commit) __asm__("__glewBufferPageCommitmentARB");
 extern void ( * glTexPageCommitmentARB) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit) __asm__("__glewTexPageCommitmentARB");
-extern void ( * glTexturePageCommitmentEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit) __asm__("__glewTexturePageCommitmentEXT");
+extern void ( * glTexturePageCommitmentEXT) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLboolean commit) __asm__("__glewTexturePageCommitmentEXT");
 extern GLenum ( * glClientWaitSync) (GLsync GLsync,GLbitfield flags,GLuint64 timeout) __asm__("__glewClientWaitSync");
 extern void ( * glDeleteSync) (GLsync GLsync) __asm__("__glewDeleteSync");
 extern GLsync ( * glFenceSync) (GLenum condition,GLbitfield flags) __asm__("__glewFenceSync");
@@ -5627,20 +5842,21 @@ extern GLboolean ( * glIsSync) (GLsync GLsync) __asm__("__glewIsSync");
 extern void ( * glWaitSync) (GLsync GLsync,GLbitfield flags,GLuint64 timeout) __asm__("__glewWaitSync");
 extern void ( * glPatchParameterfv) (GLenum pname, const GLfloat* values) __asm__("__glewPatchParameterfv");
 extern void ( * glPatchParameteri) (GLenum pname, GLint value) __asm__("__glewPatchParameteri");
+extern void ( * glTextureBarrier) (void) __asm__("__glewTextureBarrier");
 extern void ( * glTexBufferARB) (GLenum target, GLenum internalformat, GLuint buffer) __asm__("__glewTexBufferARB");
 extern void ( * glTexBufferRange) (GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size) __asm__("__glewTexBufferRange");
 extern void ( * glTextureBufferRangeEXT) (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer, GLintptr offset, GLsizeiptr size) __asm__("__glewTextureBufferRangeEXT");
-extern void ( * glCompressedTexImage1DARB) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexImage1DARB");
-extern void ( * glCompressedTexImage2DARB) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexImage2DARB");
-extern void ( * glCompressedTexImage3DARB) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexImage3DARB");
-extern void ( * glCompressedTexSubImage1DARB) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexSubImage1DARB");
-extern void ( * glCompressedTexSubImage2DARB) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexSubImage2DARB");
-extern void ( * glCompressedTexSubImage3DARB) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTexSubImage3DARB");
-extern void ( * glGetCompressedTexImageARB) (GLenum target, GLint lod, GLvoid *img) __asm__("__glewGetCompressedTexImageARB");
+extern void ( * glCompressedTexImage1DARB) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexImage1DARB");
+extern void ( * glCompressedTexImage2DARB) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexImage2DARB");
+extern void ( * glCompressedTexImage3DARB) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexImage3DARB");
+extern void ( * glCompressedTexSubImage1DARB) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexSubImage1DARB");
+extern void ( * glCompressedTexSubImage2DARB) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexSubImage2DARB");
+extern void ( * glCompressedTexSubImage3DARB) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTexSubImage3DARB");
+extern void ( * glGetCompressedTexImageARB) (GLenum target, GLint lod, void *img) __asm__("__glewGetCompressedTexImageARB");
 extern void ( * glGetMultisamplefv) (GLenum pname, GLuint index, GLfloat* val) __asm__("__glewGetMultisamplefv");
 extern void ( * glSampleMaski) (GLuint index, GLbitfield mask) __asm__("__glewSampleMaski");
-extern void ( * glTexImage2DMultisample) (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations) __asm__("__glewTexImage2DMultisample");
-extern void ( * glTexImage3DMultisample) (GLenum target, GLsizei samples, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations) __asm__("__glewTexImage3DMultisample");
+extern void ( * glTexImage2DMultisample) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLboolean fixedsamplelocations) __asm__("__glewTexImage2DMultisample");
+extern void ( * glTexImage3DMultisample) (GLenum target, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLboolean fixedsamplelocations) __asm__("__glewTexImage3DMultisample");
 extern void ( * glTexStorage1D) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width) __asm__("__glewTexStorage1D");
 extern void ( * glTexStorage2D) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height) __asm__("__glewTexStorage2D");
 extern void ( * glTexStorage3D) (GLenum target, GLsizei levels, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth) __asm__("__glewTexStorage3D");
@@ -5680,7 +5896,7 @@ extern void ( * glGetActiveUniformName) (GLuint program, GLuint uniformIndex, GL
 extern void ( * glGetActiveUniformsiv) (GLuint program, GLsizei uniformCount, const GLuint* uniformIndices, GLenum pname, GLint* params) __asm__("__glewGetActiveUniformsiv");
 extern void ( * glGetIntegeri_v) (GLenum target, GLuint index, GLint* data) __asm__("__glewGetIntegeri_v");
 extern GLuint ( * glGetUniformBlockIndex) (GLuint program, const GLchar* uniformBlockName) __asm__("__glewGetUniformBlockIndex");
-extern void ( * glGetUniformIndices) (GLuint program, GLsizei uniformCount, const GLchar** uniformNames, GLuint* uniformIndices) __asm__("__glewGetUniformIndices");
+extern void ( * glGetUniformIndices) (GLuint program, GLsizei uniformCount, const GLchar* const * uniformNames, GLuint* uniformIndices) __asm__("__glewGetUniformIndices");
 extern void ( * glUniformBlockBinding) (GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding) __asm__("__glewUniformBlockBinding");
 extern void ( * glBindVertexArray) (GLuint array) __asm__("__glewBindVertexArray");
 extern void ( * glDeleteVertexArrays) (GLsizei n, const GLuint* arrays) __asm__("__glewDeleteVertexArrays");
@@ -5697,13 +5913,19 @@ extern void ( * glVertexAttribL4d) (GLuint index, GLdouble x, GLdouble y, GLdoub
 extern void ( * glVertexAttribL4dv) (GLuint index, const GLdouble* v) __asm__("__glewVertexAttribL4dv");
 extern void ( * glVertexAttribLPointer) (GLuint index, GLint size, GLenum type, GLsizei stride, const void* pointer) __asm__("__glewVertexAttribLPointer");
 extern void ( * glBindVertexBuffer) (GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride) __asm__("__glewBindVertexBuffer");
+extern void ( * glVertexArrayBindVertexBufferEXT) (GLuint vaobj, GLuint bindingindex, GLuint buffer, GLintptr offset, GLsizei stride) __asm__("__glewVertexArrayBindVertexBufferEXT");
+extern void ( * glVertexArrayVertexAttribBindingEXT) (GLuint vaobj, GLuint attribindex, GLuint bindingindex) __asm__("__glewVertexArrayVertexAttribBindingEXT");
+extern void ( * glVertexArrayVertexAttribFormatEXT) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset) __asm__("__glewVertexArrayVertexAttribFormatEXT");
+extern void ( * glVertexArrayVertexAttribIFormatEXT) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) __asm__("__glewVertexArrayVertexAttribIFormatEXT");
+extern void ( * glVertexArrayVertexAttribLFormatEXT) (GLuint vaobj, GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) __asm__("__glewVertexArrayVertexAttribLFormatEXT");
+extern void ( * glVertexArrayVertexBindingDivisorEXT) (GLuint vaobj, GLuint bindingindex, GLuint divisor) __asm__("__glewVertexArrayVertexBindingDivisorEXT");
 extern void ( * glVertexAttribBinding) (GLuint attribindex, GLuint bindingindex) __asm__("__glewVertexAttribBinding");
 extern void ( * glVertexAttribFormat) (GLuint attribindex, GLint size, GLenum type, GLboolean normalized, GLuint relativeoffset) __asm__("__glewVertexAttribFormat");
 extern void ( * glVertexAttribIFormat) (GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) __asm__("__glewVertexAttribIFormat");
 extern void ( * glVertexAttribLFormat) (GLuint attribindex, GLint size, GLenum type, GLuint relativeoffset) __asm__("__glewVertexAttribLFormat");
 extern void ( * glVertexBindingDivisor) (GLuint bindingindex, GLuint divisor) __asm__("__glewVertexBindingDivisor");
 extern void ( * glVertexBlendARB) (GLint count) __asm__("__glewVertexBlendARB");
-extern void ( * glWeightPointerARB) (GLint size, GLenum type, GLsizei stride, GLvoid *pointer) __asm__("__glewWeightPointerARB");
+extern void ( * glWeightPointerARB) (GLint size, GLenum type, GLsizei stride, void *pointer) __asm__("__glewWeightPointerARB");
 extern void ( * glWeightbvARB) (GLint size, GLbyte *weights) __asm__("__glewWeightbvARB");
 extern void ( * glWeightdvARB) (GLint size, GLdouble *weights) __asm__("__glewWeightdvARB");
 extern void ( * glWeightfvARB) (GLint size, GLfloat *weights) __asm__("__glewWeightfvARB");
@@ -5713,15 +5935,15 @@ extern void ( * glWeightubvARB) (GLint size, GLubyte *weights) __asm__("__glewWe
 extern void ( * glWeightuivARB) (GLint size, GLuint *weights) __asm__("__glewWeightuivARB");
 extern void ( * glWeightusvARB) (GLint size, GLushort *weights) __asm__("__glewWeightusvARB");
 extern void ( * glBindBufferARB) (GLenum target, GLuint buffer) __asm__("__glewBindBufferARB");
-extern void ( * glBufferDataARB) (GLenum target, GLsizeiptrARB size, const GLvoid *data, GLenum usage) __asm__("__glewBufferDataARB");
-extern void ( * glBufferSubDataARB) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, const GLvoid *data) __asm__("__glewBufferSubDataARB");
+extern void ( * glBufferDataARB) (GLenum target, GLsizeiptrARB size, const void *data, GLenum usage) __asm__("__glewBufferDataARB");
+extern void ( * glBufferSubDataARB) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, const void *data) __asm__("__glewBufferSubDataARB");
 extern void ( * glDeleteBuffersARB) (GLsizei n, const GLuint* buffers) __asm__("__glewDeleteBuffersARB");
 extern void ( * glGenBuffersARB) (GLsizei n, GLuint* buffers) __asm__("__glewGenBuffersARB");
 extern void ( * glGetBufferParameterivARB) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetBufferParameterivARB");
-extern void ( * glGetBufferPointervARB) (GLenum target, GLenum pname, GLvoid** params) __asm__("__glewGetBufferPointervARB");
-extern void ( * glGetBufferSubDataARB) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, GLvoid *data) __asm__("__glewGetBufferSubDataARB");
+extern void ( * glGetBufferPointervARB) (GLenum target, GLenum pname, void** params) __asm__("__glewGetBufferPointervARB");
+extern void ( * glGetBufferSubDataARB) (GLenum target, GLintptrARB offset, GLsizeiptrARB size, void *data) __asm__("__glewGetBufferSubDataARB");
 extern GLboolean ( * glIsBufferARB) (GLuint buffer) __asm__("__glewIsBufferARB");
-extern GLvoid * ( * glMapBufferARB) (GLenum target, GLenum access) __asm__("__glewMapBufferARB");
+extern void * ( * glMapBufferARB) (GLenum target, GLenum access) __asm__("__glewMapBufferARB");
 extern GLboolean ( * glUnmapBufferARB) (GLenum target) __asm__("__glewUnmapBufferARB");
 extern void ( * glBindProgramARB) (GLenum target, GLuint program) __asm__("__glewBindProgramARB");
 extern void ( * glDeleteProgramsARB) (GLsizei n, const GLuint* programs) __asm__("__glewDeleteProgramsARB");
@@ -5732,9 +5954,9 @@ extern void ( * glGetProgramEnvParameterdvARB) (GLenum target, GLuint index, GLd
 extern void ( * glGetProgramEnvParameterfvARB) (GLenum target, GLuint index, GLfloat* params) __asm__("__glewGetProgramEnvParameterfvARB");
 extern void ( * glGetProgramLocalParameterdvARB) (GLenum target, GLuint index, GLdouble* params) __asm__("__glewGetProgramLocalParameterdvARB");
 extern void ( * glGetProgramLocalParameterfvARB) (GLenum target, GLuint index, GLfloat* params) __asm__("__glewGetProgramLocalParameterfvARB");
-extern void ( * glGetProgramStringARB) (GLenum target, GLenum pname, GLvoid *string) __asm__("__glewGetProgramStringARB");
+extern void ( * glGetProgramStringARB) (GLenum target, GLenum pname, void *string) __asm__("__glewGetProgramStringARB");
 extern void ( * glGetProgramivARB) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetProgramivARB");
-extern void ( * glGetVertexAttribPointervARB) (GLuint index, GLenum pname, GLvoid** pointer) __asm__("__glewGetVertexAttribPointervARB");
+extern void ( * glGetVertexAttribPointervARB) (GLuint index, GLenum pname, void** pointer) __asm__("__glewGetVertexAttribPointervARB");
 extern void ( * glGetVertexAttribdvARB) (GLuint index, GLenum pname, GLdouble* params) __asm__("__glewGetVertexAttribdvARB");
 extern void ( * glGetVertexAttribfvARB) (GLuint index, GLenum pname, GLfloat* params) __asm__("__glewGetVertexAttribfvARB");
 extern void ( * glGetVertexAttribivARB) (GLuint index, GLenum pname, GLint* params) __asm__("__glewGetVertexAttribivARB");
@@ -5747,7 +5969,7 @@ extern void ( * glProgramLocalParameter4dARB) (GLenum target, GLuint index, GLdo
 extern void ( * glProgramLocalParameter4dvARB) (GLenum target, GLuint index, const GLdouble* params) __asm__("__glewProgramLocalParameter4dvARB");
 extern void ( * glProgramLocalParameter4fARB) (GLenum target, GLuint index, GLfloat x, GLfloat y, GLfloat z, GLfloat w) __asm__("__glewProgramLocalParameter4fARB");
 extern void ( * glProgramLocalParameter4fvARB) (GLenum target, GLuint index, const GLfloat* params) __asm__("__glewProgramLocalParameter4fvARB");
-extern void ( * glProgramStringARB) (GLenum target, GLenum format, GLsizei len, const GLvoid *string) __asm__("__glewProgramStringARB");
+extern void ( * glProgramStringARB) (GLenum target, GLenum format, GLsizei len, const void *string) __asm__("__glewProgramStringARB");
 extern void ( * glVertexAttrib1dARB) (GLuint index, GLdouble x) __asm__("__glewVertexAttrib1dARB");
 extern void ( * glVertexAttrib1dvARB) (GLuint index, const GLdouble* v) __asm__("__glewVertexAttrib1dvARB");
 extern void ( * glVertexAttrib1fARB) (GLuint index, GLfloat x) __asm__("__glewVertexAttrib1fARB");
@@ -5784,7 +6006,7 @@ extern void ( * glVertexAttrib4svARB) (GLuint index, const GLshort* v) __asm__("
 extern void ( * glVertexAttrib4ubvARB) (GLuint index, const GLubyte* v) __asm__("__glewVertexAttrib4ubvARB");
 extern void ( * glVertexAttrib4uivARB) (GLuint index, const GLuint* v) __asm__("__glewVertexAttrib4uivARB");
 extern void ( * glVertexAttrib4usvARB) (GLuint index, const GLushort* v) __asm__("__glewVertexAttrib4usvARB");
-extern void ( * glVertexAttribPointerARB) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid *pointer) __asm__("__glewVertexAttribPointerARB");
+extern void ( * glVertexAttribPointerARB) (GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void *pointer) __asm__("__glewVertexAttribPointerARB");
 extern void ( * glBindAttribLocationARB) (GLhandleARB programObj, GLuint index, const GLcharARB* name) __asm__("__glewBindAttribLocationARB");
 extern void ( * glGetActiveAttribARB) (GLhandleARB programObj, GLuint index, GLsizei maxLength, GLsizei* length, GLint *size, GLenum *type, GLcharARB *name) __asm__("__glewGetActiveAttribARB");
 extern GLint ( * glGetAttribLocationARB) (GLhandleARB programObj, const GLcharARB* name) __asm__("__glewGetAttribLocationARB");
@@ -5855,7 +6077,7 @@ extern void ( * glWindowPos3svARB) (const GLshort* p) __asm__("__glewWindowPos3s
 extern void ( * glDrawBuffersATI) (GLsizei n, const GLenum* bufs) __asm__("__glewDrawBuffersATI");
 extern void ( * glDrawElementArrayATI) (GLenum mode, GLsizei count) __asm__("__glewDrawElementArrayATI");
 extern void ( * glDrawRangeElementArrayATI) (GLenum mode, GLuint start, GLuint end, GLsizei count) __asm__("__glewDrawRangeElementArrayATI");
-extern void ( * glElementPointerATI) (GLenum type, const GLvoid *pointer) __asm__("__glewElementPointerATI");
+extern void ( * glElementPointerATI) (GLenum type, const void *pointer) __asm__("__glewElementPointerATI");
 extern void ( * glGetTexBumpParameterfvATI) (GLenum pname, GLfloat *param) __asm__("__glewGetTexBumpParameterfvATI");
 extern void ( * glGetTexBumpParameterivATI) (GLenum pname, GLint *param) __asm__("__glewGetTexBumpParameterivATI");
 extern void ( * glTexBumpParameterfvATI) (GLenum pname, GLfloat *param) __asm__("__glewTexBumpParameterfvATI");
@@ -5874,7 +6096,7 @@ extern GLuint ( * glGenFragmentShadersATI) (GLuint range) __asm__("__glewGenFrag
 extern void ( * glPassTexCoordATI) (GLuint dst, GLuint coord, GLenum swizzle) __asm__("__glewPassTexCoordATI");
 extern void ( * glSampleMapATI) (GLuint dst, GLuint interp, GLenum swizzle) __asm__("__glewSampleMapATI");
 extern void ( * glSetFragmentShaderConstantATI) (GLuint dst, const GLfloat* value) __asm__("__glewSetFragmentShaderConstantATI");
-extern GLvoid * ( * glMapObjectBufferATI) (GLuint buffer) __asm__("__glewMapObjectBufferATI");
+extern void * ( * glMapObjectBufferATI) (GLuint buffer) __asm__("__glewMapObjectBufferATI");
 extern void ( * glUnmapObjectBufferATI) (GLuint buffer) __asm__("__glewUnmapObjectBufferATI");
 extern void ( * glPNTrianglesfATI) (GLenum pname, GLfloat param) __asm__("__glewPNTrianglesfATI");
 extern void ( * glPNTrianglesiATI) (GLenum pname, GLint param) __asm__("__glewPNTrianglesiATI");
@@ -5889,8 +6111,8 @@ extern void ( * glGetObjectBufferivATI) (GLuint buffer, GLenum pname, GLint* par
 extern void ( * glGetVariantArrayObjectfvATI) (GLuint id, GLenum pname, GLfloat* params) __asm__("__glewGetVariantArrayObjectfvATI");
 extern void ( * glGetVariantArrayObjectivATI) (GLuint id, GLenum pname, GLint* params) __asm__("__glewGetVariantArrayObjectivATI");
 extern GLboolean ( * glIsObjectBufferATI) (GLuint buffer) __asm__("__glewIsObjectBufferATI");
-extern GLuint ( * glNewObjectBufferATI) (GLsizei size, const GLvoid *pointer, GLenum usage) __asm__("__glewNewObjectBufferATI");
-extern void ( * glUpdateObjectBufferATI) (GLuint buffer, GLuint offset, GLsizei size, const GLvoid *pointer, GLenum preserve) __asm__("__glewUpdateObjectBufferATI");
+extern GLuint ( * glNewObjectBufferATI) (GLsizei size, const void *pointer, GLenum usage) __asm__("__glewNewObjectBufferATI");
+extern void ( * glUpdateObjectBufferATI) (GLuint buffer, GLuint offset, GLsizei size, const void *pointer, GLenum preserve) __asm__("__glewUpdateObjectBufferATI");
 extern void ( * glVariantArrayObjectATI) (GLuint id, GLenum type, GLsizei stride, GLuint buffer, GLuint offset) __asm__("__glewVariantArrayObjectATI");
 extern void ( * glGetVertexAttribArrayObjectfvATI) (GLuint index, GLenum pname, GLfloat* params) __asm__("__glewGetVertexAttribArrayObjectfvATI");
 extern void ( * glGetVertexAttribArrayObjectivATI) (GLuint index, GLenum pname, GLint* params) __asm__("__glewGetVertexAttribArrayObjectivATI");
@@ -5947,25 +6169,25 @@ extern void ( * glBlendColorEXT) (GLclampf red, GLclampf green, GLclampf blue, G
 extern void ( * glBlendEquationSeparateEXT) (GLenum modeRGB, GLenum modeAlpha) __asm__("__glewBlendEquationSeparateEXT");
 extern void ( * glBlendFuncSeparateEXT) (GLenum sfactorRGB, GLenum dfactorRGB, GLenum sfactorAlpha, GLenum dfactorAlpha) __asm__("__glewBlendFuncSeparateEXT");
 extern void ( * glBlendEquationEXT) (GLenum mode) __asm__("__glewBlendEquationEXT");
-extern void ( * glColorSubTableEXT) (GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const GLvoid *data) __asm__("__glewColorSubTableEXT");
+extern void ( * glColorSubTableEXT) (GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const void *data) __asm__("__glewColorSubTableEXT");
 extern void ( * glCopyColorSubTableEXT) (GLenum target, GLsizei start, GLint x, GLint y, GLsizei width) __asm__("__glewCopyColorSubTableEXT");
 extern void ( * glLockArraysEXT) (GLint first, GLsizei count) __asm__("__glewLockArraysEXT");
 extern void ( * glUnlockArraysEXT) (void) __asm__("__glewUnlockArraysEXT");
-extern void ( * glConvolutionFilter1DEXT) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *image) __asm__("__glewConvolutionFilter1DEXT");
-extern void ( * glConvolutionFilter2DEXT) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *image) __asm__("__glewConvolutionFilter2DEXT");
+extern void ( * glConvolutionFilter1DEXT) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void *image) __asm__("__glewConvolutionFilter1DEXT");
+extern void ( * glConvolutionFilter2DEXT) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *image) __asm__("__glewConvolutionFilter2DEXT");
 extern void ( * glConvolutionParameterfEXT) (GLenum target, GLenum pname, GLfloat param) __asm__("__glewConvolutionParameterfEXT");
 extern void ( * glConvolutionParameterfvEXT) (GLenum target, GLenum pname, const GLfloat* params) __asm__("__glewConvolutionParameterfvEXT");
 extern void ( * glConvolutionParameteriEXT) (GLenum target, GLenum pname, GLint param) __asm__("__glewConvolutionParameteriEXT");
 extern void ( * glConvolutionParameterivEXT) (GLenum target, GLenum pname, const GLint* params) __asm__("__glewConvolutionParameterivEXT");
 extern void ( * glCopyConvolutionFilter1DEXT) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width) __asm__("__glewCopyConvolutionFilter1DEXT");
 extern void ( * glCopyConvolutionFilter2DEXT) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height) __asm__("__glewCopyConvolutionFilter2DEXT");
-extern void ( * glGetConvolutionFilterEXT) (GLenum target, GLenum format, GLenum type, GLvoid *image) __asm__("__glewGetConvolutionFilterEXT");
+extern void ( * glGetConvolutionFilterEXT) (GLenum target, GLenum format, GLenum type, void *image) __asm__("__glewGetConvolutionFilterEXT");
 extern void ( * glGetConvolutionParameterfvEXT) (GLenum target, GLenum pname, GLfloat* params) __asm__("__glewGetConvolutionParameterfvEXT");
 extern void ( * glGetConvolutionParameterivEXT) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetConvolutionParameterivEXT");
-extern void ( * glGetSeparableFilterEXT) (GLenum target, GLenum format, GLenum type, GLvoid *row, GLvoid *column, GLvoid *span) __asm__("__glewGetSeparableFilterEXT");
-extern void ( * glSeparableFilter2DEXT) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *row, const GLvoid *column) __asm__("__glewSeparableFilter2DEXT");
-extern void ( * glBinormalPointerEXT) (GLenum type, GLsizei stride, GLvoid *pointer) __asm__("__glewBinormalPointerEXT");
-extern void ( * glTangentPointerEXT) (GLenum type, GLsizei stride, GLvoid *pointer) __asm__("__glewTangentPointerEXT");
+extern void ( * glGetSeparableFilterEXT) (GLenum target, GLenum format, GLenum type, void *row, void *column, void *span) __asm__("__glewGetSeparableFilterEXT");
+extern void ( * glSeparableFilter2DEXT) (GLenum target, GLenum internalformat, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *row, const void *column) __asm__("__glewSeparableFilter2DEXT");
+extern void ( * glBinormalPointerEXT) (GLenum type, GLsizei stride, void *pointer) __asm__("__glewBinormalPointerEXT");
+extern void ( * glTangentPointerEXT) (GLenum type, GLsizei stride, void *pointer) __asm__("__glewTangentPointerEXT");
 extern void ( * glCopyTexImage1DEXT) (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border) __asm__("__glewCopyTexImage1DEXT");
 extern void ( * glCopyTexImage2DEXT) (GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) __asm__("__glewCopyTexImage2DEXT");
 extern void ( * glCopyTexSubImage1DEXT) (GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) __asm__("__glewCopyTexSubImage1DEXT");
@@ -5973,6 +6195,8 @@ extern void ( * glCopyTexSubImage2DEXT) (GLenum target, GLint level, GLint xoffs
 extern void ( * glCopyTexSubImage3DEXT) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) __asm__("__glewCopyTexSubImage3DEXT");
 extern void ( * glCullParameterdvEXT) (GLenum pname, GLdouble* params) __asm__("__glewCullParameterdvEXT");
 extern void ( * glCullParameterfvEXT) (GLenum pname, GLfloat* params) __asm__("__glewCullParameterfvEXT");
+extern void ( * glGetObjectLabelEXT) (GLenum type, GLuint object, GLsizei bufSize, GLsizei* length, GLchar *label) __asm__("__glewGetObjectLabelEXT");
+extern void ( * glLabelObjectEXT) (GLenum type, GLuint object, GLsizei length, const GLchar* label) __asm__("__glewLabelObjectEXT");
 extern void ( * glInsertEventMarkerEXT) (GLsizei length, const GLchar* marker) __asm__("__glewInsertEventMarkerEXT");
 extern void ( * glPopGroupMarkerEXT) (void) __asm__("__glewPopGroupMarkerEXT");
 extern void ( * glPushGroupMarkerEXT) (GLsizei length, const GLchar* marker) __asm__("__glewPushGroupMarkerEXT");
@@ -5980,18 +6204,18 @@ extern void ( * glDepthBoundsEXT) (GLclampd zmin, GLclampd zmax) __asm__("__glew
 extern void ( * glBindMultiTextureEXT) (GLenum texunit, GLenum target, GLuint texture) __asm__("__glewBindMultiTextureEXT");
 extern GLenum ( * glCheckNamedFramebufferStatusEXT) (GLuint framebuffer, GLenum target) __asm__("__glewCheckNamedFramebufferStatusEXT");
 extern void ( * glClientAttribDefaultEXT) (GLbitfield mask) __asm__("__glewClientAttribDefaultEXT");
-extern void ( * glCompressedMultiTexImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedMultiTexImage1DEXT");
-extern void ( * glCompressedMultiTexImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedMultiTexImage2DEXT");
-extern void ( * glCompressedMultiTexImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedMultiTexImage3DEXT");
-extern void ( * glCompressedMultiTexSubImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedMultiTexSubImage1DEXT");
-extern void ( * glCompressedMultiTexSubImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedMultiTexSubImage2DEXT");
-extern void ( * glCompressedMultiTexSubImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedMultiTexSubImage3DEXT");
-extern void ( * glCompressedTextureImage1DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTextureImage1DEXT");
-extern void ( * glCompressedTextureImage2DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTextureImage2DEXT");
-extern void ( * glCompressedTextureImage3DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTextureImage3DEXT");
-extern void ( * glCompressedTextureSubImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTextureSubImage1DEXT");
-extern void ( * glCompressedTextureSubImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTextureSubImage2DEXT");
-extern void ( * glCompressedTextureSubImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data) __asm__("__glewCompressedTextureSubImage3DEXT");
+extern void ( * glCompressedMultiTexImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedMultiTexImage1DEXT");
+extern void ( * glCompressedMultiTexImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedMultiTexImage2DEXT");
+extern void ( * glCompressedMultiTexImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedMultiTexImage3DEXT");
+extern void ( * glCompressedMultiTexSubImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedMultiTexSubImage1DEXT");
+extern void ( * glCompressedMultiTexSubImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedMultiTexSubImage2DEXT");
+extern void ( * glCompressedMultiTexSubImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedMultiTexSubImage3DEXT");
+extern void ( * glCompressedTextureImage1DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureImage1DEXT");
+extern void ( * glCompressedTextureImage2DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureImage2DEXT");
+extern void ( * glCompressedTextureImage3DEXT) (GLuint texture, GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureImage3DEXT");
+extern void ( * glCompressedTextureSubImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureSubImage1DEXT");
+extern void ( * glCompressedTextureSubImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureSubImage2DEXT");
+extern void ( * glCompressedTextureSubImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureSubImage3DEXT");
 extern void ( * glCopyMultiTexImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLint border) __asm__("__glewCopyMultiTexImage1DEXT");
 extern void ( * glCopyMultiTexImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLenum internalformat, GLint x, GLint y, GLsizei width, GLsizei height, GLint border) __asm__("__glewCopyMultiTexImage2DEXT");
 extern void ( * glCopyMultiTexSubImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint x, GLint y, GLsizei width) __asm__("__glewCopyMultiTexSubImage1DEXT");
@@ -6016,8 +6240,8 @@ extern void ( * glFramebufferDrawBuffersEXT) (GLuint framebuffer, GLsizei n, con
 extern void ( * glFramebufferReadBufferEXT) (GLuint framebuffer, GLenum mode) __asm__("__glewFramebufferReadBufferEXT");
 extern void ( * glGenerateMultiTexMipmapEXT) (GLenum texunit, GLenum target) __asm__("__glewGenerateMultiTexMipmapEXT");
 extern void ( * glGenerateTextureMipmapEXT) (GLuint texture, GLenum target) __asm__("__glewGenerateTextureMipmapEXT");
-extern void ( * glGetCompressedMultiTexImageEXT) (GLenum texunit, GLenum target, GLint level, GLvoid *img) __asm__("__glewGetCompressedMultiTexImageEXT");
-extern void ( * glGetCompressedTextureImageEXT) (GLuint texture, GLenum target, GLint level, GLvoid *img) __asm__("__glewGetCompressedTextureImageEXT");
+extern void ( * glGetCompressedMultiTexImageEXT) (GLenum texunit, GLenum target, GLint level, void *img) __asm__("__glewGetCompressedMultiTexImageEXT");
+extern void ( * glGetCompressedTextureImageEXT) (GLuint texture, GLenum target, GLint level, void *img) __asm__("__glewGetCompressedTextureImageEXT");
 extern void ( * glGetDoubleIndexedvEXT) (GLenum target, GLuint index, GLdouble* params) __asm__("__glewGetDoubleIndexedvEXT");
 extern void ( * glGetDoublei_vEXT) (GLenum pname, GLuint index, GLdouble* params) __asm__("__glewGetDoublei_vEXT");
 extern void ( * glGetFloatIndexedvEXT) (GLenum target, GLuint index, GLfloat* params) __asm__("__glewGetFloatIndexedvEXT");
@@ -6028,7 +6252,7 @@ extern void ( * glGetMultiTexEnvivEXT) (GLenum texunit, GLenum target, GLenum pn
 extern void ( * glGetMultiTexGendvEXT) (GLenum texunit, GLenum coord, GLenum pname, GLdouble* params) __asm__("__glewGetMultiTexGendvEXT");
 extern void ( * glGetMultiTexGenfvEXT) (GLenum texunit, GLenum coord, GLenum pname, GLfloat* params) __asm__("__glewGetMultiTexGenfvEXT");
 extern void ( * glGetMultiTexGenivEXT) (GLenum texunit, GLenum coord, GLenum pname, GLint* params) __asm__("__glewGetMultiTexGenivEXT");
-extern void ( * glGetMultiTexImageEXT) (GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels) __asm__("__glewGetMultiTexImageEXT");
+extern void ( * glGetMultiTexImageEXT) (GLenum texunit, GLenum target, GLint level, GLenum format, GLenum type, void *pixels) __asm__("__glewGetMultiTexImageEXT");
 extern void ( * glGetMultiTexLevelParameterfvEXT) (GLenum texunit, GLenum target, GLint level, GLenum pname, GLfloat* params) __asm__("__glewGetMultiTexLevelParameterfvEXT");
 extern void ( * glGetMultiTexLevelParameterivEXT) (GLenum texunit, GLenum target, GLint level, GLenum pname, GLint* params) __asm__("__glewGetMultiTexLevelParameterivEXT");
 extern void ( * glGetMultiTexParameterIivEXT) (GLenum texunit, GLenum target, GLenum pname, GLint* params) __asm__("__glewGetMultiTexParameterIivEXT");
@@ -6037,18 +6261,18 @@ extern void ( * glGetMultiTexParameterfvEXT) (GLenum texunit, GLenum target, GLe
 extern void ( * glGetMultiTexParameterivEXT) (GLenum texunit, GLenum target, GLenum pname, GLint* params) __asm__("__glewGetMultiTexParameterivEXT");
 extern void ( * glGetNamedBufferParameterivEXT) (GLuint buffer, GLenum pname, GLint* params) __asm__("__glewGetNamedBufferParameterivEXT");
 extern void ( * glGetNamedBufferPointervEXT) (GLuint buffer, GLenum pname, void** params) __asm__("__glewGetNamedBufferPointervEXT");
-extern void ( * glGetNamedBufferSubDataEXT) (GLuint buffer, GLintptr offset, GLsizeiptr size, GLvoid *data) __asm__("__glewGetNamedBufferSubDataEXT");
+extern void ( * glGetNamedBufferSubDataEXT) (GLuint buffer, GLintptr offset, GLsizeiptr size, void *data) __asm__("__glewGetNamedBufferSubDataEXT");
 extern void ( * glGetNamedFramebufferAttachmentParameterivEXT) (GLuint framebuffer, GLenum attachment, GLenum pname, GLint* params) __asm__("__glewGetNamedFramebufferAttachmentParameterivEXT");
 extern void ( * glGetNamedProgramLocalParameterIivEXT) (GLuint program, GLenum target, GLuint index, GLint* params) __asm__("__glewGetNamedProgramLocalParameterIivEXT");
 extern void ( * glGetNamedProgramLocalParameterIuivEXT) (GLuint program, GLenum target, GLuint index, GLuint* params) __asm__("__glewGetNamedProgramLocalParameterIuivEXT");
 extern void ( * glGetNamedProgramLocalParameterdvEXT) (GLuint program, GLenum target, GLuint index, GLdouble* params) __asm__("__glewGetNamedProgramLocalParameterdvEXT");
 extern void ( * glGetNamedProgramLocalParameterfvEXT) (GLuint program, GLenum target, GLuint index, GLfloat* params) __asm__("__glewGetNamedProgramLocalParameterfvEXT");
-extern void ( * glGetNamedProgramStringEXT) (GLuint program, GLenum target, GLenum pname, GLvoid *string) __asm__("__glewGetNamedProgramStringEXT");
+extern void ( * glGetNamedProgramStringEXT) (GLuint program, GLenum target, GLenum pname, void *string) __asm__("__glewGetNamedProgramStringEXT");
 extern void ( * glGetNamedProgramivEXT) (GLuint program, GLenum target, GLenum pname, GLint* params) __asm__("__glewGetNamedProgramivEXT");
 extern void ( * glGetNamedRenderbufferParameterivEXT) (GLuint renderbuffer, GLenum pname, GLint* params) __asm__("__glewGetNamedRenderbufferParameterivEXT");
-extern void ( * glGetPointerIndexedvEXT) (GLenum target, GLuint index, GLvoid** params) __asm__("__glewGetPointerIndexedvEXT");
-extern void ( * glGetPointeri_vEXT) (GLenum pname, GLuint index, GLvoid** params) __asm__("__glewGetPointeri_vEXT");
-extern void ( * glGetTextureImageEXT) (GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, GLvoid *pixels) __asm__("__glewGetTextureImageEXT");
+extern void ( * glGetPointerIndexedvEXT) (GLenum target, GLuint index, void** params) __asm__("__glewGetPointerIndexedvEXT");
+extern void ( * glGetPointeri_vEXT) (GLenum pname, GLuint index, void** params) __asm__("__glewGetPointeri_vEXT");
+extern void ( * glGetTextureImageEXT) (GLuint texture, GLenum target, GLint level, GLenum format, GLenum type, void *pixels) __asm__("__glewGetTextureImageEXT");
 extern void ( * glGetTextureLevelParameterfvEXT) (GLuint texture, GLenum target, GLint level, GLenum pname, GLfloat* params) __asm__("__glewGetTextureLevelParameterfvEXT");
 extern void ( * glGetTextureLevelParameterivEXT) (GLuint texture, GLenum target, GLint level, GLenum pname, GLint* params) __asm__("__glewGetTextureLevelParameterivEXT");
 extern void ( * glGetTextureParameterIivEXT) (GLuint texture, GLenum target, GLenum pname, GLint* params) __asm__("__glewGetTextureParameterIivEXT");
@@ -6057,10 +6281,10 @@ extern void ( * glGetTextureParameterfvEXT) (GLuint texture, GLenum target, GLen
 extern void ( * glGetTextureParameterivEXT) (GLuint texture, GLenum target, GLenum pname, GLint* params) __asm__("__glewGetTextureParameterivEXT");
 extern void ( * glGetVertexArrayIntegeri_vEXT) (GLuint vaobj, GLuint index, GLenum pname, GLint* param) __asm__("__glewGetVertexArrayIntegeri_vEXT");
 extern void ( * glGetVertexArrayIntegervEXT) (GLuint vaobj, GLenum pname, GLint* param) __asm__("__glewGetVertexArrayIntegervEXT");
-extern void ( * glGetVertexArrayPointeri_vEXT) (GLuint vaobj, GLuint index, GLenum pname, GLvoid** param) __asm__("__glewGetVertexArrayPointeri_vEXT");
-extern void ( * glGetVertexArrayPointervEXT) (GLuint vaobj, GLenum pname, GLvoid** param) __asm__("__glewGetVertexArrayPointervEXT");
-extern GLvoid * ( * glMapNamedBufferEXT) (GLuint buffer, GLenum access) __asm__("__glewMapNamedBufferEXT");
-extern GLvoid * ( * glMapNamedBufferRangeEXT) (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access) __asm__("__glewMapNamedBufferRangeEXT");
+extern void ( * glGetVertexArrayPointeri_vEXT) (GLuint vaobj, GLuint index, GLenum pname, void** param) __asm__("__glewGetVertexArrayPointeri_vEXT");
+extern void ( * glGetVertexArrayPointervEXT) (GLuint vaobj, GLenum pname, void** param) __asm__("__glewGetVertexArrayPointervEXT");
+extern void * ( * glMapNamedBufferEXT) (GLuint buffer, GLenum access) __asm__("__glewMapNamedBufferEXT");
+extern void * ( * glMapNamedBufferRangeEXT) (GLuint buffer, GLintptr offset, GLsizeiptr length, GLbitfield access) __asm__("__glewMapNamedBufferRangeEXT");
 extern void ( * glMatrixFrustumEXT) (GLenum matrixMode, GLdouble l, GLdouble r, GLdouble b, GLdouble t, GLdouble n, GLdouble f) __asm__("__glewMatrixFrustumEXT");
 extern void ( * glMatrixLoadIdentityEXT) (GLenum matrixMode) __asm__("__glewMatrixLoadIdentityEXT");
 extern void ( * glMatrixLoadTransposedEXT) (GLenum matrixMode, const GLdouble* m) __asm__("__glewMatrixLoadTransposedEXT");
@@ -6081,7 +6305,7 @@ extern void ( * glMatrixScalefEXT) (GLenum matrixMode, GLfloat x, GLfloat y, GLf
 extern void ( * glMatrixTranslatedEXT) (GLenum matrixMode, GLdouble x, GLdouble y, GLdouble z) __asm__("__glewMatrixTranslatedEXT");
 extern void ( * glMatrixTranslatefEXT) (GLenum matrixMode, GLfloat x, GLfloat y, GLfloat z) __asm__("__glewMatrixTranslatefEXT");
 extern void ( * glMultiTexBufferEXT) (GLenum texunit, GLenum target, GLenum internalformat, GLuint buffer) __asm__("__glewMultiTexBufferEXT");
-extern void ( * glMultiTexCoordPointerEXT) (GLenum texunit, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewMultiTexCoordPointerEXT");
+extern void ( * glMultiTexCoordPointerEXT) (GLenum texunit, GLint size, GLenum type, GLsizei stride, const void *pointer) __asm__("__glewMultiTexCoordPointerEXT");
 extern void ( * glMultiTexEnvfEXT) (GLenum texunit, GLenum target, GLenum pname, GLfloat param) __asm__("__glewMultiTexEnvfEXT");
 extern void ( * glMultiTexEnvfvEXT) (GLenum texunit, GLenum target, GLenum pname, const GLfloat* params) __asm__("__glewMultiTexEnvfvEXT");
 extern void ( * glMultiTexEnviEXT) (GLenum texunit, GLenum target, GLenum pname, GLint param) __asm__("__glewMultiTexEnviEXT");
@@ -6092,9 +6316,9 @@ extern void ( * glMultiTexGenfEXT) (GLenum texunit, GLenum coord, GLenum pname, 
 extern void ( * glMultiTexGenfvEXT) (GLenum texunit, GLenum coord, GLenum pname, const GLfloat* params) __asm__("__glewMultiTexGenfvEXT");
 extern void ( * glMultiTexGeniEXT) (GLenum texunit, GLenum coord, GLenum pname, GLint param) __asm__("__glewMultiTexGeniEXT");
 extern void ( * glMultiTexGenivEXT) (GLenum texunit, GLenum coord, GLenum pname, const GLint* params) __asm__("__glewMultiTexGenivEXT");
-extern void ( * glMultiTexImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewMultiTexImage1DEXT");
-extern void ( * glMultiTexImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewMultiTexImage2DEXT");
-extern void ( * glMultiTexImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewMultiTexImage3DEXT");
+extern void ( * glMultiTexImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels) __asm__("__glewMultiTexImage1DEXT");
+extern void ( * glMultiTexImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels) __asm__("__glewMultiTexImage2DEXT");
+extern void ( * glMultiTexImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels) __asm__("__glewMultiTexImage3DEXT");
 extern void ( * glMultiTexParameterIivEXT) (GLenum texunit, GLenum target, GLenum pname, const GLint* params) __asm__("__glewMultiTexParameterIivEXT");
 extern void ( * glMultiTexParameterIuivEXT) (GLenum texunit, GLenum target, GLenum pname, const GLuint* params) __asm__("__glewMultiTexParameterIuivEXT");
 extern void ( * glMultiTexParameterfEXT) (GLenum texunit, GLenum target, GLenum pname, GLfloat param) __asm__("__glewMultiTexParameterfEXT");
@@ -6102,11 +6326,11 @@ extern void ( * glMultiTexParameterfvEXT) (GLenum texunit, GLenum target, GLenum
 extern void ( * glMultiTexParameteriEXT) (GLenum texunit, GLenum target, GLenum pname, GLint param) __asm__("__glewMultiTexParameteriEXT");
 extern void ( * glMultiTexParameterivEXT) (GLenum texunit, GLenum target, GLenum pname, const GLint* param) __asm__("__glewMultiTexParameterivEXT");
 extern void ( * glMultiTexRenderbufferEXT) (GLenum texunit, GLenum target, GLuint renderbuffer) __asm__("__glewMultiTexRenderbufferEXT");
-extern void ( * glMultiTexSubImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewMultiTexSubImage1DEXT");
-extern void ( * glMultiTexSubImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewMultiTexSubImage2DEXT");
-extern void ( * glMultiTexSubImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewMultiTexSubImage3DEXT");
-extern void ( * glNamedBufferDataEXT) (GLuint buffer, GLsizeiptr size, const GLvoid *data, GLenum usage) __asm__("__glewNamedBufferDataEXT");
-extern void ( * glNamedBufferSubDataEXT) (GLuint buffer, GLintptr offset, GLsizeiptr size, const GLvoid *data) __asm__("__glewNamedBufferSubDataEXT");
+extern void ( * glMultiTexSubImage1DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels) __asm__("__glewMultiTexSubImage1DEXT");
+extern void ( * glMultiTexSubImage2DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels) __asm__("__glewMultiTexSubImage2DEXT");
+extern void ( * glMultiTexSubImage3DEXT) (GLenum texunit, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels) __asm__("__glewMultiTexSubImage3DEXT");
+extern void ( * glNamedBufferDataEXT) (GLuint buffer, GLsizeiptr size, const void *data, GLenum usage) __asm__("__glewNamedBufferDataEXT");
+extern void ( * glNamedBufferSubDataEXT) (GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data) __asm__("__glewNamedBufferSubDataEXT");
 extern void ( * glNamedCopyBufferSubDataEXT) (GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size) __asm__("__glewNamedCopyBufferSubDataEXT");
 extern void ( * glNamedFramebufferRenderbufferEXT) (GLuint framebuffer, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer) __asm__("__glewNamedFramebufferRenderbufferEXT");
 extern void ( * glNamedFramebufferTexture1DEXT) (GLuint framebuffer, GLenum attachment, GLenum textarget, GLuint texture, GLint level) __asm__("__glewNamedFramebufferTexture1DEXT");
@@ -6126,7 +6350,7 @@ extern void ( * glNamedProgramLocalParameterI4uivEXT) (GLuint program, GLenum ta
 extern void ( * glNamedProgramLocalParameters4fvEXT) (GLuint program, GLenum target, GLuint index, GLsizei count, const GLfloat* params) __asm__("__glewNamedProgramLocalParameters4fvEXT");
 extern void ( * glNamedProgramLocalParametersI4ivEXT) (GLuint program, GLenum target, GLuint index, GLsizei count, const GLint* params) __asm__("__glewNamedProgramLocalParametersI4ivEXT");
 extern void ( * glNamedProgramLocalParametersI4uivEXT) (GLuint program, GLenum target, GLuint index, GLsizei count, const GLuint* params) __asm__("__glewNamedProgramLocalParametersI4uivEXT");
-extern void ( * glNamedProgramStringEXT) (GLuint program, GLenum target, GLenum format, GLsizei len, const GLvoid *string) __asm__("__glewNamedProgramStringEXT");
+extern void ( * glNamedProgramStringEXT) (GLuint program, GLenum target, GLenum format, GLsizei len, const void *string) __asm__("__glewNamedProgramStringEXT");
 extern void ( * glNamedRenderbufferStorageEXT) (GLuint renderbuffer, GLenum internalformat, GLsizei width, GLsizei height) __asm__("__glewNamedRenderbufferStorageEXT");
 extern void ( * glNamedRenderbufferStorageMultisampleCoverageEXT) (GLuint renderbuffer, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height) __asm__("__glewNamedRenderbufferStorageMultisampleCoverageEXT");
 extern void ( * glNamedRenderbufferStorageMultisampleEXT) (GLuint renderbuffer, GLsizei samples, GLenum internalformat, GLsizei width, GLsizei height) __asm__("__glewNamedRenderbufferStorageMultisampleEXT");
@@ -6165,9 +6389,9 @@ extern void ( * glProgramUniformMatrix4x2fvEXT) (GLuint program, GLint location,
 extern void ( * glProgramUniformMatrix4x3fvEXT) (GLuint program, GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) __asm__("__glewProgramUniformMatrix4x3fvEXT");
 extern void ( * glPushClientAttribDefaultEXT) (GLbitfield mask) __asm__("__glewPushClientAttribDefaultEXT");
 extern void ( * glTextureBufferEXT) (GLuint texture, GLenum target, GLenum internalformat, GLuint buffer) __asm__("__glewTextureBufferEXT");
-extern void ( * glTextureImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTextureImage1DEXT");
-extern void ( * glTextureImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTextureImage2DEXT");
-extern void ( * glTextureImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTextureImage3DEXT");
+extern void ( * glTextureImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels) __asm__("__glewTextureImage1DEXT");
+extern void ( * glTextureImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void *pixels) __asm__("__glewTextureImage2DEXT");
+extern void ( * glTextureImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels) __asm__("__glewTextureImage3DEXT");
 extern void ( * glTextureParameterIivEXT) (GLuint texture, GLenum target, GLenum pname, const GLint* params) __asm__("__glewTextureParameterIivEXT");
 extern void ( * glTextureParameterIuivEXT) (GLuint texture, GLenum target, GLenum pname, const GLuint* params) __asm__("__glewTextureParameterIuivEXT");
 extern void ( * glTextureParameterfEXT) (GLuint texture, GLenum target, GLenum pname, GLfloat param) __asm__("__glewTextureParameterfEXT");
@@ -6175,9 +6399,9 @@ extern void ( * glTextureParameterfvEXT) (GLuint texture, GLenum target, GLenum 
 extern void ( * glTextureParameteriEXT) (GLuint texture, GLenum target, GLenum pname, GLint param) __asm__("__glewTextureParameteriEXT");
 extern void ( * glTextureParameterivEXT) (GLuint texture, GLenum target, GLenum pname, const GLint* param) __asm__("__glewTextureParameterivEXT");
 extern void ( * glTextureRenderbufferEXT) (GLuint texture, GLenum target, GLuint renderbuffer) __asm__("__glewTextureRenderbufferEXT");
-extern void ( * glTextureSubImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTextureSubImage1DEXT");
-extern void ( * glTextureSubImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTextureSubImage2DEXT");
-extern void ( * glTextureSubImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTextureSubImage3DEXT");
+extern void ( * glTextureSubImage1DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels) __asm__("__glewTextureSubImage1DEXT");
+extern void ( * glTextureSubImage2DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels) __asm__("__glewTextureSubImage2DEXT");
+extern void ( * glTextureSubImage3DEXT) (GLuint texture, GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels) __asm__("__glewTextureSubImage3DEXT");
 extern GLboolean ( * glUnmapNamedBufferEXT) (GLuint buffer) __asm__("__glewUnmapNamedBufferEXT");
 extern void ( * glVertexArrayColorOffsetEXT) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset) __asm__("__glewVertexArrayColorOffsetEXT");
 extern void ( * glVertexArrayEdgeFlagOffsetEXT) (GLuint vaobj, GLuint buffer, GLsizei stride, GLintptr offset) __asm__("__glewVertexArrayEdgeFlagOffsetEXT");
@@ -6187,6 +6411,7 @@ extern void ( * glVertexArrayMultiTexCoordOffsetEXT) (GLuint vaobj, GLuint buffe
 extern void ( * glVertexArrayNormalOffsetEXT) (GLuint vaobj, GLuint buffer, GLenum type, GLsizei stride, GLintptr offset) __asm__("__glewVertexArrayNormalOffsetEXT");
 extern void ( * glVertexArraySecondaryColorOffsetEXT) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset) __asm__("__glewVertexArraySecondaryColorOffsetEXT");
 extern void ( * glVertexArrayTexCoordOffsetEXT) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset) __asm__("__glewVertexArrayTexCoordOffsetEXT");
+extern void ( * glVertexArrayVertexAttribDivisorEXT) (GLuint vaobj, GLuint index, GLuint divisor) __asm__("__glewVertexArrayVertexAttribDivisorEXT");
 extern void ( * glVertexArrayVertexAttribIOffsetEXT) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset) __asm__("__glewVertexArrayVertexAttribIOffsetEXT");
 extern void ( * glVertexArrayVertexAttribOffsetEXT) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, GLintptr offset) __asm__("__glewVertexArrayVertexAttribOffsetEXT");
 extern void ( * glVertexArrayVertexOffsetEXT) (GLuint vaobj, GLuint buffer, GLint size, GLenum type, GLsizei stride, GLintptr offset) __asm__("__glewVertexArrayVertexOffsetEXT");
@@ -6197,9 +6422,9 @@ extern void ( * glGetBooleanIndexedvEXT) (GLenum value, GLuint index, GLboolean*
 extern void ( * glGetIntegerIndexedvEXT) (GLenum value, GLuint index, GLint* data) __asm__("__glewGetIntegerIndexedvEXT");
 extern GLboolean ( * glIsEnabledIndexedEXT) (GLenum target, GLuint index) __asm__("__glewIsEnabledIndexedEXT");
 extern void ( * glDrawArraysInstancedEXT) (GLenum mode, GLint start, GLsizei count, GLsizei primcount) __asm__("__glewDrawArraysInstancedEXT");
-extern void ( * glDrawElementsInstancedEXT) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount) __asm__("__glewDrawElementsInstancedEXT");
-extern void ( * glDrawRangeElementsEXT) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid *indices) __asm__("__glewDrawRangeElementsEXT");
-extern void ( * glFogCoordPointerEXT) (GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewFogCoordPointerEXT");
+extern void ( * glDrawElementsInstancedEXT) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount) __asm__("__glewDrawElementsInstancedEXT");
+extern void ( * glDrawRangeElementsEXT) (GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void *indices) __asm__("__glewDrawRangeElementsEXT");
+extern void ( * glFogCoordPointerEXT) (GLenum type, GLsizei stride, const void *pointer) __asm__("__glewFogCoordPointerEXT");
 extern void ( * glFogCoorddEXT) (GLdouble coord) __asm__("__glewFogCoorddEXT");
 extern void ( * glFogCoorddvEXT) (const GLdouble *coord) __asm__("__glewFogCoorddvEXT");
 extern void ( * glFogCoordfEXT) (GLfloat coord) __asm__("__glewFogCoordfEXT");
@@ -6279,11 +6504,11 @@ extern void ( * glVertexAttribI4ubvEXT) (GLuint index, const GLubyte *v) __asm__
 extern void ( * glVertexAttribI4uiEXT) (GLuint index, GLuint x, GLuint y, GLuint z, GLuint w) __asm__("__glewVertexAttribI4uiEXT");
 extern void ( * glVertexAttribI4uivEXT) (GLuint index, const GLuint *v) __asm__("__glewVertexAttribI4uivEXT");
 extern void ( * glVertexAttribI4usvEXT) (GLuint index, const GLushort *v) __asm__("__glewVertexAttribI4usvEXT");
-extern void ( * glVertexAttribIPointerEXT) (GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewVertexAttribIPointerEXT");
-extern void ( * glGetHistogramEXT) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values) __asm__("__glewGetHistogramEXT");
+extern void ( * glVertexAttribIPointerEXT) (GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer) __asm__("__glewVertexAttribIPointerEXT");
+extern void ( * glGetHistogramEXT) (GLenum target, GLboolean reset, GLenum format, GLenum type, void *values) __asm__("__glewGetHistogramEXT");
 extern void ( * glGetHistogramParameterfvEXT) (GLenum target, GLenum pname, GLfloat* params) __asm__("__glewGetHistogramParameterfvEXT");
 extern void ( * glGetHistogramParameterivEXT) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetHistogramParameterivEXT");
-extern void ( * glGetMinmaxEXT) (GLenum target, GLboolean reset, GLenum format, GLenum type, GLvoid *values) __asm__("__glewGetMinmaxEXT");
+extern void ( * glGetMinmaxEXT) (GLenum target, GLboolean reset, GLenum format, GLenum type, void *values) __asm__("__glewGetMinmaxEXT");
 extern void ( * glGetMinmaxParameterfvEXT) (GLenum target, GLenum pname, GLfloat* params) __asm__("__glewGetMinmaxParameterfvEXT");
 extern void ( * glGetMinmaxParameterivEXT) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetMinmaxParameterivEXT");
 extern void ( * glHistogramEXT) (GLenum target, GLsizei width, GLenum internalformat, GLboolean sink) __asm__("__glewHistogramEXT");
@@ -6296,11 +6521,11 @@ extern void ( * glApplyTextureEXT) (GLenum mode) __asm__("__glewApplyTextureEXT"
 extern void ( * glTextureLightEXT) (GLenum pname) __asm__("__glewTextureLightEXT");
 extern void ( * glTextureMaterialEXT) (GLenum face, GLenum mode) __asm__("__glewTextureMaterialEXT");
 extern void ( * glMultiDrawArraysEXT) (GLenum mode, const GLint* first, const GLsizei *count, GLsizei primcount) __asm__("__glewMultiDrawArraysEXT");
-extern void ( * glMultiDrawElementsEXT) (GLenum mode, GLsizei* count, GLenum type, const GLvoid * const *indices, GLsizei primcount) __asm__("__glewMultiDrawElementsEXT");
+extern void ( * glMultiDrawElementsEXT) (GLenum mode, GLsizei* count, GLenum type, const void *const *indices, GLsizei primcount) __asm__("__glewMultiDrawElementsEXT");
 extern void ( * glSampleMaskEXT) (GLclampf value, GLboolean invert) __asm__("__glewSampleMaskEXT");
 extern void ( * glSamplePatternEXT) (GLenum pattern) __asm__("__glewSamplePatternEXT");
-extern void ( * glColorTableEXT) (GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const GLvoid *data) __asm__("__glewColorTableEXT");
-extern void ( * glGetColorTableEXT) (GLenum target, GLenum format, GLenum type, GLvoid *data) __asm__("__glewGetColorTableEXT");
+extern void ( * glColorTableEXT) (GLenum target, GLenum internalFormat, GLsizei width, GLenum format, GLenum type, const void *data) __asm__("__glewColorTableEXT");
+extern void ( * glGetColorTableEXT) (GLenum target, GLenum format, GLenum type, void *data) __asm__("__glewGetColorTableEXT");
 extern void ( * glGetColorTableParameterfvEXT) (GLenum target, GLenum pname, GLfloat* params) __asm__("__glewGetColorTableParameterfvEXT");
 extern void ( * glGetColorTableParameterivEXT) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetColorTableParameterivEXT");
 extern void ( * glGetPixelTransformParameterfvEXT) (GLenum target, GLenum pname, const GLfloat* params) __asm__("__glewGetPixelTransformParameterfvEXT");
@@ -6331,17 +6556,17 @@ extern void ( * glSecondaryColor3uiEXT) (GLuint red, GLuint green, GLuint blue) 
 extern void ( * glSecondaryColor3uivEXT) (const GLuint *v) __asm__("__glewSecondaryColor3uivEXT");
 extern void ( * glSecondaryColor3usEXT) (GLushort red, GLushort green, GLushort blue) __asm__("__glewSecondaryColor3usEXT");
 extern void ( * glSecondaryColor3usvEXT) (const GLushort *v) __asm__("__glewSecondaryColor3usvEXT");
-extern void ( * glSecondaryColorPointerEXT) (GLint size, GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewSecondaryColorPointerEXT");
+extern void ( * glSecondaryColorPointerEXT) (GLint size, GLenum type, GLsizei stride, const void *pointer) __asm__("__glewSecondaryColorPointerEXT");
 extern void ( * glActiveProgramEXT) (GLuint program) __asm__("__glewActiveProgramEXT");
 extern GLuint ( * glCreateShaderProgramEXT) (GLenum type, const GLchar* string) __asm__("__glewCreateShaderProgramEXT");
 extern void ( * glUseShaderProgramEXT) (GLenum type, GLuint program) __asm__("__glewUseShaderProgramEXT");
 extern void ( * glBindImageTextureEXT) (GLuint index, GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum access, GLint format) __asm__("__glewBindImageTextureEXT");
 extern void ( * glMemoryBarrierEXT) (GLbitfield barriers) __asm__("__glewMemoryBarrierEXT");
 extern void ( * glActiveStencilFaceEXT) (GLenum face) __asm__("__glewActiveStencilFaceEXT");
-extern void ( * glTexSubImage1DEXT) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTexSubImage1DEXT");
-extern void ( * glTexSubImage2DEXT) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTexSubImage2DEXT");
-extern void ( * glTexSubImage3DEXT) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTexSubImage3DEXT");
-extern void ( * glTexImage3DEXT) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTexImage3DEXT");
+extern void ( * glTexSubImage1DEXT) (GLenum target, GLint level, GLint xoffset, GLsizei width, GLenum format, GLenum type, const void *pixels) __asm__("__glewTexSubImage1DEXT");
+extern void ( * glTexSubImage2DEXT) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels) __asm__("__glewTexSubImage2DEXT");
+extern void ( * glTexSubImage3DEXT) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void *pixels) __asm__("__glewTexSubImage3DEXT");
+extern void ( * glTexImage3DEXT) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void *pixels) __asm__("__glewTexImage3DEXT");
 extern void ( * glFramebufferTextureLayerEXT) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint layer) __asm__("__glewFramebufferTextureLayerEXT");
 extern void ( * glTexBufferEXT) (GLenum target, GLenum internalformat, GLuint buffer) __asm__("__glewTexBufferEXT");
 extern void ( * glClearColorIiEXT) (GLint red, GLint green, GLint blue, GLint alpha) __asm__("__glewClearColorIiEXT");
@@ -6367,13 +6592,13 @@ extern void ( * glEndTransformFeedbackEXT) (void) __asm__("__glewEndTransformFee
 extern void ( * glGetTransformFeedbackVaryingEXT) (GLuint program, GLuint index, GLsizei bufSize, GLsizei* length, GLsizei *size, GLenum *type, GLchar *name) __asm__("__glewGetTransformFeedbackVaryingEXT");
 extern void ( * glTransformFeedbackVaryingsEXT) (GLuint program, GLsizei count, const GLchar * const* varyings, GLenum bufferMode) __asm__("__glewTransformFeedbackVaryingsEXT");
 extern void ( * glArrayElementEXT) (GLint i) __asm__("__glewArrayElementEXT");
-extern void ( * glColorPointerEXT) (GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer) __asm__("__glewColorPointerEXT");
+extern void ( * glColorPointerEXT) (GLint size, GLenum type, GLsizei stride, GLsizei count, const void *pointer) __asm__("__glewColorPointerEXT");
 extern void ( * glDrawArraysEXT) (GLenum mode, GLint first, GLsizei count) __asm__("__glewDrawArraysEXT");
 extern void ( * glEdgeFlagPointerEXT) (GLsizei stride, GLsizei count, const GLboolean* pointer) __asm__("__glewEdgeFlagPointerEXT");
-extern void ( * glIndexPointerEXT) (GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer) __asm__("__glewIndexPointerEXT");
-extern void ( * glNormalPointerEXT) (GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer) __asm__("__glewNormalPointerEXT");
-extern void ( * glTexCoordPointerEXT) (GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer) __asm__("__glewTexCoordPointerEXT");
-extern void ( * glVertexPointerEXT) (GLint size, GLenum type, GLsizei stride, GLsizei count, const GLvoid *pointer) __asm__("__glewVertexPointerEXT");
+extern void ( * glIndexPointerEXT) (GLenum type, GLsizei stride, GLsizei count, const void *pointer) __asm__("__glewIndexPointerEXT");
+extern void ( * glNormalPointerEXT) (GLenum type, GLsizei stride, GLsizei count, const void *pointer) __asm__("__glewNormalPointerEXT");
+extern void ( * glTexCoordPointerEXT) (GLint size, GLenum type, GLsizei stride, GLsizei count, const void *pointer) __asm__("__glewTexCoordPointerEXT");
+extern void ( * glVertexPointerEXT) (GLint size, GLenum type, GLsizei stride, GLsizei count, const void *pointer) __asm__("__glewVertexPointerEXT");
 extern void ( * glGetVertexAttribLdvEXT) (GLuint index, GLenum pname, GLdouble* params) __asm__("__glewGetVertexAttribLdvEXT");
 extern void ( * glVertexArrayVertexAttribLOffsetEXT) (GLuint vaobj, GLuint buffer, GLuint index, GLint size, GLenum type, GLsizei stride, GLintptr offset) __asm__("__glewVertexArrayVertexAttribLOffsetEXT");
 extern void ( * glVertexAttribL1dEXT) (GLuint index, GLdouble x) __asm__("__glewVertexAttribL1dEXT");
@@ -6384,7 +6609,7 @@ extern void ( * glVertexAttribL3dEXT) (GLuint index, GLdouble x, GLdouble y, GLd
 extern void ( * glVertexAttribL3dvEXT) (GLuint index, const GLdouble* v) __asm__("__glewVertexAttribL3dvEXT");
 extern void ( * glVertexAttribL4dEXT) (GLuint index, GLdouble x, GLdouble y, GLdouble z, GLdouble w) __asm__("__glewVertexAttribL4dEXT");
 extern void ( * glVertexAttribL4dvEXT) (GLuint index, const GLdouble* v) __asm__("__glewVertexAttribL4dvEXT");
-extern void ( * glVertexAttribLPointerEXT) (GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewVertexAttribLPointerEXT");
+extern void ( * glVertexAttribLPointerEXT) (GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer) __asm__("__glewVertexAttribLPointerEXT");
 extern void ( * glBeginVertexShaderEXT) (void) __asm__("__glewBeginVertexShaderEXT");
 extern GLuint ( * glBindLightParameterEXT) (GLenum light, GLenum value) __asm__("__glewBindLightParameterEXT");
 extern GLuint ( * glBindMaterialParameterEXT) (GLenum face, GLenum value) __asm__("__glewBindMaterialParameterEXT");
@@ -6408,16 +6633,16 @@ extern void ( * glGetLocalConstantIntegervEXT) (GLuint id, GLenum value, GLint *
 extern void ( * glGetVariantBooleanvEXT) (GLuint id, GLenum value, GLboolean *data) __asm__("__glewGetVariantBooleanvEXT");
 extern void ( * glGetVariantFloatvEXT) (GLuint id, GLenum value, GLfloat *data) __asm__("__glewGetVariantFloatvEXT");
 extern void ( * glGetVariantIntegervEXT) (GLuint id, GLenum value, GLint *data) __asm__("__glewGetVariantIntegervEXT");
-extern void ( * glGetVariantPointervEXT) (GLuint id, GLenum value, GLvoid **data) __asm__("__glewGetVariantPointervEXT");
+extern void ( * glGetVariantPointervEXT) (GLuint id, GLenum value, void **data) __asm__("__glewGetVariantPointervEXT");
 extern void ( * glInsertComponentEXT) (GLuint res, GLuint src, GLuint num) __asm__("__glewInsertComponentEXT");
 extern GLboolean ( * glIsVariantEnabledEXT) (GLuint id, GLenum cap) __asm__("__glewIsVariantEnabledEXT");
-extern void ( * glSetInvariantEXT) (GLuint id, GLenum type, GLvoid *addr) __asm__("__glewSetInvariantEXT");
-extern void ( * glSetLocalConstantEXT) (GLuint id, GLenum type, GLvoid *addr) __asm__("__glewSetLocalConstantEXT");
+extern void ( * glSetInvariantEXT) (GLuint id, GLenum type, void *addr) __asm__("__glewSetInvariantEXT");
+extern void ( * glSetLocalConstantEXT) (GLuint id, GLenum type, void *addr) __asm__("__glewSetLocalConstantEXT");
 extern void ( * glShaderOp1EXT) (GLenum op, GLuint res, GLuint arg1) __asm__("__glewShaderOp1EXT");
 extern void ( * glShaderOp2EXT) (GLenum op, GLuint res, GLuint arg1, GLuint arg2) __asm__("__glewShaderOp2EXT");
 extern void ( * glShaderOp3EXT) (GLenum op, GLuint res, GLuint arg1, GLuint arg2, GLuint arg3) __asm__("__glewShaderOp3EXT");
 extern void ( * glSwizzleEXT) (GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW) __asm__("__glewSwizzleEXT");
-extern void ( * glVariantPointerEXT) (GLuint id, GLenum type, GLuint stride, GLvoid *addr) __asm__("__glewVariantPointerEXT");
+extern void ( * glVariantPointerEXT) (GLuint id, GLenum type, GLuint stride, void *addr) __asm__("__glewVariantPointerEXT");
 extern void ( * glVariantbvEXT) (GLuint id, GLbyte *addr) __asm__("__glewVariantbvEXT");
 extern void ( * glVariantdvEXT) (GLuint id, GLdouble *addr) __asm__("__glewVariantdvEXT");
 extern void ( * glVariantfvEXT) (GLuint id, GLfloat *addr) __asm__("__glewVariantfvEXT");
@@ -6427,12 +6652,12 @@ extern void ( * glVariantubvEXT) (GLuint id, GLubyte *addr) __asm__("__glewVaria
 extern void ( * glVariantuivEXT) (GLuint id, GLuint *addr) __asm__("__glewVariantuivEXT");
 extern void ( * glVariantusvEXT) (GLuint id, GLushort *addr) __asm__("__glewVariantusvEXT");
 extern void ( * glWriteMaskEXT) (GLuint res, GLuint in, GLenum outX, GLenum outY, GLenum outZ, GLenum outW) __asm__("__glewWriteMaskEXT");
-extern void ( * glVertexWeightPointerEXT) (GLint size, GLenum type, GLsizei stride, GLvoid *pointer) __asm__("__glewVertexWeightPointerEXT");
+extern void ( * glVertexWeightPointerEXT) (GLint size, GLenum type, GLsizei stride, void *pointer) __asm__("__glewVertexWeightPointerEXT");
 extern void ( * glVertexWeightfEXT) (GLfloat weight) __asm__("__glewVertexWeightfEXT");
 extern void ( * glVertexWeightfvEXT) (GLfloat* weight) __asm__("__glewVertexWeightfvEXT");
 extern GLsync ( * glImportSyncEXT) (GLenum external_sync_type, GLintptr external_sync, GLbitfield flags) __asm__("__glewImportSyncEXT");
 extern void ( * glFrameTerminatorGREMEDY) (void) __asm__("__glewFrameTerminatorGREMEDY");
-extern void ( * glStringMarkerGREMEDY) (GLsizei len, const GLvoid *string) __asm__("__glewStringMarkerGREMEDY");
+extern void ( * glStringMarkerGREMEDY) (GLsizei len, const void *string) __asm__("__glewStringMarkerGREMEDY");
 extern void ( * glGetImageTransformParameterfvHP) (GLenum target, GLenum pname, const GLfloat* params) __asm__("__glewGetImageTransformParameterfvHP");
 extern void ( * glGetImageTransformParameterivHP) (GLenum target, GLenum pname, const GLint* params) __asm__("__glewGetImageTransformParameterivHP");
 extern void ( * glImageTransformParameterfHP) (GLenum target, GLenum pname, const GLfloat param) __asm__("__glewImageTransformParameterfHP");
@@ -6440,34 +6665,49 @@ extern void ( * glImageTransformParameterfvHP) (GLenum target, GLenum pname, con
 extern void ( * glImageTransformParameteriHP) (GLenum target, GLenum pname, const GLint param) __asm__("__glewImageTransformParameteriHP");
 extern void ( * glImageTransformParameterivHP) (GLenum target, GLenum pname, const GLint* params) __asm__("__glewImageTransformParameterivHP");
 extern void ( * glMultiModeDrawArraysIBM) (const GLenum* mode, const GLint *first, const GLsizei *count, GLsizei primcount, GLint modestride) __asm__("__glewMultiModeDrawArraysIBM");
-extern void ( * glMultiModeDrawElementsIBM) (const GLenum* mode, const GLsizei *count, GLenum type, const GLvoid * const *indices, GLsizei primcount, GLint modestride) __asm__("__glewMultiModeDrawElementsIBM");
-extern void ( * glColorPointerListIBM) (GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride) __asm__("__glewColorPointerListIBM");
+extern void ( * glMultiModeDrawElementsIBM) (const GLenum* mode, const GLsizei *count, GLenum type, const void *const *indices, GLsizei primcount, GLint modestride) __asm__("__glewMultiModeDrawElementsIBM");
+extern void ( * glColorPointerListIBM) (GLint size, GLenum type, GLint stride, const void** pointer, GLint ptrstride) __asm__("__glewColorPointerListIBM");
 extern void ( * glEdgeFlagPointerListIBM) (GLint stride, const GLboolean ** pointer, GLint ptrstride) __asm__("__glewEdgeFlagPointerListIBM");
-extern void ( * glFogCoordPointerListIBM) (GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride) __asm__("__glewFogCoordPointerListIBM");
-extern void ( * glIndexPointerListIBM) (GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride) __asm__("__glewIndexPointerListIBM");
-extern void ( * glNormalPointerListIBM) (GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride) __asm__("__glewNormalPointerListIBM");
-extern void ( * glSecondaryColorPointerListIBM) (GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride) __asm__("__glewSecondaryColorPointerListIBM");
-extern void ( * glTexCoordPointerListIBM) (GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride) __asm__("__glewTexCoordPointerListIBM");
-extern void ( * glVertexPointerListIBM) (GLint size, GLenum type, GLint stride, const GLvoid ** pointer, GLint ptrstride) __asm__("__glewVertexPointerListIBM");
-extern GLvoid * ( * glMapTexture2DINTEL) (GLuint texture, GLint level, GLbitfield access, GLint* stride, GLenum *layout) __asm__("__glewMapTexture2DINTEL");
+extern void ( * glFogCoordPointerListIBM) (GLenum type, GLint stride, const void** pointer, GLint ptrstride) __asm__("__glewFogCoordPointerListIBM");
+extern void ( * glIndexPointerListIBM) (GLenum type, GLint stride, const void** pointer, GLint ptrstride) __asm__("__glewIndexPointerListIBM");
+extern void ( * glNormalPointerListIBM) (GLenum type, GLint stride, const void** pointer, GLint ptrstride) __asm__("__glewNormalPointerListIBM");
+extern void ( * glSecondaryColorPointerListIBM) (GLint size, GLenum type, GLint stride, const void** pointer, GLint ptrstride) __asm__("__glewSecondaryColorPointerListIBM");
+extern void ( * glTexCoordPointerListIBM) (GLint size, GLenum type, GLint stride, const void** pointer, GLint ptrstride) __asm__("__glewTexCoordPointerListIBM");
+extern void ( * glVertexPointerListIBM) (GLint size, GLenum type, GLint stride, const void** pointer, GLint ptrstride) __asm__("__glewVertexPointerListIBM");
+extern void * ( * glMapTexture2DINTEL) (GLuint texture, GLint level, GLbitfield access, GLint* stride, GLenum *layout) __asm__("__glewMapTexture2DINTEL");
 extern void ( * glSyncTextureINTEL) (GLuint texture) __asm__("__glewSyncTextureINTEL");
 extern void ( * glUnmapTexture2DINTEL) (GLuint texture, GLint level) __asm__("__glewUnmapTexture2DINTEL");
 extern void ( * glColorPointervINTEL) (GLint size, GLenum type, const void** pointer) __asm__("__glewColorPointervINTEL");
 extern void ( * glNormalPointervINTEL) (GLenum type, const void** pointer) __asm__("__glewNormalPointervINTEL");
 extern void ( * glTexCoordPointervINTEL) (GLint size, GLenum type, const void** pointer) __asm__("__glewTexCoordPointervINTEL");
 extern void ( * glVertexPointervINTEL) (GLint size, GLenum type, const void** pointer) __asm__("__glewVertexPointervINTEL");
+extern void ( * glBeginPerfQueryINTEL) (GLuint queryHandle) __asm__("__glewBeginPerfQueryINTEL");
+extern void ( * glCreatePerfQueryINTEL) (GLuint queryId, GLuint* queryHandle) __asm__("__glewCreatePerfQueryINTEL");
+extern void ( * glDeletePerfQueryINTEL) (GLuint queryHandle) __asm__("__glewDeletePerfQueryINTEL");
+extern void ( * glEndPerfQueryINTEL) (GLuint queryHandle) __asm__("__glewEndPerfQueryINTEL");
+extern void ( * glGetFirstPerfQueryIdINTEL) (GLuint* queryId) __asm__("__glewGetFirstPerfQueryIdINTEL");
+extern void ( * glGetNextPerfQueryIdINTEL) (GLuint queryId, GLuint* nextQueryId) __asm__("__glewGetNextPerfQueryIdINTEL");
+extern void ( * glGetPerfCounterInfoINTEL) (GLuint queryId, GLuint counterId, GLuint counterNameLength, GLchar* counterName, GLuint counterDescLength, GLchar *counterDesc, GLuint *counterOffset, GLuint *counterDataSize, GLuint *counterTypeEnum, GLuint *counterDataTypeEnum, GLuint64 *rawCounterMaxValue) __asm__("__glewGetPerfCounterInfoINTEL");
+extern void ( * glGetPerfQueryDataINTEL) (GLuint queryHandle, GLuint flags, GLsizei dataSize, void *data, GLuint *bytesWritten) __asm__("__glewGetPerfQueryDataINTEL");
+extern void ( * glGetPerfQueryIdByNameINTEL) (GLchar* queryName, GLuint *queryId) __asm__("__glewGetPerfQueryIdByNameINTEL");
+extern void ( * glGetPerfQueryInfoINTEL) (GLuint queryId, GLuint queryNameLength, GLchar* queryName, GLuint *dataSize, GLuint *noCounters, GLuint *noInstances, GLuint *capsMask) __asm__("__glewGetPerfQueryInfoINTEL");
 extern void ( * glTexScissorFuncINTEL) (GLenum target, GLenum lfunc, GLenum hfunc) __asm__("__glewTexScissorFuncINTEL");
 extern void ( * glTexScissorINTEL) (GLenum target, GLclampf tlow, GLclampf thigh) __asm__("__glewTexScissorINTEL");
-extern void ( * glDebugMessageCallback) (GLDEBUGPROC callback, const GLvoid *userParam) __asm__("__glewDebugMessageCallback");
+extern void ( * glBlendBarrierKHR) (void) __asm__("__glewBlendBarrierKHR");
+extern void ( * glDebugMessageCallback) (GLDEBUGPROC callback, const void *userParam) __asm__("__glewDebugMessageCallback");
 extern void ( * glDebugMessageControl) (GLenum source, GLenum type, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled) __asm__("__glewDebugMessageControl");
 extern void ( * glDebugMessageInsert) (GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* buf) __asm__("__glewDebugMessageInsert");
-extern GLuint ( * glGetDebugMessageLog) (GLuint count, GLsizei bufsize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, GLchar* messageLog) __asm__("__glewGetDebugMessageLog");
+extern GLuint ( * glGetDebugMessageLog) (GLuint count, GLsizei bufSize, GLenum* sources, GLenum* types, GLuint* ids, GLenum* severities, GLsizei* lengths, GLchar* messageLog) __asm__("__glewGetDebugMessageLog");
 extern void ( * glGetObjectLabel) (GLenum identifier, GLuint name, GLsizei bufSize, GLsizei* length, GLchar *label) __asm__("__glewGetObjectLabel");
-extern void ( * glGetObjectPtrLabel) (void* ptr, GLsizei bufSize, GLsizei* length, GLchar *label) __asm__("__glewGetObjectPtrLabel");
+extern void ( * glGetObjectPtrLabel) (const void *ptr, GLsizei bufSize, GLsizei* length, GLchar *label) __asm__("__glewGetObjectPtrLabel");
 extern void ( * glObjectLabel) (GLenum identifier, GLuint name, GLsizei length, const GLchar* label) __asm__("__glewObjectLabel");
-extern void ( * glObjectPtrLabel) (void* ptr, GLsizei length, const GLchar* label) __asm__("__glewObjectPtrLabel");
+extern void ( * glObjectPtrLabel) (const void *ptr, GLsizei length, const GLchar* label) __asm__("__glewObjectPtrLabel");
 extern void ( * glPopDebugGroup) (void) __asm__("__glewPopDebugGroup");
 extern void ( * glPushDebugGroup) (GLenum source, GLuint id, GLsizei length, const GLchar * message) __asm__("__glewPushDebugGroup");
+extern void ( * glGetnUniformfv) (GLuint program, GLint location, GLsizei bufSize, GLfloat* params) __asm__("__glewGetnUniformfv");
+extern void ( * glGetnUniformiv) (GLuint program, GLint location, GLsizei bufSize, GLint* params) __asm__("__glewGetnUniformiv");
+extern void ( * glGetnUniformuiv) (GLuint program, GLint location, GLsizei bufSize, GLuint* params) __asm__("__glewGetnUniformuiv");
+extern void ( * glReadnPixels) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void *data) __asm__("__glewReadnPixels");
 extern GLuint ( * glBufferRegionEnabled) (void) __asm__("__glewBufferRegionEnabled");
 extern void ( * glDeleteBufferRegion) (GLenum region) __asm__("__glewDeleteBufferRegion");
 extern void ( * glDrawBufferRegion) (GLuint region, GLint x, GLint y, GLsizei width, GLsizei height, GLint xDest, GLint yDest) __asm__("__glewDrawBufferRegion");
@@ -6500,8 +6740,10 @@ extern void ( * glWindowPos4sMESA) (GLshort x, GLshort y, GLshort z, GLshort w) 
 extern void ( * glWindowPos4svMESA) (const GLshort* p) __asm__("__glewWindowPos4svMESA");
 extern void ( * glBeginConditionalRenderNVX) (GLuint id) __asm__("__glewBeginConditionalRenderNVX");
 extern void ( * glEndConditionalRenderNVX) (void) __asm__("__glewEndConditionalRenderNVX");
-extern void ( * glMultiDrawArraysIndirectBindlessNV) (GLenum mode, const GLvoid *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount) __asm__("__glewMultiDrawArraysIndirectBindlessNV");
-extern void ( * glMultiDrawElementsIndirectBindlessNV) (GLenum mode, GLenum type, const GLvoid *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount) __asm__("__glewMultiDrawElementsIndirectBindlessNV");
+extern void ( * glMultiDrawArraysIndirectBindlessNV) (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount) __asm__("__glewMultiDrawArraysIndirectBindlessNV");
+extern void ( * glMultiDrawElementsIndirectBindlessNV) (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount) __asm__("__glewMultiDrawElementsIndirectBindlessNV");
+extern void ( * glMultiDrawArraysIndirectBindlessCountNV) (GLenum mode, const void *indirect, GLintptr drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount) __asm__("__glewMultiDrawArraysIndirectBindlessCountNV");
+extern void ( * glMultiDrawElementsIndirectBindlessCountNV) (GLenum mode, GLenum type, const void *indirect, GLintptr drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount) __asm__("__glewMultiDrawElementsIndirectBindlessCountNV");
 extern GLuint64 ( * glGetImageHandleNV) (GLuint texture, GLint level, GLboolean layered, GLint layer, GLenum format) __asm__("__glewGetImageHandleNV");
 extern GLuint64 ( * glGetTextureHandleNV) (GLuint texture) __asm__("__glewGetTextureHandleNV");
 extern GLuint64 ( * glGetTextureSamplerHandleNV) (GLuint texture, GLuint sampler) __asm__("__glewGetTextureSamplerHandleNV");
@@ -6527,10 +6769,10 @@ extern void ( * glDrawTextureNV) (GLuint texture, GLuint sampler, GLfloat x0, GL
 extern void ( * glEvalMapsNV) (GLenum target, GLenum mode) __asm__("__glewEvalMapsNV");
 extern void ( * glGetMapAttribParameterfvNV) (GLenum target, GLuint index, GLenum pname, GLfloat* params) __asm__("__glewGetMapAttribParameterfvNV");
 extern void ( * glGetMapAttribParameterivNV) (GLenum target, GLuint index, GLenum pname, GLint* params) __asm__("__glewGetMapAttribParameterivNV");
-extern void ( * glGetMapControlPointsNV) (GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLboolean packed, GLvoid *points) __asm__("__glewGetMapControlPointsNV");
+extern void ( * glGetMapControlPointsNV) (GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLboolean packed, void *points) __asm__("__glewGetMapControlPointsNV");
 extern void ( * glGetMapParameterfvNV) (GLenum target, GLenum pname, GLfloat* params) __asm__("__glewGetMapParameterfvNV");
 extern void ( * glGetMapParameterivNV) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetMapParameterivNV");
-extern void ( * glMapControlPointsNV) (GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLint uorder, GLint vorder, GLboolean packed, const GLvoid *points) __asm__("__glewMapControlPointsNV");
+extern void ( * glMapControlPointsNV) (GLenum target, GLuint index, GLenum type, GLsizei ustride, GLsizei vstride, GLint uorder, GLint vorder, GLboolean packed, const void *points) __asm__("__glewMapControlPointsNV");
 extern void ( * glMapParameterfvNV) (GLenum target, GLenum pname, const GLfloat* params) __asm__("__glewMapParameterfvNV");
 extern void ( * glMapParameterivNV) (GLenum target, GLenum pname, const GLint* params) __asm__("__glewMapParameterivNV");
 extern void ( * glGetMultisamplefvNV) (GLenum pname, GLuint index, GLfloat* val) __asm__("__glewGetMultisamplefvNV");
@@ -6678,13 +6920,13 @@ extern GLboolean ( * glIsPathNV) (GLuint path) __asm__("__glewIsPathNV");
 extern GLboolean ( * glIsPointInFillPathNV) (GLuint path, GLuint mask, GLfloat x, GLfloat y) __asm__("__glewIsPointInFillPathNV");
 extern GLboolean ( * glIsPointInStrokePathNV) (GLuint path, GLfloat x, GLfloat y) __asm__("__glewIsPointInStrokePathNV");
 extern void ( * glPathColorGenNV) (GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat* coeffs) __asm__("__glewPathColorGenNV");
-extern void ( * glPathCommandsNV) (GLuint path, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const GLvoid*coords) __asm__("__glewPathCommandsNV");
+extern void ( * glPathCommandsNV) (GLuint path, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const void*coords) __asm__("__glewPathCommandsNV");
 extern void ( * glPathCoordsNV) (GLuint path, GLsizei numCoords, GLenum coordType, const void* coords) __asm__("__glewPathCoordsNV");
 extern void ( * glPathCoverDepthFuncNV) (GLenum zfunc) __asm__("__glewPathCoverDepthFuncNV");
 extern void ( * glPathDashArrayNV) (GLuint path, GLsizei dashCount, const GLfloat* dashArray) __asm__("__glewPathDashArrayNV");
 extern void ( * glPathFogGenNV) (GLenum genMode) __asm__("__glewPathFogGenNV");
 extern void ( * glPathGlyphRangeNV) (GLuint firstPathName, GLenum fontTarget, const void* fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale) __asm__("__glewPathGlyphRangeNV");
-extern void ( * glPathGlyphsNV) (GLuint firstPathName, GLenum fontTarget, const void* fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const GLvoid*charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale) __asm__("__glewPathGlyphsNV");
+extern void ( * glPathGlyphsNV) (GLuint firstPathName, GLenum fontTarget, const void* fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const void*charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale) __asm__("__glewPathGlyphsNV");
 extern void ( * glPathParameterfNV) (GLuint path, GLenum pname, GLfloat value) __asm__("__glewPathParameterfNV");
 extern void ( * glPathParameterfvNV) (GLuint path, GLenum pname, const GLfloat* value) __asm__("__glewPathParameterfvNV");
 extern void ( * glPathParameteriNV) (GLuint path, GLenum pname, GLint value) __asm__("__glewPathParameteriNV");
@@ -6692,7 +6934,7 @@ extern void ( * glPathParameterivNV) (GLuint path, GLenum pname, const GLint* va
 extern void ( * glPathStencilDepthOffsetNV) (GLfloat factor, GLfloat units) __asm__("__glewPathStencilDepthOffsetNV");
 extern void ( * glPathStencilFuncNV) (GLenum func, GLint ref, GLuint mask) __asm__("__glewPathStencilFuncNV");
 extern void ( * glPathStringNV) (GLuint path, GLenum format, GLsizei length, const void* pathString) __asm__("__glewPathStringNV");
-extern void ( * glPathSubCommandsNV) (GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const GLvoid*coords) __asm__("__glewPathSubCommandsNV");
+extern void ( * glPathSubCommandsNV) (GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const void*coords) __asm__("__glewPathSubCommandsNV");
 extern void ( * glPathSubCoordsNV) (GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const void* coords) __asm__("__glewPathSubCoordsNV");
 extern void ( * glPathTexGenNV) (GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat* coeffs) __asm__("__glewPathTexGenNV");
 extern GLboolean ( * glPointAlongPathNV) (GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat* x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY) __asm__("__glewPointAlongPathNV");
@@ -6703,7 +6945,7 @@ extern void ( * glStencilStrokePathNV) (GLuint path, GLint reference, GLuint mas
 extern void ( * glTransformPathNV) (GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat* transformValues) __asm__("__glewTransformPathNV");
 extern void ( * glWeightPathsNV) (GLuint resultPath, GLsizei numPaths, const GLuint paths[], const GLfloat weights[]) __asm__("__glewWeightPathsNV");
 extern void ( * glFlushPixelDataRangeNV) (GLenum target) __asm__("__glewFlushPixelDataRangeNV");
-extern void ( * glPixelDataRangeNV) (GLenum target, GLsizei length, GLvoid *pointer) __asm__("__glewPixelDataRangeNV");
+extern void ( * glPixelDataRangeNV) (GLenum target, GLsizei length, void *pointer) __asm__("__glewPixelDataRangeNV");
 extern void ( * glPointParameteriNV) (GLenum pname, GLint param) __asm__("__glewPointParameteriNV");
 extern void ( * glPointParameterivNV) (GLenum pname, const GLint* params) __asm__("__glewPointParameterivNV");
 extern void ( * glGetVideoi64vNV) (GLuint video_slot, GLenum pname, GLint64EXT* params) __asm__("__glewGetVideoi64vNV");
@@ -6769,7 +7011,7 @@ extern void ( * glPauseTransformFeedbackNV) (void) __asm__("__glewPauseTransform
 extern void ( * glResumeTransformFeedbackNV) (void) __asm__("__glewResumeTransformFeedbackNV");
 extern void ( * glVDPAUFiniNV) (void) __asm__("__glewVDPAUFiniNV");
 extern void ( * glVDPAUGetSurfaceivNV) (GLvdpauSurfaceNV surface, GLenum pname, GLsizei bufSize, GLsizei* length, GLint *values) __asm__("__glewVDPAUGetSurfaceivNV");
-extern void ( * glVDPAUInitNV) (const void* vdpDevice, const GLvoid*getProcAddress) __asm__("__glewVDPAUInitNV");
+extern void ( * glVDPAUInitNV) (const void* vdpDevice, const void*getProcAddress) __asm__("__glewVDPAUInitNV");
 extern void ( * glVDPAUIsSurfaceNV) (GLvdpauSurfaceNV surface) __asm__("__glewVDPAUIsSurfaceNV");
 extern void ( * glVDPAUMapSurfacesNV) (GLsizei numSurfaces, const GLvdpauSurfaceNV* surfaces) __asm__("__glewVDPAUMapSurfacesNV");
 extern GLvdpauSurfaceNV ( * glVDPAURegisterOutputSurfaceNV) (const void* vdpSurface, GLenum target, GLsizei numTextureNames, const GLuint *textureNames) __asm__("__glewVDPAURegisterOutputSurfaceNV");
@@ -6778,7 +7020,7 @@ extern void ( * glVDPAUSurfaceAccessNV) (GLvdpauSurfaceNV surface, GLenum access
 extern void ( * glVDPAUUnmapSurfacesNV) (GLsizei numSurface, const GLvdpauSurfaceNV* surfaces) __asm__("__glewVDPAUUnmapSurfacesNV");
 extern void ( * glVDPAUUnregisterSurfaceNV) (GLvdpauSurfaceNV surface) __asm__("__glewVDPAUUnregisterSurfaceNV");
 extern void ( * glFlushVertexArrayRangeNV) (void) __asm__("__glewFlushVertexArrayRangeNV");
-extern void ( * glVertexArrayRangeNV) (GLsizei length, GLvoid *pointer) __asm__("__glewVertexArrayRangeNV");
+extern void ( * glVertexArrayRangeNV) (GLsizei length, void *pointer) __asm__("__glewVertexArrayRangeNV");
 extern void ( * glGetVertexAttribLi64vNV) (GLuint index, GLenum pname, GLint64EXT* params) __asm__("__glewGetVertexAttribLi64vNV");
 extern void ( * glGetVertexAttribLui64vNV) (GLuint index, GLenum pname, GLuint64EXT* params) __asm__("__glewGetVertexAttribLui64vNV");
 extern void ( * glVertexAttribL1i64NV) (GLuint index, GLint64EXT x) __asm__("__glewVertexAttribL1i64NV");
@@ -6820,7 +7062,7 @@ extern void ( * glGetProgramParameterfvNV) (GLenum target, GLuint index, GLenum 
 extern void ( * glGetProgramStringNV) (GLuint id, GLenum pname, GLubyte* program) __asm__("__glewGetProgramStringNV");
 extern void ( * glGetProgramivNV) (GLuint id, GLenum pname, GLint* params) __asm__("__glewGetProgramivNV");
 extern void ( * glGetTrackMatrixivNV) (GLenum target, GLuint address, GLenum pname, GLint* params) __asm__("__glewGetTrackMatrixivNV");
-extern void ( * glGetVertexAttribPointervNV) (GLuint index, GLenum pname, GLvoid** pointer) __asm__("__glewGetVertexAttribPointervNV");
+extern void ( * glGetVertexAttribPointervNV) (GLuint index, GLenum pname, void** pointer) __asm__("__glewGetVertexAttribPointervNV");
 extern void ( * glGetVertexAttribdvNV) (GLuint index, GLenum pname, GLdouble* params) __asm__("__glewGetVertexAttribdvNV");
 extern void ( * glGetVertexAttribfvNV) (GLuint index, GLenum pname, GLfloat* params) __asm__("__glewGetVertexAttribfvNV");
 extern void ( * glGetVertexAttribivNV) (GLuint index, GLenum pname, GLint* params) __asm__("__glewGetVertexAttribivNV");
@@ -6860,7 +7102,7 @@ extern void ( * glVertexAttrib4sNV) (GLuint index, GLshort x, GLshort y, GLshort
 extern void ( * glVertexAttrib4svNV) (GLuint index, const GLshort* v) __asm__("__glewVertexAttrib4svNV");
 extern void ( * glVertexAttrib4ubNV) (GLuint index, GLubyte x, GLubyte y, GLubyte z, GLubyte w) __asm__("__glewVertexAttrib4ubNV");
 extern void ( * glVertexAttrib4ubvNV) (GLuint index, const GLubyte* v) __asm__("__glewVertexAttrib4ubvNV");
-extern void ( * glVertexAttribPointerNV) (GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewVertexAttribPointerNV");
+extern void ( * glVertexAttribPointerNV) (GLuint index, GLint size, GLenum type, GLsizei stride, const void *pointer) __asm__("__glewVertexAttribPointerNV");
 extern void ( * glVertexAttribs1dvNV) (GLuint index, GLsizei n, const GLdouble* v) __asm__("__glewVertexAttribs1dvNV");
 extern void ( * glVertexAttribs1fvNV) (GLuint index, GLsizei n, const GLfloat* v) __asm__("__glewVertexAttribs1fvNV");
 extern void ( * glVertexAttribs1svNV) (GLuint index, GLsizei n, const GLshort* v) __asm__("__glewVertexAttribs1svNV");
@@ -6934,12 +7176,13 @@ extern void ( * glGetTexEnvxv) (GLenum env, GLenum pname, GLfixed* params) __asm
 extern void ( * glGetTexParameterxv) (GLenum target, GLenum pname, GLfixed* params) __asm__("__glewGetTexParameterxv");
 extern void ( * glPointParameterx) (GLenum pname, GLfixed param) __asm__("__glewPointParameterx");
 extern void ( * glPointParameterxv) (GLenum pname, const GLfixed* params) __asm__("__glewPointParameterxv");
-extern void ( * glPointSizePointerOES) (GLenum type, GLsizei stride, const GLvoid* pointer) __asm__("__glewPointSizePointerOES");
+extern void ( * glPointSizePointerOES) (GLenum type, GLsizei stride, const void *pointer) __asm__("__glewPointSizePointerOES");
 extern void ( * glTexParameterxv) (GLenum target, GLenum pname, const GLfixed* params) __asm__("__glewTexParameterxv");
 extern const GLchar* ( * glErrorStringREGAL) (GLenum error) __asm__("__glewErrorStringREGAL");
 extern GLboolean ( * glGetExtensionREGAL) (const GLchar* ext) __asm__("__glewGetExtensionREGAL");
 extern GLboolean ( * glIsSupportedREGAL) (const GLchar* ext) __asm__("__glewIsSupportedREGAL");
 extern void ( * glLogMessageCallbackREGAL) (GLLOGPROCREGAL callback) __asm__("__glewLogMessageCallbackREGAL");
+extern void * ( * glGetProcAddressREGAL) (const GLchar *name) __asm__("__glewGetProcAddressREGAL");
 extern void ( * glDetailTexFuncSGIS) (GLenum target, GLsizei n, const GLfloat* points) __asm__("__glewDetailTexFuncSGIS");
 extern void ( * glGetDetailTexFuncSGIS) (GLenum target, GLfloat* points) __asm__("__glewGetDetailTexFuncSGIS");
 extern void ( * glFogFuncSGIS) (GLsizei n, const GLfloat* points) __asm__("__glewFogFuncSGIS");
@@ -6948,8 +7191,8 @@ extern void ( * glSampleMaskSGIS) (GLclampf value, GLboolean invert) __asm__("__
 extern void ( * glSamplePatternSGIS) (GLenum pattern) __asm__("__glewSamplePatternSGIS");
 extern void ( * glGetSharpenTexFuncSGIS) (GLenum target, GLfloat* points) __asm__("__glewGetSharpenTexFuncSGIS");
 extern void ( * glSharpenTexFuncSGIS) (GLenum target, GLsizei n, const GLfloat* points) __asm__("__glewSharpenTexFuncSGIS");
-extern void ( * glTexImage4DSGIS) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLsizei extent, GLint border, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTexImage4DSGIS");
-extern void ( * glTexSubImage4DSGIS) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint woffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei extent, GLenum format, GLenum type, const GLvoid *pixels) __asm__("__glewTexSubImage4DSGIS");
+extern void ( * glTexImage4DSGIS) (GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLsizei depth, GLsizei extent, GLint border, GLenum format, GLenum type, const void *pixels) __asm__("__glewTexImage4DSGIS");
+extern void ( * glTexSubImage4DSGIS) (GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint woffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei extent, GLenum format, GLenum type, const void *pixels) __asm__("__glewTexSubImage4DSGIS");
 extern void ( * glGetTexFilterFuncSGIS) (GLenum target, GLenum filter, GLfloat* weights) __asm__("__glewGetTexFilterFuncSGIS");
 extern void ( * glTexFilterFuncSGIS) (GLenum target, GLenum filter, GLsizei n, const GLfloat* weights) __asm__("__glewTexFilterFuncSGIS");
 extern void ( * glAsyncMarkerSGIX) (GLuint marker) __asm__("__glewAsyncMarkerSGIX");
@@ -6987,11 +7230,11 @@ extern void ( * glSpriteParameterivSGIX) (GLenum pname, GLint* params) __asm__("
 extern void ( * glTagSampleBufferSGIX) (void) __asm__("__glewTagSampleBufferSGIX");
 extern void ( * glColorTableParameterfvSGI) (GLenum target, GLenum pname, const GLfloat* params) __asm__("__glewColorTableParameterfvSGI");
 extern void ( * glColorTableParameterivSGI) (GLenum target, GLenum pname, const GLint* params) __asm__("__glewColorTableParameterivSGI");
-extern void ( * glColorTableSGI) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const GLvoid *table) __asm__("__glewColorTableSGI");
+extern void ( * glColorTableSGI) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void *table) __asm__("__glewColorTableSGI");
 extern void ( * glCopyColorTableSGI) (GLenum target, GLenum internalformat, GLint x, GLint y, GLsizei width) __asm__("__glewCopyColorTableSGI");
 extern void ( * glGetColorTableParameterfvSGI) (GLenum target, GLenum pname, GLfloat* params) __asm__("__glewGetColorTableParameterfvSGI");
 extern void ( * glGetColorTableParameterivSGI) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetColorTableParameterivSGI");
-extern void ( * glGetColorTableSGI) (GLenum target, GLenum format, GLenum type, GLvoid *table) __asm__("__glewGetColorTableSGI");
+extern void ( * glGetColorTableSGI) (GLenum target, GLenum format, GLenum type, void *table) __asm__("__glewGetColorTableSGI");
 extern void ( * glFinishTextureSUNX) (void) __asm__("__glewFinishTextureSUNX");
 extern void ( * glGlobalAlphaFactorbSUN) (GLbyte factor) __asm__("__glewGlobalAlphaFactorbSUN");
 extern void ( * glGlobalAlphaFactordSUN) (GLdouble factor) __asm__("__glewGlobalAlphaFactordSUN");
@@ -7001,8 +7244,8 @@ extern void ( * glGlobalAlphaFactorsSUN) (GLshort factor) __asm__("__glewGlobalA
 extern void ( * glGlobalAlphaFactorubSUN) (GLubyte factor) __asm__("__glewGlobalAlphaFactorubSUN");
 extern void ( * glGlobalAlphaFactoruiSUN) (GLuint factor) __asm__("__glewGlobalAlphaFactoruiSUN");
 extern void ( * glGlobalAlphaFactorusSUN) (GLushort factor) __asm__("__glewGlobalAlphaFactorusSUN");
-extern void ( * glReadVideoPixelsSUN) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLvoid* pixels) __asm__("__glewReadVideoPixelsSUN");
-extern void ( * glReplacementCodePointerSUN) (GLenum type, GLsizei stride, const GLvoid *pointer) __asm__("__glewReplacementCodePointerSUN");
+extern void ( * glReadVideoPixelsSUN) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void* pixels) __asm__("__glewReadVideoPixelsSUN");
+extern void ( * glReplacementCodePointerSUN) (GLenum type, GLsizei stride, const void *pointer) __asm__("__glewReplacementCodePointerSUN");
 extern void ( * glReplacementCodeubSUN) (GLubyte code) __asm__("__glewReplacementCodeubSUN");
 extern void ( * glReplacementCodeubvSUN) (const GLubyte* code) __asm__("__glewReplacementCodeubvSUN");
 extern void ( * glReplacementCodeuiSUN) (GLuint code) __asm__("__glewReplacementCodeuiSUN");
@@ -7070,6 +7313,7 @@ extern GLboolean __GLEW_VERSION_4_1;
 extern GLboolean __GLEW_VERSION_4_2;
 extern GLboolean __GLEW_VERSION_4_3;
 extern GLboolean __GLEW_VERSION_4_4;
+extern GLboolean __GLEW_VERSION_4_5;
 extern GLboolean __GLEW_3DFX_multisample;
 extern GLboolean __GLEW_3DFX_tbuffer;
 extern GLboolean __GLEW_3DFX_texture_compression_FXT1;
@@ -7078,20 +7322,26 @@ extern GLboolean __GLEW_AMD_conservative_depth;
 extern GLboolean __GLEW_AMD_debug_output;
 extern GLboolean __GLEW_AMD_depth_clamp_separate;
 extern GLboolean __GLEW_AMD_draw_buffers_blend;
+extern GLboolean __GLEW_AMD_gcn_shader;
+extern GLboolean __GLEW_AMD_gpu_shader_int64;
 extern GLboolean __GLEW_AMD_interleaved_elements;
 extern GLboolean __GLEW_AMD_multi_draw_indirect;
 extern GLboolean __GLEW_AMD_name_gen_delete;
+extern GLboolean __GLEW_AMD_occlusion_query_event;
 extern GLboolean __GLEW_AMD_performance_monitor;
 extern GLboolean __GLEW_AMD_pinned_memory;
 extern GLboolean __GLEW_AMD_query_buffer_object;
 extern GLboolean __GLEW_AMD_sample_positions;
 extern GLboolean __GLEW_AMD_seamless_cubemap_per_texture;
+extern GLboolean __GLEW_AMD_shader_atomic_counter_ops;
 extern GLboolean __GLEW_AMD_shader_stencil_export;
+extern GLboolean __GLEW_AMD_shader_stencil_value_export;
 extern GLboolean __GLEW_AMD_shader_trinary_minmax;
 extern GLboolean __GLEW_AMD_sparse_texture;
 extern GLboolean __GLEW_AMD_stencil_operation_extended;
 extern GLboolean __GLEW_AMD_texture_texture4;
 extern GLboolean __GLEW_AMD_transform_feedback3_lines_triangles;
+extern GLboolean __GLEW_AMD_transform_feedback4;
 extern GLboolean __GLEW_AMD_vertex_shader_layer;
 extern GLboolean __GLEW_AMD_vertex_shader_tessellator;
 extern GLboolean __GLEW_AMD_vertex_shader_viewport_index;
@@ -7125,6 +7375,7 @@ extern GLboolean __GLEW_APPLE_vertex_array_range;
 extern GLboolean __GLEW_APPLE_vertex_program_evaluators;
 extern GLboolean __GLEW_APPLE_ycbcr_422;
 extern GLboolean __GLEW_ARB_ES2_compatibility;
+extern GLboolean __GLEW_ARB_ES3_1_compatibility;
 extern GLboolean __GLEW_ARB_ES3_compatibility;
 extern GLboolean __GLEW_ARB_arrays_of_arrays;
 extern GLboolean __GLEW_ARB_base_instance;
@@ -7134,18 +7385,23 @@ extern GLboolean __GLEW_ARB_buffer_storage;
 extern GLboolean __GLEW_ARB_cl_event;
 extern GLboolean __GLEW_ARB_clear_buffer_object;
 extern GLboolean __GLEW_ARB_clear_texture;
+extern GLboolean __GLEW_ARB_clip_control;
 extern GLboolean __GLEW_ARB_color_buffer_float;
 extern GLboolean __GLEW_ARB_compatibility;
 extern GLboolean __GLEW_ARB_compressed_texture_pixel_storage;
 extern GLboolean __GLEW_ARB_compute_shader;
 extern GLboolean __GLEW_ARB_compute_variable_group_size;
+extern GLboolean __GLEW_ARB_conditional_render_inverted;
 extern GLboolean __GLEW_ARB_conservative_depth;
 extern GLboolean __GLEW_ARB_copy_buffer;
 extern GLboolean __GLEW_ARB_copy_image;
+extern GLboolean __GLEW_ARB_cull_distance;
 extern GLboolean __GLEW_ARB_debug_output;
 extern GLboolean __GLEW_ARB_depth_buffer_float;
 extern GLboolean __GLEW_ARB_depth_clamp;
 extern GLboolean __GLEW_ARB_depth_texture;
+extern GLboolean __GLEW_ARB_derivative_control;
+extern GLboolean __GLEW_ARB_direct_state_access;
 extern GLboolean __GLEW_ARB_draw_buffers;
 extern GLboolean __GLEW_ARB_draw_buffers_blend;
 extern GLboolean __GLEW_ARB_draw_elements_base_vertex;
@@ -7164,6 +7420,7 @@ extern GLboolean __GLEW_ARB_framebuffer_object;
 extern GLboolean __GLEW_ARB_framebuffer_sRGB;
 extern GLboolean __GLEW_ARB_geometry_shader4;
 extern GLboolean __GLEW_ARB_get_program_binary;
+extern GLboolean __GLEW_ARB_get_texture_sub_image;
 extern GLboolean __GLEW_ARB_gpu_shader5;
 extern GLboolean __GLEW_ARB_gpu_shader_fp64;
 extern GLboolean __GLEW_ARB_half_float_pixel;
@@ -7183,6 +7440,7 @@ extern GLboolean __GLEW_ARB_multisample;
 extern GLboolean __GLEW_ARB_multitexture;
 extern GLboolean __GLEW_ARB_occlusion_query;
 extern GLboolean __GLEW_ARB_occlusion_query2;
+extern GLboolean __GLEW_ARB_pipeline_statistics_query;
 extern GLboolean __GLEW_ARB_pixel_buffer_object;
 extern GLboolean __GLEW_ARB_point_parameters;
 extern GLboolean __GLEW_ARB_point_sprite;
@@ -7209,6 +7467,7 @@ extern GLboolean __GLEW_ARB_shader_precision;
 extern GLboolean __GLEW_ARB_shader_stencil_export;
 extern GLboolean __GLEW_ARB_shader_storage_buffer_object;
 extern GLboolean __GLEW_ARB_shader_subroutine;
+extern GLboolean __GLEW_ARB_shader_texture_image_samples;
 extern GLboolean __GLEW_ARB_shader_texture_lod;
 extern GLboolean __GLEW_ARB_shading_language_100;
 extern GLboolean __GLEW_ARB_shading_language_420pack;
@@ -7216,10 +7475,12 @@ extern GLboolean __GLEW_ARB_shading_language_include;
 extern GLboolean __GLEW_ARB_shading_language_packing;
 extern GLboolean __GLEW_ARB_shadow;
 extern GLboolean __GLEW_ARB_shadow_ambient;
+extern GLboolean __GLEW_ARB_sparse_buffer;
 extern GLboolean __GLEW_ARB_sparse_texture;
 extern GLboolean __GLEW_ARB_stencil_texturing;
 extern GLboolean __GLEW_ARB_sync;
 extern GLboolean __GLEW_ARB_tessellation_shader;
+extern GLboolean __GLEW_ARB_texture_barrier;
 extern GLboolean __GLEW_ARB_texture_border_clamp;
 extern GLboolean __GLEW_ARB_texture_buffer_object;
 extern GLboolean __GLEW_ARB_texture_buffer_object_rgb32;
@@ -7253,6 +7514,7 @@ extern GLboolean __GLEW_ARB_timer_query;
 extern GLboolean __GLEW_ARB_transform_feedback2;
 extern GLboolean __GLEW_ARB_transform_feedback3;
 extern GLboolean __GLEW_ARB_transform_feedback_instanced;
+extern GLboolean __GLEW_ARB_transform_feedback_overflow_query;
 extern GLboolean __GLEW_ARB_transpose_matrix;
 extern GLboolean __GLEW_ARB_uniform_buffer_object;
 extern GLboolean __GLEW_ARB_vertex_array_bgra;
@@ -7307,6 +7569,7 @@ extern GLboolean __GLEW_EXT_convolution;
 extern GLboolean __GLEW_EXT_coordinate_frame;
 extern GLboolean __GLEW_EXT_copy_texture;
 extern GLboolean __GLEW_EXT_cull_vertex;
+extern GLboolean __GLEW_EXT_debug_label;
 extern GLboolean __GLEW_EXT_debug_marker;
 extern GLboolean __GLEW_EXT_depth_bounds_test;
 extern GLboolean __GLEW_EXT_direct_state_access;
@@ -7347,7 +7610,9 @@ extern GLboolean __GLEW_EXT_scene_marker;
 extern GLboolean __GLEW_EXT_secondary_color;
 extern GLboolean __GLEW_EXT_separate_shader_objects;
 extern GLboolean __GLEW_EXT_separate_specular_color;
+extern GLboolean __GLEW_EXT_shader_image_load_formatted;
 extern GLboolean __GLEW_EXT_shader_image_load_store;
+extern GLboolean __GLEW_EXT_shader_integer_mix;
 extern GLboolean __GLEW_EXT_shadow_funcs;
 extern GLboolean __GLEW_EXT_shared_texture_palette;
 extern GLboolean __GLEW_EXT_stencil_clear_tag;
@@ -7402,10 +7667,18 @@ extern GLboolean __GLEW_IBM_texture_mirrored_repeat;
 extern GLboolean __GLEW_IBM_vertex_array_lists;
 extern GLboolean __GLEW_INGR_color_clamp;
 extern GLboolean __GLEW_INGR_interlace_read;
+extern GLboolean __GLEW_INTEL_fragment_shader_ordering;
 extern GLboolean __GLEW_INTEL_map_texture;
 extern GLboolean __GLEW_INTEL_parallel_arrays;
+extern GLboolean __GLEW_INTEL_performance_query;
 extern GLboolean __GLEW_INTEL_texture_scissor;
+extern GLboolean __GLEW_KHR_blend_equation_advanced;
+extern GLboolean __GLEW_KHR_blend_equation_advanced_coherent;
+extern GLboolean __GLEW_KHR_context_flush_control;
 extern GLboolean __GLEW_KHR_debug;
+extern GLboolean __GLEW_KHR_robust_buffer_access_behavior;
+extern GLboolean __GLEW_KHR_robustness;
+extern GLboolean __GLEW_KHR_texture_compression_astc_hdr;
 extern GLboolean __GLEW_KHR_texture_compression_astc_ldr;
 extern GLboolean __GLEW_KTX_buffer_region;
 extern GLboolean __GLEW_MESAX_texture_stack;
@@ -7416,6 +7689,7 @@ extern GLboolean __GLEW_MESA_ycbcr_texture;
 extern GLboolean __GLEW_NVX_conditional_render;
 extern GLboolean __GLEW_NVX_gpu_memory_info;
 extern GLboolean __GLEW_NV_bindless_multi_draw_indirect;
+extern GLboolean __GLEW_NV_bindless_multi_draw_indirect_count;
 extern GLboolean __GLEW_NV_bindless_texture;
 extern GLboolean __GLEW_NV_blend_equation_advanced;
 extern GLboolean __GLEW_NV_blend_equation_advanced_coherent;
@@ -7463,8 +7737,11 @@ extern GLboolean __GLEW_NV_register_combiners;
 extern GLboolean __GLEW_NV_register_combiners2;
 extern GLboolean __GLEW_NV_shader_atomic_counters;
 extern GLboolean __GLEW_NV_shader_atomic_float;
+extern GLboolean __GLEW_NV_shader_atomic_int64;
 extern GLboolean __GLEW_NV_shader_buffer_load;
 extern GLboolean __GLEW_NV_shader_storage_buffer_object;
+extern GLboolean __GLEW_NV_shader_thread_group;
+extern GLboolean __GLEW_NV_shader_thread_shuffle;
 extern GLboolean __GLEW_NV_tessellation_program5;
 extern GLboolean __GLEW_NV_texgen_emboss;
 extern GLboolean __GLEW_NV_texgen_reflection;
@@ -7479,6 +7756,7 @@ extern GLboolean __GLEW_NV_texture_shader2;
 extern GLboolean __GLEW_NV_texture_shader3;
 extern GLboolean __GLEW_NV_transform_feedback;
 extern GLboolean __GLEW_NV_transform_feedback2;
+extern GLboolean __GLEW_NV_uniform_buffer_unified_memory;
 extern GLboolean __GLEW_NV_vdpau_interop;
 extern GLboolean __GLEW_NV_vertex_array_range;
 extern GLboolean __GLEW_NV_vertex_array_range2;
@@ -7506,6 +7784,7 @@ extern GLboolean __GLEW_REGAL_enable;
 extern GLboolean __GLEW_REGAL_error_string;
 extern GLboolean __GLEW_REGAL_extension_query;
 extern GLboolean __GLEW_REGAL_log;
+extern GLboolean __GLEW_REGAL_proc_address;
 extern GLboolean __GLEW_REND_screen_coordinates;
 extern GLboolean __GLEW_S3_s3tc;
 extern GLboolean __GLEW_SGIS_color_range;

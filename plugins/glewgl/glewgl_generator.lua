@@ -38,11 +38,12 @@ end
 
 local function processHeader(name,idir,odir,onlybinding)
   print("processing...",name)
-  local inheader = io.open(idir.."/include/GL/"..name,"rb")
-  local outheader = (not onlybinding) and io.open(odir.."/include/GL/"..name,"wb")
+  local inheader = io.open(idir.."include/GL/"..name,"rb")
+  local outheader = (not onlybinding) and io.open(odir.."include/GL/"..name,"wb")
   if (onlybinding) then
     outheader = {
       write = function() end,
+      close = function() end,
     }
   end
   
@@ -163,6 +164,7 @@ local function processHeader(name,idir,odir,onlybinding)
     
     outheader:write(output)
   end
+  outheader:close()
   
   for pfn,def in pairs(lkproc2type) do
     if (not lkprocused[pfn]) then
@@ -209,12 +211,14 @@ local function copyFile(name,idir,odir)
   for l in FileLines(infile) do
     outfile:write(l)
   end
+  infile:close()
+  outfile:close()
 end
 
 local function processSource(name,idir,odir,gl)
   print("processing...",name)
-  local infile = io.open(idir.."/src/"..name,"rb")
-  local outfile = io.open(odir.."/src/"..name,"wb")
+  local infile = io.open(idir.."src/"..name,"rb")
+  local outfile = io.open(odir.."src/"..name,"wb")
   
   local eol
   local first = true
@@ -246,6 +250,7 @@ local function processSource(name,idir,odir,gl)
     
     outfile:write(output or "")
   end
+  outfile:close()
 end
 
 
@@ -348,6 +353,8 @@ local function generateBinding(name,odir,gl,filter,ffiraw)
   end
   ofile:write("]]"..eol..eol)
   ofile:write("return ffi.load('glewgl')"..eol)
+  
+  ofile:close()
 end
 
 local function makebinding(name,idir,odir,filter,onlybinding)
