@@ -30,8 +30,9 @@ local function funcwrapper(func,eol)
   callargs = "("..table.concat(callargs,",")..")"
   
   local outfunc = func.def:gsub("(%b())",funcargs)
+  local check = "GLEW_USER_ASSERT("..func.mangled..");"
   
-  output = output..outfunc:sub(1,-2).."{"..eol..returns..func.mangled..callargs..";}"..eol
+  output = output..outfunc:sub(1,-2).."{"..eol..check..eol..returns..func.mangled..callargs..";}"..eol
   
   return output
 end
@@ -71,6 +72,10 @@ local function processHeader(name,idir,odir,onlybinding)
       eol = l:match("[\r\n]+")
       outheader:write("#ifdef GLEW_MX"..eol)
       outheader:write('#pragma error "unsupported option"'..eol)
+      outheader:write("#endif"..eol)
+      outheader:write(eol)
+      outheader:write("#ifndef GLEW_USER_ASSERT"..eol)
+      outheader:write("#define GLEW_USER_ASSERT(condition)"..eol)
       outheader:write("#endif"..eol)
       first = false
     end
@@ -388,8 +393,4 @@ makebinding(
   nil,
   nil)
 
-do
-  copyFile("include/GL/glew.h",  RELPATH (""), RELPATH ("../../depend/"))
-  copyFile("include/GL/wglew.h", RELPATH (""), RELPATH ("../../depend/"))
-  copyFile("include/GL/glxew.h", RELPATH (""), RELPATH ("../../depend/"))
-end
+

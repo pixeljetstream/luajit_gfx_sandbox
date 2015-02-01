@@ -1085,6 +1085,8 @@ GL_COMPRESSED_RGBA_BPTC_UNORM = 0x8E8C,
 GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM = 0x8E8D,
 GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT = 0x8E8E,
 GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT = 0x8E8F,
+GL_COPY_READ_BUFFER_BINDING = 0x8F36,
+GL_COPY_WRITE_BUFFER_BINDING = 0x8F37,
 GL_NUM_SHADING_LANGUAGE_VERSIONS = 0x82E9,
 GL_VERTEX_ATTRIB_ARRAY_LONG = 0x874E,
 GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED = 0x8221,
@@ -2978,10 +2980,25 @@ GL_DISTANCE_ATTENUATION_EXT = 0x8129,
 GL_POLYGON_OFFSET_EXT = 0x8037,
 GL_POLYGON_OFFSET_FACTOR_EXT = 0x8038,
 GL_POLYGON_OFFSET_BIAS_EXT = 0x8039,
+GL_POLYGON_OFFSET_CLAMP_EXT = 0x8E1B,
 GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT = 0x8E4C,
 GL_FIRST_VERTEX_CONVENTION_EXT = 0x8E4D,
 GL_LAST_VERTEX_CONVENTION_EXT = 0x8E4E,
 GL_PROVOKING_VERTEX_EXT = 0x8E4F,
+GL_COLOR_SAMPLES_NV = 0x8E20,
+GL_RASTER_MULTISAMPLE_EXT = 0x9327,
+GL_RASTER_SAMPLES_EXT = 0x9328,
+GL_MAX_RASTER_SAMPLES_EXT = 0x9329,
+GL_RASTER_FIXED_SAMPLE_LOCATIONS_EXT = 0x932A,
+GL_MULTISAMPLE_RASTERIZATION_ALLOWED_EXT = 0x932B,
+GL_EFFECTIVE_RASTER_SAMPLES_EXT = 0x932C,
+GL_DEPTH_SAMPLES_NV = 0x932D,
+GL_STENCIL_SAMPLES_NV = 0x932E,
+GL_MIXED_DEPTH_SAMPLES_SUPPORTED_NV = 0x932F,
+GL_MIXED_STENCIL_SAMPLES_SUPPORTED_NV = 0x9330,
+GL_COVERAGE_MODULATION_TABLE_NV = 0x9331,
+GL_COVERAGE_MODULATION_NV = 0x9332,
+GL_COVERAGE_MODULATION_TABLE_SIZE_NV = 0x9333,
 GL_RESCALE_NORMAL_EXT = 0x803A,
 GL_COLOR_SUM_EXT = 0x8458,
 GL_CURRENT_SECONDARY_COLOR_EXT = 0x8459,
@@ -3170,6 +3187,8 @@ GL_DOT3_RGB_EXT = 0x8740,
 GL_DOT3_RGBA_EXT = 0x8741,
 GL_TEXTURE_MAX_ANISOTROPY_EXT = 0x84FE,
 GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT = 0x84FF,
+GL_TEXTURE_REDUCTION_MODE_EXT = 0x9366,
+GL_WEIGHTED_AVERAGE_EXT = 0x9367,
 GL_RGBA32UI_EXT = 0x8D70,
 GL_RGB32UI_EXT = 0x8D71,
 GL_ALPHA32UI_EXT = 0x8D72,
@@ -3547,6 +3566,8 @@ GL_HSL_HUE_KHR = 0x92AD,
 GL_HSL_SATURATION_KHR = 0x92AE,
 GL_HSL_COLOR_KHR = 0x92AF,
 GL_HSL_LUMINOSITY_KHR = 0x92B0,
+GL_CONTEXT_RELEASE_BEHAVIOR = 0x82FB,
+GL_CONTEXT_RELEASE_BEHAVIOR_FLUSH = 0x82FC,
 GL_CONTEXT_FLAG_DEBUG_BIT = 0x00000002,
 //GL_STACK_OVERFLOW = 0x0503,
 //GL_STACK_UNDERFLOW = 0x0504,
@@ -3726,6 +3747,10 @@ GL_QUERY_WAIT_NV = 0x8E13,
 GL_QUERY_NO_WAIT_NV = 0x8E14,
 GL_QUERY_BY_REGION_WAIT_NV = 0x8E15,
 GL_QUERY_BY_REGION_NO_WAIT_NV = 0x8E16,
+GL_CONSERVATIVE_RASTERIZATION_NV = 0x9346,
+GL_SUBPIXEL_PRECISION_BIAS_X_BITS_NV = 0x9347,
+GL_SUBPIXEL_PRECISION_BIAS_Y_BITS_NV = 0x9348,
+GL_MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV = 0x9349,
 GL_DEPTH_STENCIL_TO_RGBA_NV = 0x886E,
 GL_DEPTH_STENCIL_TO_BGRA_NV = 0x886F,
 GL_MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV = 0x90D0,
@@ -3777,6 +3802,7 @@ GL_MAX_SAMPLE_MASK_WORDS_NV = 0x8E59,
 GL_ALL_COMPLETED_NV = 0x84F2,
 GL_FENCE_STATUS_NV = 0x84F3,
 GL_FENCE_CONDITION_NV = 0x84F4,
+GL_FILL_RECTANGLE_NV = 0x933C,
 GL_FLOAT_R_NV = 0x8880,
 GL_FLOAT_RG_NV = 0x8881,
 GL_FLOAT_RGB_NV = 0x8882,
@@ -3795,6 +3821,8 @@ GL_FLOAT_RGBA_MODE_NV = 0x888E,
 GL_FOG_DISTANCE_MODE_NV = 0x855A,
 GL_EYE_RADIAL_NV = 0x855B,
 GL_EYE_PLANE_ABSOLUTE_NV = 0x855C,
+GL_FRAGMENT_COVERAGE_TO_COLOR_NV = 0x92DD,
+GL_FRAGMENT_COVERAGE_COLOR_NV = 0x92DE,
 GL_MAX_FRAGMENT_PROGRAM_LOCAL_PARAMETERS_NV = 0x8868,
 GL_FRAGMENT_PROGRAM_NV = 0x8870,
 GL_MAX_TEXTURE_COORDS_NV = 0x8871,
@@ -3806,6 +3834,20 @@ GL_MAX_PROGRAM_CALL_DEPTH_NV = 0x88F5,
 GL_MAX_PROGRAM_IF_DEPTH_NV = 0x88F6,
 GL_MAX_PROGRAM_LOOP_DEPTH_NV = 0x88F7,
 GL_MAX_PROGRAM_LOOP_COUNT_NV = 0x88F8,
+//GL_COLOR_SAMPLES_NV = 0x8E20,
+//GL_RASTER_MULTISAMPLE_EXT = 0x9327,
+//GL_RASTER_SAMPLES_EXT = 0x9328,
+//GL_MAX_RASTER_SAMPLES_EXT = 0x9329,
+//GL_RASTER_FIXED_SAMPLE_LOCATIONS_EXT = 0x932A,
+//GL_MULTISAMPLE_RASTERIZATION_ALLOWED_EXT = 0x932B,
+//GL_EFFECTIVE_RASTER_SAMPLES_EXT = 0x932C,
+//GL_DEPTH_SAMPLES_NV = 0x932D,
+//GL_STENCIL_SAMPLES_NV = 0x932E,
+//GL_MIXED_DEPTH_SAMPLES_SUPPORTED_NV = 0x932F,
+//GL_MIXED_STENCIL_SAMPLES_SUPPORTED_NV = 0x9330,
+//GL_COVERAGE_MODULATION_TABLE_NV = 0x9331,
+//GL_COVERAGE_MODULATION_NV = 0x9332,
+//GL_COVERAGE_MODULATION_TABLE_SIZE_NV = 0x9333,
 GL_RENDERBUFFER_COVERAGE_SAMPLES_NV = 0x8CAB,
 GL_RENDERBUFFER_COLOR_SAMPLES_NV = 0x8E10,
 GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV = 0x8E11,
@@ -3856,9 +3898,13 @@ GL_FLOAT16_VEC2_NV = 0x8FF9,
 GL_FLOAT16_VEC3_NV = 0x8FFA,
 GL_FLOAT16_VEC4_NV = 0x8FFB,
 GL_HALF_FLOAT_NV = 0x140B,
+GL_MULTISAMPLES_NV = 0x9371,
+GL_SUPERSAMPLE_SCALE_X_NV = 0x9372,
+GL_SUPERSAMPLE_SCALE_Y_NV = 0x9373,
+GL_CONFORMANT_NV = 0x9374,
 GL_MAX_SHININESS_NV = 0x8504,
 GL_MAX_SPOT_EXPONENT_NV = 0x8505,
-GL_COLOR_SAMPLES_NV = 0x8E20,
+//GL_COLOR_SAMPLES_NV = 0x8E20,
 GL_MULTISAMPLE_FILTER_HINT_NV = 0x8534,
 GL_PIXEL_COUNTER_BITS_NV = 0x8864,
 GL_CURRENT_OCCLUSION_QUERY_ID_NV = 0x8865,
@@ -3903,19 +3949,32 @@ GL_LARGE_CCW_ARC_TO_NV = 0x16,
 GL_RELATIVE_LARGE_CCW_ARC_TO_NV = 0x17,
 GL_LARGE_CW_ARC_TO_NV = 0x18,
 GL_RELATIVE_LARGE_CW_ARC_TO_NV = 0x19,
+GL_CONIC_CURVE_TO_NV = 0x1A,
+GL_RELATIVE_CONIC_CURVE_TO_NV = 0x1B,
 GL_GLYPH_VERTICAL_BEARING_X_BIT_NV = 0x20,
 GL_GLYPH_VERTICAL_BEARING_Y_BIT_NV = 0x40,
 GL_GLYPH_VERTICAL_BEARING_ADVANCE_BIT_NV = 0x80,
+GL_ROUNDED_RECT_NV = 0xE8,
+GL_RELATIVE_ROUNDED_RECT_NV = 0xE9,
+GL_ROUNDED_RECT2_NV = 0xEA,
+GL_RELATIVE_ROUNDED_RECT2_NV = 0xEB,
+GL_ROUNDED_RECT4_NV = 0xEC,
+GL_RELATIVE_ROUNDED_RECT4_NV = 0xED,
+GL_ROUNDED_RECT8_NV = 0xEE,
+GL_RELATIVE_ROUNDED_RECT8_NV = 0xEF,
 GL_RESTART_PATH_NV = 0xF0,
 GL_DUP_FIRST_CUBIC_CURVE_TO_NV = 0xF2,
 GL_DUP_LAST_CUBIC_CURVE_TO_NV = 0xF4,
 GL_RECT_NV = 0xF6,
+GL_RELATIVE_RECT_NV = 0xF7,
 GL_CIRCULAR_CCW_ARC_TO_NV = 0xF8,
 GL_CIRCULAR_CW_ARC_TO_NV = 0xFA,
 GL_CIRCULAR_TANGENT_ARC_TO_NV = 0xFC,
 GL_ARC_TO_NV = 0xFE,
 GL_RELATIVE_ARC_TO_NV = 0xFF,
 GL_GLYPH_HAS_KERNING_BIT_NV = 0x100,
+GL_PRIMARY_COLOR_NV = 0x852C,
+GL_SECONDARY_COLOR_NV = 0x852D,
 //GL_PRIMARY_COLOR = 0x8577,
 GL_PATH_FORMAT_SVG_NV = 0x9070,
 GL_PATH_FORMAT_PS_NV = 0x9071,
@@ -3938,6 +3997,7 @@ GL_PATH_FILL_MASK_NV = 0x9081,
 GL_PATH_FILL_COVER_MODE_NV = 0x9082,
 GL_PATH_STROKE_COVER_MODE_NV = 0x9083,
 GL_PATH_STROKE_MASK_NV = 0x9084,
+GL_PATH_STROKE_BOUND_NV = 0x9086,
 GL_COUNT_UP_NV = 0x9088,
 GL_COUNT_DOWN_NV = 0x9089,
 GL_PATH_OBJECT_BOUNDING_BOX_NV = 0x908A,
@@ -3986,6 +4046,12 @@ GL_PATH_STENCIL_VALUE_MASK_NV = 0x90B9,
 GL_PATH_STENCIL_DEPTH_OFFSET_FACTOR_NV = 0x90BD,
 GL_PATH_STENCIL_DEPTH_OFFSET_UNITS_NV = 0x90BE,
 GL_PATH_COVER_DEPTH_FUNC_NV = 0x90BF,
+GL_FONT_GLYPHS_AVAILABLE_NV = 0x9368,
+GL_FONT_TARGET_UNAVAILABLE_NV = 0x9369,
+GL_FONT_UNAVAILABLE_NV = 0x936A,
+GL_FONT_UNINTELLIGIBLE_NV = 0x936B,
+GL_STANDARD_FONT_FORMAT_NV = 0x936C,
+GL_FRAGMENT_INPUT_NV = 0x936D,
 GL_FONT_X_MIN_BOUNDS_BIT_NV = 0x00010000,
 GL_FONT_Y_MIN_BOUNDS_BIT_NV = 0x00020000,
 GL_FONT_X_MAX_BOUNDS_BIT_NV = 0x00040000,
@@ -3999,6 +4065,8 @@ GL_FONT_MAX_ADVANCE_HEIGHT_BIT_NV = 0x02000000,
 GL_FONT_UNDERLINE_POSITION_BIT_NV = 0x04000000,
 GL_FONT_UNDERLINE_THICKNESS_BIT_NV = 0x08000000,
 GL_FONT_HAS_KERNING_BIT_NV = 0x10000000,
+GL_FONT_NUM_GLYPH_INDICES_BIT_NV = 0x20000000,
+GL_SHARED_EDGE_NV = 0xC0,
 GL_WRITE_PIXEL_DATA_RANGE_NV = 0x8878,
 GL_READ_PIXEL_DATA_RANGE_NV = 0x8879,
 GL_WRITE_PIXEL_DATA_RANGE_LENGTH_NV = 0x887A,
@@ -4026,8 +4094,8 @@ GL_VARIABLE_F_NV = 0x8528,
 GL_VARIABLE_G_NV = 0x8529,
 GL_CONSTANT_COLOR0_NV = 0x852A,
 GL_CONSTANT_COLOR1_NV = 0x852B,
-GL_PRIMARY_COLOR_NV = 0x852C,
-GL_SECONDARY_COLOR_NV = 0x852D,
+//GL_PRIMARY_COLOR_NV = 0x852C,
+//GL_SECONDARY_COLOR_NV = 0x852D,
 GL_SPARE0_NV = 0x852E,
 GL_SPARE1_NV = 0x852F,
 GL_DISCARD_NV = 0x8530,
@@ -4068,6 +4136,14 @@ GL_COMBINER5_NV = 0x8555,
 GL_COMBINER6_NV = 0x8556,
 GL_COMBINER7_NV = 0x8557,
 GL_PER_STAGE_CONSTANTS_NV = 0x8535,
+GL_SAMPLE_LOCATION_NV = 0x8E50,
+GL_SAMPLE_LOCATION_SUBPIXEL_BITS_NV = 0x933D,
+GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV = 0x933E,
+GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_NV = 0x933F,
+GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_NV = 0x9340,
+GL_PROGRAMMABLE_SAMPLE_LOCATION_NV = 0x9341,
+GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV = 0x9342,
+GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV = 0x9343,
 GL_BUFFER_GPU_ADDRESS_NV = 0x8F1D,
 GL_GPU_ADDRESS_NV = 0x8F34,
 GL_MAX_SHADER_BUFFER_ADDRESS_NV = 0x8F35,
@@ -5280,6 +5356,7 @@ extern void ( * glBlendEquationi) (GLuint buf, GLenum mode) __asm__("__glewBlend
 extern void ( * glBlendFuncSeparatei) (GLuint buf, GLenum srcRGB, GLenum dstRGB, GLenum srcAlpha, GLenum dstAlpha) __asm__("__glewBlendFuncSeparatei");
 extern void ( * glBlendFunci) (GLuint buf, GLenum src, GLenum dst) __asm__("__glewBlendFunci");
 extern void ( * glMinSampleShading) (GLclampf value) __asm__("__glewMinSampleShading");
+extern GLenum ( * glGetGraphicsResetStatus) (void) __asm__("__glewGetGraphicsResetStatus");
 extern void ( * glTbufferMask3DFX) (GLuint mask) __asm__("__glewTbufferMask3DFX");
 extern void ( * glDebugMessageCallbackAMD) (GLDEBUGPROCAMD callback, void *userParam) __asm__("__glewDebugMessageCallbackAMD");
 extern void ( * glDebugMessageEnableAMD) (GLenum category, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled) __asm__("__glewDebugMessageEnableAMD");
@@ -5448,6 +5525,10 @@ extern void ( * glGetNamedBufferSubData) (GLuint buffer, GLintptr offset, GLsize
 extern void ( * glGetNamedFramebufferAttachmentParameteriv) (GLuint framebuffer, GLenum attachment, GLenum pname, GLint* params) __asm__("__glewGetNamedFramebufferAttachmentParameteriv");
 extern void ( * glGetNamedFramebufferParameteriv) (GLuint framebuffer, GLenum pname, GLint* param) __asm__("__glewGetNamedFramebufferParameteriv");
 extern void ( * glGetNamedRenderbufferParameteriv) (GLuint renderbuffer, GLenum pname, GLint* params) __asm__("__glewGetNamedRenderbufferParameteriv");
+extern void ( * glGetQueryBufferObjecti64v) (GLuint id,GLuint buffer,GLenum pname,GLintptr offset) __asm__("__glewGetQueryBufferObjecti64v");
+extern void ( * glGetQueryBufferObjectiv) (GLuint id,GLuint buffer,GLenum pname,GLintptr offset) __asm__("__glewGetQueryBufferObjectiv");
+extern void ( * glGetQueryBufferObjectui64v) (GLuint id,GLuint buffer,GLenum pname,GLintptr offset) __asm__("__glewGetQueryBufferObjectui64v");
+extern void ( * glGetQueryBufferObjectuiv) (GLuint id,GLuint buffer,GLenum pname,GLintptr offset) __asm__("__glewGetQueryBufferObjectuiv");
 extern void ( * glGetTextureImage) (GLuint texture, GLint level, GLenum format, GLenum type, GLsizei bufSize, void *pixels) __asm__("__glewGetTextureImage");
 extern void ( * glGetTextureLevelParameterfv) (GLuint texture, GLint level, GLenum pname, GLfloat* params) __asm__("__glewGetTextureLevelParameterfv");
 extern void ( * glGetTextureLevelParameteriv) (GLuint texture, GLint level, GLenum pname, GLint* params) __asm__("__glewGetTextureLevelParameteriv");
@@ -6537,7 +6618,12 @@ extern void ( * glPixelTransformParameterivEXT) (GLenum target, GLenum pname, co
 extern void ( * glPointParameterfEXT) (GLenum pname, GLfloat param) __asm__("__glewPointParameterfEXT");
 extern void ( * glPointParameterfvEXT) (GLenum pname, const GLfloat* params) __asm__("__glewPointParameterfvEXT");
 extern void ( * glPolygonOffsetEXT) (GLfloat factor, GLfloat bias) __asm__("__glewPolygonOffsetEXT");
+extern void ( * glPolygonOffsetClampEXT) (GLfloat factor, GLfloat units, GLfloat clamp) __asm__("__glewPolygonOffsetClampEXT");
 extern void ( * glProvokingVertexEXT) (GLenum mode) __asm__("__glewProvokingVertexEXT");
+extern void ( * glCoverageModulationNV) (GLenum components) __asm__("__glewCoverageModulationNV");
+extern void ( * glCoverageModulationTableNV) (GLsizei n, const GLfloat* v) __asm__("__glewCoverageModulationTableNV");
+extern void ( * glGetCoverageModulationTableNV) (GLsizei bufsize, GLfloat* v) __asm__("__glewGetCoverageModulationTableNV");
+extern void ( * glRasterSamplesEXT) (GLuint samples, GLboolean fixedsamplelocations) __asm__("__glewRasterSamplesEXT");
 extern void ( * glBeginSceneEXT) (void) __asm__("__glewBeginSceneEXT");
 extern void ( * glEndSceneEXT) (void) __asm__("__glewEndSceneEXT");
 extern void ( * glSecondaryColor3bEXT) (GLbyte red, GLbyte green, GLbyte blue) __asm__("__glewSecondaryColor3bEXT");
@@ -6761,6 +6847,7 @@ extern void ( * glBlendBarrierNV) (void) __asm__("__glewBlendBarrierNV");
 extern void ( * glBlendParameteriNV) (GLenum pname, GLint value) __asm__("__glewBlendParameteriNV");
 extern void ( * glBeginConditionalRenderNV) (GLuint id, GLenum mode) __asm__("__glewBeginConditionalRenderNV");
 extern void ( * glEndConditionalRenderNV) (void) __asm__("__glewEndConditionalRenderNV");
+extern void ( * glSubpixelPrecisionBiasNV) (GLuint xbits, GLuint ybits) __asm__("__glewSubpixelPrecisionBiasNV");
 extern void ( * glCopyImageSubDataNV) (GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) __asm__("__glewCopyImageSubDataNV");
 extern void ( * glClearDepthdNV) (GLdouble depth) __asm__("__glewClearDepthdNV");
 extern void ( * glDepthBoundsdNV) (GLdouble zmin, GLdouble zmax) __asm__("__glewDepthBoundsdNV");
@@ -6785,6 +6872,7 @@ extern void ( * glGetFenceivNV) (GLuint fence, GLenum pname, GLint* params) __as
 extern GLboolean ( * glIsFenceNV) (GLuint fence) __asm__("__glewIsFenceNV");
 extern void ( * glSetFenceNV) (GLuint fence, GLenum condition) __asm__("__glewSetFenceNV");
 extern GLboolean ( * glTestFenceNV) (GLuint fence) __asm__("__glewTestFenceNV");
+extern void ( * glFragmentCoverageColorNV) (GLuint color) __asm__("__glewFragmentCoverageColorNV");
 extern void ( * glGetProgramNamedParameterdvNV) (GLuint id, GLsizei len, const GLubyte* name, GLdouble *params) __asm__("__glewGetProgramNamedParameterdvNV");
 extern void ( * glGetProgramNamedParameterfvNV) (GLuint id, GLsizei len, const GLubyte* name, GLfloat *params) __asm__("__glewGetProgramNamedParameterfvNV");
 extern void ( * glProgramNamedParameter4dNV) (GLuint id, GLsizei len, const GLubyte* name, GLdouble x, GLdouble y, GLdouble z, GLdouble w) __asm__("__glewProgramNamedParameter4dNV");
@@ -6885,6 +6973,7 @@ extern void ( * glVertexAttribs3hvNV) (GLuint index, GLsizei n, const GLhalf* v)
 extern void ( * glVertexAttribs4hvNV) (GLuint index, GLsizei n, const GLhalf* v) __asm__("__glewVertexAttribs4hvNV");
 extern void ( * glVertexWeighthNV) (GLhalf weight) __asm__("__glewVertexWeighthNV");
 extern void ( * glVertexWeighthvNV) (const GLhalf* weight) __asm__("__glewVertexWeighthvNV");
+extern void ( * glGetInternalformatSampleivNV) (GLenum target, GLenum internalformat, GLsizei samples, GLenum pname, GLsizei bufSize, GLint* params) __asm__("__glewGetInternalformatSampleivNV");
 extern void ( * glBeginOcclusionQueryNV) (GLuint id) __asm__("__glewBeginOcclusionQueryNV");
 extern void ( * glDeleteOcclusionQueriesNV) (GLsizei n, const GLuint* ids) __asm__("__glewDeleteOcclusionQueriesNV");
 extern void ( * glEndOcclusionQueryNV) (void) __asm__("__glewEndOcclusionQueryNV");
@@ -6896,52 +6985,67 @@ extern void ( * glProgramBufferParametersIivNV) (GLenum target, GLuint buffer, G
 extern void ( * glProgramBufferParametersIuivNV) (GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLuint *params) __asm__("__glewProgramBufferParametersIuivNV");
 extern void ( * glProgramBufferParametersfvNV) (GLenum target, GLuint buffer, GLuint index, GLsizei count, const GLfloat *params) __asm__("__glewProgramBufferParametersfvNV");
 extern void ( * glCopyPathNV) (GLuint resultPath, GLuint srcPath) __asm__("__glewCopyPathNV");
-extern void ( * glCoverFillPathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues) __asm__("__glewCoverFillPathInstancedNV");
+extern void ( * glCoverFillPathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues) __asm__("__glewCoverFillPathInstancedNV");
 extern void ( * glCoverFillPathNV) (GLuint path, GLenum coverMode) __asm__("__glewCoverFillPathNV");
-extern void ( * glCoverStrokePathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues) __asm__("__glewCoverStrokePathInstancedNV");
-extern void ( * glCoverStrokePathNV) (GLuint name, GLenum coverMode) __asm__("__glewCoverStrokePathNV");
+extern void ( * glCoverStrokePathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLenum coverMode, GLenum transformType, const GLfloat *transformValues) __asm__("__glewCoverStrokePathInstancedNV");
+extern void ( * glCoverStrokePathNV) (GLuint path, GLenum coverMode) __asm__("__glewCoverStrokePathNV");
 extern void ( * glDeletePathsNV) (GLuint path, GLsizei range) __asm__("__glewDeletePathsNV");
 extern GLuint ( * glGenPathsNV) (GLsizei range) __asm__("__glewGenPathsNV");
 extern void ( * glGetPathColorGenfvNV) (GLenum color, GLenum pname, GLfloat* value) __asm__("__glewGetPathColorGenfvNV");
 extern void ( * glGetPathColorGenivNV) (GLenum color, GLenum pname, GLint* value) __asm__("__glewGetPathColorGenivNV");
-extern void ( * glGetPathCommandsNV) (GLuint name, GLubyte* commands) __asm__("__glewGetPathCommandsNV");
-extern void ( * glGetPathCoordsNV) (GLuint name, GLfloat* coords) __asm__("__glewGetPathCoordsNV");
-extern void ( * glGetPathDashArrayNV) (GLuint name, GLfloat* dashArray) __asm__("__glewGetPathDashArrayNV");
+extern void ( * glGetPathCommandsNV) (GLuint path, GLubyte* commands) __asm__("__glewGetPathCommandsNV");
+extern void ( * glGetPathCoordsNV) (GLuint path, GLfloat* coords) __asm__("__glewGetPathCoordsNV");
+extern void ( * glGetPathDashArrayNV) (GLuint path, GLfloat* dashArray) __asm__("__glewGetPathDashArrayNV");
 extern GLfloat ( * glGetPathLengthNV) (GLuint path, GLsizei startSegment, GLsizei numSegments) __asm__("__glewGetPathLengthNV");
-extern void ( * glGetPathMetricRangeNV) (GLbitfield metricQueryMask, GLuint fistPathName, GLsizei numPaths, GLsizei stride, GLfloat* metrics) __asm__("__glewGetPathMetricRangeNV");
-extern void ( * glGetPathMetricsNV) (GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLsizei stride, GLfloat *metrics) __asm__("__glewGetPathMetricsNV");
-extern void ( * glGetPathParameterfvNV) (GLuint name, GLenum param, GLfloat* value) __asm__("__glewGetPathParameterfvNV");
-extern void ( * glGetPathParameterivNV) (GLuint name, GLenum param, GLint* value) __asm__("__glewGetPathParameterivNV");
-extern void ( * glGetPathSpacingNV) (GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing) __asm__("__glewGetPathSpacingNV");
+extern void ( * glGetPathMetricRangeNV) (GLbitfield metricQueryMask, GLuint firstPathName, GLsizei numPaths, GLsizei stride, GLfloat* metrics) __asm__("__glewGetPathMetricRangeNV");
+extern void ( * glGetPathMetricsNV) (GLbitfield metricQueryMask, GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLsizei stride, GLfloat *metrics) __asm__("__glewGetPathMetricsNV");
+extern void ( * glGetPathParameterfvNV) (GLuint path, GLenum pname, GLfloat* value) __asm__("__glewGetPathParameterfvNV");
+extern void ( * glGetPathParameterivNV) (GLuint path, GLenum pname, GLint* value) __asm__("__glewGetPathParameterivNV");
+extern void ( * glGetPathSpacingNV) (GLenum pathListMode, GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLfloat advanceScale, GLfloat kerningScale, GLenum transformType, GLfloat *returnedSpacing) __asm__("__glewGetPathSpacingNV");
 extern void ( * glGetPathTexGenfvNV) (GLenum texCoordSet, GLenum pname, GLfloat* value) __asm__("__glewGetPathTexGenfvNV");
 extern void ( * glGetPathTexGenivNV) (GLenum texCoordSet, GLenum pname, GLint* value) __asm__("__glewGetPathTexGenivNV");
+extern void ( * glGetProgramResourcefvNV) (GLuint program, GLenum programInterface, GLuint index, GLsizei propCount, const GLenum* props, GLsizei bufSize, GLsizei *length, GLfloat *params) __asm__("__glewGetProgramResourcefvNV");
 extern void ( * glInterpolatePathsNV) (GLuint resultPath, GLuint pathA, GLuint pathB, GLfloat weight) __asm__("__glewInterpolatePathsNV");
 extern GLboolean ( * glIsPathNV) (GLuint path) __asm__("__glewIsPathNV");
 extern GLboolean ( * glIsPointInFillPathNV) (GLuint path, GLuint mask, GLfloat x, GLfloat y) __asm__("__glewIsPointInFillPathNV");
 extern GLboolean ( * glIsPointInStrokePathNV) (GLuint path, GLfloat x, GLfloat y) __asm__("__glewIsPointInStrokePathNV");
+extern void ( * glMatrixLoad3x2fNV) (GLenum matrixMode, const GLfloat* m) __asm__("__glewMatrixLoad3x2fNV");
+extern void ( * glMatrixLoad3x3fNV) (GLenum matrixMode, const GLfloat* m) __asm__("__glewMatrixLoad3x3fNV");
+extern void ( * glMatrixLoadTranspose3x3fNV) (GLenum matrixMode, const GLfloat* m) __asm__("__glewMatrixLoadTranspose3x3fNV");
+extern void ( * glMatrixMult3x2fNV) (GLenum matrixMode, const GLfloat* m) __asm__("__glewMatrixMult3x2fNV");
+extern void ( * glMatrixMult3x3fNV) (GLenum matrixMode, const GLfloat* m) __asm__("__glewMatrixMult3x3fNV");
+extern void ( * glMatrixMultTranspose3x3fNV) (GLenum matrixMode, const GLfloat* m) __asm__("__glewMatrixMultTranspose3x3fNV");
 extern void ( * glPathColorGenNV) (GLenum color, GLenum genMode, GLenum colorFormat, const GLfloat* coeffs) __asm__("__glewPathColorGenNV");
 extern void ( * glPathCommandsNV) (GLuint path, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const void*coords) __asm__("__glewPathCommandsNV");
-extern void ( * glPathCoordsNV) (GLuint path, GLsizei numCoords, GLenum coordType, const void* coords) __asm__("__glewPathCoordsNV");
+extern void ( * glPathCoordsNV) (GLuint path, GLsizei numCoords, GLenum coordType, const void *coords) __asm__("__glewPathCoordsNV");
 extern void ( * glPathCoverDepthFuncNV) (GLenum zfunc) __asm__("__glewPathCoverDepthFuncNV");
 extern void ( * glPathDashArrayNV) (GLuint path, GLsizei dashCount, const GLfloat* dashArray) __asm__("__glewPathDashArrayNV");
 extern void ( * glPathFogGenNV) (GLenum genMode) __asm__("__glewPathFogGenNV");
-extern void ( * glPathGlyphRangeNV) (GLuint firstPathName, GLenum fontTarget, const void* fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale) __asm__("__glewPathGlyphRangeNV");
-extern void ( * glPathGlyphsNV) (GLuint firstPathName, GLenum fontTarget, const void* fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const void*charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale) __asm__("__glewPathGlyphsNV");
+extern GLenum ( * glPathGlyphIndexArrayNV) (GLuint firstPathName, GLenum fontTarget, const void *fontName, GLbitfield fontStyle, GLuint firstGlyphIndex, GLsizei numGlyphs, GLuint pathParameterTemplate, GLfloat emScale) __asm__("__glewPathGlyphIndexArrayNV");
+extern GLenum ( * glPathGlyphIndexRangeNV) (GLenum fontTarget, const void *fontName, GLbitfield fontStyle, GLuint pathParameterTemplate, GLfloat emScale, GLuint baseAndCount[2]) __asm__("__glewPathGlyphIndexRangeNV");
+extern void ( * glPathGlyphRangeNV) (GLuint firstPathName, GLenum fontTarget, const void *fontName, GLbitfield fontStyle, GLuint firstGlyph, GLsizei numGlyphs, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale) __asm__("__glewPathGlyphRangeNV");
+extern void ( * glPathGlyphsNV) (GLuint firstPathName, GLenum fontTarget, const void *fontName, GLbitfield fontStyle, GLsizei numGlyphs, GLenum type, const void*charcodes, GLenum handleMissingGlyphs, GLuint pathParameterTemplate, GLfloat emScale) __asm__("__glewPathGlyphsNV");
+extern GLenum ( * glPathMemoryGlyphIndexArrayNV) (GLuint firstPathName, GLenum fontTarget, GLsizeiptr fontSize, const void *fontData, GLsizei faceIndex, GLuint firstGlyphIndex, GLsizei numGlyphs, GLuint pathParameterTemplate, GLfloat emScale) __asm__("__glewPathMemoryGlyphIndexArrayNV");
 extern void ( * glPathParameterfNV) (GLuint path, GLenum pname, GLfloat value) __asm__("__glewPathParameterfNV");
 extern void ( * glPathParameterfvNV) (GLuint path, GLenum pname, const GLfloat* value) __asm__("__glewPathParameterfvNV");
 extern void ( * glPathParameteriNV) (GLuint path, GLenum pname, GLint value) __asm__("__glewPathParameteriNV");
 extern void ( * glPathParameterivNV) (GLuint path, GLenum pname, const GLint* value) __asm__("__glewPathParameterivNV");
 extern void ( * glPathStencilDepthOffsetNV) (GLfloat factor, GLfloat units) __asm__("__glewPathStencilDepthOffsetNV");
 extern void ( * glPathStencilFuncNV) (GLenum func, GLint ref, GLuint mask) __asm__("__glewPathStencilFuncNV");
-extern void ( * glPathStringNV) (GLuint path, GLenum format, GLsizei length, const void* pathString) __asm__("__glewPathStringNV");
+extern void ( * glPathStringNV) (GLuint path, GLenum format, GLsizei length, const void *pathString) __asm__("__glewPathStringNV");
 extern void ( * glPathSubCommandsNV) (GLuint path, GLsizei commandStart, GLsizei commandsToDelete, GLsizei numCommands, const GLubyte* commands, GLsizei numCoords, GLenum coordType, const void*coords) __asm__("__glewPathSubCommandsNV");
-extern void ( * glPathSubCoordsNV) (GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const void* coords) __asm__("__glewPathSubCoordsNV");
+extern void ( * glPathSubCoordsNV) (GLuint path, GLsizei coordStart, GLsizei numCoords, GLenum coordType, const void *coords) __asm__("__glewPathSubCoordsNV");
 extern void ( * glPathTexGenNV) (GLenum texCoordSet, GLenum genMode, GLint components, const GLfloat* coeffs) __asm__("__glewPathTexGenNV");
 extern GLboolean ( * glPointAlongPathNV) (GLuint path, GLsizei startSegment, GLsizei numSegments, GLfloat distance, GLfloat* x, GLfloat *y, GLfloat *tangentX, GLfloat *tangentY) __asm__("__glewPointAlongPathNV");
-extern void ( * glStencilFillPathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues) __asm__("__glewStencilFillPathInstancedNV");
+extern void ( * glProgramPathFragmentInputGenNV) (GLuint program, GLint location, GLenum genMode, GLint components, const GLfloat* coeffs) __asm__("__glewProgramPathFragmentInputGenNV");
+extern void ( * glStencilFillPathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum transformType, const GLfloat *transformValues) __asm__("__glewStencilFillPathInstancedNV");
 extern void ( * glStencilFillPathNV) (GLuint path, GLenum fillMode, GLuint mask) __asm__("__glewStencilFillPathNV");
-extern void ( * glStencilStrokePathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void* paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues) __asm__("__glewStencilStrokePathInstancedNV");
+extern void ( * glStencilStrokePathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum transformType, const GLfloat *transformValues) __asm__("__glewStencilStrokePathInstancedNV");
 extern void ( * glStencilStrokePathNV) (GLuint path, GLint reference, GLuint mask) __asm__("__glewStencilStrokePathNV");
+extern void ( * glStencilThenCoverFillPathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLenum fillMode, GLuint mask, GLenum coverMode, GLenum transformType, const GLfloat *transformValues) __asm__("__glewStencilThenCoverFillPathInstancedNV");
+extern void ( * glStencilThenCoverFillPathNV) (GLuint path, GLenum fillMode, GLuint mask, GLenum coverMode) __asm__("__glewStencilThenCoverFillPathNV");
+extern void ( * glStencilThenCoverStrokePathInstancedNV) (GLsizei numPaths, GLenum pathNameType, const void *paths, GLuint pathBase, GLint reference, GLuint mask, GLenum coverMode, GLenum transformType, const GLfloat *transformValues) __asm__("__glewStencilThenCoverStrokePathInstancedNV");
+extern void ( * glStencilThenCoverStrokePathNV) (GLuint path, GLint reference, GLuint mask, GLenum coverMode) __asm__("__glewStencilThenCoverStrokePathNV");
 extern void ( * glTransformPathNV) (GLuint resultPath, GLuint srcPath, GLenum transformType, const GLfloat* transformValues) __asm__("__glewTransformPathNV");
 extern void ( * glWeightPathsNV) (GLuint resultPath, GLsizei numPaths, const GLuint paths[], const GLfloat weights[]) __asm__("__glewWeightPathsNV");
 extern void ( * glFlushPixelDataRangeNV) (GLenum target) __asm__("__glewFlushPixelDataRangeNV");
@@ -6971,6 +7075,8 @@ extern void ( * glGetFinalCombinerInputParameterfvNV) (GLenum variable, GLenum p
 extern void ( * glGetFinalCombinerInputParameterivNV) (GLenum variable, GLenum pname, GLint* params) __asm__("__glewGetFinalCombinerInputParameterivNV");
 extern void ( * glCombinerStageParameterfvNV) (GLenum stage, GLenum pname, const GLfloat* params) __asm__("__glewCombinerStageParameterfvNV");
 extern void ( * glGetCombinerStageParameterfvNV) (GLenum stage, GLenum pname, GLfloat* params) __asm__("__glewGetCombinerStageParameterfvNV");
+extern void ( * glFramebufferSampleLocationsfvNV) (GLenum target, GLuint start, GLsizei count, const GLfloat* v) __asm__("__glewFramebufferSampleLocationsfvNV");
+extern void ( * glNamedFramebufferSampleLocationsfvNV) (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat* v) __asm__("__glewNamedFramebufferSampleLocationsfvNV");
 extern void ( * glGetBufferParameterui64vNV) (GLenum target, GLenum pname, GLuint64EXT* params) __asm__("__glewGetBufferParameterui64vNV");
 extern void ( * glGetIntegerui64vNV) (GLenum value, GLuint64EXT* result) __asm__("__glewGetIntegerui64vNV");
 extern void ( * glGetNamedBufferParameterui64vNV) (GLuint buffer, GLenum pname, GLuint64EXT* params) __asm__("__glewGetNamedBufferParameterui64vNV");
@@ -7128,7 +7234,7 @@ extern GLenum ( * glVideoCaptureNV) (GLuint video_capture_slot, GLuint* sequence
 extern void ( * glVideoCaptureStreamParameterdvNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLdouble* params) __asm__("__glewVideoCaptureStreamParameterdvNV");
 extern void ( * glVideoCaptureStreamParameterfvNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLfloat* params) __asm__("__glewVideoCaptureStreamParameterfvNV");
 extern void ( * glVideoCaptureStreamParameterivNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLint* params) __asm__("__glewVideoCaptureStreamParameterivNV");
-extern void ( * glClearDepthfOES) (GLclampd depth) __asm__("__glewClearDepthfOES");
+extern void ( * glClearDepthfOES) (GLclampf depth) __asm__("__glewClearDepthfOES");
 extern void ( * glClipPlanefOES) (GLenum plane, const GLfloat* equation) __asm__("__glewClipPlanefOES");
 extern void ( * glDepthRangefOES) (GLclampf n, GLclampf f) __asm__("__glewDepthRangefOES");
 extern void ( * glFrustumfOES) (GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f) __asm__("__glewFrustumfOES");
@@ -7604,7 +7710,10 @@ extern GLboolean __GLEW_EXT_pixel_transform;
 extern GLboolean __GLEW_EXT_pixel_transform_color_table;
 extern GLboolean __GLEW_EXT_point_parameters;
 extern GLboolean __GLEW_EXT_polygon_offset;
+extern GLboolean __GLEW_EXT_polygon_offset_clamp;
+extern GLboolean __GLEW_EXT_post_depth_coverage;
 extern GLboolean __GLEW_EXT_provoking_vertex;
+extern GLboolean __GLEW_EXT_raster_multisample;
 extern GLboolean __GLEW_EXT_rescale_normal;
 extern GLboolean __GLEW_EXT_scene_marker;
 extern GLboolean __GLEW_EXT_secondary_color;
@@ -7615,6 +7724,7 @@ extern GLboolean __GLEW_EXT_shader_image_load_store;
 extern GLboolean __GLEW_EXT_shader_integer_mix;
 extern GLboolean __GLEW_EXT_shadow_funcs;
 extern GLboolean __GLEW_EXT_shared_texture_palette;
+extern GLboolean __GLEW_EXT_sparse_texture2;
 extern GLboolean __GLEW_EXT_stencil_clear_tag;
 extern GLboolean __GLEW_EXT_stencil_two_side;
 extern GLboolean __GLEW_EXT_stencil_wrap;
@@ -7634,6 +7744,7 @@ extern GLboolean __GLEW_EXT_texture_env_add;
 extern GLboolean __GLEW_EXT_texture_env_combine;
 extern GLboolean __GLEW_EXT_texture_env_dot3;
 extern GLboolean __GLEW_EXT_texture_filter_anisotropic;
+extern GLboolean __GLEW_EXT_texture_filter_minmax;
 extern GLboolean __GLEW_EXT_texture_integer;
 extern GLboolean __GLEW_EXT_texture_lod_bias;
 extern GLboolean __GLEW_EXT_texture_mirror_clamp;
@@ -7696,6 +7807,7 @@ extern GLboolean __GLEW_NV_blend_equation_advanced_coherent;
 extern GLboolean __GLEW_NV_blend_square;
 extern GLboolean __GLEW_NV_compute_program5;
 extern GLboolean __GLEW_NV_conditional_render;
+extern GLboolean __GLEW_NV_conservative_raster;
 extern GLboolean __GLEW_NV_copy_depth_to_color;
 extern GLboolean __GLEW_NV_copy_image;
 extern GLboolean __GLEW_NV_deep_texture3D;
@@ -7706,21 +7818,27 @@ extern GLboolean __GLEW_NV_draw_texture;
 extern GLboolean __GLEW_NV_evaluators;
 extern GLboolean __GLEW_NV_explicit_multisample;
 extern GLboolean __GLEW_NV_fence;
+extern GLboolean __GLEW_NV_fill_rectangle;
 extern GLboolean __GLEW_NV_float_buffer;
 extern GLboolean __GLEW_NV_fog_distance;
+extern GLboolean __GLEW_NV_fragment_coverage_to_color;
 extern GLboolean __GLEW_NV_fragment_program;
 extern GLboolean __GLEW_NV_fragment_program2;
 extern GLboolean __GLEW_NV_fragment_program4;
 extern GLboolean __GLEW_NV_fragment_program_option;
+extern GLboolean __GLEW_NV_fragment_shader_interlock;
+extern GLboolean __GLEW_NV_framebuffer_mixed_samples;
 extern GLboolean __GLEW_NV_framebuffer_multisample_coverage;
 extern GLboolean __GLEW_NV_geometry_program4;
 extern GLboolean __GLEW_NV_geometry_shader4;
+extern GLboolean __GLEW_NV_geometry_shader_passthrough;
 extern GLboolean __GLEW_NV_gpu_program4;
 extern GLboolean __GLEW_NV_gpu_program5;
 extern GLboolean __GLEW_NV_gpu_program5_mem_extended;
 extern GLboolean __GLEW_NV_gpu_program_fp64;
 extern GLboolean __GLEW_NV_gpu_shader5;
 extern GLboolean __GLEW_NV_half_float;
+extern GLboolean __GLEW_NV_internalformat_sample_query;
 extern GLboolean __GLEW_NV_light_max_exponent;
 extern GLboolean __GLEW_NV_multisample_coverage;
 extern GLboolean __GLEW_NV_multisample_filter_hint;
@@ -7729,14 +7847,18 @@ extern GLboolean __GLEW_NV_packed_depth_stencil;
 extern GLboolean __GLEW_NV_parameter_buffer_object;
 extern GLboolean __GLEW_NV_parameter_buffer_object2;
 extern GLboolean __GLEW_NV_path_rendering;
+extern GLboolean __GLEW_NV_path_rendering_shared_edge;
 extern GLboolean __GLEW_NV_pixel_data_range;
 extern GLboolean __GLEW_NV_point_sprite;
 extern GLboolean __GLEW_NV_present_video;
 extern GLboolean __GLEW_NV_primitive_restart;
 extern GLboolean __GLEW_NV_register_combiners;
 extern GLboolean __GLEW_NV_register_combiners2;
+extern GLboolean __GLEW_NV_sample_locations;
+extern GLboolean __GLEW_NV_sample_mask_override_coverage;
 extern GLboolean __GLEW_NV_shader_atomic_counters;
 extern GLboolean __GLEW_NV_shader_atomic_float;
+extern GLboolean __GLEW_NV_shader_atomic_fp16_vector;
 extern GLboolean __GLEW_NV_shader_atomic_int64;
 extern GLboolean __GLEW_NV_shader_buffer_load;
 extern GLboolean __GLEW_NV_shader_storage_buffer_object;
@@ -7769,6 +7891,7 @@ extern GLboolean __GLEW_NV_vertex_program2_option;
 extern GLboolean __GLEW_NV_vertex_program3;
 extern GLboolean __GLEW_NV_vertex_program4;
 extern GLboolean __GLEW_NV_video_capture;
+extern GLboolean __GLEW_NV_viewport_array2;
 extern GLboolean __GLEW_OES_byte_coordinates;
 extern GLboolean __GLEW_OES_compressed_paletted_texture;
 extern GLboolean __GLEW_OES_read_format;
