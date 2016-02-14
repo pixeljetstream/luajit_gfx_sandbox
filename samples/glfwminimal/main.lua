@@ -1,6 +1,3 @@
-local lxpath = (os.getenv("LUAJIT_GFX_SANDBOX") and os.getenv("LUAJIT_GFX_SANDBOX").."/..") or "../../runtime"
-dofile(lxpath.."/setup_package_paths.lua")
-
 print "glfw minimal"
 
 local glfw = require "glfw"

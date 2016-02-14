@@ -2,8 +2,7 @@ do
   local info = debug.getinfo(1,"S")
   local path = info.source:gsub("\\","/")
   path = path:match("@(.+)/.+$")
-  
-  if (not package.path:find(path,1,true)) then
+  if (path and not package.path:find(path,1,true)) then
     local p = path .. "/bin_"..jit.os.."_"..jit.arch.."/clibs"
     local l = path .. "/lua"
     local s = jit.os == "Windows" and ".dll" or ".so"
