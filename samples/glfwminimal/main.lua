@@ -1,4 +1,4 @@
-local lxpath = (os.getenv("LUXINIA2") and os.getenv("LUXINIA2").."/..") or "../../runtime"
+local lxpath = (os.getenv("LUAJIT_GFX_SANDBOX") and os.getenv("LUAJIT_GFX_SANDBOX").."/..") or "../../runtime"
 dofile(lxpath.."/setup_package_paths.lua")
 
 print "glfw minimal"
