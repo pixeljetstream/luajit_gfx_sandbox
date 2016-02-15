@@ -7,7 +7,7 @@ Simple framework to run some directed Vulkan and OpenGL tests.
 See LICENSE for details (MIT) and 3RDPARTY for
 other libraries used in this project.
 
-Similar frameworks can be found at
-https://github.com/malkia/ufo 
-or
-http://www.luapower.com
+Similar frameworks can be found here:
+
+* https://github.com/malkia/ufo 
+* http://www.luapower.com (most binaries and lua module are taken from here)
