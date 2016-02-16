@@ -10,6 +10,6 @@ other libraries used in this project.
 Similar frameworks can be found here:
 
 * https://github.com/malkia/ufo 
-* http://www.luapower.com (most binaries and lua module are taken from here)
+* http://www.luapower.com (most binaries and lua modules are taken from here)
 
 This repository was once called luxinia2, however it never turned into the sucessor of [luxinia1](https://github.com/pixeljetstream/luxinia1) but really is meant as basic sandbox for directed tests.
