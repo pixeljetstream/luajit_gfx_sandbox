@@ -1,3 +1,7 @@
+-- check if vulkan was loaded
+
+local hasVulkan = package.loaded.vulkan1 ~= nil
+
 local ffi = require( "ffi" )
 
 local def = ([[
@@ -3440,7 +3444,114 @@ GLFWAPI int glfwVulkanSupported(void);
  *  @ingroup vulkan
  */
 GLFWAPI const char** glfwGetRequiredInstanceExtensions(int* count);
-]]
+]]..(hasVulkan and
+[[
+/*! @brief Returns the address of the specified Vulkan instance function.
+ *
+ *  This function returns the address of the specified Vulkan core or extension
+ *  function for the specified instance.  If instance is set to `NULL` it can
+ *  return any function exported from the Vulkan loader, including at least the
+ *  following functions:
+ *
+ *  - `vkEnumerateInstanceExtensionProperties`
+ *  - `vkEnumerateInstanceLayerProperties`
+ *  - `vkCreateInstance`
+ *  - `vkGetInstanceProcAddr`
+ *
+ *  If Vulkan is not available on the machine, this function returns `NULL` and
+ *  generates a @ref GLFW_API_UNAVAILABLE error.  Call @ref glfwVulkanSupported
+ *  to check whether Vulkan is available.
+ *
+ *  This function is equivalent to calling `vkGetInstanceProcAddr` with
+ *  a platform-specific query of the Vulkan loader as a fallback.
+ *
+ *  @param[in] instance The Vulkan instance to query, or `NULL` to retrieve
+ *  functions related to instance creation.
+ *  @param[in] procname The ASCII encoded name of the function.
+ *  @return The address of the function, or `NULL` if an
+ *  [error](@ref error_handling) occurred.
+ *
+ *  @par Pointer Lifetime
+ *  The returned function pointer is valid until the program is terminated.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.
+ *
+ *  @sa @ref vulkan_proc
+ *
+ *  @since Added in GLFW 3.2.
+ *
+ *  @ingroup vulkan
+ */
+GLFWAPI GLFWvkproc glfwGetInstanceProcAddress(VkInstance instance, const char* procname);
+
+/*! @brief Returns whether the specified queue family can present images.
+ *
+ *  This function returns whether the specified queue family of the specified
+ *  physical device supports presentation to the platform GLFW was built for.
+ *
+ *  If Vulkan or the required window surface creation instance extensions are
+ *  not available on the machine, or if the specified instance was not created
+ *  with the required extensions, this function returns `GLFW_FALSE` and
+ *  generates a @ref GLFW_API_UNAVAILABLE error.  Call @ref glfwVulkanSupported
+ *  to check whether Vulkan is available and @ref
+ *  glfwGetRequiredInstanceExtensions to check what instance extensions are
+ *  required.
+ *
+ *  @param[in] instance The instance that the physical device belongs to.
+ *  @param[in] device The physical device that the queue family belongs to.
+ *  @param[in] queuefamily The index of the queue family to query.
+ *  @return `GLFW_TRUE` if the queue family supports presentation, or
+ *  `GLFW_FALSE` otherwise.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.  For synchronization details of
+ *  Vulkan objects, see the Vulkan specification.
+ *
+ *  @sa @ref vulkan_present
+ *
+ *  @since Added in GLFW 3.2.
+ *
+ *  @ingroup vulkan
+ */
+GLFWAPI int glfwGetPhysicalDevicePresentationSupport(VkInstance instance, VkPhysicalDevice device, uint32_t queuefamily);
+
+/*! @brief Creates a Vulkan surface for the specified window.
+ *
+ *  This function creates a Vulkan surface for the specified window.
+ *
+ *  If Vulkan or the required window surface creation instance extensions are
+ *  not available on the machine, or if the specified instance was not created
+ *  with the required extensions, this function returns `VK_NULL_HANDLE` and
+ *  generates a @ref GLFW_API_UNAVAILABLE error.  Call @ref glfwVulkanSupported
+ *  to check whether Vulkan is available and @ref
+ *  glfwGetRequiredInstanceExtensions to check what instance extensions are
+ *  required.
+ *
+ *  The returned surface must be destroyed before the specified Vulkan instance.
+ *  It is not destroyed at window destruction or library termination time.  Call
+ *  `vkDestroySurfaceKHR` to destroy the surface.
+ *
+ *  @param[in] instance The Vulkan instance to create the surface in.
+ *  @param[in] window The window to create the surface for.
+ *  @param[in] allocator The allocator to use, or `NULL` to use the default
+ *  allocator.
+ *  @return The handle of the created surface or `VK_NULL_HANDLE` if an
+ *  [error](@ref error_handling) occurred.
+ *
+ *  @par Thread Safety
+ *  This function may be called from any thread.  For synchronization details of
+ *  Vulkan objects, see the Vulkan specification.
+ *
+ *  @sa @ref vulkan_surface
+ *  @sa glfwGetRequiredInstanceExtensions
+ *
+ *  @since Added in GLFW 3.2.
+ *
+ *  @ingroup vulkan
+ */
+GLFWAPI VkSurfaceKHR glfwCreateWindowSurface(VkInstance instance, GLFWwindow* window, const VkAllocationCallbacks* allocator);
+]] or "")
 ):gsub("GLFWCALL",ffi.os == "Windows" and "__stdcall" or ""):gsub("GLFWAPI", "")
 
 ffi.cdef(def)
