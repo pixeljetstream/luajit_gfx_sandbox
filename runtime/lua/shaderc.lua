@@ -1,6 +1,6 @@
 local ffi = require( "ffi" )
 local def = ([[
-// shaderc | SHADERC window manager
+// shaderc | SHADERC glsl 2 spir-v
 //
 // Copyright 2015 The Shaderc Authors. All rights reserved.
 //
