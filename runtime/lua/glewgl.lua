@@ -38,6 +38,7 @@ typedef void ( *GLDEBUGPROCARB)(GLenum source, GLenum type, GLuint id, GLenum se
 typedef void ( *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, void* userParam);
 typedef void ( *GLLOGPROCREGAL)(GLenum stream, GLsizei length, const GLchar *message, void *context);
 typedef void ( *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
+typedef void ( *GLVULKANPROCNV)(void);
 
 enum {
 GL_ZERO = 0,
@@ -1081,6 +1082,8 @@ GL_SAMPLER_CUBE_MAP_ARRAY = 0x900C,
 GL_SAMPLER_CUBE_MAP_ARRAY_SHADOW = 0x900D,
 GL_INT_SAMPLER_CUBE_MAP_ARRAY = 0x900E,
 GL_UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY = 0x900F,
+GL_TRANSFORM_FEEDBACK_PAUSED = 0x8E23,
+GL_TRANSFORM_FEEDBACK_ACTIVE = 0x8E24,
 GL_COMPRESSED_RGBA_BPTC_UNORM = 0x8E8C,
 GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM = 0x8E8D,
 GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT = 0x8E8E,
@@ -1092,6 +1095,7 @@ GL_VERTEX_ATTRIB_ARRAY_LONG = 0x874E,
 GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED = 0x8221,
 GL_MAX_VERTEX_ATTRIB_STRIDE = 0x82E5,
 GL_TEXTURE_BUFFER_BINDING = 0x8C2A,
+GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT = 0x00000004,
 GL_MULTISAMPLE_3DFX = 0x86B2,
 GL_SAMPLE_BUFFERS_3DFX = 0x86B3,
 GL_SAMPLES_3DFX = 0x86B4,
@@ -1281,6 +1285,9 @@ GL_SHADER_COMPILER = 0x8DFA,
 GL_MAX_VERTEX_UNIFORM_VECTORS = 0x8DFB,
 GL_MAX_VARYING_VECTORS = 0x8DFC,
 GL_MAX_FRAGMENT_UNIFORM_VECTORS = 0x8DFD,
+GL_PRIMITIVE_BOUNDING_BOX_ARB = 0x92BE,
+GL_MULTISAMPLE_LINE_WIDTH_RANGE_ARB = 0x9381,
+GL_MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB = 0x9382,
 GL_TEXTURE_IMMUTABLE_LEVELS = 0x82DF,
 GL_PRIMITIVE_RESTART_FIXED_INDEX = 0x8D69,
 GL_ANY_SAMPLES_PASSED_CONSERVATIVE = 0x8D6A,
@@ -1394,7 +1401,6 @@ GL_TEXTURE_DEPTH_SIZE_ARB = 0x884A,
 GL_DEPTH_TEXTURE_MODE_ARB = 0x884B,
 GL_TEXTURE_TARGET = 0x1006,
 GL_QUERY_TARGET = 0x82EA,
-GL_TEXTURE_BINDING = 0x82EB,
 GL_MAX_DRAW_BUFFERS_ARB = 0x8824,
 GL_DRAW_BUFFER0_ARB = 0x8825,
 GL_DRAW_BUFFER1_ARB = 0x8826,
@@ -1543,6 +1549,8 @@ GL_PROGRAM_BINARY_RETRIEVABLE_HINT = 0x8257,
 GL_PROGRAM_BINARY_LENGTH = 0x8741,
 GL_NUM_PROGRAM_BINARY_FORMATS = 0x87FE,
 GL_PROGRAM_BINARY_FORMATS = 0x87FF,
+GL_SHADER_BINARY_FORMAT_SPIR_V_ARB = 0x9551,
+GL_SPIR_V_BINARY_ARB = 0x9552,
 GL_GEOMETRY_SHADER_INVOCATIONS = 0x887F,
 GL_MAX_GEOMETRY_SHADER_INVOCATIONS = 0x8E5A,
 GL_MIN_FRAGMENT_INTERPOLATION_OFFSET = 0x8E5B,
@@ -1561,6 +1569,14 @@ GL_DOUBLE_MAT4x3 = 0x8F4E,
 GL_DOUBLE_VEC2 = 0x8FFC,
 GL_DOUBLE_VEC3 = 0x8FFD,
 GL_DOUBLE_VEC4 = 0x8FFE,
+GL_INT64_ARB = 0x140E,
+//GL_UNSIGNED_INT64_ARB = 0x140F,
+GL_INT64_VEC2_ARB = 0x8FE9,
+GL_INT64_VEC3_ARB = 0x8FEA,
+GL_INT64_VEC4_ARB = 0x8FEB,
+GL_UNSIGNED_INT64_VEC2_ARB = 0x8FF5,
+GL_UNSIGNED_INT64_VEC3_ARB = 0x8FF6,
+GL_UNSIGNED_INT64_VEC4_ARB = 0x8FF7,
 GL_HALF_FLOAT_ARB = 0x140B,
 GL_HALF_FLOAT = 0x140B,
 GL_CONSTANT_COLOR = 0x8001,
@@ -1810,6 +1826,8 @@ GL_QUERY_RESULT_ARB = 0x8866,
 GL_QUERY_RESULT_AVAILABLE_ARB = 0x8867,
 GL_SAMPLES_PASSED_ARB = 0x8914,
 GL_ANY_SAMPLES_PASSED = 0x8C2F,
+GL_MAX_SHADER_COMPILER_THREADS_ARB = 0x91B0,
+GL_COMPLETION_STATUS_ARB = 0x91B1,
 GL_VERTICES_SUBMITTED_ARB = 0x82EE,
 GL_PRIMITIVES_SUBMITTED_ARB = 0x82EF,
 GL_VERTEX_SHADER_INVOCATIONS_ARB = 0x82F0,
@@ -1893,6 +1911,14 @@ GL_INNOCENT_CONTEXT_RESET_ARB = 0x8254,
 GL_UNKNOWN_CONTEXT_RESET_ARB = 0x8255,
 GL_RESET_NOTIFICATION_STRATEGY_ARB = 0x8256,
 GL_NO_RESET_NOTIFICATION_ARB = 0x8261,
+GL_SAMPLE_LOCATION_ARB = 0x8E50,
+GL_SAMPLE_LOCATION_SUBPIXEL_BITS_ARB = 0x933D,
+GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_ARB = 0x933E,
+GL_SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_ARB = 0x933F,
+GL_PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_ARB = 0x9340,
+GL_PROGRAMMABLE_SAMPLE_LOCATION_ARB = 0x9341,
+GL_FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_ARB = 0x9342,
+GL_FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_ARB = 0x9343,
 GL_SAMPLE_SHADING_ARB = 0x8C36,
 GL_MIN_SAMPLE_SHADING_VALUE_ARB = 0x8C37,
 GL_SAMPLER_BINDING = 0x8919,
@@ -2095,7 +2121,7 @@ GL_ALREADY_SIGNALED = 0x911A,
 GL_TIMEOUT_EXPIRED = 0x911B,
 GL_CONDITION_SATISFIED = 0x911C,
 GL_WAIT_FAILED = 0x911D,
-//GL_TIMEOUT_IGNORED = 0xFFFFFFFFFFFFFFFF,
+//GL_TIMEOUT_IGNORED = 0xFFFFFFFFFFFFFFFFull,
 GL_PATCHES = 0xE,
 GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER = 0x84F0,
 GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER = 0x84F1,
@@ -2199,6 +2225,8 @@ GL_OPERAND1_ALPHA_ARB = 0x8599,
 GL_OPERAND2_ALPHA_ARB = 0x859A,
 GL_DOT3_RGB_ARB = 0x86AE,
 GL_DOT3_RGBA_ARB = 0x86AF,
+GL_TEXTURE_REDUCTION_MODE_ARB = 0x9366,
+GL_WEIGHTED_AVERAGE_ARB = 0x9367,
 GL_RGBA32F_ARB = 0x8814,
 GL_RGB32F_ARB = 0x8815,
 GL_ALPHA32F_ARB = 0x8816,
@@ -2335,7 +2363,7 @@ GL_UNIFORM_BLOCK_ACTIVE_UNIFORM_INDICES = 0x8A43,
 GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER = 0x8A44,
 GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER = 0x8A45,
 GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER = 0x8A46,
-GL_INVALID_INDEX = 0xFFFFFFFF,
+GL_INVALID_INDEX = 0xFFFFFFFFu,
 //GL_BGRA = 0x80E1,
 GL_VERTEX_ARRAY_BINDING = 0x85B5,
 GL_VERTEX_ATTRIB_BINDING = 0x82D4,
@@ -2669,6 +2697,8 @@ GL_VERTEX_STREAM4_ATI = 0x8771,
 GL_VERTEX_STREAM5_ATI = 0x8772,
 GL_VERTEX_STREAM6_ATI = 0x8773,
 GL_VERTEX_STREAM7_ATI = 0x8774,
+GL_EGL_GENERATE_RESET_ON_VIDEO_MEMORY_PURGE_NV = 0x334C,
+GL_PURGED_CONTEXT_RESET_NV = 0x92BB,
 GL_422_EXT = 0x80CC,
 GL_422_REV_EXT = 0x80CD,
 GL_422_AVERAGE_EXT = 0x80CE,
@@ -3490,6 +3520,12 @@ GL_VERTEX_WEIGHT_ARRAY_SIZE_EXT = 0x850D,
 GL_VERTEX_WEIGHT_ARRAY_TYPE_EXT = 0x850E,
 GL_VERTEX_WEIGHT_ARRAY_STRIDE_EXT = 0x850F,
 GL_VERTEX_WEIGHT_ARRAY_POINTER_EXT = 0x8510,
+GL_INCLUSIVE_EXT = 0x8F10,
+GL_EXCLUSIVE_EXT = 0x8F11,
+GL_WINDOW_RECTANGLE_EXT = 0x8F12,
+GL_WINDOW_RECTANGLE_MODE_EXT = 0x8F13,
+GL_MAX_WINDOW_RECTANGLES_EXT = 0x8F14,
+GL_NUM_WINDOW_RECTANGLES_EXT = 0x8F15,
 GL_SYNC_X11_FENCE_EXT = 0x90E1,
 GL_CULL_VERTEX_IBM = 103050,
 GL_RASTER_POSITION_UNCLIPPED_IBM = 103010,
@@ -3521,6 +3557,7 @@ GL_GREEN_MAX_CLAMP_INGR = 0x8565,
 GL_BLUE_MAX_CLAMP_INGR = 0x8566,
 GL_ALPHA_MAX_CLAMP_INGR = 0x8567,
 GL_INTERLACE_READ_INGR = 0x8568,
+GL_CONSERVATIVE_RASTERIZATION_INTEL = 0x83FE,
 GL_LAYOUT_DEFAULT_INTEL = 0,
 GL_LAYOUT_LINEAR_INTEL = 1,
 GL_LAYOUT_LINEAR_CPU_CACHED_INTEL = 2,
@@ -3608,6 +3645,7 @@ GL_DEBUG_SEVERITY_HIGH = 0x9146,
 GL_DEBUG_SEVERITY_MEDIUM = 0x9147,
 GL_DEBUG_SEVERITY_LOW = 0x9148,
 GL_DEBUG_OUTPUT = 0x92E0,
+GL_CONTEXT_FLAG_NO_ERROR_BIT_KHR = 0x00000008,
 GL_CONTEXT_LOST = 0x0507,
 GL_LOSE_CONTEXT_ON_RESET = 0x8252,
 GL_GUILTY_CONTEXT_RESET = 0x8253,
@@ -3691,6 +3729,8 @@ GL_GPU_MEMORY_INFO_TOTAL_AVAILABLE_MEMORY_NVX = 0x9048,
 GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX = 0x9049,
 GL_GPU_MEMORY_INFO_EVICTION_COUNT_NVX = 0x904A,
 GL_GPU_MEMORY_INFO_EVICTED_MEMORY_NVX = 0x904B,
+GL_LGPU_SEPARATE_STORAGE_BIT_NVX = 0x0800,
+GL_MAX_LGPU_GPUS_NVX = 0x92BA,
 GL_XOR_NV = 0x1506,
 GL_RED_NV = 0x1903,
 GL_GREEN_NV = 0x1904,
@@ -3741,6 +3781,28 @@ GL_PLUS_CLAMPED_NV = 0x92B1,
 GL_PLUS_CLAMPED_ALPHA_NV = 0x92B2,
 GL_MINUS_CLAMPED_NV = 0x92B3,
 GL_INVERT_OVG_NV = 0x92B4,
+GL_VIEWPORT_POSITION_W_SCALE_NV = 0x937C,
+GL_VIEWPORT_POSITION_W_SCALE_X_COEFF_NV = 0x937D,
+GL_VIEWPORT_POSITION_W_SCALE_Y_COEFF_NV = 0x937E,
+GL_TERMINATE_SEQUENCE_COMMAND_NV = 0x0000,
+GL_NOP_COMMAND_NV = 0x0001,
+GL_DRAW_ELEMENTS_COMMAND_NV = 0x0002,
+GL_DRAW_ARRAYS_COMMAND_NV = 0x0003,
+GL_DRAW_ELEMENTS_STRIP_COMMAND_NV = 0x0004,
+GL_DRAW_ARRAYS_STRIP_COMMAND_NV = 0x0005,
+GL_DRAW_ELEMENTS_INSTANCED_COMMAND_NV = 0x0006,
+GL_DRAW_ARRAYS_INSTANCED_COMMAND_NV = 0x0007,
+GL_ELEMENT_ADDRESS_COMMAND_NV = 0x0008,
+GL_ATTRIBUTE_ADDRESS_COMMAND_NV = 0x0009,
+GL_UNIFORM_ADDRESS_COMMAND_NV = 0x000a,
+GL_BLEND_COLOR_COMMAND_NV = 0x000b,
+GL_STENCIL_REF_COMMAND_NV = 0x000c,
+GL_LINE_WIDTH_COMMAND_NV = 0x000d,
+GL_POLYGON_OFFSET_COMMAND_NV = 0x000e,
+GL_ALPHA_REF_COMMAND_NV = 0x000f,
+GL_VIEWPORT_COMMAND_NV = 0x0010,
+GL_SCISSOR_COMMAND_NV = 0x0011,
+GL_FRONT_FACE_COMMAND_NV = 0x0012,
 GL_COMPUTE_PROGRAM_NV = 0x90FB,
 GL_COMPUTE_PROGRAM_PARAMETER_BUFFER_NV = 0x90FC,
 GL_QUERY_WAIT_NV = 0x8E13,
@@ -3751,6 +3813,12 @@ GL_CONSERVATIVE_RASTERIZATION_NV = 0x9346,
 GL_SUBPIXEL_PRECISION_BIAS_X_BITS_NV = 0x9347,
 GL_SUBPIXEL_PRECISION_BIAS_Y_BITS_NV = 0x9348,
 GL_MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV = 0x9349,
+GL_CONSERVATIVE_RASTER_DILATE_NV = 0x9379,
+GL_CONSERVATIVE_RASTER_DILATE_RANGE_NV = 0x937A,
+GL_CONSERVATIVE_RASTER_DILATE_GRANULARITY_NV = 0x937B,
+GL_CONSERVATIVE_RASTER_MODE_NV = 0x954D,
+GL_CONSERVATIVE_RASTER_MODE_POST_SNAP_NV = 0x954E,
+GL_CONSERVATIVE_RASTER_MODE_PRE_SNAP_TRIANGLES_NV = 0x954F,
 GL_DEPTH_STENCIL_TO_RGBA_NV = 0x886E,
 GL_DEPTH_STENCIL_TO_BGRA_NV = 0x886F,
 GL_MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV = 0x90D0,
@@ -3855,6 +3923,11 @@ GL_MULTISAMPLE_COVERAGE_MODES_NV = 0x8E12,
 GL_GEOMETRY_PROGRAM_NV = 0x8C26,
 GL_MAX_PROGRAM_OUTPUT_VERTICES_NV = 0x8C27,
 GL_MAX_PROGRAM_TOTAL_OUTPUT_COMPONENTS_NV = 0x8C28,
+GL_PER_GPU_STORAGE_BIT_NV = 0x0800,
+GL_MULTICAST_GPUS_NV = 0x92BA,
+GL_PER_GPU_STORAGE_NV = 0x9548,
+GL_MULTICAST_PROGRAMMABLE_SAMPLE_LOCATION_NV = 0x9549,
+GL_RENDER_GPU_MASK_NV = 0x9558,
 GL_MIN_PROGRAM_TEXEL_OFFSET_NV = 0x8904,
 GL_MAX_PROGRAM_TEXEL_OFFSET_NV = 0x8905,
 GL_PROGRAM_ATTRIB_COMPONENTS_NV = 0x8906,
@@ -4136,6 +4209,8 @@ GL_COMBINER5_NV = 0x8555,
 GL_COMBINER6_NV = 0x8556,
 GL_COMBINER7_NV = 0x8557,
 GL_PER_STAGE_CONSTANTS_NV = 0x8535,
+//GL_EGL_GENERATE_RESET_ON_VIDEO_MEMORY_PURGE_NV = 0x334C,
+//GL_PURGED_CONTEXT_RESET_NV = 0x92BB,
 GL_SAMPLE_LOCATION_NV = 0x8E50,
 GL_SAMPLE_LOCATION_SUBPIXEL_BITS_NV = 0x933D,
 GL_SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV = 0x933E,
@@ -4475,6 +4550,18 @@ GL_VIDEO_CAPTURE_FRAME_HEIGHT_NV = 0x9039,
 GL_VIDEO_CAPTURE_FIELD_UPPER_HEIGHT_NV = 0x903A,
 GL_VIDEO_CAPTURE_FIELD_LOWER_HEIGHT_NV = 0x903B,
 GL_VIDEO_CAPTURE_SURFACE_ORIGIN_NV = 0x903C,
+GL_VIEWPORT_SWIZZLE_POSITIVE_X_NV = 0x9350,
+GL_VIEWPORT_SWIZZLE_NEGATIVE_X_NV = 0x9351,
+GL_VIEWPORT_SWIZZLE_POSITIVE_Y_NV = 0x9352,
+GL_VIEWPORT_SWIZZLE_NEGATIVE_Y_NV = 0x9353,
+GL_VIEWPORT_SWIZZLE_POSITIVE_Z_NV = 0x9354,
+GL_VIEWPORT_SWIZZLE_NEGATIVE_Z_NV = 0x9355,
+GL_VIEWPORT_SWIZZLE_POSITIVE_W_NV = 0x9356,
+GL_VIEWPORT_SWIZZLE_NEGATIVE_W_NV = 0x9357,
+GL_VIEWPORT_SWIZZLE_X_NV = 0x9358,
+GL_VIEWPORT_SWIZZLE_Y_NV = 0x9359,
+GL_VIEWPORT_SWIZZLE_Z_NV = 0x935A,
+GL_VIEWPORT_SWIZZLE_W_NV = 0x935B,
 GL_PALETTE4_RGB8_OES = 0x8B90,
 GL_PALETTE4_RGBA8_OES = 0x8B91,
 GL_PALETTE4_R5_G6_B5_OES = 0x8B92,
@@ -4497,6 +4584,10 @@ GL_RESAMPLE_AVERAGE_OML = 0x8988,
 GL_RESAMPLE_DECIMATE_OML = 0x8989,
 GL_FORMAT_SUBSAMPLE_24_24_OML = 0x8982,
 GL_FORMAT_SUBSAMPLE_244_244_OML = 0x8983,
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR = 0x9630,
+GL_MAX_VIEWS_OVR = 0x9631,
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR = 0x9632,
+GL_FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR = 0x9633,
 GL_PREFER_DOUBLEBUFFER_HINT_PGI = 107000,
 GL_CONSERVE_MEMORY_HINT_PGI = 107005,
 GL_RECLAIM_MEMORY_HINT_PGI = 107006,
@@ -4624,9 +4715,6 @@ GL_DEPTH_COMPONENT24_SGIX = 0x81A6,
 GL_DEPTH_COMPONENT32_SGIX = 0x81A7,
 GL_FOG_OFFSET_SGIX = 0x8198,
 GL_FOG_OFFSET_VALUE_SGIX = 0x8199,
-GL_FOG_PATCHY_FACTOR_SGIX = 0,
-GL_FRAGMENT_FOG_SGIX = 0,
-GL_TEXTURE_FOG_SGIX = 0,
 GL_INTERLACE_SGIX = 0x8094,
 GL_PACK_RESAMPLE_SGIX = 0x842E,
 GL_UNPACK_RESAMPLE_SGIX = 0x842F,
@@ -5357,6 +5445,9 @@ extern void ( * glBlendFuncSeparatei) (GLuint buf, GLenum srcRGB, GLenum dstRGB,
 extern void ( * glBlendFunci) (GLuint buf, GLenum src, GLenum dst) __asm__("__glewBlendFunci");
 extern void ( * glMinSampleShading) (GLclampf value) __asm__("__glewMinSampleShading");
 extern GLenum ( * glGetGraphicsResetStatus) (void) __asm__("__glewGetGraphicsResetStatus");
+extern void ( * glGetnCompressedTexImage) (GLenum target, GLint lod, GLsizei bufSize, GLvoid *pixels) __asm__("__glewGetnCompressedTexImage");
+extern void ( * glGetnTexImage) (GLenum tex, GLint level, GLenum format, GLenum type, GLsizei bufSize, GLvoid *pixels) __asm__("__glewGetnTexImage");
+extern void ( * glGetnUniformdv) (GLuint program, GLint location, GLsizei bufSize, GLdouble *params) __asm__("__glewGetnUniformdv");
 extern void ( * glTbufferMask3DFX) (GLuint mask) __asm__("__glewTbufferMask3DFX");
 extern void ( * glDebugMessageCallbackAMD) (GLDEBUGPROCAMD callback, void *userParam) __asm__("__glewDebugMessageCallbackAMD");
 extern void ( * glDebugMessageEnableAMD) (GLenum category, GLenum severity, GLsizei count, const GLuint* ids, GLboolean enabled) __asm__("__glewDebugMessageEnableAMD");
@@ -5447,6 +5538,7 @@ extern void ( * glGetShaderPrecisionFormat) (GLenum shadertype, GLenum precision
 extern void ( * glReleaseShaderCompiler) (void) __asm__("__glewReleaseShaderCompiler");
 extern void ( * glShaderBinary) (GLsizei count, const GLuint* shaders, GLenum binaryformat, const void*binary, GLsizei length) __asm__("__glewShaderBinary");
 extern void ( * glMemoryBarrierByRegion) (GLbitfield barriers) __asm__("__glewMemoryBarrierByRegion");
+extern void ( * glPrimitiveBoundingBoxARB) (GLfloat minX, GLfloat minY, GLfloat minZ, GLfloat minW, GLfloat maxX, GLfloat maxY, GLfloat maxZ, GLfloat maxW) __asm__("__glewPrimitiveBoundingBoxARB");
 extern void ( * glDrawArraysInstancedBaseInstance) (GLenum mode, GLint first, GLsizei count, GLsizei primcount, GLuint baseinstance) __asm__("__glewDrawArraysInstancedBaseInstance");
 extern void ( * glDrawElementsInstancedBaseInstance) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount, GLuint baseinstance) __asm__("__glewDrawElementsInstancedBaseInstance");
 extern void ( * glDrawElementsInstancedBaseVertexBaseInstance) (GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei primcount, GLint basevertex, GLuint baseinstance) __asm__("__glewDrawElementsInstancedBaseVertexBaseInstance");
@@ -5493,8 +5585,8 @@ extern void ( * glBlitNamedFramebuffer) (GLuint readFramebuffer, GLuint drawFram
 extern GLenum ( * glCheckNamedFramebufferStatus) (GLuint framebuffer, GLenum target) __asm__("__glewCheckNamedFramebufferStatus");
 extern void ( * glClearNamedBufferData) (GLuint buffer, GLenum internalformat, GLenum format, GLenum type, const void *data) __asm__("__glewClearNamedBufferData");
 extern void ( * glClearNamedBufferSubData) (GLuint buffer, GLenum internalformat, GLintptr offset, GLsizeiptr size, GLenum format, GLenum type, const void *data) __asm__("__glewClearNamedBufferSubData");
-extern void ( * glClearNamedFramebufferfi) (GLuint framebuffer, GLenum buffer, GLfloat depth, GLint stencil) __asm__("__glewClearNamedFramebufferfi");
-extern void ( * glClearNamedFramebufferfv) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLfloat* value) __asm__("__glewClearNamedFramebufferfv");
+extern void ( * glClearNamedFramebufferfi) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, GLfloat depth, GLint stencil) __asm__("__glewClearNamedFramebufferfi");
+extern void ( * glClearNamedFramebufferfv) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, GLfloat* value) __asm__("__glewClearNamedFramebufferfv");
 extern void ( * glClearNamedFramebufferiv) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLint* value) __asm__("__glewClearNamedFramebufferiv");
 extern void ( * glClearNamedFramebufferuiv) (GLuint framebuffer, GLenum buffer, GLint drawbuffer, const GLuint* value) __asm__("__glewClearNamedFramebufferuiv");
 extern void ( * glCompressedTextureSubImage1D) (GLuint texture, GLint level, GLint xoffset, GLsizei width, GLenum format, GLsizei imageSize, const void *data) __asm__("__glewCompressedTextureSubImage1D");
@@ -5629,6 +5721,7 @@ extern void ( * glProgramBinary) (GLuint program, GLenum binaryFormat, const voi
 extern void ( * glProgramParameteri) (GLuint program, GLenum pname, GLint value) __asm__("__glewProgramParameteri");
 extern void ( * glGetCompressedTextureSubImage) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLsizei bufSize, void *pixels) __asm__("__glewGetCompressedTextureSubImage");
 extern void ( * glGetTextureSubImage) (GLuint texture, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, GLsizei bufSize, void *pixels) __asm__("__glewGetTextureSubImage");
+extern void ( * glSpecializeShaderARB) (GLuint shader, const GLchar* pEntryPoint, GLuint numSpecializationConstants, const GLuint* pConstantIndex, const GLuint* pConstantValue) __asm__("__glewSpecializeShaderARB");
 extern void ( * glGetUniformdv) (GLuint program, GLint location, GLdouble* params) __asm__("__glewGetUniformdv");
 extern void ( * glUniform1d) (GLint location, GLdouble x) __asm__("__glewUniform1d");
 extern void ( * glUniform1dv) (GLint location, GLsizei count, const GLdouble* value) __asm__("__glewUniform1dv");
@@ -5647,6 +5740,42 @@ extern void ( * glUniformMatrix3x4dv) (GLint location, GLsizei count, GLboolean 
 extern void ( * glUniformMatrix4dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) __asm__("__glewUniformMatrix4dv");
 extern void ( * glUniformMatrix4x2dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) __asm__("__glewUniformMatrix4x2dv");
 extern void ( * glUniformMatrix4x3dv) (GLint location, GLsizei count, GLboolean transpose, const GLdouble* value) __asm__("__glewUniformMatrix4x3dv");
+extern void ( * glGetUniformi64vARB) (GLuint program, GLint location, GLint64* params) __asm__("__glewGetUniformi64vARB");
+extern void ( * glGetUniformui64vARB) (GLuint program, GLint location, GLuint64* params) __asm__("__glewGetUniformui64vARB");
+extern void ( * glGetnUniformi64vARB) (GLuint program, GLint location, GLsizei bufSize, GLint64* params) __asm__("__glewGetnUniformi64vARB");
+extern void ( * glGetnUniformui64vARB) (GLuint program, GLint location, GLsizei bufSize, GLuint64* params) __asm__("__glewGetnUniformui64vARB");
+extern void ( * glProgramUniform1i64ARB) (GLuint program, GLint location, GLint64 x) __asm__("__glewProgramUniform1i64ARB");
+extern void ( * glProgramUniform1i64vARB) (GLuint program, GLint location, GLsizei count, const GLint64* value) __asm__("__glewProgramUniform1i64vARB");
+extern void ( * glProgramUniform1ui64ARB) (GLuint program, GLint location, GLuint64 x) __asm__("__glewProgramUniform1ui64ARB");
+extern void ( * glProgramUniform1ui64vARB) (GLuint program, GLint location, GLsizei count, const GLuint64* value) __asm__("__glewProgramUniform1ui64vARB");
+extern void ( * glProgramUniform2i64ARB) (GLuint program, GLint location, GLint64 x, GLint64 y) __asm__("__glewProgramUniform2i64ARB");
+extern void ( * glProgramUniform2i64vARB) (GLuint program, GLint location, GLsizei count, const GLint64* value) __asm__("__glewProgramUniform2i64vARB");
+extern void ( * glProgramUniform2ui64ARB) (GLuint program, GLint location, GLuint64 x, GLuint64 y) __asm__("__glewProgramUniform2ui64ARB");
+extern void ( * glProgramUniform2ui64vARB) (GLuint program, GLint location, GLsizei count, const GLuint64* value) __asm__("__glewProgramUniform2ui64vARB");
+extern void ( * glProgramUniform3i64ARB) (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z) __asm__("__glewProgramUniform3i64ARB");
+extern void ( * glProgramUniform3i64vARB) (GLuint program, GLint location, GLsizei count, const GLint64* value) __asm__("__glewProgramUniform3i64vARB");
+extern void ( * glProgramUniform3ui64ARB) (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z) __asm__("__glewProgramUniform3ui64ARB");
+extern void ( * glProgramUniform3ui64vARB) (GLuint program, GLint location, GLsizei count, const GLuint64* value) __asm__("__glewProgramUniform3ui64vARB");
+extern void ( * glProgramUniform4i64ARB) (GLuint program, GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w) __asm__("__glewProgramUniform4i64ARB");
+extern void ( * glProgramUniform4i64vARB) (GLuint program, GLint location, GLsizei count, const GLint64* value) __asm__("__glewProgramUniform4i64vARB");
+extern void ( * glProgramUniform4ui64ARB) (GLuint program, GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w) __asm__("__glewProgramUniform4ui64ARB");
+extern void ( * glProgramUniform4ui64vARB) (GLuint program, GLint location, GLsizei count, const GLuint64* value) __asm__("__glewProgramUniform4ui64vARB");
+extern void ( * glUniform1i64ARB) (GLint location, GLint64 x) __asm__("__glewUniform1i64ARB");
+extern void ( * glUniform1i64vARB) (GLint location, GLsizei count, const GLint64* value) __asm__("__glewUniform1i64vARB");
+extern void ( * glUniform1ui64ARB) (GLint location, GLuint64 x) __asm__("__glewUniform1ui64ARB");
+extern void ( * glUniform1ui64vARB) (GLint location, GLsizei count, const GLuint64* value) __asm__("__glewUniform1ui64vARB");
+extern void ( * glUniform2i64ARB) (GLint location, GLint64 x, GLint64 y) __asm__("__glewUniform2i64ARB");
+extern void ( * glUniform2i64vARB) (GLint location, GLsizei count, const GLint64* value) __asm__("__glewUniform2i64vARB");
+extern void ( * glUniform2ui64ARB) (GLint location, GLuint64 x, GLuint64 y) __asm__("__glewUniform2ui64ARB");
+extern void ( * glUniform2ui64vARB) (GLint location, GLsizei count, const GLuint64* value) __asm__("__glewUniform2ui64vARB");
+extern void ( * glUniform3i64ARB) (GLint location, GLint64 x, GLint64 y, GLint64 z) __asm__("__glewUniform3i64ARB");
+extern void ( * glUniform3i64vARB) (GLint location, GLsizei count, const GLint64* value) __asm__("__glewUniform3i64vARB");
+extern void ( * glUniform3ui64ARB) (GLint location, GLuint64 x, GLuint64 y, GLuint64 z) __asm__("__glewUniform3ui64ARB");
+extern void ( * glUniform3ui64vARB) (GLint location, GLsizei count, const GLuint64* value) __asm__("__glewUniform3ui64vARB");
+extern void ( * glUniform4i64ARB) (GLint location, GLint64 x, GLint64 y, GLint64 z, GLint64 w) __asm__("__glewUniform4i64ARB");
+extern void ( * glUniform4i64vARB) (GLint location, GLsizei count, const GLint64* value) __asm__("__glewUniform4i64vARB");
+extern void ( * glUniform4ui64ARB) (GLint location, GLuint64 x, GLuint64 y, GLuint64 z, GLuint64 w) __asm__("__glewUniform4ui64ARB");
+extern void ( * glUniform4ui64vARB) (GLint location, GLsizei count, const GLuint64* value) __asm__("__glewUniform4ui64vARB");
 extern void ( * glColorSubTable) (GLenum target, GLsizei start, GLsizei count, GLenum format, GLenum type, const void *data) __asm__("__glewColorSubTable");
 extern void ( * glColorTable) (GLenum target, GLenum internalformat, GLsizei width, GLenum format, GLenum type, const void *table) __asm__("__glewColorTable");
 extern void ( * glColorTableParameterfv) (GLenum target, GLenum pname, const GLfloat *params) __asm__("__glewColorTableParameterfv");
@@ -5750,6 +5879,7 @@ extern void ( * glGetQueryObjectivARB) (GLuint id, GLenum pname, GLint* params) 
 extern void ( * glGetQueryObjectuivARB) (GLuint id, GLenum pname, GLuint* params) __asm__("__glewGetQueryObjectuivARB");
 extern void ( * glGetQueryivARB) (GLenum target, GLenum pname, GLint* params) __asm__("__glewGetQueryivARB");
 extern GLboolean ( * glIsQueryARB) (GLuint id) __asm__("__glewIsQueryARB");
+extern void ( * glMaxShaderCompilerThreadsARB) (GLuint count) __asm__("__glewMaxShaderCompilerThreadsARB");
 extern void ( * glPointParameterfARB) (GLenum pname, GLfloat param) __asm__("__glewPointParameterfARB");
 extern void ( * glPointParameterfvARB) (GLenum pname, const GLfloat* params) __asm__("__glewPointParameterfvARB");
 extern void ( * glGetProgramInterfaceiv) (GLuint program, GLenum programInterface, GLenum pname, GLint* params) __asm__("__glewGetProgramInterfaceiv");
@@ -5779,6 +5909,8 @@ extern void ( * glGetnUniformfvARB) (GLuint program, GLint location, GLsizei buf
 extern void ( * glGetnUniformivARB) (GLuint program, GLint location, GLsizei bufSize, GLint* params) __asm__("__glewGetnUniformivARB");
 extern void ( * glGetnUniformuivARB) (GLuint program, GLint location, GLsizei bufSize, GLuint* params) __asm__("__glewGetnUniformuivARB");
 extern void ( * glReadnPixelsARB) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, GLsizei bufSize, void* data) __asm__("__glewReadnPixelsARB");
+extern void ( * glFramebufferSampleLocationsfvARB) (GLenum target, GLuint start, GLsizei count, const GLfloat* v) __asm__("__glewFramebufferSampleLocationsfvARB");
+extern void ( * glNamedFramebufferSampleLocationsfvARB) (GLuint framebuffer, GLuint start, GLsizei count, const GLfloat* v) __asm__("__glewNamedFramebufferSampleLocationsfvARB");
 extern void ( * glMinSampleShadingARB) (GLclampf value) __asm__("__glewMinSampleShadingARB");
 extern void ( * glBindSampler) (GLuint unit, GLuint sampler) __asm__("__glewBindSampler");
 extern void ( * glDeleteSamplers) (GLsizei count, const GLuint * samplers) __asm__("__glewDeleteSamplers");
@@ -6741,6 +6873,7 @@ extern void ( * glWriteMaskEXT) (GLuint res, GLuint in, GLenum outX, GLenum outY
 extern void ( * glVertexWeightPointerEXT) (GLint size, GLenum type, GLsizei stride, void *pointer) __asm__("__glewVertexWeightPointerEXT");
 extern void ( * glVertexWeightfEXT) (GLfloat weight) __asm__("__glewVertexWeightfEXT");
 extern void ( * glVertexWeightfvEXT) (GLfloat* weight) __asm__("__glewVertexWeightfvEXT");
+extern void ( * glWindowRectanglesEXT) (GLenum mode, GLsizei count, const GLint box[]) __asm__("__glewWindowRectanglesEXT");
 extern GLsync ( * glImportSyncEXT) (GLenum external_sync_type, GLintptr external_sync, GLbitfield flags) __asm__("__glewImportSyncEXT");
 extern void ( * glFrameTerminatorGREMEDY) (void) __asm__("__glewFrameTerminatorGREMEDY");
 extern void ( * glStringMarkerGREMEDY) (GLsizei len, const void *string) __asm__("__glewStringMarkerGREMEDY");
@@ -6826,6 +6959,9 @@ extern void ( * glWindowPos4sMESA) (GLshort x, GLshort y, GLshort z, GLshort w) 
 extern void ( * glWindowPos4svMESA) (const GLshort* p) __asm__("__glewWindowPos4svMESA");
 extern void ( * glBeginConditionalRenderNVX) (GLuint id) __asm__("__glewBeginConditionalRenderNVX");
 extern void ( * glEndConditionalRenderNVX) (void) __asm__("__glewEndConditionalRenderNVX");
+extern void ( * glLGPUCopyImageSubDataNVX) (GLuint sourceGpu, GLbitfield destinationGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) __asm__("__glewLGPUCopyImageSubDataNVX");
+extern void ( * glLGPUInterlockNVX) (void) __asm__("__glewLGPUInterlockNVX");
+extern void ( * glLGPUNamedBufferSubDataNVX) (GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data) __asm__("__glewLGPUNamedBufferSubDataNVX");
 extern void ( * glMultiDrawArraysIndirectBindlessNV) (GLenum mode, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount) __asm__("__glewMultiDrawArraysIndirectBindlessNV");
 extern void ( * glMultiDrawElementsIndirectBindlessNV) (GLenum mode, GLenum type, const void *indirect, GLsizei drawCount, GLsizei stride, GLint vertexBufferCount) __asm__("__glewMultiDrawElementsIndirectBindlessNV");
 extern void ( * glMultiDrawArraysIndirectBindlessCountNV) (GLenum mode, const void *indirect, GLintptr drawCount, GLsizei maxDrawCount, GLsizei stride, GLint vertexBufferCount) __asm__("__glewMultiDrawArraysIndirectBindlessCountNV");
@@ -6845,14 +6981,39 @@ extern void ( * glUniformHandleui64NV) (GLint location, GLuint64 value) __asm__(
 extern void ( * glUniformHandleui64vNV) (GLint location, GLsizei count, const GLuint64* value) __asm__("__glewUniformHandleui64vNV");
 extern void ( * glBlendBarrierNV) (void) __asm__("__glewBlendBarrierNV");
 extern void ( * glBlendParameteriNV) (GLenum pname, GLint value) __asm__("__glewBlendParameteriNV");
+extern void ( * glViewportPositionWScaleNV) (GLuint index, GLfloat xcoeff, GLfloat ycoeff) __asm__("__glewViewportPositionWScaleNV");
+extern void ( * glCallCommandListNV) (GLuint list) __asm__("__glewCallCommandListNV");
+extern void ( * glCommandListSegmentsNV) (GLuint list, GLuint segments) __asm__("__glewCommandListSegmentsNV");
+extern void ( * glCompileCommandListNV) (GLuint list) __asm__("__glewCompileCommandListNV");
+extern void ( * glCreateCommandListsNV) (GLsizei n, GLuint* lists) __asm__("__glewCreateCommandListsNV");
+extern void ( * glCreateStatesNV) (GLsizei n, GLuint* states) __asm__("__glewCreateStatesNV");
+extern void ( * glDeleteCommandListsNV) (GLsizei n, const GLuint* lists) __asm__("__glewDeleteCommandListsNV");
+extern void ( * glDeleteStatesNV) (GLsizei n, const GLuint* states) __asm__("__glewDeleteStatesNV");
+extern void ( * glDrawCommandsAddressNV) (GLenum primitiveMode, const GLuint64* indirects, const GLsizei* sizes, GLuint count) __asm__("__glewDrawCommandsAddressNV");
+extern void ( * glDrawCommandsNV) (GLenum primitiveMode, GLuint buffer, const GLintptr* indirects, const GLsizei* sizes, GLuint count) __asm__("__glewDrawCommandsNV");
+extern void ( * glDrawCommandsStatesAddressNV) (const GLuint64* indirects, const GLsizei* sizes, const GLuint* states, const GLuint* fbos, GLuint count) __asm__("__glewDrawCommandsStatesAddressNV");
+extern void ( * glDrawCommandsStatesNV) (GLuint buffer, const GLintptr* indirects, const GLsizei* sizes, const GLuint* states, const GLuint* fbos, GLuint count) __asm__("__glewDrawCommandsStatesNV");
+extern GLuint ( * glGetCommandHeaderNV) (GLenum tokenID, GLuint size) __asm__("__glewGetCommandHeaderNV");
+extern GLushort ( * glGetStageIndexNV) (GLenum shadertype) __asm__("__glewGetStageIndexNV");
+extern GLboolean ( * glIsCommandListNV) (GLuint list) __asm__("__glewIsCommandListNV");
+extern GLboolean ( * glIsStateNV) (GLuint state) __asm__("__glewIsStateNV");
+extern void ( * glListDrawCommandsStatesClientNV) (GLuint list, GLuint segment, const void** indirects, const GLsizei* sizes, const GLuint* states, const GLuint* fbos, GLuint count) __asm__("__glewListDrawCommandsStatesClientNV");
+extern void ( * glStateCaptureNV) (GLuint state, GLenum mode) __asm__("__glewStateCaptureNV");
 extern void ( * glBeginConditionalRenderNV) (GLuint id, GLenum mode) __asm__("__glewBeginConditionalRenderNV");
 extern void ( * glEndConditionalRenderNV) (void) __asm__("__glewEndConditionalRenderNV");
 extern void ( * glSubpixelPrecisionBiasNV) (GLuint xbits, GLuint ybits) __asm__("__glewSubpixelPrecisionBiasNV");
+extern void ( * glConservativeRasterParameterfNV) (GLenum pname, GLfloat value) __asm__("__glewConservativeRasterParameterfNV");
+extern void ( * glConservativeRasterParameteriNV) (GLenum pname, GLint param) __asm__("__glewConservativeRasterParameteriNV");
 extern void ( * glCopyImageSubDataNV) (GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srcY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei width, GLsizei height, GLsizei depth) __asm__("__glewCopyImageSubDataNV");
 extern void ( * glClearDepthdNV) (GLdouble depth) __asm__("__glewClearDepthdNV");
 extern void ( * glDepthBoundsdNV) (GLdouble zmin, GLdouble zmax) __asm__("__glewDepthBoundsdNV");
 extern void ( * glDepthRangedNV) (GLdouble zNear, GLdouble zFar) __asm__("__glewDepthRangedNV");
 extern void ( * glDrawTextureNV) (GLuint texture, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1) __asm__("__glewDrawTextureNV");
+extern void ( * glDrawVkImageNV) (GLuint64 vkImage, GLuint sampler, GLfloat x0, GLfloat y0, GLfloat x1, GLfloat y1, GLfloat z, GLfloat s0, GLfloat t0, GLfloat s1, GLfloat t1) __asm__("__glewDrawVkImageNV");
+extern GLVULKANPROCNV ( * glGetVkProcAddrNV) (const GLchar* name) __asm__("__glewGetVkProcAddrNV");
+extern void ( * glSignalVkFenceNV) (GLuint64 vkFence) __asm__("__glewSignalVkFenceNV");
+extern void ( * glSignalVkSemaphoreNV) (GLuint64 vkSemaphore) __asm__("__glewSignalVkSemaphoreNV");
+extern void ( * glWaitVkSemaphoreNV) (GLuint64 vkSemaphore) __asm__("__glewWaitVkSemaphoreNV");
 extern void ( * glEvalMapsNV) (GLenum target, GLenum mode) __asm__("__glewEvalMapsNV");
 extern void ( * glGetMapAttribParameterfvNV) (GLenum target, GLuint index, GLenum pname, GLfloat* params) __asm__("__glewGetMapAttribParameterfvNV");
 extern void ( * glGetMapAttribParameterivNV) (GLenum target, GLuint index, GLenum pname, GLint* params) __asm__("__glewGetMapAttribParameterivNV");
@@ -6881,6 +7042,18 @@ extern void ( * glProgramNamedParameter4fNV) (GLuint id, GLsizei len, const GLub
 extern void ( * glProgramNamedParameter4fvNV) (GLuint id, GLsizei len, const GLubyte* name, const GLfloat v[]) __asm__("__glewProgramNamedParameter4fvNV");
 extern void ( * glRenderbufferStorageMultisampleCoverageNV) (GLenum target, GLsizei coverageSamples, GLsizei colorSamples, GLenum internalformat, GLsizei width, GLsizei height) __asm__("__glewRenderbufferStorageMultisampleCoverageNV");
 extern void ( * glProgramVertexLimitNV) (GLenum target, GLint limit) __asm__("__glewProgramVertexLimitNV");
+extern void ( * glMulticastBarrierNV) (void) __asm__("__glewMulticastBarrierNV");
+extern void ( * glMulticastBlitFramebufferNV) (GLuint srcGpu, GLuint dstGpu, GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter) __asm__("__glewMulticastBlitFramebufferNV");
+extern void ( * glMulticastBufferSubDataNV) (GLbitfield gpuMask, GLuint buffer, GLintptr offset, GLsizeiptr size, const void *data) __asm__("__glewMulticastBufferSubDataNV");
+extern void ( * glMulticastCopyBufferSubDataNV) (GLuint readGpu, GLbitfield writeGpuMask, GLuint readBuffer, GLuint writeBuffer, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size) __asm__("__glewMulticastCopyBufferSubDataNV");
+extern void ( * glMulticastCopyImageSubDataNV) (GLuint srcGpu, GLbitfield dstGpuMask, GLuint srcName, GLenum srcTarget, GLint srcLevel, GLint srcX, GLint srxY, GLint srcZ, GLuint dstName, GLenum dstTarget, GLint dstLevel, GLint dstX, GLint dstY, GLint dstZ, GLsizei srcWidth, GLsizei srcHeight, GLsizei srcDepth) __asm__("__glewMulticastCopyImageSubDataNV");
+extern void ( * glMulticastFramebufferSampleLocationsfvNV) (GLuint gpu, GLuint framebuffer, GLuint start, GLsizei count, const GLfloat* v) __asm__("__glewMulticastFramebufferSampleLocationsfvNV");
+extern void ( * glMulticastGetQueryObjecti64vNV) (GLuint gpu, GLuint id, GLenum pname, GLint64* params) __asm__("__glewMulticastGetQueryObjecti64vNV");
+extern void ( * glMulticastGetQueryObjectivNV) (GLuint gpu, GLuint id, GLenum pname, GLint* params) __asm__("__glewMulticastGetQueryObjectivNV");
+extern void ( * glMulticastGetQueryObjectui64vNV) (GLuint gpu, GLuint id, GLenum pname, GLuint64* params) __asm__("__glewMulticastGetQueryObjectui64vNV");
+extern void ( * glMulticastGetQueryObjectuivNV) (GLuint gpu, GLuint id, GLenum pname, GLuint* params) __asm__("__glewMulticastGetQueryObjectuivNV");
+extern void ( * glMulticastWaitSyncNV) (GLuint signalGpu, GLbitfield waitGpuMask) __asm__("__glewMulticastWaitSyncNV");
+extern void ( * glRenderGpuMaskNV) (GLbitfield mask) __asm__("__glewRenderGpuMaskNV");
 extern void ( * glProgramEnvParameterI4iNV) (GLenum target, GLuint index, GLint x, GLint y, GLint z, GLint w) __asm__("__glewProgramEnvParameterI4iNV");
 extern void ( * glProgramEnvParameterI4ivNV) (GLenum target, GLuint index, const GLint *params) __asm__("__glewProgramEnvParameterI4ivNV");
 extern void ( * glProgramEnvParameterI4uiNV) (GLenum target, GLuint index, GLuint x, GLuint y, GLuint z, GLuint w) __asm__("__glewProgramEnvParameterI4uiNV");
@@ -7234,12 +7407,14 @@ extern GLenum ( * glVideoCaptureNV) (GLuint video_capture_slot, GLuint* sequence
 extern void ( * glVideoCaptureStreamParameterdvNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLdouble* params) __asm__("__glewVideoCaptureStreamParameterdvNV");
 extern void ( * glVideoCaptureStreamParameterfvNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLfloat* params) __asm__("__glewVideoCaptureStreamParameterfvNV");
 extern void ( * glVideoCaptureStreamParameterivNV) (GLuint video_capture_slot, GLuint stream, GLenum pname, const GLint* params) __asm__("__glewVideoCaptureStreamParameterivNV");
+extern void ( * glViewportSwizzleNV) (GLuint index, GLenum swizzlex, GLenum swizzley, GLenum swizzlez, GLenum swizzlew) __asm__("__glewViewportSwizzleNV");
 extern void ( * glClearDepthfOES) (GLclampf depth) __asm__("__glewClearDepthfOES");
 extern void ( * glClipPlanefOES) (GLenum plane, const GLfloat* equation) __asm__("__glewClipPlanefOES");
 extern void ( * glDepthRangefOES) (GLclampf n, GLclampf f) __asm__("__glewDepthRangefOES");
 extern void ( * glFrustumfOES) (GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f) __asm__("__glewFrustumfOES");
 extern void ( * glGetClipPlanefOES) (GLenum plane, GLfloat* equation) __asm__("__glewGetClipPlanefOES");
 extern void ( * glOrthofOES) (GLfloat l, GLfloat r, GLfloat b, GLfloat t, GLfloat n, GLfloat f) __asm__("__glewOrthofOES");
+extern void ( * glFramebufferTextureMultiviewOVR) (GLenum target, GLenum attachment, GLuint texture, GLint level, GLint baseViewIndex, GLsizei numViews) __asm__("__glewFramebufferTextureMultiviewOVR");
 extern void ( * glAlphaFuncx) (GLenum func, GLclampx ref) __asm__("__glewAlphaFuncx");
 extern void ( * glClearColorx) (GLclampx red, GLclampx green, GLclampx blue, GLclampx alpha) __asm__("__glewClearColorx");
 extern void ( * glClearDepthx) (GLclampx depth) __asm__("__glewClearDepthx");
@@ -7440,6 +7615,7 @@ extern GLboolean __GLEW_AMD_query_buffer_object;
 extern GLboolean __GLEW_AMD_sample_positions;
 extern GLboolean __GLEW_AMD_seamless_cubemap_per_texture;
 extern GLboolean __GLEW_AMD_shader_atomic_counter_ops;
+extern GLboolean __GLEW_AMD_shader_explicit_vertex_parameter;
 extern GLboolean __GLEW_AMD_shader_stencil_export;
 extern GLboolean __GLEW_AMD_shader_stencil_value_export;
 extern GLboolean __GLEW_AMD_shader_trinary_minmax;
@@ -7482,6 +7658,7 @@ extern GLboolean __GLEW_APPLE_vertex_program_evaluators;
 extern GLboolean __GLEW_APPLE_ycbcr_422;
 extern GLboolean __GLEW_ARB_ES2_compatibility;
 extern GLboolean __GLEW_ARB_ES3_1_compatibility;
+extern GLboolean __GLEW_ARB_ES3_2_compatibility;
 extern GLboolean __GLEW_ARB_ES3_compatibility;
 extern GLboolean __GLEW_ARB_arrays_of_arrays;
 extern GLboolean __GLEW_ARB_base_instance;
@@ -7521,14 +7698,17 @@ extern GLboolean __GLEW_ARB_fragment_layer_viewport;
 extern GLboolean __GLEW_ARB_fragment_program;
 extern GLboolean __GLEW_ARB_fragment_program_shadow;
 extern GLboolean __GLEW_ARB_fragment_shader;
+extern GLboolean __GLEW_ARB_fragment_shader_interlock;
 extern GLboolean __GLEW_ARB_framebuffer_no_attachments;
 extern GLboolean __GLEW_ARB_framebuffer_object;
 extern GLboolean __GLEW_ARB_framebuffer_sRGB;
 extern GLboolean __GLEW_ARB_geometry_shader4;
 extern GLboolean __GLEW_ARB_get_program_binary;
 extern GLboolean __GLEW_ARB_get_texture_sub_image;
+extern GLboolean __GLEW_ARB_gl_spirv;
 extern GLboolean __GLEW_ARB_gpu_shader5;
 extern GLboolean __GLEW_ARB_gpu_shader_fp64;
+extern GLboolean __GLEW_ARB_gpu_shader_int64;
 extern GLboolean __GLEW_ARB_half_float_pixel;
 extern GLboolean __GLEW_ARB_half_float_vertex;
 extern GLboolean __GLEW_ARB_imaging;
@@ -7546,10 +7726,12 @@ extern GLboolean __GLEW_ARB_multisample;
 extern GLboolean __GLEW_ARB_multitexture;
 extern GLboolean __GLEW_ARB_occlusion_query;
 extern GLboolean __GLEW_ARB_occlusion_query2;
+extern GLboolean __GLEW_ARB_parallel_shader_compile;
 extern GLboolean __GLEW_ARB_pipeline_statistics_query;
 extern GLboolean __GLEW_ARB_pixel_buffer_object;
 extern GLboolean __GLEW_ARB_point_parameters;
 extern GLboolean __GLEW_ARB_point_sprite;
+extern GLboolean __GLEW_ARB_post_depth_coverage;
 extern GLboolean __GLEW_ARB_program_interface_query;
 extern GLboolean __GLEW_ARB_provoking_vertex;
 extern GLboolean __GLEW_ARB_query_buffer_object;
@@ -7557,13 +7739,17 @@ extern GLboolean __GLEW_ARB_robust_buffer_access_behavior;
 extern GLboolean __GLEW_ARB_robustness;
 extern GLboolean __GLEW_ARB_robustness_application_isolation;
 extern GLboolean __GLEW_ARB_robustness_share_group_isolation;
+extern GLboolean __GLEW_ARB_sample_locations;
 extern GLboolean __GLEW_ARB_sample_shading;
 extern GLboolean __GLEW_ARB_sampler_objects;
 extern GLboolean __GLEW_ARB_seamless_cube_map;
 extern GLboolean __GLEW_ARB_seamless_cubemap_per_texture;
 extern GLboolean __GLEW_ARB_separate_shader_objects;
+extern GLboolean __GLEW_ARB_shader_atomic_counter_ops;
 extern GLboolean __GLEW_ARB_shader_atomic_counters;
+extern GLboolean __GLEW_ARB_shader_ballot;
 extern GLboolean __GLEW_ARB_shader_bit_encoding;
+extern GLboolean __GLEW_ARB_shader_clock;
 extern GLboolean __GLEW_ARB_shader_draw_parameters;
 extern GLboolean __GLEW_ARB_shader_group_vote;
 extern GLboolean __GLEW_ARB_shader_image_load_store;
@@ -7575,6 +7761,7 @@ extern GLboolean __GLEW_ARB_shader_storage_buffer_object;
 extern GLboolean __GLEW_ARB_shader_subroutine;
 extern GLboolean __GLEW_ARB_shader_texture_image_samples;
 extern GLboolean __GLEW_ARB_shader_texture_lod;
+extern GLboolean __GLEW_ARB_shader_viewport_layer_array;
 extern GLboolean __GLEW_ARB_shading_language_100;
 extern GLboolean __GLEW_ARB_shading_language_420pack;
 extern GLboolean __GLEW_ARB_shading_language_include;
@@ -7583,6 +7770,8 @@ extern GLboolean __GLEW_ARB_shadow;
 extern GLboolean __GLEW_ARB_shadow_ambient;
 extern GLboolean __GLEW_ARB_sparse_buffer;
 extern GLboolean __GLEW_ARB_sparse_texture;
+extern GLboolean __GLEW_ARB_sparse_texture2;
+extern GLboolean __GLEW_ARB_sparse_texture_clamp;
 extern GLboolean __GLEW_ARB_stencil_texturing;
 extern GLboolean __GLEW_ARB_sync;
 extern GLboolean __GLEW_ARB_tessellation_shader;
@@ -7600,6 +7789,7 @@ extern GLboolean __GLEW_ARB_texture_env_add;
 extern GLboolean __GLEW_ARB_texture_env_combine;
 extern GLboolean __GLEW_ARB_texture_env_crossbar;
 extern GLboolean __GLEW_ARB_texture_env_dot3;
+extern GLboolean __GLEW_ARB_texture_filter_minmax;
 extern GLboolean __GLEW_ARB_texture_float;
 extern GLboolean __GLEW_ARB_texture_gather;
 extern GLboolean __GLEW_ARB_texture_mirror_clamp_to_edge;
@@ -7656,6 +7846,7 @@ extern GLboolean __GLEW_ATI_texture_mirror_once;
 extern GLboolean __GLEW_ATI_vertex_array_object;
 extern GLboolean __GLEW_ATI_vertex_attrib_array_object;
 extern GLboolean __GLEW_ATI_vertex_streams;
+extern GLboolean __GLEW_EGL_NV_robustness_video_memory_purge;
 extern GLboolean __GLEW_EXT_422_pixels;
 extern GLboolean __GLEW_EXT_Cg_shader;
 extern GLboolean __GLEW_EXT_abgr;
@@ -7763,6 +7954,7 @@ extern GLboolean __GLEW_EXT_vertex_array_bgra;
 extern GLboolean __GLEW_EXT_vertex_attrib_64bit;
 extern GLboolean __GLEW_EXT_vertex_shader;
 extern GLboolean __GLEW_EXT_vertex_weighting;
+extern GLboolean __GLEW_EXT_window_rectangles;
 extern GLboolean __GLEW_EXT_x11_sync_object;
 extern GLboolean __GLEW_GREMEDY_frame_terminator;
 extern GLboolean __GLEW_GREMEDY_string_marker;
@@ -7778,7 +7970,9 @@ extern GLboolean __GLEW_IBM_texture_mirrored_repeat;
 extern GLboolean __GLEW_IBM_vertex_array_lists;
 extern GLboolean __GLEW_INGR_color_clamp;
 extern GLboolean __GLEW_INGR_interlace_read;
+extern GLboolean __GLEW_INTEL_conservative_rasterization;
 extern GLboolean __GLEW_INTEL_fragment_shader_ordering;
+extern GLboolean __GLEW_INTEL_framebuffer_CMAA;
 extern GLboolean __GLEW_INTEL_map_texture;
 extern GLboolean __GLEW_INTEL_parallel_arrays;
 extern GLboolean __GLEW_INTEL_performance_query;
@@ -7787,27 +7981,36 @@ extern GLboolean __GLEW_KHR_blend_equation_advanced;
 extern GLboolean __GLEW_KHR_blend_equation_advanced_coherent;
 extern GLboolean __GLEW_KHR_context_flush_control;
 extern GLboolean __GLEW_KHR_debug;
+extern GLboolean __GLEW_KHR_no_error;
 extern GLboolean __GLEW_KHR_robust_buffer_access_behavior;
 extern GLboolean __GLEW_KHR_robustness;
 extern GLboolean __GLEW_KHR_texture_compression_astc_hdr;
 extern GLboolean __GLEW_KHR_texture_compression_astc_ldr;
+extern GLboolean __GLEW_KHR_texture_compression_astc_sliced_3d;
 extern GLboolean __GLEW_KTX_buffer_region;
 extern GLboolean __GLEW_MESAX_texture_stack;
 extern GLboolean __GLEW_MESA_pack_invert;
 extern GLboolean __GLEW_MESA_resize_buffers;
+extern GLboolean __GLEW_MESA_shader_integer_functions;
 extern GLboolean __GLEW_MESA_window_pos;
 extern GLboolean __GLEW_MESA_ycbcr_texture;
+extern GLboolean __GLEW_NVX_blend_equation_advanced_multi_draw_buffers;
 extern GLboolean __GLEW_NVX_conditional_render;
 extern GLboolean __GLEW_NVX_gpu_memory_info;
+extern GLboolean __GLEW_NVX_linked_gpu_multicast;
 extern GLboolean __GLEW_NV_bindless_multi_draw_indirect;
 extern GLboolean __GLEW_NV_bindless_multi_draw_indirect_count;
 extern GLboolean __GLEW_NV_bindless_texture;
 extern GLboolean __GLEW_NV_blend_equation_advanced;
 extern GLboolean __GLEW_NV_blend_equation_advanced_coherent;
 extern GLboolean __GLEW_NV_blend_square;
+extern GLboolean __GLEW_NV_clip_space_w_scaling;
+extern GLboolean __GLEW_NV_command_list;
 extern GLboolean __GLEW_NV_compute_program5;
 extern GLboolean __GLEW_NV_conditional_render;
 extern GLboolean __GLEW_NV_conservative_raster;
+extern GLboolean __GLEW_NV_conservative_raster_dilate;
+extern GLboolean __GLEW_NV_conservative_raster_pre_snap_triangles;
 extern GLboolean __GLEW_NV_copy_depth_to_color;
 extern GLboolean __GLEW_NV_copy_image;
 extern GLboolean __GLEW_NV_deep_texture3D;
@@ -7815,6 +8018,7 @@ extern GLboolean __GLEW_NV_depth_buffer_float;
 extern GLboolean __GLEW_NV_depth_clamp;
 extern GLboolean __GLEW_NV_depth_range_unclamped;
 extern GLboolean __GLEW_NV_draw_texture;
+extern GLboolean __GLEW_NV_draw_vulkan_image;
 extern GLboolean __GLEW_NV_evaluators;
 extern GLboolean __GLEW_NV_explicit_multisample;
 extern GLboolean __GLEW_NV_fence;
@@ -7832,6 +8036,7 @@ extern GLboolean __GLEW_NV_framebuffer_multisample_coverage;
 extern GLboolean __GLEW_NV_geometry_program4;
 extern GLboolean __GLEW_NV_geometry_shader4;
 extern GLboolean __GLEW_NV_geometry_shader_passthrough;
+extern GLboolean __GLEW_NV_gpu_multicast;
 extern GLboolean __GLEW_NV_gpu_program4;
 extern GLboolean __GLEW_NV_gpu_program5;
 extern GLboolean __GLEW_NV_gpu_program5_mem_extended;
@@ -7854,16 +8059,19 @@ extern GLboolean __GLEW_NV_present_video;
 extern GLboolean __GLEW_NV_primitive_restart;
 extern GLboolean __GLEW_NV_register_combiners;
 extern GLboolean __GLEW_NV_register_combiners2;
+extern GLboolean __GLEW_NV_robustness_video_memory_purge;
 extern GLboolean __GLEW_NV_sample_locations;
 extern GLboolean __GLEW_NV_sample_mask_override_coverage;
 extern GLboolean __GLEW_NV_shader_atomic_counters;
 extern GLboolean __GLEW_NV_shader_atomic_float;
+extern GLboolean __GLEW_NV_shader_atomic_float64;
 extern GLboolean __GLEW_NV_shader_atomic_fp16_vector;
 extern GLboolean __GLEW_NV_shader_atomic_int64;
 extern GLboolean __GLEW_NV_shader_buffer_load;
 extern GLboolean __GLEW_NV_shader_storage_buffer_object;
 extern GLboolean __GLEW_NV_shader_thread_group;
 extern GLboolean __GLEW_NV_shader_thread_shuffle;
+extern GLboolean __GLEW_NV_stereo_view_rendering;
 extern GLboolean __GLEW_NV_tessellation_program5;
 extern GLboolean __GLEW_NV_texgen_emboss;
 extern GLboolean __GLEW_NV_texgen_reflection;
@@ -7892,6 +8100,7 @@ extern GLboolean __GLEW_NV_vertex_program3;
 extern GLboolean __GLEW_NV_vertex_program4;
 extern GLboolean __GLEW_NV_video_capture;
 extern GLboolean __GLEW_NV_viewport_array2;
+extern GLboolean __GLEW_NV_viewport_swizzle;
 extern GLboolean __GLEW_OES_byte_coordinates;
 extern GLboolean __GLEW_OES_compressed_paletted_texture;
 extern GLboolean __GLEW_OES_read_format;
@@ -7899,6 +8108,8 @@ extern GLboolean __GLEW_OES_single_precision;
 extern GLboolean __GLEW_OML_interlace;
 extern GLboolean __GLEW_OML_resample;
 extern GLboolean __GLEW_OML_subsample;
+extern GLboolean __GLEW_OVR_multiview;
+extern GLboolean __GLEW_OVR_multiview2;
 extern GLboolean __GLEW_PGI_misc_hints;
 extern GLboolean __GLEW_PGI_vertex_hints;
 extern GLboolean __GLEW_REGAL_ES1_0_compatibility;
