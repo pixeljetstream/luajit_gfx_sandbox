@@ -70,10 +70,6 @@ local function processHeader(name,idir,odir,onlybinding)
     local output = l
     if (first) then
       eol = l:match("[\r\n]+")
-      outheader:write("#ifdef GLEW_MX"..eol)
-      outheader:write('#pragma error "unsupported option"'..eol)
-      outheader:write("#endif"..eol)
-      outheader:write(eol)
       outheader:write("#ifndef GLEW_USER_ASSERT"..eol)
       outheader:write("#define GLEW_USER_ASSERT(condition)"..eol)
       outheader:write("#endif"..eol)
@@ -177,7 +173,9 @@ local function processHeader(name,idir,odir,onlybinding)
     end
   end
   
-  local lkenumexported = {}
+  local lkenumexported = {
+    GL_TIMEOUT_IGNORED = true, -- uses 64-bit value which we cannot handle as enum
+  }
   for i,v in ipairs(enums) do
     local enum,value = v.str:match("([_%w]+) = ([_%w]+)")
     local ext = v.ext
