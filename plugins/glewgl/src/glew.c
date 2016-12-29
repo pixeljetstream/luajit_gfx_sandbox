@@ -46,6 +46,21 @@
 #include <stddef.h>  /* For size_t */
 
 #if defined(GLEW_EGL)
+#elif defined(_WIN32)
+
+void* win32GetProcAddress (const GLubyte* name)
+{
+  static HANDLE instance = NULL;
+  void* proc = wglGetProcAddress((LPCSTR)name);
+  if (proc){
+    return proc;
+  }
+  if (instance == NULL){
+    instance = LoadLibraryA("opengl32.dll");
+  }
+  return GetProcAddress(instance,name);
+}
+
 #elif defined(GLEW_REGAL)
 
 /* In GLEW_REGAL mode we call direcly into the linked
@@ -153,7 +168,7 @@ void* NSGLGetProcAddress (const GLubyte *name)
 #elif defined(GLEW_EGL)
 #  define glewGetProcAddress(name) eglGetProcAddress((const char *)name)
 #elif defined(_WIN32)
-#  define glewGetProcAddress(name) wglGetProcAddress((LPCSTR)name)
+#  define glewGetProcAddress(name) win32GetProcAddress(name)
 #elif defined(__APPLE__) && !defined(GLEW_APPLE_GLX)
 #  define glewGetProcAddress(name) NSGLGetProcAddress(name)
 #elif defined(__sgi) || defined(__sun) || defined(__HAIKU__)
