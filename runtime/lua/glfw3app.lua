@@ -155,10 +155,6 @@ function glapp.loop(app, fnThink, properties)
     local width  = sizes[0]
     local height = sizes[1]
 
-    if (not props.noclear) then
-      gl.glClear( bit.bor(gl.GL_COLOR_BUFFER_BIT,gl.GL_STENCIL_BUFFER_BIT,gl.GL_DEPTH_BUFFER_BIT) )
-    end
-    
     fnThink(width, height, frame, t, tdelta, tavg)
 
     if (not props.noswap) then
