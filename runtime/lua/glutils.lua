@@ -4,9 +4,26 @@
 local gl  = require "opengl"
 local ffi = require "ffi"
 
-local co = {}
+local glu = {}
 
-function co.feedbackvaryings(prog,what,mode)
+function glu.resource(fncreate, fndelete, arg)
+  local obj = ffi.new("GLuint[1]")
+  if (arg) then
+    fncreate(arg, 1, obj)
+  else
+    fncreate(1, obj)
+  end
+  
+  return {
+    handle = obj[0],
+    delete = function()
+      fndelete(1, obj)
+    end
+  }
+  
+end
+
+function glu.feedbackvaryings(prog,what,mode)
   local cptrs = ffi.new("const char*[?]",#what)
   for i,v in ipairs(what) do
     cptrs[i-1] = v
@@ -14,7 +31,7 @@ function co.feedbackvaryings(prog,what,mode)
   gl.glTransformFeedbackVaryings(prog, #what, cptrs, mode)
 end
 
-function co.genprogram(sources,prelink,binary)
+function glu.genprogram(sources,prelink,binary)
   local prog = gl.glCreateProgram()
   
   if (binary) then
@@ -63,7 +80,7 @@ function co.genprogram(sources,prelink,binary)
 end
 
 
-function co.loadfile(filename, how)
+function glu.loadfile(filename, how)
   local f = io.open(filename, how)
   if (not f) then return nil end
   local str = f:read("*a")
@@ -71,13 +88,13 @@ function co.loadfile(filename, how)
   return str
 end
 
-function co.loadprogram(filenames,prepend,prelink,binary)
+function glu.loadprogram(filenames,prepend,prelink,binary)
   local prepend = prepend or ""
   
   local sources = {}
   local filesokay = true
   for i,v in pairs(filenames) do
-    local src = co.loadfile(v,"rt")
+    local src = glu.loadfile(v,"rt")
     filesokay = filesokay and (src ~= nil)
     sources[i] = prepend..(src or "")
   end
@@ -85,7 +102,7 @@ function co.loadprogram(filenames,prepend,prelink,binary)
   if (filesokay) then
     -- load from files
     -- load from files
-    local prog = co.genprogram(sources,prelink,binary)
+    local prog = glu.genprogram(sources,prelink,binary)
     return prog
   else
     error("no program definition found, neither files, nor cache")
@@ -96,7 +113,7 @@ end
 local metauni = {}
 metauni.__index = function(table, key) return rawget(table,key) or -1 end
 
-function co.programuniforms(prog)
+function glu.programuniforms(prog)
   local tab = {}
   
   setmetatable(tab,metauni)
@@ -116,7 +133,7 @@ end
 
 
 
-function co.enabledebug()
+function glu.enabledebug()
   -- GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam
   
   local keys = {
@@ -162,7 +179,7 @@ function co.enabledebug()
   gl.glEnable(gl.GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
 end
 
-function co.getOrthoCtrl()
+function glu.getOrthoCtrl()
   return {
     panning = false,
     zooming = false,
@@ -226,4 +243,4 @@ function co.getOrthoCtrl()
   }
 end
 
-return co
+return glu
