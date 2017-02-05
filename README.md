@@ -13,3 +13,6 @@ Similar frameworks can be found here:
 * http://www.luapower.com (most binaries and lua modules are taken from here)
 
 This repository was once called luxinia2, however it never turned into the sucessor of [luxinia1](https://github.com/pixeljetstream/luxinia1) but really is meant as basic sandbox for directed tests.
+
+# IDE Support
+It is best used with the [ZeroBraneStudio](https://studio.zerobrane.com/) IDE and the [zbstudio-graphicscodepack](https://github.com/pixeljetstream/zbstudio-graphicscodepack).
